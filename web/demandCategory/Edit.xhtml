@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandCategoryEditDlg" widgetVar="DemandCategoryEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandCategoryTitle}">
+            <h:form id="DemandCategoryEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_sortiment}" for="sortiment" />
+                        <p:selectOneMenu id="sortiment" value="#{demandCategoryController.selected.sortiment}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
+                                           var="sortimentItem"
+                                           itemValue="#{sortimentItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlBeteiligten}" for="anzahlBeteiligten" />
+                        <p:inputText id="anzahlBeteiligten" value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.EditDemandCategoryTitle_anzahlBeteiligten}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlMitglieder}" for="anzahlMitglieder" />
+                        <p:inputText id="anzahlMitglieder" value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.EditDemandCategoryTitle_anzahlMitglieder}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandCategoryController.selected.id}" title="#{bundle.EditDemandCategoryTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_bearbeitungszeit}" for="bearbeitungszeit" />
+                        <p:inputText id="bearbeitungszeit" value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.EditDemandCategoryTitle_bearbeitungszeit}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_category}" for="category" />
+                        <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
+                                           var="categoryItem"
+                                           itemValue="#{categoryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlGesamtSeiten}" for="anzahlGesamtSeiten" />
+                        <p:inputText id="anzahlGesamtSeiten" value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.EditDemandCategoryTitle_anzahlGesamtSeiten}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_percentSeitenFaktor}" for="percentSeitenFaktor" />
+                        <p:inputText id="percentSeitenFaktor" value="#{demandCategoryController.selected.percentSeitenFaktor}" title="#{bundle.EditDemandCategoryTitle_percentSeitenFaktor}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlSonderSeiten}" for="anzahlSonderSeiten" />
+                        <p:inputText id="anzahlSonderSeiten" value="#{demandCategoryController.selected.anzahlSonderSeiten}" title="#{bundle.EditDemandCategoryTitle_anzahlSonderSeiten}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlGenerierungUpdateSeiten}" for="anzahlGenerierungUpdateSeiten" />
+                        <p:inputText id="anzahlGenerierungUpdateSeiten" value="#{demandCategoryController.selected.anzahlGenerierungUpdateSeiten}" title="#{bundle.EditDemandCategoryTitle_anzahlGenerierungUpdateSeiten}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlIHVZSeiten}" for="anzahlIHVZSeiten" />
+                        <p:inputText id="anzahlIHVZSeiten" value="#{demandCategoryController.selected.anzahlIHVZSeiten}" title="#{bundle.EditDemandCategoryTitle_anzahlIHVZSeiten}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlBestellNrSeiten}" for="anzahlBestellNrSeiten" />
+                        <p:inputText id="anzahlBestellNrSeiten" value="#{demandCategoryController.selected.anzahlBestellNrSeiten}" title="#{bundle.EditDemandCategoryTitle_anzahlBestellNrSeiten}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlGesamtArtikel}" for="anzahlGesamtArtikel" />
+                        <p:inputText id="anzahlGesamtArtikel" value="#{demandCategoryController.selected.anzahlGesamtArtikel}" title="#{bundle.EditDemandCategoryTitle_anzahlGesamtArtikel}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlNeueArtikel}" for="anzahlNeueArtikel" />
+                        <p:inputText id="anzahlNeueArtikel" value="#{demandCategoryController.selected.anzahlNeueArtikel}" title="#{bundle.EditDemandCategoryTitle_anzahlNeueArtikel}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlBestandArtikel}" for="anzahlBestandArtikel" />
+                        <p:inputText id="anzahlBestandArtikel" value="#{demandCategoryController.selected.anzahlBestandArtikel}" title="#{bundle.EditDemandCategoryTitle_anzahlBestandArtikel}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlÜbernahmeArtikel}" for="anzahlÜbernahmeArtikel" />
+                        <p:inputText id="anzahlÜbernahmeArtikel" value="#{demandCategoryController.selected.anzahlÜbernahmeArtikel}" title="#{bundle.EditDemandCategoryTitle_anzahlÜbernahmeArtikel}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlGesamtProdukt}" for="anzahlGesamtProdukt" />
+                        <p:inputText id="anzahlGesamtProdukt" value="#{demandCategoryController.selected.anzahlGesamtProdukt}" title="#{bundle.EditDemandCategoryTitle_anzahlGesamtProdukt}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlNeueProdukt}" for="anzahlNeueProdukt" />
+                        <p:inputText id="anzahlNeueProdukt" value="#{demandCategoryController.selected.anzahlNeueProdukt}" title="#{bundle.EditDemandCategoryTitle_anzahlNeueProdukt}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlBestandProdukt}" for="anzahlBestandProdukt" />
+                        <p:inputText id="anzahlBestandProdukt" value="#{demandCategoryController.selected.anzahlBestandProdukt}" title="#{bundle.EditDemandCategoryTitle_anzahlBestandProdukt}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlLieferantGesamt}" for="anzahlLieferantGesamt" />
+                        <p:inputText id="anzahlLieferantGesamt" value="#{demandCategoryController.selected.anzahlLieferantGesamt}" title="#{bundle.EditDemandCategoryTitle_anzahlLieferantGesamt}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlLieferantNeu}" for="anzahlLieferantNeu" />
+                        <p:inputText id="anzahlLieferantNeu" value="#{demandCategoryController.selected.anzahlLieferantNeu}" title="#{bundle.EditDemandCategoryTitle_anzahlLieferantNeu}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlKapitetel}" for="anzahlKapitetel" />
+                        <p:inputText id="anzahlKapitetel" value="#{demandCategoryController.selected.anzahlKapitetel}" title="#{bundle.EditDemandCategoryTitle_anzahlKapitetel}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" />
+                        <p:selectOneMenu id="correctionSchluessel" value="#{demandCategoryController.selected.correctionSchluessel}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{correctionSchluesselController.itemsAvailableSelectOne}"
+                                           var="correctionSchluesselItem"
+                                           itemValue="#{correctionSchluesselItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_teilnehmerZahl}" for="teilnehmerZahl" />
+                        <p:inputText id="teilnehmerZahl" value="#{demandCategoryController.selected.teilnehmerZahl}" title="#{bundle.EditDemandCategoryTitle_teilnehmerZahl}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_participantFaktor}" for="participantFaktor" />
+                        <p:selectOneMenu id="participantFaktor" value="#{demandCategoryController.selected.participantFaktor}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{participantFaktorController.itemsAvailableSelectOne}"
+                                           var="participantFaktorItem"
+                                           itemValue="#{participantFaktorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_schluessel}" for="schluessel" />
+                        <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.EditDemandCategoryTitle_schluessel}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryLabel_anzahlProduktGesamt}" for="anzahlProduktGesamt" />
+                        <p:inputText id="anzahlProduktGesamt" value="#{demandCategoryController.selected.anzahlProduktGesamt}" title="#{bundle.EditDemandCategoryTitle_anzahlProduktGesamt}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandCategoryController.update}" value="#{bundle.Save}" update="display,:DemandCategoryListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandCategoryEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

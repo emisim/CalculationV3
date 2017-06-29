@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandCategoryViewDlg" widgetVar="DemandCategoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDemandCategoryTitle}">
+            <h:form id="DemandCategoryViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_sortiment}"/>
+                        <h:outputText value="#{demandCategoryController.selected.sortiment}" title="#{bundle.ViewDemandCategoryTitle_sortiment}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_id}"/>
+                        <h:outputText value="#{demandCategoryController.selected.id}" title="#{bundle.ViewDemandCategoryTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}"/>
+                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_category}"/>
+                        <h:outputText value="#{demandCategoryController.selected.category}" title="#{bundle.ViewDemandCategoryTitle_category}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtSeiten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtSeiten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_percentSeitenFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.percentSeitenFaktor}" title="#{bundle.ViewDemandCategoryTitle_percentSeitenFaktor}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlSonderSeiten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlSonderSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlSonderSeiten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGenerierungUpdateSeiten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlGenerierungUpdateSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGenerierungUpdateSeiten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlIHVZSeiten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlIHVZSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlIHVZSeiten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBestellNrSeiten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBestellNrSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBestellNrSeiten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtArtikel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlGesamtArtikel}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtArtikel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlNeueArtikel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlNeueArtikel}" title="#{bundle.ViewDemandCategoryTitle_anzahlNeueArtikel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBestandArtikel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBestandArtikel}" title="#{bundle.ViewDemandCategoryTitle_anzahlBestandArtikel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlÜbernahmeArtikel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlÜbernahmeArtikel}" title="#{bundle.ViewDemandCategoryTitle_anzahlÜbernahmeArtikel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtProdukt}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlGesamtProdukt}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtProdukt}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlNeueProdukt}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlNeueProdukt}" title="#{bundle.ViewDemandCategoryTitle_anzahlNeueProdukt}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBestandProdukt}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBestandProdukt}" title="#{bundle.ViewDemandCategoryTitle_anzahlBestandProdukt}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlLieferantGesamt}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlLieferantGesamt}" title="#{bundle.ViewDemandCategoryTitle_anzahlLieferantGesamt}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlLieferantNeu}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlLieferantNeu}" title="#{bundle.ViewDemandCategoryTitle_anzahlLieferantNeu}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlKapitetel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlKapitetel}" title="#{bundle.ViewDemandCategoryTitle_anzahlKapitetel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_correctionSchluessel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.correctionSchluessel}" title="#{bundle.ViewDemandCategoryTitle_correctionSchluessel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_teilnehmerZahl}"/>
+                        <h:outputText value="#{demandCategoryController.selected.teilnehmerZahl}" title="#{bundle.ViewDemandCategoryTitle_teilnehmerZahl}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_participantFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.participantFaktor}" title="#{bundle.ViewDemandCategoryTitle_participantFaktor}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_schluessel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.schluessel}" title="#{bundle.ViewDemandCategoryTitle_schluessel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlProduktGesamt}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlProduktGesamt}" title="#{bundle.ViewDemandCategoryTitle_anzahlProduktGesamt}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DemandCategoryViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

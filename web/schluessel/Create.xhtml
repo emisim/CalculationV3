@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SchluesselCreateDlg" widgetVar="SchluesselCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSchluesselTitle}">
+            <h:form id="SchluesselCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{schluesselController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSchluesselLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{schluesselController.selected.id}" title="#{bundle.CreateSchluesselTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateSchluesselLabel_label}" for="label" />
+                        <p:inputText id="label" value="#{schluesselController.selected.label}" title="#{bundle.CreateSchluesselTitle_label}" />
+                        <p:outputLabel value="#{bundle.CreateSchluesselLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{schluesselController.selected.value}" title="#{bundle.CreateSchluesselTitle_value}" />
+                        <p:outputLabel value="#{bundle.CreateSchluesselLabel_schluesselType}" for="schluesselType" />
+                        <p:selectOneMenu id="schluesselType" value="#{schluesselController.selected.schluesselType}" >
+                            <f:selectItems value="#{schluesselTypeController.itemsAvailableSelectOne}"
+                                           var="schluesselTypeItem"
+                                           itemValue="#{schluesselTypeItem}"
+                                           itemLabel="#{schluesselTypeItem.name}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{schluesselController.create}" value="#{bundle.Save}" update="display,:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchluesselCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SchluesselCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
