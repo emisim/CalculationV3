@@ -54,7 +54,7 @@ public class DemandCategory implements Serializable {
     //Bearbeitungszeit
     private int bearbeitungszeit;
     
-    //Beteiligten Anzahl
+    //Beteiligten Anzahl 
     private int anzahlBeteiligten;
     
     //Mitglieder Anzahl
