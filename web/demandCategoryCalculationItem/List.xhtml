@@ -63,9 +63,41 @@
                                 <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryCalculationItemEditForm" oncomplete="PF('DemandCategoryCalculationItemEditDialog').show()" disabled="#{empty demandCategoryCalculationItemController.selected}"/>
                                 <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryCalculationItemController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryCalculationItemController.selected}"/>
                             </f:facet>
-                        </p:dataTable>
-                    </p:panel>
-                </h:form>
+                            <h:outputText value="#{item.demandCategoryCalculation}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryCalculationItemTitle_departementCriteriaItem}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.departementCriteriaItem}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryCalculationItemTitle_price}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.price}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryCalculationItemTitle_calcultaed}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.calcultaed}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryCalculationItemTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryCalculationItemController.prepareCreate}" update=":DemandCategoryCalculationItemCreateForm" oncomplete="PF('DemandCategoryCalculationItemCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryCalculationItemViewForm" oncomplete="PF('DemandCategoryCalculationItemViewDialog').show()" disabled="#{empty demandCategoryCalculationItemController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryCalculationItemEditForm" oncomplete="PF('DemandCategoryCalculationItemEditDialog').show()" disabled="#{empty demandCategoryCalculationItemController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryCalculationItemController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryCalculationItemController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
