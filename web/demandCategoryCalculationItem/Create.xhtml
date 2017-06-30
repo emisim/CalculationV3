@@ -26,6 +26,8 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_price}" for="price" />
                         <p:inputText id="price" value="#{demandCategoryCalculationItemController.selected.price}" title="#{bundle.CreateDemandCategoryCalculationItemTitle_price}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_calcultaed}" for="calcultaed" />
+                        <p:selectBooleanCheckbox id="calcultaed" value="#{demandCategoryCalculationItemController.selected.calcultaed}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_id}" for="id" />
                         <p:inputText id="id" value="#{demandCategoryCalculationItemController.selected.id}" title="#{bundle.CreateDemandCategoryCalculationItemTitle_id}" />
                     </p:panelGrid>
