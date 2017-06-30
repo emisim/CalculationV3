@@ -12,22 +12,20 @@
             <h:form id="DemandCategoryViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateDemandCategory}"/>
-                        <h:outputText value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.ViewDemandCategoryTitle_dateDemandCategory}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_sortiment}"/>
-                        <h:outputText value="#{demandCategoryController.selected.sortiment}" title="#{bundle.ViewDemandCategoryTitle_sortiment}"/>
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}"/>
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_id}"/>
                         <h:outputText value="#{demandCategoryController.selected.id}" title="#{bundle.ViewDemandCategoryTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}"/>
-                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summDruck}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summDruck}" title="#{bundle.ViewDemandCategoryTitle_summDruck}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summDepartment}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summDepartment}" title="#{bundle.ViewDemandCategoryTitle_summDepartment}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotal}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summTotal}" title="#{bundle.ViewDemandCategoryTitle_summTotal}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_category}"/>
                         <h:outputText value="#{demandCategoryController.selected.category}" title="#{bundle.ViewDemandCategoryTitle_category}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_product}"/>
+                        <h:outputText value="#{demandCategoryController.selected.product}" title="#{bundle.ViewDemandCategoryTitle_product}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_schluessel}"/>
+                        <h:outputText value="#{demandCategoryController.selected.schluessel}" title="#{bundle.ViewDemandCategoryTitle_schluessel}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtSeiten}"/>
                         <h:outputText value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtSeiten}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_percentSeitenFaktor}"/>
@@ -62,14 +60,52 @@
                         <h:outputText value="#{demandCategoryController.selected.anzahlKapitetel}" title="#{bundle.ViewDemandCategoryTitle_anzahlKapitetel}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_correctionSchluessel}"/>
                         <h:outputText value="#{demandCategoryController.selected.correctionSchluessel}" title="#{bundle.ViewDemandCategoryTitle_correctionSchluessel}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_mitgliederkorrekturFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.mitgliederkorrekturFaktor}" title="#{bundle.ViewDemandCategoryTitle_mitgliederkorrekturFaktor}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_wechselfassungVariantFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.wechselfassungVariantFaktor}" title="#{bundle.ViewDemandCategoryTitle_wechselfassungVariantFaktor}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_teilnehmerZahl}"/>
                         <h:outputText value="#{demandCategoryController.selected.teilnehmerZahl}" title="#{bundle.ViewDemandCategoryTitle_teilnehmerZahl}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_participantFaktor}"/>
                         <h:outputText value="#{demandCategoryController.selected.participantFaktor}" title="#{bundle.ViewDemandCategoryTitle_participantFaktor}"/>
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_schluessel}"/>
-                        <h:outputText value="#{demandCategoryController.selected.schluessel}" title="#{bundle.ViewDemandCategoryTitle_schluessel}"/>
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlProduktGesamt}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlProduktGesamt}" title="#{bundle.ViewDemandCategoryTitle_anzahlProduktGesamt}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_konzeptbearbeitungFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.konzeptbearbeitungFaktor}" title="#{bundle.ViewDemandCategoryTitle_konzeptbearbeitungFaktor}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_formatAuswaehlen}"/>
+                        <h:outputText value="#{demandCategoryController.selected.formatAuswaehlen}" title="#{bundle.ViewDemandCategoryTitle_formatAuswaehlen}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_papierMaterialAuswaehlen}"/>
+                        <h:outputText value="#{demandCategoryController.selected.papierMaterialAuswaehlen}" title="#{bundle.ViewDemandCategoryTitle_papierMaterialAuswaehlen}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_seitenanzahl}"/>
+                        <h:outputText value="#{demandCategoryController.selected.seitenanzahl}" title="#{bundle.ViewDemandCategoryTitle_seitenanzahl}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_farbigkeit}"/>
+                        <h:outputText value="#{demandCategoryController.selected.farbigkeit}" title="#{bundle.ViewDemandCategoryTitle_farbigkeit}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_artDerWeiterverarbeitung}"/>
+                        <h:outputText value="#{demandCategoryController.selected.artDerWeiterverarbeitung}" title="#{bundle.ViewDemandCategoryTitle_artDerWeiterverarbeitung}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_veredlung}"/>
+                        <h:outputText value="#{demandCategoryController.selected.veredlung}" title="#{bundle.ViewDemandCategoryTitle_veredlung}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_umschlagPapierAuswaehlen}"/>
+                        <h:outputText value="#{demandCategoryController.selected.umschlagPapierAuswaehlen}" title="#{bundle.ViewDemandCategoryTitle_umschlagPapierAuswaehlen}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_umschlagFarbigkeit}"/>
+                        <h:outputText value="#{demandCategoryController.selected.umschlagFarbigkeit}" title="#{bundle.ViewDemandCategoryTitle_umschlagFarbigkeit}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_cover}"/>
+                        <h:outputText value="#{demandCategoryController.selected.cover}" title="#{bundle.ViewDemandCategoryTitle_cover}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bindung}"/>
+                        <h:outputText value="#{demandCategoryController.selected.bindung}" title="#{bundle.ViewDemandCategoryTitle_bindung}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_auflage}"/>
+                        <h:outputText value="#{demandCategoryController.selected.auflage}" title="#{bundle.ViewDemandCategoryTitle_auflage}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_liefertermin}"/>
+                        <h:outputText value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.ViewDemandCategoryTitle_liefertermin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}"/>
+                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateDemandCategory}"/>
+                        <h:outputText value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.ViewDemandCategoryTitle_dateDemandCategory}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="DemandCategoryViewDialog.hide()"/>
                 </h:panelGroup>

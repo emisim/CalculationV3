@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "participantFaktorController")
+
+@ManagedBean(name="participantFaktorController")
 @SessionScoped
 public class ParticipantFaktorController implements Serializable {
 
-    @EJB
-    private service.ParticipantFaktorFacade ejbFacade;
+
+    @EJB private service.ParticipantFaktorFacade ejbFacade;
     private List<ParticipantFaktor> items = null;
     private ParticipantFaktor selected;
 
@@ -109,6 +110,7 @@ public class ParticipantFaktorController implements Serializable {
         }
     }
 
+
     public List<ParticipantFaktor> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class ParticipantFaktorController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = ParticipantFaktor.class)
+    @FacesConverter(forClass=ParticipantFaktor.class)
     public static class ParticipantFaktorControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class ParticipantFaktorController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ParticipantFaktorController controller = (ParticipantFaktorController) facesContext.getApplication().getELResolver().
+            ParticipantFaktorController controller = (ParticipantFaktorController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "participantFaktorController");
             return controller.getFacade().find(getKey(value));
         }

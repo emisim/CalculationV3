@@ -29,11 +29,9 @@ public class ParticipantFaktor implements Serializable {
     private Long id;
 
     private int percent;
-    private BigDecimal value;
+    private BigDecimal wert;
     
-    @OneToMany(mappedBy = "participantFaktor")
-    private List<DemandCategory> demandCategorys;
-
+  
     public Long getId() {
         return id;
     }
@@ -42,16 +40,7 @@ public class ParticipantFaktor implements Serializable {
         this.id = id;
     }
 
-    public List<DemandCategory> getDemandCategorys() {
-        if(demandCategorys == null)
-            demandCategorys = new ArrayList<>();
-        return demandCategorys;
-    }
-
-    public void setDemandCategorys(List<DemandCategory> demandCategorys) {
-        this.demandCategorys = demandCategorys;
-    }
-
+   
     public int getPercent() {
         return percent;
     }
@@ -61,11 +50,11 @@ public class ParticipantFaktor implements Serializable {
     }
 
     public BigDecimal getValue() {
-        return value;
+        return wert;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setValue(BigDecimal wert) {
+        this.wert = wert;
     }
 
     @Override

@@ -6,11 +6,13 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,16 +21,37 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Product implements Serializable {
 
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String label;
-    
-    
+
+    @OneToMany(mappedBy = "product")
+    private List<DemandCategory> demandCategorys;
+      
     @ManyToOne
     private Category category;
 
+        private String label;
+    //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
+    private String description;
+    
+
+    
+  
+   
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
+    
     public String getLabel() {
         return label;
     }
@@ -37,7 +60,13 @@ public class Product implements Serializable {
         this.label = label;
     }
 
+ public List<DemandCategory> getDemandCategorys() {
+        return demandCategorys;
+    }
 
+    public void setDemandCategorys(List<DemandCategory> demandCategorys) {
+        this.demandCategorys = demandCategorys;
+    }
     public Category getCategory() {
         return category;
     }

@@ -25,10 +25,20 @@ public class Schluessel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String label;
-    private BigDecimal value = new BigDecimal(0);
+    private String description;
+    private BigDecimal wert = new BigDecimal(0);
     
     @ManyToOne
     private SchluesselType schluesselType; 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     
 
     public Long getId() {
@@ -48,11 +58,11 @@ public class Schluessel implements Serializable {
     }
 
     public BigDecimal getValue() {
-        return value;
+        return wert;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setValue(BigDecimal wert) {
+        this.wert = wert;
     }
 
     public SchluesselType getSchluesselType() {

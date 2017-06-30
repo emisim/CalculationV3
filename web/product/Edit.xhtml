@@ -12,6 +12,8 @@
             <h:form id="ProductEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{productController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProductLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{productController.selected.description}" title="#{bundle.EditProductTitle_description}" />
                         <p:outputLabel value="#{bundle.EditProductLabel_label}" for="label" />
                         <p:inputText id="label" value="#{productController.selected.label}" title="#{bundle.EditProductTitle_label}" />
                         <p:outputLabel value="#{bundle.EditProductLabel_category}" for="category" />

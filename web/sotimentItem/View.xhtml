@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SotimentItemViewDlg" widgetVar="SotimentItemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSotimentItemTitle}">
+            <h:form id="SotimentItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sotimentItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSotimentItemLabel_id}"/>
+                        <h:outputText value="#{sotimentItemController.selected.id}" title="#{bundle.ViewSotimentItemTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSotimentItemLabel_wert}"/>
+                        <h:outputText value="#{sotimentItemController.selected.wert}" title="#{bundle.ViewSotimentItemTitle_wert}"/>
+                        <h:outputText value="#{bundle.ViewSotimentItemLabel_demandCategory}"/>
+                        <h:outputText value="#{sotimentItemController.selected.demandCategory}" title="#{bundle.ViewSotimentItemTitle_demandCategory}"/>
+                        <h:outputText value="#{bundle.ViewSotimentItemLabel_sortiment}"/>
+                        <h:outputText value="#{sotimentItemController.selected.sortiment}" title="#{bundle.ViewSotimentItemTitle_sortiment}"/>
+                        <h:outputText value="#{bundle.ViewSotimentItemLabel_value}"/>
+                        <h:outputText value="#{sotimentItemController.selected.value}" title="#{bundle.ViewSotimentItemTitle_value}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SotimentItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

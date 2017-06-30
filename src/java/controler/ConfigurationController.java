@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "configurationController")
+
+@ManagedBean(name="configurationController")
 @SessionScoped
 public class ConfigurationController implements Serializable {
 
-    @EJB
-    private service.ConfigurationFacade ejbFacade;
+
+    @EJB private service.ConfigurationFacade ejbFacade;
     private List<Configuration> items = null;
     private Configuration selected;
 
@@ -109,6 +110,7 @@ public class ConfigurationController implements Serializable {
         }
     }
 
+
     public List<Configuration> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class ConfigurationController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Configuration.class)
+    @FacesConverter(forClass=Configuration.class)
     public static class ConfigurationControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class ConfigurationController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ConfigurationController controller = (ConfigurationController) facesContext.getApplication().getELResolver().
+            ConfigurationController controller = (ConfigurationController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "configurationController");
             return controller.getFacade().find(getKey(value));
         }

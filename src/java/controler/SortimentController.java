@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "sortimentController")
+
+@ManagedBean(name="sortimentController")
 @SessionScoped
 public class SortimentController implements Serializable {
 
-    @EJB
-    private service.SortimentFacade ejbFacade;
+
+    @EJB private service.SortimentFacade ejbFacade;
     private List<Sortiment> items = null;
     private Sortiment selected;
 
@@ -109,6 +110,7 @@ public class SortimentController implements Serializable {
         }
     }
 
+
     public List<Sortiment> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class SortimentController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Sortiment.class)
+    @FacesConverter(forClass=Sortiment.class)
     public static class SortimentControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class SortimentController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SortimentController controller = (SortimentController) facesContext.getApplication().getELResolver().
+            SortimentController controller = (SortimentController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "sortimentController");
             return controller.getFacade().find(getKey(value));
         }

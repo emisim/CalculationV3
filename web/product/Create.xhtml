@@ -12,6 +12,8 @@
             <h:form id="ProductCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{productController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateProductLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{productController.selected.description}" title="#{bundle.CreateProductTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateProductLabel_label}" for="label" />
                         <p:inputText id="label" value="#{productController.selected.label}" title="#{bundle.CreateProductTitle_label}" />
                         <p:outputLabel value="#{bundle.CreateProductLabel_category}" for="category" />

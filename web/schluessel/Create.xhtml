@@ -12,6 +12,8 @@
             <h:form id="SchluesselCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{schluesselController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSchluesselLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{schluesselController.selected.description}" title="#{bundle.CreateSchluesselTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateSchluesselLabel_id}" for="id" />
                         <p:inputText id="id" value="#{schluesselController.selected.id}" title="#{bundle.CreateSchluesselTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateSchluesselLabel_label}" for="label" />

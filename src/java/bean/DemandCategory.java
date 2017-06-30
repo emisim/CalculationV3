@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -22,13 +23,28 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class DemandCategory implements Serializable {
-   
+
+
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @ManyToOne
+    private Category category;
+    
+    @ManyToOne
+    private Product product;
+    
+    //Sortiment
+    @OneToMany(mappedBy = "demandCategory")
+    private List<SotimentItem> sotimentItems;
+   
+    // Schlüssel beinhaltet mehrere Keys: Layout Ausgabe....
+    @ManyToOne
+    private Schluessel Schluessel;
+       
     //Seiten
     private int anzahlGesamtSeiten;
     //10% für den ANzahl dere Seiten
@@ -56,75 +72,87 @@ public class DemandCategory implements Serializable {
     //Warengruppe Kapitel
     private int anzahlKapitetel;
     
+    //Aufwand für Allg.Änderung    
+    @ManyToOne
+    private CorrectionSchluessel correctionSchluessel;
+    
+    //ja/nein MitgliederKorrektur && Wec hselfassung && Konzept
+    
+    @ManyToOne
+    private MitgliederkorrekturFaktor mitgliederkorrekturFaktor;
+    
+    @ManyToOne
+    private WechselfassungVariantFaktor wechselfassungVariantFaktor;
+    
+    
+    //Teilnehmerzahl
+    private int teilnehmerZahl;
+    @ManyToOne
+    private ParticipantFaktor participantFaktor;
+    
+    //KonzeptbearbeitungFaktor
+    @ManyToOne
+    private KonzeptbearbeitungFaktor konzeptbearbeitungFaktor;
+    
+    
+    //Für den Druck
+    private boolean druck;
+    
+    
+    @ManyToOne
+    private FormatAuswaehlen formatAuswaehlen;
+    
+    @ManyToOne
+    private PapierMaterialAuswaehlen papierMaterialAuswaehlen;
+    
+    private int seitenanzahl;
+        @ManyToOne
+    private Farbigkeit farbigkeit;
+    
+            @ManyToOne
+    private ArtDerWeiterverarbeitung artDerWeiterverarbeitung;
+            @ManyToOne
+    private Veredlung veredlung;
+    
+    private boolean umschlag;
+        @ManyToOne
+    
+    private UmschlagPapierAuswaehlen umschlagPapierAuswaehlen;
+        @ManyToOne
+    
+    private UmschlagFarbigkeit umschlagFarbigkeit;
+        @ManyToOne
+    
+    private Cover cover;
+    
+        @ManyToOne
+    private Bindung bindung;
+    
+        @ManyToOne
+    private Auflage auflage;
+    
+    //Date de Livraisoin
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date liefertermin;
+    
     //Bearbeitungszeit
     private int bearbeitungszeit;
     
-    //Beteiligten Anzahl 
+    //Beteiligten Anzahl die die Initialcosts beinflüssen
     private int anzahlBeteiligten;
     
     //Mitglieder Anzahl
-    private int anzahlMitglieder;
-    
-    //Sortiment
-    @ManyToOne
-    private Sortiment sortiment;
+    private int anzahlMitglieder;    
     
     //Datum falls die einzelne Preise geändert werden
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateDemandCategory;  
 
-    public Date getDateDemandCategory() {
-        return dateDemandCategory;
-    }
-
-    public void setDateDemandCategory(Date dateDemandCategory) {
-        this.dateDemandCategory = dateDemandCategory;
-    }
+    //Berechnete Summen 
+    private BigDecimal summDruck;
+    private BigDecimal summDepartment;
+    private BigDecimal summTotal;
     
-    
-    
-    @ManyToOne
-    private Category category;
-    
-    @ManyToOne
-    private CorrectionSchluessel correctionSchluessel;
-    
-    private int teilnehmerZahl;
-    @ManyToOne
-    private ParticipantFaktor participantFaktor;
-    
-    @ManyToOne
-    private Schluessel Schluessel;
-    
-    private int anzahlProduktGesamt;
-
-    public Sortiment getSortiment() {
-        
-        if(sortiment == null)
-            sortiment = new Sortiment();
-        return sortiment;
-    }
-
-    public void setSortiment(Sortiment sortiment) {
-        this.sortiment = sortiment;
-    }
-
-    public int getAnzahlBeteiligten() {
-        return anzahlBeteiligten;
-    }
-
-    public void setAnzahlBeteiligten(int anzahlBeteiligten) {
-        this.anzahlBeteiligten = anzahlBeteiligten;
-    }
-
-    public int getAnzahlMitglieder() {
-        return anzahlMitglieder;
-    }
-
-    public void setAnzahlMitglieder(int anzahlMitglieder) {
-        this.anzahlMitglieder = anzahlMitglieder;
-    }
-
     public Long getId() {
         return id;
     }
@@ -133,12 +161,28 @@ public class DemandCategory implements Serializable {
         this.id = id;
     }
 
-    public int getBearbeitungszeit() {
-        return bearbeitungszeit;
+    public BigDecimal getSummDruck() {
+        return summDruck;
     }
 
-    public void setBearbeitungszeit(int bearbeitungszeit) {
-        this.bearbeitungszeit = bearbeitungszeit;
+    public void setSummDruck(BigDecimal summDruck) {
+        this.summDruck = summDruck;
+    }
+
+    public BigDecimal getSummDepartment() {
+        return summDepartment;
+    }
+
+    public void setSummDepartment(BigDecimal summDepartment) {
+        this.summDepartment = summDepartment;
+    }
+
+    public BigDecimal getSummTotal() {
+        return summTotal;
+    }
+
+    public void setSummTotal(BigDecimal summTotal) {
+        this.summTotal = summTotal;
     }
 
     public Category getCategory() {
@@ -147,6 +191,31 @@ public class DemandCategory implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public List<SotimentItem> getSotimentItems() {
+        return sotimentItems;
+    }
+
+    public void setSotimentItems(List<SotimentItem> sotimentItems) {
+        this.sotimentItems = sotimentItems;
+    }
+
+
+    public Schluessel getSchluessel() {
+        return Schluessel;
+    }
+
+    public void setSchluessel(Schluessel Schluessel) {
+        this.Schluessel = Schluessel;
     }
 
     public int getAnzahlGesamtSeiten() {
@@ -285,6 +354,22 @@ public class DemandCategory implements Serializable {
         this.correctionSchluessel = correctionSchluessel;
     }
 
+    public MitgliederkorrekturFaktor getMitgliederkorrekturFaktor() {
+        return mitgliederkorrekturFaktor;
+    }
+
+    public void setMitgliederkorrekturFaktor(MitgliederkorrekturFaktor mitgliederkorrekturFaktor) {
+        this.mitgliederkorrekturFaktor = mitgliederkorrekturFaktor;
+    }
+
+    public WechselfassungVariantFaktor getWechselfassungVariantFaktor() {
+        return wechselfassungVariantFaktor;
+    }
+
+    public void setWechselfassungVariantFaktor(WechselfassungVariantFaktor wechselfassungVariantFaktor) {
+        this.wechselfassungVariantFaktor = wechselfassungVariantFaktor;
+    }
+
     public int getTeilnehmerZahl() {
         return teilnehmerZahl;
     }
@@ -301,22 +386,159 @@ public class DemandCategory implements Serializable {
         this.participantFaktor = participantFaktor;
     }
 
-    public Schluessel getSchluessel() {
-        return Schluessel;
+    public KonzeptbearbeitungFaktor getKonzeptbearbeitungFaktor() {
+        return konzeptbearbeitungFaktor;
     }
 
-    public void setSchluessel(Schluessel Schluessel) {
-        this.Schluessel = Schluessel;
+    public void setKonzeptbearbeitungFaktor(KonzeptbearbeitungFaktor konzeptbearbeitungFaktor) {
+        this.konzeptbearbeitungFaktor = konzeptbearbeitungFaktor;
     }
 
-    public int getAnzahlProduktGesamt() {
-        return anzahlProduktGesamt;
+    public boolean isDruck() {
+        return druck;
     }
 
-    public void setAnzahlProduktGesamt(int anzahlProduktGesamt) {
-        this.anzahlProduktGesamt = anzahlProduktGesamt;
+    public void setDruck(boolean druck) {
+        this.druck = druck;
     }
 
+    public FormatAuswaehlen getFormatAuswaehlen() {
+        return formatAuswaehlen;
+    }
+
+    public void setFormatAuswaehlen(FormatAuswaehlen formatAuswaehlen) {
+        this.formatAuswaehlen = formatAuswaehlen;
+    }
+
+    public PapierMaterialAuswaehlen getPapierMaterialAuswaehlen() {
+        return papierMaterialAuswaehlen;
+    }
+
+    public void setPapierMaterialAuswaehlen(PapierMaterialAuswaehlen papierMaterialAuswaehlen) {
+        this.papierMaterialAuswaehlen = papierMaterialAuswaehlen;
+    }
+
+    public int getSeitenanzahl() {
+        return seitenanzahl;
+    }
+
+    public void setSeitenanzahl(int seitenanzahl) {
+        this.seitenanzahl = seitenanzahl;
+    }
+
+    public Farbigkeit getFarbigkeit() {
+        return farbigkeit;
+    }
+
+    public void setFarbigkeit(Farbigkeit farbigkeit) {
+        this.farbigkeit = farbigkeit;
+    }
+
+    public ArtDerWeiterverarbeitung getArtDerWeiterverarbeitung() {
+        return artDerWeiterverarbeitung;
+    }
+
+    public void setArtDerWeiterverarbeitung(ArtDerWeiterverarbeitung artDerWeiterverarbeitung) {
+        this.artDerWeiterverarbeitung = artDerWeiterverarbeitung;
+    }
+
+    public Veredlung getVeredlung() {
+        return veredlung;
+    }
+
+    public void setVeredlung(Veredlung veredlung) {
+        this.veredlung = veredlung;
+    }
+
+    public boolean isUmschlag() {
+        return umschlag;
+    }
+
+    public void setUmschlag(boolean umschlag) {
+        this.umschlag = umschlag;
+    }
+
+    public UmschlagPapierAuswaehlen getUmschlagPapierAuswaehlen() {
+        return umschlagPapierAuswaehlen;
+    }
+
+    public void setUmschlagPapierAuswaehlen(UmschlagPapierAuswaehlen umschlagPapierAuswaehlen) {
+        this.umschlagPapierAuswaehlen = umschlagPapierAuswaehlen;
+    }
+
+    public UmschlagFarbigkeit getUmschlagFarbigkeit() {
+        return umschlagFarbigkeit;
+    }
+
+    public void setUmschlagFarbigkeit(UmschlagFarbigkeit umschlagFarbigkeit) {
+        this.umschlagFarbigkeit = umschlagFarbigkeit;
+    }
+
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
+    }
+
+    public Bindung getBindung() {
+        return bindung;
+    }
+
+    public void setBindung(Bindung bindung) {
+        this.bindung = bindung;
+    }
+
+    public Auflage getAuflage() {
+        return auflage;
+    }
+
+    public void setAuflage(Auflage auflage) {
+        this.auflage = auflage;
+    }
+
+    public Date getLiefertermin() {
+        return liefertermin;
+    }
+
+    public void setLiefertermin(Date liefertermin) {
+        this.liefertermin = liefertermin;
+    }
+
+    public int getBearbeitungszeit() {
+        return bearbeitungszeit;
+    }
+
+    public void setBearbeitungszeit(int bearbeitungszeit) {
+        this.bearbeitungszeit = bearbeitungszeit;
+    }
+
+    public int getAnzahlBeteiligten() {
+        return anzahlBeteiligten;
+    }
+
+    public void setAnzahlBeteiligten(int anzahlBeteiligten) {
+        this.anzahlBeteiligten = anzahlBeteiligten;
+    }
+
+    public int getAnzahlMitglieder() {
+        return anzahlMitglieder;
+    }
+
+    public void setAnzahlMitglieder(int anzahlMitglieder) {
+        this.anzahlMitglieder = anzahlMitglieder;
+    }
+
+    public Date getDateDemandCategory() {
+        return dateDemandCategory;
+    }
+
+    public void setDateDemandCategory(Date dateDemandCategory) {
+        this.dateDemandCategory = dateDemandCategory;
+    }
+
+   
     @Override
     public int hashCode() {
         int hash = 0;

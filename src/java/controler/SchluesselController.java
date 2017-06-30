@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "schluesselController")
+
+@ManagedBean(name="schluesselController")
 @SessionScoped
 public class SchluesselController implements Serializable {
 
-    @EJB
-    private service.SchluesselFacade ejbFacade;
+
+    @EJB private service.SchluesselFacade ejbFacade;
     private List<Schluessel> items = null;
     private Schluessel selected;
 
@@ -109,6 +110,7 @@ public class SchluesselController implements Serializable {
         }
     }
 
+
     public List<Schluessel> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class SchluesselController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Schluessel.class)
+    @FacesConverter(forClass=Schluessel.class)
     public static class SchluesselControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class SchluesselController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SchluesselController controller = (SchluesselController) facesContext.getApplication().getELResolver().
+            SchluesselController controller = (SchluesselController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "schluesselController");
             return controller.getFacade().find(getKey(value));
         }

@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 public class Sortiment implements Serializable {
 
     
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +37,10 @@ public class Sortiment implements Serializable {
     private BigDecimal lKSchluessel= new BigDecimal(0);
     private BigDecimal mKSchluessel= new BigDecimal(0);
 
-
     @OneToMany(mappedBy = "sortiment")
-    private List<SotimentMix> sotimentMixs;
+    private List<SotimentItem> sotimentItems;
+
+
 
     public Long getId() {
         return id;
@@ -48,16 +50,15 @@ public class Sortiment implements Serializable {
         this.id = id;
     }
 
-    public List<SotimentMix> getSotimentMixs() {
-        if(sotimentMixs == null)
-            sotimentMixs = new ArrayList<>();
-        return sotimentMixs;
+    public List<SotimentItem> getSotimentItems() {
+        return sotimentItems;
     }
 
-    public void setSotimentMixs(List<SotimentMix> sotimentMixs) {
-        this.sotimentMixs = sotimentMixs;
+    public void setSotimentItems(List<SotimentItem> sotimentItems) {
+        this.sotimentItems = sotimentItems;
     }
 
+    
     public String getName() {
         return name;
     }

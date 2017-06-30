@@ -30,7 +30,7 @@ public class CorrectionSchluessel implements Serializable {
     
     // Hier wird der Wert der durch die Bechnung von 100* gesamtArtikel/New_Artikel
     private int percent;
-    private BigDecimal value;
+    private BigDecimal wert;
 
     @OneToMany(mappedBy = "correctionSchluessel")
     private List<DemandCategory> demandCategorys;
@@ -62,11 +62,11 @@ public class CorrectionSchluessel implements Serializable {
     }
 
     public BigDecimal getValue() {
-        return value;
+        return wert;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setValue(BigDecimal wert) {
+        this.wert = wert;
     }
 
     @Override

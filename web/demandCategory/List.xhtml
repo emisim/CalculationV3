@@ -29,47 +29,45 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_dateDemandCategory}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateDemandCategory}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_sortiment}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.sortiment}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlBeteiligten}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.anzahlBeteiligten}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlMitglieder}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.anzahlMitglieder}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_bearbeitungszeit}"/>
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summDruck}"/>
                             </f:facet>
-                            <h:outputText value="#{item.bearbeitungszeit}"/>
+                            <h:outputText value="#{item.summDruck}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summDepartment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.summDepartment}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summTotal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.summTotal}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>
                             </f:facet>
                             <h:outputText value="#{item.category}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_product}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.product}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_schluessel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.schluessel}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -175,6 +173,18 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_mitgliederkorrekturFaktor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mitgliederkorrekturFaktor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_wechselfassungVariantFaktor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.wechselfassungVariantFaktor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_teilnehmerZahl}"/>
                             </f:facet>
                             <h:outputText value="#{item.teilnehmerZahl}"/>
@@ -187,15 +197,109 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_schluessel}"/>
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_konzeptbearbeitungFaktor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.schluessel}"/>
+                            <h:outputText value="#{item.konzeptbearbeitungFaktor}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlProduktGesamt}"/>
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_formatAuswaehlen}"/>
                             </f:facet>
-                            <h:outputText value="#{item.anzahlProduktGesamt}"/>
+                            <h:outputText value="#{item.formatAuswaehlen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_papierMaterialAuswaehlen}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.papierMaterialAuswaehlen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_seitenanzahl}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seitenanzahl}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_farbigkeit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.farbigkeit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_artDerWeiterverarbeitung}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.artDerWeiterverarbeitung}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_veredlung}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.veredlung}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_umschlagPapierAuswaehlen}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.umschlagPapierAuswaehlen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_umschlagFarbigkeit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.umschlagFarbigkeit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_cover}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cover}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_bindung}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bindung}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_auflage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.auflage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_liefertermin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.liefertermin}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_bearbeitungszeit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bearbeitungszeit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlBeteiligten}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anzahlBeteiligten}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlMitglieder}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anzahlMitglieder}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_dateDemandCategory}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateDemandCategory}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryController.prepareCreate}" update=":DemandCategoryCreateForm" oncomplete="PF('DemandCategoryCreateDialog').show()"/>

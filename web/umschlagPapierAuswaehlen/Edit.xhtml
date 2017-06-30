@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UmschlagPapierAuswaehlenEditDlg" widgetVar="UmschlagPapierAuswaehlenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUmschlagPapierAuswaehlenTitle}">
+            <h:form id="UmschlagPapierAuswaehlenEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{umschlagPapierAuswaehlenController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUmschlagPapierAuswaehlenLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{umschlagPapierAuswaehlenController.selected.price}" title="#{bundle.EditUmschlagPapierAuswaehlenTitle_price}" />
+                        <p:outputLabel value="#{bundle.EditUmschlagPapierAuswaehlenLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{umschlagPapierAuswaehlenController.selected.description}" title="#{bundle.EditUmschlagPapierAuswaehlenTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditUmschlagPapierAuswaehlenLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{umschlagPapierAuswaehlenController.selected.id}" title="#{bundle.EditUmschlagPapierAuswaehlenTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{umschlagPapierAuswaehlenController.update}" value="#{bundle.Save}" update="display,:UmschlagPapierAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UmschlagPapierAuswaehlenEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UmschlagPapierAuswaehlenEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
