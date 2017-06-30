@@ -14,46 +14,46 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="DepartementCriteriaListForm">
-                <p:panel header="#{bundle.ListDepartementCriteriaTitle}">
-                    <p:dataTable id="datalist" value="#{departementCriteriaController.items}" var="item"
-                                 selectionMode="single" selection="#{departementCriteriaController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                <h:form id="DepartementCriteriaListForm">
+                    <p:panel header="#{bundle.ListDepartementCriteriaTitle}">
+                        <p:dataTable id="datalist" value="#{departementCriteriaController.items}" var="item"
+                            selectionMode="single" selection="#{departementCriteriaController.selected}"
+                            paginator="true"
+                            rowKey="#{item.id}"
+                            rows="10"
+                            rowsPerPageTemplate="10,20,30,40,50"
+                            >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDepartementCriteriaTitle_name}"/>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListDepartementCriteriaTitle_name}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.name}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListDepartementCriteriaTitle_departement}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.departement}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListDepartementCriteriaTitle_id}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementCriteriaController.prepareCreate}" update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DepartementCriteriaViewForm" oncomplete="PF('DepartementCriteriaViewDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{departementCriteriaController.destroy}" update=":growl,datalist" disabled="#{empty departementCriteriaController.selected}"/>
                             </f:facet>
-                            <h:outputText value="#{item.name}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDepartementCriteriaTitle_departement}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.departement}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDepartementCriteriaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementCriteriaController.prepareCreate}" update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DepartementCriteriaViewForm" oncomplete="PF('DepartementCriteriaViewDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{departementCriteriaController.destroy}" update=":growl,datalist" disabled="#{empty departementCriteriaController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>

@@ -12,10 +12,10 @@
             <h:form id="DemandCategoryCalculationViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryCalculationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandCategoryCalculationLabel_summe}"/>
+                        <h:outputText value="#{demandCategoryCalculationController.selected.summe}" title="#{bundle.ViewDemandCategoryCalculationTitle_summe}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryCalculationLabel_departementCriteria}"/>
                         <h:outputText value="#{demandCategoryCalculationController.selected.departementCriteria}" title="#{bundle.ViewDemandCategoryCalculationTitle_departementCriteria}"/>
-                        <h:outputText value="#{bundle.ViewDemandCategoryCalculationLabel_sum}"/>
-                        <h:outputText value="#{demandCategoryCalculationController.selected.sum}" title="#{bundle.ViewDemandCategoryCalculationTitle_sum}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryCalculationLabel_demandCategory}"/>
                         <h:outputText value="#{demandCategoryCalculationController.selected.demandCategory}" title="#{bundle.ViewDemandCategoryCalculationTitle_demandCategory}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryCalculationLabel_id}"/>

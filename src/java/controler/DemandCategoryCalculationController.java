@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "demandCategoryCalculationController")
+
+@ManagedBean(name="demandCategoryCalculationController")
 @SessionScoped
 public class DemandCategoryCalculationController implements Serializable {
 
-    @EJB
-    private service.DemandCategoryCalculationFacade ejbFacade;
+
+    @EJB private service.DemandCategoryCalculationFacade ejbFacade;
     private List<DemandCategoryCalculation> items = null;
     private DemandCategoryCalculation selected;
 
@@ -109,6 +110,7 @@ public class DemandCategoryCalculationController implements Serializable {
         }
     }
 
+
     public List<DemandCategoryCalculation> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class DemandCategoryCalculationController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = DemandCategoryCalculation.class)
+    @FacesConverter(forClass=DemandCategoryCalculation.class)
     public static class DemandCategoryCalculationControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class DemandCategoryCalculationController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DemandCategoryCalculationController controller = (DemandCategoryCalculationController) facesContext.getApplication().getELResolver().
+            DemandCategoryCalculationController controller = (DemandCategoryCalculationController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "demandCategoryCalculationController");
             return controller.getFacade().find(getKey(value));
         }

@@ -22,13 +22,12 @@ public class DemandCategoryCalculationItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private DepartementCriteriaItem departementCriteriaItem;
     private BigDecimal price;
-    @ManyToOne
-    private boolean calcultaed;
+    private Boolean calcultaed;
     @ManyToOne
     private DemandCategoryCalculation demandCategoryCalculation;
 
@@ -56,7 +55,7 @@ public class DemandCategoryCalculationItem implements Serializable {
         this.price = price;
     }
 
-    public boolean isCalcultaed() {
+    public boolean getCalcultaed() {
         return calcultaed;
     }
 

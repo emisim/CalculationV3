@@ -25,7 +25,7 @@ public class CorrectionSchluessel implements Serializable {
    
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     // Hier wird der Wert der durch die Bechnung von 100* gesamtArtikel/New_Artikel

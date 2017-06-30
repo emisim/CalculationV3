@@ -12,6 +12,8 @@
             <h:form id="UserEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUserLabel_admin}" for="admin" />
+                        <p:inputText id="admin" value="#{userController.selected.admin}" title="#{bundle.EditUserTitle_admin}" />
                         <p:outputLabel value="#{bundle.EditUserLabel_departement}" for="departement" />
                         <p:selectOneMenu id="departement" value="#{userController.selected.departement}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

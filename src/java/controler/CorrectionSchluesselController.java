@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "correctionSchluesselController")
+
+@ManagedBean(name="correctionSchluesselController")
 @SessionScoped
 public class CorrectionSchluesselController implements Serializable {
 
-    @EJB
-    private service.CorrectionSchluesselFacade ejbFacade;
+
+    @EJB private service.CorrectionSchluesselFacade ejbFacade;
     private List<CorrectionSchluessel> items = null;
     private CorrectionSchluessel selected;
 
@@ -109,6 +110,7 @@ public class CorrectionSchluesselController implements Serializable {
         }
     }
 
+
     public List<CorrectionSchluessel> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class CorrectionSchluesselController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = CorrectionSchluessel.class)
+    @FacesConverter(forClass=CorrectionSchluessel.class)
     public static class CorrectionSchluesselControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class CorrectionSchluesselController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CorrectionSchluesselController controller = (CorrectionSchluesselController) facesContext.getApplication().getELResolver().
+            CorrectionSchluesselController controller = (CorrectionSchluesselController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "correctionSchluesselController");
             return controller.getFacade().find(getKey(value));
         }

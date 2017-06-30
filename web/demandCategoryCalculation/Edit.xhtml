@@ -12,6 +12,8 @@
             <h:form id="DemandCategoryCalculationEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryCalculationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandCategoryCalculationLabel_summe}" for="summe" />
+                        <p:inputText id="summe" value="#{demandCategoryCalculationController.selected.summe}" title="#{bundle.EditDemandCategoryCalculationTitle_summe}" />
                         <p:outputLabel value="#{bundle.EditDemandCategoryCalculationLabel_departementCriteria}" for="departementCriteria" />
                         <p:selectOneMenu id="departementCriteria" value="#{demandCategoryCalculationController.selected.departementCriteria}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -19,8 +21,6 @@
                                            var="departementCriteriaItem"
                                            itemValue="#{departementCriteriaItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditDemandCategoryCalculationLabel_sum}" for="sum" />
-                        <p:inputText id="sum" value="#{demandCategoryCalculationController.selected.sum}" title="#{bundle.EditDemandCategoryCalculationTitle_sum}" />
                         <p:outputLabel value="#{bundle.EditDemandCategoryCalculationLabel_demandCategory}" for="demandCategory" />
                         <p:selectOneMenu id="demandCategory" value="#{demandCategoryCalculationController.selected.demandCategory}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "departementCriteriaController")
+
+@ManagedBean(name="departementCriteriaController")
 @SessionScoped
 public class DepartementCriteriaController implements Serializable {
 
-    @EJB
-    private service.DepartementCriteriaFacade ejbFacade;
+
+    @EJB private service.DepartementCriteriaFacade ejbFacade;
     private List<DepartementCriteria> items = null;
     private DepartementCriteria selected;
 
@@ -109,6 +110,7 @@ public class DepartementCriteriaController implements Serializable {
         }
     }
 
+
     public List<DepartementCriteria> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -117,7 +119,7 @@ public class DepartementCriteriaController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = DepartementCriteria.class)
+    @FacesConverter(forClass=DepartementCriteria.class)
     public static class DepartementCriteriaControllerConverter implements Converter {
 
         @Override
@@ -125,7 +127,7 @@ public class DepartementCriteriaController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DepartementCriteriaController controller = (DepartementCriteriaController) facesContext.getApplication().getELResolver().
+            DepartementCriteriaController controller = (DepartementCriteriaController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "departementCriteriaController");
             return controller.getFacade().find(getKey(value));
         }

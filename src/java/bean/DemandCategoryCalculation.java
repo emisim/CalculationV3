@@ -24,17 +24,25 @@ public class DemandCategoryCalculation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private DepartementCriteria departementCriteria;
-    private BigDecimal sum;
+    private BigDecimal summe;
     @ManyToOne
     private DemandCategory demandCategory;
     private boolean valide;
     @OneToMany(mappedBy = "demandCategoryCalculation")
     private List<DemandCategoryCalculationItem> demandCategoryCalculationItems;
 
+    public BigDecimal getSumme() {
+        return summe;
+    }
+
+    public void setSumme(BigDecimal summe) {
+        this.summe = summe;
+    }
+    
     public List<DemandCategoryCalculationItem> getDemandCategoryCalculationItems() {
         return demandCategoryCalculationItems;
     }
@@ -51,14 +59,7 @@ public class DemandCategoryCalculation implements Serializable {
         this.departementCriteria = departementCriteria;
     }
 
-    public BigDecimal getSum() {
-        return sum;
-    }
-
-    public void setSum(BigDecimal sum) {
-        this.sum = sum;
-    }
-
+   
     public DemandCategory getDemandCategory() {
         return demandCategory;
     }
