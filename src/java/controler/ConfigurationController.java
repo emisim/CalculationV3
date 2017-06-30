@@ -1,9 +1,9 @@
 package controler;
 
-import bean.User;
+import bean.Configuration;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
-import service.UserFacade;
+import service.ConfigurationFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "userController")
+@ManagedBean(name = "configurationController")
 @SessionScoped
-public class UserController implements Serializable {
+public class ConfigurationController implements Serializable {
 
     @EJB
-    private service.UserFacade ejbFacade;
-    private List<User> items = null;
-    private User selected;
+    private service.ConfigurationFacade ejbFacade;
+    private List<Configuration> items = null;
+    private Configuration selected;
 
-    public UserController() {
+    public ConfigurationController() {
     }
 
-    public User getSelected() {
+    public Configuration getSelected() {
         return selected;
     }
 
-    public void setSelected(User selected) {
+    public void setSelected(Configuration selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class UserController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private UserFacade getFacade() {
+    private ConfigurationFacade getFacade() {
         return ejbFacade;
     }
 
-    public User prepareCreate() {
-        selected = new User();
+    public Configuration prepareCreate() {
+        selected = new Configuration();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ConfigurationCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ConfigurationUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UserDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ConfigurationDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<User> getItems() {
+    public List<Configuration> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,34 +109,34 @@ public class UserController implements Serializable {
         }
     }
 
-    public List<User> getItemsAvailableSelectMany() {
+    public List<Configuration> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<User> getItemsAvailableSelectOne() {
+    public List<Configuration> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = User.class)
-    public static class UserControllerConverter implements Converter {
+    @FacesConverter(forClass = Configuration.class)
+    public static class ConfigurationControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UserController controller = (UserController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "userController");
+            ConfigurationController controller = (ConfigurationController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "configurationController");
             return controller.getFacade().find(getKey(value));
         }
 
-        java.lang.String getKey(String value) {
-            java.lang.String key;
-            key = value;
+        java.lang.Long getKey(String value) {
+            java.lang.Long key;
+            key = Long.valueOf(value);
             return key;
         }
 
-        String getStringKey(java.lang.String value) {
+        String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -147,11 +147,11 @@ public class UserController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof User) {
-                User o = (User) object;
-                return getStringKey(o.getLogin());
+            if (object instanceof Configuration) {
+                Configuration o = (Configuration) object;
+                return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), User.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Configuration.class.getName()});
                 return null;
             }
         }

@@ -12,6 +12,8 @@
             <h:form id="DemandCategoryCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateDemandCategory}" for="dateDemandCategory" />
+                        <p:calendar id="dateDemandCategory" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.EditDemandCategoryTitle_dateDemandCategory}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_sortiment}" for="sortiment" />
                         <p:selectOneMenu id="sortiment" value="#{demandCategoryController.selected.sortiment}" >
                             <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"

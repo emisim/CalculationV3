@@ -29,6 +29,14 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_dateDemandCategory}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateDemandCategory}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_sortiment}"/>
                             </f:facet>
                             <h:outputText value="#{item.sortiment}"/>

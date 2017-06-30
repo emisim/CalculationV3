@@ -5,7 +5,7 @@
  */
 package service;
 
-import bean.DemandCategoryCalculation;
+import bean.Configuration;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author lcharaf
  */
 @Stateless
-public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCategoryCalculation> {
+public class ConfigurationFacade extends AbstractFacade<Configuration> {
 
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         return em;
     }
 
-    public DemandCategoryCalculationFacade() {
-        super(DemandCategoryCalculation.class);
+    public ConfigurationFacade() {
+        super(Configuration.class);
     }
     
 }

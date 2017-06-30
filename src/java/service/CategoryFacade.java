@@ -12,10 +12,11 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author pc&
+ * @author lcharaf
  */
 @Stateless
 public class CategoryFacade extends AbstractFacade<Category> {
+
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 

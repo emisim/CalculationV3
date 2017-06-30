@@ -12,6 +12,10 @@
             <h:form id="DemandCategoryViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateDemandCategory}"/>
+                        <h:outputText value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.ViewDemandCategoryTitle_dateDemandCategory}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_sortiment}"/>
                         <h:outputText value="#{demandCategoryController.selected.sortiment}" title="#{bundle.ViewDemandCategoryTitle_sortiment}"/>
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}"/>
