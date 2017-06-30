@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -67,8 +69,18 @@ public class DemandCategory implements Serializable {
     @ManyToOne
     private Sortiment sortiment;
     
-    //Summe soll noch eingeführt werden
-  
+    //Datum falls die einzelne Preise geändert werden
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateDemandCategory;  
+
+    public Date getDateDemandCategory() {
+        return dateDemandCategory;
+    }
+
+    public void setDateDemandCategory(Date dateDemandCategory) {
+        this.dateDemandCategory = dateDemandCategory;
+    }
+    
     
     
     @ManyToOne
