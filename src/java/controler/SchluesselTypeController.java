@@ -12,14 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("schluesselTypeController")
+@ManagedBean(name = "schluesselTypeController")
 @SessionScoped
 public class SchluesselTypeController implements Serializable {
 
@@ -109,10 +109,6 @@ public class SchluesselTypeController implements Serializable {
         }
     }
 
-    public SchluesselType getSchluesselType(java.lang.Long id) {
-        return getFacade().find(id);
-    }
-
     public List<SchluesselType> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -131,7 +127,7 @@ public class SchluesselTypeController implements Serializable {
             }
             SchluesselTypeController controller = (SchluesselTypeController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "schluesselTypeController");
-            return controller.getSchluesselType(getKey(value));
+            return controller.getFacade().find(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

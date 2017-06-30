@@ -12,14 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("correctionSchluesselController")
+@ManagedBean(name = "correctionSchluesselController")
 @SessionScoped
 public class CorrectionSchluesselController implements Serializable {
 
@@ -109,10 +109,6 @@ public class CorrectionSchluesselController implements Serializable {
         }
     }
 
-    public CorrectionSchluessel getCorrectionSchluessel(java.lang.Long id) {
-        return getFacade().find(id);
-    }
-
     public List<CorrectionSchluessel> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -131,7 +127,7 @@ public class CorrectionSchluesselController implements Serializable {
             }
             CorrectionSchluesselController controller = (CorrectionSchluesselController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "correctionSchluesselController");
-            return controller.getCorrectionSchluessel(getKey(value));
+            return controller.getFacade().find(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

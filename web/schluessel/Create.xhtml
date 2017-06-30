@@ -22,8 +22,7 @@
                         <p:selectOneMenu id="schluesselType" value="#{schluesselController.selected.schluesselType}" >
                             <f:selectItems value="#{schluesselTypeController.itemsAvailableSelectOne}"
                                            var="schluesselTypeItem"
-                                           itemValue="#{schluesselTypeItem}"
-                                           itemLabel="#{schluesselTypeItem.name}"/>
+                                           itemValue="#{schluesselTypeItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schluesselController.create}" value="#{bundle.Save}" update="display,:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchluesselCreateDialog');"/>

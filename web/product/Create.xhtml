@@ -18,9 +18,7 @@
                         <p:selectOneMenu id="category" value="#{productController.selected.category}" >
                             <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
                                            var="categoryItem"
-                                           itemValue="#{categoryItem}"
-                                           itemLabel="#{categoryItem.name}"
-                                           />
+                                           itemValue="#{categoryItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateProductLabel_id}" for="id" />
                         <p:inputText id="id" value="#{productController.selected.id}" title="#{bundle.CreateProductTitle_id}" />

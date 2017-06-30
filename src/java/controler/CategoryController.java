@@ -12,14 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("categoryController")
+@ManagedBean(name = "categoryController")
 @SessionScoped
 public class CategoryController implements Serializable {
 
@@ -109,10 +109,6 @@ public class CategoryController implements Serializable {
         }
     }
 
-    public Category getCategory(java.lang.Long id) {
-        return getFacade().find(id);
-    }
-
     public List<Category> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -131,7 +127,7 @@ public class CategoryController implements Serializable {
             }
             CategoryController controller = (CategoryController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "categoryController");
-            return controller.getCategory(getKey(value));
+            return controller.getFacade().find(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

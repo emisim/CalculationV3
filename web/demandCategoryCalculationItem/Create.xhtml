@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandCategoryCalculationItemCreateDlg" widgetVar="DemandCategoryCalculationItemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDemandCategoryCalculationItemTitle}">
+            <h:form id="DemandCategoryCalculationItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandCategoryCalculationItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_demandCategoryCalculation}" for="demandCategoryCalculation" />
+                        <p:selectOneMenu id="demandCategoryCalculation" value="#{demandCategoryCalculationItemController.selected.demandCategoryCalculation}" >
+                            <f:selectItems value="#{demandCategoryCalculationController.itemsAvailableSelectOne}"
+                                           var="demandCategoryCalculationItem"
+                                           itemValue="#{demandCategoryCalculationItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_departementCriteriaItem}" for="departementCriteriaItem" />
+                        <p:selectOneMenu id="departementCriteriaItem" value="#{demandCategoryCalculationItemController.selected.departementCriteriaItem}" >
+                            <f:selectItems value="#{departementCriteriaItemController.itemsAvailableSelectOne}"
+                                           var="departementCriteriaItemItem"
+                                           itemValue="#{departementCriteriaItemItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{demandCategoryCalculationItemController.selected.price}" title="#{bundle.CreateDemandCategoryCalculationItemTitle_price}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandCategoryCalculationItemController.selected.id}" title="#{bundle.CreateDemandCategoryCalculationItemTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandCategoryCalculationItemController.create}" value="#{bundle.Save}" update="display,:DemandCategoryCalculationItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandCategoryCalculationItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryCalculationItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -6,55 +6,27 @@ import controler.util.JsfUtil.PersistAction;
 import service.DemandCategoryFacade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import service.CalculeHelper;
 
-@Named("demandCategoryController")
+@ManagedBean(name = "demandCategoryController")
 @SessionScoped
 public class DemandCategoryController implements Serializable {
 
     @EJB
     private service.DemandCategoryFacade ejbFacade;
     private List<DemandCategory> items = null;
-        private DemandCategory selected;
-    
- //Monaten für die Berbeitungszeit
-    private List<Integer> mois ;
-
-    public void calculateAnzahlBestandArtikel(){
-        CalculeHelper.calculateAnzahlBestandArtikel(selected);
-    }
-    
-    public DemandCategoryFacade getEjbFacade() {
-        return ejbFacade;
-    }
-
-    public void setEjbFacade(DemandCategoryFacade ejbFacade) {
-        this.ejbFacade = ejbFacade;
-    }
-
-    public List<Integer> getMois() {
-        if(mois == null){
-            mois = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-           mois.add(i);
-        }
-        }
-        return mois;
-    }
-
+    private DemandCategory selected;
 
     public DemandCategoryController() {
     }
@@ -137,10 +109,6 @@ public class DemandCategoryController implements Serializable {
         }
     }
 
-    public DemandCategory getDemandCategory(java.lang.Long id) {
-        return getFacade().find(id);
-    }
-
     public List<DemandCategory> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -159,7 +127,7 @@ public class DemandCategoryController implements Serializable {
             }
             DemandCategoryController controller = (DemandCategoryController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "demandCategoryController");
-            return controller.getDemandCategory(getKey(value));
+            return controller.getFacade().find(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

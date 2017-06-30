@@ -12,14 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("sotimentMixController")
+@ManagedBean(name = "sotimentMixController")
 @SessionScoped
 public class SotimentMixController implements Serializable {
 
@@ -109,10 +109,6 @@ public class SotimentMixController implements Serializable {
         }
     }
 
-    public SotimentMix getSotimentMix(java.lang.Long id) {
-        return getFacade().find(id);
-    }
-
     public List<SotimentMix> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
@@ -131,7 +127,7 @@ public class SotimentMixController implements Serializable {
             }
             SotimentMixController controller = (SotimentMixController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "sotimentMixController");
-            return controller.getSotimentMix(getKey(value));
+            return controller.getFacade().find(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
