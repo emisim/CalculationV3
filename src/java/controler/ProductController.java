@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="productController")
+@Named("productController")
 @SessionScoped
 public class ProductController implements Serializable {
 
-
-    @EJB private service.ProductFacade ejbFacade;
+    @EJB
+    private service.ProductFacade ejbFacade;
     private List<Product> items = null;
     private Product selected;
 
@@ -110,6 +109,9 @@ public class ProductController implements Serializable {
         }
     }
 
+    public Product getProduct(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<Product> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class ProductController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Product.class)
+    @FacesConverter(forClass = Product.class)
     public static class ProductControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class ProductController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ProductController controller = (ProductController)facesContext.getApplication().getELResolver().
+            ProductController controller = (ProductController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "productController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getProduct(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="participantFaktorController")
+@Named("participantFaktorController")
 @SessionScoped
 public class ParticipantFaktorController implements Serializable {
 
-
-    @EJB private service.ParticipantFaktorFacade ejbFacade;
+    @EJB
+    private service.ParticipantFaktorFacade ejbFacade;
     private List<ParticipantFaktor> items = null;
     private ParticipantFaktor selected;
 
@@ -110,6 +109,9 @@ public class ParticipantFaktorController implements Serializable {
         }
     }
 
+    public ParticipantFaktor getParticipantFaktor(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<ParticipantFaktor> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class ParticipantFaktorController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=ParticipantFaktor.class)
+    @FacesConverter(forClass = ParticipantFaktor.class)
     public static class ParticipantFaktorControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class ParticipantFaktorController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ParticipantFaktorController controller = (ParticipantFaktorController)facesContext.getApplication().getELResolver().
+            ParticipantFaktorController controller = (ParticipantFaktorController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "participantFaktorController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getParticipantFaktor(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

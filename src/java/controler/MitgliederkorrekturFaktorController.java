@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="mitgliederkorrekturFaktorController")
+@Named("mitgliederkorrekturFaktorController")
 @SessionScoped
 public class MitgliederkorrekturFaktorController implements Serializable {
 
-
-    @EJB private service.MitgliederkorrekturFaktorFacade ejbFacade;
+    @EJB
+    private service.MitgliederkorrekturFaktorFacade ejbFacade;
     private List<MitgliederkorrekturFaktor> items = null;
     private MitgliederkorrekturFaktor selected;
 
@@ -110,6 +109,9 @@ public class MitgliederkorrekturFaktorController implements Serializable {
         }
     }
 
+    public MitgliederkorrekturFaktor getMitgliederkorrekturFaktor(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<MitgliederkorrekturFaktor> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class MitgliederkorrekturFaktorController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=MitgliederkorrekturFaktor.class)
+    @FacesConverter(forClass = MitgliederkorrekturFaktor.class)
     public static class MitgliederkorrekturFaktorControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class MitgliederkorrekturFaktorController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            MitgliederkorrekturFaktorController controller = (MitgliederkorrekturFaktorController)facesContext.getApplication().getELResolver().
+            MitgliederkorrekturFaktorController controller = (MitgliederkorrekturFaktorController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "mitgliederkorrekturFaktorController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getMitgliederkorrekturFaktor(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

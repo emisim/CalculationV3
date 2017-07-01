@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="demandCategoryCalculationItemController")
+@Named("demandCategoryCalculationItemController")
 @SessionScoped
 public class DemandCategoryCalculationItemController implements Serializable {
 
-
-    @EJB private service.DemandCategoryCalculationItemFacade ejbFacade;
+    @EJB
+    private service.DemandCategoryCalculationItemFacade ejbFacade;
     private List<DemandCategoryCalculationItem> items = null;
     private DemandCategoryCalculationItem selected;
 
@@ -110,6 +109,9 @@ public class DemandCategoryCalculationItemController implements Serializable {
         }
     }
 
+    public DemandCategoryCalculationItem getDemandCategoryCalculationItem(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<DemandCategoryCalculationItem> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class DemandCategoryCalculationItemController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=DemandCategoryCalculationItem.class)
+    @FacesConverter(forClass = DemandCategoryCalculationItem.class)
     public static class DemandCategoryCalculationItemControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class DemandCategoryCalculationItemController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DemandCategoryCalculationItemController controller = (DemandCategoryCalculationItemController)facesContext.getApplication().getELResolver().
+            DemandCategoryCalculationItemController controller = (DemandCategoryCalculationItemController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "demandCategoryCalculationItemController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getDemandCategoryCalculationItem(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
