@@ -5,6 +5,10 @@
  */
 package controler.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -25,7 +29,7 @@ public class Calculator {
     public static Double calc(String expression) {
 
         if (expression.startsWith("(") && expression.endsWith(")")) {
-            return calc(expression.substring(1, expression.length() - 1));
+            return calc(expression.substring(1, expression.length() - 1));//eliminer les parenteses
         }
         String[] containerArr = new String[]{expression};
         double leftVal = getNextOperand(containerArr);
@@ -106,6 +110,38 @@ public class Calculator {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine jsEngine = manager.getEngineByName("JavaScript"); //BE CAREFUL about the engine name. 
         Object result = jsEngine.eval(expression); //Returns a java.lang.Boolean for the expression "1<3"
-        System.out.println("ha exp "+expression+" o ha res "+result);
+        System.out.println("ha exp " + expression + " o ha res " + result);
+    }
+
+    public static List<String> extracteService(String expression) {
+        return extracteService(expression, ";", ";");
+    }
+
+    private static List<String> extracteService(String expression, String start, String end) {
+
+// Captures the word(s) between the above two character(s)
+        String pattern = start + "(\\w+)" + end;
+        Pattern patternToBeExec = Pattern.compile(pattern);
+        Matcher matcher = patternToBeExec.matcher(expression);
+        List<String> res = new ArrayList();
+        while (matcher.find()) {
+            res.add(matcher.group().replace(start, "").replace(end, ""));
+        }
+        return res;
+    }
+
+    public List<String> formateService(String nonFormatedText) {
+        //nonFormatedText = "6*;configurationItemFacadDOTfindByNameACLDOTgetDefaultValueACL;+66 ;koko;";
+
+        List<String> res = (extracteService(nonFormatedText));
+        for (int i = 0; i < res.size(); i++) {
+            res.set(i, res.get(i).replace("DOT", "."));
+
+        }
+        for (int i = 0; i < res.size(); i++) {
+            res.set(i, (res.get(i).replace("ACL", "()")));
+
+        }
+        return res;
     }
 }
