@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="correctionSchluesselController")
+@Named("correctionSchluesselController")
 @SessionScoped
 public class CorrectionSchluesselController implements Serializable {
 
-
-    @EJB private service.CorrectionSchluesselFacade ejbFacade;
+    @EJB
+    private service.CorrectionSchluesselFacade ejbFacade;
     private List<CorrectionSchluessel> items = null;
     private CorrectionSchluessel selected;
 
@@ -110,6 +109,9 @@ public class CorrectionSchluesselController implements Serializable {
         }
     }
 
+    public CorrectionSchluessel getCorrectionSchluessel(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<CorrectionSchluessel> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class CorrectionSchluesselController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=CorrectionSchluessel.class)
+    @FacesConverter(forClass = CorrectionSchluessel.class)
     public static class CorrectionSchluesselControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class CorrectionSchluesselController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CorrectionSchluesselController controller = (CorrectionSchluesselController)facesContext.getApplication().getELResolver().
+            CorrectionSchluesselController controller = (CorrectionSchluesselController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "correctionSchluesselController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getCorrectionSchluessel(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

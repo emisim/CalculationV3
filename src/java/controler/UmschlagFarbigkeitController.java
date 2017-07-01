@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="umschlagFarbigkeitController")
+@Named("umschlagFarbigkeitController")
 @SessionScoped
 public class UmschlagFarbigkeitController implements Serializable {
 
-
-    @EJB private service.UmschlagFarbigkeitFacade ejbFacade;
+    @EJB
+    private service.UmschlagFarbigkeitFacade ejbFacade;
     private List<UmschlagFarbigkeit> items = null;
     private UmschlagFarbigkeit selected;
 
@@ -110,6 +109,9 @@ public class UmschlagFarbigkeitController implements Serializable {
         }
     }
 
+    public UmschlagFarbigkeit getUmschlagFarbigkeit(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<UmschlagFarbigkeit> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class UmschlagFarbigkeitController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=UmschlagFarbigkeit.class)
+    @FacesConverter(forClass = UmschlagFarbigkeit.class)
     public static class UmschlagFarbigkeitControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class UmschlagFarbigkeitController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UmschlagFarbigkeitController controller = (UmschlagFarbigkeitController)facesContext.getApplication().getELResolver().
+            UmschlagFarbigkeitController controller = (UmschlagFarbigkeitController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "umschlagFarbigkeitController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getUmschlagFarbigkeit(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

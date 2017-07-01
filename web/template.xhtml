@@ -20,8 +20,8 @@
                 <p:layoutUnit position="north" class="ui-grid-col-12" style="padding: 0px">
                     <h:form id="menuForm" >
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-1" style="text-align: center; " >
-                                <img src="../resources/image/logo-ede.png" style="width: 30px;vertical-align: middle;margin:13px;" alt="commune logo"/>&nbsp;<br/>
+                            <div class="ui-grid-col-1" style="text-align: center">
+                                <img src="../resources/image/logo-ede.png" style="width: 30px;vertical-align: middle;margin: 13px;" alt="EDE logo"/>&nbsp;<br/>
                                 <span style="color: black; text-shadow: 2px 2px 2px white; font-size: 14px; font-weight: bold"></span>
                             </div>
                             <div class="ui-grid-col-10" >
@@ -98,15 +98,14 @@
                                     <p:submenu id="umschlag" label="Umschlag" icon="fa fa-database" >
                                         <p:menuitem value="Farbigkeit" outcome="/umschlagFarbigkeit/List.xhtml"  />
                                         <p:menuitem value="PapierAuswaehlen" outcome="/umschlagFarbigkeit/List.xhtml"  />
-
                                     </p:submenu>
 
                                 </p:menubar>
 
                             </div>
                             <div class="ui-grid-col-1" style="text-align: center;">
-                                <br/><i class="fa fa-user" style="font-size: 13px;"></i>&nbsp;<b style="font-size: 13px;">Admin</b>&nbsp;<br/>
-                                <p:commandLink title="Se deconnecter" >
+                                <br/><i class="fa fa-user" style="font-size: 13px;"></i>&nbsp;<b style="font-size: 13px;">#{userController.connectedUser.login}</b>&nbsp;<br/>
+                                <p:commandLink title="Se deconnecter" action="#{userController.seDeConnnecter()}">
                                     <p:graphicImage  value ="../resources/image/exit.png" width="32" height="32"/>
                                 </p:commandLink>
                             </div>

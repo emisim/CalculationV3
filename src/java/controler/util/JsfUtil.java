@@ -60,6 +60,11 @@ public class JsfUtil {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
     }
+    
+    public static void addWrningMessage(String msg) {
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, msg, "");
+        FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+    }
 
     public static enum PersistAction {
         CREATE,

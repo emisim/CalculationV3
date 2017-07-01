@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="farbigkeitController")
+@Named("farbigkeitController")
 @SessionScoped
 public class FarbigkeitController implements Serializable {
 
-
-    @EJB private service.FarbigkeitFacade ejbFacade;
+    @EJB
+    private service.FarbigkeitFacade ejbFacade;
     private List<Farbigkeit> items = null;
     private Farbigkeit selected;
 
@@ -110,6 +109,9 @@ public class FarbigkeitController implements Serializable {
         }
     }
 
+    public Farbigkeit getFarbigkeit(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<Farbigkeit> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class FarbigkeitController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Farbigkeit.class)
+    @FacesConverter(forClass = Farbigkeit.class)
     public static class FarbigkeitControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class FarbigkeitController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            FarbigkeitController controller = (FarbigkeitController)facesContext.getApplication().getELResolver().
+            FarbigkeitController controller = (FarbigkeitController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "farbigkeitController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getFarbigkeit(getKey(value));
         }
 
         java.lang.String getKey(String value) {

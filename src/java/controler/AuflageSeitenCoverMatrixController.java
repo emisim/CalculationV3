@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="auflageSeitenCoverMatrixController")
+@Named("auflageSeitenCoverMatrixController")
 @SessionScoped
 public class AuflageSeitenCoverMatrixController implements Serializable {
 
-
-    @EJB private service.AuflageSeitenCoverMatrixFacade ejbFacade;
+    @EJB
+    private service.AuflageSeitenCoverMatrixFacade ejbFacade;
     private List<AuflageSeitenCoverMatrix> items = null;
     private AuflageSeitenCoverMatrix selected;
 
@@ -110,6 +109,9 @@ public class AuflageSeitenCoverMatrixController implements Serializable {
         }
     }
 
+    public AuflageSeitenCoverMatrix getAuflageSeitenCoverMatrix(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<AuflageSeitenCoverMatrix> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class AuflageSeitenCoverMatrixController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=AuflageSeitenCoverMatrix.class)
+    @FacesConverter(forClass = AuflageSeitenCoverMatrix.class)
     public static class AuflageSeitenCoverMatrixControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class AuflageSeitenCoverMatrixController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AuflageSeitenCoverMatrixController controller = (AuflageSeitenCoverMatrixController)facesContext.getApplication().getELResolver().
+            AuflageSeitenCoverMatrixController controller = (AuflageSeitenCoverMatrixController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "auflageSeitenCoverMatrixController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getAuflageSeitenCoverMatrix(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

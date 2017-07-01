@@ -24,20 +24,20 @@ public class ConfigurationItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private DepartementCriteriaItem departementCriteriaItem;
     private BigDecimal defaultValue;
+    private String name;
     @ManyToOne
     private Configuration configuration;
 
-    public DepartementCriteriaItem getDepartementCriteriaItem() {
-        return departementCriteriaItem;
+    public String getName() {
+        return name;
     }
 
-    public void setDepartementCriteriaItem(DepartementCriteriaItem departementCriteriaItem) {
-        this.departementCriteriaItem = departementCriteriaItem;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    
     public BigDecimal getDefaultValue() {
         return defaultValue;
     }

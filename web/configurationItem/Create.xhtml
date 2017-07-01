@@ -12,12 +12,8 @@
             <h:form id="ConfigurationItemCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{configurationItemController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateConfigurationItemLabel_departementCriteriaItem}" for="departementCriteriaItem" />
-                        <p:selectOneMenu id="departementCriteriaItem" value="#{configurationItemController.selected.departementCriteriaItem}" >
-                            <f:selectItems value="#{departementCriteriaItemController.itemsAvailableSelectOne}"
-                                           var="departementCriteriaItemItem"
-                                           itemValue="#{departementCriteriaItemItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateConfigurationItemLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{configurationItemController.selected.name}" title="#{bundle.CreateConfigurationItemTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateConfigurationItemLabel_defaultValue}" for="defaultValue" />
                         <p:inputText id="defaultValue" value="#{configurationItemController.selected.defaultValue}" title="#{bundle.CreateConfigurationItemTitle_defaultValue}" />
                         <p:outputLabel value="#{bundle.CreateConfigurationItemLabel_configuration}" for="configuration" />

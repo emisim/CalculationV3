@@ -14,14 +14,14 @@
 .bodyLogin img {
     display: block;
     max-width: 100%;
-    width: 150px;
+    width: 92px;
     height: auto;
     margin-left: auto;
     margin-right: auto;
 }
 
 .login-card {
-    padding: 40px;
+    padding: 10px;
     width: 274px;
     background-color: #F7F7F7;
     margin: 8px auto 10px;
