@@ -3,41 +3,123 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view contentType="text/html" locale="fr">
+        <h:head>
+            <title><ui:insert name="title">Menu</ui:insert></title>
+            <h:outputStylesheet library="css" name="jsfcrud.css"/>
+            <h:outputScript library="js" name="jsfcrud.js"/>
+            <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+            <link rel="shortcut icon" href="../resources/image/logo.png" type="image/png" sizes="16x16"/>
+        </h:head>
 
-    <h:head>
-        <title><ui:insert name="title">Default Title</ui:insert></title>
-        <h:outputStylesheet library="css" name="jsfcrud.css"/>
-        <h:outputScript library="js" name="jsfcrud.js"/>
-    </h:head>
+        <h:body>
+            <p:growl id="growl" life="5000" showDetail="true"/>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" class="ui-grid-col-12" style="padding: 0px">
+                    <h:form id="menuForm" >
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-1" style="text-align: center; " >
+                                <img src="../resources/image/logo-ede.png" style="width: 30px;vertical-align: middle;margin:13px;" alt="commune logo"/>&nbsp;<br/>
+                                <span style="color: black; text-shadow: 2px 2px 2px white; font-size: 14px; font-weight: bold"></span>
+                            </div>
+                            <div class="ui-grid-col-10" >
+                                <br/>
+                                <p:menubar>
+                                    <p:submenu id="artDerWeiterverarbeitung" label="ArtDerWeiterverarbeitung" icon="fa fa-book" >
+                                        <p:menuitem value="List" outcome="/artDerWeiterverarbeitung/List.xhtml"  />
+                                    </p:submenu>
+                                    <p:submenu id="auflage" label="Auflage" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/auflage/List.xhtml"  />
+                                    </p:submenu>
+                                    <p:submenu id="bindung" label="Bindung" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/bindung/List.xhtml"  />
+                                    </p:submenu>
+                                    <p:submenu id="category" label="Category" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/category/List.xhtml"  />
+                                    </p:submenu>
+                                    <p:submenu id="configuration" label="Configuration" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/configuration/List.xhtml"  />
+                                        <p:menuitem value="ConfigurationItem" outcome="/configurationItem/List.xhtml"  />
+                                    </p:submenu>
+                                    <p:submenu id="correctionSchluessel" label="CorrectionSchluessel" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/correctionSchluessel/List.xhtml"  />
+                                    </p:submenu>
+                                    <p:submenu id="cover" label="Cover" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/cover/List.xhtml"  />
+                                    </p:submenu>
 
-    <h:body>
+                                    <p:submenu id="demandCategory" label="DemandCategory" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/demandCategory/List.xhtml"  />
+                                        <p:menuitem value="Calculation" outcome="/demandCategoryCalculation/List.xhtml"  />
+                                        <p:menuitem value="CalculationItem" outcome="/demandCategoryCalculationItem/List.xhtml"  />
+                                    </p:submenu>
 
-        <p:growl id="growl" life="3000" />
 
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
-                <h:form id="menuForm">
-                    <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="Category" outcome="/category/List.xhtml" />
-                            <p:menuitem value="Product" outcome="/product/List.xhtml" />
-                        </p:submenu>
-                    </p:menubar>
-                </h:form>
-            </p:layoutUnit>
+                                    <p:submenu id="departement" label="Departement" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/departement/List.xhtml"  />
+                                        <p:menuitem value="Criteria" outcome="/departementCriteria/List.xhtml"/>
+                                    </p:submenu>
 
-            <p:layoutUnit position="south" size="60">
-                <ui:insert name="footer"/>
-            </p:layoutUnit>
+                                    <p:submenu id="farbigkeit" label="Farbigkeit" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/farbigkeit/List.xhtml"  />
+                                    </p:submenu>
 
-            <p:layoutUnit position="center">
-                <ui:insert name="body"/>
-            </p:layoutUnit>
+                                    <p:submenu id="formatAuswaehlen" label="FormatAuswaehlen" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/formatAuswaehlen/List.xhtml"  />
+                                    </p:submenu>
 
-        </p:layout>
+                                    <p:submenu id="faktor" label="Faktor" icon="fa fa-database" >
+                                        <p:menuitem value="Konzeptbearbeitung" outcome="/konzeptbearbeitungFaktor/List.xhtml"  />
+                                        <p:menuitem value="Mitgliederkorrektur" outcome="/mitgliederkorrekturFaktor/List.xhtml"  />
+                                        <p:menuitem value="Participant" outcome="/participantFaktor/List.xhtml"  />
 
-    </h:body>
+                                    </p:submenu>
 
+
+                                    <p:submenu id="product" label="Product" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/product/List.xhtml"  />
+                                    </p:submenu>
+
+                                    <p:submenu id="schluessel" label="Schluessel" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/schluessel/List.xhtml"  />
+                                        <p:menuitem value="Type" outcome="/schluesselType/List.xhtml"  />
+                                    </p:submenu>
+
+                                    <p:submenu id="seiten" label="Seiten" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/seiten/List.xhtml"  />
+                                    </p:submenu>
+
+                                    <p:submenu id="sortiment" label="Sortiment" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/sortiment/List.xhtml"  />
+                                    </p:submenu>
+
+                                    <p:submenu id="umschlag" label="Umschlag" icon="fa fa-database" >
+                                        <p:menuitem value="Farbigkeit" outcome="/umschlagFarbigkeit/List.xhtml"  />
+                                        <p:menuitem value="PapierAuswaehlen" outcome="/umschlagFarbigkeit/List.xhtml"  />
+
+                                    </p:submenu>
+
+                                </p:menubar>
+
+                            </div>
+                            <div class="ui-grid-col-1" style="text-align: center;">
+                                <br/><i class="fa fa-user" style="font-size: 13px;"></i>&nbsp;<b style="font-size: 13px;">Admin</b>&nbsp;<br/>
+                                <p:commandLink title="Se deconnecter" >
+                                    <p:graphicImage  value ="../resources/image/exit.png" width="32" height="32"/>
+                                </p:commandLink>
+                            </div>
+                        </div>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center" id="pageLayout">
+                    <ui:insert name="body"/>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+    </f:view>
 </html>
