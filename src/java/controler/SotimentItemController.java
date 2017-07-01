@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="sotimentItemController")
+@Named("sotimentItemController")
 @SessionScoped
 public class SotimentItemController implements Serializable {
 
-
-    @EJB private service.SotimentItemFacade ejbFacade;
+    @EJB
+    private service.SotimentItemFacade ejbFacade;
     private List<SotimentItem> items = null;
     private SotimentItem selected;
 
@@ -110,6 +109,9 @@ public class SotimentItemController implements Serializable {
         }
     }
 
+    public SotimentItem getSotimentItem(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<SotimentItem> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class SotimentItemController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=SotimentItem.class)
+    @FacesConverter(forClass = SotimentItem.class)
     public static class SotimentItemControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class SotimentItemController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SotimentItemController controller = (SotimentItemController)facesContext.getApplication().getELResolver().
+            SotimentItemController controller = (SotimentItemController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "sotimentItemController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getSotimentItem(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

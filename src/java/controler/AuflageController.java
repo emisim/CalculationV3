@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="auflageController")
+@Named("auflageController")
 @SessionScoped
 public class AuflageController implements Serializable {
 
-
-    @EJB private service.AuflageFacade ejbFacade;
+    @EJB
+    private service.AuflageFacade ejbFacade;
     private List<Auflage> items = null;
     private Auflage selected;
 
@@ -110,6 +109,9 @@ public class AuflageController implements Serializable {
         }
     }
 
+    public Auflage getAuflage(java.lang.Integer id) {
+        return getFacade().find(id);
+    }
 
     public List<Auflage> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class AuflageController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Auflage.class)
+    @FacesConverter(forClass = Auflage.class)
     public static class AuflageControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class AuflageController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AuflageController controller = (AuflageController)facesContext.getApplication().getELResolver().
+            AuflageController controller = (AuflageController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "auflageController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getAuflage(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {

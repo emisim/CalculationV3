@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="artDerWeiterverarbeitungController")
+@Named("artDerWeiterverarbeitungController")
 @SessionScoped
 public class ArtDerWeiterverarbeitungController implements Serializable {
 
-
-    @EJB private service.ArtDerWeiterverarbeitungFacade ejbFacade;
+    @EJB
+    private service.ArtDerWeiterverarbeitungFacade ejbFacade;
     private List<ArtDerWeiterverarbeitung> items = null;
     private ArtDerWeiterverarbeitung selected;
 
@@ -110,6 +109,9 @@ public class ArtDerWeiterverarbeitungController implements Serializable {
         }
     }
 
+    public ArtDerWeiterverarbeitung getArtDerWeiterverarbeitung(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<ArtDerWeiterverarbeitung> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class ArtDerWeiterverarbeitungController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=ArtDerWeiterverarbeitung.class)
+    @FacesConverter(forClass = ArtDerWeiterverarbeitung.class)
     public static class ArtDerWeiterverarbeitungControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class ArtDerWeiterverarbeitungController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ArtDerWeiterverarbeitungController controller = (ArtDerWeiterverarbeitungController)facesContext.getApplication().getELResolver().
+            ArtDerWeiterverarbeitungController controller = (ArtDerWeiterverarbeitungController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "artDerWeiterverarbeitungController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getArtDerWeiterverarbeitung(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

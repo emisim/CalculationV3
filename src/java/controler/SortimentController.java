@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="sortimentController")
+@Named("sortimentController")
 @SessionScoped
 public class SortimentController implements Serializable {
 
-
-    @EJB private service.SortimentFacade ejbFacade;
+    @EJB
+    private service.SortimentFacade ejbFacade;
     private List<Sortiment> items = null;
     private Sortiment selected;
 
@@ -110,6 +109,9 @@ public class SortimentController implements Serializable {
         }
     }
 
+    public Sortiment getSortiment(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<Sortiment> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class SortimentController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Sortiment.class)
+    @FacesConverter(forClass = Sortiment.class)
     public static class SortimentControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class SortimentController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SortimentController controller = (SortimentController)facesContext.getApplication().getELResolver().
+            SortimentController controller = (SortimentController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "sortimentController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getSortiment(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

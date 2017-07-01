@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="demandCategoryController")
+@Named("demandCategoryController")
 @SessionScoped
 public class DemandCategoryController implements Serializable {
 
-
-    @EJB private service.DemandCategoryFacade ejbFacade;
+    @EJB
+    private service.DemandCategoryFacade ejbFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
 
@@ -110,6 +109,9 @@ public class DemandCategoryController implements Serializable {
         }
     }
 
+    public DemandCategory getDemandCategory(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<DemandCategory> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class DemandCategoryController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=DemandCategory.class)
+    @FacesConverter(forClass = DemandCategory.class)
     public static class DemandCategoryControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class DemandCategoryController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DemandCategoryController controller = (DemandCategoryController)facesContext.getApplication().getELResolver().
+            DemandCategoryController controller = (DemandCategoryController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "demandCategoryController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getDemandCategory(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

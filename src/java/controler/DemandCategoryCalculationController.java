@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="demandCategoryCalculationController")
+@Named("demandCategoryCalculationController")
 @SessionScoped
 public class DemandCategoryCalculationController implements Serializable {
 
-
-    @EJB private service.DemandCategoryCalculationFacade ejbFacade;
+    @EJB
+    private service.DemandCategoryCalculationFacade ejbFacade;
     private List<DemandCategoryCalculation> items = null;
     private DemandCategoryCalculation selected;
 
@@ -110,6 +109,9 @@ public class DemandCategoryCalculationController implements Serializable {
         }
     }
 
+    public DemandCategoryCalculation getDemandCategoryCalculation(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<DemandCategoryCalculation> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class DemandCategoryCalculationController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=DemandCategoryCalculation.class)
+    @FacesConverter(forClass = DemandCategoryCalculation.class)
     public static class DemandCategoryCalculationControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class DemandCategoryCalculationController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DemandCategoryCalculationController controller = (DemandCategoryCalculationController)facesContext.getApplication().getELResolver().
+            DemandCategoryCalculationController controller = (DemandCategoryCalculationController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "demandCategoryCalculationController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getDemandCategoryCalculation(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

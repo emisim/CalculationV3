@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="bindungController")
+@Named("bindungController")
 @SessionScoped
 public class BindungController implements Serializable {
 
-
-    @EJB private service.BindungFacade ejbFacade;
+    @EJB
+    private service.BindungFacade ejbFacade;
     private List<Bindung> items = null;
     private Bindung selected;
 
@@ -110,6 +109,9 @@ public class BindungController implements Serializable {
         }
     }
 
+    public Bindung getBindung(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<Bindung> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class BindungController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Bindung.class)
+    @FacesConverter(forClass = Bindung.class)
     public static class BindungControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class BindungController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BindungController controller = (BindungController)facesContext.getApplication().getELResolver().
+            BindungController controller = (BindungController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "bindungController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getBindung(getKey(value));
         }
 
         java.lang.String getKey(String value) {

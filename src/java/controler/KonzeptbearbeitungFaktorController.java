@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="konzeptbearbeitungFaktorController")
+@Named("konzeptbearbeitungFaktorController")
 @SessionScoped
 public class KonzeptbearbeitungFaktorController implements Serializable {
 
-
-    @EJB private service.KonzeptbearbeitungFaktorFacade ejbFacade;
+    @EJB
+    private service.KonzeptbearbeitungFaktorFacade ejbFacade;
     private List<KonzeptbearbeitungFaktor> items = null;
     private KonzeptbearbeitungFaktor selected;
 
@@ -110,6 +109,9 @@ public class KonzeptbearbeitungFaktorController implements Serializable {
         }
     }
 
+    public KonzeptbearbeitungFaktor getKonzeptbearbeitungFaktor(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<KonzeptbearbeitungFaktor> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class KonzeptbearbeitungFaktorController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=KonzeptbearbeitungFaktor.class)
+    @FacesConverter(forClass = KonzeptbearbeitungFaktor.class)
     public static class KonzeptbearbeitungFaktorControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class KonzeptbearbeitungFaktorController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            KonzeptbearbeitungFaktorController controller = (KonzeptbearbeitungFaktorController)facesContext.getApplication().getELResolver().
+            KonzeptbearbeitungFaktorController controller = (KonzeptbearbeitungFaktorController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "konzeptbearbeitungFaktorController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getKonzeptbearbeitungFaktor(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="papierMaterialAuswaehlenController")
+@Named("papierMaterialAuswaehlenController")
 @SessionScoped
 public class PapierMaterialAuswaehlenController implements Serializable {
 
-
-    @EJB private service.PapierMaterialAuswaehlenFacade ejbFacade;
+    @EJB
+    private service.PapierMaterialAuswaehlenFacade ejbFacade;
     private List<PapierMaterialAuswaehlen> items = null;
     private PapierMaterialAuswaehlen selected;
 
@@ -110,6 +109,9 @@ public class PapierMaterialAuswaehlenController implements Serializable {
         }
     }
 
+    public PapierMaterialAuswaehlen getPapierMaterialAuswaehlen(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<PapierMaterialAuswaehlen> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class PapierMaterialAuswaehlenController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=PapierMaterialAuswaehlen.class)
+    @FacesConverter(forClass = PapierMaterialAuswaehlen.class)
     public static class PapierMaterialAuswaehlenControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class PapierMaterialAuswaehlenController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            PapierMaterialAuswaehlenController controller = (PapierMaterialAuswaehlenController)facesContext.getApplication().getELResolver().
+            PapierMaterialAuswaehlenController controller = (PapierMaterialAuswaehlenController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "papierMaterialAuswaehlenController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getPapierMaterialAuswaehlen(getKey(value));
         }
 
         java.lang.String getKey(String value) {

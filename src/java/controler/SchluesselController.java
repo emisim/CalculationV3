@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="schluesselController")
+@Named("schluesselController")
 @SessionScoped
 public class SchluesselController implements Serializable {
 
-
-    @EJB private service.SchluesselFacade ejbFacade;
+    @EJB
+    private service.SchluesselFacade ejbFacade;
     private List<Schluessel> items = null;
     private Schluessel selected;
 
@@ -110,6 +109,9 @@ public class SchluesselController implements Serializable {
         }
     }
 
+    public Schluessel getSchluessel(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<Schluessel> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class SchluesselController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Schluessel.class)
+    @FacesConverter(forClass = Schluessel.class)
     public static class SchluesselControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class SchluesselController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SchluesselController controller = (SchluesselController)facesContext.getApplication().getELResolver().
+            SchluesselController controller = (SchluesselController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "schluesselController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getSchluessel(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

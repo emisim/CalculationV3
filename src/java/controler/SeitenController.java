@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="seitenController")
+@Named("seitenController")
 @SessionScoped
 public class SeitenController implements Serializable {
 
-
-    @EJB private service.SeitenFacade ejbFacade;
+    @EJB
+    private service.SeitenFacade ejbFacade;
     private List<Seiten> items = null;
     private Seiten selected;
 
@@ -110,6 +109,9 @@ public class SeitenController implements Serializable {
         }
     }
 
+    public Seiten getSeiten(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<Seiten> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class SeitenController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Seiten.class)
+    @FacesConverter(forClass = Seiten.class)
     public static class SeitenControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class SeitenController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SeitenController controller = (SeitenController)facesContext.getApplication().getELResolver().
+            SeitenController controller = (SeitenController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "seitenController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getSeiten(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
