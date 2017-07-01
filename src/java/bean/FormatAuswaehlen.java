@@ -76,7 +76,7 @@ public class FormatAuswaehlen implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.FormatAuswaehlen[ id=" + id + " ]";
+        return id;
     }
     
 }

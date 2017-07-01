@@ -83,9 +83,9 @@ public class DepartementCriteria implements Serializable {
         return true;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return "bean.DepartementCriteria[ id=" + id + " ]";
+        return name;
     }
 
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 01 Juillet 2017 à 14:39
+-- Généré le :  Dim 02 Juillet 2017 à 01:47
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -245,7 +245,10 @@ CREATE TABLE `departement` (
 --
 
 INSERT INTO `departement` (`ID`, `NAME`) VALUES
-(1, 'ContentManagement								');
+(1, 'contentManagement'),
+(2, 'datenManagement'),
+(3, 'databasePublishing'),
+(4, 'projectManagement');
 
 -- --------------------------------------------------------
 
@@ -286,7 +289,8 @@ CREATE TABLE `departementcriteriaitem` (
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '', '8*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', 'std_stz', 1);
+(1, '', '8*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', 'std_stz', 1),
+(2, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1);
 
 -- --------------------------------------------------------
 
@@ -482,6 +486,14 @@ CREATE TABLE `user` (
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
+('anas', 0, 0, 'anas@gmail.com', 1, 1, 'anas', '1a79118784aacad6ef9c43f1b38dfac9ed138ae31384e599a485b337e295a085', 'anas', '06', 2),
+('younes', 1, 0, 'younes@gmail.com', 1, 0, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -547,6 +559,24 @@ ALTER TABLE `category`
 -- Index pour la table `configuration`
 --
 ALTER TABLE `configuration`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `departement`
+--
+ALTER TABLE `departement`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `departementcriteria`
+--
+ALTER TABLE `departementcriteria`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `departementcriteriaitem`
+--
+ALTER TABLE `departementcriteriaitem`
   ADD PRIMARY KEY (`ID`);
 SET FOREIGN_KEY_CHECKS=1;
 

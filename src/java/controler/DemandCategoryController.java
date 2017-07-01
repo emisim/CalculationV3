@@ -30,6 +30,12 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
+    
+    public boolean renderAttribute(String attribute){
+        boolean isSet = ejbFacade.renderAttribute(attribute);
+        return isSet;
+    }
+    
 
     public DemandCategory getSelected() {
         return selected;

@@ -24,16 +24,16 @@ public class AuflageSeitenCoverMatrix implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     private Auflage auflage;
-    
+
     @ManyToOne
     private Seiten seiten;
-    
+
     @ManyToOne
     private Cover cover;
-    
+
     private BigDecimal price;
 
     public Long getId() {
@@ -98,7 +98,7 @@ public class AuflageSeitenCoverMatrix implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.AuflageSeitenMatrix[ id=" + id + " ]";
+        return id + "";
     }
-    
+
 }

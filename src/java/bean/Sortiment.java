@@ -121,7 +121,7 @@ public class Sortiment implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Sortiment[ id=" + id + " ]";
+        return name+"";
     }
     
 }

@@ -92,9 +92,9 @@ public class DepartementCriteriaItem implements Serializable {
         return true;
     }
 
-    @Override
+   @Override
     public String toString() {
-        return "bean.DepartementCriteriaItem[ id=" + id + " ]";
+        return description;
     }
 
 }

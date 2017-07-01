@@ -72,7 +72,7 @@ public class MitgliederkorrekturFaktor implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.MitgliederkorrekturFaktor[ id=" + id + " ]";
+        return wert+"";
     }
     
 }

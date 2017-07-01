@@ -79,9 +79,9 @@ public class Configuration implements Serializable {
         return true;
     }
 
-    @Override
+   @Override
     public String toString() {
-        return "bean.Configuration[ id=" + id + " ]";
+        return dateApplication+"";
     }
     
 }

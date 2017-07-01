@@ -62,7 +62,7 @@ public class Seiten implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Seiten[ id=" + id + " ]";
+        return nbrePage+"";
     }
     
 }

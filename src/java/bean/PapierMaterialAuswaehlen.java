@@ -72,9 +72,9 @@ public class PapierMaterialAuswaehlen implements Serializable {
         return true;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return "bean.FormatAuswaehlen[ id=" + id + " ]";
+        return id;
     }
     
 }

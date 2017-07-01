@@ -94,7 +94,7 @@ public class SotimentItem implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.SotimentMix[ id=" + id + " ]";
+        return   sortiment.getName() + " "+wert;
     }
     
 }

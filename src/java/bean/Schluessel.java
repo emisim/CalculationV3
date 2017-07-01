@@ -97,7 +97,8 @@ public class Schluessel implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Schluessel[ id=" + id + " ]";
+        return label;
     }
+    
     
 }

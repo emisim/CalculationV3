@@ -73,7 +73,7 @@ public class WechselfassungVariantFaktor implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.WechselfassungVariantFaktor[ id=" + id + " ]";
+        return wert+"";
     }
     
 }

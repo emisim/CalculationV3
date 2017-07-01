@@ -74,7 +74,7 @@ public class Veredlung implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.FormatAuswaehlen[ id=" + id + " ]";
+        return id ;
     }
     
 }

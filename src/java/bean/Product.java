@@ -104,9 +104,10 @@ public class Product implements Serializable {
         return true;
     }
 
-    @Override
+   @Override
     public String toString() {
-        return "bean.Product[ id=" + id + " ]";
+        return label;
     }
+    
     
 }

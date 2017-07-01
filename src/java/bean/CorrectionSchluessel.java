@@ -91,7 +91,7 @@ public class CorrectionSchluessel implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.CorrectionSchluessel[ id=" + id + " ]";
+        return percent+"|"+wert;
     }
     
 }

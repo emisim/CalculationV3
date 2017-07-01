@@ -77,9 +77,9 @@ public class ParticipantFaktor implements Serializable {
         return true;
     }
 
-    @Override
+  @Override
     public String toString() {
-        return "bean.ParticipantFaktor[ id=" + id + " ]";
+        return percent+"|"+wert;
     }
     
 }

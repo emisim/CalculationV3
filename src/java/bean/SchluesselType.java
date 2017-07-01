@@ -79,9 +79,10 @@ public class SchluesselType implements Serializable {
         return true;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return "bean.schluessels_Type[ id=" + id + " ]";
+        return name;
     }
+    
     
 }
