@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="formatAuswaehlenController")
+@Named("formatAuswaehlenController")
 @SessionScoped
 public class FormatAuswaehlenController implements Serializable {
 
-
-    @EJB private service.FormatAuswaehlenFacade ejbFacade;
+    @EJB
+    private service.FormatAuswaehlenFacade ejbFacade;
     private List<FormatAuswaehlen> items = null;
     private FormatAuswaehlen selected;
 
@@ -110,6 +109,9 @@ public class FormatAuswaehlenController implements Serializable {
         }
     }
 
+    public FormatAuswaehlen getFormatAuswaehlen(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<FormatAuswaehlen> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class FormatAuswaehlenController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=FormatAuswaehlen.class)
+    @FacesConverter(forClass = FormatAuswaehlen.class)
     public static class FormatAuswaehlenControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class FormatAuswaehlenController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            FormatAuswaehlenController controller = (FormatAuswaehlenController)facesContext.getApplication().getELResolver().
+            FormatAuswaehlenController controller = (FormatAuswaehlenController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "formatAuswaehlenController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getFormatAuswaehlen(getKey(value));
         }
 
         java.lang.String getKey(String value) {

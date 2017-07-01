@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="departementCriteriaItemController")
+@Named("departementCriteriaItemController")
 @SessionScoped
 public class DepartementCriteriaItemController implements Serializable {
 
-
-    @EJB private service.DepartementCriteriaItemFacade ejbFacade;
+    @EJB
+    private service.DepartementCriteriaItemFacade ejbFacade;
     private List<DepartementCriteriaItem> items = null;
     private DepartementCriteriaItem selected;
 
@@ -110,6 +109,9 @@ public class DepartementCriteriaItemController implements Serializable {
         }
     }
 
+    public DepartementCriteriaItem getDepartementCriteriaItem(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<DepartementCriteriaItem> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class DepartementCriteriaItemController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=DepartementCriteriaItem.class)
+    @FacesConverter(forClass = DepartementCriteriaItem.class)
     public static class DepartementCriteriaItemControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class DepartementCriteriaItemController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DepartementCriteriaItemController controller = (DepartementCriteriaItemController)facesContext.getApplication().getELResolver().
+            DepartementCriteriaItemController controller = (DepartementCriteriaItemController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "departementCriteriaItemController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getDepartementCriteriaItem(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

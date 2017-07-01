@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="umschlagPapierAuswaehlenController")
+@Named("umschlagPapierAuswaehlenController")
 @SessionScoped
 public class UmschlagPapierAuswaehlenController implements Serializable {
 
-
-    @EJB private service.UmschlagPapierAuswaehlenFacade ejbFacade;
+    @EJB
+    private service.UmschlagPapierAuswaehlenFacade ejbFacade;
     private List<UmschlagPapierAuswaehlen> items = null;
     private UmschlagPapierAuswaehlen selected;
 
@@ -110,6 +109,9 @@ public class UmschlagPapierAuswaehlenController implements Serializable {
         }
     }
 
+    public UmschlagPapierAuswaehlen getUmschlagPapierAuswaehlen(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<UmschlagPapierAuswaehlen> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class UmschlagPapierAuswaehlenController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=UmschlagPapierAuswaehlen.class)
+    @FacesConverter(forClass = UmschlagPapierAuswaehlen.class)
     public static class UmschlagPapierAuswaehlenControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class UmschlagPapierAuswaehlenController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UmschlagPapierAuswaehlenController controller = (UmschlagPapierAuswaehlenController)facesContext.getApplication().getELResolver().
+            UmschlagPapierAuswaehlenController controller = (UmschlagPapierAuswaehlenController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "umschlagPapierAuswaehlenController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getUmschlagPapierAuswaehlen(getKey(value));
         }
 
         java.lang.String getKey(String value) {

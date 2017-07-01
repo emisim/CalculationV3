@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="departementController")
+@Named("departementController")
 @SessionScoped
 public class DepartementController implements Serializable {
 
-
-    @EJB private service.DepartementFacade ejbFacade;
+    @EJB
+    private service.DepartementFacade ejbFacade;
     private List<Departement> items = null;
     private Departement selected;
 
@@ -110,6 +109,9 @@ public class DepartementController implements Serializable {
         }
     }
 
+    public Departement getDepartement(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<Departement> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class DepartementController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Departement.class)
+    @FacesConverter(forClass = Departement.class)
     public static class DepartementControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class DepartementController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DepartementController controller = (DepartementController)facesContext.getApplication().getELResolver().
+            DepartementController controller = (DepartementController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "departementController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getDepartement(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

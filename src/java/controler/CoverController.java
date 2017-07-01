@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="coverController")
+@Named("coverController")
 @SessionScoped
 public class CoverController implements Serializable {
 
-
-    @EJB private service.CoverFacade ejbFacade;
+    @EJB
+    private service.CoverFacade ejbFacade;
     private List<Cover> items = null;
     private Cover selected;
 
@@ -110,6 +109,9 @@ public class CoverController implements Serializable {
         }
     }
 
+    public Cover getCover(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<Cover> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class CoverController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Cover.class)
+    @FacesConverter(forClass = Cover.class)
     public static class CoverControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class CoverController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CoverController controller = (CoverController)facesContext.getApplication().getELResolver().
+            CoverController controller = (CoverController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "coverController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getCover(getKey(value));
         }
 
         java.lang.String getKey(String value) {

@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="categoryController")
+@Named("categoryController")
 @SessionScoped
 public class CategoryController implements Serializable {
 
-
-    @EJB private service.CategoryFacade ejbFacade;
+    @EJB
+    private service.CategoryFacade ejbFacade;
     private List<Category> items = null;
     private Category selected;
 
@@ -110,6 +109,9 @@ public class CategoryController implements Serializable {
         }
     }
 
+    public Category getCategory(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<Category> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class CategoryController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Category.class)
+    @FacesConverter(forClass = Category.class)
     public static class CategoryControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class CategoryController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CategoryController controller = (CategoryController)facesContext.getApplication().getELResolver().
+            CategoryController controller = (CategoryController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "categoryController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getCategory(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

@@ -12,8 +12,8 @@
             <h:form id="ConfigurationItemViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{configurationItemController.selected != null}">
-                        <h:outputText value="#{bundle.ViewConfigurationItemLabel_departementCriteriaItem}"/>
-                        <h:outputText value="#{configurationItemController.selected.departementCriteriaItem}" title="#{bundle.ViewConfigurationItemTitle_departementCriteriaItem}"/>
+                        <h:outputText value="#{bundle.ViewConfigurationItemLabel_name}"/>
+                        <h:outputText value="#{configurationItemController.selected.name}" title="#{bundle.ViewConfigurationItemTitle_name}"/>
                         <h:outputText value="#{bundle.ViewConfigurationItemLabel_defaultValue}"/>
                         <h:outputText value="#{configurationItemController.selected.defaultValue}" title="#{bundle.ViewConfigurationItemTitle_defaultValue}"/>
                         <h:outputText value="#{bundle.ViewConfigurationItemLabel_configuration}"/>

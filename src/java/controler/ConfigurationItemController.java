@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="configurationItemController")
+@Named("configurationItemController")
 @SessionScoped
 public class ConfigurationItemController implements Serializable {
 
-
-    @EJB private service.ConfigurationItemFacade ejbFacade;
+    @EJB
+    private service.ConfigurationItemFacade ejbFacade;
     private List<ConfigurationItem> items = null;
     private ConfigurationItem selected;
 
@@ -110,6 +109,9 @@ public class ConfigurationItemController implements Serializable {
         }
     }
 
+    public ConfigurationItem getConfigurationItem(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<ConfigurationItem> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class ConfigurationItemController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=ConfigurationItem.class)
+    @FacesConverter(forClass = ConfigurationItem.class)
     public static class ConfigurationItemControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class ConfigurationItemController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ConfigurationItemController controller = (ConfigurationItemController)facesContext.getApplication().getELResolver().
+            ConfigurationItemController controller = (ConfigurationItemController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "configurationItemController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getConfigurationItem(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

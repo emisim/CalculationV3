@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="wechselfassungVariantFaktorController")
+@Named("wechselfassungVariantFaktorController")
 @SessionScoped
 public class WechselfassungVariantFaktorController implements Serializable {
 
-
-    @EJB private service.WechselfassungVariantFaktorFacade ejbFacade;
+    @EJB
+    private service.WechselfassungVariantFaktorFacade ejbFacade;
     private List<WechselfassungVariantFaktor> items = null;
     private WechselfassungVariantFaktor selected;
 
@@ -110,6 +109,9 @@ public class WechselfassungVariantFaktorController implements Serializable {
         }
     }
 
+    public WechselfassungVariantFaktor getWechselfassungVariantFaktor(java.lang.Long id) {
+        return getFacade().find(id);
+    }
 
     public List<WechselfassungVariantFaktor> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class WechselfassungVariantFaktorController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=WechselfassungVariantFaktor.class)
+    @FacesConverter(forClass = WechselfassungVariantFaktor.class)
     public static class WechselfassungVariantFaktorControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class WechselfassungVariantFaktorController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            WechselfassungVariantFaktorController controller = (WechselfassungVariantFaktorController)facesContext.getApplication().getELResolver().
+            WechselfassungVariantFaktorController controller = (WechselfassungVariantFaktorController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "wechselfassungVariantFaktorController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getWechselfassungVariantFaktor(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

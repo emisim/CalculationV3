@@ -12,20 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@ManagedBean(name="veredlungController")
+@Named("veredlungController")
 @SessionScoped
 public class VeredlungController implements Serializable {
 
-
-    @EJB private service.VeredlungFacade ejbFacade;
+    @EJB
+    private service.VeredlungFacade ejbFacade;
     private List<Veredlung> items = null;
     private Veredlung selected;
 
@@ -110,6 +109,9 @@ public class VeredlungController implements Serializable {
         }
     }
 
+    public Veredlung getVeredlung(java.lang.String id) {
+        return getFacade().find(id);
+    }
 
     public List<Veredlung> getItemsAvailableSelectMany() {
         return getFacade().findAll();
@@ -119,7 +121,7 @@ public class VeredlungController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Veredlung.class)
+    @FacesConverter(forClass = Veredlung.class)
     public static class VeredlungControllerConverter implements Converter {
 
         @Override
@@ -127,9 +129,9 @@ public class VeredlungController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            VeredlungController controller = (VeredlungController)facesContext.getApplication().getELResolver().
+            VeredlungController controller = (VeredlungController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "veredlungController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getVeredlung(getKey(value));
         }
 
         java.lang.String getKey(String value) {
