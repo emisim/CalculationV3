@@ -1,6 +1,8 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.Sortiment;
+import bean.SotimentItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
 import service.DemandCategoryFacade;
@@ -27,15 +29,16 @@ public class DemandCategoryController implements Serializable {
     private service.DemandCategoryFacade ejbFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
+    private Sortiment sortiment;
+    private List<SotimentItem> sotimentItems;
 
     public DemandCategoryController() {
     }
-    
-    public boolean renderAttribute(String attribute){
+
+    public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
     }
-    
 
     public DemandCategory getSelected() {
         return selected;
@@ -166,6 +169,22 @@ public class DemandCategoryController implements Serializable {
             }
         }
 
+    }
+
+    public Sortiment getSortiment() {
+        return sortiment;
+    }
+
+    public void setSortiment(Sortiment sortiment) {
+        this.sortiment = sortiment;
+    }
+
+    public List<SotimentItem> getSotimentItems() {
+        return sotimentItems;
+    }
+
+    public void setSotimentItems(List<SotimentItem> sotimentItems) {
+        this.sotimentItems = sotimentItems;
     }
 
 }

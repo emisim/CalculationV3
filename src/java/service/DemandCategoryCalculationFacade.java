@@ -5,7 +5,9 @@
  */
 package service;
 
+import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
+    private @EJB DepartementCriteriaFacade departementCriteriaFacade;
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -29,4 +32,8 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         super(DemandCategoryCalculation.class);
     }
     
+//    public void save(DemandCategory demandCategory){
+//        departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(departement)
+//        
+//    }
 }
