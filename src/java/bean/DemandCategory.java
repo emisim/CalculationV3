@@ -96,7 +96,7 @@ public class DemandCategory implements Serializable {
     
     
     //Für den Druck
-    private boolean druck;
+    private boolean druck;// dakchi lli apres druk a cacher!!!!===> anas
     
     
     @ManyToOne

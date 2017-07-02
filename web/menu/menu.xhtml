@@ -19,13 +19,14 @@
 
 
     <h:body class="bodyLogin">
-        <div class="ui-grid-row" style="background: url(../resources/image/header3.jpg) no-repeat;background-size: cover;">
+        <div class="ui-grid-row" style="height: 250px;background: url(../resources/image/background-banner.jpg) no-repeat;background-size: cover;" >
             <div class="ui-grid-col-12" style="text-align: right; margin-top: 2px; padding-right: 10px">
                 <h:form>
-                    Bienvenue : <b>Admin</b>&nbsp;
-                    |&nbsp;<p:commandLink value="Se Déconnecter" />
+                    Bienvenue : <b>#{userController.connectedUser.login}</b>&nbsp;
+                    |&nbsp;<p:commandLink value="Se Déconnecter" action="#{userController.seDeConnnecter()}"/>
                 </h:form>
             </div>
+            <img src="../resources/image/ede.png" style="width: 120px; height: auto"/>
         </div>
         <div class="ui-grid ui-grid-responsive">
 
@@ -188,7 +189,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../papierMaterialAuswaehlen/List.xhtml">
                                 <div class="menu-card">
@@ -197,7 +198,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../participantFaktor/List.xhtml">
                                 <div class="menu-card">
@@ -206,7 +207,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../product/List.xhtml">
                                 <div class="menu-card">
@@ -215,7 +216,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../schluessel/List.xhtml">
                                 <div class="menu-card">
@@ -248,7 +249,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../umschlagFarbigkeit/List.xhtml">
                                 <div class="menu-card">
@@ -257,7 +258,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../umschlagPapierAuswaehlen/List.xhtml">
                                 <div class="menu-card">
@@ -266,7 +267,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../user/List.xhtml">
                                 <div class="menu-card">
@@ -275,7 +276,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../veredlung/List.xhtml">
                                 <div class="menu-card">
@@ -284,8 +285,8 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
-                        
+
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../wechselfassungVariantFaktor/List.xhtml">
                                 <div class="menu-card">
@@ -294,7 +295,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../wechselfassungVariantFaktor/List.xhtml">
                                 <div class="menu-card">
@@ -303,7 +304,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        
+
                     </div>
                 </div>
 
