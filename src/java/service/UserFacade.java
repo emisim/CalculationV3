@@ -23,8 +23,7 @@ public class UserFacade extends AbstractFacade<User> {
 
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
-    @EJB
-    private DepartementFacade departementFacade;
+
 
     @Override
     protected EntityManager getEntityManager() {
@@ -56,7 +55,7 @@ public class UserFacade extends AbstractFacade<User> {
             } else {
                 loadedUser.setNbrCnx(0);
                 user = clone(loadedUser);
-                user.setDepartement(departementFacade.findByUser(user));
+                user.setDepartement(loadedUser.getDepartement());
                 user.setMdpChanged(loadedUser.isMdpChanged());
                 user.setPassword(null);
                 SessionUtil.attachUserToDepartement(user);
