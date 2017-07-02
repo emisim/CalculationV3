@@ -44,4 +44,5 @@ public class DepartementFacade extends AbstractFacade<Departement> {
         super(Departement.class);
     }
 
+   
 }
