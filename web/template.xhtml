@@ -11,7 +11,7 @@
             <h:outputStylesheet library="css" name="jsfcrud.css"/>
             <h:outputScript library="js" name="jsfcrud.js"/>
             <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-            <link rel="shortcut icon" href="../resources/image/logo.png" type="image/png" sizes="16x16"/>
+            <link rel="shortcut icon" href="../resources/image/logo-ede.png" type="image/png" sizes="16x16"/>
         </h:head>
 
         <h:body>
@@ -60,6 +60,7 @@
                                     <p:submenu id="departement" label="Departement" icon="fa fa-database" >
                                         <p:menuitem value="List" outcome="/departement/List.xhtml"  />
                                         <p:menuitem value="Criteria" outcome="/departementCriteria/List.xhtml"/>
+                                        <p:menuitem value="Criteria Item" outcome="/departementCriteriaItem/List.xhtml"/>
                                     </p:submenu>
 
                                     <p:submenu id="farbigkeit" label="Farbigkeit" icon="fa fa-database" >
@@ -98,6 +99,10 @@
                                     <p:submenu id="umschlag" label="Umschlag" icon="fa fa-database" >
                                         <p:menuitem value="Farbigkeit" outcome="/umschlagFarbigkeit/List.xhtml"  />
                                         <p:menuitem value="PapierAuswaehlen" outcome="/umschlagFarbigkeit/List.xhtml"  />
+                                    </p:submenu>
+                                    
+                                    <p:submenu id="user" label="User" icon="fa fa-database" >
+                                        <p:menuitem value="List" outcome="/user/List.xhtml"  />
                                     </p:submenu>
 
                                 </p:menubar>

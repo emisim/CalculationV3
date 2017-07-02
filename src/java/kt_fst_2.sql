@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 02 Juillet 2017 à 01:47
+-- Généré le :  Dim 02 Juillet 2017 à 11:17
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -82,6 +82,16 @@ CREATE TABLE `category` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `category`
+--
+
+INSERT INTO `category` (`ID`, `NAME`) VALUES
+(1, 'Katalog'),
+(2, 'Fleyer'),
+(3, 'Prospekt'),
+(4, 'BMEcat');
 
 -- --------------------------------------------------------
 
@@ -289,8 +299,10 @@ CREATE TABLE `departementcriteriaitem` (
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '', '8*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', 'std_stz', 1),
-(2, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1);
+(1, '', '8*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '8*std_stz', 1),
+(2, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
+(3, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
+(4, '', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacad.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
 
 -- --------------------------------------------------------
 
@@ -377,6 +389,18 @@ CREATE TABLE `product` (
   `CATEGORY_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `product`
+--
+
+INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
+(1, NULL, 'Premium EWZ', 1),
+(2, NULL, 'Fortis WZ', 1),
+(3, NULL, 'Industrietechnik', 1),
+(4, NULL, 'Baugerät', 1),
+(5, NULL, 'LL Gartentechnik', 1),
+(6, NULL, 'Plus1 Nachdruck', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -391,6 +415,27 @@ CREATE TABLE `schluessel` (
   `SCHLUESSELTYPE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `schluessel`
+--
+
+INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_ID`) VALUES
+(1, 'Hier soll BIld oder Beschreibung', 'Einfach', '1', 2),
+(2, 'Hier soll BIld oder Beschreibung', 'Standard', '1', 2),
+(3, 'Hier soll BIld oder Beschreibung', 'Komplex', '1', 2),
+(4, 'Hier soll BIld oder Beschreibung', 'Erstausgabe', '1', 1),
+(5, 'Hier soll BIld oder Beschreibung', 'Folgeausgabe', '0', 1),
+(6, 'Hier soll BIld oder Beschreibung', 'Lagerliste', '1', 3),
+(7, 'Hier soll BIld oder Beschreibung', 'E/D/E Katalog', '1', 3),
+(8, 'Hier soll BIld oder Beschreibung', 'Individueller Katalog', '1', 3),
+(9, 'Hier soll BIld oder Beschreibung', 'Fremdsprachen-Katalog', '1', 3),
+(10, NULL, 'Proz.neu / Tech. Alt', '1', 4),
+(11, NULL, 'Proz.neu / Tech.Neu', '1', 4),
+(12, NULL, 'Datenmanagemnt', '56', 5),
+(13, NULL, 'Contentmanagement', '56', 5),
+(14, NULL, 'Assetmanagement', '56', 5),
+(15, NULL, 'Allgemein', '56', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -401,6 +446,17 @@ CREATE TABLE `schluesseltype` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `schluesseltype`
+--
+
+INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
+(1, 'Ausgabe'),
+(2, 'Layout'),
+(3, 'Katalogart'),
+(4, 'Prozess/Technik'),
+(5, 'Kostenschlüssel');
 
 -- --------------------------------------------------------
 
@@ -427,6 +483,30 @@ CREATE TABLE `sortiment` (
   `NAME` varchar(255) DEFAULT NULL,
   `PRODUCTSCHLUESSEL` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `sortiment`
+--
+
+INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`, `NAME`, `PRODUCTSCHLUESSEL`) VALUES
+(1, '16', '1', '1', 'Arbeitsschutz', '5'),
+(2, '16', '1', '1', 'Baubeschläge', '5'),
+(3, '8', '1', '1', 'Baugeräte', '3'),
+(4, '27', '1', '1', 'Befestigungstechnik', '8'),
+(5, '12', '1', '1', 'Betriebseinrichtungen', '4'),
+(6, '5', '1', '1', 'Elektrowerkzeuge', '2'),
+(7, '6', '1', '1', 'Gartentechnik', '2'),
+(8, '11', '1', '1', 'Handwerkzeuge', '3'),
+(9, '6', '1', '1', 'Haustechnik/Innendeko/Elektroinstallation', '2'),
+(10, '18', '1', '1', 'Industrietechnik', '5'),
+(11, '9', '1', '1', 'Möbelbeschläge', '3'),
+(12, '10', '1', '1', 'Präzisionswerkzeuge', '8'),
+(13, '9', '1', '1', 'Schweißtechnik', '3'),
+(14, '12', '1', '1', 'Verpackungen', '4'),
+(15, '6', '1', '1', 'Werkstattmaterial', '2'),
+(16, '11', '1', '1', '\nWerkzeuge Holzbearbeitung', '3'),
+(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3'),
+(18, NULL, NULL, NULL, 'Mix-Sortiment', NULL);
 
 -- --------------------------------------------------------
 
@@ -491,8 +571,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
-('anas', 0, 0, 'anas@gmail.com', 1, 1, 'anas', '1a79118784aacad6ef9c43f1b38dfac9ed138ae31384e599a485b337e295a085', 'anas', '06', 2),
-('younes', 1, 0, 'younes@gmail.com', 1, 0, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
+('ana', 0, 0, 'ana', 1, 0, 'ana', 'b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64', 'ana', '00000', 1),
+('anas', 0, 1, 'anas@gmail.com', 1, 3, 'anas', '9d171d82134b0ec576fe121cf857321819cf3a59bc0138af35862c2caa617d57', 'anas', '06', 1),
+('walo', 1, 0, 'walo', 0, 0, 'walo', 'de34ddf5af5bcbda0219a7280880a0b7c6ae7b12885160996fe3effaa67733a3', 'walo', '00000', NULL),
+('younes', 1, 0, 'younes@gmail.com', 1, 3, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
 
 -- --------------------------------------------------------
 
@@ -578,7 +660,27 @@ ALTER TABLE `departementcriteria`
 --
 ALTER TABLE `departementcriteriaitem`
   ADD PRIMARY KEY (`ID`);
-SET FOREIGN_KEY_CHECKS=1;
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`LOGIN`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `departementcriteria`
+--
+ALTER TABLE `departementcriteria`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `departementcriteriaitem`
+--
+ALTER TABLE `departementcriteriaitem`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

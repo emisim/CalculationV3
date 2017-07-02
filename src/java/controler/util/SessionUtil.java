@@ -13,13 +13,7 @@ public class SessionUtil {
     private SessionUtil() {
     }
 
-    public static void attachUserToDepartement(User user) {
-        Departement myDepartement = user.getDepartement();
-        if (myDepartement.getUsers().indexOf(user) == -1) {
-            myDepartement.getUsers().add(user);
-        }
-        registerUser(user);
-    }
+  
 
     public static void registerUser(User user) {
         //clone user before

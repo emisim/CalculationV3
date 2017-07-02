@@ -59,7 +59,6 @@ public class UserFacade extends AbstractFacade<User> {
                 user.setDepartement(departementFacade.findByUser(user));
                 user.setMdpChanged(loadedUser.isMdpChanged());
                 user.setPassword(null);
-                SessionUtil.attachUserToDepartement(user);
                 return 1;
 
             }
