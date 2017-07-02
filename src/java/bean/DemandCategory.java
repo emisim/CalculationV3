@@ -133,7 +133,7 @@ public class DemandCategory implements Serializable {
     
     //Date de Livraisoin
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date liefertermin;
+    private Date liefertermin= new Date();
     
     //Bearbeitungszeit
     private int bearbeitungszeit;
@@ -146,7 +146,7 @@ public class DemandCategory implements Serializable {
     
     //Datum falls die einzelne Preise geändert werden
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateDemandCategory;  
+    private Date dateDemandCategory= new Date();  
 
     //Berechnete Summen 
     private BigDecimal summDruck;

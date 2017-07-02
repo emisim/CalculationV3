@@ -26,6 +26,13 @@
                                            var="productItem"
                                            itemValue="#{productItem}"/>
                         </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" />
+                        <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" >
+                            <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
+                                           var="sortimentItem"
+                                           itemValue="#{sortimentItem}"/>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
                         <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
