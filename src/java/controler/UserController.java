@@ -47,7 +47,6 @@ public class UserController implements Serializable {
         AccessDepartement.populateMaps();
         System.out.println("resss " + res);
         if (res > 0) {
-            System.out.println(SessionUtil.getConnectedUser());
             if (SessionUtil.getConnectedUser().isMdpChanged()) {
                 System.out.println("meenu");
                 return "/demandCategory/List?faces-redirect=true";
