@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 02 Juillet 2017 à 11:17
--- Version du serveur :  10.1.19-MariaDB
--- Version de PHP :  5.5.38
+-- Généré le :  Dim 02 Juillet 2017 à 13:31
+-- Version du serveur :  5.7.11
+-- Version de PHP :  5.6.19
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -299,10 +299,10 @@ CREATE TABLE `departementcriteriaitem` (
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '', '8*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '8*std_stz', 1),
-(2, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
-(3, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
-(4, '', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacad.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
+(1, '', '8*configurationItemFacad.findByName(\'std_stz\').getDefaultValue()', '8*std_stz', 1),
+(2, '', '6*configurationItemFacad.findByName(\'std_stz\').getDefaultValue()', '6*std_stz', 1),
+(3, '', '6*configurationItemFacad.findByName(\'std_stz\').getDefaultValue()', '1*std_stz', 2),
+(4, '', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacad.findByName(\'std_stz\').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
 
 -- --------------------------------------------------------
 
@@ -574,7 +574,7 @@ INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`
 ('ana', 0, 0, 'ana', 1, 0, 'ana', 'b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64', 'ana', '00000', 1),
 ('anas', 0, 1, 'anas@gmail.com', 1, 3, 'anas', '9d171d82134b0ec576fe121cf857321819cf3a59bc0138af35862c2caa617d57', 'anas', '06', 1),
 ('walo', 1, 0, 'walo', 0, 0, 'walo', 'de34ddf5af5bcbda0219a7280880a0b7c6ae7b12885160996fe3effaa67733a3', 'walo', '00000', NULL),
-('younes', 1, 0, 'younes@gmail.com', 1, 3, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
+('younes', 1, 0, 'younes@gmail.com', 1, 0, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
 
 -- --------------------------------------------------------
 
@@ -644,6 +644,24 @@ ALTER TABLE `configuration`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `demandcategory`
+--
+ALTER TABLE `demandcategory`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `demandcategorycalculation`
+--
+ALTER TABLE `demandcategorycalculation`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `demandcategorycalculationitem`
+--
+ALTER TABLE `demandcategorycalculationitem`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Index pour la table `departement`
 --
 ALTER TABLE `departement`
@@ -671,6 +689,21 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour les tables exportées
 --
 
+--
+-- AUTO_INCREMENT pour la table `demandcategory`
+--
+ALTER TABLE `demandcategory`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `demandcategorycalculation`
+--
+ALTER TABLE `demandcategorycalculation`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
+--
+ALTER TABLE `demandcategorycalculationitem`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `departementcriteria`
 --

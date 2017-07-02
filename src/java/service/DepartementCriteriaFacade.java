@@ -7,7 +7,6 @@ package service;
 
 import bean.Departement;
 import bean.DepartementCriteria;
-import static bean.DepartementCriteria_.departementCriteriaItems;
 import controler.util.SearchUtil;
 import java.util.List;
 import javax.ejb.EJB;
