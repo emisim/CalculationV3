@@ -41,9 +41,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if(user.getAdmin() == 1){
             return true;
         }else{
-            
-        
-        
         if(dep.getName().equals("contentManagement")){
             if(AccessDepartement.getContentManagementMap().containsKey(attribute)){
                 return true;
