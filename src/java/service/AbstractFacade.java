@@ -22,6 +22,15 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
+    public Long generate(String beanName, String attributeName) {
+        String requete = "SELECT max(item." + attributeName + ") FROM " + beanName + " item";
+        List<Long> maxId = getEntityManager().createQuery(requete).getResultList();
+        if (maxId == null || maxId.isEmpty() || maxId.get(0) == null) {
+            return 1L;
+        }
+        return maxId.get(0) + 1;
+    }
+
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
@@ -60,5 +69,5 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }

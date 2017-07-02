@@ -5,7 +5,10 @@
  */
 package service;
 
+import bean.DemandCategoryCalculation;
 import bean.DemandCategoryCalculationItem;
+import controler.util.SearchUtil;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +31,13 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
     public DemandCategoryCalculationItemFacade() {
         super(DemandCategoryCalculationItem.class);
     }
-    
+
+    List<DemandCategoryCalculationItem> findByDemandCategoryCalculation(DemandCategoryCalculation demandCategoryCalculation) {
+        String query = "SELECT item FROM DepartementCriteriaItem item WHERE 1=1";
+        if (demandCategoryCalculation != null && demandCategoryCalculation.getId() != null) {
+            query += SearchUtil.addConstraint("item", "demandCategoryCalculation.id", "=", demandCategoryCalculation.getId());
+        }
+        return em.createQuery(query).getResultList();
+
+    }
 }
