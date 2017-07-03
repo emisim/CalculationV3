@@ -24,244 +24,299 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summDruck}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.summDruck}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summTotal}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.summTotal}"/>
-                        </p:column>
-                        <p:column>
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('category')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>
                             </f:facet>
-                            <h:outputText value="#{item.category}"/>
+                            <h:outputText value="#{item.category.name}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('product')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_product}"/>
                             </f:facet>
-                            <h:outputText value="#{item.product}"/>
+                            <h:outputText value="#{item.product.label}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('schluessel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_schluessel}"/>
                             </f:facet>
-                            <h:outputText value="#{item.schluessel}"/>
+                            <h:outputText value="#{item.schluessel.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlGesamtSeiten}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlGesamtSeiten}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_percentSeitenFaktor}"/>
                             </f:facet>
                             <h:outputText value="#{item.percentSeitenFaktor}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlSonderSeiten')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlSonderSeiten}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlSonderSeiten}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlGenerierungUpdateSeiten')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlGenerierungUpdateSeiten}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlGenerierungUpdateSeiten}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlIHVZSeiten')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlIHVZSeiten}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlIHVZSeiten}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlBestellNrSeiten')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlBestellNrSeiten}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlBestellNrSeiten}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlGesamtArtikel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlGesamtArtikel}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlGesamtArtikel}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlNeueArtikel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlNeueArtikel}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlNeueArtikel}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlBestandArtikel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlBestandArtikel}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlBestandArtikel}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlÜbernahmeArtikel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlÜbernahmeArtikel}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlÜbernahmeArtikel}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlGesamtProdukt')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlGesamtProdukt}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlGesamtProdukt}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlNeueProdukt')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlNeueProdukt}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlNeueProdukt}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlBestandProdukt')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlBestandProdukt}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlBestandProdukt}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlLieferantGesamt}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlLieferantGesamt}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlLieferantNeu')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlLieferantNeu}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlLieferantNeu}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlKapitetel}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlKapitetel}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_correctionSchluessel}"/>
                             </f:facet>
-                            <h:outputText value="#{item.correctionSchluessel}"/>
+                            <h:outputText value="#{item.correctionSchluessel.value}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('mitgliederkorrekturFaktor')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_mitgliederkorrekturFaktor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.mitgliederkorrekturFaktor}"/>
+                            <h:outputText value="#{item.mitgliederkorrekturFaktor.value}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('wechselfassungVariantFaktor')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_wechselfassungVariantFaktor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.wechselfassungVariantFaktor}"/>
+                            <h:outputText value="#{item.wechselfassungVariantFaktor.value}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('teilnehmerZahl')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_teilnehmerZahl}"/>
                             </f:facet>
                             <h:outputText value="#{item.teilnehmerZahl}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('participantFaktor')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_participantFaktor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.participantFaktor}"/>
+                            <h:outputText value="#{item.participantFaktor.value}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_konzeptbearbeitungFaktor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.konzeptbearbeitungFaktor}"/>
+                            <h:outputText value="#{item.konzeptbearbeitungFaktor.value}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_formatAuswaehlen}"/>
                             </f:facet>
-                            <h:outputText value="#{item.formatAuswaehlen}"/>
+                            <h:outputText value="#{item.formatAuswaehlen.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_papierMaterialAuswaehlen}"/>
                             </f:facet>
-                            <h:outputText value="#{item.papierMaterialAuswaehlen}"/>
+                            <h:outputText value="#{item.papierMaterialAuswaehlen.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('seitenanzahl')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_seitenanzahl}"/>
                             </f:facet>
                             <h:outputText value="#{item.seitenanzahl}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('farbigkeit')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_farbigkeit}"/>
                             </f:facet>
-                            <h:outputText value="#{item.farbigkeit}"/>
+                            <h:outputText value="#{item.farbigkeit.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_artDerWeiterverarbeitung}"/>
                             </f:facet>
-                            <h:outputText value="#{item.artDerWeiterverarbeitung}"/>
+                            <h:outputText value="#{item.artDerWeiterverarbeitung.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('veredlung')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_veredlung}"/>
                             </f:facet>
-                            <h:outputText value="#{item.veredlung}"/>
+                            <h:outputText value="#{item.veredlung.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('umschlagPapierAuswaehlen')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_umschlagPapierAuswaehlen}"/>
                             </f:facet>
-                            <h:outputText value="#{item.umschlagPapierAuswaehlen}"/>
+                            <h:outputText value="#{item.umschlagPapierAuswaehlen.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_umschlagFarbigkeit}"/>
                             </f:facet>
-                            <h:outputText value="#{item.umschlagFarbigkeit}"/>
+                            <h:outputText value="#{item.umschlagFarbigkeit.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('cover')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_cover}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cover}"/>
+                            <h:outputText value="#{item.cover.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('bindung')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_bindung}"/>
                             </f:facet>
-                            <h:outputText value="#{item.bindung}"/>
+                            <h:outputText value="#{item.bindung.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('auflage')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_auflage}"/>
                             </f:facet>
-                            <h:outputText value="#{item.auflage}"/>
+                            <h:outputText value="#{item.auflage.description}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('liefertermin')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_liefertermin}"/>
                             </f:facet>
@@ -269,25 +324,33 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_bearbeitungszeit}"/>
                             </f:facet>
                             <h:outputText value="#{item.bearbeitungszeit}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlBeteiligten}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlBeteiligten}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_anzahlMitglieder}"/>
                             </f:facet>
                             <h:outputText value="#{item.anzahlMitglieder}"/>
                         </p:column>
-                        <p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('dateDemandCategory')}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_dateDemandCategory}"/>
                             </f:facet>
@@ -295,8 +358,23 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('summDruck')}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summDruck}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.summDruck}"/>
+                        </p:column>
+                        
+                        
+                        <p:column rendered="#{demandCategoryController.renderAttribute('summTotal')}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summTotal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.summTotal}"/>
+                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryController.prepareCreate}" update=":DemandCategoryCreateForm" oncomplete="PF('DemandCategoryCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}"/>
@@ -305,7 +383,6 @@
                 </p:panel>
             </h:form>
 
-            <ui:include src="CreateCat.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>

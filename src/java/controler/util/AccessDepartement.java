@@ -66,6 +66,7 @@ public class AccessDepartement {
     
         contentManagementMap.put("category", true);
         contentManagementMap.put("product", true);
+        contentManagementMap.put("sortiment", true);
         contentManagementMap.put("anzahlGesamtArtikel", true);
         contentManagementMap.put("anzahlNeueArtikel", true);
         contentManagementMap.put("anzahlGesamtProdukt", true);
@@ -81,6 +82,7 @@ public class AccessDepartement {
         
         datenManagementMap.put("category", true);
         datenManagementMap.put("product", true);
+        datenManagementMap.put("sortiment", true);
         datenManagementMap.put("anzahlGesamtArtikel", true);
         datenManagementMap.put("anzahlNeueArtikel", true);
         datenManagementMap.put("anzahlBestandArtikel", true);
@@ -93,6 +95,7 @@ public class AccessDepartement {
     private static void populateDatabasePublishingMap() {
         databasePublishingMap.put("category", true);
         databasePublishingMap.put("product", true);
+        databasePublishingMap.put("sortiment", true);
         databasePublishingMap.put("anzahlSonderSeiten", true);
         databasePublishingMap.put("anzahlGenerierungUpdateSeiten", true);
         databasePublishingMap.put("anzahlIHVZSeiten", true);
@@ -106,6 +109,7 @@ public class AccessDepartement {
         
         projectManagementMap.put("category", true);
         projectManagementMap.put("product", true);
+        projectManagementMap.put("sortiment", true);
         
     
     }
