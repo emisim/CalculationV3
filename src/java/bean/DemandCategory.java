@@ -92,8 +92,7 @@ public class DemandCategory implements Serializable {
 
     //Für den Druck
     private boolean druck;// dakchi lli apres druk a cacher!!!!===> anas
-    
-    
+
     @ManyToOne
     private FormatAuswaehlen formatAuswaehlen;
 
@@ -131,22 +130,31 @@ public class DemandCategory implements Serializable {
     private Date liefertermin = new Date();
 
     //Bearbeitungszeit
-    private int bearbeitungszeit=18;
+    private int bearbeitungszeit = 18;
 
     //Beteiligten Anzahl die die Initialcosts beinflüssen
-    private int anzahlBeteiligten=19;
+    private int anzahlBeteiligten = 19;
 
     //Mitglieder Anzahl
-    private int anzahlMitglieder=20;
+    private int anzahlMitglieder = 20;
 
     //Datum falls die einzelne Preise geändert werden
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateDemandCategory = new Date();
 
     //Berechnete Summen 
-    private BigDecimal summDruck= new BigDecimal(0);
-    private BigDecimal summDepartment= new BigDecimal(0);
-    private BigDecimal summTotal= new BigDecimal(0);
+    private BigDecimal summDruck = new BigDecimal(0);
+    private BigDecimal summTotal = new BigDecimal(0);
+    @OneToMany(mappedBy = "demandCategory")
+    private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
+
+    public List<DemandCategoryDepartementCalculation> getDemandCategoryDepartementCalculations() {
+        return demandCategoryDepartementCalculations;
+    }
+
+    public void setDemandCategoryDepartementCalculations(List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
+        this.demandCategoryDepartementCalculations = demandCategoryDepartementCalculations;
+    }
 
     public Long getId() {
         return id;
@@ -162,14 +170,6 @@ public class DemandCategory implements Serializable {
 
     public void setSummDruck(BigDecimal summDruck) {
         this.summDruck = summDruck;
-    }
-
-    public BigDecimal getSummDepartment() {
-        return summDepartment;
-    }
-
-    public void setSummDepartment(BigDecimal summDepartment) {
-        this.summDepartment = summDepartment;
     }
 
     public BigDecimal getSummTotal() {

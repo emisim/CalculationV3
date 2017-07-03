@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Juillet 2017 à 02:27
+-- Généré le :  Lun 03 Juillet 2017 à 11:35
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -278,6 +278,18 @@ INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `DEMAN
 (6, 0, '1542', 3, 2, '1542'),
 (7, 0, '1542', 4, 3, '1542'),
 (8, 0, '257', 4, 4, '257');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `demandcategorydepartementcalculation`
+--
+
+CREATE TABLE `demandcategorydepartementcalculation` (
+  `ID` bigint(20) NOT NULL,
+  `SUMME` decimal(38,0) DEFAULT NULL,
+  `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -564,8 +576,7 @@ INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`,
 (14, '12', '1', '1', 'Verpackungen', '4'),
 (15, '6', '1', '1', 'Werkstattmaterial', '2'),
 (16, '11', '1', '1', '\nWerkzeuge Holzbearbeitung', '3'),
-(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3'),
-(18, NULL, NULL, NULL, 'Mix-Sortiment', NULL);
+(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3');
 
 -- --------------------------------------------------------
 
@@ -722,6 +733,13 @@ ALTER TABLE `demandcategorycalculationitem`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `demandcategorydepartementcalculation`
+--
+ALTER TABLE `demandcategorydepartementcalculation`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` (`DEMANDCATEGORY_ID`);
+
+--
 -- Index pour la table `departement`
 --
 ALTER TABLE `departement`
@@ -758,6 +776,12 @@ ALTER TABLE `schluesseltype`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `sortiment`
+--
+ALTER TABLE `sortiment`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Index pour la table `umschlagpapierauswaehlen`
 --
 ALTER TABLE `umschlagpapierauswaehlen`
@@ -789,6 +813,11 @@ ALTER TABLE `demandcategorycalculation`
 ALTER TABLE `demandcategorycalculationitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
+-- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
+--
+ALTER TABLE `demandcategorydepartementcalculation`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
@@ -807,7 +836,22 @@ ALTER TABLE `schluessel`
 -- AUTO_INCREMENT pour la table `schluesseltype`
 --
 ALTER TABLE `schluesseltype`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;SET FOREIGN_KEY_CHECKS=1;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `sortiment`
+--
+ALTER TABLE `sortiment`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `demandcategorydepartementcalculation`
+--
+ALTER TABLE `demandcategorydepartementcalculation`
+  ADD CONSTRAINT `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`);
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

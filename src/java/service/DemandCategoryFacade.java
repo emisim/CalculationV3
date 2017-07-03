@@ -32,7 +32,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     
     private @EJB SotimentItemFacade sotimentItemFacade;
-    private @EJB DemandCategoryCalculationFacade demandCategoryCalculationFacade;
+    private @EJB DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -61,14 +61,13 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setUmschlagPapierAuswaehlen(null);
             demandCategory.setUmschlagFarbigkeit(null);
         }
-        demandCategory.setSummTotal(demandCategory.getSummDruck().add(demandCategory.getSummDepartment()));
         
         demandCategory.setId(generate("DemandCategory", "id"));
         if (!simulation) {
             edit(demandCategory);
         }
         sotimentItemFacade.save(demandCategory, simulation);
-        demandCategoryCalculationFacade.save(demandCategory, departement,simulation);
+        demandCategoryDepartementCalculationFacade.save(demandCategory, departement,simulation);
 
     }
     
