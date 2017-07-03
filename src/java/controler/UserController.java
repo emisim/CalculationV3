@@ -1,14 +1,8 @@
 package controler;
 
 import bean.User;
-import controler.util.AccessDepartement;
-import controler.util.HashageUtil;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
-import controler.util.Message;
-import controler.util.MessageManager;
-import controler.util.SessionUtil;
-import java.io.IOException;
 import service.UserFacade;
 
 import java.io.Serializable;
@@ -33,113 +27,11 @@ public class UserController implements Serializable {
     private service.UserFacade ejbFacade;
     private List<User> items = null;
     private User selected;
-    private User connectedUser;
-    private Message message;
-    private String oldPassword;
-    private String newPassword;
-    private String newRepetePassword;
 
     public UserController() {
     }
-    
-    public String seConnnecter() {
-        int res = ejbFacade.seConnnecter(selected);
-        AccessDepartement.populateMaps();
-        System.out.println("resss " + res);
-        if (res > 0) {
-            if (SessionUtil.getConnectedUser().isMdpChanged()) {
-                System.out.println("meenu");
-                return "/menu/menu?faces-redirect=true";
-            }
-            else {
-                return "/user/ChangePassword?faces-redirect=true";
-            }
-            //communeFacade.initCommuneParams(selected.getCommune());   
-        }
-        validteConnexionForm(res);
-        return null;
-    }
-    
-    private void validteConnexionForm(int res) {
-        message = MessageManager.createErrorMessage(res, "");
-        if (res == -1) {
-            message.setText("Socie actuelement bloqué, Merci de contacter l'éditeur du logiciel");
-        } else if (res == -2) {
-            message.setText("Compte bloqué, Merci de contacter l'admin");
-        } else if (res == -3) {
-            message.setText("Erreur password, Réssayer SVP");
-        } else if (res == -4) {
-            message.setText("Erreur login, Réssayer SVP");
-        } else if (res == -5) {
-            message.setText("Veuilliez saisir votre login");
-        }
-        MessageManager.showMessage(message);
-    }
-    
-     public void isNotConnected() throws IOException {
-        if (SessionUtil.getConnectedUser() == null) {
-            SessionUtil.redirect("../index.xhtml");
-        }
-    }
-    
-    public String changePassword() {
-        if (newPassword.equals(newRepetePassword) && !newPassword.equals("") && newPassword != null) {
-            User user = ejbFacade.find(selected.getLogin());
-            user.setPassword(HashageUtil.sha256(newPassword));
-            user.setMdpChanged(true);
-            ejbFacade.edit(user);
-            return seDeConnnecter();
-        }
-        return "";
-    }
-    
-    public String seDeConnnecter() {
-        //
-        ejbFacade.seDeConnnecter();
-        return "/index?faces-redirect=true";
 
-    }
-
-    public User getConnectedUser() {
-        if(connectedUser == null){
-            connectedUser = SessionUtil.getConnectedUser();
-        }
-        return connectedUser;
-    }
-
-    public void setConnectedUser(User connectedUser) {
-        this.connectedUser = connectedUser;
-    }
-    
-   
-    public String getOldPassword() {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    public String getNewRepetePassword() {
-        return newRepetePassword;
-    }
-
-    public void setNewRepetePassword(String newRepetePassword) {
-        this.newRepetePassword = newRepetePassword;
-    }
-    
     public User getSelected() {
-        if(selected == null){
-            selected = new User();
-        }
         return selected;
     }
 
@@ -194,7 +86,6 @@ public class UserController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    selected.setPassword(HashageUtil.sha256(selected.getPassword()));
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);

@@ -12,7 +12,7 @@
             <h:form id="AuflageEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageController.selected != null}">
-                         <p:outputLabel value="#{bundle.EditAuflageLabel_description}" for="description" />
+                        <p:outputLabel value="#{bundle.EditAuflageLabel_description}" for="description" />
                         <p:inputText id="description" value="#{auflageController.selected.description}" title="#{bundle.EditAuflageTitle_description}" />
                         <p:outputLabel value="#{bundle.EditAuflageLabel_id}" for="id" />
                         <p:inputText id="id" value="#{auflageController.selected.id}" title="#{bundle.EditAuflageTitle_id}" />

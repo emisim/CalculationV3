@@ -1,9 +1,9 @@
 package controler;
 
-import bean.DemandCategoryCalculationItem;
+import bean.DemandCategoryDepartementCalculation;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
-import service.DemandCategoryCalculationItemFacade;
+import service.DemandCategoryDepartementCalculationFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("demandCategoryCalculationItemController")
+@Named("demandCategoryDepartementCalculationController")
 @SessionScoped
-public class DemandCategoryCalculationItemController implements Serializable {
+public class DemandCategoryDepartementCalculationController implements Serializable {
 
     @EJB
-    private service.DemandCategoryCalculationItemFacade ejbFacade;
-    private List<DemandCategoryCalculationItem> items = null;
-    private DemandCategoryCalculationItem selected;
+    private service.DemandCategoryDepartementCalculationFacade ejbFacade;
+    private List<DemandCategoryDepartementCalculation> items = null;
+    private DemandCategoryDepartementCalculation selected;
 
-    public DemandCategoryCalculationItemController() {
+    public DemandCategoryDepartementCalculationController() {
     }
 
-    public DemandCategoryCalculationItem getSelected() {
+    public DemandCategoryDepartementCalculation getSelected() {
         return selected;
     }
 
-    public void setSelected(DemandCategoryCalculationItem selected) {
+    public void setSelected(DemandCategoryDepartementCalculation selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class DemandCategoryCalculationItemController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private DemandCategoryCalculationItemFacade getFacade() {
+    private DemandCategoryDepartementCalculationFacade getFacade() {
         return ejbFacade;
     }
 
-    public DemandCategoryCalculationItem prepareCreate() {
-        selected = new DemandCategoryCalculationItem();
+    public DemandCategoryDepartementCalculation prepareCreate() {
+        selected = new DemandCategoryDepartementCalculation();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryCalculationItemCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryDepartementCalculationCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryCalculationItemUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryDepartementCalculationUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryCalculationItemDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryDepartementCalculationDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<DemandCategoryCalculationItem> getItems() {
+    public List<DemandCategoryDepartementCalculation> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,29 +109,29 @@ public class DemandCategoryCalculationItemController implements Serializable {
         }
     }
 
-    public DemandCategoryCalculationItem getDemandCategoryCalculationItem(java.lang.Long id) {
+    public DemandCategoryDepartementCalculation getDemandCategoryDepartementCalculation(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<DemandCategoryCalculationItem> getItemsAvailableSelectMany() {
+    public List<DemandCategoryDepartementCalculation> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<DemandCategoryCalculationItem> getItemsAvailableSelectOne() {
+    public List<DemandCategoryDepartementCalculation> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = DemandCategoryCalculationItem.class)
-    public static class DemandCategoryCalculationItemControllerConverter implements Converter {
+    @FacesConverter(forClass = DemandCategoryDepartementCalculation.class)
+    public static class DemandCategoryDepartementCalculationControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DemandCategoryCalculationItemController controller = (DemandCategoryCalculationItemController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "demandCategoryCalculationItemController");
-            return controller.getDemandCategoryCalculationItem(getKey(value));
+            DemandCategoryDepartementCalculationController controller = (DemandCategoryDepartementCalculationController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "demandCategoryDepartementCalculationController");
+            return controller.getDemandCategoryDepartementCalculation(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -151,11 +151,11 @@ public class DemandCategoryCalculationItemController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof DemandCategoryCalculationItem) {
-                DemandCategoryCalculationItem o = (DemandCategoryCalculationItem) object;
+            if (object instanceof DemandCategoryDepartementCalculation) {
+                DemandCategoryDepartementCalculation o = (DemandCategoryDepartementCalculation) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), DemandCategoryCalculationItem.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), DemandCategoryDepartementCalculation.class.getName()});
                 return null;
             }
         }
