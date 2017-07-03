@@ -24,16 +24,8 @@ public class Auflage implements Serializable {
     private Integer id;
     //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
     private String description;
-    private BigDecimal price;
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
+   
     public String getDescription() {
         return description;
     }

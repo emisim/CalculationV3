@@ -7,69 +7,67 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author pc&
  */
 @Entity
-public class DemandCategoryCalculationItem implements Serializable {
+public class DemandCategoryDepartementCalculation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private BigDecimal summe;
     @ManyToOne
-    private DepartementCriteriaItem departementCriteriaItem;
-    private BigDecimal price;
-    private BigDecimal priceGlobal;
-    private boolean calcultaed;
+    private DemandCategory demandCategory;
     @ManyToOne
-    private DemandCategoryCalculation demandCategoryCalculation;
+    private Departement departement;
 
-    public DemandCategoryCalculation getDemandCategoryCalculation() {
-        return demandCategoryCalculation;
+    @OneToMany(mappedBy = "demandCategoryDepartementCalculation")
+    private List<DemandCategoryCalculation> demandCategoryCalculations;
+
+    public DemandCategoryDepartementCalculation() {
     }
 
-    public void setDemandCategoryCalculation(DemandCategoryCalculation demandCategoryCalculation) {
-        this.demandCategoryCalculation = demandCategoryCalculation;
+    public Departement getDepartement() {
+        return departement;
     }
 
-    public DepartementCriteriaItem getDepartementCriteriaItem() {
-        return departementCriteriaItem;
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
     }
 
-    public void setDepartementCriteriaItem(DepartementCriteriaItem departementCriteriaItem) {
-        this.departementCriteriaItem = departementCriteriaItem;
+    public List<DemandCategoryCalculation> getDemandCategoryCalculations() {
+        return demandCategoryCalculations;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public void setDemandCategoryCalculations(List<DemandCategoryCalculation> demandCategoryCalculations) {
+        this.demandCategoryCalculations = demandCategoryCalculations;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-    
-    public BigDecimal getPriceGlobal() {
-        return priceGlobal;
+    public BigDecimal getSumme() {
+        return summe;
     }
 
-    public void setPriceGlobal(BigDecimal priceGlobal) {
-        this.priceGlobal = priceGlobal;
+    public void setSumme(BigDecimal summe) {
+        this.summe = summe;
     }
 
-    public boolean getCalcultaed() {
-        return calcultaed;
+    public DemandCategory getDemandCategory() {
+        return demandCategory;
     }
 
-    public void setCalcultaed(boolean calcultaed) {
-        this.calcultaed = calcultaed;
+    public void setDemandCategory(DemandCategory demandCategory) {
+        this.demandCategory = demandCategory;
     }
 
     public Long getId() {
@@ -90,10 +88,10 @@ public class DemandCategoryCalculationItem implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DemandCategoryCalculationItem)) {
+        if (!(object instanceof DemandCategoryDepartementCalculation)) {
             return false;
         }
-        DemandCategoryCalculationItem other = (DemandCategoryCalculationItem) object;
+        DemandCategoryDepartementCalculation other = (DemandCategoryDepartementCalculation) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

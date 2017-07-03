@@ -29,11 +29,23 @@ public class DemandCategoryCalculation implements Serializable {
     @ManyToOne
     private DepartementCriteria departementCriteria;
     private BigDecimal summe;
-    @ManyToOne
-    private DemandCategory demandCategory;
+
     private boolean valide;
     @OneToMany(mappedBy = "demandCategoryCalculation")
     private List<DemandCategoryCalculationItem> demandCategoryCalculationItems;
+    @ManyToOne
+    private DemandCategoryDepartementCalculation demandCategoryDepartementCalculation;
+
+    public DemandCategoryCalculation() {
+    }
+
+    public DemandCategoryDepartementCalculation getDemandCategoryDepartementCalculation() {
+        return demandCategoryDepartementCalculation;
+    }
+
+    public void setDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
+        this.demandCategoryDepartementCalculation = demandCategoryDepartementCalculation;
+    }
 
     public BigDecimal getSumme() {
         return summe;
@@ -42,7 +54,7 @@ public class DemandCategoryCalculation implements Serializable {
     public void setSumme(BigDecimal summe) {
         this.summe = summe;
     }
-    
+
     public List<DemandCategoryCalculationItem> getDemandCategoryCalculationItems() {
         return demandCategoryCalculationItems;
     }
@@ -57,15 +69,6 @@ public class DemandCategoryCalculation implements Serializable {
 
     public void setDepartementCriteria(DepartementCriteria departementCriteria) {
         this.departementCriteria = departementCriteria;
-    }
-
-   
-    public DemandCategory getDemandCategory() {
-        return demandCategory;
-    }
-
-    public void setDemandCategory(DemandCategory demandCategory) {
-        this.demandCategory = demandCategory;
     }
 
     public boolean isValide() {

@@ -37,7 +37,7 @@ public class User implements Serializable {
     @ManyToOne
     private Departement departement;
     private int admin;
-
+    
     public int getAdmin() {
         return admin;
     }

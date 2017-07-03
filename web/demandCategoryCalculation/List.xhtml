@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_demandCategoryDepartementCalculation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.demandCategoryDepartementCalculation}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_summe}"/>
                             </f:facet>
                             <h:outputText value="#{item.summe}"/>
@@ -38,12 +44,6 @@
                                 <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_departementCriteria}"/>
                             </f:facet>
                             <h:outputText value="#{item.departementCriteria}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_demandCategory}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.demandCategory}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

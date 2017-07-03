@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandCategoryDepartementCalculationEditDlg" widgetVar="DemandCategoryDepartementCalculationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandCategoryDepartementCalculationTitle}">
+            <h:form id="DemandCategoryDepartementCalculationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandCategoryDepartementCalculationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandCategoryDepartementCalculationLabel_departement}" for="departement" />
+                        <p:selectOneMenu id="departement" value="#{demandCategoryDepartementCalculationController.selected.departement}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
+                                           var="departementItem"
+                                           itemValue="#{departementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandCategoryDepartementCalculationLabel_summe}" for="summe" />
+                        <p:inputText id="summe" value="#{demandCategoryDepartementCalculationController.selected.summe}" title="#{bundle.EditDemandCategoryDepartementCalculationTitle_summe}" />
+                        <p:outputLabel value="#{bundle.EditDemandCategoryDepartementCalculationLabel_demandCategory}" for="demandCategory" />
+                        <p:selectOneMenu id="demandCategory" value="#{demandCategoryDepartementCalculationController.selected.demandCategory}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{demandCategoryController.itemsAvailableSelectOne}"
+                                           var="demandCategoryItem"
+                                           itemValue="#{demandCategoryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandCategoryDepartementCalculationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandCategoryDepartementCalculationController.selected.id}" title="#{bundle.EditDemandCategoryDepartementCalculationTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandCategoryDepartementCalculationController.update}" value="#{bundle.Save}" update="display,:DemandCategoryDepartementCalculationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDepartementCalculationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryDepartementCalculationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

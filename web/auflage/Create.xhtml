@@ -12,8 +12,6 @@
             <h:form id="AuflageCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateAuflageLabel_price}" for="price" />
-                        <p:inputText id="price" value="#{auflageController.selected.price}" title="#{bundle.CreateAuflageTitle_price}" />
                         <p:outputLabel value="#{bundle.CreateAuflageLabel_description}" for="description" />
                         <p:inputText id="description" value="#{auflageController.selected.description}" title="#{bundle.CreateAuflageTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateAuflageLabel_id}" for="id" />

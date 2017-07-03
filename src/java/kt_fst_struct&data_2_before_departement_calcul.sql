@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 02 Juillet 2017 à 11:17
+-- Généré le :  Lun 03 Juillet 2017 à 11:35
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -42,8 +42,7 @@ CREATE TABLE `artderweiterverarbeitung` (
 
 CREATE TABLE `auflage` (
   `ID` int(11) NOT NULL,
-  `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `DESCRIPTION` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -71,6 +70,14 @@ CREATE TABLE `bindung` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `bindung`
+--
+
+INSERT INTO `bindung` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
+('Fadenheftung', NULL, NULL),
+('PUR-Bindung', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,6 +218,14 @@ CREATE TABLE `demandcategory` (
   `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `demandcategory`
+--
+
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DRUCK`, `LIEFERTERMIN`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDEPARTMENT`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
+(1, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
+(2, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -225,6 +240,16 @@ CREATE TABLE `demandcategorycalculation` (
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `demandcategorycalculation`
+--
+
+INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `VALIDE`, `DEMANDCATEGORY_ID`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(1, '3598', 0, 1, 1),
+(2, '1799', 0, 1, 2),
+(3, '3598', 0, 2, 1),
+(4, '1799', 0, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -236,7 +261,34 @@ CREATE TABLE `demandcategorycalculationitem` (
   `CALCULTAED` tinyint(1) DEFAULT '0',
   `PRICE` decimal(38,0) DEFAULT NULL,
   `DEMANDCATEGORYCALCULATION_ID` bigint(20) DEFAULT NULL,
-  `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
+  `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL,
+  `PRICEGLOBAL` decimal(38,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `demandcategorycalculationitem`
+--
+
+INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `DEMANDCATEGORYCALCULATION_ID`, `DEPARTEMENTCRITERIAITEM_ID`, `PRICEGLOBAL`) VALUES
+(1, 0, '2056', 1, 1, '2056'),
+(2, 0, '1542', 1, 2, '1542'),
+(3, 0, '1542', 2, 3, '1542'),
+(4, 0, '257', 2, 4, '257'),
+(5, 0, '2056', 3, 1, '2056'),
+(6, 0, '1542', 3, 2, '1542'),
+(7, 0, '1542', 4, 3, '1542'),
+(8, 0, '257', 4, 4, '257');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `demandcategorydepartementcalculation`
+--
+
+CREATE TABLE `demandcategorydepartementcalculation` (
+  `ID` bigint(20) NOT NULL,
+  `SUMME` decimal(38,0) DEFAULT NULL,
+  `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -299,10 +351,10 @@ CREATE TABLE `departementcriteriaitem` (
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '', '8*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '8*std_stz', 1),
-(2, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
-(3, '', '6*configurationItemFacad.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
-(4, '', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacad.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
+(1, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '8*std_stz', 1),
+(2, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
+(3, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
+(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
 
 -- --------------------------------------------------------
 
@@ -315,6 +367,15 @@ CREATE TABLE `farbigkeit` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `farbigkeit`
+--
+
+INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
+('1/1 -farbig', NULL, NULL),
+('2/2 -farbig', NULL, NULL),
+('3/3 -farbig', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -363,6 +424,16 @@ CREATE TABLE `papiermaterialauswaehlen` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `papiermaterialauswaehlen`
+--
+
+INSERT INTO `papiermaterialauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
+('65 g/qm', NULL, NULL),
+('70 g/qm', NULL, NULL),
+('80 g/qm', NULL, NULL),
+('85 g/qm', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -505,8 +576,7 @@ INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`,
 (14, '12', '1', '1', 'Verpackungen', '4'),
 (15, '6', '1', '1', 'Werkstattmaterial', '2'),
 (16, '11', '1', '1', '\nWerkzeuge Holzbearbeitung', '3'),
-(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3'),
-(18, NULL, NULL, NULL, 'Mix-Sortiment', NULL);
+(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3');
 
 -- --------------------------------------------------------
 
@@ -573,7 +643,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
 ('ana', 0, 0, 'ana', 1, 0, 'ana', 'b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64', 'ana', '00000', 1),
 ('anas', 0, 1, 'anas@gmail.com', 1, 3, 'anas', '9d171d82134b0ec576fe121cf857321819cf3a59bc0138af35862c2caa617d57', 'anas', '06', 1),
-('walo', 1, 0, 'walo', 0, 0, 'walo', 'de34ddf5af5bcbda0219a7280880a0b7c6ae7b12885160996fe3effaa67733a3', 'walo', '00000', NULL),
+('kiki', 1, 0, 'kiki', 1, 0, 'kiki', '888da5db853449fff82b07cbdbf7c755ece0783aa670bb36cc5c4cc9a68fb864', 'kiki', 'kiki', NULL),
+('walo', 1, 0, 'walo', 1, 0, 'walo', '41d119f6079d09b46a5c950a03b455c99ec6c9b6f1726401a52c85d0b17d4b54', 'walo', '00000', NULL),
 ('younes', 1, 0, 'younes@gmail.com', 1, 3, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
 
 -- --------------------------------------------------------
@@ -644,6 +715,31 @@ ALTER TABLE `configuration`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `demandcategory`
+--
+ALTER TABLE `demandcategory`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `demandcategorycalculation`
+--
+ALTER TABLE `demandcategorycalculation`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `demandcategorycalculationitem`
+--
+ALTER TABLE `demandcategorycalculationitem`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `demandcategorydepartementcalculation`
+--
+ALTER TABLE `demandcategorydepartementcalculation`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` (`DEMANDCATEGORY_ID`);
+
+--
 -- Index pour la table `departement`
 --
 ALTER TABLE `departement`
@@ -662,6 +758,36 @@ ALTER TABLE `departementcriteriaitem`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `papiermaterialauswaehlen`
+--
+ALTER TABLE `papiermaterialauswaehlen`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `schluessel`
+--
+ALTER TABLE `schluessel`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `schluesseltype`
+--
+ALTER TABLE `schluesseltype`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `sortiment`
+--
+ALTER TABLE `sortiment`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `umschlagpapierauswaehlen`
+--
+ALTER TABLE `umschlagpapierauswaehlen`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -672,6 +798,26 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `demandcategory`
+--
+ALTER TABLE `demandcategory`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `demandcategorycalculation`
+--
+ALTER TABLE `demandcategorycalculation`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
+--
+ALTER TABLE `demandcategorycalculationitem`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
+--
+ALTER TABLE `demandcategorydepartementcalculation`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
@@ -680,7 +826,32 @@ ALTER TABLE `departementcriteria`
 -- AUTO_INCREMENT pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;SET FOREIGN_KEY_CHECKS=1;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `schluessel`
+--
+ALTER TABLE `schluessel`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `schluesseltype`
+--
+ALTER TABLE `schluesseltype`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `sortiment`
+--
+ALTER TABLE `sortiment`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `demandcategorydepartementcalculation`
+--
+ALTER TABLE `demandcategorydepartementcalculation`
+  ADD CONSTRAINT `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`);
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

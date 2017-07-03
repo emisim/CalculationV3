@@ -12,6 +12,12 @@
             <h:form id="DemandCategoryCalculationCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryCalculationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationLabel_demandCategoryDepartementCalculation}" for="demandCategoryDepartementCalculation" />
+                        <p:selectOneMenu id="demandCategoryDepartementCalculation" value="#{demandCategoryCalculationController.selected.demandCategoryDepartementCalculation}" >
+                            <f:selectItems value="#{demandCategoryDepartementCalculationController.itemsAvailableSelectOne}"
+                                           var="demandCategoryDepartementCalculationItem"
+                                           itemValue="#{demandCategoryDepartementCalculationItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationLabel_summe}" for="summe" />
                         <p:inputText id="summe" value="#{demandCategoryCalculationController.selected.summe}" title="#{bundle.CreateDemandCategoryCalculationTitle_summe}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationLabel_departementCriteria}" for="departementCriteria" />
@@ -19,12 +25,6 @@
                             <f:selectItems value="#{departementCriteriaController.itemsAvailableSelectOne}"
                                            var="departementCriteriaItem"
                                            itemValue="#{departementCriteriaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationLabel_demandCategory}" for="demandCategory" />
-                        <p:selectOneMenu id="demandCategory" value="#{demandCategoryCalculationController.selected.demandCategory}" >
-                            <f:selectItems value="#{demandCategoryController.itemsAvailableSelectOne}"
-                                           var="demandCategoryItem"
-                                           itemValue="#{demandCategoryItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryCalculationLabel_id}" for="id" />
                         <p:inputText id="id" value="#{demandCategoryCalculationController.selected.id}" title="#{bundle.CreateDemandCategoryCalculationTitle_id}" />

@@ -41,12 +41,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryTitle_summDepartment}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.summDepartment}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryTitle_summTotal}"/>
                             </f:facet>
                             <h:outputText value="#{item.summTotal}"/>
@@ -311,7 +305,7 @@
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
+            <ui:include src="CreateCat.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>

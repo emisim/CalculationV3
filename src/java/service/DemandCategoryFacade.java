@@ -6,14 +6,19 @@
  */
 package service;
 
+import bean.Category;
 import bean.DemandCategory;
 import bean.Departement;
 import bean.User;
 import controler.util.AccessDepartement;
 import controler.util.SessionUtil;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.script.ScriptException;
 
 /**
  *
@@ -25,10 +30,48 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
+    
+    private @EJB SotimentItemFacade sotimentItemFacade;
+    private @EJB DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    public void save(DemandCategory demandCategory,Departement departement, boolean simulation) throws ScriptException {
+        if (!demandCategory.isDruck()) {
+            demandCategory.setFormatAuswaehlen(null);
+            demandCategory.setPapierMaterialAuswaehlen(null);
+            demandCategory.setSeitenanzahl(0);
+            demandCategory.setFarbigkeit(null);
+            demandCategory.setArtDerWeiterverarbeitung(null);
+            demandCategory.setVeredlung(null);
+            demandCategory.setVeredlung(null);
+            demandCategory.setUmschlag(false);
+            demandCategory.setCover(null);
+            demandCategory.setBindung(null);
+            demandCategory.setAuflage(null);
+            demandCategory.setBearbeitungszeit(0);
+            demandCategory.setAnzahlBeteiligten(0);
+            demandCategory.setAnzahlMitglieder(0);
+            demandCategory.setSummDruck(new BigDecimal(0));
+        }
+        if (!demandCategory.isUmschlag()) {
+            demandCategory.setUmschlagPapierAuswaehlen(null);
+            demandCategory.setUmschlagFarbigkeit(null);
+        }
+        
+        demandCategory.setId(generate("DemandCategory", "id"));
+        if (!simulation) {
+            edit(demandCategory);
+        }
+        sotimentItemFacade.save(demandCategory, simulation);
+        demandCategoryDepartementCalculationFacade.save(demandCategory, departement,simulation);
+
+    }
+    
+    
 
     public DemandCategoryFacade() {
         super(DemandCategory.class);
@@ -37,39 +80,39 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     public boolean renderAttribute(String attribute) {
         User user = SessionUtil.getConnectedUser();
         Departement dep = user.getDepartement();
-        
-        if(user.getAdmin() == 1){
+
+        if (user.getAdmin() == 1) {
             return true;
-        }else{
-        if(dep.getName().equals("contentManagement")){
-            if(AccessDepartement.getContentManagementMap().containsKey(attribute)){
-                return true;
+        } else {
+            if (dep.getName().equals("contentManagement")) {
+                if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
+                    return true;
+                }
             }
-        }
-        
-        if(dep.getName().equals("datenManagement")){
-            if(AccessDepartement.getDatenManagementMap().containsKey(attribute)){
-                return true;
+
+            if (dep.getName().equals("datenManagement")) {
+                if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
+                    return true;
+                }
             }
-        }
-        
-        if(dep.getName().equals("databasePublishing")){
-            if(AccessDepartement.getDatabasePublishingMap().containsKey(attribute)){
-                return true;
+
+            if (dep.getName().equals("databasePublishing")) {
+                if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
+                    return true;
+                }
             }
-        }
-        
-        if(dep.getName().equals("projectManagement")){
-            if(AccessDepartement.getProjectManagementMap().containsKey(attribute)){
-                return true;
+
+            if (dep.getName().equals("projectManagement")) {
+                if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
+                    return true;
+                }
             }
+
+            return false;
+
         }
-        
-        return false;
-    
     }
-}
+
     
-    
-    
+
 }

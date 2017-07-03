@@ -24,135 +24,139 @@ import javax.persistence.Temporal;
 @Entity
 public class DemandCategory implements Serializable {
 
-
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     private Category category;
-    
+
     @ManyToOne
     private Product product;
-    
+
     //Sortiment
     @OneToMany(mappedBy = "demandCategory")
     private List<SotimentItem> sotimentItems;
-   
+
     // Schlüssel beinhaltet mehrere Keys: Layout Ausgabe....
     @ManyToOne
     private Schluessel Schluessel;
-       
+
     //Seiten
-    private int anzahlGesamtSeiten;
+    private int anzahlGesamtSeiten = 2;
     //10% für den ANzahl dere Seiten
     private int percentSeitenFaktor = 10;
-    private int anzahlSonderSeiten;
-    private int anzahlGenerierungUpdateSeiten;
-    private int anzahlIHVZSeiten;
-    private int anzahlBestellNrSeiten;
-    
+    private int anzahlSonderSeiten = 3;
+    private int anzahlGenerierungUpdateSeiten = 4;
+    private int anzahlIHVZSeiten = 4;
+    private int anzahlBestellNrSeiten = 5;
+
     //Artikel
-    private int anzahlGesamtArtikel;
-    private int anzahlNeueArtikel;
-    private int anzahlBestandArtikel;
-    private int anzahlÜbernahmeArtikel;
-   
+    private int anzahlGesamtArtikel = 6;
+    private int anzahlNeueArtikel = 7;
+    private int anzahlBestandArtikel = 8;
+    private int anzahlÜbernahmeArtikel = 9;
+
     //Produkt
-    private int anzahlGesamtProdukt;
-    private int anzahlNeueProdukt;
-    private int anzahlBestandProdukt;
- 
+    private int anzahlGesamtProdukt = 10;
+    private int anzahlNeueProdukt = 11;
+    private int anzahlBestandProdukt = 12;
+
     //Lieferant   
-    private int anzahlLieferantGesamt;
-    private int anzahlLieferantNeu;
-    
+    private int anzahlLieferantGesamt = 13;
+    private int anzahlLieferantNeu = 14;
+
     //Warengruppe Kapitel
-    private int anzahlKapitetel;
-    
+    private int anzahlKapitetel = 15;
+
     //Aufwand für Allg.Änderung    
     @ManyToOne
     private CorrectionSchluessel correctionSchluessel;
-    
+
     //ja/nein MitgliederKorrektur && Wec hselfassung && Konzept
-    
     @ManyToOne
     private MitgliederkorrekturFaktor mitgliederkorrekturFaktor;
-    
+
     @ManyToOne
     private WechselfassungVariantFaktor wechselfassungVariantFaktor;
-    
-    
+
     //Teilnehmerzahl
-    private int teilnehmerZahl;
+    private int teilnehmerZahl = 16;
     @ManyToOne
     private ParticipantFaktor participantFaktor;
-    
+
     //KonzeptbearbeitungFaktor
     @ManyToOne
     private KonzeptbearbeitungFaktor konzeptbearbeitungFaktor;
-    
-    
+
     //Für den Druck
     private boolean druck = false;
     
     
     @ManyToOne
     private FormatAuswaehlen formatAuswaehlen;
-    
+
     @ManyToOne
     private PapierMaterialAuswaehlen papierMaterialAuswaehlen;
-    
-    private int seitenanzahl;
-        @ManyToOne
+
+    private int seitenanzahl = 17;
+    @ManyToOne
     private Farbigkeit farbigkeit;
-    
-            @ManyToOne
+
+    @ManyToOne
     private ArtDerWeiterverarbeitung artDerWeiterverarbeitung;
-            @ManyToOne
+    @ManyToOne
     private Veredlung veredlung;
-    
+
     private boolean umschlag;
-        @ManyToOne
-    
+    @ManyToOne
+
     private UmschlagPapierAuswaehlen umschlagPapierAuswaehlen;
-        @ManyToOne
-    
+    @ManyToOne
+
     private UmschlagFarbigkeit umschlagFarbigkeit;
-        @ManyToOne
-    
+    @ManyToOne
+
     private Cover cover;
-    
-        @ManyToOne
+
+    @ManyToOne
     private Bindung bindung;
-    
-        @ManyToOne
+
+    @ManyToOne
     private Auflage auflage;
-    
+
     //Date de Livraisoin
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date liefertermin;
-    
+    private Date liefertermin = new Date();
+
     //Bearbeitungszeit
-    private int bearbeitungszeit;
-    
+    private int bearbeitungszeit = 18;
+
     //Beteiligten Anzahl die die Initialcosts beinflüssen
-    private int anzahlBeteiligten;
-    
+    private int anzahlBeteiligten = 19;
+
     //Mitglieder Anzahl
-    private int anzahlMitglieder;    
-    
+    private int anzahlMitglieder = 20;
+
     //Datum falls die einzelne Preise geändert werden
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateDemandCategory;  
+    private Date dateDemandCategory = new Date();
 
     //Berechnete Summen 
-    private BigDecimal summDruck;
-    private BigDecimal summDepartment;
-    private BigDecimal summTotal;
-    
+    private BigDecimal summDruck = new BigDecimal(0);
+    private BigDecimal summTotal = new BigDecimal(0);
+    @OneToMany(mappedBy = "demandCategory")
+    private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
+
+    public List<DemandCategoryDepartementCalculation> getDemandCategoryDepartementCalculations() {
+        return demandCategoryDepartementCalculations;
+    }
+
+    public void setDemandCategoryDepartementCalculations(List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
+        this.demandCategoryDepartementCalculations = demandCategoryDepartementCalculations;
+    }
+
     public Long getId() {
         return id;
     }
@@ -167,14 +171,6 @@ public class DemandCategory implements Serializable {
 
     public void setSummDruck(BigDecimal summDruck) {
         this.summDruck = summDruck;
-    }
-
-    public BigDecimal getSummDepartment() {
-        return summDepartment;
-    }
-
-    public void setSummDepartment(BigDecimal summDepartment) {
-        this.summDepartment = summDepartment;
     }
 
     public BigDecimal getSummTotal() {
@@ -208,7 +204,6 @@ public class DemandCategory implements Serializable {
     public void setSotimentItems(List<SotimentItem> sotimentItems) {
         this.sotimentItems = sotimentItems;
     }
-
 
     public Schluessel getSchluessel() {
         return Schluessel;
@@ -538,7 +533,6 @@ public class DemandCategory implements Serializable {
         this.dateDemandCategory = dateDemandCategory;
     }
 
-   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -563,5 +557,5 @@ public class DemandCategory implements Serializable {
     public String toString() {
         return "bean.DemandCategory[ id=" + id + " ]";
     }
-    
+
 }
