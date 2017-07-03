@@ -42,18 +42,20 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
-    
-    public void checkDruck(){
-        System.out.println("hahowa druck : "+selected.isDruck());
+
+    public void checkDruck() {
+        System.out.println("hahowa druck : " + selected.isDruck());
     }
-    
-    public boolean renderAttribute(String attribute){
+
+    public boolean renderAttribute(String attribute) {
+        System.out.println("Attribute :::::::: " + attribute);
         boolean isSet = ejbFacade.renderAttribute(attribute);
+        System.out.println("Is Set :::::::::::;;; " + isSet);
         return isSet;
     }
 
     public DemandCategory getSelectedForSearch() {
-        if(selectedForSearch==null){
+        if (selectedForSearch == null) {
             selectedForSearch = new DemandCategory();
         }
         return selectedForSearch;
@@ -62,9 +64,6 @@ public class DemandCategoryController implements Serializable {
     public void setSelectedForSearch(DemandCategory selectedForSearch) {
         this.selectedForSearch = selectedForSearch;
     }
-    
-    
-
 
     public DemandCategory getSelected() {
         if (selected == null) {
@@ -92,8 +91,8 @@ public class DemandCategoryController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
-    public void search(){
+
+    public void search() {
         items = ejbFacade.search(selectedForSearch);
     }
 
@@ -131,9 +130,9 @@ public class DemandCategoryController implements Serializable {
         }
         return departementCriterias;
     }
-    
-    public List allDepartements(){
-       return departementCriteriaFacade.allDetailDepartements();
+
+    public List allDepartements() {
+        return departementCriteriaFacade.allDetailDepartements();
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -141,10 +140,10 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    getFacade().save(selected,SessionUtil.getConnectedUser().getDepartement(),false);
+                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false);
                 } else if (persistAction == PersistAction.UPDATE) {
                     getFacade().edit(selected);
-                }else {
+                } else {
                     getFacade().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);

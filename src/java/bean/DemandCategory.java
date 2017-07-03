@@ -69,6 +69,8 @@ public class DemandCategory implements Serializable {
 
     //Warengruppe Kapitel
     private int anzahlKapitetel = 15;
+    
+    private int nbrTotalValidation;
 
     //Aufwand für Allg.Änderung    
     @ManyToOne
@@ -532,6 +534,15 @@ public class DemandCategory implements Serializable {
     public void setDateDemandCategory(Date dateDemandCategory) {
         this.dateDemandCategory = dateDemandCategory;
     }
+
+    public int getNbrTotalValidation() {
+        return nbrTotalValidation;
+    }
+
+    public void setNbrTotalValidation(int nbrTotalValidation) {
+        this.nbrTotalValidation = nbrTotalValidation;
+    }
+    
 
     @Override
     public int hashCode() {
