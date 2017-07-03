@@ -32,6 +32,9 @@ public class DemandCategoryCalculationItemController implements Serializable {
     }
 
     public DemandCategoryCalculationItem getSelected() {
+        if(selected==null){
+           selected = new DemandCategoryCalculationItem();
+        }
         return selected;
     }
 

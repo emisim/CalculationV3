@@ -6,12 +6,14 @@
  */
 package service;
 
+import bean.Category;
 import bean.DemandCategory;
 import bean.Departement;
 import bean.User;
 import controler.util.AccessDepartement;
 import controler.util.SessionUtil;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -69,6 +71,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         demandCategoryCalculationFacade.save(demandCategory, departement,simulation);
 
     }
+    
+    
 
     public DemandCategoryFacade() {
         super(DemandCategory.class);

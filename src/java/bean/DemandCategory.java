@@ -91,8 +91,9 @@ public class DemandCategory implements Serializable {
     private KonzeptbearbeitungFaktor konzeptbearbeitungFaktor;
 
     //Für den Druck
-    private boolean druck;
-
+    private boolean druck;// dakchi lli apres druk a cacher!!!!===> anas
+    
+    
     @ManyToOne
     private FormatAuswaehlen formatAuswaehlen;
 

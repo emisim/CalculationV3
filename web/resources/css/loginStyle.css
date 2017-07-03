@@ -120,7 +120,7 @@
     margin-top: 10px;
     height: 170px;
     background-color: #fff;
-    color: green;
+    color: #006e73;
     border-radius: 2px;
     overflow: hidden;
 }
@@ -128,7 +128,7 @@
 .menu-card:hover {
     text-shadow: 0 1px rgba(0,0,0,0.3);
     background-color: #e7e7e7;
-    color:red;
+    color:#f07d00;
     background-position:0 0, 0 0;
     -webkit-transition-duration:0.5s;
     -moz-transition-duration:0.5s;
