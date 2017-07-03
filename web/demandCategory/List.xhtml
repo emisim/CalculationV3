@@ -20,9 +20,9 @@
                         <h:form id="DemandCategorySearchForm">
                             <p:fieldset legend="Critères de recherche" toggleable="true" toggleSpeed="500" style="margin-bottom:20px" >
                                 <div Class="ui-grid-row">
-                                    <div Class="ui-grid-col-12" style="width: 20%;">
+                                    <div Class="ui-grid-col-12" >
                                         <h:panelGroup id="display" >
-                                            <h:panelGrid columns="10" cellpadding="4">
+                                            <h:panelGrid columns="10" cellpadding="2">
                                                 <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                                                 <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
