@@ -20,6 +20,10 @@ public class ConfigurationItemFacade extends AbstractFacade<ConfigurationItem> {
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
+    
+    public ConfigurationItem findByName(String name){
+        return (ConfigurationItem) em.createQuery("SELECT item FROM ConfigurationItem item WHERE item.name='"+name+"'").getSingleResult();
+    }
     @Override
     protected EntityManager getEntityManager() {
         return em;

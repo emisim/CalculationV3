@@ -1,11 +1,18 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.Departement;
+import bean.DepartementCriteria;
+import bean.DepartementDetail;
+import bean.Sortiment;
+import bean.SotimentItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.DemandCategoryFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,13 +32,25 @@ public class DemandCategoryController implements Serializable {
 
     @EJB
     private service.DemandCategoryFacade ejbFacade;
+    @EJB
+    private service.DepartementCriteriaFacade departementCriteriaFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
+    private Sortiment sortiment;
+    private List<SotimentItem> sotimentItems;
 
     public DemandCategoryController() {
     }
 
+    public boolean renderAttribute(String attribute) {
+        boolean isSet = ejbFacade.renderAttribute(attribute);
+        return isSet;
+    }
+
     public DemandCategory getSelected() {
+        if (selected == null) {
+            selected = new DemandCategory();
+        }
         return selected;
     }
 
@@ -81,13 +100,28 @@ public class DemandCategoryController implements Serializable {
         return items;
     }
 
+    public List<DepartementDetail> departementeDetails() {
+        List<DepartementDetail> departementCriterias = new ArrayList<>();
+        Departement departement = SessionUtil.getConnectedUser().getDepartement();
+        if (departement != null && departement.getId() != null) {
+            departementCriterias = departementCriteriaFacade.detailDepartement(departement);
+        }
+        return departementCriterias;
+    }
+    
+    public List allDepartements(){
+       return departementCriteriaFacade.allDetailDepartements();
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
+                if (persistAction == PersistAction.CREATE) {
+                    getFacade().save(selected,SessionUtil.getConnectedUser().getDepartement(),false);
+                } else if (persistAction == PersistAction.UPDATE) {
                     getFacade().edit(selected);
-                } else {
+                }else {
                     getFacade().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
@@ -160,6 +194,22 @@ public class DemandCategoryController implements Serializable {
             }
         }
 
+    }
+
+    public Sortiment getSortiment() {
+        return sortiment;
+    }
+
+    public void setSortiment(Sortiment sortiment) {
+        this.sortiment = sortiment;
+    }
+
+    public List<SotimentItem> getSotimentItems() {
+        return sotimentItems;
+    }
+
+    public void setSotimentItems(List<SotimentItem> sotimentItems) {
+        this.sotimentItems = sotimentItems;
     }
 
 }
