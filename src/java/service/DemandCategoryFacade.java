@@ -16,6 +16,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.script.ScriptException;
 
 /**
  *
@@ -27,15 +28,16 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
-    @EJB
-    SotimentItemFacade sotimentItemFacade;
+    
+    private @EJB SotimentItemFacade sotimentItemFacade;
+    private @EJB DemandCategoryCalculationFacade demandCategoryCalculationFacade;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
-    public void save(DemandCategory demandCategory, boolean simulation) {
+    public void save(DemandCategory demandCategory,Departement departement, boolean simulation) throws ScriptException {
         if (!demandCategory.isDruck()) {
             demandCategory.setFormatAuswaehlen(null);
             demandCategory.setPapierMaterialAuswaehlen(null);
@@ -57,13 +59,14 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setUmschlagPapierAuswaehlen(null);
             demandCategory.setUmschlagFarbigkeit(null);
         }
-
+        demandCategory.setSummTotal(demandCategory.getSummDruck().add(demandCategory.getSummDepartment()));
         
         demandCategory.setId(generate("DemandCategory", "id"));
         if (!simulation) {
-            create(demandCategory);
+            edit(demandCategory);
         }
         sotimentItemFacade.save(demandCategory, simulation);
+        demandCategoryCalculationFacade.save(demandCategory, departement,simulation);
 
     }
 
@@ -106,5 +109,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
         }
     }
+
+    
 
 }

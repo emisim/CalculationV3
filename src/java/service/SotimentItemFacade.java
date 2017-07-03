@@ -26,13 +26,12 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
 
     public void save(DemandCategory demandCategory, boolean simulation) {
         List<SotimentItem> sotimentItems = demandCategory.getSotimentItems();
-        if (sotimentItems.isEmpty()) {
+        if (sotimentItems==null || sotimentItems.isEmpty()) {
             return;
         } else if (sotimentItems.size() == 1) {
             sotimentItems.get(0).setWert(new BigDecimal(100));
         }
         for (SotimentItem sotimentItem : sotimentItems) {
-            //  sotimentItem.setId(generate("SotimentItem", "id"));
             sotimentItem.setDemandCategory(demandCategory);
             if (!simulation) {
                 edit(sotimentItem);

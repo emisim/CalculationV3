@@ -5,6 +5,7 @@ import bean.Sortiment;
 import bean.SotimentItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.DemandCategoryFacade;
 
 import java.io.Serializable;
@@ -94,9 +95,11 @@ public class DemandCategoryController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
+                if (persistAction == PersistAction.CREATE) {
+                    getFacade().save(selected,SessionUtil.getConnectedUser().getDepartement(),false);
+                } else if (persistAction == PersistAction.UPDATE) {
                     getFacade().edit(selected);
-                } else {
+                }else {
                     getFacade().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);

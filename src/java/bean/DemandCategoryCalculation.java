@@ -35,6 +35,10 @@ public class DemandCategoryCalculation implements Serializable {
     @OneToMany(mappedBy = "demandCategoryCalculation")
     private List<DemandCategoryCalculationItem> demandCategoryCalculationItems;
 
+    public DemandCategoryCalculation() {
+    }
+
+    
     public BigDecimal getSumme() {
         return summe;
     }

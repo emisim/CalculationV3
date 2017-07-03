@@ -37,7 +37,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryCalculationItemTitle_departementCriteriaItem}"/>
                             </f:facet>
-                            <h:outputText value="#{item.departementCriteriaItem}"/>
+                            <h:outputText value="#{item.departementCriteriaItem.description}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -51,12 +51,7 @@
                             </f:facet>
                             <p:selectBooleanCheckbox value="#{item.calcultaed}" disabled="true"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryCalculationItemTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                      
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryCalculationItemController.prepareCreate}" update=":DemandCategoryCalculationItemCreateForm" oncomplete="PF('DemandCategoryCalculationItemCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryCalculationItemViewForm" oncomplete="PF('DemandCategoryCalculationItemViewDialog').show()" disabled="#{empty demandCategoryCalculationItemController.selected}"/>
