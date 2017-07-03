@@ -36,6 +36,7 @@ public class DemandCategoryController implements Serializable {
     private service.DepartementCriteriaFacade departementCriteriaFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
+    private DemandCategory selectedForSearch;
     private Sortiment sortiment;
     private List<SotimentItem> sotimentItems;
 
@@ -50,6 +51,19 @@ public class DemandCategoryController implements Serializable {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
     }
+
+    public DemandCategory getSelectedForSearch() {
+        if(selectedForSearch==null){
+            selectedForSearch = new DemandCategory();
+        }
+        return selectedForSearch;
+    }
+
+    public void setSelectedForSearch(DemandCategory selectedForSearch) {
+        this.selectedForSearch = selectedForSearch;
+    }
+    
+    
 
 
     public DemandCategory getSelected() {
@@ -77,6 +91,10 @@ public class DemandCategoryController implements Serializable {
         selected = new DemandCategory();
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    public void search(){
+        items = ejbFacade.search(selectedForSearch);
     }
 
     public void create() {
