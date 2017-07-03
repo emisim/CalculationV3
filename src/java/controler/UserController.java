@@ -49,7 +49,7 @@ public class UserController implements Serializable {
         if (res > 0) {
             if (SessionUtil.getConnectedUser().isMdpChanged()) {
                 System.out.println("meenu");
-                return "/demandCategory/List?faces-redirect=true";
+                return "/menu/menu?faces-redirect=true";
             }
             else {
                 return "/user/ChangePassword?faces-redirect=true";

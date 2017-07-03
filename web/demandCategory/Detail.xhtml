@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandCategoryDetailDlg" width="1000" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Departements':userController.connectedUser.departement}" >
+            <h:form id="DemandCategoryDetailForm">
+
+                <h:panelGroup id="displayForAdmin" rendered="#{userController.connectedUser.admin == 1}" >
+                    <p:tabView id="viewtabForAdmin" >
+                        <p:tab title="Content management">
+                            <p:dataTable  var="item1" value="#{demandCategoryController.allDepartements().get(0)}" sortBy="#{item1.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="2" style="text-align:left" >
+                                        <h:outputText value="#{item1.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="50"  >
+                                    <h:outputText value="#{item1.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Arithmitique Expresion" width="100" >
+                                    <h:outputText value="#{item1.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="2" style="text-align:right">
+                                        <h:outputText value="1200" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>
+                        </p:tab>  
+                        <p:tab title="Daten Management">
+                            <p:dataTable  var="item2" value="#{demandCategoryController.allDepartements().get(1)}" sortBy="#{item2.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="2" style="text-align:left" >
+                                        <h:outputText value="#{item2.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="50"  >
+                                    <h:outputText value="#{item2.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Arithmitique Expresion" width="100" >
+                                    <h:outputText value="#{item2.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="2" style="text-align:right">
+                                        <h:outputText value="1200" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>
+                        </p:tab>
+                        <p:tab title="Database Publishing">
+                            <p:dataTable  var="item3" value="#{demandCategoryController.allDepartements().get(2)}" sortBy="#{item3.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="2" style="text-align:left" >
+                                        <h:outputText value="#{item3.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="50"  >
+                                    <h:outputText value="#{item3.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Arithmitique Expresion" width="100" >
+                                    <h:outputText value="#{item3.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="2" style="text-align:right">
+                                        <h:outputText value="1200" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>
+                        </p:tab>
+                        <p:tab title="Project Management">
+                            <p:dataTable  var="item4" value="#{demandCategoryController.allDepartements().get(3)}" sortBy="#{item4.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="2" style="text-align:left" >
+                                        <h:outputText value="#{item4.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="50"  >
+                                    <h:outputText value="#{item4.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Arithmitique Expresion" width="100" >
+                                    <h:outputText value="#{item4.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="2" style="text-align:right">
+                                        <h:outputText value="1200" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>
+                        </p:tab>
+                    </p:tabView>
+                </h:panelGroup>
+                <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0}" >
+                    <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails()}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                        <p:headerRow>
+                            <p:column colspan="2" style="text-align:left" >
+                                <h:outputText value="#{item.nomDepCritera}" />
+                            </p:column>
+                        </p:headerRow>
+                        <p:column headerText="Description" width="50"  >
+                            <h:outputText value="#{item.descrDepCriteriaItem}" />
+                        </p:column>
+                        <p:column headerText="Arithmitique Expresion" width="100" >
+                            <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
+                        </p:column>
+                        <p:summaryRow>
+                            <p:column colspan="2" style="text-align:right">
+                                <h:outputText value="1200" />
+                            </p:column>
+                        </p:summaryRow>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

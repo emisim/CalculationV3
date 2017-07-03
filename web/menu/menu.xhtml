@@ -19,13 +19,14 @@
 
 
     <h:body class="bodyLogin">
-        <div class="ui-grid-row" style="background: url(../resources/image/header3.jpg) no-repeat;background-size: cover;">
+        <div class="ui-grid-row" style="height: 250px;background: url(../resources/image/background-banner.jpg) no-repeat;background-size: cover;" >
             <div class="ui-grid-col-12" style="text-align: right; margin-top: 2px; padding-right: 10px">
                 <h:form>
-                    Bienvenue : <b>Admin</b>&nbsp;
-                    |&nbsp;<p:commandLink value="Se Déconnecter" />
+                    Bienvenue : <b>#{userController.connectedUser.login}</b>&nbsp;
+                    |&nbsp;<p:commandLink value="Se Déconnecter" action="#{userController.seDeConnnecter()}"/>
                 </h:form>
             </div>
+            <img src="../resources/image/ede.png" style="width: 120px; height: auto"/>
         </div>
         <div class="ui-grid ui-grid-responsive">
 
@@ -34,276 +35,38 @@
                     <div class="col-md-12" style="text-align: center;">
 
                         <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../artDerWeiterverarbeitung/List.xhtml">
+                            <a class="menu-link" href="../user/List.xhtml">
                                 <div class="menu-card" >
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>ArtDerWeiterverarbeitung  </h4>
+                                    <h1><span class="fa-3x fa fa-users"></span></h1>
+                                    <h4>Users</h4>
                                 </div>
                             </a>
                         </p:panel>
                         <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../auflage/List.xhtml">
+                            <a class="menu-link" href="../departementCriteria/List.xhtml">
                                 <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Auflage </h4>
+                                    <h1><span class="fa-3x fa fa-th-large"></span></h1>
+                                    <h4>Criteria</h4>
                                 </div>
                             </a>
                         </p:panel>
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../auflageSeitenCoverMatrix/List.xhtml">
                                 <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>AuflageSeitenCoverMatrix </h4>
+                                    <h1><span class="fa-3x fa fa-history"></span></h1>
+                                    <h4>Historie</h4>
                                 </div>
                             </a>
                         </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../bindung/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Bindung </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../category/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Category </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../configuration/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Configuration </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../configurationItem/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>ConfigurationItem </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../correctionSchluessel/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>CorrectionSchluessel </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../cover/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Cover </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../demandCategory/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>DemandCategory </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../demandCategoryCalculation/List.xhtml">
                                 <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>DemandCategoryCalculation </h4>
+                                    <h1><span class="fa-3x fa fa-calculator"></span></h1>
+                                    <h4>Calcul</h4>
                                 </div>
                             </a>
                         </p:panel>
 
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../demandCategoryCalculationItem/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>DemandCategoryCalculationItem </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../departement/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Departement </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../departementCriteria/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>DepartementCriteria </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../farbigkeit/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Farbigkeit </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../formatAuswaehlen/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>FormatAuswaehlen </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../konzeptbearbeitungFaktor/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>KonzeptbearbeitungFaktor </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../mitgliederkorrekturFaktor/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>MitgliederkorrekturFaktor </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../papierMaterialAuswaehlen/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>PapierMaterialAuswaehlen </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../participantFaktor/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>articipantFaktor </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../product/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Product </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../schluessel/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Schluessel </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../schluesselType/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>SchluesselType </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../seiten/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Seiten </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../sortiment/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Sortiment </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../umschlagFarbigkeit/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>UmschlagFarbigkeit </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../umschlagPapierAuswaehlen/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>UmschlagPapierAuswaehlen </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../user/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>User </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../veredlung/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>Veredlung </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../wechselfassungVariantFaktor/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>WechselfassungVariantFaktor </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../wechselfassungVariantFaktor/List.xhtml">
-                                <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-book"></span></h1>
-                                    <h4>WechselfassungVariantFaktor </h4>
-                                </div>
-                            </a>
-                        </p:panel>
-                        
                     </div>
                 </div>
 
