@@ -91,7 +91,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         }
         System.out.println("rah maaa l9itechhh DemandCategoryDepartementCalculation f bd ");
         DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = new DemandCategoryDepartementCalculation();
-        demandCategoryDepartementCalculation.setId(generate("DemandCategoryDepartementCalculation", "id"));
+       // demandCategoryDepartementCalculation.setId(generate("DemandCategoryDepartementCalculation", "id"));
         demandCategoryDepartementCalculation.setDemandCategory(demandCategory);
         demandCategoryDepartementCalculation.setDepartement(departement);
         return demandCategoryDepartementCalculation;

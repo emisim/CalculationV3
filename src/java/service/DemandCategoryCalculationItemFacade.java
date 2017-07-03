@@ -62,7 +62,7 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
             return res.get(0);
         }
         DemandCategoryCalculationItem demandCategoryCalculationItem = new DemandCategoryCalculationItem();
-        demandCategoryCalculationItem.setId(generate("DemandCategoryCalculationItem", "id"));
+      //  demandCategoryCalculationItem.setId(generate("DemandCategoryCalculationItem", "id"));
         demandCategoryCalculationItem.setDepartementCriteriaItem(departementCriteriaItem);
         demandCategoryCalculationItem.setDemandCategoryCalculation(demandCategoryCalculation);
         return demandCategoryCalculationItem;
