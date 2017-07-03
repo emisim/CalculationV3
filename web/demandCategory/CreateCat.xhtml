@@ -33,13 +33,17 @@
                                                itemValue="#{productItem}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-                            <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
-                                <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
-                                               var="sortimentItem"
-                                               itemValue="#{sortimentItem}"/>
-                            </p:selectOneMenu>
+                            
+                                <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
+                                    <f:selectItem itemValue="#{null}" itemLabel="--sortiment--"/>
+                                    <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
+                                                   var="sortimentItem"
+                                                   itemValue="#{sortimentItem}"/>
+                                </p:selectOneMenu>
+                                <p:commandButton  value="Mix"  />
+                           
+
+
 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
                             <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
