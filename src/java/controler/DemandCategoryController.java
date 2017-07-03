@@ -31,6 +31,10 @@ public class DemandCategoryController implements Serializable {
     public DemandCategoryController() {
     }
     
+    public void checkDruck(){
+        System.out.println("hahowa druck : "+selected.isDruck());
+    }
+    
     public boolean renderAttribute(String attribute){
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
