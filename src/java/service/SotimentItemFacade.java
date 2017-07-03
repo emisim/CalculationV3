@@ -6,7 +6,6 @@
 package service;
 
 import bean.DemandCategory;
-import static bean.DemandCategory_.sotimentItems;
 import bean.SotimentItem;
 import java.math.BigDecimal;
 import java.util.List;
