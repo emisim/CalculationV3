@@ -71,6 +71,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     }
 
     private DemandCategoryCalculation createOrFind(DepartementCriteria departementCriteria, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
+       
         String query="SELECT item FROM DemandCategoryCalculation item WHERE "
                 + "item.demandCategoryDepartementCalculation.id=" + demandCategoryDepartementCalculation.getId() + " AND item.departementCriteria.id=" + departementCriteria.getId();
         System.out.println("haa query ==> "+query);
@@ -81,7 +82,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         }
         System.out.println("rah maaa l9itechhh DemandCategoryCalculation f bd ");
         DemandCategoryCalculation demandCategoryCalculation = new DemandCategoryCalculation();
-        demandCategoryCalculation.setId(generate("DemandCategoryCalculation", "id"));
+     //   demandCategoryCalculation.setId(generate("DemandCategoryCalculation", "id"));
         demandCategoryCalculation.setDepartementCriteria(departementCriteria);
         demandCategoryCalculation.setDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
         return demandCategoryCalculation;

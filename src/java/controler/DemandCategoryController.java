@@ -51,6 +51,7 @@ public class DemandCategoryController implements Serializable {
         return isSet;
     }
 
+
     public DemandCategory getSelected() {
         if (selected == null) {
             selected = new DemandCategory();
