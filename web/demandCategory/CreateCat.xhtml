@@ -15,7 +15,7 @@
             <p:panel header="Demand category"  >
                 <h:form id="DemandCategoryCreateForm">
                     <h:panelGroup id="display" >
-                        <h:panelGrid columns="6" cellpadding="7">
+                        <h:panelGrid columns="8" cellpadding="7">
 
                             <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                             <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" >
@@ -34,7 +34,7 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-                            <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" >
+                            <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
                                 <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                 <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
                                                var="sortimentItem"
@@ -146,12 +146,12 @@
                             <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
                                 <p:ajax process="druck" update="afterDruck" listener="#{demandCategoryController.checkDruck()}" />
                             </p:selectBooleanCheckbox>
-                            
-                            </h:panelGrid>
-                        
 
-                            <h:panelGrid id="afterDruck" columns="6" cellpadding="7">
-                                
+                        </h:panelGrid>
+
+                        <hr></hr>
+                        <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
+
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                             <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" >
                                 <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
