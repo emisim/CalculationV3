@@ -101,5 +101,7 @@ public class SotimentItem implements Serializable {
     public String toString() {
         return   sortiment.getName() + " "+wert;
     }
+
+    
     
 }

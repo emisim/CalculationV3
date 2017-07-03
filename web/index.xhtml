@@ -10,6 +10,7 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <h:outputStylesheet name="css/loginStyle.css"/>
         <link rel="shortcut icon" href="../resources/image/ede.png" type="image/png" sizes="16x22"/>
+        <link rel="stylesheet" href="resources/font-awesome-4.6.3/css/font-awesome.min.css" type="text/css" />
     </h:head>
     <!--#/{userController.isConnected()}-->
     <h:body class="bodyLogin" style="background: url(resources/image/background-banner.jpg) no-repeat;background-size: 120% 150%;" >
@@ -20,16 +21,16 @@
 
             <h:form>
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-                <h:panelGrid columns="2" cellpadding="5"  styleClass="align-center">
+                <h:panelGrid columns="2" cellpadding="5"  styleClass="align-center ede-color">
                     <i class="fa fa-user icon-login"></i>
                     <p:inputText id="username" value="#{userController.selected.login}" required="false" label="username" placeholder="Saisissez votre login" />
-                    <i class="fa fa-key icon-login"></i>
+                    <i class="fa fa-key icon-login "></i>
                     <p:password id="password" value="#{userController.selected.password}" required="false" label="password" placeholder="Saisissez votre mot de passe" />
 
                     <f:facet name="footer">
                         <p:commandButton value="CONNEXION" style=" font-size: 14px;
                                          font-family: 'Arial', sans-serif;font-weight: 700;height: 36px;
-                                         width: 100%;display: block;margin-bottom: 10px;position: relative;margin-left: 14px;"
+                                         width: 100%;display: block;margin-bottom: 10px;position: relative;margin-left: 25px;"
                                          update="growl" action="#{userController.seConnnecter()}"/>
                     </f:facet>  
                 </h:panelGrid>
@@ -37,74 +38,7 @@
         </div>
 
 
-
-
     </h:body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </html>
 

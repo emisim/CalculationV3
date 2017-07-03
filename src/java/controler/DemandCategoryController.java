@@ -39,6 +39,7 @@ public class DemandCategoryController implements Serializable {
     private service.SotimentItemFacade sortimentItemFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
+    private DemandCategory selectedForSearch;
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
@@ -68,11 +69,14 @@ public class DemandCategoryController implements Serializable {
         System.out.println("hahowa wert : "+sortimentItem.getWert());
         
         sotimentItems.add(sortimentItemFacade.clone(sortimentItem,sotimentItems));
-        
     }
+
     
-    public boolean renderAttribute(String attribute){
+
+    public boolean renderAttribute(String attribute) {
+        System.out.println("Attribute :::::::: " + attribute);
         boolean isSet = ejbFacade.renderAttribute(attribute);
+        System.out.println("Is Set :::::::::::;;; " + isSet);
         return isSet;
     }
 
@@ -85,6 +89,17 @@ public class DemandCategoryController implements Serializable {
 
     public void setSortimentItem(SotimentItem sortimentItem) {
         this.sortimentItem = sortimentItem;
+    }
+    
+    public DemandCategory getSelectedForSearch() {
+        if (selectedForSearch == null) {
+            selectedForSearch = new DemandCategory();
+        }
+        return selectedForSearch;
+    }
+
+    public void setSelectedForSearch(DemandCategory selectedForSearch) {
+        this.selectedForSearch = selectedForSearch;
     }
 
     public DemandCategory getSelected() {
@@ -112,6 +127,10 @@ public class DemandCategoryController implements Serializable {
         selected = new DemandCategory();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public void search() {
+        items = ejbFacade.search(selectedForSearch);
     }
 
     public void create() {
@@ -148,9 +167,9 @@ public class DemandCategoryController implements Serializable {
         }
         return departementCriterias;
     }
-    
-    public List allDepartements(){
-       return departementCriteriaFacade.allDetailDepartements();
+
+    public List allDepartements() {
+        return departementCriteriaFacade.allDetailDepartements();
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -158,10 +177,10 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    getFacade().save(selected,SessionUtil.getConnectedUser().getDepartement(),false);
+                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false);
                 } else if (persistAction == PersistAction.UPDATE) {
                     getFacade().edit(selected);
-                }else {
+                } else {
                     getFacade().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);

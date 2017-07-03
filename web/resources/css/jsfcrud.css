@@ -62,6 +62,8 @@
 .icon-login {
     font-size: 26px;
     margin-left: 54px;
+    
+    
 }
 
 .danger{
@@ -91,4 +93,8 @@ img-border {
     border-radius: 4px;
     padding: 5px;
     width: 150px;
+}
+
+.ede-color{
+    color: #006f73;
 }
