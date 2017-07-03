@@ -15,7 +15,7 @@
             <p:panel header="Demand category"  >
                 <h:form id="DemandCategoryCreateForm">
                     <h:panelGroup id="display" >
-                        <h:panelGrid columns="6" cellpadding="7">
+                        <h:panelGrid columns="8" cellpadding="7">
 
                             <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                             <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" >
@@ -40,7 +40,10 @@
                                                var="sortimentItem"
                                                itemValue="#{sortimentItem}"/>
                             </p:selectOneMenu>
-
+                            
+                            <p:outputLabel for="mix" value="Mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
+                            <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
+                            
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
                             <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
 
@@ -150,7 +153,7 @@
                             </h:panelGrid>
                         
 
-                            <h:panelGrid id="afterDruck" columns="6" cellpadding="7">
+                            <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
                                 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                             <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" >
@@ -275,6 +278,7 @@
                 </h:form>
             </p:panel>
             <ui:include src="Detail.xhtml"/>
+            <ui:include src="Mix.xhtml"/>
         </ui:define>
     </ui:composition>
 </html>

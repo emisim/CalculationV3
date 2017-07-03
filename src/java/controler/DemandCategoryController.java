@@ -2,7 +2,6 @@ package controler;
 
 import bean.DemandCategory;
 import bean.Departement;
-import bean.DepartementCriteria;
 import bean.DepartementDetail;
 import bean.Sortiment;
 import bean.SotimentItem;
@@ -34,16 +33,42 @@ public class DemandCategoryController implements Serializable {
     private service.DemandCategoryFacade ejbFacade;
     @EJB
     private service.DepartementCriteriaFacade departementCriteriaFacade;
+    @EJB
+    private service.SortimentFacade sortimentFacade;
+    @EJB
+    private service.SotimentItemFacade sortimentItemFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
     private Sortiment sortiment;
+    private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
+    private int index;
+    private int cmp = 0;
 
     public DemandCategoryController() {
     }
     
+    public void removeSortimentItem(SotimentItem sItem){
+        System.out.println("hahowa element a supprimer : "+sItem.getWert());
+        index = sItem.getId().intValue();
+        
+        sotimentItems.remove(sItem);
+    }
+    
+    public List<Sortiment> findAllSortiment(){
+        return sortimentFacade.findAll();
+    }
+    
     public void checkDruck(){
         System.out.println("hahowa druck : "+selected.isDruck());
+    }
+    
+    public void addSortimentItem(){
+        
+        System.out.println("hahowa wert : "+sortimentItem.getWert());
+        
+        sotimentItems.add(sortimentItemFacade.clone(sortimentItem,sotimentItems));
+        
     }
     
     public boolean renderAttribute(String attribute){
@@ -51,6 +76,16 @@ public class DemandCategoryController implements Serializable {
         return isSet;
     }
 
+    public SotimentItem getSortimentItem() {
+        if(sortimentItem == null){
+            sortimentItem = new SotimentItem();
+        }
+        return sortimentItem;
+    }
+
+    public void setSortimentItem(SotimentItem sortimentItem) {
+        this.sortimentItem = sortimentItem;
+    }
 
     public DemandCategory getSelected() {
         if (selected == null) {
@@ -210,6 +245,9 @@ public class DemandCategoryController implements Serializable {
     }
 
     public List<SotimentItem> getSotimentItems() {
+        if(sotimentItems == null){
+            sotimentItems = new ArrayList<>();
+        }
         return sotimentItems;
     }
 
