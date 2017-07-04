@@ -27,7 +27,7 @@
                                            itemValue="#{schluesselTypeItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{schluesselController.create}" value="#{bundle.Save}" update="display,:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchluesselCreateDialog');"/>
+                    <p:commandButton actionListener="#{schluesselController.create}" value="#{bundle.Save}" update="display,:parametrageTab:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchluesselCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchluesselCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditKonzeptbearbeitungFaktorLabel_id}" for="id" />
                         <p:inputText id="id" value="#{konzeptbearbeitungFaktorController.selected.id}" title="#{bundle.EditKonzeptbearbeitungFaktorTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{konzeptbearbeitungFaktorController.update}" value="#{bundle.Save}" update="display,:KonzeptbearbeitungFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KonzeptbearbeitungFaktorEditDialog');"/>
+                    <p:commandButton actionListener="#{konzeptbearbeitungFaktorController.update}" value="#{bundle.Save}" update="display,:parametrageTab:KonzeptbearbeitungFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KonzeptbearbeitungFaktorEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="KonzeptbearbeitungFaktorEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

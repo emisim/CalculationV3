@@ -22,37 +22,21 @@
                     <h:form id="menuForm" style="background: url(../resources/image/background-banner.jpg) no-repeat;background-size: cover;">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-1" style="text-align: center">
-                                <img src="../resources/image/ede.png" style="width: 30px;vertical-align: middle;margin: 13px;" alt="EDE logo"/>&nbsp;<br/>
+                                <a href="../menu/menu.xhtml"> <img src="../resources/image/ede.png" style="width: 30px;vertical-align: middle;margin: 13px;" alt="EDE logo"/></a>&nbsp;<br/>
                                 <span style="color: black; text-shadow: 2px 2px 2px white; font-size: 14px; font-weight: bold"></span>
                             </div>
                             <div class="ui-grid-col-10" >
                                 <br/>
                                 <p:menubar>
-                                    <p:submenu id="artDerWeiterverarbeitung" label="Parametrage" icon="fa fa-book" >
-                                        <p:menuitem value="ArtDerWeiterverarbeitung" outcome="/artDerWeiterverarbeitung/List.xhtml"  />
-                                        <p:menuitem value="Auflage" outcome="/auflage/List.xhtml"  />
-                                        <p:menuitem value="Bindung" outcome="/bindung/List.xhtml"  />
-                                        <p:menuitem value="Category" outcome="/category/List.xhtml"  />
-                                        <p:menuitem value="CorrectionSchluessel" outcome="/correctionSchluessel/List.xhtml"  />
-                                        <p:menuitem value="Cover" outcome="/cover/List.xhtml"  />
-                                        <p:menuitem value="Farbigkeit" outcome="/farbigkeit/List.xhtml"  />
-                                        <p:menuitem value="FormatAuswaehlen" outcome="/formatAuswaehlen/List.xhtml"  />
-                                        <p:menuitem value="Product" outcome="/product/List.xhtml"  />
-                                        <p:menuitem value="Seiten" outcome="/seiten/List.xhtml"  />
-                                        <p:menuitem value="Sortiment" outcome="/sortiment/List.xhtml"  />
-
-                                    </p:submenu>
 
 
-                                    <p:submenu id="configuration" label="Configuration" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/configuration/List.xhtml"  />
-                                        <p:menuitem value="ConfigurationItem" outcome="/configurationItem/List.xhtml"  />
-
+                                    <p:submenu id="parametrage" label="Parametrage" icon="ui-icon-tabs" >
+                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml"  />
                                     </p:submenu>
 
 
 
-                                    <p:submenu id="demandCategory" label="DemandCategory" icon="fa fa-database" >
+                                    <p:submenu id="demandCategory" label="DemandCategory" icon="ui-icon-database" >
                                         <p:menuitem value="Create" outcome="/demandCategory/CreateCat.xhtml"  />
                                         <p:menuitem value="List" outcome="/demandCategory/List.xhtml"  />
                                         <p:menuitem value="Calculation" outcome="/demandCategoryCalculation/List.xhtml"  />
@@ -60,37 +44,20 @@
                                     </p:submenu>
 
 
-                                    <p:submenu id="departement" label="Departement" icon="fa fa-database" >
+                                    <p:submenu id="departement" label="Departement" icon="ui-icon-building" >
                                         <p:menuitem value="List" outcome="/departement/List.xhtml"  />
                                         <p:menuitem value="Criteria" outcome="/departementCriteria/List.xhtml"/>
                                         <p:menuitem value="Criteria Item" outcome="/departementCriteriaItem/List.xhtml"/>
                                     </p:submenu>
 
-
-
-
-                                    <p:submenu id="faktor" label="Faktor" icon="fa fa-database" >
-                                        <p:menuitem value="Konzeptbearbeitung" outcome="/konzeptbearbeitungFaktor/List.xhtml"  />
-                                        <p:menuitem value="Mitgliederkorrektur" outcome="/mitgliederkorrekturFaktor/List.xhtml"  />
-                                        <p:menuitem value="Participant" outcome="/participantFaktor/List.xhtml"  />
+                                    <p:submenu id="configuration" label="Configuration" icon="ui-icon-gear" >
+                                        <p:menuitem value="List" outcome="/configurationItem/List.xhtml"  />
 
                                     </p:submenu>
 
 
 
-
-                                    <p:submenu id="schluessel" label="Schluessel" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/schluessel/List.xhtml"  />
-                                        <p:menuitem value="Type" outcome="/schluesselType/List.xhtml"  />
-                                    </p:submenu>
-
-
-                                    <p:submenu id="umschlag" label="Umschlag" icon="fa fa-database" >
-                                        <p:menuitem value="Farbigkeit" outcome="/umschlagFarbigkeit/List.xhtml"  />
-                                        <p:menuitem value="PapierAuswaehlen" outcome="/umschlagFarbigkeit/List.xhtml"  />
-                                    </p:submenu>
-
-                                    <p:submenu id="user" label="User" icon="fa fa-database" >
+                                    <p:submenu id="user" label="User" icon="ui-icon-user" >
                                         <p:menuitem value="List" outcome="/user/List.xhtml"  />
                                     </p:submenu>
 

@@ -6,14 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-
-
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListSortimentTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
+ 
             <h:form id="SortimentListForm">
                 <p:panel header="#{bundle.ListSortimentTitle}">
                     <p:dataTable id="datalist" value="#{sortimentController.items}" var="item"
@@ -64,9 +57,9 @@
                             <h:outputText value="#{item.mKSchluessel}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{sortimentController.prepareCreate}" update=":SortimentCreateForm" oncomplete="PF('SortimentCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SortimentViewForm" oncomplete="PF('SortimentViewDialog').show()" disabled="#{empty sortimentController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SortimentEditForm" oncomplete="PF('SortimentEditDialog').show()" disabled="#{empty sortimentController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{sortimentController.prepareCreate}" update=":parametrageTab:SortimentCreateForm" oncomplete="PF('SortimentCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:SortimentViewForm" oncomplete="PF('SortimentViewDialog').show()" disabled="#{empty sortimentController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:SortimentEditForm" oncomplete="PF('SortimentEditDialog').show()" disabled="#{empty sortimentController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{sortimentController.destroy}" update=":growl,datalist" disabled="#{empty sortimentController.selected}"/>
                         </f:facet>
                     </p:dataTable>
@@ -76,7 +69,5 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
 
 </html>

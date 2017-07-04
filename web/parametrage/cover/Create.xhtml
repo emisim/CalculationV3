@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateCoverLabel_id}" for="id" />
                         <p:inputText id="id" value="#{coverController.selected.id}" title="#{bundle.CreateCoverTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{coverController.create}" value="#{bundle.Save}" update="display,:CoverListForm:datalist,:growl" oncomplete="handleSubmit(args,'CoverCreateDialog');"/>
+                    <p:commandButton actionListener="#{coverController.create}" value="#{bundle.Save}" update="display,:parametrageTab:CoverListForm:datalist,:growl" oncomplete="handleSubmit(args,'CoverCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CoverCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

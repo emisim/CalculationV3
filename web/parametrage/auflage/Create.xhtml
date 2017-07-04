@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateAuflageLabel_id}" for="id" />
                         <p:inputText id="id" value="#{auflageController.selected.id}" title="#{bundle.CreateAuflageTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{auflageController.create}" value="#{bundle.Save}" update="display,:AuflageListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuflageCreateDialog');"/>
+                    <p:commandButton actionListener="#{auflageController.create}" value="#{bundle.Save}" update="display,:parametrageTab:AuflageListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuflageCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AuflageCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

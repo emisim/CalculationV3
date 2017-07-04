@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditSeitenLabel_nbrePage}" for="nbrePage" />
                         <p:inputText id="nbrePage" value="#{seitenController.selected.nbrePage}" title="#{bundle.EditSeitenTitle_nbrePage}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{seitenController.update}" value="#{bundle.Save}" update="display,:SeitenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SeitenEditDialog');"/>
+                    <p:commandButton actionListener="#{seitenController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SeitenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SeitenEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SeitenEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

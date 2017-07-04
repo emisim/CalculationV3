@@ -3,26 +3,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
-
 
         <ui:define name="title">
             <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ParametrageForm">
-                <p:tabView id="artDerWeiterverarbeitungTab" >
-                    <p:tab title="artDerWeiterverarbeitung">
-                        
-                    </p:tab>      
-                </p:tabView>
 
-            </h:form>
-            <ui:include src="newjsf.xhtml"/>
+            <p:tabView id="parametrageTab" >
+                <p:tab title="artDerWeiterverarbeitung">
+                    <ui:include src="artDerWeiterverarbeitung/List.xhtml"/>
+                </p:tab> 
+                <p:tab title="auflage">
+                    <ui:include src="auflage/List.xhtml"/>
+                </p:tab> 
+                
+                 <p:tab title="bindung">
+                    <ui:include src="bindung/List.xhtml"/>
+                </p:tab> 
+                
+                 <p:tab title="correctionSchluessel">
+                    <ui:include src="correctionSchluessel/List.xhtml"/>
+                </p:tab> 
+                 <p:tab title="cover">
+                    <ui:include src="cover/List.xhtml"/>
+                </p:tab> 
+                  <p:tab title="farbigkeit">
+                    <ui:include src="farbigkeit/List.xhtml"/>
+                </p:tab> 
+                <p:tab title="formatAuswaehlen">
+                    <ui:include src="formatAuswaehlen/List.xhtml"/>
+                </p:tab> 
+                 <p:tab title="product">
+                    <ui:include src="product/List.xhtml"/>
+                </p:tab> 
+                 <p:tab title="seiten">
+                    <ui:include src="seiten/List.xhtml"/>
+                </p:tab> 
+                 <p:tab title="sortiment">
+                    <ui:include src="sortiment/List.xhtml"/>
+                </p:tab> 
+               
+            
+                 <p:tab title="mitgliederkorrekturFaktor">
+                    <ui:include src="mitgliederkorrekturFaktor/List.xhtml"/>
+                </p:tab> 
+                
+                 <p:tab title="participantFaktor">
+                    <ui:include src="participantFaktor/List.xhtml"/>
+                </p:tab> 
+               
+                 <p:tab title="schluessel">
+                    <ui:include src="schluessel/List.xhtml"/>
+                </p:tab> 
+               
+                 <p:tab title="schluesselType">
+                    <ui:include src="schluesselType/List.xhtml"/>
+                </p:tab> 
+               
+                
+            </p:tabView>  
+
+
+
+
         </ui:define>
     </ui:composition>
 

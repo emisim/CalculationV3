@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.EditFarbigkeitLabel_id}" for="id" />
                         <p:inputText id="id" value="#{farbigkeitController.selected.id}" title="#{bundle.EditFarbigkeitTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{farbigkeitController.update}" value="#{bundle.Save}" update="display,:FarbigkeitListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FarbigkeitEditDialog');"/>
+                    <p:commandButton actionListener="#{farbigkeitController.update}" value="#{bundle.Save}" update="display,:parametrageTab:FarbigkeitListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FarbigkeitEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FarbigkeitEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

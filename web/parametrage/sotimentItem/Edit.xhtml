@@ -33,7 +33,7 @@
                         <p:outputLabel value="#{bundle.EditSotimentItemLabel_value}" for="value" />
                         <p:inputText id="value" value="#{sotimentItemController.selected.value}" title="#{bundle.EditSotimentItemTitle_value}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{sotimentItemController.update}" value="#{bundle.Save}" update="display,:SotimentItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SotimentItemEditDialog');"/>
+                    <p:commandButton actionListener="#{sotimentItemController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SotimentItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SotimentItemEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SotimentItemEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

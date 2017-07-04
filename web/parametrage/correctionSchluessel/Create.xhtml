@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateCorrectionSchluesselLabel_value}" for="value" />
                         <p:inputText id="value" value="#{correctionSchluesselController.selected.value}" title="#{bundle.CreateCorrectionSchluesselTitle_value}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{correctionSchluesselController.create}" value="#{bundle.Save}" update="display,:CorrectionSchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'CorrectionSchluesselCreateDialog');"/>
+                    <p:commandButton actionListener="#{correctionSchluesselController.create}" value="#{bundle.Save}" update="display,:parametrageTab:CorrectionSchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'CorrectionSchluesselCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CorrectionSchluesselCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

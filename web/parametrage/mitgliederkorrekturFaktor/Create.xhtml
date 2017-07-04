@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateMitgliederkorrekturFaktorLabel_id}" for="id" />
                         <p:inputText id="id" value="#{mitgliederkorrekturFaktorController.selected.id}" title="#{bundle.CreateMitgliederkorrekturFaktorTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{mitgliederkorrekturFaktorController.create}" value="#{bundle.Save}" update="display,:MitgliederkorrekturFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args,'MitgliederkorrekturFaktorCreateDialog');"/>
+                    <p:commandButton actionListener="#{mitgliederkorrekturFaktorController.create}" value="#{bundle.Save}" update="display,:parametrageTab:MitgliederkorrekturFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args,'MitgliederkorrekturFaktorCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MitgliederkorrekturFaktorCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

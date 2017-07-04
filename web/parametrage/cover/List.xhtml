@@ -6,14 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-
-
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListCoverTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
+      
             <h:form id="CoverListForm">
                 <p:panel header="#{bundle.ListCoverTitle}">
                     <p:dataTable id="datalist" value="#{coverController.items}" var="item"
@@ -41,19 +34,16 @@
                         </p:column>
                         
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{coverController.prepareCreate}" update=":CoverCreateForm" oncomplete="PF('CoverCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CoverViewForm" oncomplete="PF('CoverViewDialog').show()" disabled="#{empty coverController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CoverEditForm" oncomplete="PF('CoverEditDialog').show()" disabled="#{empty coverController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{coverController.prepareCreate}" update=":parametrageTab:CoverCreateForm" oncomplete="PF('CoverCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:CoverViewForm" oncomplete="PF('CoverViewDialog').show()" disabled="#{empty coverController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:CoverEditForm" oncomplete="PF('CoverEditDialog').show()" disabled="#{empty coverController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{coverController.destroy}" update=":growl,datalist" disabled="#{empty coverController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
-
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
 
 </html>

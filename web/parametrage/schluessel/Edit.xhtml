@@ -28,7 +28,7 @@
                                            itemValue="#{schluesselTypeItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{schluesselController.update}" value="#{bundle.Save}" update="display,:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchluesselEditDialog');"/>
+                    <p:commandButton actionListener="#{schluesselController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchluesselEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchluesselEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

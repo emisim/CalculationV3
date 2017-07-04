@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditSchluesselTypeLabel_id}" for="id" />
                         <p:inputText id="id" value="#{schluesselTypeController.selected.id}" title="#{bundle.EditSchluesselTypeTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{schluesselTypeController.update}" value="#{bundle.Save}" update="display,:SchluesselTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchluesselTypeEditDialog');"/>
+                    <p:commandButton actionListener="#{schluesselTypeController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SchluesselTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchluesselTypeEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchluesselTypeEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

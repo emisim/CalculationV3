@@ -31,7 +31,7 @@
                         <p:outputLabel value="#{bundle.CreateSotimentItemLabel_value}" for="value" />
                         <p:inputText id="value" value="#{sotimentItemController.selected.value}" title="#{bundle.CreateSotimentItemTitle_value}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{sotimentItemController.create}" value="#{bundle.Save}" update="display,:SotimentItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'SotimentItemCreateDialog');"/>
+                    <p:commandButton actionListener="#{sotimentItemController.create}" value="#{bundle.Save}" update="display,:parametrageTab:SotimentItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'SotimentItemCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SotimentItemCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

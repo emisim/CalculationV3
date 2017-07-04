@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.EditParticipantFaktorLabel_value}" for="value" />
                         <p:inputText id="value" value="#{participantFaktorController.selected.value}" title="#{bundle.EditParticipantFaktorTitle_value}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{participantFaktorController.update}" value="#{bundle.Save}" update="display,:ParticipantFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParticipantFaktorEditDialog');"/>
+                    <p:commandButton actionListener="#{participantFaktorController.update}" value="#{bundle.Save}" update="display,:parametrageTab:ParticipantFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParticipantFaktorEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ParticipantFaktorEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

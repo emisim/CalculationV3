@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateBindungLabel_id}" for="id" />
                         <p:inputText id="id" value="#{bindungController.selected.id}" title="#{bundle.CreateBindungTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{bindungController.create}" value="#{bundle.Save}" update="display,:BindungListForm:datalist,:growl" oncomplete="handleSubmit(args,'BindungCreateDialog');"/>
+                    <p:commandButton actionListener="#{bindungController.create}" value="#{bundle.Save}" update="display,:parametrageTab:BindungListForm:datalist,:growl" oncomplete="handleSubmit(args,'BindungCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="BindungCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

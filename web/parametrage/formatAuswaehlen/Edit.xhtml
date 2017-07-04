@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.EditFormatAuswaehlenLabel_id}" for="id" />
                         <p:inputText id="id" value="#{formatAuswaehlenController.selected.id}" title="#{bundle.EditFormatAuswaehlenTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{formatAuswaehlenController.update}" value="#{bundle.Save}" update="display,:FormatAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FormatAuswaehlenEditDialog');"/>
+                    <p:commandButton actionListener="#{formatAuswaehlenController.update}" value="#{bundle.Save}" update="display,:parametrageTab:FormatAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FormatAuswaehlenEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FormatAuswaehlenEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

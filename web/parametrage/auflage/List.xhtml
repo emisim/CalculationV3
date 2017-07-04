@@ -6,14 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    
 
-
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListAuflageTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
+      
             <h:form id="AuflageListForm">
                 <p:panel header="#{bundle.ListAuflageTitle}">
                     <p:dataTable id="datalist" value="#{auflageController.items}" var="item"
@@ -35,9 +30,9 @@
                         </p:column>
                         
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{auflageController.prepareCreate}" update=":AuflageCreateForm" oncomplete="PF('AuflageCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AuflageViewForm" oncomplete="PF('AuflageViewDialog').show()" disabled="#{empty auflageController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AuflageEditForm" oncomplete="PF('AuflageEditDialog').show()" disabled="#{empty auflageController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{auflageController.prepareCreate}" update=":parametrageTab:AuflageCreateForm" oncomplete="PF('AuflageCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:AuflageViewForm" oncomplete="PF('AuflageViewDialog').show()" disabled="#{empty auflageController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:AuflageEditForm" oncomplete="PF('AuflageEditDialog').show()" disabled="#{empty auflageController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{auflageController.destroy}" update=":growl,datalist" disabled="#{empty auflageController.selected}"/>
                         </f:facet>
                     </p:dataTable>
@@ -47,7 +42,7 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+      
+   
 
 </html>
