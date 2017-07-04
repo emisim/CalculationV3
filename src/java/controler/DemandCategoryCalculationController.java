@@ -25,8 +25,6 @@ public class DemandCategoryCalculationController implements Serializable {
 
     @EJB
     private service.DemandCategoryCalculationFacade ejbFacade;
-    @EJB
-    private service.DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
     private List<DemandCategoryCalculation> items = null;
     private DemandCategoryCalculation selected;
 
@@ -56,8 +54,6 @@ public class DemandCategoryCalculationController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
-   
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryCalculationCreated"));
