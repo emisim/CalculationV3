@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 04 Juillet 2017 à 20:07
+-- Généré le :  Mar 04 Juillet 2017 à 20:48
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -70,6 +70,16 @@ INSERT INTO `departement` (`ID`, `NAME`) VALUES
 INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
 (1, 'Allgemein', 1),
 (2, 'Reda', 1);
+
+--
+-- Contenu de la table `departementcriteriaitem`
+--
+
+INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(1, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '8*std_stz', 1),
+(2, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
+(3, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
+(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
 
 --
 -- Contenu de la table `farbigkeit`
