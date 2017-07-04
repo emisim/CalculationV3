@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import service.DemandCategoryCalculationFacade;
+import javax.script.ScriptException;
 
 @Named("demandCategoryController")
 @SessionScoped
@@ -182,11 +183,12 @@ public class DemandCategoryController implements Serializable {
         return items;
     }
 
-    public List<DepartementDetail> departementeDetails() {
+    public List<DepartementDetail> departementeDetails() throws ScriptException {
         List<DepartementDetail> departementCriterias = new ArrayList<>();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
         if (departement != null && departement.getId() != null) {
-            departementCriterias = departementCriteriaFacade.detailDepartement(departement);
+            System.out.println("Selected caat ::::::: "+selected);
+            departementCriterias = departementCriteriaFacade.detailDepartement(selected,departement);
         }
         return departementCriterias;
     }

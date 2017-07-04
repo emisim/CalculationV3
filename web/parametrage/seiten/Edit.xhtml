@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SeitenEditDlg" widgetVar="SeitenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSeitenTitle}">
+            <h:form id="SeitenEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{seitenController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSeitenLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{seitenController.selected.id}" title="#{bundle.EditSeitenTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditSeitenLabel_nbrePage}" for="nbrePage" />
+                        <p:inputText id="nbrePage" value="#{seitenController.selected.nbrePage}" title="#{bundle.EditSeitenTitle_nbrePage}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{seitenController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SeitenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SeitenEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SeitenEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

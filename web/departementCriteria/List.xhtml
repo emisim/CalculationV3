@@ -39,12 +39,7 @@
                             </f:facet>
                             <h:outputText value="#{item.departement}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDepartementCriteriaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementCriteriaController.prepareCreate}" update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DepartementCriteriaViewForm" oncomplete="PF('DepartementCriteriaViewDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>

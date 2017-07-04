@@ -6,7 +6,6 @@
 package bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +20,11 @@ public class Auflage implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
     private String description;
 
-   
     public String getDescription() {
         return description;
     }
@@ -33,10 +32,6 @@ public class Auflage implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    
-    
-  
 
     public Integer getId() {
         return id;
@@ -68,7 +63,7 @@ public class Auflage implements Serializable {
 
     @Override
     public String toString() {
-        return id+"";
+        return id + "";
     }
-    
+
 }

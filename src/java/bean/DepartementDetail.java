@@ -15,6 +15,10 @@ public class DepartementDetail {
     private String descrDepCriteriaItem;
     private String arithmitiqueExpresionForUnitePrice;
     private String arithmitiqueExpresionForGlobalPrice;
+    private String price;
+    private String priceGlobal;
+    private String summCriteria;
+    private String summDepartement;
 
     public DepartementDetail() {
     }
@@ -50,6 +54,40 @@ public class DepartementDetail {
     public void setArithmitiqueExpresionForGlobalPrice(String arithmitiqueExpresionForGlobalPrice) {
         this.arithmitiqueExpresionForGlobalPrice = arithmitiqueExpresionForGlobalPrice;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getPriceGlobal() {
+        return priceGlobal;
+    }
+
+    public void setPriceGlobal(String priceGlobal) {
+        this.priceGlobal = priceGlobal;
+    }
+
+    public String getSummCriteria() {
+        return summCriteria;
+    }
+
+    public void setSummCriteria(String summCriteria) {
+        this.summCriteria = summCriteria;
+    }
+
+    public String getSummDepartement() {
+        return summDepartement;
+    }
+
+    public void setSummDepartement(String summDepartement) {
+        this.summDepartement = summDepartement;
+    }
+    
+    
 
     @Override
     public String toString() {

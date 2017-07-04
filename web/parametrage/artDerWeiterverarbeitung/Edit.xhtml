@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ArtDerWeiterverarbeitungEditDlg" widgetVar="ArtDerWeiterverarbeitungEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditArtDerWeiterverarbeitungTitle}">
+            <h:form id="ArtDerWeiterverarbeitungEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{artDerWeiterverarbeitungController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditArtDerWeiterverarbeitungLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{artDerWeiterverarbeitungController.selected.price}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_price}" />
+                        <p:outputLabel value="#{bundle.EditArtDerWeiterverarbeitungLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{artDerWeiterverarbeitungController.selected.description}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditArtDerWeiterverarbeitungLabel_label}" for="label" />
+                        <p:inputText id="label" value="#{artDerWeiterverarbeitungController.selected.label}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_label}" />
+                        <p:outputLabel value="#{bundle.EditArtDerWeiterverarbeitungLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{artDerWeiterverarbeitungController.selected.id}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{artDerWeiterverarbeitungController.update}" value="#{bundle.Save}" update="display,:parametrageTab:ArtDerWeiterverarbeitungListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ArtDerWeiterverarbeitungEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ArtDerWeiterverarbeitungEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

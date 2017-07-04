@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SotimentItemCreateDlg" widgetVar="SotimentItemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSotimentItemTitle}">
+            <h:form id="SotimentItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sotimentItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sotimentItemController.selected.id}" title="#{bundle.CreateSotimentItemTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_wert}" for="wert" />
+                        <p:inputText id="wert" value="#{sotimentItemController.selected.wert}" title="#{bundle.CreateSotimentItemTitle_wert}" />
+                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_demandCategory}" for="demandCategory" />
+                        <p:selectOneMenu id="demandCategory" value="#{sotimentItemController.selected.demandCategory}" >
+                            <f:selectItems value="#{demandCategoryController.itemsAvailableSelectOne}"
+                                           var="demandCategoryItem"
+                                           itemValue="#{demandCategoryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" />
+                        <p:selectOneMenu id="sortiment" value="#{sotimentItemController.selected.sortiment}" >
+                            <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
+                                           var="sortimentItem"
+                                           itemValue="#{sortimentItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{sotimentItemController.selected.value}" title="#{bundle.CreateSotimentItemTitle_value}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sotimentItemController.create}" value="#{bundle.Save}" update="display,:parametrageTab:SotimentItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'SotimentItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SotimentItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

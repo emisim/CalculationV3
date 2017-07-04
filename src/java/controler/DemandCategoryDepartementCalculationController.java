@@ -48,6 +48,8 @@ public class DemandCategoryDepartementCalculationController implements Serializa
     private DemandCategoryDepartementCalculationFacade getFacade() {
         return ejbFacade;
     }
+    
+    
 
     public DemandCategoryDepartementCalculation prepareCreate() {
         selected = new DemandCategoryDepartementCalculation();
