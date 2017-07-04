@@ -40,13 +40,15 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         return departementCriterias;
     }
 
-    private List<DepartementCriteria> findByDepartement(Departement departement) {
+    public List<DepartementCriteria> findByDepartement(Departement departement) {
         String query = "SELECT item FROM DepartementCriteria item WHERE 1=1";
         if (departement != null && departement.getId() != null) {
             query += SearchUtil.addConstraint("item", "departement.id", "=", departement.getId());
         }
         return em.createQuery(query).getResultList();
     }
+    
+    
 
     public List<DepartementDetail> detailDepartement(Departement departement) {
 

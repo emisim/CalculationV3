@@ -39,5 +39,7 @@ public class DepartementCriteriaItemFacade extends AbstractFacade<DepartementCri
     public DepartementCriteriaItemFacade() {
         super(DepartementCriteriaItem.class);
     }
+
+    
     
 }
