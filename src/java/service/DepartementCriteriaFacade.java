@@ -87,4 +87,19 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         super(DepartementCriteria.class);
     }
 
+    public void deleteCriteriaWithCriteriaItem(DepartementCriteria criteria) {
+        System.out.println("hahowa criteria : "+criteria);
+        String requette = "select item from DepartementCriteriaItem item where item.departementCriteria.id ='"+criteria.getId()+"'";
+        System.out.println("hahiya requette : "+requette);
+        List<DepartementCriteriaItem> departementCriteriaItems = em.createQuery(requette).getResultList();
+        
+        for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
+            departementCriteriaItemFacade.remove(departementCriteriaItem);
+            
+        }
+        
+        remove(criteria);
+     
+    }
+
 }

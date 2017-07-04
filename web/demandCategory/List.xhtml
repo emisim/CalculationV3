@@ -94,7 +94,7 @@
                                                     <h:panelGroup id="displayBlock" >
                                                         <div class="align-center" style="width: 100%;">
                                                             <p:graphicImage  value ="../resources/image/hourglass.gif" width="32" height="32"  /><br></br>
-                                                         youn   <p:outputLabel value="Recherche en cours...." styleClass="text-font"/> 
+                                                            <p:outputLabel value="Recherche en cours...." styleClass="text-font"/> 
                                                         </div>
                                                     </h:panelGroup>
                                                 </p:blockUI>
@@ -137,6 +137,46 @@
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_product}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.product.label}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('layout')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_layout}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.layout.name}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('katalogart')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_katalogart}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.katalogart.name}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('prozess')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_prozess}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prozess.name}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('ausgabe')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_ausgabe}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ausgabe.name}"/>
+                                    </p:column>
+
+                                    
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('umfang')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_umfang}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.umfang}"/>
                                     </p:column>
 
 
@@ -470,7 +510,7 @@
                                         </f:facet>
                                         <h:outputText value="#{item.summTotal}"/>
                                     </p:column>
-                                   
+
                                     <p:column styleClass="align-center" >
                                         <f:facet name="header">
                                             <h:outputText value="validate"/>

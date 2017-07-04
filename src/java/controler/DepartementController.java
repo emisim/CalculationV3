@@ -53,8 +53,24 @@ public class DepartementController implements Serializable {
         }
     }
     
+    public void deleteDepartementWithCriteria(Departement departement){
+        ejbFacade.deleteDepartementWithCriteria(departement);
+    }
+    
+    public void deleteCriteriaItem(DepartementCriteriaItem criteriaItem){
+        departementCriteriaItemFacade.remove(criteriaItem);
+    }
+    
+    public void deleteCriteriaWithCriteriaItem(DepartementCriteria criteria){
+        departementCriteriaFacade.deleteCriteriaWithCriteriaItem(criteria);
+    }
+    
     public boolean renderCriteriaItem(){
         return renderCriteriaItem;
+    }
+    
+    public boolean renderCriteria(){
+        return renderCriteria;
     }
     
     public void prepareEditCriteria(DepartementCriteria criteria){

@@ -24,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.DemandCategoryCalculationFacade;
 
 @Named("demandCategoryController")
 @SessionScoped
@@ -58,6 +59,24 @@ public class DemandCategoryController implements Serializable {
         index = sItem.getId().intValue();
 
         sotimentItems.remove(sItem);
+    }
+    
+    public void calculAnzahlBestandArtikel(){
+        DemandCategoryCalculationFacade.calculateAnzahlBestandArtikel(selected);
+    }
+    
+    public void calculAnzahlGenerierungUpdateSeitenn(){
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
+    }
+    
+    public void calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn(){
+        DemandCategoryCalculationFacade.calculateAnzahlSonderSeiten(selected);
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
+        
+    }
+    
+    public void calculAnzahlBestandProdukt(){
+        DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
 
     public boolean renderAttribute(String attribute) {

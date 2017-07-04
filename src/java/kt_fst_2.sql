@@ -1,13 +1,12 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 04 Juillet 2017 à 15:51
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+-- Généré le :  Mar 04 Juillet 2017 à 20:48
+-- Version du serveur :  5.7.14
+-- Version de PHP :  7.0.10
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -58,6 +57,18 @@ CREATE TABLE `auflageseitencovermatrix` (
   `COVER_ID` varchar(255) DEFAULT NULL,
   `SEITEN_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ausgabe`
+--
+
+CREATE TABLE `ausgabe` (
+  `ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `VALUEE` decimal(38,0) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -191,42 +202,37 @@ CREATE TABLE `demandcategory` (
   `DATEDEMANDCATEGORY` date DEFAULT NULL,
   `DRUCK` tinyint(1) DEFAULT '0',
   `LIEFERTERMIN` date DEFAULT NULL,
+  `NBRTOTALVALIDATION` int(11) DEFAULT NULL,
   `PERCENTSEITENFAKTOR` int(11) DEFAULT NULL,
   `SEITENANZAHL` int(11) DEFAULT NULL,
-  `SUMMDEPARTMENT` decimal(38,0) DEFAULT NULL,
   `SUMMDRUCK` decimal(38,0) DEFAULT NULL,
   `SUMMTOTAL` decimal(38,0) DEFAULT NULL,
   `TEILNEHMERZAHL` int(11) DEFAULT NULL,
+  `UMFANG` int(11) DEFAULT NULL,
   `UMSCHLAG` tinyint(1) DEFAULT '0',
-  `NBRTOTALVALIDATION` int(11) NOT NULL,
   `SCHLUESSEL_ID` bigint(20) DEFAULT NULL,
   `ARTDERWEITERVERARBEITUNG_ID` bigint(20) DEFAULT NULL,
   `AUFLAGE_ID` int(11) DEFAULT NULL,
+  `AUSGABE_ID` bigint(20) DEFAULT NULL,
   `BINDUNG_ID` varchar(255) DEFAULT NULL,
   `CATEGORY_ID` bigint(20) DEFAULT NULL,
   `CORRECTIONSCHLUESSEL_ID` bigint(20) DEFAULT NULL,
   `COVER_ID` varchar(255) DEFAULT NULL,
   `FARBIGKEIT_ID` varchar(255) DEFAULT NULL,
   `FORMATAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
+  `KATALOGART_ID` bigint(20) DEFAULT NULL,
   `KONZEPTBEARBEITUNGFAKTOR_ID` bigint(20) DEFAULT NULL,
+  `LAYOUT_ID` bigint(20) DEFAULT NULL,
   `MITGLIEDERKORREKTURFAKTOR_ID` bigint(20) DEFAULT NULL,
   `PAPIERMATERIALAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `PARTICIPANTFAKTOR_ID` bigint(20) DEFAULT NULL,
   `PRODUCT_ID` bigint(20) DEFAULT NULL,
+  `PROZESS_ID` bigint(20) DEFAULT NULL,
   `UMSCHLAGFARBIGKEIT_ID` bigint(20) DEFAULT NULL,
   `UMSCHLAGPAPIERAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `VEREDLUNG_ID` varchar(255) DEFAULT NULL,
   `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `demandcategory`
---
-
-INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DRUCK`, `LIEFERTERMIN`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDEPARTMENT`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMSCHLAG`, `NBRTOTALVALIDATION`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
-(1, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(2, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, NULL, '0', '0', 16, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -475,6 +481,18 @@ CREATE TABLE `formatauswaehlen` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `katalogart`
+--
+
+CREATE TABLE `katalogart` (
+  `ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `VALUEE` decimal(38,0) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `konzeptbearbeitungfaktor`
 --
 
@@ -483,6 +501,18 @@ CREATE TABLE `konzeptbearbeitungfaktor` (
   `EXPRESSION` tinyint(1) DEFAULT '0',
   `WERT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `layout`
+--
+
+CREATE TABLE `layout` (
+  `ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `VALUEE` decimal(38,0) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -558,6 +588,18 @@ INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `prozess`
+--
+
+CREATE TABLE `prozess` (
+  `ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `VALUEE` decimal(38,0) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `schluessel`
 --
 
@@ -622,6 +664,24 @@ CREATE TABLE `seiten` (
   `ID` bigint(20) NOT NULL,
   `NBREPAGE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sequence`
+--
+
+CREATE TABLE `sequence` (
+  `SEQ_NAME` varchar(50) NOT NULL,
+  `SEQ_COUNT` decimal(38,0) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sequence`
+--
+
+INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
+('SEQ_GEN', '0');
 
 -- --------------------------------------------------------
 
@@ -780,6 +840,12 @@ ALTER TABLE `auflageseitencovermatrix`
   ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` (`AUFLAGE_ID`);
 
 --
+-- Index pour la table `ausgabe`
+--
+ALTER TABLE `ausgabe`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Index pour la table `bindung`
 --
 ALTER TABLE `bindung`
@@ -801,7 +867,29 @@ ALTER TABLE `configuration`
 -- Index pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_PROZESS_ID` (`PROZESS_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_SCHLUESSEL_ID` (`SCHLUESSEL_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` (`CORRECTIONSCHLUESSEL_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` (`ARTDERWEITERVERARBEITUNG_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_AUFLAGE_ID` (`AUFLAGE_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_PRODUCT_ID` (`PRODUCT_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_CATEGORY_ID` (`CATEGORY_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` (`UMSCHLAGPAPIERAUSWAEHLEN_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_BINDUNG_ID` (`BINDUNG_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` (`KONZEPTBEARBEITUNGFAKTOR_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` (`PAPIERMATERIALAUSWAEHLEN_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_VEREDLUNG_ID` (`VEREDLUNG_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_COVER_ID` (`COVER_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` (`UMSCHLAGFARBIGKEIT_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` (`PARTICIPANTFAKTOR_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_LAYOUT_ID` (`LAYOUT_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` (`WECHSELFASSUNGVARIANTFAKTOR_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_AUSGABE_ID` (`AUSGABE_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_FARBIGKEIT_ID` (`FARBIGKEIT_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_MITGLIEDERKORREKTURFAKTOR_ID` (`MITGLIEDERKORREKTURFAKTOR_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_KATALOGART_ID` (`KATALOGART_ID`);
 
 --
 -- Index pour la table `demandcategorycalculation`
@@ -856,9 +944,27 @@ ALTER TABLE `departementcriteriaitem`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `katalogart`
+--
+ALTER TABLE `katalogart`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `layout`
+--
+ALTER TABLE `layout`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Index pour la table `papiermaterialauswaehlen`
 --
 ALTER TABLE `papiermaterialauswaehlen`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `prozess`
+--
+ALTER TABLE `prozess`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -872,6 +978,12 @@ ALTER TABLE `schluessel`
 --
 ALTER TABLE `schluesseltype`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `sequence`
+--
+ALTER TABLE `sequence`
+  ADD PRIMARY KEY (`SEQ_NAME`);
 
 --
 -- Index pour la table `sortiment`
@@ -899,7 +1011,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
@@ -959,7 +1071,6 @@ ALTER TABLE `sortiment`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
   ADD CONSTRAINT `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`);
-SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
