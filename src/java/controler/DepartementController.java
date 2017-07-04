@@ -1,11 +1,15 @@
 package controler;
 
 import bean.Departement;
+import bean.DepartementCriteria;
+import bean.DepartementCriteriaItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.DepartementFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,13 +29,127 @@ public class DepartementController implements Serializable {
 
     @EJB
     private service.DepartementFacade ejbFacade;
+    @EJB
+    private service.DepartementCriteriaFacade departementCriteriaFacade;
+    @EJB
+    private service.DepartementCriteriaItemFacade departementCriteriaItemFacade;
     private List<Departement> items = null;
+    private List<DepartementCriteria> departementCriterias;
+    private List<DepartementCriteriaItem> departementCriteriaItems;
     private Departement selected;
+    private DepartementCriteria departementCriteria;
+    private DepartementCriteriaItem departementCriteriaItem;
 
     public DepartementController() {
     }
+    
+    public boolean checkUser(){
+        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public void prepareEditCriteria(DepartementCriteria criteria){
+        departementCriteria = criteria;
+    }
+    
+    public void prepareEdit(Departement dep){
+        selected = dep;
+    }
+    
+    public void prepareEditCriteriaItem(DepartementCriteriaItem criteriaItem){
+        departementCriteriaItem = criteriaItem;
+    }
+    
+    public List<Departement> findDepartementByUser(){
+        items = ejbFacade.findDepartementByUser();
+        return items;
+    }
+    
+    public void updateDepartementCriteria(){
+        departementCriteriaFacade.edit(departementCriteria);
+    }
+    
+    public void updateDepartementCriteriaItem(){
+        departementCriteriaItemFacade.edit(departementCriteriaItem);
+    }
+    
+    public void prepareDepartementCriteria(DepartementCriteria criteria){
+        departementCriteria = criteria;
+    }
+    
+    public void findCriteriaByDepartement(Departement departement){
+        departementCriterias = departementCriteriaFacade.findByDepartement(departement);
+        selected = departement;
+    }
+    
+    public void createDepartementCriteria(){
+        departementCriteria.setDepartement(selected);
+        departementCriteriaFacade.create(departementCriteria);
+        departementCriteria = new DepartementCriteria();
+    }
+    
+    public void createDepartementCriterieItem(){
+        departementCriteriaItem.setDepartementCriteria(departementCriteria);
+        departementCriteriaItemFacade.create(departementCriteriaItem);
+        departementCriteriaItem = new DepartementCriteriaItem();
+    }
+    
+    public void findCriteriaItemByCriteria(DepartementCriteria criteria){
+        departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(criteria);
+        departementCriteria = criteria;
+    }
 
+    public DepartementCriteriaItem getDepartementCriteriaItem() {
+        if(departementCriteriaItem == null){
+            departementCriteriaItem = new DepartementCriteriaItem();
+        }
+        return departementCriteriaItem;
+    }
+
+    public void setDepartementCriteriaItem(DepartementCriteriaItem departementCriteriaItem) {
+        this.departementCriteriaItem = departementCriteriaItem;
+    }
+
+    public DepartementCriteria getDepartementCriteria() {
+        if(departementCriteria == null){
+            departementCriteria = new DepartementCriteria();
+        }
+        return departementCriteria;
+    }
+
+    public void setDepartementCriteria(DepartementCriteria departementCriteria) {
+        this.departementCriteria = departementCriteria;
+    }
+
+    public List<DepartementCriteriaItem> getDepartementCriteriaItems() {
+        if(departementCriteriaItems == null){
+            departementCriteriaItems = new ArrayList<>();
+        }
+        return departementCriteriaItems;
+    }
+
+    public void setDepartementCriteriaItems(List<DepartementCriteriaItem> departementCriteriaItems) {
+        this.departementCriteriaItems = departementCriteriaItems;
+    }
+
+    public List<DepartementCriteria> getDepartementCriterias() {
+        if(departementCriterias == null){
+            departementCriterias = new ArrayList<>();
+        }
+        return departementCriterias;
+    }
+
+    public void setDepartementCriterias(List<DepartementCriteria> departementCriterias) {
+        this.departementCriterias = departementCriterias;
+    }
+    
     public Departement getSelected() {
+        if(selected == null){
+            selected = new Departement();
+        }
         return selected;
     }
 
@@ -54,6 +172,8 @@ public class DepartementController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DepartementCreated"));
