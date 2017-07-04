@@ -65,7 +65,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setUmschlagFarbigkeit(null);
         }
 
-        //demandCategory.setId(generate("DemandCategory", "id"));
+        demandCategory.setId(generate("DemandCategory", "id"));
         if (!simulation) {
             edit(demandCategory);
         }
