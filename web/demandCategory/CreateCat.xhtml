@@ -34,7 +34,7 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-                            <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" >
+                            <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
                                 <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                 <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
                                                var="sortimentItem"
@@ -269,13 +269,11 @@
                         </h:panelGrid>
                         <div class="align-center ui-widget-header">
                             <p:commandButton actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update=":growl" />
-                            <p:commandButton value="Deatil" oncomplete="PF('DemandCategoryDetailDialog').show()"/>   
                             <p:commandButton value="#{bundle.Cancel}" />   
                         </div>
                     </h:panelGroup>
                 </h:form>
             </p:panel>
-            <ui:include src="Detail.xhtml"/>
             <ui:include src="Mix.xhtml"/>
         </ui:define>
     </ui:composition>

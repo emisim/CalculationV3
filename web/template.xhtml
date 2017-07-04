@@ -28,28 +28,29 @@
                             <div class="ui-grid-col-10" >
                                 <br/>
                                 <p:menubar>
-                                    <p:submenu id="artDerWeiterverarbeitung" label="ArtDerWeiterverarbeitung" icon="fa fa-book" >
-                                        <p:menuitem value="List" outcome="/artDerWeiterverarbeitung/List.xhtml"  />
+                                    <p:submenu id="artDerWeiterverarbeitung" label="Parametrage" icon="fa fa-book" >
+                                        <p:menuitem value="ArtDerWeiterverarbeitung" outcome="/artDerWeiterverarbeitung/List.xhtml"  />
+                                        <p:menuitem value="Auflage" outcome="/auflage/List.xhtml"  />
+                                        <p:menuitem value="Bindung" outcome="/bindung/List.xhtml"  />
+                                        <p:menuitem value="Category" outcome="/category/List.xhtml"  />
+                                        <p:menuitem value="CorrectionSchluessel" outcome="/correctionSchluessel/List.xhtml"  />
+                                        <p:menuitem value="Cover" outcome="/cover/List.xhtml"  />
+                                        <p:menuitem value="Farbigkeit" outcome="/farbigkeit/List.xhtml"  />
+                                        <p:menuitem value="FormatAuswaehlen" outcome="/formatAuswaehlen/List.xhtml"  />
+                                        <p:menuitem value="Product" outcome="/product/List.xhtml"  />
+                                        <p:menuitem value="Seiten" outcome="/seiten/List.xhtml"  />
+                                        <p:menuitem value="Sortiment" outcome="/sortiment/List.xhtml"  />
+
                                     </p:submenu>
-                                    <p:submenu id="auflage" label="Auflage" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/auflage/List.xhtml"  />
-                                    </p:submenu>
-                                    <p:submenu id="bindung" label="Bindung" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/bindung/List.xhtml"  />
-                                    </p:submenu>
-                                    <p:submenu id="category" label="Category" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/category/List.xhtml"  />
-                                    </p:submenu>
+
+
                                     <p:submenu id="configuration" label="Configuration" icon="fa fa-database" >
                                         <p:menuitem value="List" outcome="/configuration/List.xhtml"  />
                                         <p:menuitem value="ConfigurationItem" outcome="/configurationItem/List.xhtml"  />
+
                                     </p:submenu>
-                                    <p:submenu id="correctionSchluessel" label="CorrectionSchluessel" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/correctionSchluessel/List.xhtml"  />
-                                    </p:submenu>
-                                    <p:submenu id="cover" label="Cover" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/cover/List.xhtml"  />
-                                    </p:submenu>
+
+
 
                                     <p:submenu id="demandCategory" label="DemandCategory" icon="fa fa-database" >
                                         <p:menuitem value="Create" outcome="/demandCategory/CreateCat.xhtml"  />
@@ -65,13 +66,8 @@
                                         <p:menuitem value="Criteria Item" outcome="/departementCriteriaItem/List.xhtml"/>
                                     </p:submenu>
 
-                                    <p:submenu id="farbigkeit" label="Farbigkeit" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/farbigkeit/List.xhtml"  />
-                                    </p:submenu>
 
-                                    <p:submenu id="formatAuswaehlen" label="FormatAuswaehlen" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/formatAuswaehlen/List.xhtml"  />
-                                    </p:submenu>
+
 
                                     <p:submenu id="faktor" label="Faktor" icon="fa fa-database" >
                                         <p:menuitem value="Konzeptbearbeitung" outcome="/konzeptbearbeitungFaktor/List.xhtml"  />
@@ -81,22 +77,13 @@
                                     </p:submenu>
 
 
-                                    <p:submenu id="product" label="Product" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/product/List.xhtml"  />
-                                    </p:submenu>
+
 
                                     <p:submenu id="schluessel" label="Schluessel" icon="fa fa-database" >
                                         <p:menuitem value="List" outcome="/schluessel/List.xhtml"  />
                                         <p:menuitem value="Type" outcome="/schluesselType/List.xhtml"  />
                                     </p:submenu>
 
-                                    <p:submenu id="seiten" label="Seiten" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/seiten/List.xhtml"  />
-                                    </p:submenu>
-
-                                    <p:submenu id="sortiment" label="Sortiment" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/sortiment/List.xhtml"  />
-                                    </p:submenu>
 
                                     <p:submenu id="umschlag" label="Umschlag" icon="fa fa-database" >
                                         <p:menuitem value="Farbigkeit" outcome="/umschlagFarbigkeit/List.xhtml"  />
