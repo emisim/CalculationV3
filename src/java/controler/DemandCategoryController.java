@@ -28,7 +28,7 @@ import javax.faces.convert.FacesConverter;
 @Named("demandCategoryController")
 @SessionScoped
 public class DemandCategoryController implements Serializable {
-    
+
     @EJB
     private service.DemandCategoryFacade ejbFacade;
     @EJB
@@ -37,6 +37,7 @@ public class DemandCategoryController implements Serializable {
     private service.DemandCategoryValidationItemFacade demandCategoryValidationItemFacade;
     @EJB
     private service.DemandCategoryValidationFacade demandCategoryValidationFacade;
+    @EJB
     private service.SortimentFacade sortimentFacade;
     @EJB
     private service.SotimentItemFacade sortimentItemFacade;
@@ -51,97 +52,95 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
-    
-    public void removeSortimentItem(SotimentItem sItem){
-        System.out.println("hahowa element a supprimer : "+sItem.getWert());
+
+    public void removeSortimentItem(SotimentItem sItem) {
+        System.out.println("hahowa element a supprimer : " + sItem.getWert());
         index = sItem.getId().intValue();
-        
+
         sotimentItems.remove(sItem);
     }
-    
+
     public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
     }
-    public List<Sortiment> findAllSortiment(){
+
+    public List<Sortiment> findAllSortiment() {
         return sortimentFacade.findAll();
     }
-    
-    public void checkDruck(){
-        System.out.println("hahowa druck : "+selected.isDruck());
-    }
-    
-    public void addSortimentItem(){
-        
-        System.out.println("hahowa wert : "+sortimentItem.getWert());
-        
-        sotimentItems.add(sortimentItemFacade.clone(sortimentItem,sotimentItems));
+
+    public void checkDruck() {
+        System.out.println("hahowa druck : " + selected.isDruck());
     }
 
-    
+    public void addSortimentItem() {
 
-    
+        System.out.println("hahowa wert : " + sortimentItem.getWert());
+
+        sotimentItems.add(sortimentItemFacade.clone(sortimentItem, sotimentItems));
+    }
+
     public DemandCategory getSelectedForSearch() {
         if (selectedForSearch == null) {
             selectedForSearch = new DemandCategory();
         }
         return selectedForSearch;
     }
-    
+
     public void setSelectedForSearch(DemandCategory selectedForSearch) {
         this.selectedForSearch = selectedForSearch;
     }
-    
+
     public DemandCategory getSelected() {
         if (selected == null) {
             selected = new DemandCategory();
         }
         return selected;
     }
-    
+
     public void setSelected(DemandCategory selected) {
         this.selected = selected;
     }
-    
+
     protected void setEmbeddableKeys() {
     }
-    
+
     protected void initializeEmbeddableKey() {
     }
-    
+
     private DemandCategoryFacade getFacade() {
         return ejbFacade;
     }
-    
+
     public DemandCategory prepareCreate() {
         selected = new DemandCategory();
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public void search() {
         items = ejbFacade.search(selectedForSearch);
     }
-    
+
     public int checkDemandValidation(DemandCategory demandCategory) {
         return demandCategoryValidationItemFacade.checkUserValidation(demandCategory);
     }
-    
+
     public void validate(DemandCategory demandCategory) {
         demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
     }
-    
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryUpdated"));
     }
-    
+
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("DemandCategoryDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -149,14 +148,14 @@ public class DemandCategoryController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public List<DemandCategory> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-    
+
     public List<DepartementDetail> departementeDetails() {
         List<DepartementDetail> departementCriterias = new ArrayList<>();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
@@ -165,11 +164,11 @@ public class DemandCategoryController implements Serializable {
         }
         return departementCriterias;
     }
-    
+
     public List allDepartements() {
         return departementCriteriaFacade.allDetailDepartements();
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -199,22 +198,22 @@ public class DemandCategoryController implements Serializable {
             }
         }
     }
-    
+
     public DemandCategory getDemandCategory(java.lang.Long id) {
         return getFacade().find(id);
     }
-    
+
     public List<DemandCategory> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-    
+
     public List<DemandCategory> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     @FacesConverter(forClass = DemandCategory.class)
     public static class DemandCategoryControllerConverter implements Converter {
-        
+
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -224,19 +223,19 @@ public class DemandCategoryController implements Serializable {
                     getValue(facesContext.getELContext(), null, "demandCategoryController");
             return controller.getDemandCategory(getKey(value));
         }
-        
+
         java.lang.Long getKey(String value) {
             java.lang.Long key;
             key = Long.valueOf(value);
             return key;
         }
-        
+
         String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-        
+
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -250,32 +249,30 @@ public class DemandCategoryController implements Serializable {
                 return null;
             }
         }
-        
+
     }
-    
+
     public Sortiment getSortiment() {
         return sortiment;
     }
-    
+
     public void setSortiment(Sortiment sortiment) {
         this.sortiment = sortiment;
     }
-    
+
     public List<SotimentItem> getSotimentItems() {
-        if(sotimentItems == null){
+        if (sotimentItems == null) {
             sotimentItems = new ArrayList<>();
         }
         return sotimentItems;
     }
-    
+
     public void setSotimentItems(List<SotimentItem> sotimentItems) {
         this.sotimentItems = sotimentItems;
     }
-    
-
 
     public SotimentItem getSortimentItem() {
-        if(sortimentItem == null){
+        if (sortimentItem == null) {
             sortimentItem = new SotimentItem();
         }
         return sortimentItem;
