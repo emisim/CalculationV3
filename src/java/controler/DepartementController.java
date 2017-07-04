@@ -39,6 +39,8 @@ public class DepartementController implements Serializable {
     private Departement selected;
     private DepartementCriteria departementCriteria;
     private DepartementCriteriaItem departementCriteriaItem;
+    private boolean renderCriteriaItem = false;
+    private boolean renderCriteria = false;
 
     public DepartementController() {
     }
@@ -51,6 +53,10 @@ public class DepartementController implements Serializable {
         }
     }
     
+    public boolean renderCriteriaItem(){
+        return renderCriteriaItem;
+    }
+    
     public void prepareEditCriteria(DepartementCriteria criteria){
         departementCriteria = criteria;
     }
@@ -60,6 +66,10 @@ public class DepartementController implements Serializable {
     }
     
     public void prepareEditCriteriaItem(DepartementCriteriaItem criteriaItem){
+        departementCriteriaItem = criteriaItem;
+    }
+    
+    public void prepareViewCriteriaItem(DepartementCriteriaItem criteriaItem){
         departementCriteriaItem = criteriaItem;
     }
     
@@ -83,6 +93,8 @@ public class DepartementController implements Serializable {
     public void findCriteriaByDepartement(Departement departement){
         departementCriterias = departementCriteriaFacade.findByDepartement(departement);
         selected = departement;
+        renderCriteriaItem = false;
+        renderCriteria = true;
     }
     
     public void createDepartementCriteria(){
@@ -100,6 +112,7 @@ public class DepartementController implements Serializable {
     public void findCriteriaItemByCriteria(DepartementCriteria criteria){
         departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(criteria);
         departementCriteria = criteria;
+        renderCriteriaItem = true;
     }
 
     public DepartementCriteriaItem getDepartementCriteriaItem() {

@@ -65,6 +65,13 @@ public class DemandCategoryController implements Serializable {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
     }
+    
+    public boolean renderAttributeForList(String attribute) {
+        System.out.println("Attribute :::::::: " + attribute);
+        boolean isSet = ejbFacade.renderAttributeForList(attribute);
+        System.out.println("Is Set :::::::::::;;; " + isSet);
+        return isSet;
+    }
 
     public List<Sortiment> findAllSortiment() {
         return sortimentFacade.findAll();

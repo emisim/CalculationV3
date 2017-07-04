@@ -40,9 +40,9 @@
                                         <f:facet name="header">
                                             <h:outputText value="Detail"/>
                                         </f:facet>
-                                        <p:commandButton value="Criteria" actionListener="#{departementController.findCriteriaByDepartement(item)}" update=":DepartementCriteriaListForm"/>
-                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{departementController.prepareEdit(item)}" update=":DepartementEditForm" oncomplete="PF('DepartementEditDialog').show()" disabled="#{empty departementController.selected}" rendered="#{departementController.checkUser()}"/>
-                                   
+                                        <p:commandButton value="Criteria" icon="fa fa-bars" actionListener="#{departementController.findCriteriaByDepartement(item)}" update=":DepartementCriteriaListForm, :DepartementCriteriaItemListForm"/>
+                                        <p:commandButton id="editButton"  icon="ui-icon-pencil"  actionListener="#{departementController.prepareEdit(item)}" update=":DepartementEditForm" oncomplete="PF('DepartementEditDialog').show()" disabled="#{empty departementController.selected}" rendered="#{departementController.checkUser()}"/>
+
                                     </p:column>
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementController.prepareCreate}" update=":DepartementCreateForm" oncomplete="PF('DepartementCreateDialog').show()" rendered="#{departementController.checkUser()}"/>
@@ -78,12 +78,12 @@
                                             <h:outputText value="Detail"/>
                                         </f:facet>
                                         <p:commandButton value="Criteria Items" actionListener="#{departementController.findCriteriaItemByCriteria(itemm)}" update=":DepartementCriteriaItemListForm" />
-                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" actionListener="#{departementController.prepareEditCriteria(itemm)}" value="#{bundle.Edit}" update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementController.departementCriteria}" rendered="#{departementController.checkUser()}"/>
-                                   
+                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" actionListener="#{departementController.prepareEditCriteria(itemm)}"  update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementController.departementCriteria}" rendered="#{departementController.checkUser()}"/>
+
                                     </p:column>
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}"  update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()" rendered="#{departementController.checkUser()}"/>
-                                     </f:facet>
+                                    </f:facet>
                                 </p:dataTable>
                             </p:panel>
                         </h:form>
@@ -91,7 +91,7 @@
                     </div>
                     <div Class="ui-grid-col-4">
                         <h:form id="DepartementCriteriaItemListForm">
-                            <p:panel header="Criteria Item" >
+                            <p:panel header="Criteria Item" rendered="#{departementController.renderCriteriaItem()}">
                                 <p:dataTable id="datalist" value="#{departementController.departementCriteriaItems}" var="item"
                                              selectionMode="single" selection="#{departementController.departementCriteriaItem}"
                                              paginator="true"
@@ -127,7 +127,8 @@
                                         <f:facet name="header">
                                             <h:outputText value="Detail"/>
                                         </f:facet>
-                                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{departementController.prepareEditCriteriaItem(item)}"  update=":DepartementCriteriaItemEditForm" oncomplete="PF('DepartementCriteriaItemEditDialog').show()" disabled="#{empty departementController.departementCriteriaItem}" rendered="#{departementController.checkUser()}"/>
+                                        <p:commandButton id="editButton"   icon="ui-icon-pencil"  actionListener="#{departementController.prepareEditCriteriaItem(item)}"  update=":DepartementCriteriaItemEditForm" oncomplete="PF('DepartementCriteriaItemEditDialog').show()" disabled="#{empty departementController.departementCriteriaItem}" rendered="#{departementController.checkUser()}"/>
+                                        <p:commandButton id="viewButton" icon="ui-icon-search"  update=":DepartementCriteriaItemViewForm" actionListener="#{departementController.prepareViewCriteriaItem(item)}" oncomplete="PF('DepartementCriteriaItemViewDialog').show()"/>
                                     </p:column>
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" update=":DepartementCriteriaItemCreateForm" oncomplete="PF('DepartementCriteriaItemCreateDialog').show()" rendered="#{departementController.checkUser()}"/>
@@ -146,6 +147,7 @@
             <ui:include src="Edit.xhtml"/>
             <ui:include src="EditCriteria.xhtml"/>
             <ui:include src="EditCriteriaItem.xhtml"/>
+            <ui:include src="ViewCriteriaItem.xhtml"/>
 
         </ui:define>
     </ui:composition>

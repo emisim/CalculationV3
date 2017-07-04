@@ -18,6 +18,7 @@ public class AccessDepartement {
     private static Map<String, Boolean> datenManagementMap = new HashMap<>();
     private static Map<String, Boolean> databasePublishingMap = new HashMap<>();
     private static Map<String, Boolean> projectManagementMap = new HashMap<>();
+    private static Map<String, Boolean> adminMap = new HashMap<>();
 
     public static Map<String, Boolean> getContentManagementMap() {
         
@@ -54,12 +55,26 @@ public class AccessDepartement {
     public static void setProjectManagementMap(Map<String, Boolean> ProjectManagementMap) {
         AccessDepartement.projectManagementMap = ProjectManagementMap;
     }
+
+    public static Map<String, Boolean> getAdminMap() {
+        if(adminMap == null){
+            adminMap = new HashMap<>();
+        }
+        return adminMap;
+    }
+
+    public static void setAdminMap(Map<String, Boolean> adminMap) {
+        AccessDepartement.adminMap = adminMap;
+    }
+    
+    
     
     public static void populateMaps(){
         populateContentManagementMap();
         populateDatenManagementMap();
         populateDatabasePublishingMap();
         populateProjectManagementMap();
+        populateAdminMap();
     }
 
     private static void populateContentManagementMap() {
@@ -111,6 +126,16 @@ public class AccessDepartement {
         projectManagementMap.put("product", true);
         projectManagementMap.put("sortiment", true);
         
+    
+    }
+
+    private static void populateAdminMap() {
+        
+        adminMap.put("category", true);
+        adminMap.put("product", true);
+        adminMap.put("anzahlGesamtArtikel", true);
+        adminMap.put("anzahlKapitetel", true);
+        adminMap.put("anzahlGesamtProdukt", true);
     
     }
     
