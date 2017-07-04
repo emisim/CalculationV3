@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 04 Juillet 2017 à 20:07
+-- Généré le :  Mar 04 Juillet 2017 à 20:47
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -339,6 +339,16 @@ CREATE TABLE `departementcriteriaitem` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `departementcriteriaitem`
+--
+
+INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(1, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '8*std_stz', 1),
+(2, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
+(3, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
+(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
 
 -- --------------------------------------------------------
 
@@ -945,12 +955,12 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
@@ -960,7 +970,7 @@ ALTER TABLE `demandcategorycalculationitem`
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
@@ -985,7 +995,7 @@ ALTER TABLE `departementcriteria`
 -- AUTO_INCREMENT pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `konzeptbearbeitungfaktor`
 --
