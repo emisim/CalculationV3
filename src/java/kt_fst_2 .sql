@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Juillet 2017 à 20:28
+-- Généré le :  Mar 04 Juillet 2017 à 15:51
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.19
 
@@ -224,9 +224,9 @@ CREATE TABLE `demandcategory` (
 --
 
 INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DRUCK`, `LIEFERTERMIN`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDEPARTMENT`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMSCHLAG`, `NBRTOTALVALIDATION`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
-(1, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
-(2, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, NULL, '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL),
+(2, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, '0', '0', '0', 16, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-03', 0, '2017-07-03', 10, 0, NULL, '0', '0', 16, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,8 +336,18 @@ INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `DEMANDCATEGO
 --
 
 CREATE TABLE `demandcategoryvalidation` (
-  `ID` int(11) NOT NULL
+  `ID` int(11) NOT NULL,
+  `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategoryvalidation`
+--
+
+INSERT INTO `demandcategoryvalidation` (`ID`, `DEMANDCATEGORY_ID`) VALUES
+(1, 1),
+(2, 10),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -352,6 +362,17 @@ CREATE TABLE `demandcategoryvalidationitem` (
   `DEMANDCATEGORYVALIDATION_ID` int(11) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategoryvalidationitem`
+--
+
+INSERT INTO `demandcategoryvalidationitem` (`ID`, `DEPARTEMENT`, `SYSDATE`, `DEMANDCATEGORYVALIDATION_ID`, `USER_LOGIN`) VALUES
+(1, 'contentManagement', '2017-07-04', 1, 'ana'),
+(2, 'contentManagement', '2017-07-04', 2, 'ana'),
+(3, 'contentManagement', '2017-07-04', 2, 'younes'),
+(4, 'contentManagement', '2017-07-04', 3, 'ana'),
+(5, 'contentManagement', '2017-07-04', 3, 'younes');
 
 -- --------------------------------------------------------
 
@@ -805,7 +826,8 @@ ALTER TABLE `demandcategorydepartementcalculation`
 -- Index pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`);
 
 --
 -- Index pour la table `demandcategoryvalidationitem`
@@ -897,12 +919,12 @@ ALTER TABLE `demandcategorydepartementcalculation`
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidationitem`
 --
 ALTER TABLE `demandcategoryvalidationitem`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `departementcriteria`
 --

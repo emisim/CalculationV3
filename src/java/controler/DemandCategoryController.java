@@ -34,6 +34,10 @@ public class DemandCategoryController implements Serializable {
     @EJB
     private service.DepartementCriteriaFacade departementCriteriaFacade;
     @EJB
+    private service.DemandCategoryValidationItemFacade demandCategoryValidationItemFacade;
+    @EJB
+    private service.DemandCategoryValidationFacade demandCategoryValidationFacade;
+    @EJB
     private service.SortimentFacade sortimentFacade;
     @EJB
     private service.SotimentItemFacade sortimentItemFacade;
@@ -48,35 +52,16 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
-    
-    public void removeSortimentItem(SotimentItem sItem){
-        System.out.println("hahowa element a supprimer : "+sItem.getWert());
+
+    public void removeSortimentItem(SotimentItem sItem) {
+        System.out.println("hahowa element a supprimer : " + sItem.getWert());
         index = sItem.getId().intValue();
-        
+
         sotimentItems.remove(sItem);
     }
-    
-    public List<Sortiment> findAllSortiment(){
-        return sortimentFacade.findAll();
-    }
-    
-    public void checkDruck(){
-        System.out.println("hahowa druck : "+selected.isDruck());
-    }
-    
-    public void addSortimentItem(){
-        
-        System.out.println("hahowa wert : "+sortimentItem.getWert());
-        
-        sotimentItems.add(sortimentItemFacade.clone(sortimentItem,sotimentItems));
-    }
-
-    
 
     public boolean renderAttribute(String attribute) {
-        System.out.println("Attribute :::::::: " + attribute);
         boolean isSet = ejbFacade.renderAttribute(attribute);
-        System.out.println("Is Set :::::::::::;;; " + isSet);
         return isSet;
     }
     
@@ -87,17 +72,21 @@ public class DemandCategoryController implements Serializable {
         return isSet;
     }
 
-    public SotimentItem getSortimentItem() {
-        if(sortimentItem == null){
-            sortimentItem = new SotimentItem();
-        }
-        return sortimentItem;
+    public List<Sortiment> findAllSortiment() {
+        return sortimentFacade.findAll();
     }
 
-    public void setSortimentItem(SotimentItem sortimentItem) {
-        this.sortimentItem = sortimentItem;
+    public void checkDruck() {
+        System.out.println("hahowa druck : " + selected.isDruck());
     }
-    
+
+    public void addSortimentItem() {
+
+        System.out.println("hahowa wert : " + sortimentItem.getWert());
+
+        sotimentItems.add(sortimentItemFacade.clone(sortimentItem, sotimentItems));
+    }
+
     public DemandCategory getSelectedForSearch() {
         if (selectedForSearch == null) {
             selectedForSearch = new DemandCategory();
@@ -138,6 +127,14 @@ public class DemandCategoryController implements Serializable {
 
     public void search() {
         items = ejbFacade.search(selectedForSearch);
+    }
+
+    public int checkDemandValidation(DemandCategory demandCategory) {
+        return demandCategoryValidationItemFacade.checkUserValidation(demandCategory);
+    }
+
+    public void validate(DemandCategory demandCategory) {
+        demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
     }
 
     public void create() {
@@ -271,7 +268,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public List<SotimentItem> getSotimentItems() {
-        if(sotimentItems == null){
+        if (sotimentItems == null) {
             sotimentItems = new ArrayList<>();
         }
         return sotimentItems;
@@ -281,4 +278,14 @@ public class DemandCategoryController implements Serializable {
         this.sotimentItems = sotimentItems;
     }
 
+    public SotimentItem getSortimentItem() {
+        if (sortimentItem == null) {
+            sortimentItem = new SotimentItem();
+        }
+        return sortimentItem;
+    }
+
+    public void setSortimentItem(SotimentItem sortimentItem) {
+        this.sortimentItem = sortimentItem;
+    }
 }
