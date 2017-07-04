@@ -89,12 +89,12 @@
                                                 </p:selectOneMenu>
                                             </h:panelGrid>
                                             <div class="align-content ui-widget-header">
-                                                <p:commandButton id="rechercher" value="recherche" icon="fa fa-search" actionListener="#{demandCategoryController.search()}"  update="growl,:DemandCategoryListForm,:DemandCategoryListForm:datalist" />         
+                                                <p:commandButton id="rechercher" value="recherche" icon="ui-icon-search" actionListener="#{demandCategoryController.search()}"  update="growl,:DemandCategoryListForm,:DemandCategoryListForm:datalist" />         
                                                 <p:blockUI block="pageLayout" trigger="rechercher" >
                                                     <h:panelGroup id="displayBlock" >
                                                         <div class="align-center" style="width: 100%;">
                                                             <p:graphicImage  value ="../resources/image/hourglass.gif" width="32" height="32"  /><br></br>
-                                                            <p:outputLabel value="Recherche en cours...." styleClass="text-font"/> 
+                                                         youn   <p:outputLabel value="Recherche en cours...." styleClass="text-font"/> 
                                                         </div>
                                                     </h:panelGroup>
                                                 </p:blockUI>
@@ -463,13 +463,21 @@
                                         <h:outputText value="#{item.summDruck}"/>
                                     </p:column>
 
-
                                     <p:column rendered="#{demandCategoryController.renderAttribute('summTotal')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_summTotal}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.summTotal}"/>
                                     </p:column>
+                                   
+                                    <p:column styleClass="align-center" >
+                                        <f:facet name="header">
+                                            <h:outputText value="validate"/>
+                                        </f:facet>
+                                        <p:commandButton id="valider"   icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
+                                    </p:column>
+
+
                                     <f:facet name="footer">
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selectedForSearch}"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selectedForSearch}"/>

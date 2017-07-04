@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,6 +25,9 @@ public class DemandCategoryValidation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @OneToOne
+    private DemandCategory demandCategory;
     
     @OneToMany(mappedBy = "demandCategoryValidation")
     private List<DemandCategoryValidationItem> demandCategoryValidationItems;
@@ -44,12 +48,17 @@ public class DemandCategoryValidation implements Serializable {
         this.demandCategoryValidationItems = demandCategoryValidationItems;
     }
 
-    @Override
-    public String toString() {
-        return "DemandCategoryValidation{" + "id=" + id + ", demandCategoryValidationItems=" + demandCategoryValidationItems + '}';
+    public DemandCategory getDemandCategory() {
+        return demandCategory;
     }
 
-    
-   
-    
+    public void setDemandCategory(DemandCategory demandCategory) {
+        this.demandCategory = demandCategory;
+    }
+
+    @Override
+    public String toString() {
+        return "DemandCategoryValidation{" + "id=" + id + ", demandCategory=" + demandCategory + ", demandCategoryValidationItems=" + demandCategoryValidationItems + '}';
+    }
+
 }
