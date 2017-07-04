@@ -147,5 +147,45 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
         }
     }
+    
+    public boolean renderAttributeForList(String attribute) {
+        User user = SessionUtil.getConnectedUser();
+        Departement dep = user.getDepartement();
+
+        if (user.getAdmin() == 1) {
+            
+                if (AccessDepartement.getAdminMap().containsKey(attribute)) {
+                    return true;
+                }
+            
+        } else {
+            if (dep.getName().equals("contentManagement")) {
+                if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
+                    return true;
+                }
+            }
+
+            if (dep.getName().equals("datenManagement")) {
+                if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
+                    return true;
+                }
+            }
+
+            if (dep.getName().equals("databasePublishing")) {
+                if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
+                    return true;
+                }
+            }
+
+            if (dep.getName().equals("projectManagement")) {
+                if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
+                    return true;
+                }
+            }
+
+
+        }
+        return false;
+    }
 
 }

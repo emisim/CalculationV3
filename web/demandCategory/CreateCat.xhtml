@@ -145,13 +145,13 @@
                                                itemValue="#{konzeptbearbeitungFaktorItem}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="druck" for="druck" />
-                            <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
+                            <p:outputLabel value="druck" for="druck" rendered="false"/>
+                            <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" rendered="false" >
                                 <p:ajax process="druck" update="afterDruck" listener="#{demandCategoryController.checkDruck()}" />
                             </p:selectBooleanCheckbox>
                         </h:panelGrid>
 
-                            <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
+                        <h:panelGrid id="afterDruck" columns="8" cellpadding="7" rendered="false">
                                 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                             <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" >
