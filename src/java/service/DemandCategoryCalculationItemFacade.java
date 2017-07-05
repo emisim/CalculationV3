@@ -50,7 +50,7 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
             demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory) + ""));
             demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
             if (!simuler) {
-                edit(demandCategoryCalculationItem);
+                create(demandCategoryCalculationItem);
                 System.out.println("hana edite demandCategoryCalculationItem ==> " + demandCategoryCalculationItem);
             }
             res.add(demandCategoryCalculationItem);

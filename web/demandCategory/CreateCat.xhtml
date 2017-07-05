@@ -22,7 +22,7 @@
                                 <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                 <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
                                                var="categoryItem"
-                                               itemValue="#{categoryItem}"/>
+                                               itemValue="#{categoryItem}" itemLabel="#{categoryItem.name}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_product}" for="product" rendered="#{demandCategoryController.renderAttribute('product')}" />
@@ -30,24 +30,23 @@
                                 <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                 <f:selectItems value="#{productController.itemsAvailableSelectOne}"
                                                var="productItem"
-                                               itemValue="#{productItem}"/>
+                                               itemValue="#{productItem}" itemLabel="#{productItem.label}"/>
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                             <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
-                                <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="--Select Sortiment--"/>
                                 <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
                                                var="sortimentItem"
-                                               itemValue="#{sortimentItem}"/>
+                                               itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
                             </p:selectOneMenu>
 
 
-                            <p:outputLabel for="mix" value="Mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                             <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_layout}" for="layout" rendered="#{demandCategoryController.renderAttribute('layout')}" />
                             <p:selectOneMenu id="layout" value="#{demandCategoryController.selected.layout}" rendered="#{demandCategoryController.renderAttribute('layout')}" >
+                                <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                 <f:selectItems value="#{layoutController.itemsAvailableSelectOne}"
                                                var="layoutItem"
                                                itemValue="#{layoutItem}"/>
@@ -56,14 +55,18 @@
 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_katalogart}" for="katalogart" rendered="#{demandCategoryController.renderAttribute('katalogart')}" />
                             <p:selectOneMenu id="katalogart" value="#{demandCategoryController.selected.katalogart}" rendered="#{demandCategoryController.renderAttribute('katalogart')}" >
+                                <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                 <f:selectItems value="#{katalogartController.itemsAvailableSelectOne}"
                                                var="katalogartItem"
-                                               itemValue="#{katalogartItem}"/>
+                                               itemValue="#{katalogartItem}" />
                             </p:selectOneMenu>
 
 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_prozess}" for="prozess" rendered="#{demandCategoryController.renderAttribute('prozess')}" />
+
                             <p:selectOneMenu id="prozess" value="#{demandCategoryController.selected.prozess}" rendered="#{demandCategoryController.renderAttribute('prozess')}" >
+                                <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+
                                 <f:selectItems value="#{prozessController.itemsAvailableSelectOne}"
                                                var="prozessItem"
                                                itemValue="#{prozessItem}"/>
@@ -72,6 +75,8 @@
 
                             <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_ausgabe}" for="ausgabe" rendered="#{demandCategoryController.renderAttribute('ausgabe')}" />
                             <p:selectOneMenu id="ausgabe" value="#{demandCategoryController.selected.ausgabe}" rendered="#{demandCategoryController.renderAttribute('ausgabe')}" >
+                                <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+
                                 <f:selectItems value="#{ausgabeController.itemsAvailableSelectOne}"
                                                var="ausgabeItem"
                                                itemValue="#{ausgabeItem}"/>

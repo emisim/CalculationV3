@@ -53,7 +53,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     public void save(DemandCategory demandCategory, Departement departement, boolean simulation) throws ScriptException {
         prepareSave(demandCategory);
         if (!simulation) {
-            edit(demandCategory);
+            create(demandCategory);
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
         sotimentItemFacade.save(demandCategory, simulation);
