@@ -23,10 +23,9 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{departementCriteriaController.itemsAvailableSelectOne}"
                                            var="departementCriteriaItem"
-                                           itemValue="#{departementCriteriaItem}"/>
+                                           itemValue="#{departementCriteriaItem}" itemLabel="#{departementCriteriaItem.name}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditDepartementCriteriaItemLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{departementCriteriaItemController.selected.id}" title="#{bundle.EditDepartementCriteriaItemTitle_id}" />
+                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{departementCriteriaItemController.update}" value="#{bundle.Save}" update="display,:DepartementCriteriaItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DepartementCriteriaItemEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DepartementCriteriaItemEditDialog.hide()"/>

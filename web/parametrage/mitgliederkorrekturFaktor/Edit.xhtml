@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{mitgliederkorrekturFaktorController.selected != null}">
                         <p:outputLabel value="#{bundle.EditMitgliederkorrekturFaktorLabel_value}" for="value" />
                         <p:inputText id="value" value="#{mitgliederkorrekturFaktorController.selected.value}" title="#{bundle.EditMitgliederkorrekturFaktorTitle_value}" />
-                        <p:outputLabel value="#{bundle.EditMitgliederkorrekturFaktorLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{mitgliederkorrekturFaktorController.selected.id}" title="#{bundle.EditMitgliederkorrekturFaktorTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{mitgliederkorrekturFaktorController.update}" value="#{bundle.Save}" update="display,:parametrageTab:MitgliederkorrekturFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MitgliederkorrekturFaktorEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MitgliederkorrekturFaktorEditDialog.hide()"/>

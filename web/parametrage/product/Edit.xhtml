@@ -23,8 +23,6 @@
                                            var="categoryItem"
                                            itemValue="#{categoryItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditProductLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{productController.selected.id}" title="#{bundle.EditProductTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{productController.update}" value="#{bundle.Save}" update="display,:parametrageTab:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProductEditDialog.hide()"/>

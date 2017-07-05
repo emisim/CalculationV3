@@ -12,8 +12,6 @@
             <h:form id="SortimentViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sortimentController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSortimentLabel_id}"/>
-                        <h:outputText value="#{sortimentController.selected.id}" title="#{bundle.ViewSortimentTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSortimentLabel_name}"/>
                         <h:outputText value="#{sortimentController.selected.name}" title="#{bundle.ViewSortimentTitle_name}"/>
                         <h:outputText value="#{bundle.ViewSortimentLabel_productSchluessel}"/>

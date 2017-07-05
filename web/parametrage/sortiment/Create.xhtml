@@ -12,8 +12,6 @@
             <h:form id="SortimentCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sortimentController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSortimentLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{sortimentController.selected.id}" title="#{bundle.CreateSortimentTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateSortimentLabel_name}" for="name" />
                         <p:inputText id="name" value="#{sortimentController.selected.name}" title="#{bundle.CreateSortimentTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateSortimentLabel_productSchluessel}" for="productSchluessel" />

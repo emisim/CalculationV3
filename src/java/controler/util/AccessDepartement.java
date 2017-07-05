@@ -81,6 +81,9 @@ public class AccessDepartement {
     
         contentManagementMap.put("category", true);
         contentManagementMap.put("product", true);
+        contentManagementMap.put("layout", true);
+        contentManagementMap.put("katalogart", true);
+        contentManagementMap.put("umfang", true);
         contentManagementMap.put("sortiment", true);
         contentManagementMap.put("anzahlGesamtArtikel", true);
         contentManagementMap.put("anzahlNeueArtikel", true);
@@ -97,6 +100,9 @@ public class AccessDepartement {
         
         datenManagementMap.put("category", true);
         datenManagementMap.put("product", true);
+        datenManagementMap.put("layout", true);
+        datenManagementMap.put("umfang", true);
+        datenManagementMap.put("prozess", true);
         datenManagementMap.put("sortiment", true);
         datenManagementMap.put("anzahlGesamtArtikel", true);
         datenManagementMap.put("anzahlNeueArtikel", true);
@@ -110,6 +116,10 @@ public class AccessDepartement {
     private static void populateDatabasePublishingMap() {
         databasePublishingMap.put("category", true);
         databasePublishingMap.put("product", true);
+        databasePublishingMap.put("layout", true);
+        databasePublishingMap.put("prozess", true);
+        databasePublishingMap.put("katalogart", true);
+        databasePublishingMap.put("ausgabe", true);
         databasePublishingMap.put("sortiment", true);
         databasePublishingMap.put("anzahlSonderSeiten", true);
         databasePublishingMap.put("anzahlGenerierungUpdateSeiten", true);
@@ -125,6 +135,11 @@ public class AccessDepartement {
         projectManagementMap.put("category", true);
         projectManagementMap.put("product", true);
         projectManagementMap.put("sortiment", true);
+        projectManagementMap.put("layout", true);
+        projectManagementMap.put("katalogart", true);
+        projectManagementMap.put("ausgabe", true);
+        projectManagementMap.put("umfang", true);
+        
         
     
     }
@@ -136,6 +151,9 @@ public class AccessDepartement {
         adminMap.put("anzahlGesamtArtikel", true);
         adminMap.put("anzahlKapitetel", true);
         adminMap.put("anzahlGesamtProdukt", true);
+        adminMap.put("layout", true);
+        adminMap.put("katalogart", true);
+        adminMap.put("umfang", true);
     
     }
     

@@ -12,8 +12,6 @@
             <h:form id="SotimentItemViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sotimentItemController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSotimentItemLabel_id}"/>
-                        <h:outputText value="#{sotimentItemController.selected.id}" title="#{bundle.ViewSotimentItemTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSotimentItemLabel_wert}"/>
                         <h:outputText value="#{sotimentItemController.selected.wert}" title="#{bundle.ViewSotimentItemTitle_wert}"/>
                         <h:outputText value="#{bundle.ViewSotimentItemLabel_demandCategory}"/>

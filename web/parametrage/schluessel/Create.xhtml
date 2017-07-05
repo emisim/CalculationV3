@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{schluesselController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateSchluesselLabel_description}" for="description" />
                         <p:inputText id="description" value="#{schluesselController.selected.description}" title="#{bundle.CreateSchluesselTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreateSchluesselLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{schluesselController.selected.id}" title="#{bundle.CreateSchluesselTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateSchluesselLabel_label}" for="label" />
                         <p:inputText id="label" value="#{schluesselController.selected.label}" title="#{bundle.CreateSchluesselTitle_label}" />
                         <p:outputLabel value="#{bundle.CreateSchluesselLabel_value}" for="value" />
@@ -24,7 +22,7 @@
                         <p:selectOneMenu id="schluesselType" value="#{schluesselController.selected.schluesselType}" >
                             <f:selectItems value="#{schluesselTypeController.itemsAvailableSelectOne}"
                                            var="schluesselTypeItem"
-                                           itemValue="#{schluesselTypeItem}"/>
+                                           itemValue="#{schluesselTypeItem}" itemLabel="#{schluesselTypeItem.name}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schluesselController.create}" value="#{bundle.Save}" update="display,:parametrageTab:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchluesselCreateDialog');"/>

@@ -26,6 +26,7 @@ public class DemandCategoryValidation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    
     @OneToOne
     private DemandCategory demandCategory;
     

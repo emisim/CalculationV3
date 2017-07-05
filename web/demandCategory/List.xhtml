@@ -140,6 +140,46 @@
                                     </p:column>
 
 
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('layout')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_layout}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.layout.name}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('katalogart')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_katalogart}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.katalogart.name}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('prozess')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_prozess}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prozess.name}"/>
+                                    </p:column>
+
+
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('ausgabe')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_ausgabe}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ausgabe.name}"/>
+                                    </p:column>
+
+                                    
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('umfang')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_umfang}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.umfang}"/>
+                                    </p:column>
+
+
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('schluessel')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_schluessel}"/>
@@ -476,11 +516,14 @@
                                             <h:outputText value="validate"/>
                                         </f:facet>
                                         <p:commandButton id="valider"   icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
+                                        <p:commandButton id="detail" value="detail" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
                                     </p:column>
+                                    
+                                   
 
 
                                     <f:facet name="footer">
-                                        <p:commandButton id="detailButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
+                                        <p:commandButton id="detailButton"   icon="ui-icon-pencil" value="#{bundle.Detail}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}"/>
@@ -498,6 +541,7 @@
             <ui:include src="Edit.xhtml"/>
             <ui:include src="Detail.xhtml"/>
             <ui:include src="View.xhtml"/>
+            <ui:include src="ValidationItemList.xhtml"/>
         </ui:define>
     </ui:composition>
 

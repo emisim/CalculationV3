@@ -14,8 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{configurationController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateConfigurationLabel_dateApplication}" for="dateApplication" />
                         <p:calendar id="dateApplication" pattern="MM/dd/yyyy" value="#{configurationController.selected.dateApplication}" title="#{bundle.EditConfigurationTitle_dateApplication}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateConfigurationLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{configurationController.selected.id}" title="#{bundle.CreateConfigurationTitle_id}" />
+                     
                     </p:panelGrid>
                     <p:commandButton actionListener="#{configurationController.create}" value="#{bundle.Save}" update="display,:ConfigurationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConfigurationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ConfigurationCreateDialog.hide()"/>

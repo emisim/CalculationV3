@@ -13,8 +13,6 @@
                     <p:panelGrid columns="2" rendered="#{schluesselTypeController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateSchluesselTypeLabel_name}" for="name" />
                         <p:inputText id="name" value="#{schluesselTypeController.selected.name}" title="#{bundle.CreateSchluesselTypeTitle_name}" />
-                        <p:outputLabel value="#{bundle.CreateSchluesselTypeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{schluesselTypeController.selected.id}" title="#{bundle.CreateSchluesselTypeTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schluesselTypeController.create}" value="#{bundle.Save}" update="display,:parametrageTab:SchluesselTypeListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchluesselTypeCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchluesselTypeCreateDialog.hide()"/>

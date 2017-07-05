@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateCategoryLabel_name}" for="name" />
                         <p:inputText id="name" value="#{categoryController.selected.name}" title="#{bundle.CreateCategoryTitle_name}" />
-                        <p:outputLabel value="#{bundle.CreateCategoryLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{categoryController.selected.id}" title="#{bundle.CreateCategoryTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{categoryController.create}" value="#{bundle.Save}" update="display,:parametrageTab:CategoryListForm:datalist,:growl" oncomplete="handleSubmit(args,'CategoryCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CategoryCreateDialog.hide()"/>

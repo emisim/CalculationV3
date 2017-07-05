@@ -23,8 +23,7 @@
                                            var="configurationItem"
                                            itemValue="#{configurationItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditConfigurationItemLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{configurationItemController.selected.id}" title="#{bundle.EditConfigurationItemTitle_id}" />
+                      
                     </p:panelGrid>
                     <p:commandButton actionListener="#{configurationItemController.update}" value="#{bundle.Save}" update="display,:ConfigurationItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConfigurationItemEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ConfigurationItemEditDialog.hide()"/>

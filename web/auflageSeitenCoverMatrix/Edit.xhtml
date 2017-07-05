@@ -12,8 +12,6 @@
             <h:form id="AuflageSeitenCoverMatrixEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageSeitenCoverMatrixController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditAuflageSeitenCoverMatrixLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{auflageSeitenCoverMatrixController.selected.id}" title="#{bundle.EditAuflageSeitenCoverMatrixTitle_id}" />
                         <p:outputLabel value="#{bundle.EditAuflageSeitenCoverMatrixLabel_cover}" for="cover" />
                         <p:selectOneMenu id="cover" value="#{auflageSeitenCoverMatrixController.selected.cover}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -12,8 +12,6 @@
             <h:form id="SotimentItemCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sotimentItemController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSotimentItemLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{sotimentItemController.selected.id}" title="#{bundle.CreateSotimentItemTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateSotimentItemLabel_wert}" for="wert" />
                         <p:inputText id="wert" value="#{sotimentItemController.selected.wert}" title="#{bundle.CreateSotimentItemTitle_wert}" />
                         <p:outputLabel value="#{bundle.CreateSotimentItemLabel_demandCategory}" for="demandCategory" />

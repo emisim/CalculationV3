@@ -12,8 +12,6 @@
             <h:form id="SeitenCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{seitenController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSeitenLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{seitenController.selected.id}" title="#{bundle.CreateSeitenTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateSeitenLabel_nbrePage}" for="nbrePage" />
                         <p:inputText id="nbrePage" value="#{seitenController.selected.nbrePage}" title="#{bundle.CreateSeitenTitle_nbrePage}" />
                     </p:panelGrid>

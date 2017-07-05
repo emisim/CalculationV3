@@ -12,8 +12,6 @@
             <h:form id="CorrectionSchluesselViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{correctionSchluesselController.selected != null}">
-                        <h:outputText value="#{bundle.ViewCorrectionSchluesselLabel_id}"/>
-                        <h:outputText value="#{correctionSchluesselController.selected.id}" title="#{bundle.ViewCorrectionSchluesselTitle_id}"/>
                         <h:outputText value="#{bundle.ViewCorrectionSchluesselLabel_percent}"/>
                         <h:outputText value="#{correctionSchluesselController.selected.percent}" title="#{bundle.ViewCorrectionSchluesselTitle_percent}"/>
                         <h:outputText value="#{bundle.ViewCorrectionSchluesselLabel_value}"/>
