@@ -100,7 +100,9 @@ public class DemandCategoryDepartementCalculation implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.DemandCategoryCalculation[ id=" + id + " ]";
+        return "DemandCategoryDepartementCalculation{" + "id=" + id + ", summe=" + summe + ", demandCategory=" + demandCategory.getId() + ", departement=" + departement.getName() + '}';
     }
+
+   
 
 }

@@ -42,7 +42,26 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return em;
     }
 
+    @Override
+    public void remove(DemandCategory demandCategory) {
+        em.createQuery("DELETE FROM DemandCategoryCalculationItem item WHERE item.demandCategoryCalculation.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
+        em.createQuery("DELETE FROM DemandCategoryCalculation item WHERE item.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
+        em.createQuery("DELETE FROM DemandCategoryDepartementCalculation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
+        remove(demandCategory);
+    }
+
     public void save(DemandCategory demandCategory, Departement departement, boolean simulation) throws ScriptException {
+        prepareSave(demandCategory);
+        if (!simulation) {
+            edit(demandCategory);
+            System.out.println("hana savite demandCategory ==> " + demandCategory);
+        }
+        sotimentItemFacade.save(demandCategory, simulation);
+        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation);
+
+    }
+
+    private void prepareSave(DemandCategory demandCategory) {
         if (!demandCategory.isDruck()) {
             demandCategory.setFormatAuswaehlen(null);
             demandCategory.setPapierMaterialAuswaehlen(null);
@@ -64,13 +83,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setUmschlagPapierAuswaehlen(null);
             demandCategory.setUmschlagFarbigkeit(null);
         }
-
         demandCategory.setId(generate("DemandCategory", "id"));
-        if (!simulation) {
-            edit(demandCategory);
-        }
-        sotimentItemFacade.save(demandCategory, simulation);
-        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation);
 
     }
 
@@ -147,17 +160,17 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
         }
     }
-    
+
     public boolean renderAttributeForList(String attribute) {
         User user = SessionUtil.getConnectedUser();
         Departement dep = user.getDepartement();
 
         if (user.getAdmin() == 1) {
-            
-                if (AccessDepartement.getAdminMap().containsKey(attribute)) {
-                    return true;
-                }
-            
+
+            if (AccessDepartement.getAdminMap().containsKey(attribute)) {
+                return true;
+            }
+
         } else {
             if (dep.getName().equals("contentManagement")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
@@ -182,7 +195,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                     return true;
                 }
             }
-
 
         }
         return false;

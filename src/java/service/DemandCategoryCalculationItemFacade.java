@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
@@ -49,6 +51,7 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
             demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
             if (!simuler) {
                 edit(demandCategoryCalculationItem);
+                System.out.println("hana edite demandCategoryCalculationItem ==> " + demandCategoryCalculationItem);
             }
             res.add(demandCategoryCalculationItem);
         }

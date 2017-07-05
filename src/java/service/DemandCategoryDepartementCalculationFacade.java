@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
@@ -38,15 +40,15 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
     private @EJB
     DepartementCriteriaFacade departementCriteriaFacade;
 
-    public List<DemandCategoryDepartementCalculation> findWithItemsByDemandCategory(DemandCategory demandCategory,Departement departement) {
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandCategory(demandCategory,departement);
+    public List<DemandCategoryDepartementCalculation> findWithItemsByDemandCategory(DemandCategory demandCategory, Departement departement) {
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandCategory(demandCategory, departement);
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.findWithItemsByDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation));
         }
         return demandCategoryDepartementCalculations;
     }
 
-    private List<DemandCategoryDepartementCalculation> findByDemandCategory(DemandCategory demandCategory,Departement departement) {
+    private List<DemandCategoryDepartementCalculation> findByDemandCategory(DemandCategory demandCategory, Departement departement) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE 1=1";
         if (demandCategory != null && demandCategory.getId() != null) {
             query += SearchUtil.addConstraint("item", "demandCategory.id", "=", demandCategory.getId());
@@ -59,21 +61,23 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
 
     public List<DemandCategoryDepartementCalculation> save(DemandCategory demandCategory, Departement departement, boolean similuer) throws ScriptException {
         List<DemandCategoryDepartementCalculation> res = new ArrayList();
-        List<Departement> departements= new ArrayList();
-        if(departement==null || departement.getId()==null){
-            departements= departementFacade.findAll();
-        }else{
+        List<Departement> departements = new ArrayList();
+        if (departement == null || departement.getId() == null) {
+            departements = departementFacade.findAll();
+        } else {
             departements.add(departement);
         }
         for (Departement myDepartement : departements) {
             DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = createOrFind(myDepartement, demandCategory);
             if (!similuer) {
                 edit(demandCategoryDepartementCalculation);
+                System.out.println("hana savite demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
             }
             demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.save(demandCategory, demandCategoryDepartementCalculation, similuer));
             demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
             if (!similuer) {
                 edit(demandCategoryDepartementCalculation);
+                System.out.println("hana editer demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
             }
             res.add(demandCategoryDepartementCalculation);
         }
@@ -81,9 +85,9 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
     }
 
     private DemandCategoryDepartementCalculation createOrFind(Departement departement, DemandCategory demandCategory) {
-        String query="SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
+        String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
                 + "item.demandCategory.id=" + demandCategory.getId() + " AND item.departement.id=" + departement.getId();
-        System.out.println("haa query ==> "+query);
+        System.out.println("haa query ==> " + query);
         List<DemandCategoryDepartementCalculation> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
             System.out.println("rah l9ite DemandCategoryDepartementCalculation f bd ha son id " + res.get(0).getId());
@@ -100,6 +104,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
     private BigDecimal calculerSum(List<DemandCategoryCalculation> demandCategoryCalculations) {
         BigDecimal sum = new BigDecimal(0);
         for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryCalculations) {
+            if(demandCategoryCalculation.getSumme()!=null)
             sum = sum.add(demandCategoryCalculation.getSumme());
         }
         return sum;

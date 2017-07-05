@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
@@ -35,26 +37,22 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
     private @EJB
     DepartementCriteriaFacade departementCriteriaFacade;
-    
-    
-    
-    public static void calculateAnzahlBestandArtikel(DemandCategory selected){
-    selected.setAnzahlBestandArtikel(selected.getAnzahlGesamtArtikel() - selected.getAnzahlNeueArtikel());
+
+    public static void calculateAnzahlBestandArtikel(DemandCategory selected) {
+        selected.setAnzahlBestandArtikel(selected.getAnzahlGesamtArtikel() - selected.getAnzahlNeueArtikel());
     }
-    
-    public static void calculateAnzahlBestandProdukt(DemandCategory selected){
-    selected.setAnzahlBestandProdukt(selected.getAnzahlGesamtProdukt() - selected.getAnzahlNeueProdukt());
+
+    public static void calculateAnzahlBestandProdukt(DemandCategory selected) {
+        selected.setAnzahlBestandProdukt(selected.getAnzahlGesamtProdukt() - selected.getAnzahlNeueProdukt());
     }
-    
-    public static void calculateAnzahlSonderSeiten(DemandCategory selected){
-    selected.setAnzahlSonderSeiten((int) (0.1 * selected.getUmfang()));
+
+    public static void calculateAnzahlSonderSeiten(DemandCategory selected) {
+        selected.setAnzahlSonderSeiten((int) (0.1 * selected.getUmfang()));
     }
-    
-    public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected){
-    selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten());
+
+    public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected) {
+        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten());
     }
-    
-    
 
     public List<DemandCategoryCalculation> findWithItemsByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
         List<DemandCategoryCalculation> demandCategoryCalculations = findByDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
@@ -72,18 +70,20 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         return em.createQuery(query).getResultList();
     }
 
-    public List<DemandCategoryCalculation> save(DemandCategory demandCategory,DemandCategoryDepartementCalculation demandCategoryDepartementCalculation, boolean similuer) throws ScriptException {
+    public List<DemandCategoryCalculation> save(DemandCategory demandCategory, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation, boolean similuer) throws ScriptException {
         List<DemandCategoryCalculation> res = new ArrayList();
         List<DepartementCriteria> departementCriterias = departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(demandCategoryDepartementCalculation.getDepartement());
         for (DepartementCriteria departementCriteria : departementCriterias) {
             DemandCategoryCalculation demandCategoryCalculation = createOrFind(departementCriteria, demandCategoryDepartementCalculation);
             if (!similuer) {
                 edit(demandCategoryCalculation);
+                System.out.println("hana savite demandCategoryCalculation ==> " + demandCategoryCalculation);
             }
-            demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer));
-            demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
+           // demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer));
+           // demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
             if (!similuer) {
                 edit(demandCategoryCalculation);
+                System.out.println("hana edite demandCategoryCalculation ==> " + demandCategoryCalculation);
             }
             res.add(demandCategoryCalculation);
         }
@@ -91,10 +91,11 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     }
 
     private DemandCategoryCalculation createOrFind(DepartementCriteria departementCriteria, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
-       
-        String query="SELECT item FROM DemandCategoryCalculation item WHERE "
-                + "item.demandCategoryDepartementCalculation.id=" + demandCategoryDepartementCalculation.getId() + " AND item.departementCriteria.id=" + departementCriteria.getId();
-        System.out.println("haa query ==> "+query);
+
+        String query = "SELECT item FROM DemandCategoryCalculation item WHERE "
+                + "item.demandCategoryDepartementCalculation.id=" + demandCategoryDepartementCalculation.getId()
+                + " AND item.departementCriteria.id=" + departementCriteria.getId();
+        System.out.println("haa query ==> " + query);
         List<DemandCategoryCalculation> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
             System.out.println("rah l9ite DemandCategoryCalculation f bd ha son id " + res.get(0).getId());
@@ -102,7 +103,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         }
         System.out.println("rah maaa l9itechhh DemandCategoryCalculation f bd ");
         DemandCategoryCalculation demandCategoryCalculation = new DemandCategoryCalculation();
-       demandCategoryCalculation.setId(generate("DemandCategoryCalculation", "id"));
+        demandCategoryCalculation.setId(generate("DemandCategoryCalculation", "id"));
         demandCategoryCalculation.setDepartementCriteria(departementCriteria);
         demandCategoryCalculation.setDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
         return demandCategoryCalculation;
