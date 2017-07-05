@@ -16,8 +16,6 @@
                         <p:inputText id="price" value="#{bindungController.selected.price}" title="#{bundle.EditBindungTitle_price}" />
                         <p:outputLabel value="#{bundle.EditBindungLabel_description}" for="description" />
                         <p:inputText id="description" value="#{bindungController.selected.description}" title="#{bundle.EditBindungTitle_description}" />
-                        <p:outputLabel value="#{bundle.EditBindungLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{bindungController.selected.id}" title="#{bundle.EditBindungTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{bindungController.update}" value="#{bundle.Save}" update="display,:parametrageTab:BindungListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BindungEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="BindungEditDialog.hide()"/>

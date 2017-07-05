@@ -12,8 +12,6 @@
             <h:form id="KatalogartViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{katalogartController.selected != null}">
-                        <h:outputText value="#{bundle.ViewKatalogartLabel_id}"/>
-                        <h:outputText value="#{katalogartController.selected.id}" title="#{bundle.ViewKatalogartTitle_id}"/>
                         <h:outputText value="#{bundle.ViewKatalogartLabel_name}"/>
                         <h:outputText value="#{katalogartController.selected.name}" title="#{bundle.ViewKatalogartTitle_name}"/>
                         <h:outputText value="#{bundle.ViewKatalogartLabel_valuee}"/>

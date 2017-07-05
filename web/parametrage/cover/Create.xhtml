@@ -16,8 +16,6 @@
                         <p:inputText id="price" value="#{coverController.selected.price}" title="#{bundle.CreateCoverTitle_price}" />
                         <p:outputLabel value="#{bundle.CreateCoverLabel_description}" for="description" />
                         <p:inputText id="description" value="#{coverController.selected.description}" title="#{bundle.CreateCoverTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreateCoverLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{coverController.selected.id}" title="#{bundle.CreateCoverTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{coverController.create}" value="#{bundle.Save}" update="display,:parametrageTab:CoverListForm:datalist,:growl" oncomplete="handleSubmit(args,'CoverCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CoverCreateDialog.hide()"/>

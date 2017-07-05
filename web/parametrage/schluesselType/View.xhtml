@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{schluesselTypeController.selected != null}">
                         <h:outputText value="#{bundle.ViewSchluesselTypeLabel_name}"/>
                         <h:outputText value="#{schluesselTypeController.selected.name}" title="#{bundle.ViewSchluesselTypeTitle_name}"/>
-                        <h:outputText value="#{bundle.ViewSchluesselTypeLabel_id}"/>
-                        <h:outputText value="#{schluesselTypeController.selected.id}" title="#{bundle.ViewSchluesselTypeTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SchluesselTypeViewDialog.hide()"/>
                 </h:panelGroup>

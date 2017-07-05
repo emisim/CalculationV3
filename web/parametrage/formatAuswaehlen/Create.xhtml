@@ -16,8 +16,6 @@
                         <p:inputText id="price" value="#{formatAuswaehlenController.selected.price}" title="#{bundle.CreateFormatAuswaehlenTitle_price}" />
                         <p:outputLabel value="#{bundle.CreateFormatAuswaehlenLabel_description}" for="description" />
                         <p:inputText id="description" value="#{formatAuswaehlenController.selected.description}" title="#{bundle.CreateFormatAuswaehlenTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreateFormatAuswaehlenLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{formatAuswaehlenController.selected.id}" title="#{bundle.CreateFormatAuswaehlenTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{formatAuswaehlenController.create}" value="#{bundle.Save}" update="display,:parametrageTab:FormatAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args,'FormatAuswaehlenCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FormatAuswaehlenCreateDialog.hide()"/>

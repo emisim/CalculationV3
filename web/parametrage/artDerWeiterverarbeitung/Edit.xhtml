@@ -18,8 +18,6 @@
                         <p:inputText id="description" value="#{artDerWeiterverarbeitungController.selected.description}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_description}" />
                         <p:outputLabel value="#{bundle.EditArtDerWeiterverarbeitungLabel_label}" for="label" />
                         <p:inputText id="label" value="#{artDerWeiterverarbeitungController.selected.label}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_label}" />
-                        <p:outputLabel value="#{bundle.EditArtDerWeiterverarbeitungLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{artDerWeiterverarbeitungController.selected.id}" title="#{bundle.EditArtDerWeiterverarbeitungTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{artDerWeiterverarbeitungController.update}" value="#{bundle.Save}" update="display,:parametrageTab:ArtDerWeiterverarbeitungListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ArtDerWeiterverarbeitungEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ArtDerWeiterverarbeitungEditDialog.hide()"/>

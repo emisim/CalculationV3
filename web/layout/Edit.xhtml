@@ -12,8 +12,6 @@
             <h:form id="LayoutEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{layoutController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditLayoutLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{layoutController.selected.id}" title="#{bundle.EditLayoutTitle_id}" />
                         <p:outputLabel value="#{bundle.EditLayoutLabel_name}" for="name" />
                         <p:inputText id="name" value="#{layoutController.selected.name}" title="#{bundle.EditLayoutTitle_name}" />
                         <p:outputLabel value="#{bundle.EditLayoutLabel_valuee}" for="valuee" />

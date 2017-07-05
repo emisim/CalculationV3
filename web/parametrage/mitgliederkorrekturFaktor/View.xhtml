@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{mitgliederkorrekturFaktorController.selected != null}">
                         <h:outputText value="#{bundle.ViewMitgliederkorrekturFaktorLabel_value}"/>
                         <h:outputText value="#{mitgliederkorrekturFaktorController.selected.value}" title="#{bundle.ViewMitgliederkorrekturFaktorTitle_value}"/>
-                        <h:outputText value="#{bundle.ViewMitgliederkorrekturFaktorLabel_id}"/>
-                        <h:outputText value="#{mitgliederkorrekturFaktorController.selected.id}" title="#{bundle.ViewMitgliederkorrekturFaktorTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MitgliederkorrekturFaktorViewDialog.hide()"/>
                 </h:panelGroup>

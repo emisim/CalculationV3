@@ -16,8 +16,6 @@
                         <p:inputText id="price" value="#{coverController.selected.price}" title="#{bundle.EditCoverTitle_price}" />
                         <p:outputLabel value="#{bundle.EditCoverLabel_description}" for="description" />
                         <p:inputText id="description" value="#{coverController.selected.description}" title="#{bundle.EditCoverTitle_description}" />
-                        <p:outputLabel value="#{bundle.EditCoverLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{coverController.selected.id}" title="#{bundle.EditCoverTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{coverController.update}" value="#{bundle.Save}" update="display,:parametrageTab:CoverListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CoverEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CoverEditDialog.hide()"/>

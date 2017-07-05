@@ -12,8 +12,6 @@
             <h:form id="AusgabeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ausgabeController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateAusgabeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{ausgabeController.selected.id}" title="#{bundle.CreateAusgabeTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateAusgabeLabel_name}" for="name" />
                         <p:inputText id="name" value="#{ausgabeController.selected.name}" title="#{bundle.CreateAusgabeTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateAusgabeLabel_valuee}" for="valuee" />

@@ -43,14 +43,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_departementCriteria}"/>
                             </f:facet>
-                            <h:outputText value="#{item.departementCriteria}"/>
+                            <h:outputText value="#{item.departementCriteria.name}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                       
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryCalculationController.prepareCreate}" update=":DemandCategoryCalculationCreateForm" oncomplete="PF('DemandCategoryCalculationCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryCalculationViewForm" oncomplete="PF('DemandCategoryCalculationViewDialog').show()" disabled="#{empty demandCategoryCalculationController.selected}"/>

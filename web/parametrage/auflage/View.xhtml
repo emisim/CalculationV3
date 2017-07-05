@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{auflageController.selected != null}">
                         <h:outputText value="#{bundle.ViewAuflageLabel_description}"/>
                         <h:outputText value="#{auflageController.selected.description}" title="#{bundle.ViewAuflageTitle_description}"/>
-                        <h:outputText value="#{bundle.ViewAuflageLabel_id}"/>
-                        <h:outputText value="#{auflageController.selected.id}" title="#{bundle.ViewAuflageTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="AuflageViewDialog.hide()"/>
                 </h:panelGroup>

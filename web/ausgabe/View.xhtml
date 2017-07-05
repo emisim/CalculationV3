@@ -12,8 +12,7 @@
             <h:form id="AusgabeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ausgabeController.selected != null}">
-                        <h:outputText value="#{bundle.ViewAusgabeLabel_id}"/>
-                        <h:outputText value="#{ausgabeController.selected.id}" title="#{bundle.ViewAusgabeTitle_id}"/>
+                       
                         <h:outputText value="#{bundle.ViewAusgabeLabel_name}"/>
                         <h:outputText value="#{ausgabeController.selected.name}" title="#{bundle.ViewAusgabeTitle_name}"/>
                         <h:outputText value="#{bundle.ViewAusgabeLabel_valuee}"/>

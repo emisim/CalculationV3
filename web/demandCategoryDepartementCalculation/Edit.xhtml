@@ -28,8 +28,6 @@
                                            var="demandCategoryItem"
                                            itemValue="#{demandCategoryItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditDemandCategoryDepartementCalculationLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{demandCategoryDepartementCalculationController.selected.id}" title="#{bundle.EditDemandCategoryDepartementCalculationTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandCategoryDepartementCalculationController.update}" value="#{bundle.Save}" update="display,:DemandCategoryDepartementCalculationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDepartementCalculationEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryDepartementCalculationEditDialog.hide()"/>

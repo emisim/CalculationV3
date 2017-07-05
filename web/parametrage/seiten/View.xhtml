@@ -12,8 +12,6 @@
             <h:form id="SeitenViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{seitenController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSeitenLabel_id}"/>
-                        <h:outputText value="#{seitenController.selected.id}" title="#{bundle.ViewSeitenTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSeitenLabel_nbrePage}"/>
                         <h:outputText value="#{seitenController.selected.nbrePage}" title="#{bundle.ViewSeitenTitle_nbrePage}"/>
                     </p:panelGrid>

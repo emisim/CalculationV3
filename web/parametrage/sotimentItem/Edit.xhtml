@@ -12,8 +12,6 @@
             <h:form id="SotimentItemEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sotimentItemController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSotimentItemLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{sotimentItemController.selected.id}" title="#{bundle.EditSotimentItemTitle_id}" />
                         <p:outputLabel value="#{bundle.EditSotimentItemLabel_wert}" for="wert" />
                         <p:inputText id="wert" value="#{sotimentItemController.selected.wert}" title="#{bundle.EditSotimentItemTitle_wert}" />
                         <p:outputLabel value="#{bundle.EditSotimentItemLabel_demandCategory}" for="demandCategory" />

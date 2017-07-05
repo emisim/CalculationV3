@@ -16,8 +16,6 @@
                         <p:inputText id="price" value="#{papierMaterialAuswaehlenController.selected.price}" title="#{bundle.CreatePapierMaterialAuswaehlenTitle_price}" />
                         <p:outputLabel value="#{bundle.CreatePapierMaterialAuswaehlenLabel_description}" for="description" />
                         <p:inputText id="description" value="#{papierMaterialAuswaehlenController.selected.description}" title="#{bundle.CreatePapierMaterialAuswaehlenTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreatePapierMaterialAuswaehlenLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{papierMaterialAuswaehlenController.selected.id}" title="#{bundle.CreatePapierMaterialAuswaehlenTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{papierMaterialAuswaehlenController.create}" value="#{bundle.Save}" update="display,:PapierMaterialAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args,'PapierMaterialAuswaehlenCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PapierMaterialAuswaehlenCreateDialog.hide()"/>

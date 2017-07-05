@@ -12,8 +12,6 @@
             <h:form id="ParticipantFaktorEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{participantFaktorController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditParticipantFaktorLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{participantFaktorController.selected.id}" title="#{bundle.EditParticipantFaktorTitle_id}" />
                         <p:outputLabel value="#{bundle.EditParticipantFaktorLabel_percent}" for="percent" />
                         <p:inputText id="percent" value="#{participantFaktorController.selected.percent}" title="#{bundle.EditParticipantFaktorTitle_percent}" />
                         <p:outputLabel value="#{bundle.EditParticipantFaktorLabel_value}" for="value" />

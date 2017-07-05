@@ -12,8 +12,6 @@
             <h:form id="ParticipantFaktorViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{participantFaktorController.selected != null}">
-                        <h:outputText value="#{bundle.ViewParticipantFaktorLabel_id}"/>
-                        <h:outputText value="#{participantFaktorController.selected.id}" title="#{bundle.ViewParticipantFaktorTitle_id}"/>
                         <h:outputText value="#{bundle.ViewParticipantFaktorLabel_percent}"/>
                         <h:outputText value="#{participantFaktorController.selected.percent}" title="#{bundle.ViewParticipantFaktorTitle_percent}"/>
                         <h:outputText value="#{bundle.ViewParticipantFaktorLabel_value}"/>

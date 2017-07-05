@@ -26,12 +26,6 @@
                             </f:facet>
                             <h:outputText value="#{item.value}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMitgliederkorrekturFaktorTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{mitgliederkorrekturFaktorController.prepareCreate}" update=":parametrageTab:MitgliederkorrekturFaktorCreateForm" oncomplete="PF('MitgliederkorrekturFaktorCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:MitgliederkorrekturFaktorViewForm" oncomplete="PF('MitgliederkorrekturFaktorViewDialog').show()" disabled="#{empty mitgliederkorrekturFaktorController.selected}"/>

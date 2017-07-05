@@ -12,8 +12,6 @@
             <h:form id="KatalogartCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{katalogartController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateKatalogartLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{katalogartController.selected.id}" title="#{bundle.CreateKatalogartTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateKatalogartLabel_name}" for="name" />
                         <p:inputText id="name" value="#{katalogartController.selected.name}" title="#{bundle.CreateKatalogartTitle_name}" />
                         <p:outputLabel value="#{bundle.CreateKatalogartLabel_valuee}" for="valuee" />

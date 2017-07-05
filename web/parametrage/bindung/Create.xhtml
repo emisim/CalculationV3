@@ -16,8 +16,6 @@
                         <p:inputText id="price" value="#{bindungController.selected.price}" title="#{bundle.CreateBindungTitle_price}" />
                         <p:outputLabel value="#{bundle.CreateBindungLabel_description}" for="description" />
                         <p:inputText id="description" value="#{bindungController.selected.description}" title="#{bundle.CreateBindungTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreateBindungLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{bindungController.selected.id}" title="#{bundle.CreateBindungTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{bindungController.create}" value="#{bundle.Save}" update="display,:parametrageTab:BindungListForm:datalist,:growl" oncomplete="handleSubmit(args,'BindungCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="BindungCreateDialog.hide()"/>

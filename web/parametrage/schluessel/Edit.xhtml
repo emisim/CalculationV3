@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{schluesselController.selected != null}">
                         <p:outputLabel value="#{bundle.EditSchluesselLabel_description}" for="description" />
                         <p:inputText id="description" value="#{schluesselController.selected.description}" title="#{bundle.EditSchluesselTitle_description}" />
-                        <p:outputLabel value="#{bundle.EditSchluesselLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{schluesselController.selected.id}" title="#{bundle.EditSchluesselTitle_id}" />
                         <p:outputLabel value="#{bundle.EditSchluesselLabel_label}" for="label" />
                         <p:inputText id="label" value="#{schluesselController.selected.label}" title="#{bundle.EditSchluesselTitle_label}" />
                         <p:outputLabel value="#{bundle.EditSchluesselLabel_value}" for="value" />
@@ -25,7 +23,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{schluesselTypeController.itemsAvailableSelectOne}"
                                            var="schluesselTypeItem"
-                                           itemValue="#{schluesselTypeItem}"/>
+                                           itemValue="#{schluesselTypeItem}" itemLabel="#{schluesselTypeItem.name}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schluesselController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SchluesselListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchluesselEditDialog');"/>

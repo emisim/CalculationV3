@@ -12,8 +12,6 @@
             <h:form id="LayoutViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{layoutController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLayoutLabel_id}"/>
-                        <h:outputText value="#{layoutController.selected.id}" title="#{bundle.ViewLayoutTitle_id}"/>
                         <h:outputText value="#{bundle.ViewLayoutLabel_name}"/>
                         <h:outputText value="#{layoutController.selected.name}" title="#{bundle.ViewLayoutTitle_name}"/>
                         <h:outputText value="#{bundle.ViewLayoutLabel_valuee}"/>

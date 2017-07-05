@@ -12,8 +12,6 @@
             <h:form id="KatalogartEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{katalogartController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditKatalogartLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{katalogartController.selected.id}" title="#{bundle.EditKatalogartTitle_id}" />
                         <p:outputLabel value="#{bundle.EditKatalogartLabel_name}" for="name" />
                         <p:inputText id="name" value="#{katalogartController.selected.name}" title="#{bundle.EditKatalogartTitle_name}" />
                         <p:outputLabel value="#{bundle.EditKatalogartLabel_valuee}" for="valuee" />
