@@ -42,10 +42,13 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
 
   
     public Object evalFunction(String expression , Object input) throws ScriptException {
+        System.out.println("haa expression ==> "+expression);
         if(input!=null && input instanceof DemandCategory){
             getJsEngine().put("demandCategory", (DemandCategory)input);
         }
-        return getJsEngine().eval(expression);
+        Object obj= getJsEngine().eval(expression);
+        System.out.println("haaa l eval ==> "+obj);
+        return obj;
     }
 
    

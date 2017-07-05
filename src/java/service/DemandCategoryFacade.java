@@ -47,21 +47,25 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         em.createQuery("DELETE FROM DemandCategoryCalculationItem item WHERE item.demandCategoryCalculation.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculation item WHERE item.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryDepartementCalculation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
-        remove(demandCategory);
+        super.remove(demandCategory);
     }
 
-    public void save(DemandCategory demandCategory, Departement departement, boolean simulation) throws ScriptException {
-        prepareSave(demandCategory);
+    public void save(DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
+        prepareSave(demandCategory,isSave);
         if (!simulation) {
-            create(demandCategory);
+            if (isSave) {
+                create(demandCategory);
+            } else {
+                edit(demandCategory);
+            }
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
-        sotimentItemFacade.save(demandCategory, simulation);
-        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation);
+        //sotimentItemFacade.save(demandCategory, simulation,isSave);
+        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
 
     }
 
-    private void prepareSave(DemandCategory demandCategory) {
+    private void prepareSave(DemandCategory demandCategory, boolean isSave) {
         if (!demandCategory.isDruck()) {
             demandCategory.setFormatAuswaehlen(null);
             demandCategory.setPapierMaterialAuswaehlen(null);
@@ -83,7 +87,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setUmschlagPapierAuswaehlen(null);
             demandCategory.setUmschlagFarbigkeit(null);
         }
-        demandCategory.setId(generate("DemandCategory", "id"));
+        if (isSave) {
+            demandCategory.setId(generate("DemandCategory", "id"));
+        }
 
     }
 

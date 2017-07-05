@@ -5,7 +5,6 @@
  */
 package service;
 
-import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
 import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
