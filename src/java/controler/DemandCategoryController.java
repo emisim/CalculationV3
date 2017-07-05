@@ -203,7 +203,6 @@ public class DemandCategoryController implements Serializable {
 
     public List<DepartementDetail> departementeDetails() throws ScriptException {
         List<DepartementDetail> departementCriterias = new ArrayList<>();
-        
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
         if (departement != null && departement.getId() != null) {
           
