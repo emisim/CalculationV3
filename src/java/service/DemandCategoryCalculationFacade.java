@@ -76,11 +76,11 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         for (DepartementCriteria departementCriteria : departementCriterias) {
             DemandCategoryCalculation demandCategoryCalculation = createOrFind(departementCriteria, demandCategoryDepartementCalculation);
             if (!similuer) {
-                edit(demandCategoryCalculation);
+                create(demandCategoryCalculation);
                 System.out.println("hana savite demandCategoryCalculation ==> " + demandCategoryCalculation);
             }
-           // demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer));
-           // demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
+            demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer));
+            demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
             if (!similuer) {
                 edit(demandCategoryCalculation);
                 System.out.println("hana edite demandCategoryCalculation ==> " + demandCategoryCalculation);

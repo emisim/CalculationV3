@@ -70,9 +70,10 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         for (Departement myDepartement : departements) {
             DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = createOrFind(myDepartement, demandCategory);
             if (!similuer) {
-                edit(demandCategoryDepartementCalculation);
+                create(demandCategoryDepartementCalculation);
                 System.out.println("hana savite demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
             }
+            
             demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.save(demandCategory, demandCategoryDepartementCalculation, similuer));
             demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
             if (!similuer) {
@@ -94,12 +95,15 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
             return res.get(0);
         }
         System.out.println("rah maaa l9itechhh DemandCategoryDepartementCalculation f bd ");
+        System.out.println("Id ===========>"+generate("DemandCategoryDepartementCalculation", "id"));
         DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = new DemandCategoryDepartementCalculation();
         demandCategoryDepartementCalculation.setId(generate("DemandCategoryDepartementCalculation", "id"));
         demandCategoryDepartementCalculation.setDemandCategory(demandCategory);
         demandCategoryDepartementCalculation.setDepartement(departement);
         return demandCategoryDepartementCalculation;
     }
+    
+    
 
     private BigDecimal calculerSum(List<DemandCategoryCalculation> demandCategoryCalculations) {
         BigDecimal sum = new BigDecimal(0);

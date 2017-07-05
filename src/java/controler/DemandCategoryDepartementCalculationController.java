@@ -77,9 +77,7 @@ public class DemandCategoryDepartementCalculationController implements Serializa
     }
 
     public List<DemandCategoryDepartementCalculation> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+         items = getFacade().findAll();
         return items;
     }
 

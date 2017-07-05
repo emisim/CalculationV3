@@ -75,9 +75,7 @@ public class DemandCategoryCalculationItemController implements Serializable {
     }
 
     public List<DemandCategoryCalculationItem> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+          items = getFacade().findAll();
         return items;
     }
 

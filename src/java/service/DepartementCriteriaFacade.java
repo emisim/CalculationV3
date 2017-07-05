@@ -62,8 +62,10 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             String summ = demandCategoryDepartementCalculation.getSumme() + "";
             for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryDepartementCalculation.getDemandCategoryCalculations()) {
+                System.out.println("DepartementCruteudhdkdbhkdbhdbhj ::::::::::: "+demandCategoryCalculation);
                 String summCriteria = demandCategoryCalculation.getSumme() + "";
                 String nomDepCriteria = demandCategoryCalculation.getDepartementCriteria().getName();
+                
                 for (DemandCategoryCalculationItem demandCategoryCalculationItem : demandCategoryCalculation.getDemandCategoryCalculationItems()) {
                     DepartementCriteriaItem departementCriteriaItem = demandCategoryCalculationItem.getDepartementCriteriaItem();
                     DepartementDetail departementDetail = new DepartementDetail();
