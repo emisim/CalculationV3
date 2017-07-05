@@ -480,7 +480,7 @@
 
 
                                     <f:facet name="footer">
-                                        <p:commandButton id="detailButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
+                                        <p:commandButton id="detailButton"   icon="ui-icon-pencil" value="#{bundle.Detail}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}"/>

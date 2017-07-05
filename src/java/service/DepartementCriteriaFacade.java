@@ -11,6 +11,7 @@ import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
 import bean.DepartementCriteria;
+import bean.DepartementCriteriaItem;
 import bean.DepartementDetail;
 import controler.util.SearchUtil;
 import java.util.ArrayList;
@@ -58,23 +59,24 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         
         List<DepartementDetail> departementDetails = new ArrayList<>();
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, true);
-        
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            String nomDep = demandCategoryDepartementCalculation.getDepartement().getName();
             String summ = demandCategoryDepartementCalculation.getSumme() + "";
             for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryDepartementCalculation.getDemandCategoryCalculations()) {
                 String summCriteria = demandCategoryCalculation.getSumme() + "";
                 String nomDepCriteria = demandCategoryCalculation.getDepartementCriteria().getName();
                 for (DemandCategoryCalculationItem demandCategoryCalculationItem : demandCategoryCalculation.getDemandCategoryCalculationItems()) {
+                    DepartementCriteriaItem departementCriteriaItem = demandCategoryCalculationItem.getDepartementCriteriaItem();
                     DepartementDetail departementDetail = new DepartementDetail();
                     departementDetail.setPrice(demandCategoryCalculationItem.getPrice() + "");
                     departementDetail.setPriceGlobal(demandCategoryCalculationItem.getPriceGlobal() + "");
                     departementDetail.setNomDepCritera(nomDepCriteria);
+                    departementDetail.setDescrDepCriteriaItem(departementCriteriaItem.getDescription());
+                    departementDetail.setArithmitiqueExpresionForUnitePrice(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice());
+                    departementDetail.setArithmitiqueExpresionForGlobalPrice(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice());
                     departementDetail.setSummCriteria(summCriteria);
                     departementDetail.setSummDepartement(summ);
                     departementDetails.add(departementDetail);
                 }
-                
             }
         }
         
