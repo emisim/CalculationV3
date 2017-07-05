@@ -1,11 +1,13 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.DemandCategoryDepartementCalculation;
 import bean.DemandCategoryValidationItem;
 import bean.Departement;
 import bean.DepartementDetail;
 import bean.Sortiment;
 import bean.SotimentItem;
+import static bean.SotimentItem_.demandCategory;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
 import controler.util.SessionUtil;
@@ -27,6 +29,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
+import service.DemandCategoryDepartementCalculationFacade;
 
 @Named("demandCategoryController")
 @SessionScoped
@@ -44,6 +47,8 @@ public class DemandCategoryController implements Serializable {
     private service.SortimentFacade sortimentFacade;
     @EJB
     private service.SotimentItemFacade sortimentItemFacade;
+    @EJB
+    private DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
     private DemandCategory selectedForSearch;
@@ -53,6 +58,7 @@ public class DemandCategoryController implements Serializable {
     private List<DemandCategoryValidationItem> demandCategoryValidationItems;
     private int index;
     private int cmp = 0;
+    private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
 
     public DemandCategoryController() {
     }
@@ -100,9 +106,7 @@ public class DemandCategoryController implements Serializable {
     }
     
     public boolean renderAttributeForList(String attribute) {
-        System.out.println("Attribute :::::::: " + attribute);
         boolean isSet = ejbFacade.renderAttributeForList(attribute);
-        System.out.println("Is Set :::::::::::;;; " + isSet);
         return isSet;
     }
 
@@ -202,10 +206,13 @@ public class DemandCategoryController implements Serializable {
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
         if (departement != null && departement.getId() != null) {
             System.out.println("Selected caat ::::::: "+selected);
-            departementCriterias = departementCriteriaFacade.detailDepartement(selected,departement);
+            demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, departement);
+            departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+            System.out.println("Controller :::::: Size of liste :::::::::: > "+departementCriterias.size());
         }
         return departementCriterias;
     }
+
 
     public List allDepartements() {
         return departementCriteriaFacade.allDetailDepartements();

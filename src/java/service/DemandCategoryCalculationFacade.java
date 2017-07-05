@@ -62,11 +62,12 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         return demandCategoryCalculations;
     }
 
-    private List<DemandCategoryCalculation> findByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
+    public List<DemandCategoryCalculation> findByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
         String query = "SELECT item FROM DemandCategoryCalculation item WHERE 1=1";
         if (demandCategoryDepartementCalculation != null && demandCategoryDepartementCalculation.getId() != null) {
             query += SearchUtil.addConstraint("item", "demandCategoryDepartementCalculation.id", "=", demandCategoryDepartementCalculation.getId());
         }
+        System.out.println("Auery  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM "+query);
         return em.createQuery(query).getResultList();
     }
 
@@ -89,6 +90,19 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         }
         return res;
     }
+    
+    public List<DemandCategoryCalculation> detail(DemandCategory demandCategory, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) throws ScriptException {
+        List<DemandCategoryCalculation> res = new ArrayList();
+        List<DepartementCriteria> departementCriterias = departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(demandCategoryDepartementCalculation.getDepartement());
+        for (DepartementCriteria departementCriteria : departementCriterias) {
+            DemandCategoryCalculation demandCategoryCalculation = find(departementCriteria, demandCategoryDepartementCalculation);
+            demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.detail(demandCategoryCalculation, demandCategory));
+            demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
+            demandCategoryCalculation.setDepartementCriteria(departementCriteria);
+            res.add(demandCategoryCalculation);
+        }
+        return res;
+    }
 
     private DemandCategoryCalculation createOrFind(DepartementCriteria departementCriteria, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
 
@@ -107,6 +121,21 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         demandCategoryCalculation.setDepartementCriteria(departementCriteria);
         demandCategoryCalculation.setDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
         return demandCategoryCalculation;
+    }
+    
+     private DemandCategoryCalculation find(DepartementCriteria departementCriteria, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
+
+        String query = "SELECT item FROM DemandCategoryCalculation item WHERE "
+                + "item.demandCategoryDepartementCalculation.id=" + demandCategoryDepartementCalculation.getId()
+                + " AND item.departementCriteria.id=" + departementCriteria.getId();
+        System.out.println("haa query ==> " + query);
+        List<DemandCategoryCalculation> res = em.createQuery(query).getResultList();
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            System.out.println("rah l9ite DemandCategoryCalculation f bd ha son id " + res.get(0).getId());
+            return res.get(0);
+        }
+       
+        return new DemandCategoryCalculation();
     }
 
     private BigDecimal calculerSum(List<DemandCategoryCalculationItem> demandCategoryCalculationItems) {
