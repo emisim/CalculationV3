@@ -42,6 +42,14 @@ public class UserController implements Serializable {
     public UserController() {
     }
     
+    public boolean checkUser(){
+        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public String seConnnecter() {
         int res = ejbFacade.seConnnecter(selected);
         AccessDepartement.populateMaps();

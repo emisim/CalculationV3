@@ -56,6 +56,14 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
+    
+    public boolean checkUser(){
+        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void removeSortimentItem(SotimentItem sItem) {
         System.out.println("hahowa element a supprimer : " + sItem.getWert());
