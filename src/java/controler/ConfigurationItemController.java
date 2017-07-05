@@ -3,6 +3,7 @@ package controler;
 import bean.ConfigurationItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.ConfigurationItemFacade;
 
 import java.io.Serializable;
@@ -29,6 +30,14 @@ public class ConfigurationItemController implements Serializable {
     private ConfigurationItem selected;
 
     public ConfigurationItemController() {
+    }
+    
+    public boolean checkUser(){
+        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public ConfigurationItem getSelected() {

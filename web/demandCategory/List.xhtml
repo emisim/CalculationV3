@@ -511,7 +511,7 @@
                                         <h:outputText value="#{item.summTotal}"/>
                                     </p:column>
 
-                                    <p:column styleClass="align-center" >
+                                    <p:column styleClass="align-center" rendered="#{demandCategoryController.checkUser()}">
                                         <f:facet name="header">
                                             <h:outputText value="validate"/>
                                         </f:facet>
@@ -522,7 +522,7 @@
                                    
 
 
-                                    <f:facet name="footer">
+                                    <f:facet name="footer" rendered="#{demandCategoryController.checkUser()}">
                                         <p:commandButton id="detailButton"   icon="ui-icon-pencil" value="#{bundle.Detail}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}"/>

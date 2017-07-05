@@ -47,7 +47,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         em.createQuery("DELETE FROM DemandCategoryCalculationItem item WHERE item.demandCategoryCalculation.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculation item WHERE item.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryDepartementCalculation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
-        remove(demandCategory);
+        super.remove(demandCategory);
     }
 
     public void save(DemandCategory demandCategory, Departement departement, boolean simulation) throws ScriptException {
