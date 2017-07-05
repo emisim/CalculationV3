@@ -322,7 +322,7 @@
                         </h:panelGrid>
                         <div class="align-center ui-widget-header">
                             <p:commandButton actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update=":growl" />
-                            <p:commandButton value="#{bundle.Cancel}" />   
+                            <p:commandButton actionListener="#{demandCategoryController.simuler}" value="#{bundle.Simuler}" update=":growl" />
                         </div>
                     </h:panelGroup>
                 </h:form>

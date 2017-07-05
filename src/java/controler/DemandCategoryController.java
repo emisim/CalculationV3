@@ -44,6 +44,8 @@ public class DemandCategoryController implements Serializable {
     private service.SortimentFacade sortimentFacade;
     @EJB
     private service.SotimentItemFacade sortimentItemFacade;
+    @EJB
+    private service.DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
     private DemandCategory selectedForSearch;
@@ -56,11 +58,15 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
-    
-    public boolean checkUser(){
-        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+
+    public void simuler() throws ScriptException {
+        demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
+    }
+
+    public boolean checkUser() {
+        if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -71,26 +77,26 @@ public class DemandCategoryController implements Serializable {
 
         sotimentItems.remove(sItem);
     }
-    
-    public void prepareValidateItems(DemandCategory demandCategory){
+
+    public void prepareValidateItems(DemandCategory demandCategory) {
         demandCategoryValidationItems = demandCategoryValidationItemFacade.findByValidation(demandCategory.getDemandCategoryValidation());
     }
-    
-    public void calculAnzahlBestandArtikel(){
+
+    public void calculAnzahlBestandArtikel() {
         DemandCategoryCalculationFacade.calculateAnzahlBestandArtikel(selected);
     }
-    
-    public void calculAnzahlGenerierungUpdateSeitenn(){
+
+    public void calculAnzahlGenerierungUpdateSeitenn() {
         DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
     }
-    
-    public void calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn(){
+
+    public void calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn() {
         DemandCategoryCalculationFacade.calculateAnzahlSonderSeiten(selected);
         DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
-        
+
     }
-    
-    public void calculAnzahlBestandProdukt(){
+
+    public void calculAnzahlBestandProdukt() {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
 
@@ -98,11 +104,11 @@ public class DemandCategoryController implements Serializable {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
     }
-    
+
     public boolean renderAttributeForList(String attribute) {
-        System.out.println("Attribute :::::::: " + attribute);
+        //     System.out.println("Attribute :::::::: " + attribute);
         boolean isSet = ejbFacade.renderAttributeForList(attribute);
-        System.out.println("Is Set :::::::::::;;; " + isSet);
+        //    System.out.println("Is Set :::::::::::;;; " + isSet);
         return isSet;
     }
 
@@ -201,8 +207,8 @@ public class DemandCategoryController implements Serializable {
         List<DepartementDetail> departementCriterias = new ArrayList<>();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
         if (departement != null && departement.getId() != null) {
-            System.out.println("Selected caat ::::::: "+selected);
-            departementCriterias = departementCriteriaFacade.detailDepartement(selected,departement);
+            System.out.println("Selected caat ::::::: " + selected);
+            departementCriterias = departementCriteriaFacade.detailDepartement(selected, departement);
         }
         return departementCriterias;
     }
@@ -216,9 +222,9 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false);
+                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false, true);
                 } else if (persistAction == PersistAction.UPDATE) {
-                    getFacade().edit(selected);
+                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false, false);
                 } else {
                     getFacade().remove(selected);
                 }
@@ -325,7 +331,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public List<DemandCategoryValidationItem> getDemandCategoryValidationItems() {
-        if(demandCategoryValidationItems == null){
+        if (demandCategoryValidationItems == null) {
             demandCategoryValidationItems = new ArrayList<>();
         }
         return demandCategoryValidationItems;
@@ -334,6 +340,5 @@ public class DemandCategoryController implements Serializable {
     public void setDemandCategoryValidationItems(List<DemandCategoryValidationItem> demandCategoryValidationItems) {
         this.demandCategoryValidationItems = demandCategoryValidationItems;
     }
-    
-    
+
 }

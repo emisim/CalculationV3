@@ -41,7 +41,7 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         return em;
     }
 
-    public List<DemandCategoryCalculationItem> save(DemandCategoryCalculation demandCategoryCalculation, DemandCategory demandCategory, boolean simuler) throws ScriptException {
+    public List<DemandCategoryCalculationItem> save(DemandCategoryCalculation demandCategoryCalculation, DemandCategory demandCategory, boolean simuler, boolean isSave) throws ScriptException {
         List<DemandCategoryCalculationItem> res = new ArrayList();
         DepartementCriteria departementCriteria = demandCategoryCalculation.getDepartementCriteria();
         List<DepartementCriteriaItem> departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(departementCriteria);
@@ -50,7 +50,11 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
             demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory) + ""));
             demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
             if (!simuler) {
-                create(demandCategoryCalculationItem);
+                if (isSave) {
+                    create(demandCategoryCalculationItem);
+                } else {
+                    edit(demandCategoryCalculationItem);
+                }
                 System.out.println("hana edite demandCategoryCalculationItem ==> " + demandCategoryCalculationItem);
             }
             res.add(demandCategoryCalculationItem);

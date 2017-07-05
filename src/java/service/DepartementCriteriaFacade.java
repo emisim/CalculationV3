@@ -58,7 +58,7 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
     public List<DepartementDetail> detailDepartement(DemandCategory demandCategory, Departement departement) throws ScriptException {
         
         List<DepartementDetail> departementDetails = new ArrayList<>();
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, true);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, true,true);
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             String summ = demandCategoryDepartementCalculation.getSumme() + "";
             for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryDepartementCalculation.getDemandCategoryCalculations()) {

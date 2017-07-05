@@ -40,7 +40,7 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         return clone;
     }
 
-    public void save(DemandCategory demandCategory, boolean simulation) {
+    public void save(DemandCategory demandCategory, boolean simulation, boolean isSave) {
         List<SotimentItem> sotimentItems = demandCategory.getSotimentItems();
         if (sotimentItems == null || sotimentItems.isEmpty()) {
             return;
@@ -50,7 +50,11 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         for (SotimentItem sotimentItem : sotimentItems) {
             sotimentItem.setDemandCategory(demandCategory);
             if (!simulation) {
-                edit(sotimentItem);
+                if (isSave) {
+                    create(sotimentItem);
+                } else {
+                    edit(sotimentItem);
+                }
             }
         }
     }
