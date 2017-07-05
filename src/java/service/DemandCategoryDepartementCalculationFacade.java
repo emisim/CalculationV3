@@ -88,6 +88,23 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         }
         return res;
     }
+    
+      public List<DemandCategoryDepartementCalculation> detail(DemandCategory demandCategory, Departement departement) throws ScriptException {
+        List<DemandCategoryDepartementCalculation> res = new ArrayList();
+        List<Departement> departements = new ArrayList();
+        if (departement == null || departement.getId() == null) {
+            departements = departementFacade.findAll();
+        } else {
+            departements.add(departement);
+        }
+        for (Departement myDepartement : departements) {
+            DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = find(myDepartement, demandCategory);
+            demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.detail(demandCategory, demandCategoryDepartementCalculation));
+            demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
+            res.add(demandCategoryDepartementCalculation);
+        }
+        return res;
+    }
 
     private DemandCategoryDepartementCalculation createOrFind(Departement departement, DemandCategory demandCategory) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
@@ -106,6 +123,20 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         demandCategoryDepartementCalculation.setDepartement(departement);
         return demandCategoryDepartementCalculation;
     }
+    
+    private DemandCategoryDepartementCalculation find(Departement departement, DemandCategory demandCategory) {
+        String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
+                + "item.demandCategory.id=" + demandCategory.getId() + " AND item.departement.id=" + departement.getId();
+        System.out.println("haa query ==> " + query);
+        List<DemandCategoryDepartementCalculation> res = em.createQuery(query).getResultList();
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            System.out.println("rah l9ite DemandCategoryDepartementCalculation f bd ha son id " + res.get(0).getId());
+            return res.get(0);
+        }
+        return new DemandCategoryDepartementCalculation();
+    }
+    
+    
 
     private BigDecimal calculerSum(List<DemandCategoryCalculation> demandCategoryCalculations) {
         BigDecimal sum = new BigDecimal(0);

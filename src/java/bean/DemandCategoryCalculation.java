@@ -109,7 +109,7 @@ public class DemandCategoryCalculation implements Serializable {
 
     @Override
     public String toString() {
-        return "DemandCategoryCalculation{" + "id=" + id + ", departementCriteria=" + departementCriteria.getName() + ", summe=" + summe + ", valide=" + valide + ", demandCategoryDepartementCalculation=" + demandCategoryDepartementCalculation.getId() + '}';
+        return "DemandCategoryCalculation{" + "id=" + id + ", departementCriteria=" + departementCriteria + ", summe=" + summe + ", valide=" + valide + ", demandCategoryCalculationItems=" + demandCategoryCalculationItems + ", demandCategoryDepartementCalculation=" + demandCategoryDepartementCalculation + '}';
     }
 
    

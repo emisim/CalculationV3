@@ -61,6 +61,20 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         }
         return res;
     }
+    
+    public List<DemandCategoryCalculationItem> detail(DemandCategoryCalculation demandCategoryCalculation, DemandCategory demandCategory) throws ScriptException {
+        List<DemandCategoryCalculationItem> res = new ArrayList();
+        DepartementCriteria departementCriteria = demandCategoryCalculation.getDepartementCriteria();
+        List<DepartementCriteriaItem> departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(departementCriteria);
+        for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
+            DemandCategoryCalculationItem demandCategoryCalculationItem = find(departementCriteriaItem, demandCategoryCalculation);
+            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory) + ""));
+            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
+           demandCategoryCalculationItem.setDepartementCriteriaItem(departementCriteriaItem);
+            res.add(demandCategoryCalculationItem);
+        }
+        return res;
+    }
 
     private DemandCategoryCalculationItem createOrFind(DepartementCriteriaItem departementCriteriaItem, DemandCategoryCalculation demandCategoryCalculation) {
         List<DemandCategoryCalculationItem> res = em.createQuery("SELECT item FROM DemandCategoryCalculationItem item WHERE "
@@ -74,12 +88,25 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         demandCategoryCalculationItem.setDemandCategoryCalculation(demandCategoryCalculation);
         return demandCategoryCalculationItem;
     }
+    
+    private DemandCategoryCalculationItem find(DepartementCriteriaItem departementCriteriaItem, DemandCategoryCalculation demandCategoryCalculation) {
+        String query = "SELECT item FROM DemandCategoryCalculationItem item WHERE "
+                + "item.demandCategoryCalculation.id=" + demandCategoryCalculation.getId() + " AND item.departementCriteriaItem.id=" + departementCriteriaItem.getId();
+        List<DemandCategoryCalculationItem> res = em.createQuery(query).getResultList();
+        System.out.println("queryyy MMMMMMMMMMMMMMMMMm "+query);
+       System.out.println("DemandCategoryCalculationItem.size MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM "+res);
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            System.out.println("DemandCategoryCalculationItem.size and list is not null MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM "+res.get(0));
+            return res.get(0);
+        }
+        return new DemandCategoryCalculationItem();
+    }
 
     public DemandCategoryCalculationItemFacade() {
         super(DemandCategoryCalculationItem.class);
     }
 
-    List<DemandCategoryCalculationItem> findByDemandCategoryCalculation(DemandCategoryCalculation demandCategoryCalculation) {
+    public List<DemandCategoryCalculationItem> findByDemandCategoryCalculation(DemandCategoryCalculation demandCategoryCalculation) {
         String query = "SELECT item FROM DemandCategoryCalculationItem item WHERE 1=1";
         if (demandCategoryCalculation != null && demandCategoryCalculation.getId() != null) {
             query += SearchUtil.addConstraint("item", "demandCategoryCalculation.id", "=", demandCategoryCalculation.getId());
