@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -24,10 +25,15 @@ import javax.persistence.Temporal;
 @Entity
 public class DemandCategory implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @OneToOne(mappedBy = "demandCategory")
+    private DemandCategoryValidation demandCategoryValidation;
 
     @ManyToOne
     private Category category;
@@ -178,6 +184,17 @@ public class DemandCategory implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public DemandCategoryValidation getDemandCategoryValidation() {
+        if(demandCategoryValidation == null){
+            demandCategoryValidation = new DemandCategoryValidation();
+        }
+        return demandCategoryValidation;
+    }
+
+    public void setDemandCategoryValidation(DemandCategoryValidation demandCategoryValidation) {
+        this.demandCategoryValidation = demandCategoryValidation;
     }
 
     public BigDecimal getSummDruck() {

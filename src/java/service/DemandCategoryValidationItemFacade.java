@@ -41,6 +41,12 @@ public class DemandCategoryValidationItemFacade extends AbstractFacade<DemandCat
         return -1;
     }
 
+    public List<DemandCategoryValidationItem> findByValidation(DemandCategoryValidation demandCategoryValidation) {
+        String requette = "select item from DemandCategoryValidationItem item where item.demandCategoryValidation.id = '"+demandCategoryValidation.getId()+"'";
+        return em.createQuery(requette).getResultList();
+    
+    }
+
    
     
    

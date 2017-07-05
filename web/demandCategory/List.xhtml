@@ -516,7 +516,10 @@
                                             <h:outputText value="validate"/>
                                         </f:facet>
                                         <p:commandButton id="valider"   icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
+                                        <p:commandButton id="detail" value="detail" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
                                     </p:column>
+                                    
+                                   
 
 
                                     <f:facet name="footer">
@@ -538,6 +541,7 @@
             <ui:include src="Edit.xhtml"/>
             <ui:include src="Detail.xhtml"/>
             <ui:include src="View.xhtml"/>
+            <ui:include src="ValidationItemList.xhtml"/>
         </ui:define>
     </ui:composition>
 

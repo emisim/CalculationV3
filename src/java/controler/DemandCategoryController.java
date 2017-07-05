@@ -1,6 +1,7 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.DemandCategoryValidationItem;
 import bean.Departement;
 import bean.DepartementDetail;
 import bean.Sortiment;
@@ -49,6 +50,7 @@ public class DemandCategoryController implements Serializable {
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
+    private List<DemandCategoryValidationItem> demandCategoryValidationItems;
     private int index;
     private int cmp = 0;
 
@@ -60,6 +62,10 @@ public class DemandCategoryController implements Serializable {
         index = sItem.getId().intValue();
 
         sotimentItems.remove(sItem);
+    }
+    
+    public void prepareValidateItems(DemandCategory demandCategory){
+        demandCategoryValidationItems = demandCategoryValidationItemFacade.findByValidation(demandCategory.getDemandCategoryValidation());
     }
     
     public void calculAnzahlBestandArtikel(){
@@ -309,4 +315,17 @@ public class DemandCategoryController implements Serializable {
     public void setSortimentItem(SotimentItem sortimentItem) {
         this.sortimentItem = sortimentItem;
     }
+
+    public List<DemandCategoryValidationItem> getDemandCategoryValidationItems() {
+        if(demandCategoryValidationItems == null){
+            demandCategoryValidationItems = new ArrayList<>();
+        }
+        return demandCategoryValidationItems;
+    }
+
+    public void setDemandCategoryValidationItems(List<DemandCategoryValidationItem> demandCategoryValidationItems) {
+        this.demandCategoryValidationItems = demandCategoryValidationItems;
+    }
+    
+    
 }
