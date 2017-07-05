@@ -35,6 +35,26 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
     private @EJB
     DepartementCriteriaFacade departementCriteriaFacade;
+    
+    
+    
+    public static void calculateAnzahlBestandArtikel(DemandCategory selected){
+    selected.setAnzahlBestandArtikel(selected.getAnzahlGesamtArtikel() - selected.getAnzahlNeueArtikel());
+    }
+    
+    public static void calculateAnzahlBestandProdukt(DemandCategory selected){
+    selected.setAnzahlBestandProdukt(selected.getAnzahlGesamtProdukt() - selected.getAnzahlNeueProdukt());
+    }
+    
+    public static void calculateAnzahlSonderSeiten(DemandCategory selected){
+    selected.setAnzahlSonderSeiten((int) (0.1 * selected.getUmfang()));
+    }
+    
+    public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected){
+    selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten());
+    }
+    
+    
 
     public List<DemandCategoryCalculation> findWithItemsByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
         List<DemandCategoryCalculation> demandCategoryCalculations = findByDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);

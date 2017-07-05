@@ -1,6 +1,7 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.DemandCategoryValidationItem;
 import bean.Departement;
 import bean.DepartementDetail;
 import bean.Sortiment;
@@ -24,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
 
 @Named("demandCategoryController")
@@ -48,6 +50,7 @@ public class DemandCategoryController implements Serializable {
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
+    private List<DemandCategoryValidationItem> demandCategoryValidationItems;
     private int index;
     private int cmp = 0;
 
@@ -59,6 +62,28 @@ public class DemandCategoryController implements Serializable {
         index = sItem.getId().intValue();
 
         sotimentItems.remove(sItem);
+    }
+    
+    public void prepareValidateItems(DemandCategory demandCategory){
+        demandCategoryValidationItems = demandCategoryValidationItemFacade.findByValidation(demandCategory.getDemandCategoryValidation());
+    }
+    
+    public void calculAnzahlBestandArtikel(){
+        DemandCategoryCalculationFacade.calculateAnzahlBestandArtikel(selected);
+    }
+    
+    public void calculAnzahlGenerierungUpdateSeitenn(){
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
+    }
+    
+    public void calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn(){
+        DemandCategoryCalculationFacade.calculateAnzahlSonderSeiten(selected);
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
+        
+    }
+    
+    public void calculAnzahlBestandProdukt(){
+        DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
 
     public boolean renderAttribute(String attribute) {
@@ -290,4 +315,17 @@ public class DemandCategoryController implements Serializable {
     public void setSortimentItem(SotimentItem sortimentItem) {
         this.sortimentItem = sortimentItem;
     }
+
+    public List<DemandCategoryValidationItem> getDemandCategoryValidationItems() {
+        if(demandCategoryValidationItems == null){
+            demandCategoryValidationItems = new ArrayList<>();
+        }
+        return demandCategoryValidationItems;
+    }
+
+    public void setDemandCategoryValidationItems(List<DemandCategoryValidationItem> demandCategoryValidationItems) {
+        this.demandCategoryValidationItems = demandCategoryValidationItems;
+    }
+    
+    
 }

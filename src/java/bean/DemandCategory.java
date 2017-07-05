@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -24,10 +25,15 @@ import javax.persistence.Temporal;
 @Entity
 public class DemandCategory implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @OneToOne(mappedBy = "demandCategory")
+    private DemandCategoryValidation demandCategoryValidation;
 
     @ManyToOne
     private Category category;
@@ -39,9 +45,23 @@ public class DemandCategory implements Serializable {
     @OneToMany(mappedBy = "demandCategory")
     private List<SotimentItem> sotimentItems;
 
+    @ManyToOne
+    private Layout layout;
+
+    @ManyToOne
+    private Katalogart katalogart;
+
+    @ManyToOne
+    private Prozess prozess;
+
+    @ManyToOne
+    private Ausgabe ausgabe;
+
     // Schlüssel beinhaltet mehrere Keys: Layout Ausgabe....
     @ManyToOne
     private Schluessel Schluessel;
+
+    private int umfang;
 
     //Seiten
     private int anzahlGesamtSeiten = 2;
@@ -69,7 +89,7 @@ public class DemandCategory implements Serializable {
 
     //Warengruppe Kapitel
     private int anzahlKapitetel = 15;
-    
+
     private int nbrTotalValidation;
 
     //Aufwand für Allg.Änderung    
@@ -94,8 +114,7 @@ public class DemandCategory implements Serializable {
 
     //Für den Druck
     private boolean druck = false;
-    
-    
+
     @ManyToOne
     private FormatAuswaehlen formatAuswaehlen;
 
@@ -167,6 +186,17 @@ public class DemandCategory implements Serializable {
         this.id = id;
     }
 
+    public DemandCategoryValidation getDemandCategoryValidation() {
+        if(demandCategoryValidation == null){
+            demandCategoryValidation = new DemandCategoryValidation();
+        }
+        return demandCategoryValidation;
+    }
+
+    public void setDemandCategoryValidation(DemandCategoryValidation demandCategoryValidation) {
+        this.demandCategoryValidation = demandCategoryValidation;
+    }
+
     public BigDecimal getSummDruck() {
         return summDruck;
     }
@@ -205,6 +235,46 @@ public class DemandCategory implements Serializable {
 
     public void setSotimentItems(List<SotimentItem> sotimentItems) {
         this.sotimentItems = sotimentItems;
+    }
+
+    public Layout getLayout() {
+        return layout;
+    }
+
+    public void setLayout(Layout layout) {
+        this.layout = layout;
+    }
+
+    public Katalogart getKatalogart() {
+        return katalogart;
+    }
+
+    public int getUmfang() {
+        return umfang;
+    }
+
+    public void setUmfang(int umfang) {
+        this.umfang = umfang;
+    }
+
+    public void setKatalogart(Katalogart katalogart) {
+        this.katalogart = katalogart;
+    }
+
+    public Prozess getProzess() {
+        return prozess;
+    }
+
+    public void setProzess(Prozess prozess) {
+        this.prozess = prozess;
+    }
+
+    public Ausgabe getAusgabe() {
+        return ausgabe;
+    }
+
+    public void setAusgabe(Ausgabe ausgabe) {
+        this.ausgabe = ausgabe;
     }
 
     public Schluessel getSchluessel() {
@@ -542,7 +612,6 @@ public class DemandCategory implements Serializable {
     public void setNbrTotalValidation(int nbrTotalValidation) {
         this.nbrTotalValidation = nbrTotalValidation;
     }
-    
 
     @Override
     public int hashCode() {

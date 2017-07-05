@@ -7,9 +7,11 @@
 package service;
 
 import bean.Departement;
+import bean.DepartementCriteria;
 import bean.User;
 import controler.util.SessionUtil;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +25,8 @@ public class DepartementFacade extends AbstractFacade<Departement> {
 
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
+    @EJB
+    private DepartementCriteriaFacade departementCriteriaFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -53,6 +57,19 @@ public class DepartementFacade extends AbstractFacade<Departement> {
         }
         
         return em.createQuery(requette).getResultList();
+    }
+
+    public void deleteDepartementWithCriteria(Departement departement) {
+        String requette = "select criteria from DepartementCriteria criteria where criteria.departement.id = '"+departement.getId()+"'";
+        List<DepartementCriteria> departementCriterias = em.createQuery(requette).getResultList();
+        
+        for (DepartementCriteria departementCriteria : departementCriterias) {
+            departementCriteriaFacade.deleteCriteriaWithCriteriaItem(departementCriteria);
+            
+        }
+        
+        remove(departement);
+    
     }
 
    
