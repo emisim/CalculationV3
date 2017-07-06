@@ -53,6 +53,10 @@ public class DepartementController implements Serializable {
         }
     }
     
+     public List<Departement> findAll(){
+       return ejbFacade.findAll();
+    }
+    
     public void deleteDepartementWithCriteria(Departement departement){
         ejbFacade.deleteDepartementWithCriteria(departement);
     }

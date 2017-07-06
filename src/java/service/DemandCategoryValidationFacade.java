@@ -42,11 +42,17 @@ public class DemandCategoryValidationFacade extends AbstractFacade<DemandCategor
     }
 
     public void checkExistanceOrCreate(DemandCategory demandCategory) {
-        if (demandCategory != null && demandCategory.getId() != null) {
-            User user = SessionUtil.getConnectedUser();
+        System.out.println("im in checkExistanceOrCreate before if");
+        User user = SessionUtil.getConnectedUser();
+        if (demandCategory != null && demandCategory.getId() != null && user != null) {
+            System.out.println("im in checkExistanceOrCreate after if");
             List<DemandCategoryValidation> demandCategorys = em.createQuery("SELECT v FROM DemandCategoryValidation v WHERE v.demandCategory.id=" + demandCategory.getId()).getResultList();
             DemandCategoryValidationItem demandCategoryValidationItem = new DemandCategoryValidationItem();
-            demandCategoryValidationItem.setDepartement(user.getDepartement().getName());
+            if (user.getAdmin() == 1) {
+                demandCategoryValidationItem.setDepartement("");
+            } else {
+                demandCategoryValidationItem.setDepartement(user.getDepartement().getName());
+            }
             demandCategoryValidationItem.setSysDate(new Date());
             demandCategoryValidationItem.setUser(user);
             if (demandCategorys != null && demandCategorys.size() == 1) {

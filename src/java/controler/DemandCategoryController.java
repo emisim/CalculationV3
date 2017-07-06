@@ -7,7 +7,7 @@ import bean.Departement;
 import bean.DepartementDetail;
 import bean.Sortiment;
 import bean.SotimentItem;
-import static bean.SotimentItem_.demandCategory;
+import bean.User;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
 import controler.util.SessionUtil;
@@ -15,7 +15,9 @@ import service.DemandCategoryFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +50,8 @@ public class DemandCategoryController implements Serializable {
     @EJB
     private service.SotimentItemFacade sortimentItemFacade;
     @EJB
+    private service.DepartementFacade departementFacade;
+    @EJB
     private DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
     private List<DemandCategory> items = null;
     private DemandCategory selected;
@@ -59,6 +63,7 @@ public class DemandCategoryController implements Serializable {
     private int index;
     private int cmp = 0;
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
+    private List<DepartementDetail> departementCriterias;
 
     public DemandCategoryController() {
     }
@@ -80,6 +85,14 @@ public class DemandCategoryController implements Serializable {
         index = sItem.getId().intValue();
 
         sotimentItems.remove(sItem);
+    }
+    
+    public int checkSelection(){
+        if(selected==null){
+            JsfUtil.addWrningMessage("Please, select one demand category");
+            return 0;
+        }
+        return 1;
     }
 
     public void prepareValidateItems(DemandCategory demandCategory) {
@@ -176,6 +189,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void validate(DemandCategory demandCategory) {
+        System.out.println("validate methode in controller");
         demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
     }
 
@@ -205,17 +219,29 @@ public class DemandCategoryController implements Serializable {
         return items;
     }
 
-    public List<DepartementDetail> departementeDetails() throws ScriptException {
+    public List<DepartementDetail> departementeDetails(String nameDep) throws ScriptException {
         List<DepartementDetail> departementCriterias = new ArrayList<>();
+        Map<String , List<DepartementDetail>> params = new HashMap<>();
+        User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
-        if (departement != null && departement.getId() != null) {
-          
+        if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
             demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, departement);
             departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
         }
+        if (departement == null && user.getAdmin() == 1) {
+            List<Departement> departements = departementFacade.findAll();
+            if (departements != null && !departements.isEmpty()) {
+                for (Departement departement1 : departements) {
+                    demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, departement1);
+                    departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+                    params.put(departement1.getName(),departementCriterias);
+                }
+            }
+
+            return params.get(nameDep);
+        }
         return departementCriterias;
     }
-
 
     public List allDepartements() {
         return departementCriteriaFacade.allDetailDepartements();

@@ -8,6 +8,7 @@
     <f:view contentType="text/html" locale="fr">
         <h:head>
             <title><ui:insert name="title">Menu</ui:insert></title>
+            <meta http-equiv="refresh" content="#{userController.getTimout()};../index.xhtml" />
             <h:outputStylesheet library="css" name="jsfcrud.css"/>
             <h:outputScript library="js" name="jsfcrud.js"/>
             <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />

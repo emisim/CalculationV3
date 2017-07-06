@@ -10,8 +10,8 @@
 
         <p:dialog id="DemandCategoryDetailDlg" width="1200" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Departements':userController.connectedUser.departement}" >
             <h:form id="DemandCategoryDetailForm" rendered="#{demandCategoryController.selected!=null}">
-                <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0}" >
-                    <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails()}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
+                    <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                         <p:headerRow>
                             <p:column colspan="5" style="text-align:left" >
                                 <h:outputText value="#{item.nomDepCritera}" />
@@ -27,10 +27,10 @@
                             <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
                         </p:column>
                         <p:column headerText="Global price" width="50" >
-                             <h:outputText value="#{item.priceGlobal}" />
+                            <h:outputText value="#{item.priceGlobal}" />
                         </p:column>
-                         <p:column headerText="Arithmetic expession for global price" >
-                             <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
+                        <p:column headerText="Arithmetic expession for global price" >
+                            <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                         </p:column>
                         <p:summaryRow>
                             <p:column colspan="5" style="text-align:right">
@@ -39,6 +39,129 @@
                         </p:summaryRow>
                     </p:dataTable>
                 </h:panelGroup>
+
+                <h:panelGroup id="displayForAdmin" rendered="#{userController.connectedUser.admin == 1 and userController.connectedUser.departement==null}" >
+                    <p:tabView id="displayTabForAdmin" >
+                        <p:tab title="contentManagement">
+                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('contentManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="5" style="text-align:left" >
+                                        <h:outputText value="#{item.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="150">
+                                    <h:outputText value="#{item.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Unit Price" width="50" >
+                                    <h:outputText value="#{item.price}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for unit price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:column headerText="Global price" width="50" >
+                                    <h:outputText value="#{item.priceGlobal}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for global price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="5" style="text-align:right">
+                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>  
+                        </p:tab>
+                         <p:tab title="datenManagement">
+                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('datenManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="5" style="text-align:left" >
+                                        <h:outputText value="#{item.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="150">
+                                    <h:outputText value="#{item.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Unit Price" width="50" >
+                                    <h:outputText value="#{item.price}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for unit price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:column headerText="Global price" width="50" >
+                                    <h:outputText value="#{item.priceGlobal}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for global price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="5" style="text-align:right">
+                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>  
+                        </p:tab>
+                         <p:tab title="databasePublishing">
+                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('databasePublishing')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="5" style="text-align:left" >
+                                        <h:outputText value="#{item.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="150">
+                                    <h:outputText value="#{item.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Unit Price" width="50" >
+                                    <h:outputText value="#{item.price}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for unit price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:column headerText="Global price" width="50" >
+                                    <h:outputText value="#{item.priceGlobal}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for global price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="5" style="text-align:right">
+                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>  
+                        </p:tab>
+                         <p:tab title="projectManagement">
+                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('projectManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                                <p:headerRow>
+                                    <p:column colspan="5" style="text-align:left" >
+                                        <h:outputText value="#{item.nomDepCritera}" />
+                                    </p:column>
+                                </p:headerRow>
+                                <p:column headerText="Description" width="150">
+                                    <h:outputText value="#{item.descrDepCriteriaItem}" />
+                                </p:column>
+                                <p:column headerText="Unit Price" width="50" >
+                                    <h:outputText value="#{item.price}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for unit price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
+                                </p:column>
+                                <p:column headerText="Global price" width="50" >
+                                    <h:outputText value="#{item.priceGlobal}" />
+                                </p:column>
+                                <p:column headerText="Arithmetic expession for global price" >
+                                    <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
+                                </p:column>
+                                <p:summaryRow>
+                                    <p:column colspan="5" style="text-align:right">
+                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
+                                    </p:column>
+                                </p:summaryRow>
+                            </p:dataTable>  
+                        </p:tab>
+                        
+                    </p:tabView>
+                </h:panelGroup>
+
             </h:form>
         </p:dialog>
 
