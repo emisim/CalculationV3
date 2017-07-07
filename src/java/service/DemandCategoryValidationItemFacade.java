@@ -40,6 +40,14 @@ public class DemandCategoryValidationItemFacade extends AbstractFacade<DemandCat
         }
         return -1;
     }
+    
+    public DemandCategoryValidationItem getValidationItemByDemandAndUser(DemandCategory demandCategory) {
+        List<DemandCategoryValidationItem> demandCategoryValidationItems = em.createQuery("SELECT v FROM DemandCategoryValidationItem v WHERE v.demandCategoryValidation.demandCategory.id=" + demandCategory.getId() + " and v.user.login = '" + SessionUtil.getConnectedUser().getLogin() + "'").getResultList();
+        if (demandCategoryValidationItems != null && demandCategoryValidationItems.size() > 0) {
+            return demandCategoryValidationItems.get(0);
+        }
+        return null;
+    }
 
     public List<DemandCategoryValidationItem> findByValidation(DemandCategoryValidation demandCategoryValidation) {
         String requette = "select item from DemandCategoryValidationItem item where item.demandCategoryValidation.id ="+demandCategoryValidation.getId();

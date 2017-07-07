@@ -12,8 +12,19 @@
         </ui:define>
 
         <ui:define name="body">
-
-            <p:tabView id="parametrageTab" >
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12 " >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                            <p:menuitem value="Parametrage" url="#" />
+                        </p:breadCrumb>   
+                    </h:form>
+                </div>
+            </div><br></br>
+             <div class="ui-grid-row">
+               <div class="ui-grid-col-12">
+                     <p:tabView id="parametrageTab" >
                 <p:tab title="artDerWeiterverarbeitung">
                     <ui:include src="artDerWeiterverarbeitung/List.xhtml"/>
                 </p:tab> 
@@ -65,7 +76,10 @@
                 </p:tab> 
                
                 
-            </p:tabView>  
+            </p:tabView>     
+                </div> 
+            </div>
+        
 
 
 

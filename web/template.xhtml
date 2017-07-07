@@ -11,9 +11,10 @@
             <meta http-equiv="refresh" content="#{userController.getTimout()};../index.xhtml" />
             <h:outputStylesheet library="css" name="jsfcrud.css"/>
             <h:outputScript library="js" name="jsfcrud.js"/>
+            <link rel="shortcut icon" href="../resources/image/logo-ede.png" type="image/png" sizes="16x16"/>
+            <link rel="stylesheet" href="../resources/font-awesome-4.6.3/css/font-awesome.min.css" type="text/css" />
             <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-            <link rel="shortcut icon" href="resources/image/logo-ede.png" type="image/png" sizes="16x16"/>
-            <link rel="stylesheet" href="resources/font-awesome-4.6.3/css/font-awesome.min.css" type="text/css" />
+
         </h:head>
 
         <h:body>
@@ -30,35 +31,33 @@
                                 <br/>
                                 <p:menubar>
 
+                                    <p:submenu id="parametrage" label="Parametrage" icon="fa fa-bars" >
+                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml" icon="fa fa-bars"  />
+                                    </p:submenu>
 
-                                    <p:submenu id="parametrage" label="Parametrage" icon="ui-icon-tabs" >
-                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml"  />
+
+                                    <p:submenu id="demandCategory" label="DemandCategory" icon="fa fa-th-large"  >
+                                        <p:menuitem value="Cacule" outcome="/demandCategory/CreateCat.xhtml" icon="fa fa-calculator"/>
+                                        <p:menuitem value="History" outcome="/demandCategory/List.xhtml"  icon="fa fa-history"/>
+                                        <p:menuitem value="DepartementCalculation" outcome="/demandCategoryDepartementCalculation/List.xhtml" icon="fa fa-bars" style="width:160px;" />
+                                        <p:menuitem value="Calculation" outcome="/demandCategoryCalculation/List.xhtml"  icon="fa fa-bars" />
+                                        <p:menuitem value="CalculationItem" outcome="/demandCategoryCalculationItem/List.xhtml" icon="fa fa-bars"  />
+                                    </p:submenu>
+
+
+                                    <p:submenu id="departement" label="Departement/Criteria" icon="fa fa-building" >
+                                        <p:menuitem value="List" outcome="/departement/List.xhtml" icon="fa fa-bars"  />
+                                    </p:submenu>
+
+                                    <p:submenu id="configuration" label="Configuration" icon="fa fa-gear" >
+                                        <p:menuitem value="List" outcome="/configurationItem/List.xhtml" icon="fa fa-bars"  />
+
                                     </p:submenu>
 
 
 
-                                    <p:submenu id="demandCategory" label="DemandCategory" icon="ui-icon-database" >
-                                        <p:menuitem value="Cacule" outcome="/demandCategory/CreateCat.xhtml"  />
-                                        <p:menuitem value="History" outcome="/demandCategory/List.xhtml"  />
-                                        <p:menuitem value="DepartementCalculation" outcome="/demandCategoryDepartementCalculation/List.xhtml"  />
-                                        <p:menuitem value="Calculation" outcome="/demandCategoryCalculation/List.xhtml"  />
-                                        <p:menuitem value="CalculationItem" outcome="/demandCategoryCalculationItem/List.xhtml"  />
-                                    </p:submenu>
-
-
-                                    <p:submenu id="departement" label="Departement/Criteria" icon="fa fa-database" >
-                                        <p:menuitem value="List" outcome="/departement/List.xhtml"  />
-                                    </p:submenu>
-
-                                    <p:submenu id="configuration" label="Configuration" icon="ui-icon-gear" >
-                                        <p:menuitem value="List" outcome="/configurationItem/List.xhtml"  />
-
-                                    </p:submenu>
-
-
-
-                                    <p:submenu id="user" label="User" icon="ui-icon-user" >
-                                        <p:menuitem value="List" outcome="/user/List.xhtml"  />
+                                    <p:submenu id="user" label="User" icon="fa fa-user" >
+                                        <p:menuitem value="List" outcome="/user/List.xhtml" icon="fa fa-bars"  />
                                     </p:submenu>
 
                                 </p:menubar>
