@@ -13,27 +13,22 @@
                 <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
                     <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                         <p:headerRow>
-                            <p:column colspan="5" style="text-align:left" >
+                            <p:column colspan="3" style="text-align:left" >
                                 <h:outputText value="#{item.nomDepCritera}" />
                             </p:column>
                         </p:headerRow>
-                        <p:column headerText="Description" width="150">
+                        <p:column headerText="Description" width="80">
                             <h:outputText value="#{item.descrDepCriteriaItem}" />
                         </p:column>
                         <p:column headerText="Unit Price" width="50" >
                             <h:outputText value="#{item.price}" />
                         </p:column>
-                        <p:column headerText="Arithmetic expession for unit price" >
-                            <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}" />
-                        </p:column>
                         <p:column headerText="Global price" width="50" >
                             <h:outputText value="#{item.priceGlobal}" />
                         </p:column>
-                        <p:column headerText="Arithmetic expession for global price" >
-                            <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
-                        </p:column>
+                        
                         <p:summaryRow>
-                            <p:column colspan="5" style="text-align:right">
+                            <p:column colspan="3" style="text-align:right">
                                 <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                             </p:column>
                         </p:summaryRow>

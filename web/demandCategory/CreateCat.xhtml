@@ -63,7 +63,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{layoutController.itemsAvailableSelectOne}"
                                                        var="layoutItem"
-                                                       itemValue="#{layoutItem}"/>
+                                                       itemValue="#{layoutItem}" itemLabel="#{layoutItem.name}"/>
                                     </p:selectOneMenu>
 
 
@@ -72,7 +72,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{katalogartController.itemsAvailableSelectOne}"
                                                        var="katalogartItem"
-                                                       itemValue="#{katalogartItem}" />
+                                                       itemValue="#{katalogartItem}" itemLabel="#{katalogartItem.name}" />
                                     </p:selectOneMenu>
 
 
@@ -83,7 +83,7 @@
 
                                         <f:selectItems value="#{prozessController.itemsAvailableSelectOne}"
                                                        var="prozessItem"
-                                                       itemValue="#{prozessItem}"/>
+                                                       itemValue="#{prozessItem}" itemLabel="#{prozessItem.name}"/>
                                     </p:selectOneMenu>
 
 
@@ -93,7 +93,7 @@
 
                                         <f:selectItems value="#{ausgabeController.itemsAvailableSelectOne}"
                                                        var="ausgabeItem"
-                                                       itemValue="#{ausgabeItem}"/>
+                                                       itemValue="#{ausgabeItem}" itemLabel="#{ausgabeItem.name}"/>
                                     </p:selectOneMenu>
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umfang}" for="umfang" rendered="#{demandCategoryController.renderAttribute('umfang')}" />
@@ -168,7 +168,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{correctionSchluesselController.itemsAvailableSelectOne}"
                                                        var="correctionSchluesselItem"
-                                                       itemValue="#{correctionSchluesselItem}"/>
+                                                       itemValue="#{correctionSchluesselItem}" itemLabel="#{correctionSchluesselItem.value}"/>
                                     </p:selectOneMenu>
 
 
@@ -178,7 +178,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{mitgliederkorrekturFaktorController.itemsAvailableSelectOne}"
                                                        var="mitgliederkorrekturFaktorItem"
-                                                       itemValue="#{mitgliederkorrekturFaktorItem}"/>
+                                                       itemValue="#{mitgliederkorrekturFaktorItem}" itemLabel="#{mitgliederkorrekturFaktorItem.value}"/>
                                     </p:selectOneMenu>
 
 
@@ -200,7 +200,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{participantFaktorController.itemsAvailableSelectOne}"
                                                        var="participantFaktorItem"
-                                                       itemValue="#{participantFaktorItem}"/>
+                                                       itemValue="#{participantFaktorItem}" itemLabel="#{participantFaktorItem.value}"/>
                                     </p:selectOneMenu>
 
 
@@ -209,7 +209,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{konzeptbearbeitungFaktorController.itemsAvailableSelectOne}"
                                                        var="konzeptbearbeitungFaktorItem"
-                                                       itemValue="#{konzeptbearbeitungFaktorItem}"/>
+                                                       itemValue="#{konzeptbearbeitungFaktorItem}" itemLabel="#{konzeptbearbeitungFaktorItem.value}"/>
                                     </p:selectOneMenu>
 
                                     <p:outputLabel value="druck" for="druck" rendered="false"/>
@@ -246,7 +246,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{farbigkeitController.itemsAvailableSelectOne}"
                                                        var="farbigkeitItem"
-                                                       itemValue="#{farbigkeitItem}"/>
+                                                       itemValue="#{farbigkeitItem}" itemLabel="#{farbigkeitItem.description}"/>
                                     </p:selectOneMenu>
 
 
@@ -255,7 +255,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{artDerWeiterverarbeitungController.itemsAvailableSelectOne}"
                                                        var="artDerWeiterverarbeitungItem"
-                                                       itemValue="#{artDerWeiterverarbeitungItem}"/>
+                                                       itemValue="#{artDerWeiterverarbeitungItem}" itemLabel="#{artDerWeiterverarbeitungItem.description}"/>
                                     </p:selectOneMenu>
 
 
@@ -264,7 +264,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{veredlungController.itemsAvailableSelectOne}"
                                                        var="veredlungItem"
-                                                       itemValue="#{veredlungItem}"/>
+                                                       itemValue="#{veredlungItem}" itemLabel="#{veredlungItem.description}"/>
                                     </p:selectOneMenu>
 
 
@@ -273,7 +273,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{umschlagPapierAuswaehlenController.itemsAvailableSelectOne}"
                                                        var="umschlagPapierAuswaehlenItem"
-                                                       itemValue="#{umschlagPapierAuswaehlenItem}"/>
+                                                       itemValue="#{umschlagPapierAuswaehlenItem}" itemLabel="#{umschlagPapierAuswaehlenItem.description}"/>
                                     </p:selectOneMenu>
 
 
@@ -282,7 +282,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{umschlagFarbigkeitController.itemsAvailableSelectOne}"
                                                        var="umschlagFarbigkeitItem"
-                                                       itemValue="#{umschlagFarbigkeitItem}"/>
+                                                       itemValue="#{umschlagFarbigkeitItem}" itemLabel="#{umschlagFarbigkeitItem.label}"/>
                                     </p:selectOneMenu>
 
 
@@ -291,7 +291,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{coverController.itemsAvailableSelectOne}"
                                                        var="coverItem"
-                                                       itemValue="#{coverItem}"/>
+                                                       itemValue="#{coverItem}" itemLabel="#{coverItem.description}"/>
                                     </p:selectOneMenu>
 
 
@@ -300,7 +300,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{bindungController.itemsAvailableSelectOne}"
                                                        var="bindungItem"
-                                                       itemValue="#{bindungItem}"/>
+                                                       itemValue="#{bindungItem}" itemLabel="#{bindungItem.description}"/>
                                     </p:selectOneMenu>
 
 
@@ -309,7 +309,7 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{auflageController.itemsAvailableSelectOne}"
                                                        var="auflageItem"
-                                                       itemValue="#{auflageItem}"/>
+                                                       itemValue="#{auflageItem}" itemLabel="#{auflageItem.description}"/>
                                     </p:selectOneMenu>
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_liefertermin}" for="liefertermin" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true }" />
