@@ -30,18 +30,11 @@
         </div>
         <div class="ui-grid ui-grid-responsive">
 
-            <div class="container" style="margin-top: 10px">
+            <div class="container " style="margin-top: 10px">
                 <div class="row">
                     <div class="col-md-12" style="text-align: center;">
 
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../user/List.xhtml">
-                                <div class="menu-card" >
-                                    <h1><span class="fa-3x fa fa-users"></span></h1>
-                                    <h4>Users</h4>
-                                </div>
-                            </a>
-                        </p:panel>
+                       
                         <p:panel class="col-md-3" style="border: 0px">
                             <a class="menu-link" href="../departementCriteria/List.xhtml">
                                 <div class="menu-card">
@@ -66,18 +59,26 @@
                                 </div>
                             </a>
                         </p:panel>
-                         <p:panel class="col-md-3" style="border: 0px">
+                         <p:panel class="col-md-3" style="border: 0px" rendered="#{userController.checkUser()}">
+                            <a class="menu-link" href="../user/List.xhtml">
+                                <div class="menu-card" >
+                                    <h1><span class="fa-3x fa fa-users"></span></h1>
+                                    <h4>Users</h4>
+                                </div>
+                            </a>
+                        </p:panel>
+                         <p:panel class="col-md-3" style="border: 0px" rendered="#{userController.checkUser()}">
                             <a class="menu-link" href="../parametrage/Parametrage.xhtml">
                                 <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-bars"></span></h1>
+                                    <h1><span class="fa-3x fa fa-gears"></span></h1>
                                     <h4>Parametrage</h4>
                                 </div>
                             </a>
                         </p:panel>
                         <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../configurationItem/List.xhtml">
+                            <a class="menu-link" href="../configurationItem/List.xhtml" rendered="#{userController.checkUser()}">
                                 <div class="menu-card">
-                                    <h1><span class="fa-3x fa fa-gear"></span></h1>
+                                    <h1><span class="fa-3x fa fa-wrench"></span></h1>
                                     <h4>Configuration</h4>
                                 </div>
                             </a>

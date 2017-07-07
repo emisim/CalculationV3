@@ -31,33 +31,34 @@
                                 <br/>
                                 <p:menubar>
 
-                                    <p:submenu id="parametrage" label="Parametrage" icon="fa fa-bars" >
-                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml" icon="fa fa-bars"  />
+
+                                    <p:submenu id="parametrage" label="Parametrage" icon="fa fa-gears" rendered="#{userController.checkUser()}" >
+                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml" icon="fa fa-list"  />
                                     </p:submenu>
 
 
                                     <p:submenu id="demandCategory" label="DemandCategory" icon="fa fa-th-large"  >
                                         <p:menuitem value="Cacule" outcome="/demandCategory/CreateCat.xhtml" icon="fa fa-calculator"/>
                                         <p:menuitem value="History" outcome="/demandCategory/List.xhtml"  icon="fa fa-history"/>
-                                        <p:menuitem value="DepartementCalculation" outcome="/demandCategoryDepartementCalculation/List.xhtml" icon="fa fa-bars" style="width:160px;" />
-                                        <p:menuitem value="Calculation" outcome="/demandCategoryCalculation/List.xhtml"  icon="fa fa-bars" />
-                                        <p:menuitem value="CalculationItem" outcome="/demandCategoryCalculationItem/List.xhtml" icon="fa fa-bars"  />
+                                        <p:menuitem value="DepartementCalculation" outcome="/demandCategoryDepartementCalculation/List.xhtml" icon="fa fa-list" style="width:160px;" />
+                                        <p:menuitem value="Calculation" outcome="/demandCategoryCalculation/List.xhtml"  icon="fa fa-list" />
+                                        <p:menuitem value="CalculationItem" outcome="/demandCategoryCalculationItem/List.xhtml" icon="fa fa-list"  />
                                     </p:submenu>
 
 
                                     <p:submenu id="departement" label="Departement/Criteria" icon="fa fa-building" >
-                                        <p:menuitem value="List" outcome="/departement/List.xhtml" icon="fa fa-bars"  />
+                                        <p:menuitem value="List" outcome="/departement/List.xhtml" icon="fa fa-list"  />
                                     </p:submenu>
 
-                                    <p:submenu id="configuration" label="Configuration" icon="fa fa-gear" >
-                                        <p:menuitem value="List" outcome="/configurationItem/List.xhtml" icon="fa fa-bars"  />
+                                    <p:submenu id="configuration" label="Configuration" icon="fa fa-wrench" rendered="#{userController.checkUser()}">
+                                        <p:menuitem value="List" outcome="/configurationItem/List.xhtml"  icon="fa fa-list" />
 
                                     </p:submenu>
 
 
 
-                                    <p:submenu id="user" label="User" icon="fa fa-user" >
-                                        <p:menuitem value="List" outcome="/user/List.xhtml" icon="fa fa-bars"  />
+                                    <p:submenu id="user" label="User" icon="fa fa-user" rendered="#{userController.checkUser()}">
+                                        <p:menuitem value="List" outcome="/user/List.xhtml" icon="fa fa-list" />
                                     </p:submenu>
 
                                 </p:menubar>

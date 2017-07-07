@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditKatalogartLabel_valuee}" for="valuee" />
                         <p:inputText id="valuee" value="#{katalogartController.selected.valuee}" title="#{bundle.EditKatalogartTitle_valuee}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{katalogartController.update}" value="#{bundle.Save}" update="display,:KatalogartListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KatalogartEditDialog');"/>
+                    <p:commandButton actionListener="#{katalogartController.update}" value="#{bundle.Save}" update="display,:parametrageTab:KatalogartListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KatalogartEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="KatalogartEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
