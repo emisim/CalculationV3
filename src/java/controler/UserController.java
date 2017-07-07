@@ -101,6 +101,10 @@ public class UserController implements Serializable {
         return "";
     }
     
+    public int getTimout() {
+        return SessionUtil.getSession().getMaxInactiveInterval();
+    }
+    
     public String seDeConnnecter() {
         //
         ejbFacade.seDeConnnecter();

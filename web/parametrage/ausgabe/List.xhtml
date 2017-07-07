@@ -6,14 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-
-
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListAusgabeTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
+    
             <h:form id="AusgabeListForm">
                 <p:panel header="#{bundle.ListAusgabeTitle}">
                     <p:dataTable id="datalist" value="#{ausgabeController.items}" var="item"
@@ -41,9 +34,9 @@
                             <h:outputText value="#{item.valuee}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ausgabeController.prepareCreate}" update=":AusgabeCreateForm" oncomplete="PF('AusgabeCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AusgabeViewForm" oncomplete="PF('AusgabeViewDialog').show()" disabled="#{empty ausgabeController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AusgabeEditForm" oncomplete="PF('AusgabeEditDialog').show()" disabled="#{empty ausgabeController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ausgabeController.prepareCreate}" update=":parametrageTab:AusgabeCreateForm" oncomplete="PF('AusgabeCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:AusgabeViewForm" oncomplete="PF('AusgabeViewDialog').show()" disabled="#{empty ausgabeController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:AusgabeEditForm" oncomplete="PF('AusgabeEditDialog').show()" disabled="#{empty ausgabeController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ausgabeController.destroy}" update=":growl,datalist" disabled="#{empty ausgabeController.selected}"/>
                         </f:facet>
                     </p:dataTable>
@@ -53,7 +46,6 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+       
 
 </html>

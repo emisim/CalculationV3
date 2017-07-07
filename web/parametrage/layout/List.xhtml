@@ -6,14 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-
-
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListLayoutTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
+   
             <h:form id="LayoutListForm">
                 <p:panel header="#{bundle.ListLayoutTitle}">
                     <p:dataTable id="datalist" value="#{layoutController.items}" var="item"
@@ -41,9 +34,9 @@
                             <h:outputText value="#{item.valuee}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{layoutController.prepareCreate}" update=":LayoutCreateForm" oncomplete="PF('LayoutCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LayoutViewForm" oncomplete="PF('LayoutViewDialog').show()" disabled="#{empty layoutController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LayoutEditForm" oncomplete="PF('LayoutEditDialog').show()" disabled="#{empty layoutController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{layoutController.prepareCreate}" update=":parametrageTab:LayoutCreateForm" oncomplete="PF('LayoutCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:LayoutViewForm" oncomplete="PF('LayoutViewDialog').show()" disabled="#{empty layoutController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:LayoutEditForm" oncomplete="PF('LayoutEditDialog').show()" disabled="#{empty layoutController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{layoutController.destroy}" update=":growl,datalist" disabled="#{empty layoutController.selected}"/>
                         </f:facet>
                     </p:dataTable>
@@ -53,7 +46,5 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
-
+        
 </html>

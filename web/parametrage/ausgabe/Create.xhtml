@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateAusgabeLabel_valuee}" for="valuee" />
                         <p:inputText id="valuee" value="#{ausgabeController.selected.valuee}" title="#{bundle.CreateAusgabeTitle_valuee}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ausgabeController.create}" value="#{bundle.Save}" update="display,:AusgabeListForm:datalist,:growl" oncomplete="handleSubmit(args,'AusgabeCreateDialog');"/>
+                    <p:commandButton actionListener="#{ausgabeController.create}" value="#{bundle.Save}" update="display,:parametrageTab:AusgabeListForm:datalist,:growl" oncomplete="handleSubmit(args,'AusgabeCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AusgabeCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

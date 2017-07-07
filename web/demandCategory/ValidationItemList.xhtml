@@ -36,7 +36,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_user}"/>
                             </f:facet>
-                            <h:outputText value="#{item.user.nom}"/>
+                            <h:outputText value="#{item.user.nom} - #{item.user.admin==1?'Admin':''}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
