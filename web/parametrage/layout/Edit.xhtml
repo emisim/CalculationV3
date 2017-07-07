@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditLayoutLabel_valuee}" for="valuee" />
                         <p:inputText id="valuee" value="#{layoutController.selected.valuee}" title="#{bundle.EditLayoutTitle_valuee}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{layoutController.update}" value="#{bundle.Save}" update="display,:LayoutListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LayoutEditDialog');"/>
+                    <p:commandButton actionListener="#{layoutController.update}" value="#{bundle.Save}" update="display,:parametrageTab:LayoutListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LayoutEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LayoutEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -31,7 +31,7 @@
                                 <p:menubar>
 
 
-                                    <p:submenu id="parametrage" label="Parametrage" icon="ui-icon-tabs" >
+                                    <p:submenu id="parametrage" label="Parametrage" icon="ui-icon-tabs" rendered="#{userController.checkUser()}" >
                                         <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml"  />
                                     </p:submenu>
 
@@ -50,14 +50,14 @@
                                         <p:menuitem value="List" outcome="/departement/List.xhtml"  />
                                     </p:submenu>
 
-                                    <p:submenu id="configuration" label="Configuration" icon="ui-icon-gear" >
+                                    <p:submenu id="configuration" label="Configuration" icon="ui-icon-gear" rendered="#{userController.checkUser()}">
                                         <p:menuitem value="List" outcome="/configurationItem/List.xhtml"  />
 
                                     </p:submenu>
 
 
 
-                                    <p:submenu id="user" label="User" icon="ui-icon-user" >
+                                    <p:submenu id="user" label="User" icon="ui-icon-user" rendered="#{userController.checkUser()}">
                                         <p:menuitem value="List" outcome="/user/List.xhtml"  />
                                     </p:submenu>
 

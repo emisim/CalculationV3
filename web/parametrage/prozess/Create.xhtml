@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateProzessLabel_valuee}" for="valuee" />
                         <p:inputText id="valuee" value="#{prozessController.selected.valuee}" title="#{bundle.CreateProzessTitle_valuee}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{prozessController.create}" value="#{bundle.Save}" update="display,:ProzessListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProzessCreateDialog');"/>
+                    <p:commandButton actionListener="#{prozessController.create}" value="#{bundle.Save}" update="display,:parametrageTab:ProzessListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProzessCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProzessCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
