@@ -55,10 +55,10 @@
                         </p:column>
                         
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementCriteriaController.prepareCreate}" update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DepartementCriteriaViewForm" oncomplete="PF('DepartementCriteriaViewDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementCriteriaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{departementCriteriaController.destroy}" update=":growl,datalist" disabled="#{empty departementCriteriaController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementCriteriaController.prepareCreate}" update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()" rendered="#{userController.checkUser()}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DepartementCriteriaViewForm" oncomplete="PF('DepartementCriteriaViewDialog').show()" disabled="#{empty departementCriteriaController.selected}" rendered="#{userController.checkUser()}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementCriteriaController.selected}" rendered="#{userController.checkUser()}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{departementCriteriaController.destroy}" update=":growl,datalist" disabled="#{empty departementCriteriaController.selected}" rendered="#{userController.checkUser()}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

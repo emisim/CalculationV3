@@ -86,7 +86,7 @@ public class Katalogart implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Katalogart[ id=" + id + " ]";
+        return name+"";
     }
     
 }

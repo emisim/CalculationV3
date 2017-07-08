@@ -91,14 +91,22 @@ public class UserController implements Serializable {
     }
     
     public String changePassword() {
-        if (newPassword.equals(newRepetePassword) && !newPassword.equals("") && newPassword != null) {
-            User user = ejbFacade.find(selected.getLogin());
+        User user = ejbFacade.find(selected.getLogin());
+        System.out.println("ha hash l 9dim : "+HashageUtil.sha256(user.getPassword()));
+        System.out.println("ha hash jdid : "+HashageUtil.sha256(newPassword));
+        System.out.println("ha pass l 9dim : "+user.getPassword());
+        System.out.println("ha pass jdid : "+newPassword);
+        if (newPassword.equals(newRepetePassword) && !newPassword.equals("") && newPassword != null && !HashageUtil.sha256(newPassword).equals(user.getPassword())) {
+            
             user.setPassword(HashageUtil.sha256(newPassword));
             user.setMdpChanged(true);
             ejbFacade.edit(user);
             return seDeConnnecter();
+        }else{
+            JsfUtil.addErrorMessage("Probleme lors du changement de mot de passe");
+            return "";
         }
-        return "";
+        
     }
     
     public int getTimout() {

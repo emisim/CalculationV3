@@ -87,7 +87,7 @@ public class Ausgabe implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Ausgabe[ id=" + id + " ]";
+        return name+"";
     }
     
 }
