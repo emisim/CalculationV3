@@ -62,7 +62,6 @@ public class UserController implements Serializable {
             else {
                 return "/user/ChangePassword?faces-redirect=true";
             }
-            //communeFacade.initCommuneParams(selected.getCommune());   
         }
         validteConnexionForm(res);
         return null;
