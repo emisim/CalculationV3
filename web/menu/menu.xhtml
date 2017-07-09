@@ -36,7 +36,7 @@
 
                        
                         <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../departementCriteria/List.xhtml">
+                            <a class="menu-link" href="../departement/List.xhtml">
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-th-large"></span></h1>
                                     <h4>Criteria</h4>
@@ -51,7 +51,7 @@
                                 </div>
                             </a>
                         </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
+                        <p:panel class="col-md-3" style="border: 0px" rendered="#{userController.checkUser()}">
                             <a class="menu-link" href="../demandCategory/CreateCat.xhtml">
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-calculator"></span></h1>
@@ -75,8 +75,8 @@
                                 </div>
                             </a>
                         </p:panel>
-                        <p:panel class="col-md-3" style="border: 0px">
-                            <a class="menu-link" href="../configurationItem/List.xhtml" rendered="#{userController.checkUser()}">
+                        <p:panel class="col-md-3" style="border: 0px" rendered="#{userController.checkUser()}">
+                            <a class="menu-link" href="../configurationItem/List.xhtml" >
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-wrench"></span></h1>
                                     <h4>Configuration</h4>

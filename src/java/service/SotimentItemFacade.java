@@ -40,8 +40,8 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         return clone;
     }
 
-    public void save(DemandCategory demandCategory, boolean simulation, boolean isSave) {
-        List<SotimentItem> sotimentItems = demandCategory.getSotimentItems();
+    public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) {
+       
         if (sotimentItems == null || sotimentItems.isEmpty()) {
             return;
         } else if (sotimentItems.size() == 1) {
@@ -66,6 +66,13 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
 
     public SotimentItemFacade() {
         super(SotimentItem.class);
+    }
+
+    public List<SotimentItem> findByDemandeCategory(DemandCategory demandCategory) {
+        
+        String requette = "select item from SotimentItem item where item.demandCategory.id = '"+demandCategory.getId()+"'";
+        return em.createQuery(requette).getResultList();
+    
     }
 
 }

@@ -47,14 +47,15 @@
                                                        itemValue="#{productItem}" itemLabel="#{productItem.label}"/>
                                     </p:selectOneMenu>
 
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                                     <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--Select Sortiment--"/>
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
                                                        var="sortimentItem"
                                                        itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
                                     </p:selectOneMenu>
 
-
+                                    <p:outputLabel value="Mix" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                                     <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
 

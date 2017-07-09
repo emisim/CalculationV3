@@ -526,10 +526,11 @@
 
                                     <p:column styleClass="align-center" rendered="#{demandCategoryController.checkUser()}">
                                         <f:facet name="header">
-                                            <h:outputText value="validate"/>
+                                            <h:outputText value="Action"/>
                                         </f:facet>
-                                        <p:commandButton id="valider"   icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
-                                        <p:commandButton id="detail" value="detail" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
+                                        <p:commandButton id="valider" title="Valider" icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
+                                        <p:commandButton id="detailValider" icon="fa fa-bars" title="Detail Validation" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
+                                        <p:commandButton id="detailSortiemnt" icon="fa fa-info-circle" title="Detail Sortiment" actionListener="#{demandCategoryController.prepareSortimentItems(item)}" update=":SotimentItemListForm" oncomplete="PF('SortiementItemListDialog').show()" />
                                     </p:column>
                                     
                                    
@@ -555,6 +556,7 @@
             <ui:include src="Detail.xhtml"/>
             <ui:include src="View.xhtml"/>
             <ui:include src="ValidationItemList.xhtml"/>
+            <ui:include src="SortimentItemList.xhtml"/>
         </ui:define>
     </ui:composition>
 

@@ -59,6 +59,7 @@ public class DemandCategoryController implements Serializable {
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
+    private List<SotimentItem> detailSotimentItems;
     private List<DemandCategoryValidationItem> demandCategoryValidationItems;
     private int index;
     private int cmp = 0;
@@ -97,6 +98,10 @@ public class DemandCategoryController implements Serializable {
 
     public void prepareValidateItems(DemandCategory demandCategory) {
         demandCategoryValidationItems = demandCategoryValidationItemFacade.findByValidation(demandCategory.getDemandCategoryValidation());
+    }
+    
+    public void prepareSortimentItems(DemandCategory demandCategory) {
+        detailSotimentItems = sortimentItemFacade.findByDemandeCategory(demandCategory);
     }
 
     public void calculAnzahlBestandArtikel() {
@@ -252,9 +257,9 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false, true);
+                    getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, true);
                 } else if (persistAction == PersistAction.UPDATE) {
-                    getFacade().save(selected, SessionUtil.getConnectedUser().getDepartement(), false, false);
+                    getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, false);
                 } else {
                     getFacade().remove(selected);
                 }
@@ -370,5 +375,18 @@ public class DemandCategoryController implements Serializable {
     public void setDemandCategoryValidationItems(List<DemandCategoryValidationItem> demandCategoryValidationItems) {
         this.demandCategoryValidationItems = demandCategoryValidationItems;
     }
+
+    public List<SotimentItem> getDetailSotimentItems() {
+        if(detailSotimentItems == null){
+            detailSotimentItems = new ArrayList<>();
+        }
+        return detailSotimentItems;
+    }
+
+    public void setDetailSotimentItems(List<SotimentItem> detailSotimentItems) {
+        this.detailSotimentItems = detailSotimentItems;
+    }
+    
+    
 
 }

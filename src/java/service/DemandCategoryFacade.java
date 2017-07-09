@@ -8,6 +8,7 @@ package service;
 
 import bean.DemandCategory;
 import bean.Departement;
+import bean.SotimentItem;
 import bean.User;
 import controler.util.AccessDepartement;
 import controler.util.JsfUtil;
@@ -50,7 +51,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         super.remove(demandCategory);
     }
 
-    public void save(DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
+    public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepareSave(demandCategory,isSave);
         if (!simulation) {
             if (isSave) {
@@ -60,7 +61,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             }
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
-        //sotimentItemFacade.save(demandCategory, simulation,isSave);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation,isSave);
         demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
 
     }
