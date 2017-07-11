@@ -86,7 +86,7 @@ public class Prozess implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Prozess[ id=" + id + " ]";
+        return name+"";
     }
     
 }

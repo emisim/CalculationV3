@@ -88,7 +88,7 @@ public class Layout implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Layout[ id=" + id + " ]";
+        return name+"";
     }
     
 }
