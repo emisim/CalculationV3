@@ -8,6 +8,7 @@ package service;
 
 import bean.DemandCategory;
 import bean.Departement;
+import bean.SotimentItem;
 import bean.User;
 import controler.util.AccessDepartement;
 import controler.util.JsfUtil;
@@ -51,7 +52,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public void save(DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
-        prepareSave(demandCategory,isSave);
+        prepareSave(demandCategory, isSave);
         if (!simulation) {
             if (isSave) {
                 create(demandCategory);
@@ -93,9 +94,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
-        String query = "SELECT d from DemandCategory d WHERE 1=1";
+        String query = "SELECT d from DemandCategory d inner join d.sotimentItems s WHERE 1=1";
         if (demandCategory != null) {
             if (demandCategory.getProduct() != null) {
                 query += SearchUtil.addConstraint("d", "product.id", "=", demandCategory.getProduct().getId());
@@ -118,7 +119,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
+            //if (sotimentItems != null && !sotimentItems.isEmpty()) {
+                System.out.println("  hahahahah  "+sotimentItems);
+               
+                for (String sotimentItem : sotimentItems) {
+//                    System.out.println(" jbdnkjbdkjbdkjdbskj "+sotimentItem.getId());
+                    query += " and s.id = "+sotimentItem;
+                
+                }
+           // }
         }
+
+        System.out.println("search query ::: " + query);
         demandCategorys = em.createQuery(query).getResultList();
         if (demandCategorys.isEmpty()) {
             JsfUtil.addErrorMessage("Aucun résultat trouvé");

@@ -1,6 +1,7 @@
 package controler;
 
 import bean.Sortiment;
+import bean.SotimentItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
 import service.SortimentFacade;
@@ -27,6 +28,7 @@ public class SortimentController implements Serializable {
     private service.SortimentFacade ejbFacade;
     private List<Sortiment> items = null;
     private Sortiment selected;
+    private List<SotimentItem> sotimentItems = null;
 
     public SortimentController() {
     }
@@ -81,6 +83,16 @@ public class SortimentController implements Serializable {
         return items;
     }
 
+    public List<SotimentItem> getSotimentItems() {
+        return sotimentItems;
+    }
+
+    public void setSotimentItems(List<SotimentItem> sotimentItems) {
+        this.sotimentItems = sotimentItems;
+    }
+    
+    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -120,6 +132,8 @@ public class SortimentController implements Serializable {
     public List<Sortiment> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+    
 
     @FacesConverter(forClass = Sortiment.class)
     public static class SortimentControllerConverter implements Converter {

@@ -125,11 +125,12 @@ public class Sortiment implements Serializable {
         return true;
     }
 
-   
-
     @Override
     public String toString() {
-        return name;
+        return "Sortiment{" + "id=" + id + ", name=" + name + ", productSchluessel=" + productSchluessel + ", artikelPerPage=" + artikelPerPage + ", lKSchluessel=" + lKSchluessel + ", mKSchluessel=" + mKSchluessel + ", sotimentItems=" + sotimentItems + '}';
     }
-    
+
+   
+
+   
 }

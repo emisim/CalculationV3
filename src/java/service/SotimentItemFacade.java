@@ -6,8 +6,10 @@
 package service;
 
 import bean.DemandCategory;
+import bean.Sortiment;
 import bean.SotimentItem;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -57,6 +59,17 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
                 }
             }
         }
+    }
+
+    public List<SotimentItem> findBySortiement(Sortiment sortiment) {
+        List<SotimentItem> sotimentItems = new ArrayList<>();
+        if (sortiment != null && sortiment.getId() != null) {
+            System.out.println("je suis dans findBySortiement");
+            String query = "SELECT s FROM SotimentItem s WHERE s.sortiment.id = " + sortiment.getId();
+            System.out.println(query);
+            sotimentItems = em.createQuery(query).getResultList();
+        }
+        return sotimentItems;
     }
 
     @Override
