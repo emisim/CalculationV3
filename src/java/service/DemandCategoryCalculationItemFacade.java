@@ -24,7 +24,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCategoryCalculationItem> {
@@ -41,12 +41,16 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         return em;
     }
 
+    
+    //Wichtig Calculation
     public List<DemandCategoryCalculationItem> save(DemandCategoryCalculation demandCategoryCalculation, DemandCategory demandCategory, boolean simuler, boolean isSave) throws ScriptException {
         List<DemandCategoryCalculationItem> res = new ArrayList();
         DepartementCriteria departementCriteria = demandCategoryCalculation.getDepartementCriteria();
+        //Hier werden die einzelne CriteriaItem
         List<DepartementCriteriaItem> departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(departementCriteria);
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
             DemandCategoryCalculationItem demandCategoryCalculationItem = createOrFind(departementCriteriaItem, demandCategoryCalculation);
+            //evalFunction SErvice ALBATAL pour calcul
             demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory) + ""));
             demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
             if (!simuler) {

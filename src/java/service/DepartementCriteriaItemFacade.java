@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class DepartementCriteriaItemFacade extends AbstractFacade<DepartementCriteriaItem> {

@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 public class DateUtil {
    public static String formateDate(String pattern, Date date) {

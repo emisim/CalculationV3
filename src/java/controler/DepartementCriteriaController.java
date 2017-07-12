@@ -3,6 +3,7 @@ package controler;
 import bean.DepartementCriteria;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.DepartementCriteriaFacade;
 
 import java.io.Serializable;
@@ -76,7 +77,11 @@ public class DepartementCriteriaController implements Serializable {
 
     public List<DepartementCriteria> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            if (SessionUtil.getConnectedUser().getAdmin() == 1) {
+                items = getFacade().findAll();
+            } else {
+                items = getFacade().findByUser();
+            }
         }
         return items;
     }

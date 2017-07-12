@@ -15,10 +15,23 @@
 
         <ui:define name="body">
             <div Class="ui-grid ui-grid-responsive" >
+                 <div class="ui-grid-row">
+                <div class="ui-grid-col-12 " >
+                    <h:form>
+                      <p:breadCrumb>
+                        <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                        <p:menuitem value="Demand category " url="#" />
+                        <p:menuitem value="History" url="#" />
+                    </p:breadCrumb>   
+                    </h:form>
+                   
+                </div>
+            </div><br></br>
+            
                 <div Class="ui-grid-row">
                     <div Class="ui-grid-col-12">
                         <h:form id="DemandCategorySearchForm">
-                            <p:fieldset legend="Critères de recherche" toggleable="true" toggleSpeed="500" style="margin-bottom:20px" >
+                            <p:fieldset legend="Erweiterte Suche" toggleable="true" toggleSpeed="500" style="margin-bottom:20px" >
                                 <div Class="ui-grid-row">
                                     <div Class="ui-grid-col-12" >
                                         <h:panelGroup id="display" >
@@ -89,12 +102,12 @@
                                                 </p:selectOneMenu>
                                             </h:panelGrid>
                                             <div class="align-content ui-widget-header">
-                                                <p:commandButton id="rechercher" value="recherche" icon="ui-icon-search" actionListener="#{demandCategoryController.search()}"  update="growl,:DemandCategoryListForm,:DemandCategoryListForm:datalist" />         
+                                                <p:commandButton id="rechercher" value="Search" icon="ui-icon-search" actionListener="#{demandCategoryController.search()}"  update="growl,:DemandCategoryListForm,:DemandCategoryListForm:datalist" />         
                                                 <p:blockUI block="pageLayout" trigger="rechercher" >
                                                     <h:panelGroup id="displayBlock" >
                                                         <div class="align-center" style="width: 100%;">
                                                             <p:graphicImage  value ="../resources/image/hourglass.gif" width="32" height="32"  /><br></br>
-                                                            <p:outputLabel value="Recherche en cours...." styleClass="text-font"/> 
+                                                            <p:outputLabel value="Research in progress..." styleClass="text-font"/> 
                                                         </div>
                                                     </h:panelGroup>
                                                 </p:blockUI>
@@ -522,11 +535,11 @@
                                    
 
 
-                                    <f:facet name="footer" rendered="#{demandCategoryController.checkUser()}">
-                                        <p:commandButton id="detailButton"   icon="ui-icon-bars" value="#{bundle.Detail}"  update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
-                                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
-                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}"/>
-                                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}"/>
+                                    <f:facet name="footer" >
+                                        <p:commandButton id="detailButton"   icon="fa fa-list" value="#{bundle.Detail}"  update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}" />
+                                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
+                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
+                                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
                                     </f:facet>
                                 </p:dataTable>
                             </p:panel>

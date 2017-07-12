@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Ashen One
+ * @author lcharaf
  */
 @Entity
 public class Ausgabe implements Serializable {
@@ -87,7 +87,7 @@ public class Ausgabe implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Ausgabe[ id=" + id + " ]";
+        return name+"";
     }
     
 }

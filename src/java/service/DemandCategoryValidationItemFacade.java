@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class DemandCategoryValidationItemFacade extends AbstractFacade<DemandCategoryValidationItem> {
@@ -39,6 +39,14 @@ public class DemandCategoryValidationItemFacade extends AbstractFacade<DemandCat
             return 1;
         }
         return -1;
+    }
+    
+    public DemandCategoryValidationItem getValidationItemByDemandAndUser(DemandCategory demandCategory) {
+        List<DemandCategoryValidationItem> demandCategoryValidationItems = em.createQuery("SELECT v FROM DemandCategoryValidationItem v WHERE v.demandCategoryValidation.demandCategory.id=" + demandCategory.getId() + " and v.user.login = '" + SessionUtil.getConnectedUser().getLogin() + "'").getResultList();
+        if (demandCategoryValidationItems != null && demandCategoryValidationItems.size() > 0) {
+            return demandCategoryValidationItems.get(0);
+        }
+        return null;
     }
 
     public List<DemandCategoryValidationItem> findByValidation(DemandCategoryValidation demandCategoryValidation) {

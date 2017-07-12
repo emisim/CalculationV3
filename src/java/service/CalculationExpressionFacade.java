@@ -21,7 +21,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
@@ -41,9 +41,11 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
    
 
   
+    //Wichtig für die Evaluation unsere Expression
     public Object evalFunction(String expression , Object input) throws ScriptException {
         System.out.println("haa expression ==> "+expression);
         if(input!=null && input instanceof DemandCategory){
+            // ALlle Input sinbd als Object hier gespeicherts
             getJsEngine().put("demandCategory", (DemandCategory)input);
         }
         Object obj= getJsEngine().eval(expression);
@@ -69,6 +71,10 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
         return em;
     }
     
+    
+    
+    
+    // ALles drunter wird nicht benutzt
      public static List<String> extracteService(String expression) {
         return extracteService(expression, ";", ";");
     }

@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Ashen One
+ * @author lcharaf
  */
 @Entity
 public class Prozess implements Serializable {
@@ -86,7 +86,7 @@ public class Prozess implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Prozess[ id=" + id + " ]";
+        return name+"";
     }
     
 }

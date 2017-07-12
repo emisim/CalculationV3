@@ -121,7 +121,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
         demandCategorys = em.createQuery(query).getResultList();
         if (demandCategorys.isEmpty()) {
-            JsfUtil.addErrorMessage("Aucun résultat trouvé");
+            JsfUtil.addErrorMessage("Kein Ergebnis");
         }
 
         return demandCategorys;

@@ -12,7 +12,9 @@ import bean.Departement;
 import bean.DepartementCriteria;
 import bean.DepartementCriteriaItem;
 import bean.DepartementDetail;
+import bean.User;
 import controler.util.SearchUtil;
+import controler.util.SessionUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,7 +25,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteria> {
@@ -114,6 +116,13 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         
         remove(criteria);
      
+    }
+
+    public List<DepartementCriteria> findByUser() {
+        
+        User connectedUser = SessionUtil.getConnectedUser();
+        String requette = "select dep from DepartementCriteria dep where dep.departement.id = '"+connectedUser.getDepartement().getId()+"'";
+        return em.createQuery(requette).getResultList();
     }
 
 }

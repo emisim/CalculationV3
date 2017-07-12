@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
 
 /**
  *
- * @author moulaYounes
+ * @author lcharaf
  */
 @Entity
 public class User implements Serializable {

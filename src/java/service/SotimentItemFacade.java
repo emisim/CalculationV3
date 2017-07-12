@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class SotimentItemFacade extends AbstractFacade<SotimentItem> {

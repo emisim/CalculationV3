@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Ashen One
+ * @author lcharaf
  */
 @Stateless
 public class KatalogartFacade extends AbstractFacade<Katalogart> {

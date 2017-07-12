@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class CorrectionSchluesselFacade extends AbstractFacade<CorrectionSchluessel> {

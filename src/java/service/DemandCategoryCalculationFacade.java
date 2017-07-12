@@ -25,7 +25,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author lcharaf
  */
 @Stateless
 public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCategoryCalculation> {
@@ -41,6 +41,17 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     public static void calculateAnzahlBestandArtikel(DemandCategory selected) {
         selected.setAnzahlBestandArtikel(selected.getAnzahlGesamtArtikel() - selected.getAnzahlNeueArtikel());
     }
+    
+    //Calculate CorrectionschluesselAufwand Allgemeine Änderung
+    
+    
+    // Hier soll noch AnzahlGesamtProdukt berechnet werden abhängig von SOrtimentfaktor soll noch defineirt werden
+    
+    public static void calculateAnzahlGesamtProdukt(DemandCategory selected) {
+        
+        selected.setAnzahlGesamtProdukt(selected.getAnzahlGesamtArtikel() );       
+    }
+
 
     public static void calculateAnzahlBestandProdukt(DemandCategory selected) {
         selected.setAnzahlBestandProdukt(selected.getAnzahlGesamtProdukt() - selected.getAnzahlNeueProdukt());
@@ -71,6 +82,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         return em.createQuery(query).getResultList();
     }
 
+    //Hier werden alle Calculation gesucht oder gespeichert
     public List<DemandCategoryCalculation> save(DemandCategory demandCategory, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation, boolean similuer, boolean isSave) throws ScriptException {
         List<DemandCategoryCalculation> res = new ArrayList();
         List<DepartementCriteria> departementCriterias = departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(demandCategoryDepartementCalculation.getDepartement());

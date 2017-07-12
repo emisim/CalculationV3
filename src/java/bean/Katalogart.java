@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Ashen One
+ * @author lcharaf
  */
 @Entity
 public class Katalogart implements Serializable {
@@ -86,7 +86,7 @@ public class Katalogart implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Katalogart[ id=" + id + " ]";
+        return name+"";
     }
     
 }
