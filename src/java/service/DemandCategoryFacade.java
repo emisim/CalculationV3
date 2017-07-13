@@ -8,6 +8,7 @@ package service;
 
 import bean.DemandCategory;
 import bean.Departement;
+import bean.Sortiment;
 import bean.SotimentItem;
 import bean.User;
 import controler.util.AccessDepartement;
@@ -52,7 +53,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
-        prepareSave(demandCategory,isSave);
+        prepareSave(demandCategory, isSave);
         if (!simulation) {
             if (isSave) {
                 create(demandCategory);
@@ -61,7 +62,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             }
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
-        sotimentItemFacade.save(sotimentItems, demandCategory, simulation,isSave);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
         demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
 
     }
@@ -96,7 +97,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
-        String query = "SELECT d from DemandCategory d inner join d.sotimentItems s WHERE 1=1";
+        List<SotimentItem> myItems = new ArrayList<>();
+        String query = "SELECT d from DemandCategory d WHERE 1=1";
         if (demandCategory != null) {
             if (demandCategory.getProduct() != null) {
                 query += SearchUtil.addConstraint("d", "product.id", "=", demandCategory.getProduct().getId());
@@ -119,24 +121,38 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
-            //if (sotimentItems != null && !sotimentItems.isEmpty()) {
-                System.out.println("  hahahahah  "+sotimentItems);
-               
-                for (String sotimentItem : sotimentItems) {
-//                    System.out.println(" jbdnkjbdkjbdkjdbskj "+sotimentItem.getId());
-                    query += " and s.id = "+sotimentItem;
-                
+            demandCategorys = em.createQuery(query).getResultList();
+            List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
+            if (demandCategorys != null && !demandCategorys.isEmpty() && sotimentItems != null && !sotimentItems.isEmpty()) {
+                System.out.println("items avant :::: " + sotimentItems);
+                myItems = convertToLong(sotimentItems);
+                System.out.println("items aprés :::: " + myItems);
+                for (DemandCategory loadedDemandCategory : demandCategorys) {
+                    List<SotimentItem> items = sotimentItemFacade.findByDemandeCategory(loadedDemandCategory);
+                    if (myItems.containsAll(items)) {
+                        System.out.println("it conatains :::: true");
+                        demandCategorysWithSortiements.add(loadedDemandCategory);
+                    }
                 }
-           // }
+            }
+            if (!demandCategorysWithSortiements.isEmpty()) {
+                demandCategorys = demandCategorysWithSortiements;
+            }
         }
-
-        System.out.println("search query ::: " + query);
-        demandCategorys = em.createQuery(query).getResultList();
-        if (demandCategorys.isEmpty()) {
+        System.out.println("query ::::::: " + query);
+        if (demandCategorys != null && demandCategorys.isEmpty()) {
             JsfUtil.addErrorMessage("Aucun résultat trouvé");
         }
 
         return demandCategorys;
+    }
+
+    private List<SotimentItem> convertToLong(List<String> sotiementItems) {
+        List<SotimentItem> sotimentItemss = new ArrayList<>();
+        for (String sotiementItem : sotiementItems) {
+            sotimentItemss.add(new SotimentItem(Long.valueOf(sotiementItem), new Sortiment(), new DemandCategory()));
+        }
+        return sotimentItemss;
     }
 
     public DemandCategoryFacade() {
