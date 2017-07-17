@@ -14,6 +14,7 @@ import controler.util.SessionUtil;
 import service.DemandCategoryFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +54,9 @@ public class DemandCategoryController implements Serializable {
     private service.DepartementFacade departementFacade;
     @EJB
     private DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
+    @EJB
+    private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
+    
     private List<DemandCategory> items = null;
     private DemandCategory selected;
     private DemandCategory selectedForSearch;
@@ -70,6 +74,8 @@ public class DemandCategoryController implements Serializable {
 
     public DemandCategoryController() {
     }
+    
+    
 
     public void simuler() throws ScriptException {
         demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
@@ -119,12 +125,33 @@ public class DemandCategoryController implements Serializable {
         DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
 
     }
+    
+    
+    public void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt() {
+        selected.setSotimentItems(sotimentItems);
+        DemandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(selected);
+    }
+    
+    public void calculAnzahlBestandArtikelAndAnzahlNeueProdukt() {
+        selected.setSotimentItems(sotimentItems);
+        DemandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlNeueProdukt(selected);
+    }
+    
+    
+    
 
     public void calculAnzahlBestandProdukt() {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
     
-
+    
+     public void calculAnzahlNeuProdukt() {
+         selected.setSotimentItems(sotimentItems);
+        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
+    }
+    
+    
+  
     public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;
@@ -152,7 +179,11 @@ public class DemandCategoryController implements Serializable {
     public void addSortimentItem() {
 
         System.out.println("hahowa wert : " + sortimentItem.getWert());
-        sotimentItems.add(sortimentItemFacade.clone(sortimentItem, sotimentItems));
+
+        int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
+        if(res < 0)
+            JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
+        
     }
 
     public DemandCategory getSelectedForSearch() {

@@ -11,6 +11,7 @@ import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
 import bean.DepartementCriteria;
+import bean.SotimentItem;
 import controler.util.SearchUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
     private @EJB
     DepartementCriteriaFacade departementCriteriaFacade;
+    
+    private @EJB
+    SotimentItemFacade sortimentItemFacade;
 
     public static void calculateAnzahlBestandArtikel(DemandCategory selected) {
         selected.setAnzahlBestandArtikel(selected.getAnzahlGesamtArtikel() - selected.getAnzahlNeueArtikel());
@@ -60,6 +64,75 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     public static void calculateAnzahlSonderSeiten(DemandCategory selected) {
         selected.setAnzahlSonderSeiten((int) (0.1 * selected.getUmfang()));
     }
+    
+    
+    public static void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(DemandCategory selected) {        
+        calculateAnzahlBestandArtikel(selected);
+        
+        BigDecimal summ = summSortiment(selected);
+        if (summ.compareTo(new BigDecimal(0)) != 0 ){
+            int sortimentFaktor = (int) (new Double(selected.getAnzahlGesamtArtikel()) / summ.doubleValue());
+        
+            selected.setAnzahlGesamtProdukt(sortimentFaktor);
+            System.out.println(" hha l faktor dyalna " + sortimentFaktor);
+            System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
+        }
+        
+    }
+    
+    
+    public static void calculAnzahlBestandArtikelAndAnzahlNeueProdukt(DemandCategory selected) {        
+        calculateAnzahlBestandArtikel(selected);
+        
+        BigDecimal summ = summSortiment(selected);
+        if (summ.compareTo(new BigDecimal(0)) != 0 ){
+            int sortimentFaktor = (int) (new Double(selected.getAnzahlNeueArtikel()) / summ.doubleValue());
+        
+            selected.setAnzahlNeueProdukt(sortimentFaktor);
+            System.out.println(" hha l faktor dyalna " + sortimentFaktor);
+            System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
+        }
+        
+    }
+    
+    
+    
+    
+    
+    public static void calculAnzahlNeuProdukt(DemandCategory selected) {     
+        
+        
+        BigDecimal summ = summSortiment(selected);
+        if (summ.compareTo(new BigDecimal(0)) != 0 ){
+             BigDecimal sortimentFaktor = new BigDecimal(selected.getAnzahlNeueArtikel()).divide(summ);
+            selected.setAnzahlNeueProdukt(sortimentFaktor.intValue());
+            
+             System.out.println("haa le resultat dyl produkt gesamt " + sortimentFaktor);
+        }
+    }
+  
+  
+    
+    public static BigDecimal summSortiment(DemandCategory selected) {
+        List<SotimentItem> sotimentItems = selected.getSotimentItems();
+       BigDecimal summe =new BigDecimal("0");
+       if(sotimentItems == null  || sotimentItems.isEmpty()){
+           return summe;
+    }
+        for (SotimentItem sotimentItem : sotimentItems) {
+            summe =summe.add(percentValueProductSchluessel(sotimentItem));
+        }
+        System.out.println("haa somme " + summe);
+        return summe;
+    }
+
+    public static BigDecimal percentValueProductSchluessel(SotimentItem sotimentItem) {
+        BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        return (percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel()));
+    }
+    
+    
+    
 
     public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected) {
         selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten());
@@ -153,6 +226,15 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
        
         return new DemandCategoryCalculation();
     }
+     
+     
+     public  int addSortimentItem(DemandCategory selected, List<SotimentItem> sotimentItems, SotimentItem sotimentItem){
+         if(summSortiment(selected).add(percentValueProductSchluessel(sotimentItem)).compareTo(new BigDecimal(100)) <= 0){
+        sotimentItems.add(sortimentItemFacade.clone(sotimentItem, sotimentItems));
+        return 1;
+        }
+        return -1;
+     }
 
     private BigDecimal calculerSum(List<DemandCategoryCalculationItem> demandCategoryCalculationItems) {
         BigDecimal sum = new BigDecimal(0);
