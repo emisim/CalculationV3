@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class DemandCategory implements Serializable {
@@ -152,10 +152,10 @@ public class DemandCategory implements Serializable {
     private Date liefertermin = new Date();
 
     //Bearbeitungszeit
-    private int bearbeitungszeit = 18;
+    private int bearbeitungszeit = 3;
 
     //Beteiligten Anzahl die die Initialcosts beinflüssen
-    private int anzahlBeteiligten = 19;
+    private int anzahlBeteiligten = 2;
 
     //Mitglieder Anzahl
     private int anzahlMitglieder = 20;

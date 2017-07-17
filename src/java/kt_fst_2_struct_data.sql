@@ -31,7 +31,7 @@ CREATE TABLE `artderweiterverarbeitung` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,7 +53,7 @@ CREATE TABLE `auflage` (
 
 CREATE TABLE `auflageseitencovermatrix` (
   `ID` bigint(20) NOT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL,
+  `PRICE` decimal(38,2) DEFAULT NULL,
   `AUFLAGE_ID` int(11) DEFAULT NULL,
   `COVER_ID` varchar(255) DEFAULT NULL,
   `SEITEN_ID` bigint(20) DEFAULT NULL
@@ -68,7 +68,7 @@ CREATE TABLE `auflageseitencovermatrix` (
 CREATE TABLE `ausgabe` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,0) DEFAULT NULL
+  `VALUEE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,7 +80,7 @@ CREATE TABLE `ausgabe` (
 CREATE TABLE `bindung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -138,7 +138,7 @@ INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
 
 CREATE TABLE `configurationitem` (
   `ID` bigint(20) NOT NULL,
-  `DEFAULTVALUE` decimal(38,0) DEFAULT NULL,
+  `DEFAULTVALUE` decimal(38,2) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `CONFIGURATION_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -159,7 +159,7 @@ INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID
 CREATE TABLE `correctionschluessel` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(38,0) DEFAULT NULL
+  `WERT` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -171,7 +171,7 @@ CREATE TABLE `correctionschluessel` (
 CREATE TABLE `cover` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -206,8 +206,8 @@ CREATE TABLE `demandcategory` (
   `NBRTOTALVALIDATION` int(11) DEFAULT NULL,
   `PERCENTSEITENFAKTOR` int(11) DEFAULT NULL,
   `SEITENANZAHL` int(11) DEFAULT NULL,
-  `SUMMDRUCK` decimal(38,0) DEFAULT NULL,
-  `SUMMTOTAL` decimal(38,0) DEFAULT NULL,
+  `SUMMDRUCK` decimal(38,2) DEFAULT NULL,
+  `SUMMTOTAL` decimal(38,2) DEFAULT NULL,
   `TEILNEHMERZAHL` int(11) DEFAULT NULL,
   `UMFANG` int(11) DEFAULT NULL,
   `UMSCHLAG` tinyint(1) DEFAULT '0',
@@ -243,7 +243,7 @@ CREATE TABLE `demandcategory` (
 
 CREATE TABLE `demandcategorycalculation` (
   `ID` bigint(20) NOT NULL,
-  `SUMME` decimal(38,0) DEFAULT NULL,
+  `SUMME` decimal(38,2) DEFAULT NULL,
   `VALIDE` tinyint(1) DEFAULT '0',
   `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
@@ -258,8 +258,8 @@ CREATE TABLE `demandcategorycalculation` (
 CREATE TABLE `demandcategorycalculationitem` (
   `ID` bigint(20) NOT NULL,
   `CALCULTAED` tinyint(1) DEFAULT '0',
-  `PRICE` decimal(38,0) DEFAULT NULL,
-  `PRICEGLOBAL` decimal(38,0) DEFAULT NULL,
+  `PRICE` decimal(38,2) DEFAULT NULL,
+  `PRICEGLOBAL` decimal(38,2) DEFAULT NULL,
   `DEMANDCATEGORYCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -272,7 +272,7 @@ CREATE TABLE `demandcategorycalculationitem` (
 
 CREATE TABLE `demandcategorydepartementcalculation` (
   `ID` bigint(20) NOT NULL,
-  `SUMME` decimal(38,0) DEFAULT NULL,
+  `SUMME` decimal(38,2) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -376,7 +376,7 @@ INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRIC
 CREATE TABLE `farbigkeit` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -397,7 +397,7 @@ INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 CREATE TABLE `formatauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -409,7 +409,7 @@ CREATE TABLE `formatauswaehlen` (
 CREATE TABLE `katalogart` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,0) DEFAULT NULL
+  `VALUEE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -421,7 +421,7 @@ CREATE TABLE `katalogart` (
 CREATE TABLE `konzeptbearbeitungfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
-  `WERT` decimal(38,0) DEFAULT NULL
+  `WERT` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -433,7 +433,7 @@ CREATE TABLE `konzeptbearbeitungfaktor` (
 CREATE TABLE `layout` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,0) DEFAULT NULL
+  `VALUEE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -445,7 +445,7 @@ CREATE TABLE `layout` (
 CREATE TABLE `mitgliederkorrekturfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
-  `WERT` decimal(38,0) DEFAULT NULL
+  `WERT` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -457,7 +457,7 @@ CREATE TABLE `mitgliederkorrekturfaktor` (
 CREATE TABLE `papiermaterialauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -479,7 +479,7 @@ INSERT INTO `papiermaterialauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 CREATE TABLE `participantfaktor` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(38,0) DEFAULT NULL
+  `WERT` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -516,7 +516,7 @@ INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
 CREATE TABLE `prozess` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,0) DEFAULT NULL
+  `VALUEE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -529,7 +529,7 @@ CREATE TABLE `schluessel` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `WERT` decimal(38,0) DEFAULT NULL,
+  `WERT` decimal(38,2) DEFAULT NULL,
   `SCHLUESSELTYPE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -595,7 +595,7 @@ CREATE TABLE `seiten` (
 
 CREATE TABLE `sequence` (
   `SEQ_NAME` varchar(50) NOT NULL,
-  `SEQ_COUNT` decimal(38,0) DEFAULT NULL
+  `SEQ_COUNT` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -613,11 +613,11 @@ INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
 
 CREATE TABLE `sortiment` (
   `ID` bigint(20) NOT NULL,
-  `ARTIKELPERPAGE` decimal(38,0) DEFAULT NULL,
-  `LKSCHLUESSEL` decimal(38,0) DEFAULT NULL,
-  `MKSCHLUESSEL` decimal(38,0) DEFAULT NULL,
+  `ARTIKELPERPAGE` decimal(38,2) DEFAULT NULL,
+  `LKSCHLUESSEL` decimal(38,2) DEFAULT NULL,
+  `MKSCHLUESSEL` decimal(38,2) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `PRODUCTSCHLUESSEL` decimal(38,0) DEFAULT NULL
+  `PRODUCTSCHLUESSEL` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -651,7 +651,7 @@ INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`,
 
 CREATE TABLE `sotimentitem` (
   `ID` bigint(20) NOT NULL,
-  `WERT` decimal(38,0) DEFAULT NULL,
+  `WERT` decimal(38,2) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `SORTIMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -666,7 +666,7 @@ CREATE TABLE `umschlagfarbigkeit` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -678,7 +678,7 @@ CREATE TABLE `umschlagfarbigkeit` (
 CREATE TABLE `umschlagpapierauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -721,7 +721,7 @@ INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`
 CREATE TABLE `veredlung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,0) DEFAULT NULL
+  `PRICE` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -733,7 +733,7 @@ CREATE TABLE `veredlung` (
 CREATE TABLE `wechselfassungvariantfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
-  `WERT` decimal(38,0) DEFAULT NULL
+  `WERT` decimal(38,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

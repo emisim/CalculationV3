@@ -52,11 +52,12 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
                                                        var="sortimentItem"
-                                                       itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
+                                                       itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name} "/>
+                                                       <!--itemValue="# {sortimentItem}" itemLabel="# {sortimentItem.name} (# {sortimentItem.productSchluessel}) "/>-->
                                     </p:selectOneMenu>
 
-                                    <p:outputLabel value="Mix" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-                                    <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
+                                    <!--<p:outputLabel value="Mischsortiment:" for="mix" rendered="# {demandCategoryController.renderAttribute('sortiment')}" />-->
+                                    <p:commandButton id="mix" value="Mischsortiment"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_layout}" for="layout" rendered="#{demandCategoryController.renderAttribute('layout')}" />
@@ -102,11 +103,6 @@
                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn()}" update="anzahlSonderSeiten, anzahlGenerierungUpdateSeiten" />
                                     </p:inputText>
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
-                                    <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
-
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtSeiten}" for="anzahlGesamtSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}" />
-                                    <p:inputText id="anzahlGesamtSeiten" value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_percentSeitenFaktor}" for="percentSeitenFaktor" rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}" />
                                     <p:inputText id="percentSeitenFaktor" value="#{demandCategoryController.selected.percentSeitenFaktor}" title="#{bundle.CreateDemandCategoryTitle_percentSeitenFaktor}" rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}" />
@@ -127,12 +123,12 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtArtikel}" for="anzahlGesamtArtikel" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtArtikel')}" />
                                     <p:inputText id="anzahlGesamtArtikel" value="#{demandCategoryController.selected.anzahlGesamtArtikel}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtArtikel}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtArtikel')}" >
-                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandArtikel()}" update="anzahlBestandArtikel" />
+                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandArtikelAndAnzahlGesamtProdukt()}" update="anzahlBestandArtikel , anzahlGesamtProdukt"   />
                                     </p:inputText>
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlNeueArtikel}" for="anzahlNeueArtikel" rendered="#{demandCategoryController.renderAttribute('anzahlNeueArtikel')}" />
                                     <p:inputText id="anzahlNeueArtikel" value="#{demandCategoryController.selected.anzahlNeueArtikel}" title="#{bundle.CreateDemandCategoryTitle_anzahlNeueArtikel}" rendered="#{demandCategoryController.renderAttribute('anzahlNeueArtikel')}" >
-                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandArtikel()}" update="anzahlBestandArtikel" />
+                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandArtikelAndAnzahlNeueProdukt()}" update="anzahlBestandArtikel , anzahlNeueProdukt" />
                                     </p:inputText>
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlBestandArtikel}" for="anzahlBestandArtikel" rendered="#{demandCategoryController.renderAttribute('anzahlBestandArtikel')}" />
@@ -148,14 +144,13 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlNeueProdukt}" for="anzahlNeueProdukt" rendered="#{demandCategoryController.renderAttribute('anzahlNeueProdukt')}" />
                                     <p:inputText id="anzahlNeueProdukt" value="#{demandCategoryController.selected.anzahlNeueProdukt}" title="#{bundle.CreateDemandCategoryTitle_anzahlNeueProdukt}" rendered="#{demandCategoryController.renderAttribute('anzahlNeueProdukt')}" >
-                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandProdukt()}" update="anzahlBestandProdukt" />
                                     </p:inputText>
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlBestandProdukt}" for="anzahlBestandProdukt" rendered="#{demandCategoryController.renderAttribute('anzahlBestandProdukt')}" />
                                     <p:inputText id="anzahlBestandProdukt" value="#{demandCategoryController.selected.anzahlBestandProdukt}" title="#{bundle.CreateDemandCategoryTitle_anzahlBestandProdukt}" rendered="#{demandCategoryController.renderAttribute('anzahlBestandProdukt')}" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlLieferantGesamt}" for="anzahlLieferantGesamt" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}" />
-                                    <p:inputText id="anzahlLieferantGesamt" value="#{demandCategoryController.selected.anzahlLieferantGesamt}" title="#{bundle.CreateDemandCategoryTitle_anzahlLieferantGesamt}" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}" />
+                                    <p:inputText id="anzahlLieferantGesamt" value="#{demandCategoryController.selected.anzahlLieferantGesamt} " title="#{bundle.CreateDemandCategoryTitle_anzahlLieferantGesamt}" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlLieferantNeu}" for="anzahlLieferantNeu" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantNeu')}" />
                                     <p:inputText id="anzahlLieferantNeu" value="#{demandCategoryController.selected.anzahlLieferantNeu}" title="#{bundle.CreateDemandCategoryTitle_anzahlLieferantNeu}" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantNeu')}" />
@@ -333,6 +328,17 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summTotal}" for="summTotal" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true }" />
                                     <p:inputText id="summTotal" value="#{demandCategoryController.selected.summTotal}" title="#{bundle.CreateDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true }" />
+
+                                    
+                                    
+                                                                        
+                                    
+                                    
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
+                                    <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
+
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtSeiten}" for="anzahlGesamtSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}" />
+                                    <p:inputText id="anzahlGesamtSeiten" value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}" />   
 
                                 </h:panelGrid>
                                 <div class="align-center ui-widget-header">

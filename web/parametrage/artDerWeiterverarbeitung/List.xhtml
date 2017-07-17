@@ -22,9 +22,9 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle_price}"/>
+                                <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle_label}"/>
                             </f:facet>
-                            <h:outputText value="#{item.price}"/>
+                            <h:outputText value="#{item.label}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -32,11 +32,13 @@
                             </f:facet>
                             <h:outputText value="#{item.description}"/>
                         </p:column>
+                        
+                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle_label}"/>
+                                <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle_price}"/>
                             </f:facet>
-                            <h:outputText value="#{item.label}"/>
+                            <h:outputText value="#{item.price}"/>
                         </p:column>
                        
                         <f:facet name="footer">

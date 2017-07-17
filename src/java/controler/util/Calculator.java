@@ -15,7 +15,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author pc&
+ * @author
  */
 public class Calculator {
 

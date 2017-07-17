@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Ashen One
+ * @author
  */
 @Entity
 public class Layout implements Serializable {

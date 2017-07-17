@@ -27,7 +27,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author
  */
 @Stateless
 public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<DemandCategoryDepartementCalculation> {
@@ -80,6 +80,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
                 System.out.println("hana savite demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
             }
 
+            //Save calculation
             demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.save(demandCategory, demandCategoryDepartementCalculation, similuer,isSave));
             demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
             if (!similuer) {

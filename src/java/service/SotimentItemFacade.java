@@ -6,8 +6,10 @@
 package service;
 
 import bean.DemandCategory;
+import bean.Sortiment;
 import bean.SotimentItem;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,7 +17,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Younes
+ * @author
  */
 @Stateless
 public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
@@ -41,7 +43,7 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
     }
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) {
-       
+
         if (sotimentItems == null || sotimentItems.isEmpty()) {
             return;
         } else if (sotimentItems.size() == 1) {
@@ -59,6 +61,18 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         }
     }
 
+    public List<SotimentItem> findBySortiement(Sortiment sortiment) {
+        List<SotimentItem> sotimentItems = new ArrayList<>();
+        if (sortiment != null && sortiment.getId() != null) {
+            System.out.println("je suis dans findBySortiement");
+            String query = "SELECT s FROM SotimentItem s WHERE s.sortiment.id = " + sortiment.getId();
+            System.out.println(query);
+            sotimentItems = em.createQuery(query).getResultList();
+        }
+        return sotimentItems;
+    }
+
+  
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -69,10 +83,10 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
     }
 
     public List<SotimentItem> findByDemandeCategory(DemandCategory demandCategory) {
-        
-        String requette = "select item from SotimentItem item where item.demandCategory.id = '"+demandCategory.getId()+"'";
+
+        String requette = "select item from SotimentItem item where item.demandCategory.id = '" + demandCategory.getId() + "'";
         return em.createQuery(requette).getResultList();
-    
+
     }
 
 }

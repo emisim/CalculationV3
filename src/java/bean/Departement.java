@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author pc&
+ * @author
  */
 @Entity
 public class Departement implements Serializable {
