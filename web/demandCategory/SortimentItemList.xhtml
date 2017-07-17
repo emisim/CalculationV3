@@ -6,17 +6,17 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+
     <ui:composition>
 
 
-        <p:dialog id="DemandCategoryValidationItemListDlg" widgetVar="DemandCategoryValidationItemListDialog" modal="true" resizable="false" appendTo="@(body)" header="Validation Items">
-            
-            <h:form id="DemandCategoryValidationItemListForm" style="width: 500px">
-                <p:panel header="#{bundle.ListDemandCategoryValidationItemTitle}">
-                    <p:dataTable id="datalist" value="#{demandCategoryController.demandCategoryValidationItems}" var="item"
-                                 
+        <p:dialog id="SortimentItemListDlg" widgetVar="SortiementItemListDialog" modal="true" resizable="false" appendTo="@(body)" header="Sortiemnt Items">
+
+
+            <h:form id="SotimentItemListForm" style="width: 900px">
+                <p:panel header="#{bundle.ListSotimentItemTitle}">
+                    <p:dataTable id="datalist" value="#{demandCategoryController.detailSotimentItems}" var="item"
                                  paginator="true"
-                                 
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
@@ -26,24 +26,24 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_sysDate}"/>
+                                <h:outputText value="#{bundle.ListSotimentItemTitle_sortiment}"/>
                             </f:facet>
-                            <h:outputText value="#{item.sysDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
+                            <h:outputText value="#{item.sortiment.name}"/>
                         </p:column>
+
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_user}"/>
+                                <h:outputText value="#{bundle.ListSotimentItemTitle_wert}"/>
                             </f:facet>
-                            <h:outputText value="#{item.user.nom} - #{item.user.admin==1?'Admin':''}"/>
+                            <h:outputText value="#{item.wert}"/>
                         </p:column>
-                        
+
+
                     </p:dataTable>
                 </p:panel>
             </h:form>
-
-            </p:dialog>
+        </p:dialog>
     </ui:composition>
+
 
 </html>

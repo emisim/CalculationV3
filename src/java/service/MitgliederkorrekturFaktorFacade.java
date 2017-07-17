@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Stateless
 public class MitgliederkorrekturFaktorFacade extends AbstractFacade<MitgliederkorrekturFaktor> {

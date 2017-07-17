@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class DepartementCriteriaItem implements Serializable {

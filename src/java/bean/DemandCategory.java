@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class DemandCategory implements Serializable {

@@ -14,7 +14,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class UmschlagPapierAuswaehlen implements Serializable {

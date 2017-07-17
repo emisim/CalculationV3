@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class DemandCategoryValidation implements Serializable {

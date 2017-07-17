@@ -15,19 +15,19 @@
 
         <ui:define name="body">
             <div Class="ui-grid ui-grid-responsive" >
-                 <div class="ui-grid-row">
-                <div class="ui-grid-col-12 " >
-                    <h:form>
-                      <p:breadCrumb>
-                        <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
-                        <p:menuitem value="Demand category " url="#" />
-                        <p:menuitem value="History" url="#" />
-                    </p:breadCrumb>   
-                    </h:form>
-                   
-                </div>
-            </div><br></br>
-            
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-12 " >
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                                <p:menuitem value="Demand category " url="#" />
+                                <p:menuitem value="History" url="#" />
+                            </p:breadCrumb>   
+                        </h:form>
+
+                    </div>
+                </div><br></br>
+
                 <div Class="ui-grid-row">
                     <div Class="ui-grid-col-12">
                         <h:form id="DemandCategorySearchForm">
@@ -56,8 +56,14 @@
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
                                                                    var="sortimentItem"
-                                                                   itemValue="#{sortimentItem}"/>
+                                                                   itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
+                                                    <p:ajax process="sortiment" listener="#{demandCategoryController.findSortiementItemsBySortiement()}" update="sortimentItem"/>
                                                 </p:selectOneMenu>
+
+                                                <p:outputLabel value="sortiement item" for="sortimentItem" rendered="#{demandCategoryController.renderAttributeForList('sortiment')}" />
+                                                <p:selectCheckboxMenu id="sortimentItem"  label="Sortiement items"   value="#{demandCategoryController.sotimentItemsForCheckBox}" filter="true" filterMatchMode="startsWith"  multiple="true" rendered="#{demandCategoryController.renderAttributeForList('sortiment')}" >
+                                                    <f:selectItems value="#{demandCategoryController.sotimentItemsForSearch}" var="typeT" itemLabel="#{typeT.value}" itemValue="#{typeT.id}" />
+                                                </p:selectCheckboxMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttributeForList('correctionSchluessel')}" />
                                                 <p:selectOneMenu id="correctionSchluessel" value="#{demandCategoryController.selectedForSearch.correctionSchluessel}" rendered="#{demandCategoryController.renderAttributeForList('correctionSchluessel')}" >
@@ -68,7 +74,6 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mitgliederkorrekturFaktor}" for="mitgliederkorrekturFaktor" rendered="#{demandCategoryController.renderAttributeForList('mitgliederkorrekturFaktor')}" />
-
                                                 <p:selectOneMenu id="mitgliederkorrekturFaktor" value="#{demandCategoryController.selectedForSearch.mitgliederkorrekturFaktor}" rendered="#{demandCategoryController.renderAttributeForList('mitgliederkorrekturFaktor')}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{mitgliederkorrekturFaktorController.itemsAvailableSelectOne}"
@@ -184,7 +189,7 @@
                                         <h:outputText value="#{item.ausgabe.name}"/>
                                     </p:column>
 
-                                    
+
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('umfang')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_umfang}"/>
@@ -526,13 +531,14 @@
 
                                     <p:column styleClass="align-center" rendered="#{demandCategoryController.checkUser()}">
                                         <f:facet name="header">
-                                            <h:outputText value="validate"/>
+                                            <h:outputText value="Action"/>
                                         </f:facet>
-                                        <p:commandButton id="valider"   icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
-                                        <p:commandButton id="detail" value="detail" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
+                                        <p:commandButton id="valider" title="Valider" icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
+                                        <p:commandButton id="detailValider" icon="fa fa-bars" title="Detail Validation" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
+                                        <p:commandButton id="detailSortiemnt" icon="fa fa-info-circle" title="Detail Sortiment" actionListener="#{demandCategoryController.prepareSortimentItems(item)}" update=":SotimentItemListForm" oncomplete="PF('SortiementItemListDialog').show()" />
                                     </p:column>
-                                    
-                                   
+
+
 
 
                                     <f:facet name="footer" >
@@ -555,6 +561,7 @@
             <ui:include src="Detail.xhtml"/>
             <ui:include src="View.xhtml"/>
             <ui:include src="ValidationItemList.xhtml"/>
+            <ui:include src="SortimentItemList.xhtml"/>
         </ui:define>
     </ui:composition>
 

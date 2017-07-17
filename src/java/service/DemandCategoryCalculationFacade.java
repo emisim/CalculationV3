@@ -25,7 +25,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Stateless
 public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCategoryCalculation> {

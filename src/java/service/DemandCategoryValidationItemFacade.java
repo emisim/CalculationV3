@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Stateless
 public class DemandCategoryValidationItemFacade extends AbstractFacade<DemandCategoryValidationItem> {
@@ -51,6 +51,7 @@ public class DemandCategoryValidationItemFacade extends AbstractFacade<DemandCat
 
     public List<DemandCategoryValidationItem> findByValidation(DemandCategoryValidation demandCategoryValidation) {
         String requette = "select item from DemandCategoryValidationItem item where item.demandCategoryValidation.id ="+demandCategoryValidation.getId();
+        System.out.println("hahiya requette : "+requette);
         return em.createQuery(requette).getResultList();
     
     }

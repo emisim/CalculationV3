@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class DemandCategoryValidationItem implements Serializable {

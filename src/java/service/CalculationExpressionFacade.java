@@ -21,7 +21,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Stateless
 public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {

@@ -7,7 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class SotimentItem implements Serializable {
@@ -25,15 +25,20 @@ public class SotimentItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     private Sortiment sortiment;
-    private BigDecimal  wert = new BigDecimal(0);
-    
-    
-    public void save(List<SotimentItem> sortimentItems){
-        
+    private BigDecimal wert = new BigDecimal(0);
+
+    public SotimentItem() {
     }
+
+    public SotimentItem(Long id, Sortiment sortiment, DemandCategory demandCategory) {
+        this.id = id;
+        this.sortiment = sortiment;
+        this.demandCategory = demandCategory;
+    }
+
     @ManyToOne
     private DemandCategory demandCategory;
 
@@ -99,9 +104,7 @@ public class SotimentItem implements Serializable {
 
     @Override
     public String toString() {
-        return   sortiment.getName() + " "+wert;
+        return "SotimentItem{" + "id=" + id + ", sortiment=" + sortiment + ", wert=" + wert + ", demandCategory=" + demandCategory + '}';
     }
 
-    
-    
 }
