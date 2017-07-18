@@ -14,6 +14,7 @@ import controler.util.SessionUtil;
 import service.DemandCategoryFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
+import static service.DemandCategoryCalculationFacade.summSortiment;
 import service.DemandCategoryDepartementCalculationFacade;
 
 @Named("demandCategoryController")
@@ -137,10 +139,10 @@ public class DemandCategoryController implements Serializable {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
 
-    public void calculAnzahlNeuProdukt() {
-        selected.setSotimentItems(sotimentItems);
-        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
-    }
+//    public void calculAnzahlNeuProdukt() {
+//        selected.setSotimentItems(sotimentItems);
+//        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
+//    }
 
     public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
@@ -171,11 +173,13 @@ public class DemandCategoryController implements Serializable {
         int duplica = demandCategoryCalculationFacade.checkItem(sotimentItems, sortimentItem);
         if (duplica > 0) {
             int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
+
+            System.out.println(" hadi la somme des sortiments res = " + res);
             if (res < 0) {
-                JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
+                JsfUtil.addErrorMessage("Die Summe ist größer als 100%!");
             }
         }else{
-            JsfUtil.addErrorMessage("Item deja dans la liste");
+            JsfUtil.addErrorMessage("Diese Sortiment existiert bereit in der Liste!");
         }
 
     }

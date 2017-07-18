@@ -69,8 +69,12 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     public static void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(DemandCategory selected) {        
         calculateAnzahlBestandArtikel(selected);
         
+        
         BigDecimal summ = summSortiment(selected);
+        
+        System.out.println("daba andi f summ f gesamtprodukt : " + summ);
         if (summ.compareTo(new BigDecimal(0)) != 0 ){
+            //Hier werde es durch SUmme von Prozentwert zu devidieren nicht durch Produktschluessel
             int sortimentFaktor = (int) (new Double(selected.getAnzahlGesamtArtikel()) / summ.doubleValue());
         
             selected.setAnzahlGesamtProdukt(sortimentFaktor);
@@ -79,18 +83,18 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         }
         
     }
-    
-    
+
     public static void calculAnzahlBestandArtikelAndAnzahlNeueProdukt(DemandCategory selected) {        
         calculateAnzahlBestandArtikel(selected);
         
         BigDecimal summ = summSortiment(selected);
+        System.out.println("daba andi f summ f neu Produkt: " + summ);
         if (summ.compareTo(new BigDecimal(0)) != 0 ){
             int sortimentFaktor = (int) (new Double(selected.getAnzahlNeueArtikel()) / summ.doubleValue());
         
             selected.setAnzahlNeueProdukt(sortimentFaktor);
             System.out.println(" hha l faktor dyalna " + sortimentFaktor);
-            System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
+            System.out.println("ha selected.setAnzahlNeueProdukt " + selected.getAnzahlGesamtProdukt());
         }
         
     }
@@ -98,21 +102,22 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     
     
     
-    
-    public static void calculAnzahlNeuProdukt(DemandCategory selected) {     
-        
-        
-        BigDecimal summ = summSortiment(selected);
-        if (summ.compareTo(new BigDecimal(0)) != 0 ){
-             BigDecimal sortimentFaktor = new BigDecimal(selected.getAnzahlNeueArtikel()).divide(summ);
-            selected.setAnzahlNeueProdukt(sortimentFaktor.intValue());
-            
-             System.out.println("haa le resultat dyl produkt gesamt " + sortimentFaktor);
-        }
-    }
+//    
+//    public static void calculAnzahlNeuProdukt(DemandCategory selected) {     
+//        
+//        
+//        BigDecimal summ = summSortiment(selected);
+//        if (summ.compareTo(new BigDecimal(0)) != 0 ){
+//             BigDecimal sortimentFaktor = new BigDecimal(selected.getAnzahlNeueArtikel()).divide(summ);
+//            selected.setAnzahlNeueProdukt(sortimentFaktor.intValue());
+//            
+//             System.out.println("haa le resultat dyl produkt gesamt " + sortimentFaktor);
+//        }
+//    }
   
   
     
+    //Summe der Faktor der Sortimente nicht von den SortimentFaktor
     public static BigDecimal summSortiment(DemandCategory selected) {
         List<SotimentItem> sotimentItems = selected.getSotimentItems();
        BigDecimal summe =new BigDecimal("0");
@@ -120,16 +125,55 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
            return summe;
     }
         for (SotimentItem sotimentItem : sotimentItems) {
-            summe =summe.add(percentValueProductSchluessel(sotimentItem));
+            //summe =summe.add(percentValueProductSchluessel(sotimentItem));
+            summe =summe.add((sotimentItem.getWert()));
         }
-        System.out.println("haa somme " + summe);
+        System.out.println("haa somme dyal faktor dyalna multipliés par leur sortiment " + summe);
         return summe;
     }
 
     public static BigDecimal percentValueProductSchluessel(SotimentItem sotimentItem) {
+        //BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal sotimentItem.getWert() " + sotimentItem.getWert());
+        System.out.println("la valeur dyal produktschluessel dyalna sotimentItem.getSortiment().getProductSchluessel() " + sotimentItem.getSortiment().getProductSchluessel());
         BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
-        return (percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel()));
+        System.out.println("la valeur dyal percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel()) " + percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel()));
+        
+        BigDecimal multiplyValueProduktKey = percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel());
+        return multiplyValueProduktKey;
     }
+    
+    
+    public static BigDecimal percentValueLKSchluessel(SotimentItem sotimentItem) {
+        //BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal sotimentItem.getWert() " + sotimentItem.getWert());
+        System.out.println("la valeur dyal LK dyalna sotimentItem.getSortiment().getlKSchluessel() " + sotimentItem.getSortiment().getlKSchluessel());
+        BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal percentwert.multiply(sotimentItem.getSortiment().getlKSchluessel()) " + percentwert.multiply(sotimentItem.getSortiment().getlKSchluessel()));
+        
+        return (percentwert.multiply(sotimentItem.getSortiment().getlKSchluessel()));
+    }
+    
+    public static BigDecimal percentValueMKSchluessel(SotimentItem sotimentItem) {
+        //BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal sotimentItem.getWert() " + sotimentItem.getWert());
+        System.out.println("la valeur dyal MK dyalna sotimentItem.getSortiment().getMKSchluessel() " + sotimentItem.getSortiment().getmKSchluessel());
+        BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal percentwert.multiply(sotimentItem.getSortiment().getmKSchluessel()) " + percentwert.multiply(sotimentItem.getSortiment().getmKSchluessel()));
+        
+        return (percentwert.multiply(sotimentItem.getSortiment().getmKSchluessel()));
+    }
+    
+    public static BigDecimal percentValueArtikelPerPage(SotimentItem sotimentItem) {
+        //BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal sotimentItem.getWert() " + sotimentItem.getWert());
+        System.out.println("la valeur dyal MK dyalna sotimentItem.getSortiment().getArtikelPerPage() " + sotimentItem.getSortiment().getArtikelPerPage());
+        BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+        System.out.println("la valeur dyal percentwert.multiply(sotimentItem.getSortiment().getArtikelPerPage()) " + percentwert.multiply(sotimentItem.getSortiment().getArtikelPerPage()));
+        
+        return (percentwert.multiply(sotimentItem.getSortiment().getArtikelPerPage()));
+    }
+    
     
     
     
@@ -226,15 +270,28 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
        
         return new DemandCategoryCalculation();
     }
+
      
      
      public  int addSortimentItem(DemandCategory selected, List<SotimentItem> sotimentItems, SotimentItem sotimentItem){
          selected.setSotimentItems(sotimentItems);
-         if(summSortiment(selected).add(percentValueProductSchluessel(sotimentItem)).compareTo(new BigDecimal(100)) <= 0){
-        sotimentItems.add(sortimentItemFacade.clone(sotimentItem, sotimentItems));
-        
+         BigDecimal resSumm = summSortiment(selected).add(sotimentItem.getWert());
+         if(resSumm.compareTo(new BigDecimal(100)) <= 0){
+             
+             System.out.println("aatini daba ach wake3 f summ dyal percent wert summSortiment(selected).add(sotimentItem.getWert())" + summSortiment(selected).add(sotimentItem.getWert()));
+         //if(summSortiment(selected).add(percentValueProductSchluessel(sotimentItem)).compareTo(new BigDecimal(100)) <= 0){  
+         
+             //summSortiment(selected).add(percentValueProductSchluessel(sotimentItem));
+             
+             sotimentItems.add(sortimentItemFacade.clone(sotimentItem, sotimentItems));
              System.out.println("werrini la valeur dyal percentValueProductSchluessel" + percentValueProductSchluessel(sotimentItem));
-        return 1;
+             System.out.println("werrini la valeur dyal percentValueLKSchluessel" + percentValueLKSchluessel(sotimentItem));
+             System.out.println("werrini la valeur dyal percentValueMKSchluessel" + percentValueMKSchluessel(sotimentItem));
+             System.out.println("werrini la valeur dyal percentValueArtikelPerPage" + percentValueArtikelPerPage(sotimentItem));
+            
+             
+             System.out.println("werrini la valeur dyal summe Sortiment resSumm" + resSumm);
+             return 1;
         }
         return -1;
      }
