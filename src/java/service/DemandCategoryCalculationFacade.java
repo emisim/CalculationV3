@@ -86,7 +86,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
 
             selected.setAnzahlNeueProdukt(sortimentFaktor);
             System.out.println(" hha l faktor dyalna " + sortimentFaktor);
-            System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
+            System.out.println("ha selected.setAnzahlNeueProdukt " + selected.getAnzahlGesamtProdukt());
         }
 
     }
@@ -111,7 +111,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         for (SotimentItem sotimentItem : sotimentItems) {
             summe = summe.add(percentValueProductSchluessel(sotimentItem, percent));
         }
-        System.out.println("haa somme " + summe);
+        System.out.println("haa somme dyal faktor dyalna multipliés par leur sortiment " + summe);
         return summe;
     }
 

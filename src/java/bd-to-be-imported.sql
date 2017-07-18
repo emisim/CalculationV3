@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 05 Juillet 2017 à 07:30
+-- Généré le :  Mer 19 Juillet 2017 à 02:59
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `kt_fst_2_bin`
+-- Base de données :  `kt_fst_2`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `artderweiterverarbeitung` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53,7 +53,7 @@ CREATE TABLE `auflage` (
 
 CREATE TABLE `auflageseitencovermatrix` (
   `ID` bigint(20) NOT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL,
+  `PRICE` decimal(38,0) DEFAULT NULL,
   `AUFLAGE_ID` int(11) DEFAULT NULL,
   `COVER_ID` varchar(255) DEFAULT NULL,
   `SEITEN_ID` bigint(20) DEFAULT NULL
@@ -68,7 +68,7 @@ CREATE TABLE `auflageseitencovermatrix` (
 CREATE TABLE `ausgabe` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,2) DEFAULT NULL
+  `VALUEE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,8 +80,16 @@ CREATE TABLE `ausgabe` (
 CREATE TABLE `bindung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `bindung`
+--
+
+INSERT INTO `bindung` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
+('Fadenheftung', NULL, NULL),
+('PUR-Bindung', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,6 +102,16 @@ CREATE TABLE `category` (
   `NAME` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `category`
+--
+
+INSERT INTO `category` (`ID`, `NAME`) VALUES
+(1, 'Katalog'),
+(2, 'Fleyer'),
+(3, 'Prospekt'),
+(4, 'BMEcat');
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +123,13 @@ CREATE TABLE `configuration` (
   `DATEAPPLICATION` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `configuration`
+--
+
+INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
+(1, '2012-07-03');
+
 -- --------------------------------------------------------
 
 --
@@ -113,10 +138,17 @@ CREATE TABLE `configuration` (
 
 CREATE TABLE `configurationitem` (
   `ID` bigint(20) NOT NULL,
-  `DEFAULTVALUE` decimal(38,2) DEFAULT NULL,
+  `DEFAULTVALUE` decimal(38,0) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `CONFIGURATION_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `configurationitem`
+--
+
+INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID`) VALUES
+(1, '257', 'std_stz', 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +159,7 @@ CREATE TABLE `configurationitem` (
 CREATE TABLE `correctionschluessel` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(38,2) DEFAULT NULL
+  `WERT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -139,7 +171,7 @@ CREATE TABLE `correctionschluessel` (
 CREATE TABLE `cover` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -174,8 +206,8 @@ CREATE TABLE `demandcategory` (
   `NBRTOTALVALIDATION` int(11) DEFAULT NULL,
   `PERCENTSEITENFAKTOR` int(11) DEFAULT NULL,
   `SEITENANZAHL` int(11) DEFAULT NULL,
-  `SUMMDRUCK` decimal(38,2) DEFAULT NULL,
-  `SUMMTOTAL` decimal(38,2) DEFAULT NULL,
+  `SUMMDRUCK` decimal(38,0) DEFAULT NULL,
+  `SUMMTOTAL` decimal(38,0) DEFAULT NULL,
   `TEILNEHMERZAHL` int(11) DEFAULT NULL,
   `UMFANG` int(11) DEFAULT NULL,
   `UMSCHLAG` tinyint(1) DEFAULT '0',
@@ -203,6 +235,16 @@ CREATE TABLE `demandcategory` (
   `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `demandcategory`
+--
+
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
+(35, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-05', 0, '2017-07-05', 0, 10, 0, '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL),
+(36, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-18', 0, '2017-07-18', 0, 10, 0, '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL),
+(37, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-18', 0, '2017-07-18', 0, 10, 0, '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL),
+(38, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-18', 0, '2017-07-18', 0, 10, 0, '0', '0', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -211,11 +253,25 @@ CREATE TABLE `demandcategory` (
 
 CREATE TABLE `demandcategorycalculation` (
   `ID` bigint(20) NOT NULL,
-  `SUMME` decimal(38,2) DEFAULT NULL,
+  `SUMME` decimal(38,0) DEFAULT NULL,
   `VALIDE` tinyint(1) DEFAULT '0',
   `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategorycalculation`
+--
+
+INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `VALIDE`, `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(23, '2827', 0, 12, 1),
+(24, '1028', 0, 12, 2),
+(25, '2827', 0, 13, 1),
+(26, '1028', 0, 13, 2),
+(27, '0', 0, 17, 1),
+(28, '0', 0, 17, 2),
+(29, '2827', 0, 21, 1),
+(30, '1028', 0, 21, 2);
 
 -- --------------------------------------------------------
 
@@ -226,11 +282,33 @@ CREATE TABLE `demandcategorycalculation` (
 CREATE TABLE `demandcategorycalculationitem` (
   `ID` bigint(20) NOT NULL,
   `CALCULTAED` tinyint(1) DEFAULT '0',
-  `PRICE` decimal(38,2) DEFAULT NULL,
-  `PRICEGLOBAL` decimal(38,2) DEFAULT NULL,
+  `PRICE` decimal(38,0) DEFAULT NULL,
+  `PRICEGLOBAL` decimal(38,0) DEFAULT NULL,
   `DEMANDCATEGORYCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategorycalculationitem`
+--
+
+INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICEGLOBAL`, `DEMANDCATEGORYCALCULATION_ID`, `DEPARTEMENTCRITERIAITEM_ID`) VALUES
+(41, 0, '1285', '2570', 23, 1),
+(42, 0, '1542', '3084', 23, 2),
+(43, 0, '771', '1542', 24, 3),
+(44, 0, '257', '514', 24, 4),
+(45, 0, '1285', '2570', 25, 1),
+(46, 0, '1542', '3084', 25, 2),
+(47, 0, '771', '1542', 26, 3),
+(48, 0, '257', '514', 26, 4),
+(49, 0, '0', '0', 27, 1),
+(50, 0, '0', '0', 27, 2),
+(51, 0, '0', '0', 28, 3),
+(52, 0, '0', '0', 28, 4),
+(53, 1, '1285', '2570', 29, 1),
+(54, 1, '1542', '3084', 29, 2),
+(55, 1, '771', '1542', 30, 3),
+(56, 1, '257', '514', 30, 4);
 
 -- --------------------------------------------------------
 
@@ -240,10 +318,29 @@ CREATE TABLE `demandcategorycalculationitem` (
 
 CREATE TABLE `demandcategorydepartementcalculation` (
   `ID` bigint(20) NOT NULL,
-  `SUMME` decimal(38,2) DEFAULT NULL,
+  `SUMME` decimal(38,0) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategorydepartementcalculation`
+--
+
+INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`) VALUES
+(12, '3855', 35, 1),
+(13, '3855', 36, 1),
+(14, '0', 36, 2),
+(15, '0', 36, 3),
+(16, '0', 36, 4),
+(17, '0', 37, 1),
+(18, '0', 37, 2),
+(19, '0', 37, 3),
+(20, '0', 37, 4),
+(21, '3855', 38, 1),
+(22, '0', 38, 2),
+(23, '0', 38, 3),
+(24, '0', 38, 4);
 
 -- --------------------------------------------------------
 
@@ -255,6 +352,16 @@ CREATE TABLE `demandcategoryvalidation` (
   `ID` int(11) NOT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategoryvalidation`
+--
+
+INSERT INTO `demandcategoryvalidation` (`ID`, `DEMANDCATEGORY_ID`) VALUES
+(2, NULL),
+(4, NULL),
+(1, 32),
+(3, 33);
 
 -- --------------------------------------------------------
 
@@ -270,6 +377,14 @@ CREATE TABLE `demandcategoryvalidationitem` (
   `USER_LOGIN` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `demandcategoryvalidationitem`
+--
+
+INSERT INTO `demandcategoryvalidationitem` (`ID`, `DEPARTEMENT`, `SYSDATE`, `DEMANDCATEGORYVALIDATION_ID`, `USER_LOGIN`) VALUES
+(1, 'contentManagement', '2017-07-05', 1, 'younes'),
+(2, 'contentManagement', '2017-07-05', 3, 'younes');
+
 -- --------------------------------------------------------
 
 --
@@ -280,6 +395,16 @@ CREATE TABLE `departement` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `departement`
+--
+
+INSERT INTO `departement` (`ID`, `NAME`) VALUES
+(1, 'contentManagement'),
+(2, 'datenManagement'),
+(3, 'databasePublishing'),
+(4, 'projectManagement');
 
 -- --------------------------------------------------------
 
@@ -292,6 +417,14 @@ CREATE TABLE `departementcriteria` (
   `NAME` varchar(255) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `departementcriteria`
+--
+
+INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
+(1, 'Allgemein', 1),
+(2, 'Reda', 1);
 
 -- --------------------------------------------------------
 
@@ -307,6 +440,16 @@ CREATE TABLE `departementcriteriaitem` (
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `departementcriteriaitem`
+--
+
+INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(1, '10*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '5*std_stz', 1),
+(2, '12*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1),
+(3, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2),
+(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -316,8 +459,17 @@ CREATE TABLE `departementcriteriaitem` (
 CREATE TABLE `farbigkeit` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `farbigkeit`
+--
+
+INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
+('1/1 -farbig', NULL, NULL),
+('2/2 -farbig', NULL, NULL),
+('3/3 -farbig', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -328,7 +480,7 @@ CREATE TABLE `farbigkeit` (
 CREATE TABLE `formatauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -340,7 +492,7 @@ CREATE TABLE `formatauswaehlen` (
 CREATE TABLE `katalogart` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,2) DEFAULT NULL
+  `VALUEE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -352,7 +504,7 @@ CREATE TABLE `katalogart` (
 CREATE TABLE `konzeptbearbeitungfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
-  `WERT` decimal(38,2) DEFAULT NULL
+  `WERT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -364,7 +516,7 @@ CREATE TABLE `konzeptbearbeitungfaktor` (
 CREATE TABLE `layout` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,2) DEFAULT NULL
+  `VALUEE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -376,7 +528,7 @@ CREATE TABLE `layout` (
 CREATE TABLE `mitgliederkorrekturfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
-  `WERT` decimal(38,2) DEFAULT NULL
+  `WERT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -388,8 +540,18 @@ CREATE TABLE `mitgliederkorrekturfaktor` (
 CREATE TABLE `papiermaterialauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `papiermaterialauswaehlen`
+--
+
+INSERT INTO `papiermaterialauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
+('65 g/qm', NULL, NULL),
+('70 g/qm', NULL, NULL),
+('80 g/qm', NULL, NULL),
+('85 g/qm', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -400,7 +562,7 @@ CREATE TABLE `papiermaterialauswaehlen` (
 CREATE TABLE `participantfaktor` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(38,2) DEFAULT NULL
+  `WERT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -416,6 +578,18 @@ CREATE TABLE `product` (
   `CATEGORY_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `product`
+--
+
+INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
+(1, NULL, 'Premium EWZ', 1),
+(2, NULL, 'Fortis WZ', 1),
+(3, NULL, 'Industrietechnik', 1),
+(4, NULL, 'Baugerät', 1),
+(5, NULL, 'LL Gartentechnik', 1),
+(6, NULL, 'Plus1 Nachdruck', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -425,7 +599,7 @@ CREATE TABLE `product` (
 CREATE TABLE `prozess` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(38,2) DEFAULT NULL
+  `VALUEE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -438,9 +612,30 @@ CREATE TABLE `schluessel` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `WERT` decimal(38,2) DEFAULT NULL,
+  `WERT` decimal(38,0) DEFAULT NULL,
   `SCHLUESSELTYPE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `schluessel`
+--
+
+INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_ID`) VALUES
+(1, 'Hier soll BIld oder Beschreibung', 'Einfach', '1', 2),
+(2, 'Hier soll BIld oder Beschreibung', 'Standard', '1', 2),
+(3, 'Hier soll BIld oder Beschreibung', 'Komplex', '1', 2),
+(4, 'Hier soll BIld oder Beschreibung', 'Erstausgabe', '1', 1),
+(5, 'Hier soll BIld oder Beschreibung', 'Folgeausgabe', '0', 1),
+(6, 'Hier soll BIld oder Beschreibung', 'Lagerliste', '1', 3),
+(7, 'Hier soll BIld oder Beschreibung', 'E/D/E Katalog', '1', 3),
+(8, 'Hier soll BIld oder Beschreibung', 'Individueller Katalog', '1', 3),
+(9, 'Hier soll BIld oder Beschreibung', 'Fremdsprachen-Katalog', '1', 3),
+(10, NULL, 'Proz.neu / Tech. Alt', '1', 4),
+(11, NULL, 'Proz.neu / Tech.Neu', '1', 4),
+(12, NULL, 'Datenmanagemnt', '56', 5),
+(13, NULL, 'Contentmanagement', '56', 5),
+(14, NULL, 'Assetmanagement', '56', 5),
+(15, NULL, 'Allgemein', '56', 5);
 
 -- --------------------------------------------------------
 
@@ -452,6 +647,17 @@ CREATE TABLE `schluesseltype` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `schluesseltype`
+--
+
+INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
+(1, 'Ausgabe'),
+(2, 'Layout'),
+(3, 'Katalogart'),
+(4, 'Prozess/Technik'),
+(5, 'Kostenschlüssel');
 
 -- --------------------------------------------------------
 
@@ -472,8 +678,15 @@ CREATE TABLE `seiten` (
 
 CREATE TABLE `sequence` (
   `SEQ_NAME` varchar(50) NOT NULL,
-  `SEQ_COUNT` decimal(38,2) DEFAULT NULL
+  `SEQ_COUNT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sequence`
+--
+
+INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
+('SEQ_GEN', '0');
 
 -- --------------------------------------------------------
 
@@ -483,12 +696,35 @@ CREATE TABLE `sequence` (
 
 CREATE TABLE `sortiment` (
   `ID` bigint(20) NOT NULL,
-  `ARTIKELPERPAGE` decimal(38,2) DEFAULT NULL,
-  `LKSCHLUESSEL` decimal(38,2) DEFAULT NULL,
-  `MKSCHLUESSEL` decimal(38,2) DEFAULT NULL,
+  `ARTIKELPERPAGE` decimal(38,0) DEFAULT NULL,
+  `LKSCHLUESSEL` decimal(38,0) DEFAULT NULL,
+  `MKSCHLUESSEL` decimal(38,0) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `PRODUCTSCHLUESSEL` decimal(38,2) DEFAULT NULL
+  `PRODUCTSCHLUESSEL` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sortiment`
+--
+
+INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`, `NAME`, `PRODUCTSCHLUESSEL`) VALUES
+(1, '16', '1', '1', 'Arbeitsschutz', '5'),
+(2, '16', '1', '1', 'Baubeschläge', '5'),
+(3, '8', '1', '1', 'Baugeräte', '3'),
+(4, '27', '1', '1', 'Befestigungstechnik', '8'),
+(5, '12', '1', '1', 'Betriebseinrichtungen', '4'),
+(6, '5', '1', '1', 'Elektrowerkzeuge', '2'),
+(7, '6', '1', '1', 'Gartentechnik', '2'),
+(8, '11', '1', '1', 'Handwerkzeuge', '3'),
+(9, '6', '1', '1', 'Haustechnik/Innendeko/Elektroinstallation', '2'),
+(10, '18', '1', '1', 'Industrietechnik', '5'),
+(11, '9', '1', '1', 'Möbelbeschläge', '3'),
+(12, '10', '1', '1', 'Präzisionswerkzeuge', '8'),
+(13, '9', '1', '1', 'Schweißtechnik', '3'),
+(14, '12', '1', '1', 'Verpackungen', '4'),
+(15, '6', '1', '1', 'Werkstattmaterial', '2'),
+(16, '11', '1', '1', '\nWerkzeuge Holzbearbeitung', '3'),
+(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3');
 
 -- --------------------------------------------------------
 
@@ -498,10 +734,28 @@ CREATE TABLE `sortiment` (
 
 CREATE TABLE `sotimentitem` (
   `ID` bigint(20) NOT NULL,
-  `WERT` decimal(38,2) DEFAULT NULL,
+  `WERT` decimal(38,0) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `SORTIMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sotimentitem`
+--
+
+INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) VALUES
+(1, '20', 36, 2),
+(2, '10', 36, 8),
+(3, '10', 36, 5),
+(4, '60', 36, 6),
+(5, '20', 37, 2),
+(6, '60', 37, 6),
+(7, '10', 37, 5),
+(8, '10', 37, 8),
+(9, '60', 38, 6),
+(10, '10', 38, 8),
+(11, '20', 38, 2),
+(12, '10', 38, 5);
 
 -- --------------------------------------------------------
 
@@ -513,7 +767,7 @@ CREATE TABLE `umschlagfarbigkeit` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -525,7 +779,7 @@ CREATE TABLE `umschlagfarbigkeit` (
 CREATE TABLE `umschlagpapierauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -548,6 +802,17 @@ CREATE TABLE `user` (
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
+('ana', 0, 0, 'ana', 1, 0, 'ana', 'b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64', 'ana', '00000', 1),
+('anas', 0, 1, 'anas@gmail.com', 1, 3, 'anas', '9d171d82134b0ec576fe121cf857321819cf3a59bc0138af35862c2caa617d57', 'anas', '06', 1),
+('kiki', 1, 0, 'kiki', 1, 0, 'kiki', '888da5db853449fff82b07cbdbf7c755ece0783aa670bb36cc5c4cc9a68fb864', 'kiki', 'kiki', NULL),
+('walo', 1, 0, 'walo', 1, 0, 'walo', '41d119f6079d09b46a5c950a03b455c99ec6c9b6f1726401a52c85d0b17d4b54', 'walo', '00000', NULL),
+('younes', 1, 0, 'younes@gmail.com', 1, 0, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -557,7 +822,7 @@ CREATE TABLE `user` (
 CREATE TABLE `veredlung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(38,2) DEFAULT NULL
+  `PRICE` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -569,7 +834,7 @@ CREATE TABLE `veredlung` (
 CREATE TABLE `wechselfassungvariantfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
-  `WERT` decimal(38,2) DEFAULT NULL
+  `WERT` decimal(38,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -881,17 +1146,17 @@ ALTER TABLE `auflageseitencovermatrix`
 -- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `configuration`
 --
 ALTER TABLE `configuration`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `configurationitem`
 --
 ALTER TABLE `configurationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `correctionschluessel`
 --
@@ -901,47 +1166,47 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidationitem`
 --
 ALTER TABLE `demandcategoryvalidationitem`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `departement`
 --
 ALTER TABLE `departement`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `konzeptbearbeitungfaktor`
 --
@@ -961,17 +1226,17 @@ ALTER TABLE `participantfaktor`
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `schluessel`
 --
 ALTER TABLE `schluessel`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `schluesseltype`
 --
 ALTER TABLE `schluesseltype`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `seiten`
 --
@@ -981,12 +1246,12 @@ ALTER TABLE `seiten`
 -- AUTO_INCREMENT pour la table `sortiment`
 --
 ALTER TABLE `sortiment`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --

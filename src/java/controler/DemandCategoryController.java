@@ -14,6 +14,7 @@ import controler.util.SessionUtil;
 import service.DemandCategoryFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
+import static service.DemandCategoryCalculationFacade.summSortiment;
 import service.DemandCategoryDepartementCalculationFacade;
 
 @Named("demandCategoryController")
@@ -137,10 +139,10 @@ public class DemandCategoryController implements Serializable {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
 
-    public void calculAnzahlNeuProdukt() {
-        selected.setSotimentItems(sotimentItems);
-        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
-    }
+//    public void calculAnzahlNeuProdukt() {
+//        selected.setSotimentItems(sotimentItems);
+//        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
+//    }
 
     public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
