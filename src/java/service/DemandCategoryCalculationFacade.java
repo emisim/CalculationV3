@@ -229,6 +229,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
      
      
      public  int addSortimentItem(DemandCategory selected, List<SotimentItem> sotimentItems, SotimentItem sotimentItem){
+         selected.setSotimentItems(sotimentItems);
          if(summSortiment(selected).add(percentValueProductSchluessel(sotimentItem)).compareTo(new BigDecimal(100)) <= 0){
         sotimentItems.add(sortimentItemFacade.clone(sotimentItem, sotimentItems));
         
@@ -253,6 +254,17 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
 
     public DemandCategoryCalculationFacade() {
         super(DemandCategoryCalculation.class);
+    }
+
+    public int checkItem(List<SotimentItem> sotimentItems, SotimentItem sortimentItem) {
+    
+        for (SotimentItem sotimentItemm : sotimentItems) {
+            if(sotimentItemm.getSortiment().getId() == sortimentItem.getSortiment().getId()){
+                return -1;
+            }
+            
+        }
+        return 1;
     }
 
 }

@@ -28,7 +28,7 @@
                         <p:outputLabel for="wert" value="Wert in %" />
                         <p:inputText id="wert" value="#{demandCategoryController.sortimentItem.wert}" />
 
-                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixListForm"/>
+                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixListForm,:growl"/>
 
                     </h:panelGrid>
 

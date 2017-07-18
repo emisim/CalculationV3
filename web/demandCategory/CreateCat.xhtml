@@ -47,16 +47,9 @@
                                                        itemValue="#{productItem}" itemLabel="#{productItem.label}"/>
                                     </p:selectOneMenu>
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-                                    <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
-                                                       var="sortimentItem"
-                                                       itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name} "/>
-                                                       <!--itemValue="# {sortimentItem}" itemLabel="# {sortimentItem.name} (# {sortimentItem.productSchluessel}) "/>-->
-                                    </p:selectOneMenu>
+                                   
 
-                                    <!--<p:outputLabel value="Mischsortiment:" for="mix" rendered="# {demandCategoryController.renderAttribute('sortiment')}" />-->
+                                    <p:outputLabel value="Mischsortiment:" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                                     <p:commandButton id="mix" value="Mischsortiment"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
 
@@ -150,7 +143,7 @@
                                     <p:inputText id="anzahlBestandProdukt" value="#{demandCategoryController.selected.anzahlBestandProdukt}" title="#{bundle.CreateDemandCategoryTitle_anzahlBestandProdukt}" rendered="#{demandCategoryController.renderAttribute('anzahlBestandProdukt')}" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlLieferantGesamt}" for="anzahlLieferantGesamt" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}" />
-                                    <p:inputText id="anzahlLieferantGesamt" value="#{demandCategoryController.selected.anzahlLieferantGesamt} " title="#{bundle.CreateDemandCategoryTitle_anzahlLieferantGesamt}" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}" />
+                                    <p:inputText id="anzahlLieferantGesamt" value="#{demandCategoryController.selected.anzahlLieferantGesamt}" title="#{bundle.CreateDemandCategoryTitle_anzahlLieferantGesamt}" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantGesamt')}" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlLieferantNeu}" for="anzahlLieferantNeu" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantNeu')}" />
                                     <p:inputText id="anzahlLieferantNeu" value="#{demandCategoryController.selected.anzahlLieferantNeu}" title="#{bundle.CreateDemandCategoryTitle_anzahlLieferantNeu}" rendered="#{demandCategoryController.renderAttribute('anzahlLieferantNeu')}" />
