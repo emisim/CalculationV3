@@ -168,16 +168,12 @@ public class DemandCategoryController implements Serializable {
 
     public void addSortimentItem() {
 
-        int duplica = demandCategoryCalculationFacade.checkItem(sotimentItems, sortimentItem);
-        if (duplica > 0) {
-            int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
-            if (res < 0) {
-                JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
-            }
-        }else{
+        int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
+        if (res == -1) {
             JsfUtil.addErrorMessage("Item deja dans la liste");
+        } else if (res == -2) {
+            JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
         }
-
     }
 
     public DemandCategory getSelectedForSearch() {
