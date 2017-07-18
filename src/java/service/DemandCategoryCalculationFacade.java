@@ -231,6 +231,8 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
      public  int addSortimentItem(DemandCategory selected, List<SotimentItem> sotimentItems, SotimentItem sotimentItem){
          if(summSortiment(selected).add(percentValueProductSchluessel(sotimentItem)).compareTo(new BigDecimal(100)) <= 0){
         sotimentItems.add(sortimentItemFacade.clone(sotimentItem, sotimentItems));
+        
+             System.out.println("werrini la valeur dyal percentValueProductSchluessel" + percentValueProductSchluessel(sotimentItem));
         return 1;
         }
         return -1;
