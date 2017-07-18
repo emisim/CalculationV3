@@ -41,7 +41,6 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         return em;
     }
 
-    
     //Wichtig Calculation
     public List<DemandCategoryCalculationItem> save(DemandCategoryCalculation demandCategoryCalculation, DemandCategory demandCategory, boolean simuler, boolean isSave) throws ScriptException {
         List<DemandCategoryCalculationItem> res = new ArrayList();
@@ -51,8 +50,8 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
             DemandCategoryCalculationItem demandCategoryCalculationItem = createOrFind(departementCriteriaItem, demandCategoryCalculation);
             //evalFunction SErvice ALBATAL pour calcul
-            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory) + ""));
-            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
+            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
             if (!simuler) {
                 if (isSave) {
                     create(demandCategoryCalculationItem);
@@ -65,16 +64,16 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         }
         return res;
     }
-    
+
     public List<DemandCategoryCalculationItem> detail(DemandCategoryCalculation demandCategoryCalculation, DemandCategory demandCategory) throws ScriptException {
         List<DemandCategoryCalculationItem> res = new ArrayList();
         DepartementCriteria departementCriteria = demandCategoryCalculation.getDepartementCriteria();
         List<DepartementCriteriaItem> departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(departementCriteria);
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
             DemandCategoryCalculationItem demandCategoryCalculationItem = find(departementCriteriaItem, demandCategoryCalculation);
-            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory) + ""));
-            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory) + ""));
-           demandCategoryCalculationItem.setDepartementCriteriaItem(departementCriteriaItem);
+            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setDepartementCriteriaItem(departementCriteriaItem);
             res.add(demandCategoryCalculationItem);
         }
         return res;
@@ -92,15 +91,15 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         demandCategoryCalculationItem.setDemandCategoryCalculation(demandCategoryCalculation);
         return demandCategoryCalculationItem;
     }
-    
+
     private DemandCategoryCalculationItem find(DepartementCriteriaItem departementCriteriaItem, DemandCategoryCalculation demandCategoryCalculation) {
         String query = "SELECT item FROM DemandCategoryCalculationItem item WHERE "
                 + "item.demandCategoryCalculation.id=" + demandCategoryCalculation.getId() + " AND item.departementCriteriaItem.id=" + departementCriteriaItem.getId();
         List<DemandCategoryCalculationItem> res = em.createQuery(query).getResultList();
-        System.out.println("queryyy MMMMMMMMMMMMMMMMMm "+query);
-       System.out.println("DemandCategoryCalculationItem.size MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM "+res);
+        System.out.println("queryyy MMMMMMMMMMMMMMMMMm " + query);
+        System.out.println("DemandCategoryCalculationItem.size MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + res);
         if (res != null && !res.isEmpty() && res.get(0) != null) {
-            System.out.println("DemandCategoryCalculationItem.size and list is not null MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM "+res.get(0));
+            System.out.println("DemandCategoryCalculationItem.size and list is not null MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + res.get(0));
             return res.get(0);
         }
         return new DemandCategoryCalculationItem();
