@@ -70,15 +70,15 @@ public class UserController implements Serializable {
     private void validteConnexionForm(int res) {
         message = MessageManager.createErrorMessage(res, "");
         if (res == -1) {
-            message.setText("Socie actuelement bloqué, Merci de contacter l'éditeur du logiciel");
+            message.setText("Socie ist zur Zeit blokiert, bitte kontaktieren Sie Ihren Admin");
         } else if (res == -2) {
-            message.setText("Compte bloqué, Merci de contacter l'admin");
+            message.setText("Ihre Account ist zur Zeit blokiert, bitte melden Sie sich bei Ihren Admin an");
         } else if (res == -3) {
-            message.setText("Erreur password, Réssayer SVP");
+            message.setText("Oups,falsches Passwort. Wiederholen Sie es noch einmal!");
         } else if (res == -4) {
-            message.setText("Erreur login, Réssayer SVP");
+            message.setText("Falsches login, Versuchen Sie es noch einmal!");
         } else if (res == -5) {
-            message.setText("Veuilliez saisir votre login");
+            message.setText("Bitte geben Sie hier Ihre login an!");
         }
         MessageManager.showMessage(message);
     }
@@ -91,10 +91,10 @@ public class UserController implements Serializable {
     
     public String changePassword() {
         User user = ejbFacade.find(selected.getLogin());
-        System.out.println("ha hash l 9dim : "+HashageUtil.sha256(user.getPassword()));
-        System.out.println("ha hash jdid : "+HashageUtil.sha256(newPassword));
-        System.out.println("ha pass l 9dim : "+user.getPassword());
-        System.out.println("ha pass jdid : "+newPassword);
+        System.out.println("alter hash : "+HashageUtil.sha256(user.getPassword()));
+        System.out.println("neuer hash : "+HashageUtil.sha256(newPassword));
+        System.out.println("altes PW : "+user.getPassword());
+        System.out.println("neuen PW: "+newPassword);
         if (newPassword.equals(newRepetePassword) && !newPassword.equals("") && newPassword != null && !HashageUtil.sha256(newPassword).equals(user.getPassword())) {
             
             user.setPassword(HashageUtil.sha256(newPassword));
@@ -102,7 +102,7 @@ public class UserController implements Serializable {
             ejbFacade.edit(user);
             return seDeConnnecter();
         }else{
-            JsfUtil.addErrorMessage("Probleme lors du changement de mot de passe");
+            JsfUtil.addErrorMessage("Probleme während die Passwortänderung");
             return "";
         }
         
@@ -111,6 +111,10 @@ public class UserController implements Serializable {
     public int getTimout() {
         return SessionUtil.getSession().getMaxInactiveInterval();
     }
+    
+    /*public int getTimout() {
+        return SessionUtil.getSession().getMaxInactiveInterval();
+    }*/
     
     public String seDeConnnecter() {
         //

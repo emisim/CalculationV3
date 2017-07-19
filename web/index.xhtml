@@ -15,7 +15,7 @@
     <!--#/{userController.isConnected()}-->
     <h:body class="bodyLogin" style="background: url(resources/image/background-banner.jpg) no-repeat;background-size: auto auto;" >
         <img src="resources/image/ede.png"/>
-        <h3 style="text-align: center">Connectez-vous à votre compte</h3>
+        <h3 style="text-align: center">Bitte loggen Sie sich an</h3>
         <div class="login-card">
             <img src="resources/image/user.png" style="border-radius: 100%; width: 100px; height: auto"/><br/>
 
@@ -23,12 +23,12 @@
                 <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                 <h:panelGrid columns="2" cellpadding="5"  styleClass="align-center ede-color">
                     <i class="fa fa-user icon-login"></i>
-                    <p:inputText id="username" value="#{userController.selected.login}" required="false" label="username" placeholder="Saisissez votre login" />
+                    <p:inputText id="username" value="#{userController.selected.login}" required="false" label="username" placeholder="Geben Sie Ihre Benutzername an" />
                     <i class="fa fa-key icon-login "></i>
-                    <p:password id="password" value="#{userController.selected.password}" required="false" label="password" placeholder="Saisissez votre mot de passe" />
+                    <p:password id="password" value="#{userController.selected.password}" required="false" label="password" placeholder="Passwort angeben" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="CONNEXION" style=" font-size: 14px;
+                        <p:commandButton value="Anmeldung" style=" font-size: 14px;
                                          font-family: 'Arial', sans-serif;font-weight: 700;height: 36px;
                                          width: 100%;display: block;margin-bottom: 10px;position: relative;margin-left: 25px;"
                                          update="growl" action="#{userController.seConnnecter()}"/>

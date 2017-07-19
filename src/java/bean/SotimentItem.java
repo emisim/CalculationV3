@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class SotimentItem implements Serializable {

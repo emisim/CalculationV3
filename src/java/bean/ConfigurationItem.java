@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class ConfigurationItem implements Serializable {

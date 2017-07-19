@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  *
- * @author Ashen One
+ * @author
  */
 public class AccessDepartement {
     
@@ -83,6 +83,7 @@ public class AccessDepartement {
         contentManagementMap.put("product", true);
         contentManagementMap.put("layout", true);
         contentManagementMap.put("katalogart", true);
+        contentManagementMap.put("ausgabe",true);
         contentManagementMap.put("umfang", true);
         contentManagementMap.put("sortiment", true);
         contentManagementMap.put("anzahlGesamtArtikel", true);
@@ -121,6 +122,7 @@ public class AccessDepartement {
         databasePublishingMap.put("katalogart", true);
         databasePublishingMap.put("ausgabe", true);
         databasePublishingMap.put("sortiment", true);
+        databasePublishingMap.put("umfang", true);
         databasePublishingMap.put("anzahlSonderSeiten", true);
         databasePublishingMap.put("anzahlGenerierungUpdateSeiten", true);
         databasePublishingMap.put("anzahlIHVZSeiten", true);

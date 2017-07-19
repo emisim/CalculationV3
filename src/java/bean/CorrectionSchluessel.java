@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class CorrectionSchluessel implements Serializable {

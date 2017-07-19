@@ -41,19 +41,19 @@
                                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
                                
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_summe}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.summe}"/>
-                                </p:column>
+                                
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_departementCriteria}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.departementCriteria.name}"/>
                                 </p:column>
-
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListDemandCategoryCalculationTitle_summe} in €"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.summe} "/>
+                                </p:column>
                                 <f:facet name="footer">
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryCalculationController.prepareCreate}" update=":DemandCategoryCalculationCreateForm" oncomplete="PF('DemandCategoryCalculationCreateDialog').show()"/>
                                     <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryCalculationViewForm" oncomplete="PF('DemandCategoryCalculationViewDialog').show()" disabled="#{empty demandCategoryCalculationController.selected}"/>

@@ -25,7 +25,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author
  */
 @Stateless
 public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteria> {

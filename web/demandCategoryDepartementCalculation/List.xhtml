@@ -45,19 +45,19 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListDemandCategoryDepartementCalculationTitle_departement}"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.departement}"/>
+                                    <h:outputText value="#{item.departement.name}"/>
+                                </p:column>                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListDemandCategoryDepartementCalculationTitle_demandCategory}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.demandCategory.category}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListDemandCategoryDepartementCalculationTitle_summe}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.summe}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListDemandCategoryDepartementCalculationTitle_demandCategory}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.demandCategory}"/>
                                 </p:column>
                                 <f:facet name="footer">
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandCategoryDepartementCalculationController.prepareCreate}" update=":DemandCategoryDepartementCalculationCreateForm" oncomplete="PF('DemandCategoryDepartementCalculationCreateDialog').show()"/>

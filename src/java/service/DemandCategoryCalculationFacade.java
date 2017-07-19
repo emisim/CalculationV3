@@ -11,10 +11,13 @@ import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
 import bean.DepartementCriteria;
+import bean.SotimentItem;
 import controler.util.SearchUtil;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -25,7 +28,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author Younes
+ * @author
  */
 @Stateless
 public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCategoryCalculation> {
@@ -38,8 +41,18 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     private @EJB
     DepartementCriteriaFacade departementCriteriaFacade;
 
+    private @EJB
+    SotimentItemFacade sortimentItemFacade;
+
     public static void calculateAnzahlBestandArtikel(DemandCategory selected) {
         selected.setAnzahlBestandArtikel(selected.getAnzahlGesamtArtikel() - selected.getAnzahlNeueArtikel());
+    }
+
+    //Calculate CorrectionschluesselAufwand Allgemeine Änderung
+    // Hier soll noch AnzahlGesamtProdukt berechnet werden abhängig von SOrtimentfaktor soll noch defineirt werden
+    public static void calculateAnzahlGesamtProdukt(DemandCategory selected) {
+
+        selected.setAnzahlGesamtProdukt(selected.getAnzahlGesamtArtikel());
     }
 
     public static void calculateAnzahlBestandProdukt(DemandCategory selected) {
@@ -48,6 +61,70 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
 
     public static void calculateAnzahlSonderSeiten(DemandCategory selected) {
         selected.setAnzahlSonderSeiten((int) (0.1 * selected.getUmfang()));
+    }
+
+    public static void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(DemandCategory selected) {
+        calculateAnzahlBestandArtikel(selected);
+
+        BigDecimal summ = summSortiment(selected, true);
+        if (summ.compareTo(new BigDecimal(0)) != 0) {
+            int sortimentFaktor = (int) (new Double(selected.getAnzahlGesamtArtikel()) / summ.doubleValue());
+
+            selected.setAnzahlGesamtProdukt(sortimentFaktor);
+            System.out.println(" hha l faktor dyalna " + sortimentFaktor);
+            System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
+        }
+
+    }
+
+    public static void calculAnzahlBestandArtikelAndAnzahlNeueProdukt(DemandCategory selected) {
+        calculateAnzahlBestandArtikel(selected);
+
+        BigDecimal summ = summSortiment(selected, true);
+        if (summ.compareTo(new BigDecimal(0)) != 0) {
+            int sortimentFaktor = (int) (new Double(selected.getAnzahlNeueArtikel()) / summ.doubleValue());
+
+            selected.setAnzahlNeueProdukt(sortimentFaktor);
+            System.out.println(" hha l faktor dyalna " + sortimentFaktor);
+            System.out.println("ha selected.setAnzahlNeueProdukt " + selected.getAnzahlGesamtProdukt());
+        }
+
+    }
+
+    public static void calculAnzahlNeuProdukt(DemandCategory selected) {
+
+        BigDecimal summ = summSortiment(selected, true);
+        if (summ.compareTo(new BigDecimal(0)) != 0) {
+            BigDecimal sortimentFaktor = new BigDecimal(selected.getAnzahlNeueArtikel()).divide(summ);
+            selected.setAnzahlNeueProdukt(sortimentFaktor.intValue());
+
+            System.out.println("haa le resultat dyl produkt gesamt " + sortimentFaktor);
+        }
+    }
+
+    public static BigDecimal summSortiment(DemandCategory selected, boolean percent) {
+        List<SotimentItem> sotimentItems = selected.getSotimentItems();
+        BigDecimal summe = new BigDecimal("0");
+        if (sotimentItems == null || sotimentItems.isEmpty()) {
+            return summe;
+        }
+        for (SotimentItem sotimentItem : sotimentItems) {
+            summe = summe.add(percentValueProductSchluessel(sotimentItem, percent));
+        }
+        System.out.println("haa somme dyal faktor dyalna multipliés par leur sortiment " + summe);
+        return summe;
+    }
+
+    public static BigDecimal percentValueProductSchluessel(SotimentItem sotimentItem, boolean percent) {
+        if (sotimentItem.getWert() == null) {
+            sotimentItem.setWert(new BigDecimal(0));
+        }
+        if (percent == true) {
+            BigDecimal percentwert = sotimentItem.getWert().divide(new BigDecimal(100));
+            return (percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel()));
+        } else {
+            return sotimentItem.getWert();
+        }
     }
 
     public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected) {
@@ -67,10 +144,11 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (demandCategoryDepartementCalculation != null && demandCategoryDepartementCalculation.getId() != null) {
             query += SearchUtil.addConstraint("item", "demandCategoryDepartementCalculation.id", "=", demandCategoryDepartementCalculation.getId());
         }
-        System.out.println("Auery  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM "+query);
+        System.out.println("Auery  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + query);
         return em.createQuery(query).getResultList();
     }
 
+    //Hier werden alle Calculation gesucht oder gespeichert
     public List<DemandCategoryCalculation> save(DemandCategory demandCategory, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation, boolean similuer, boolean isSave) throws ScriptException {
         List<DemandCategoryCalculation> res = new ArrayList();
         List<DepartementCriteria> departementCriterias = departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(demandCategoryDepartementCalculation.getDepartement());
@@ -84,7 +162,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
                 }
                 System.out.println("hana savite demandCategoryCalculation ==> " + demandCategoryCalculation);
             }
-            demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer,isSave));
+            demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer, isSave));
             demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
             if (!similuer) {
                 edit(demandCategoryCalculation);
@@ -94,7 +172,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         }
         return res;
     }
-    
+
     public List<DemandCategoryCalculation> detail(DemandCategory demandCategory, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) throws ScriptException {
         List<DemandCategoryCalculation> res = new ArrayList();
         List<DepartementCriteria> departementCriterias = departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(demandCategoryDepartementCalculation.getDepartement());
@@ -126,8 +204,8 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         demandCategoryCalculation.setDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
         return demandCategoryCalculation;
     }
-    
-     private DemandCategoryCalculation find(DepartementCriteria departementCriteria, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
+
+    private DemandCategoryCalculation find(DepartementCriteria departementCriteria, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
 
         String query = "SELECT item FROM DemandCategoryCalculation item WHERE "
                 + "item.demandCategoryDepartementCalculation.id=" + demandCategoryDepartementCalculation.getId()
@@ -138,8 +216,20 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
             System.out.println("rah l9ite DemandCategoryCalculation f bd ha son id " + res.get(0).getId());
             return res.get(0);
         }
-       
+
         return new DemandCategoryCalculation();
+    }
+
+    public int addSortimentItem(DemandCategory selected, List<SotimentItem> sotimentItems, SotimentItem sotimentItem) {
+        selected.setSotimentItems(sotimentItems);
+        if (checkItem(sotimentItems, sotimentItem) < 0) {
+            return -1;
+        } else if (summSortiment(selected, false).add(sotimentItem.getWert()).compareTo(new BigDecimal(100)) > 0) {
+            return -2;
+        } else {
+            sotimentItems.add(sortimentItemFacade.clone(sotimentItem, sotimentItems));
+            return 1;
+        }
     }
 
     private BigDecimal calculerSum(List<DemandCategoryCalculationItem> demandCategoryCalculationItems) {
@@ -157,6 +247,17 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
 
     public DemandCategoryCalculationFacade() {
         super(DemandCategoryCalculation.class);
+    }
+
+    private int checkItem(List<SotimentItem> sotimentItems, SotimentItem sortimentItem) {
+
+        for (SotimentItem sotimentItemm : sotimentItems) {
+            if (Objects.equals(sotimentItemm.getSortiment().getId(), sortimentItem.getSortiment().getId())) {
+                return -1;
+            }
+
+        }
+        return 1;
     }
 
 }

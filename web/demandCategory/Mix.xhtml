@@ -19,14 +19,16 @@
                             <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{demandCategoryController.findAllSortiment()}"
                                            var="sortimentItem"
-                                           itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
+                                           itemValue="#{sortimentItem}"
+                                           itemLabel =" #{sortimentItem.name}"
+                                           />
 
                         </p:selectOneMenu>
 
-                        <p:outputLabel for="wert" value="Wert" />
+                        <p:outputLabel for="wert" value="Wert in %" />
                         <p:inputText id="wert" value="#{demandCategoryController.sortimentItem.wert}" />
 
-                        <p:commandButton id="ajouter" value="Ajouter" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixListForm"/>
+                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixListForm,:growl"/>
 
                     </h:panelGrid>
 
@@ -46,14 +48,14 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Sortiemnt"/>
+                                <h:outputText value="Sortiment"/>
                             </f:facet>
                             <h:outputText value="#{item.sortiment.name}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Wert"/>
+                                <h:outputText value="Wert in %"/>
                             </f:facet>
                             <h:outputText value="#{item.wert}"/>
                         </p:column>
@@ -67,7 +69,7 @@
 
                     </p:dataTable>
                     
-                    <p:commandButton value="Confirmer" oncomplete="handleSubmit(args,'MixDialog');" />
+                    <p:commandButton value="Bestätigen" oncomplete="handleSubmit(args,'MixDialog');" />
 
                 </p:panel>
 

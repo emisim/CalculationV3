@@ -26,7 +26,7 @@ import javax.script.ScriptException;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Stateless
 public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
@@ -141,7 +141,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
         System.out.println("query ::::::: " + query);
         if (demandCategorys != null && demandCategorys.isEmpty()) {
-            JsfUtil.addErrorMessage("Aucun résultat trouvé");
+            JsfUtil.addErrorMessage("Kein Ergebnis gefunden!");
         }
 
         return demandCategorys;

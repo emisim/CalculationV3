@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class Seiten implements Serializable {

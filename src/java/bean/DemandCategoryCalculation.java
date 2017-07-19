@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author pc&
+ * @author
  */
 @Entity
 public class DemandCategoryCalculation implements Serializable {

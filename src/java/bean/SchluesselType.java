@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class SchluesselType implements Serializable {

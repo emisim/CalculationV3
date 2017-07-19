@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author lcharaf
+ * @author
  */
 @Entity
 public class Configuration implements Serializable {
