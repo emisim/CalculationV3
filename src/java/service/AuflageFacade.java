@@ -28,5 +28,5 @@ public class AuflageFacade extends AbstractFacade<Auflage> {
     public AuflageFacade() {
         super(Auflage.class);
     }
-    
+
 }

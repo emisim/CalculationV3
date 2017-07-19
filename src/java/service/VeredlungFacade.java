@@ -28,5 +28,5 @@ public class VeredlungFacade extends AbstractFacade<Veredlung> {
     public VeredlungFacade() {
         super(Veredlung.class);
     }
-    
+
 }

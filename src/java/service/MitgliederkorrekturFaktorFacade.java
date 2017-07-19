@@ -28,5 +28,5 @@ public class MitgliederkorrekturFaktorFacade extends AbstractFacade<Mitgliederko
     public MitgliederkorrekturFaktorFacade() {
         super(MitgliederkorrekturFaktor.class);
     }
-    
+
 }

@@ -28,5 +28,5 @@ public class AuflageSeitenCoverMatrixFacade extends AbstractFacade<AuflageSeiten
     public AuflageSeitenCoverMatrixFacade() {
         super(AuflageSeitenCoverMatrix.class);
     }
-    
+
 }

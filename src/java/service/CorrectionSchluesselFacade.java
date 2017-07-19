@@ -28,5 +28,5 @@ public class CorrectionSchluesselFacade extends AbstractFacade<CorrectionSchlues
     public CorrectionSchluesselFacade() {
         super(CorrectionSchluessel.class);
     }
-    
+
 }

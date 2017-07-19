@@ -71,6 +71,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if(simulation==false && isSave==false){
             edit(demandCategory);
         }
+
     }
 
     private void calcSumTotal(DemandCategory demandCategory){
