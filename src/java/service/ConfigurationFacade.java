@@ -28,5 +28,5 @@ public class ConfigurationFacade extends AbstractFacade<Configuration> {
     public ConfigurationFacade() {
         super(Configuration.class);
     }
-    
+
 }

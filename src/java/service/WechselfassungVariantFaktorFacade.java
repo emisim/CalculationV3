@@ -28,5 +28,5 @@ public class WechselfassungVariantFaktorFacade extends AbstractFacade<Wechselfas
     public WechselfassungVariantFaktorFacade() {
         super(WechselfassungVariantFaktor.class);
     }
-    
+
 }

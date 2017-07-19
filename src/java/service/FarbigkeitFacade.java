@@ -28,5 +28,5 @@ public class FarbigkeitFacade extends AbstractFacade<Farbigkeit> {
     public FarbigkeitFacade() {
         super(Farbigkeit.class);
     }
-    
+
 }

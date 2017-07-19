@@ -28,5 +28,5 @@ public class SeitenFacade extends AbstractFacade<Seiten> {
     public SeitenFacade() {
         super(Seiten.class);
     }
-    
+
 }

@@ -28,5 +28,5 @@ public class PapierMaterialAuswaehlenFacade extends AbstractFacade<PapierMateria
     public PapierMaterialAuswaehlenFacade() {
         super(PapierMaterialAuswaehlen.class);
     }
-    
+
 }
