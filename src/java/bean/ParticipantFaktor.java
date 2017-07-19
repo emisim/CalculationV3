@@ -22,7 +22,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class ParticipantFaktor implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +29,7 @@ public class ParticipantFaktor implements Serializable {
 
     private int percent;
     private BigDecimal wert;
-    
-  
+
     public Long getId() {
         return id;
     }
@@ -40,7 +38,6 @@ public class ParticipantFaktor implements Serializable {
         this.id = id;
     }
 
-   
     public int getPercent() {
         return percent;
     }
@@ -77,9 +74,9 @@ public class ParticipantFaktor implements Serializable {
         return true;
     }
 
-  @Override
+    @Override
     public String toString() {
-        return percent+"|"+wert;
+        return percent + "|" + wert;
     }
-    
+
 }

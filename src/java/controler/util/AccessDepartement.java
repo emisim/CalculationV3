@@ -13,7 +13,7 @@ import java.util.Map;
  * @author
  */
 public class AccessDepartement {
-    
+
     private static Map<String, Boolean> contentManagementMap = new HashMap<>();
     private static Map<String, Boolean> datenManagementMap = new HashMap<>();
     private static Map<String, Boolean> databasePublishingMap = new HashMap<>();
@@ -21,7 +21,7 @@ public class AccessDepartement {
     private static Map<String, Boolean> adminMap = new HashMap<>();
 
     public static Map<String, Boolean> getContentManagementMap() {
-        
+
         return contentManagementMap;
     }
 
@@ -30,7 +30,7 @@ public class AccessDepartement {
     }
 
     public static Map<String, Boolean> getDatenManagementMap() {
-        
+
         return datenManagementMap;
     }
 
@@ -39,7 +39,7 @@ public class AccessDepartement {
     }
 
     public static Map<String, Boolean> getDatabasePublishingMap() {
-        
+
         return databasePublishingMap;
     }
 
@@ -48,7 +48,7 @@ public class AccessDepartement {
     }
 
     public static Map<String, Boolean> getProjectManagementMap() {
-        
+
         return projectManagementMap;
     }
 
@@ -57,7 +57,7 @@ public class AccessDepartement {
     }
 
     public static Map<String, Boolean> getAdminMap() {
-        if(adminMap == null){
+        if (adminMap == null) {
             adminMap = new HashMap<>();
         }
         return adminMap;
@@ -66,10 +66,8 @@ public class AccessDepartement {
     public static void setAdminMap(Map<String, Boolean> adminMap) {
         AccessDepartement.adminMap = adminMap;
     }
-    
-    
-    
-    public static void populateMaps(){
+
+    public static void populateMaps() {
         populateContentManagementMap();
         populateDatenManagementMap();
         populateDatabasePublishingMap();
@@ -78,12 +76,12 @@ public class AccessDepartement {
     }
 
     private static void populateContentManagementMap() {
-    
+
         contentManagementMap.put("category", true);
         contentManagementMap.put("product", true);
         contentManagementMap.put("layout", true);
         contentManagementMap.put("katalogart", true);
-        contentManagementMap.put("ausgabe",true);
+        contentManagementMap.put("ausgabe", true);
         contentManagementMap.put("umfang", true);
         contentManagementMap.put("sortiment", true);
         contentManagementMap.put("anzahlGesamtArtikel", true);
@@ -98,7 +96,7 @@ public class AccessDepartement {
     }
 
     private static void populateDatenManagementMap() {
-        
+
         datenManagementMap.put("category", true);
         datenManagementMap.put("product", true);
         datenManagementMap.put("layout", true);
@@ -128,12 +126,11 @@ public class AccessDepartement {
         databasePublishingMap.put("anzahlIHVZSeiten", true);
         databasePublishingMap.put("anzahlBestellNrSeiten", true);
         databasePublishingMap.put("bearbeitungszeit", true);
-        
-    
+
     }
-        
+
     private static void populateProjectManagementMap() {
-        
+
         projectManagementMap.put("category", true);
         projectManagementMap.put("product", true);
         projectManagementMap.put("sortiment", true);
@@ -141,13 +138,11 @@ public class AccessDepartement {
         projectManagementMap.put("katalogart", true);
         projectManagementMap.put("ausgabe", true);
         projectManagementMap.put("umfang", true);
-        
-        
-    
+
     }
 
     private static void populateAdminMap() {
-        
+
         adminMap.put("category", true);
         adminMap.put("product", true);
         adminMap.put("anzahlGesamtArtikel", true);
@@ -156,7 +151,7 @@ public class AccessDepartement {
         adminMap.put("layout", true);
         adminMap.put("katalogart", true);
         adminMap.put("umfang", true);
-    
+
     }
-    
+
 }

@@ -22,7 +22,7 @@
                                            var="categoryItem"
                                            itemValue="#{categoryItem}" itemLabel="#{categoryItem.name}"/>
                         </p:selectOneMenu>
-                       
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{productController.create}" value="#{bundle.Save}" update="display,:parametrageTab:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProductCreateDialog.hide()"/>

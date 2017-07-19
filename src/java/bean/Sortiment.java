@@ -24,24 +24,20 @@ import javax.persistence.OneToMany;
 @Entity
 public class Sortiment implements Serializable {
 
-    
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
-    
+
     private BigDecimal productSchluessel = new BigDecimal(0);
-    private BigDecimal artikelPerPage= new BigDecimal(0);
-    private BigDecimal lKSchluessel= new BigDecimal(0);
-    private BigDecimal mKSchluessel= new BigDecimal(0);
+    private BigDecimal artikelPerPage = new BigDecimal(0);
+    private BigDecimal lKSchluessel = new BigDecimal(0);
+    private BigDecimal mKSchluessel = new BigDecimal(0);
 
     @OneToMany(mappedBy = "sortiment")
     private List<SotimentItem> sotimentItems;
-
-
 
     public Long getId() {
         return id;
@@ -59,7 +55,6 @@ public class Sortiment implements Serializable {
         this.sotimentItems = sotimentItems;
     }
 
-    
     public String getName() {
         return name;
     }
@@ -130,7 +125,4 @@ public class Sortiment implements Serializable {
         return "Sortiment{" + "id=" + id + ", name=" + name + ", productSchluessel=" + productSchluessel + ", artikelPerPage=" + artikelPerPage + ", lKSchluessel=" + lKSchluessel + ", mKSchluessel=" + mKSchluessel + ", sotimentItems=" + sotimentItems + '}';
     }
 
-   
-
-   
 }

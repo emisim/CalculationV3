@@ -10,7 +10,7 @@ package bean;
  * @author simo
  */
 public class DepartementDetail {
-    
+
     private String nomDepCritera;
     private String descrDepCriteriaItem;
     private String arithmitiqueExpresionForUnitePrice;
@@ -86,14 +86,10 @@ public class DepartementDetail {
     public void setSummDepartement(String summDepartement) {
         this.summDepartement = summDepartement;
     }
-    
-    
 
     @Override
     public String toString() {
         return "DepartementDetail{" + "nomDepCritera=" + nomDepCritera + ", descrDepCriteriaItem=" + descrDepCriteriaItem + ", arithmitiqueExpresionForUnitePrice=" + arithmitiqueExpresionForUnitePrice + ", arithmitiqueExpresionForGlobalPrice=" + arithmitiqueExpresionForGlobalPrice + '}';
     }
-    
-    
-    
+
 }

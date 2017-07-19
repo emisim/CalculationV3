@@ -16,8 +16,6 @@ import java.util.List;
  */
 public class SearchUtil {
 
-  
-
     public static String addConstraint(String beanAbrev, String atributeName, String operator, Object value) {
         boolean condition = value != null;
         if (value != null && value.getClass().getSimpleName().equals("String")) {
@@ -96,6 +94,5 @@ public class SearchUtil {
         }
         return requete;
     }
- 
-   
+
 }

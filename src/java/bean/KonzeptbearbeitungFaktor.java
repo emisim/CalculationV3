@@ -41,7 +41,6 @@ public class KonzeptbearbeitungFaktor implements Serializable {
     public void setValue(BigDecimal wert) {
         this.wert = wert;
     }
-    
 
     public Long getId() {
         return id;
@@ -73,7 +72,7 @@ public class KonzeptbearbeitungFaktor implements Serializable {
 
     @Override
     public String toString() {
-        return wert+"";
+        return wert + "";
     }
-    
+
 }

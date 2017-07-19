@@ -22,12 +22,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class CorrectionSchluessel implements Serializable {
 
-   
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     // Hier wird der Wert der durch die Bechnung von 100* gesamtArtikel/New_Artikel
     private int percent;
     private BigDecimal wert;
@@ -44,8 +43,9 @@ public class CorrectionSchluessel implements Serializable {
     }
 
     public List<DemandCategory> getDemandCategorys() {
-        if(demandCategorys == null)
+        if (demandCategorys == null) {
             demandCategorys = new ArrayList<>();
+        }
         return demandCategorys;
     }
 
@@ -91,7 +91,7 @@ public class CorrectionSchluessel implements Serializable {
 
     @Override
     public String toString() {
-        return percent+"|"+wert;
+        return percent + "|" + wert;
     }
-    
+
 }

@@ -28,7 +28,7 @@
                                            var="departementCriteriaItem"
                                            itemValue="#{departementCriteriaItem}"/>
                         </p:selectOneMenu>
-                     
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandCategoryCalculationController.update}" value="#{bundle.Save}" update="display,:DemandCategoryCalculationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandCategoryCalculationEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryCalculationEditDialog.hide()"/>

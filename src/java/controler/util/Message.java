@@ -59,5 +59,4 @@ public class Message {
         return text;
     }
 
-    
 }

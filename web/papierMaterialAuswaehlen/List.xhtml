@@ -39,7 +39,7 @@
                             </f:facet>
                             <h:outputText value="#{item.description}"/>
                         </p:column>
-                       
+
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{papierMaterialAuswaehlenController.prepareCreate}" update=":PapierMaterialAuswaehlenCreateForm" oncomplete="PF('PapierMaterialAuswaehlenCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PapierMaterialAuswaehlenViewForm" oncomplete="PF('PapierMaterialAuswaehlenViewDialog').show()" disabled="#{empty papierMaterialAuswaehlenController.selected}"/>

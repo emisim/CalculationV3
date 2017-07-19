@@ -15,13 +15,13 @@
             <div class="ui-grid-row">
                 <div class="ui-grid-col-12 " >
                     <h:form>
-                      <p:breadCrumb>
-                        <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
-                        <p:menuitem value="Demand category " url="#" />
-                        <p:menuitem value="Calcul" url="#" />
-                    </p:breadCrumb>   
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                            <p:menuitem value="Demand category " url="#" />
+                            <p:menuitem value="Calcul" url="#" />
+                        </p:breadCrumb>   
                     </h:form>
-                   
+
                 </div>
             </div><br></br>
             <div class="ui-grid-row">
@@ -47,7 +47,7 @@
                                                        itemValue="#{productItem}" itemLabel="#{productItem.label}"/>
                                     </p:selectOneMenu>
 
-                                   
+
 
                                     <p:outputLabel value="Sortiment:" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                                     <p:commandButton id="mix" value="Select"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
@@ -322,11 +322,11 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summTotal}" for="summTotal" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true }" />
                                     <p:inputText id="summTotal" value="#{demandCategoryController.selected.summTotal}" title="#{bundle.CreateDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true }" />
 
-                                    
-                                    
-                                                                        
-                                    
-                                    
+
+
+
+
+
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
                                     <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
 

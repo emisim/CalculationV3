@@ -14,7 +14,8 @@ import java.util.Date;
  * @author
  */
 public class DateUtil {
-   public static String formateDate(String pattern, Date date) {
+
+    public static String formateDate(String pattern, Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         if (date != null) {
             return simpleDateFormat.format(date);
@@ -22,8 +23,8 @@ public class DateUtil {
             return "";
         }
     }
-   
-     public static Date parse(String date) {
+
+    public static Date parse(String date) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             return simpleDateFormat.parse(date);
@@ -39,6 +40,5 @@ public class DateUtil {
             return null;
         }
     }
-    
-   
+
 }

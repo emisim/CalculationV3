@@ -44,8 +44,6 @@ public class ArtDerWeiterverarbeitung implements Serializable {
         this.description = description;
     }
 
-    
-    
     public String getLabel() {
         return label;
     }
@@ -53,7 +51,6 @@ public class ArtDerWeiterverarbeitung implements Serializable {
     public void setLabel(String label) {
         this.label = label;
     }
-
 
     public Long getId() {
         return id;
@@ -87,5 +84,5 @@ public class ArtDerWeiterverarbeitung implements Serializable {
     public String toString() {
         return label;
     }
-    
+
 }
