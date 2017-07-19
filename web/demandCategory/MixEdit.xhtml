@@ -15,7 +15,7 @@
                     <h:panelGrid columns="6" cellpadding="5" >
 
                         <p:outputLabel for="sortimentMix" value="Sortiment" />
-                        <p:selectOneMenu id="sortimentMix" value="#{demandCategoryController.sortimentItem.sortiment}">
+                        <p:selectOneMenu id="sortimentMix" value="#{demandCategoryController.sortimentItem.sortiment}" converter="sortimentConverter">
                             <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{demandCategoryController.findAllSortiment()}"
                                            var="sortimentItem"
