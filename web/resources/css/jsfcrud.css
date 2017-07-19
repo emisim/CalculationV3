@@ -98,3 +98,9 @@ img-border {
 .ede-color{
     color: #006f73;
 }
+
+.ui-button, button.ui-button.ui-state-default, .ui-button.ui-state-default {
+    border: 1px solid #006f73;
+    color: #fff;
+    background: #006f73;
+}

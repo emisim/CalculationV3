@@ -19,7 +19,7 @@
                             <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{demandCategoryController.findAllSortiment()}"
                                            var="sortimentItem"
-                                           itemValue="#{sortimentItem}"/>
+                                           itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
 
                         </p:selectOneMenu>
 
