@@ -22,7 +22,6 @@ import javax.persistence.Temporal;
 @Entity
 public class Configuration implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,9 +39,6 @@ public class Configuration implements Serializable {
         this.configurationItems = configurationItems;
     }
 
-    
-
-    
     public Date getDateApplication() {
         return dateApplication;
     }
@@ -79,9 +75,9 @@ public class Configuration implements Serializable {
         return true;
     }
 
-   @Override
+    @Override
     public String toString() {
-        return dateApplication+"";
+        return dateApplication + "";
     }
-    
+
 }

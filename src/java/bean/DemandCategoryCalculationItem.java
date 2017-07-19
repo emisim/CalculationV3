@@ -28,7 +28,7 @@ public class DemandCategoryCalculationItem implements Serializable {
     private DepartementCriteriaItem departementCriteriaItem;
     private BigDecimal price;
     private BigDecimal priceGlobal;
-    private boolean calcultaed=true;
+    private boolean calcultaed = true;
     @ManyToOne
     private DemandCategoryCalculation demandCategoryCalculation;
 
@@ -55,7 +55,7 @@ public class DemandCategoryCalculationItem implements Serializable {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    
+
     public BigDecimal getPriceGlobal() {
         return priceGlobal;
     }
@@ -104,7 +104,5 @@ public class DemandCategoryCalculationItem implements Serializable {
     public String toString() {
         return "DemandCategoryCalculationItem{" + "id=" + id + ", price=" + price + ", priceGlobal=" + priceGlobal + ", calcultaed=" + calcultaed + '}';
     }
-
-  
 
 }

@@ -16,17 +16,17 @@
         <ui:define name="body">
             <div Class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
-                <div class="ui-grid-col-12 " >
-                    <h:form>
-                        <p:breadCrumb>
-                            <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
-                            <p:menuitem value="Departement/Criteria" url="#" />
-                            <p:menuitem value="List" url="#" />
-                        </p:breadCrumb>   
-                    </h:form>
-                </div>
-            </div><br></br>
-                
+                    <div class="ui-grid-col-12 " >
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                                <p:menuitem value="Departement/Criteria" url="#" />
+                                <p:menuitem value="List" url="#" />
+                            </p:breadCrumb>   
+                        </h:form>
+                    </div>
+                </div><br></br>
+
                 <div Class="ui-grid-row">
                     <div Class="ui-grid-col-3">
                         <h:form id="DepartementListForm">
@@ -54,8 +54,13 @@
                                         </f:facet>
                                         <p:commandButton icon="fa fa-list" actionListener="#{departementController.findCriteriaByDepartement(item)}" update=":DepartementCriteriaListForm, :DepartementCriteriaItemListForm"/>
                                         <p:commandButton id="editButton"  icon="ui-icon-pencil"  actionListener="#{departementController.prepareEdit(item)}" update=":DepartementEditForm" oncomplete="PF('DepartementEditDialog').show()" disabled="#{empty departementController.selected}" rendered="#{departementController.checkUser()}"/>
-                                        <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteDepartementWithCriteria(item)}"  update=":DepartementListForm" rendered="#{departementController.checkUser()}"/>
-
+                                        <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteDepartementWithCriteria(item)}"  update=":DepartementListForm" rendered="#{departementController.checkUser()}">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
                                     </p:column>
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{departementController.prepareCreate}" update=":DepartementCreateForm" oncomplete="PF('DepartementCreateDialog').show()" rendered="#{departementController.checkUser()}"/>
@@ -92,8 +97,14 @@
                                         </f:facet>
                                         <p:commandButton  icon="fa fa-list" actionListener="#{departementController.findCriteriaItemByCriteria(itemm)}" update=":DepartementCriteriaItemListForm" />
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" actionListener="#{departementController.prepareEditCriteria(itemm)}"  update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementController.departementCriteria}" rendered="#{departementController.checkUser()}"/>
-                                        <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteCriteriaWithCriteriaItem(itemm)}"  update=":DepartementCriteriaListForm" rendered="#{departementController.checkUser()}"/>
+                                        <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteCriteriaWithCriteriaItem(itemm)}"  update=":DepartementCriteriaListForm" rendered="#{departementController.checkUser()}">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                                        </p:commandButton>
 
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
                                     </p:column>
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}"  update=":DepartementCriteriaCreateForm" oncomplete="PF('DepartementCriteriaCreateDialog').show()" rendered="#{departementController.checkUser()}"/>
@@ -132,24 +143,31 @@
                                         </f:facet>
                                         <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}"/>
                                     </p:column>
-                                   
+
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Expression for global price"/>
                                         </f:facet>
                                         <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}"/>
                                     </p:column>
-                                    
-                                     <p:column styleClass="align-center" width="90">
+
+                                    <p:column styleClass="align-center" width="90">
                                         <f:facet name="header">
                                             <h:outputText value="Detail"/>
                                         </f:facet>
                                         <p:commandButton id="viewButton" icon="fa fa-list"  update=":DepartementCriteriaItemViewForm" actionListener="#{departementController.prepareViewCriteriaItem(item)}" oncomplete="PF('DepartementCriteriaItemViewDialog').show()"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil"  actionListener="#{departementController.prepareEditCriteriaItem(item)}"  update=":DepartementCriteriaItemEditForm" oncomplete="PF('DepartementCriteriaItemEditDialog').show()" disabled="#{empty departementController.departementCriteriaItem}" rendered="#{departementController.checkUser()}"/>
-                                        <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteCriteriaItem(item)}"  update=":DepartementCriteriaItemListForm" rendered="#{departementController.checkUser()}"/>
+                                        <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteCriteriaItem(item)}"  update=":DepartementCriteriaItemListForm" rendered="#{departementController.checkUser()}">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
 
                                     </p:column>
-                                    
+
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" update=":DepartementCriteriaItemCreateForm" oncomplete="PF('DepartementCriteriaItemCreateDialog').show()" rendered="#{departementController.checkUser()}"/>
                                     </f:facet>

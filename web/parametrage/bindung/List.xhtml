@@ -7,45 +7,45 @@
       xmlns:p="http://primefaces.org/ui">
 
 
-       
-            <h:form id="BindungListForm">
-                <p:panel header="#{bundle.ListBindungTitle}">
-                    <p:dataTable id="datalist" value="#{bindungController.items}" var="item"
-                                 selectionMode="single" selection="#{bindungController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+    <h:form id="BindungListForm">
+        <p:panel header="#{bundle.ListBindungTitle}">
+            <p:dataTable id="datalist" value="#{bindungController.items}" var="item"
+                         selectionMode="single" selection="#{bindungController.selected}"
+                         paginator="true"
+                         rowKey="#{item.id}"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         >
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBindungTitle_price}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.price}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBindungTitle_description}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{bindungController.prepareCreate}" update=":parametrageTab:BindungCreateForm" oncomplete="PF('BindungCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:BindungViewForm" oncomplete="PF('BindungViewDialog').show()" disabled="#{empty bindungController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:BindungEditForm" oncomplete="PF('BindungEditDialog').show()" disabled="#{empty bindungController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{bindungController.destroy}" update=":growl,datalist" disabled="#{empty bindungController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
- 
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListBindungTitle_price}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.price}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListBindungTitle_description}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.description}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{bindungController.prepareCreate}" update=":parametrageTab:BindungCreateForm" oncomplete="PF('BindungCreateDialog').show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:BindungViewForm" oncomplete="PF('BindungViewDialog').show()" disabled="#{empty bindungController.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:BindungEditForm" oncomplete="PF('BindungEditDialog').show()" disabled="#{empty bindungController.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{bindungController.destroy}" update=":growl,datalist" disabled="#{empty bindungController.selected}"/>
+                </f:facet>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+
+    <ui:include src="Create.xhtml"/>
+    <ui:include src="Edit.xhtml"/>
+    <ui:include src="View.xhtml"/>
+
 
 </html>

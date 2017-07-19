@@ -31,6 +31,7 @@ public class DepartementCriteriaItemFacade extends AbstractFacade<DepartementCri
         }
         return em.createQuery(query).getResultList();
     }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -40,6 +41,4 @@ public class DepartementCriteriaItemFacade extends AbstractFacade<DepartementCri
         super(DepartementCriteriaItem.class);
     }
 
-    
-    
 }

@@ -28,5 +28,5 @@ public class ProzessFacade extends AbstractFacade<Prozess> {
     public ProzessFacade() {
         super(Prozess.class);
     }
-    
+
 }

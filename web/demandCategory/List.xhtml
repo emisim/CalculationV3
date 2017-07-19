@@ -148,14 +148,14 @@
                                         </f:facet>
                                         <h:outputText value="#{item.user}"/>
                                     </p:column>
-                                    
+
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_department}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.department}"/>
                                     </p:column>
-                                    
+
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('category')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>
@@ -559,7 +559,14 @@
                                         <p:commandButton id="detailButton"   icon="fa fa-list" value="#{bundle.Detail}"  update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}" />
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
-                                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
+                                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}">
+                                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
                                     </f:facet>
                                 </p:dataTable>
                             </p:panel>

@@ -48,8 +48,6 @@ public class DemandCategoryDepartementCalculationController implements Serializa
     private DemandCategoryDepartementCalculationFacade getFacade() {
         return ejbFacade;
     }
-    
-    
 
     public DemandCategoryDepartementCalculation prepareCreate() {
         selected = new DemandCategoryDepartementCalculation();
@@ -77,7 +75,7 @@ public class DemandCategoryDepartementCalculationController implements Serializa
     }
 
     public List<DemandCategoryDepartementCalculation> getItems() {
-         items = getFacade().findAll();
+        items = getFacade().findAll();
         return items;
     }
 

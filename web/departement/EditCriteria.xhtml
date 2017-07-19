@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{departementController.departementCriteria != null}">
                         <p:outputLabel value="#{bundle.EditDepartementCriteriaLabel_name}" for="name" />
                         <p:inputText id="name" value="#{departementController.departementCriteria.name}" title="#{bundle.EditDepartementCriteriaTitle_name}" />
-                        
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{departementController.updateDepartementCriteria()}" value="#{bundle.Save}" update="display,:DepartementCriteriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DepartementCriteriaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DepartementCriteriaEditDialog.hide()"/>

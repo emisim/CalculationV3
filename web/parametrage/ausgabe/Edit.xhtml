@@ -12,7 +12,7 @@
             <h:form id="AusgabeEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ausgabeController.selected != null}">
-                     
+
                         <p:outputLabel value="#{bundle.EditAusgabeLabel_name}" for="name" />
                         <p:inputText id="name" value="#{ausgabeController.selected.name}" title="#{bundle.EditAusgabeTitle_name}" />
                         <p:outputLabel value="#{bundle.EditAusgabeLabel_valuee}" for="valuee" />

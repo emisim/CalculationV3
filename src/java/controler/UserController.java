@@ -41,15 +41,15 @@ public class UserController implements Serializable {
 
     public UserController() {
     }
-    
-    public boolean checkUser(){
-        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+
+    public boolean checkUser() {
+        if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     public String seConnnecter() {
         int res = ejbFacade.seConnnecter(selected);
         AccessDepartement.populateMaps();
@@ -58,15 +58,14 @@ public class UserController implements Serializable {
             if (SessionUtil.getConnectedUser().isMdpChanged()) {
                 System.out.println("meenu");
                 return "/menu/menu?faces-redirect=true";
-            }
-            else {
+            } else {
                 return "/user/ChangePassword?faces-redirect=true";
             }
         }
         validteConnexionForm(res);
         return null;
     }
-    
+
     private void validteConnexionForm(int res) {
         message = MessageManager.createErrorMessage(res, "");
         if (res == -1) {
@@ -82,40 +81,39 @@ public class UserController implements Serializable {
         }
         MessageManager.showMessage(message);
     }
-    
-     public void isNotConnected() throws IOException {
+
+    public void isNotConnected() throws IOException {
         if (SessionUtil.getConnectedUser() == null) {
             SessionUtil.redirect("../index.xhtml");
         }
     }
-    
+
     public String changePassword() {
         User user = ejbFacade.find(selected.getLogin());
-        System.out.println("alter hash : "+HashageUtil.sha256(user.getPassword()));
-        System.out.println("neuer hash : "+HashageUtil.sha256(newPassword));
-        System.out.println("altes PW : "+user.getPassword());
-        System.out.println("neuen PW: "+newPassword);
+        System.out.println("alter hash : " + HashageUtil.sha256(user.getPassword()));
+        System.out.println("neuer hash : " + HashageUtil.sha256(newPassword));
+        System.out.println("altes PW : " + user.getPassword());
+        System.out.println("neuen PW: " + newPassword);
         if (newPassword.equals(newRepetePassword) && !newPassword.equals("") && newPassword != null && !HashageUtil.sha256(newPassword).equals(user.getPassword())) {
-            
+
             user.setPassword(HashageUtil.sha256(newPassword));
             user.setMdpChanged(true);
             ejbFacade.edit(user);
             return seDeConnnecter();
-        }else{
+        } else {
             JsfUtil.addErrorMessage("Probleme während die Passwortänderung");
             return "";
         }
-        
+
     }
-    
+
     public int getTimout() {
         return SessionUtil.getSession().getMaxInactiveInterval();
     }
-    
+
     /*public int getTimout() {
         return SessionUtil.getSession().getMaxInactiveInterval();
     }*/
-    
     public String seDeConnnecter() {
         //
         ejbFacade.seDeConnnecter();
@@ -124,7 +122,7 @@ public class UserController implements Serializable {
     }
 
     public User getConnectedUser() {
-        if(connectedUser == null){
+        if (connectedUser == null) {
             connectedUser = SessionUtil.getConnectedUser();
         }
         return connectedUser;
@@ -133,8 +131,7 @@ public class UserController implements Serializable {
     public void setConnectedUser(User connectedUser) {
         this.connectedUser = connectedUser;
     }
-    
-   
+
     public String getOldPassword() {
         return oldPassword;
     }
@@ -158,9 +155,9 @@ public class UserController implements Serializable {
     public void setNewRepetePassword(String newRepetePassword) {
         this.newRepetePassword = newRepetePassword;
     }
-    
+
     public User getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new User();
         }
         return selected;

@@ -20,7 +20,7 @@
                                            var="departementItem"
                                            itemValue="#{departementItem}" itemLabel="#{departementItem.name}"/>
                         </p:selectOneMenu>
-                       
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{departementCriteriaController.create}" value="#{bundle.Save}" update="display,:DepartementCriteriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'DepartementCriteriaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DepartementCriteriaCreateDialog.hide()"/>

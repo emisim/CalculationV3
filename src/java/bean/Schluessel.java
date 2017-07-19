@@ -20,16 +20,16 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Schluessel implements Serializable {
 
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String label;
     private String description;
     private BigDecimal wert = new BigDecimal(0);
-    
+
     @ManyToOne
-    private SchluesselType schluesselType; 
+    private SchluesselType schluesselType;
 
     public String getDescription() {
         return description;
@@ -38,8 +38,6 @@ public class Schluessel implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -66,8 +64,9 @@ public class Schluessel implements Serializable {
     }
 
     public SchluesselType getSchluesselType() {
-        if(schluesselType == null)
+        if (schluesselType == null) {
             schluesselType = new SchluesselType();
+        }
         return schluesselType;
     }
 
@@ -99,6 +98,5 @@ public class Schluessel implements Serializable {
     public String toString() {
         return label;
     }
-    
-    
+
 }

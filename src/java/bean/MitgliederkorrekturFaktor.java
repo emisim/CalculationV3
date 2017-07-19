@@ -19,7 +19,7 @@ import javax.persistence.Id;
 @Entity
 public class MitgliederkorrekturFaktor implements Serializable {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,7 +41,7 @@ public class MitgliederkorrekturFaktor implements Serializable {
     public void setValue(BigDecimal wert) {
         this.wert = wert;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -72,7 +72,7 @@ public class MitgliederkorrekturFaktor implements Serializable {
 
     @Override
     public String toString() {
-        return wert+"";
+        return wert + "";
     }
-    
+
 }

@@ -143,7 +143,6 @@ public class DemandCategoryController implements Serializable {
 //        selected.setSotimentItems(sotimentItems);
 //        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
 //    }
-
     public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;

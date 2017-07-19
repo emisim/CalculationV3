@@ -26,7 +26,7 @@
                         <p:column headerText="Global price" width="50" >
                             <h:outputText value="#{item.priceGlobal}" />
                         </p:column>
-                        
+
                         <p:summaryRow>
                             <p:column colspan="3" style="text-align:right">
                                 <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
@@ -66,7 +66,7 @@
                                 </p:summaryRow>
                             </p:dataTable>  
                         </p:tab>
-                         <p:tab title="datenManagement">
+                        <p:tab title="datenManagement">
                             <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('datenManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
                                     <p:column colspan="5" style="text-align:left" >
@@ -95,7 +95,7 @@
                                 </p:summaryRow>
                             </p:dataTable>  
                         </p:tab>
-                         <p:tab title="databasePublishing">
+                        <p:tab title="databasePublishing">
                             <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('databasePublishing')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
                                     <p:column colspan="5" style="text-align:left" >
@@ -124,7 +124,7 @@
                                 </p:summaryRow>
                             </p:dataTable>  
                         </p:tab>
-                         <p:tab title="projectManagement">
+                        <p:tab title="projectManagement">
                             <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('projectManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
                                     <p:column colspan="5" style="text-align:left" >
@@ -153,7 +153,7 @@
                                 </p:summaryRow>
                             </p:dataTable>  
                         </p:tab>
-                        
+
                     </p:tabView>
                 </h:panelGroup>
 

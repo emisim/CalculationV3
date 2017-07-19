@@ -168,7 +168,7 @@ public class DemandCategory implements Serializable {
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
 
-   @ManyToOne
+    @ManyToOne
     private User user;
     @ManyToOne
     private Departement department;
@@ -198,7 +198,6 @@ public class DemandCategory implements Serializable {
     public void setDateSystem(Date dateSystem) {
         this.dateSystem = dateSystem;
     }
-
 
     public List<DemandCategoryDepartementCalculation> getDemandCategoryDepartementCalculations() {
         return demandCategoryDepartementCalculations;

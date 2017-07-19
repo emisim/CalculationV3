@@ -28,5 +28,5 @@ public class LayoutFacade extends AbstractFacade<Layout> {
     public LayoutFacade() {
         super(Layout.class);
     }
-    
+
 }

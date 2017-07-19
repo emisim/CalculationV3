@@ -21,7 +21,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Product implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,18 +28,13 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product")
     private List<DemandCategory> demandCategorys;
-      
+
     @ManyToOne
     private Category category;
 
-        private String label;
+    private String label;
     //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
     private String description;
-    
-
-    
-  
-   
 
     public String getDescription() {
         return description;
@@ -50,8 +44,6 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    
-    
     public String getLabel() {
         return label;
     }
@@ -60,13 +52,14 @@ public class Product implements Serializable {
         this.label = label;
     }
 
- public List<DemandCategory> getDemandCategorys() {
+    public List<DemandCategory> getDemandCategorys() {
         return demandCategorys;
     }
 
     public void setDemandCategorys(List<DemandCategory> demandCategorys) {
         this.demandCategorys = demandCategorys;
     }
+
     public Category getCategory() {
         return category;
     }
@@ -74,7 +67,6 @@ public class Product implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-    
 
     public Long getId() {
         return id;
@@ -104,10 +96,9 @@ public class Product implements Serializable {
         return true;
     }
 
-   @Override
+    @Override
     public String toString() {
         return label;
     }
-    
-    
+
 }

@@ -22,7 +22,7 @@
                                            var="configurationItem"
                                            itemValue="#{configurationItem}"/>
                         </p:selectOneMenu>
-                      
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{configurationItemController.create}" value="#{bundle.Save}" update="display,:ConfigurationItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConfigurationItemCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ConfigurationItemCreateDialog.hide()"/>
