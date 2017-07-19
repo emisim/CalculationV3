@@ -142,6 +142,20 @@
                                     <p:ajax event="rowUnselect" update="detailButton viewButton editButton deleteButton"/>
 
 
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_user}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.user}"/>
+                                    </p:column>
+                                    
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_department}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.department}"/>
+                                    </p:column>
+                                    
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('category')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>

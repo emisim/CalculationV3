@@ -30,28 +30,29 @@ import javax.script.ScriptException;
  */
 @Stateless
 public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
-
+    
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
-
+    
     private @EJB
     SotimentItemFacade sotimentItemFacade;
     private @EJB
     DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     @Override
     public void remove(DemandCategory demandCategory) {
+        em.createQuery("DELETE FROM SotimentItem item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculationItem item WHERE item.demandCategoryCalculation.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculation item WHERE item.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryDepartementCalculation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         super.remove(demandCategory);
     }
-
+    
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepareSave(demandCategory, isSave);
         if (!simulation) {
@@ -64,10 +65,12 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
         demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-
+        
     }
-
+    
     private void prepareSave(DemandCategory demandCategory, boolean isSave) {
+        demandCategory.setUser(SessionUtil.getConnectedUser());
+        demandCategory.setDepartment(SessionUtil.getConnectedUser().getDepartement());
         if (!demandCategory.isDruck()) {
             demandCategory.setFormatAuswaehlen(null);
             demandCategory.setPapierMaterialAuswaehlen(null);
@@ -92,9 +95,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if (isSave) {
             demandCategory.setId(generate("DemandCategory", "id"));
         }
-
+        
     }
-
+    
     public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
@@ -143,10 +146,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if (demandCategorys != null && demandCategorys.isEmpty()) {
             JsfUtil.addErrorMessage("Kein Ergebnis gefunden!");
         }
-
+        
         return demandCategorys;
     }
-
+    
     private List<SotimentItem> convertToLong(List<String> sotiementItems) {
         List<SotimentItem> sotimentItemss = new ArrayList<>();
         for (String sotiementItem : sotiementItems) {
@@ -154,15 +157,15 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
         return sotimentItemss;
     }
-
+    
     public DemandCategoryFacade() {
         super(DemandCategory.class);
     }
-
+    
     public boolean renderAttribute(String attribute) {
         User user = SessionUtil.getConnectedUser();
         Departement dep = user.getDepartement();
-
+        
         if (user.getAdmin() == 1) {
             return true;
         } else {
@@ -171,67 +174,67 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                     return true;
                 }
             }
-
+            
             if (dep.getName().equals("datenManagement")) {
                 if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
             if (dep.getName().equals("databasePublishing")) {
                 if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
             if (dep.getName().equals("projectManagement")) {
                 if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
             return false;
-
+            
         }
     }
-
+    
     public boolean renderAttributeForList(String attribute) {
         User user = SessionUtil.getConnectedUser();
         Departement dep = user.getDepartement();
-
+        
         if (user.getAdmin() == 1) {
-
+            
             if (AccessDepartement.getAdminMap().containsKey(attribute)) {
                 return true;
             }
-
+            
         } else {
             if (dep.getName().equals("contentManagement")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
             if (dep.getName().equals("datenManagement")) {
                 if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
             if (dep.getName().equals("databasePublishing")) {
                 if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
             if (dep.getName().equals("projectManagement")) {
                 if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-
+            
         }
         return false;
     }
-
+    
 }

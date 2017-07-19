@@ -13,6 +13,16 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="6" rendered="#{demandCategoryController.selected != null}" style="margin: 3px" >
                         
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_user}"/>
+                        <h:outputText value="#{demandCategoryController.selected.user}" title="#{bundle.ViewDemandCategoryTitle_user}"/>
+                        
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_department}"/>
+                        <h:outputText value="#{demandCategoryController.selected.department}" title="#{bundle.ViewDemandCategoryTitle_department}"/>
+                        
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateSystem}"/>
+                        <h:outputText value="#{demandCategoryController.selected.dateSystem}" title="#{bundle.ViewDemandCategoryTitle_dateSystem}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
                         
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_category}" rendered="#{demandCategoryController.renderAttribute('category')}"/>
                         <h:outputText value="#{demandCategoryController.selected.category.name}" title="#{bundle.ViewDemandCategoryTitle_category}" rendered="#{demandCategoryController.renderAttribute('category')}"/>
