@@ -137,11 +137,19 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
-            if(!selectedSortiemnts.isEmpty()){
-                for (Sortiment selectedSortiemnt : selectedSortiemnts) {
-                 query += SearchUtil.addConstraint("s", "sortiment.id", "=", selectedSortiemnt.getId());   
-                }
+            if (demandCategory.getUser()!= null) {
+                query += SearchUtil.addConstraint("d", "user.login", "=", demandCategory.getUser().getLogin());
             }
+            if (demandCategory.getDepartment()!= null) {
+                query += SearchUtil.addConstraint("d", "department.id", "=", demandCategory.getDepartment().getId());
+            }
+            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+                query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            }
+            if(!selectedSortiemnts.isEmpty()){
+                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);   
+                }
+        
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
             if (demandCategorys != null && !demandCategorys.isEmpty() && sotimentItems != null && !sotimentItems.isEmpty()) {

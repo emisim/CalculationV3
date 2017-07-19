@@ -97,6 +97,26 @@
                                                                    var="konzeptbearbeitungFaktorItem"
                                                                    itemValue="#{konzeptbearbeitungFaktorItem}"/>
                                                 </p:selectOneMenu>
+
+                                                <p:outputLabel value="#{bundle.ViewDemandCategoryLabel_user}" for="user"/>
+                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}"  >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                                    <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                                                   var="user"
+                                                                   itemValue="#{user}"
+                                                                   itemLabel="#{user.nom} #{user.prenom}"/>
+                                                </p:selectOneMenu>
+
+                                                <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
+                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}" >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                                    <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
+                                                                   var="departementItem"
+                                                                   itemValue="#{departementItem}"
+                                                                   itemLabel="#{departementItem.name}"
+                                                                   />
+                                                </p:selectOneMenu>
+
                                             </h:panelGrid>
                                             <div class="align-content ui-widget-header">
                                                 <p:commandButton id="rechercher" value="Search" icon="ui-icon-search" actionListener="#{demandCategoryController.search()}"  update="growl,:DemandCategoryListForm,:DemandCategoryListForm:datalist" />         
