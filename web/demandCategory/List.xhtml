@@ -53,7 +53,7 @@
                                                 </p:selectOneMenu>
                                                 <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}"/>
                                                 <p:selectCheckboxMenu id="sortiment"  value="#{demandCategoryController.selectedSortiemnts}" label="--SELECT--" rendered="#{demandCategoryController.renderAttribute('sortiment')}"
-                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px" converter="sortimentConverter">
+                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px" converter="sortimentConverter" >
                                                     <f:selectItems value="#{demandCategoryController.sortiments}" var="item" itemLabel="#{item.name}" />
                                                 </p:selectCheckboxMenu>
 
@@ -99,7 +99,7 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.ViewDemandCategoryLabel_user}" for="user"/>
-                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}"  >
+                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}" disabled="#{demandCategoryController.adminAccess()}"> 
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{userController.itemsAvailableSelectOne}"
                                                                    var="user"
@@ -108,13 +108,12 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
-                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}" >
+                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}" disabled="#{demandCategoryController.adminAccess()}">
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
                                                                    var="departementItem"
                                                                    itemValue="#{departementItem}"
-                                                                   itemLabel="#{departementItem.name}"
-                                                                   />
+                                                                   itemLabel="#{departementItem.name}"/>
                                                 </p:selectOneMenu>
 
                                             </h:panelGrid>

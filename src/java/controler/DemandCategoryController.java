@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -76,6 +77,18 @@ public class DemandCategoryController implements Serializable {
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
     private List<DepartementDetail> departementCriterias;
 
+    @PostConstruct
+    public void prepareSearchForm(){
+         User connectedUser = SessionUtil.getConnectedUser();
+        if(connectedUser.getAdmin() == 0){
+            getSelectedForSearch().setDepartment(connectedUser.getDepartement());
+            getSelectedForSearch().setUser(connectedUser);
+            
+        }
+    }
+    public boolean adminAccess(){
+         return SessionUtil.getConnectedUser().getAdmin()==1;
+    }
     public DemandCategoryController() {
     }
 
@@ -102,7 +115,6 @@ public class DemandCategoryController implements Serializable {
     public void removeSortimentItem(SotimentItem sItem) {
         System.out.println("hahowa element a supprimer : " + sItem.getWert());
         index = sItem.getId().intValue();
-
         sotimentItems.remove(sItem);
     }
 
@@ -179,12 +191,14 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void addSortimentItem() {
-
+        
         int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
         if (res == -1) {
             JsfUtil.addErrorMessage("Item deja dans la liste");
         } else if (res == -2) {
             JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
+        }else{
+            System.out.println("item ajouter avec wert = "+sortimentItem.getWert());
         }
     }
 

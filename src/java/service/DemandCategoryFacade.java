@@ -149,7 +149,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if(!selectedSortiemnts.isEmpty()){
                  query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);   
                 }
-        
+            System.out.println("ha query ==> "+query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
             if (demandCategorys != null && !demandCategorys.isEmpty() && sotimentItems != null && !sotimentItems.isEmpty()) {

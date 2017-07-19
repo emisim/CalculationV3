@@ -39,12 +39,12 @@ public class SearchUtil {
     }
 
     public static String addConstraintOr(String beanAbrev, String atributeName, String operator, List values) {
-        String query = "";
+        String query = " OR ( 1=0 ";
         if (values != null && !values.isEmpty()) {
             for (Object value : values) {
                 query += addConstraintOr(beanAbrev, atributeName, operator, value);
             }
-            return query;
+            return query+")";
         }
         return "";
     }

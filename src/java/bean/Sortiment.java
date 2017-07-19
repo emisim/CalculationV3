@@ -122,7 +122,7 @@ public class Sortiment implements Serializable {
 
     @Override
     public String toString() {
-        return "Sortiment{" + "id=" + id + ", name=" + name + ", productSchluessel=" + productSchluessel + ", artikelPerPage=" + artikelPerPage + ", lKSchluessel=" + lKSchluessel + ", mKSchluessel=" + mKSchluessel + ", sotimentItems=" + sotimentItems + '}';
+        return id + "";
     }
 
 }
