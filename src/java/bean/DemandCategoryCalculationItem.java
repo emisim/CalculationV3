@@ -49,6 +49,9 @@ public class DemandCategoryCalculationItem implements Serializable {
     }
 
     public BigDecimal getPrice() {
+        if(price == null){
+            price = new BigDecimal(0);
+        }
         return price;
     }
 
@@ -57,6 +60,9 @@ public class DemandCategoryCalculationItem implements Serializable {
     }
     
     public BigDecimal getPriceGlobal() {
+        if(priceGlobal == null){
+            priceGlobal = new BigDecimal(0);
+        }
         return priceGlobal;
     }
 

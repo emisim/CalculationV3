@@ -64,7 +64,10 @@ public class DemandCategoryController implements Serializable {
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
+    private List<Sortiment> selectedSortiemnts;
+    private List<Sortiment> sortiments;
     private List<SotimentItem> detailSotimentItems;
+    private List<SotimentItem> sotimentItemsMixEdit;
     private List<SotimentItem> sotimentItemsForSearch;
     private List<String> sotimentItemsForCheckBox;
     private List<DemandCategoryValidationItem> demandCategoryValidationItems;
@@ -78,6 +81,11 @@ public class DemandCategoryController implements Serializable {
 
     public void simuler() throws ScriptException {
         demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
+    }
+    
+    public void findSortimentItem(){
+        detailSotimentItems = sortimentItemFacade.findByDemandeCategory(selected);
+        sotimentItemsMixEdit = sortimentItemFacade.findByDemandeCategory(selected);
     }
 
     public boolean checkUser() {
@@ -217,7 +225,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -250,7 +258,7 @@ public class DemandCategoryController implements Serializable {
 
     public List<DemandCategory> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findByDepartement();
         }
         return items;
     }
@@ -290,6 +298,7 @@ public class DemandCategoryController implements Serializable {
                 if (persistAction == PersistAction.CREATE) {
                     getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, true);
                 } else if (persistAction == PersistAction.UPDATE) {
+                    sortimentItemFacade.delete(detailSotimentItems);
                     getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, false);
                 } else {
                     getFacade().remove(selected);
@@ -432,6 +441,52 @@ public class DemandCategoryController implements Serializable {
 
     public void setSotimentItemsForCheckBox(List<String> sotimentItemsForCheckBox) {
         this.sotimentItemsForCheckBox = sotimentItemsForCheckBox;
+    }
+
+    public List<SotimentItem> getSotimentItemsMixEdit() {
+        return sotimentItemsMixEdit;
+    }
+
+    public void setSotimentItemsMixEdit(List<SotimentItem> sotimentItemsMixEdit) {
+        this.sotimentItemsMixEdit = sotimentItemsMixEdit;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getCmp() {
+        return cmp;
+    }
+
+    public void setCmp(int cmp) {
+        this.cmp = cmp;
+    }
+
+    public List<Sortiment> getSelectedSortiemnts() {
+        if(selectedSortiemnts == null){
+            selectedSortiemnts = new ArrayList<>();
+        }
+        return selectedSortiemnts;
+    }
+
+    public void setSelectedSortiemnts(List<Sortiment> selectedSortiemnts) {
+        this.selectedSortiemnts = selectedSortiemnts;
+    }
+
+    public List<Sortiment> getSortiments() {
+        if(sortiments == null){
+            sortiments = sortimentFacade.findAll();
+        }
+        return sortiments;
+    }
+
+    public void setSortiments(List<Sortiment> sortiments) {
+        this.sortiments = sortiments;
     }
 
 }

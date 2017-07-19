@@ -89,4 +89,12 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
 
     }
 
+    public void delete(List<SotimentItem> detailSotimentItems) {
+        
+        for (SotimentItem detailSotimentItem : detailSotimentItems) {
+            remove(detailSotimentItem);
+        }
+    
+    }
+
 }

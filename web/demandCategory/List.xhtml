@@ -36,45 +36,37 @@
                                     <div Class="ui-grid-col-12" >
                                         <h:panelGroup id="display" >
                                             <h:panelGrid columns="10" cellpadding="2">
-                                                <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttributeForList('category')}" />
-                                                <p:selectOneMenu id="category" value="#{demandCategoryController.selectedForSearch.category}" rendered="#{demandCategoryController.renderAttributeForList('category')}" autoWidth="false" >
+                                                <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
+                                                <p:selectOneMenu id="category" value="#{demandCategoryController.selectedForSearch.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
                                                                    var="categoryItem"
                                                                    itemValue="#{categoryItem}"/>
                                                 </p:selectOneMenu>
 
-                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_product}" for="product" rendered="#{demandCategoryController.renderAttributeForList('product')}" />
-                                                <p:selectOneMenu id="product" value="#{demandCategoryController.selectedForSearch.product}" rendered="#{demandCategoryController.renderAttributeForList('product')}" autoWidth="false">
+                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_product}" for="product" rendered="#{demandCategoryController.renderAttribute('product')}" />
+                                                <p:selectOneMenu id="product" value="#{demandCategoryController.selectedForSearch.product}" rendered="#{demandCategoryController.renderAttribute('product')}" autoWidth="false">
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{productController.itemsAvailableSelectOne}"
                                                                    var="productItem"
                                                                    itemValue="#{productItem}"/>
                                                 </p:selectOneMenu>
-                                                <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttributeForList('sortiment')}" />
-                                                <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttributeForList('sortiment')}" autoWidth="false" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                                    <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
-                                                                   var="sortimentItem"
-                                                                   itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
-                                                    <p:ajax process="sortiment" listener="#{demandCategoryController.findSortiementItemsBySortiement()}" update="sortimentItem"/>
-                                                </p:selectOneMenu>
-
-                                                <p:outputLabel value="sortiement item" for="sortimentItem" rendered="#{demandCategoryController.renderAttributeForList('sortiment')}" />
-                                                <p:selectCheckboxMenu id="sortimentItem"  label="Sortiement items"   value="#{demandCategoryController.sotimentItemsForCheckBox}" filter="true" filterMatchMode="startsWith"  multiple="true" rendered="#{demandCategoryController.renderAttributeForList('sortiment')}" >
-                                                    <f:selectItems value="#{demandCategoryController.sotimentItemsForSearch}" var="typeT" itemLabel="#{typeT.value}" itemValue="#{typeT.id}" />
+                                                <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}"/>
+                                                <p:selectCheckboxMenu id="sortiment"  value="#{demandCategoryController.selectedSortiemnts}" label="--SELECT--" rendered="#{demandCategoryController.renderAttribute('sortiment')}"
+                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px" converter="sortimentConverter">
+                                                    <f:selectItems value="#{demandCategoryController.sortiments}" var="item" itemLabel="#{item.name}" />
                                                 </p:selectCheckboxMenu>
 
-                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttributeForList('correctionSchluessel')}" />
-                                                <p:selectOneMenu id="correctionSchluessel" value="#{demandCategoryController.selectedForSearch.correctionSchluessel}" rendered="#{demandCategoryController.renderAttributeForList('correctionSchluessel')}" >
+                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
+                                                <p:selectOneMenu id="correctionSchluessel" value="#{demandCategoryController.selectedForSearch.correctionSchluessel}" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{correctionSchluesselController.itemsAvailableSelectOne}"
                                                                    var="correctionSchluesselItem"
                                                                    itemValue="#{correctionSchluesselItem}"/>
                                                 </p:selectOneMenu>
 
-                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mitgliederkorrekturFaktor}" for="mitgliederkorrekturFaktor" rendered="#{demandCategoryController.renderAttributeForList('mitgliederkorrekturFaktor')}" />
-                                                <p:selectOneMenu id="mitgliederkorrekturFaktor" value="#{demandCategoryController.selectedForSearch.mitgliederkorrekturFaktor}" rendered="#{demandCategoryController.renderAttributeForList('mitgliederkorrekturFaktor')}" >
+                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mitgliederkorrekturFaktor}" for="mitgliederkorrekturFaktor" rendered="#{demandCategoryController.renderAttribute('mitgliederkorrekturFaktor')}" />
+                                                <p:selectOneMenu id="mitgliederkorrekturFaktor" value="#{demandCategoryController.selectedForSearch.mitgliederkorrekturFaktor}" rendered="#{demandCategoryController.renderAttribute('mitgliederkorrekturFaktor')}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{mitgliederkorrekturFaktorController.itemsAvailableSelectOne}"
                                                                    var="mitgliederkorrekturFaktorItem"
@@ -82,24 +74,24 @@
                                                 </p:selectOneMenu>
 
 
-                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_wechselfassungVariantFaktor}" for="wechselfassungVariantFaktor" rendered="#{demandCategoryController.renderAttributeForList('wechselfassungVariantFaktor')}" />
-                                                <p:selectOneMenu id="wechselfassungVariantFaktor" value="#{demandCategoryController.selectedForSearch.wechselfassungVariantFaktor}" rendered="#{demandCategoryController.renderAttributeForList('wechselfassungVariantFaktor')}" >
+                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_wechselfassungVariantFaktor}" for="wechselfassungVariantFaktor" rendered="#{demandCategoryController.renderAttribute('wechselfassungVariantFaktor')}" />
+                                                <p:selectOneMenu id="wechselfassungVariantFaktor" value="#{demandCategoryController.selectedForSearch.wechselfassungVariantFaktor}" rendered="#{demandCategoryController.renderAttribute('wechselfassungVariantFaktor')}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{wechselfassungVariantFaktorController.itemsAvailableSelectOne}"
                                                                    var="wechselfassungVariantFaktorItem"
                                                                    itemValue="#{wechselfassungVariantFaktorItem}"/>
                                                 </p:selectOneMenu>
 
-                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_participantFaktor}" for="participantFaktor" rendered="#{demandCategoryController.renderAttributeForList('participantFaktor')}" />
-                                                <p:selectOneMenu id="participantFaktor" value="#{demandCategoryController.selectedForSearch.participantFaktor}" rendered="#{demandCategoryController.renderAttributeForList('participantFaktor')}" >
+                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_participantFaktor}" for="participantFaktor" rendered="#{demandCategoryController.renderAttribute('participantFaktor')}" />
+                                                <p:selectOneMenu id="participantFaktor" value="#{demandCategoryController.selectedForSearch.participantFaktor}" rendered="#{demandCategoryController.renderAttribute('participantFaktor')}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{participantFaktorController.itemsAvailableSelectOne}"
                                                                    var="participantFaktorItem"
                                                                    itemValue="#{participantFaktorItem}"/>
                                                 </p:selectOneMenu>
 
-                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_konzeptbearbeitungFaktor}" for="konzeptbearbeitungFaktor" rendered="#{demandCategoryController.renderAttributeForList('konzeptbearbeitungFaktor')}" />
-                                                <p:selectOneMenu id="konzeptbearbeitungFaktor" value="#{demandCategoryController.selectedForSearch.konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttributeForList('konzeptbearbeitungFaktor')}" >
+                                                <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_konzeptbearbeitungFaktor}" for="konzeptbearbeitungFaktor" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" />
+                                                <p:selectOneMenu id="konzeptbearbeitungFaktor" value="#{demandCategoryController.selectedForSearch.konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{konzeptbearbeitungFaktorController.itemsAvailableSelectOne}"
                                                                    var="konzeptbearbeitungFaktorItem"
@@ -148,14 +140,14 @@
                                         </f:facet>
                                         <h:outputText value="#{item.user}"/>
                                     </p:column>
-                                    
+
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_department}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.department}"/>
                                     </p:column>
-                                    
+
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('category')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>

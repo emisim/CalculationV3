@@ -29,16 +29,8 @@
                                            itemValue="#{productItem}" itemLabel="#{productItem.label}"/>
                         </p:selectOneMenu>
 
-                        <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--Select Sortiment--"/>
-                            <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
-                                           var="sortimentItem"
-                                           itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
-                        </p:selectOneMenu>
-
-
-                        <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-
+                        <p:outputLabel value="Sortiment:" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
+                        <p:commandButton id="mix" value="Select"  oncomplete="PF('MixEditDialog').show()" actionListener="#{demandCategoryController.findSortimentItem()}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_layout}" for="layout" rendered="#{demandCategoryController.renderAttribute('layout')}" />
                         <p:selectOneMenu id="layout" value="#{demandCategoryController.selected.layout}" rendered="#{demandCategoryController.renderAttribute('layout')}" >
@@ -321,7 +313,8 @@
                     </div>
                 </h:panelGroup>
             </h:form>
+            
         </p:dialog>
-
+ <ui:include src="MixEdit.xhtml"/>
     </ui:composition>
 </html>

@@ -98,10 +98,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         
     }
     
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
-        String query = "SELECT d from DemandCategory d WHERE 1=1";
+        String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
         if (demandCategory != null) {
             if (demandCategory.getProduct() != null) {
                 query += SearchUtil.addConstraint("d", "product.id", "=", demandCategory.getProduct().getId());
@@ -123,6 +123,11 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             }
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            }
+            if(!selectedSortiemnts.isEmpty()){
+                for (Sortiment selectedSortiemnt : selectedSortiemnts) {
+                 query += SearchUtil.addConstraint("s", "sortiment.id", "=", selectedSortiemnt.getId());   
+                }
             }
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -235,6 +240,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             
         }
         return false;
+    }
+
+    public List<DemandCategory> findByDepartement() {
+        User connectedUser = SessionUtil.getConnectedUser();
+        if(connectedUser.getAdmin() == 0){
+            String requette = "select dem from DemandCategory dem where dem.department.id = '"+connectedUser.getDepartement().getId()+"'";
+            return em.createQuery(requette).getResultList();
+        }else{
+            return findAll();
+        }
+        
+    
     }
     
 }

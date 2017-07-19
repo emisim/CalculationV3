@@ -135,7 +135,7 @@ public class SortimentController implements Serializable {
     
     
 
-    @FacesConverter(forClass = Sortiment.class)
+    @FacesConverter(forClass = Sortiment.class,value = "sortimentConverter")
     public static class SortimentControllerConverter implements Converter {
 
         @Override
