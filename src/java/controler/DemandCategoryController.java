@@ -179,12 +179,14 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void addSortimentItem() {
-
+        
         int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
         if (res == -1) {
             JsfUtil.addErrorMessage("Item deja dans la liste");
         } else if (res == -2) {
             JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
+        }else{
+            System.out.println("item ajouter avec wert = "+sortimentItem.getWert());
         }
     }
 
