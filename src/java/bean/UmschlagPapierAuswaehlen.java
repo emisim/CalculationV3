@@ -42,7 +42,6 @@ public class UmschlagPapierAuswaehlen implements Serializable {
         this.description = description;
     }
 
-   
     public String getId() {
         return id;
     }
@@ -73,7 +72,7 @@ public class UmschlagPapierAuswaehlen implements Serializable {
 
     @Override
     public String toString() {
-        return  id ;
+        return id;
     }
-    
+
 }

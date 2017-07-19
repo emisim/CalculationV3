@@ -28,5 +28,5 @@ public class SortimentFacade extends AbstractFacade<Sortiment> {
     public SortimentFacade() {
         super(Sortiment.class);
     }
-    
+
 }

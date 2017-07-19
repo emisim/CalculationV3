@@ -24,7 +24,6 @@ public class UserFacade extends AbstractFacade<User> {
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -81,7 +80,7 @@ public class UserFacade extends AbstractFacade<User> {
         clone.setTel(user.getTel());
         return clone;
     }
-    
+
     public void seDeConnnecter() {
         SessionUtil.getSession().invalidate();
 

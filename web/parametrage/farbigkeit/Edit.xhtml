@@ -16,7 +16,7 @@
                         <p:inputText id="price" value="#{farbigkeitController.selected.price}" title="#{bundle.EditFarbigkeitTitle_price}" />
                         <p:outputLabel value="#{bundle.EditFarbigkeitLabel_description}" for="description" />
                         <p:inputText id="description" value="#{farbigkeitController.selected.description}" title="#{bundle.EditFarbigkeitTitle_description}" />
-                       
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{farbigkeitController.update}" value="#{bundle.Save}" update="display,:parametrageTab:FarbigkeitListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FarbigkeitEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FarbigkeitEditDialog.hide()"/>

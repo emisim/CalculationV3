@@ -28,5 +28,5 @@ public class KonzeptbearbeitungFaktorFacade extends AbstractFacade<Konzeptbearbe
     public KonzeptbearbeitungFaktorFacade() {
         super(KonzeptbearbeitungFaktor.class);
     }
-    
+
 }

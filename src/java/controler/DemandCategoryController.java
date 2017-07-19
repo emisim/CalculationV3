@@ -79,6 +79,9 @@ public class DemandCategoryController implements Serializable {
     public DemandCategoryController() {
     }
 
+    public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
+        return ejbFacade.findSummByDepartement(demandCategory);
+    }
     public void simuler() throws ScriptException {
         demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
     }
@@ -151,7 +154,6 @@ public class DemandCategoryController implements Serializable {
 //        selected.setSotimentItems(sotimentItems);
 //        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
 //    }
-
     public boolean renderAttribute(String attribute) {
         boolean isSet = ejbFacade.renderAttribute(attribute);
         return isSet;

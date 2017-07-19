@@ -12,7 +12,7 @@
             <h:form id="DemandCategoryCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
-                        
+
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summDruck}" for="summDruck" />
                         <p:inputText id="summDruck" value="#{demandCategoryController.selected.summDruck}" title="#{bundle.CreateDemandCategoryTitle_summDruck}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summTotal}" for="summTotal" />
@@ -95,12 +95,12 @@
                                            var="konzeptbearbeitungFaktorItem"
                                            itemValue="#{konzeptbearbeitungFaktorItem}"/>
                         </p:selectOneMenu>
-                        
+
                         <p:outputLabel value="druck" for="druck" />
                         <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
                             <p:ajax process="druck" update="display, formatAuswaehlen, papierMaterialAuswaehlen, seitenanzahl, farbigkeit, artDerWeiterverarbeitung, veredlung" listener="#{demandCategoryController.checkDruck()}" />
                         </p:selectBooleanCheckbox>
-                            
+
 
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true}" />

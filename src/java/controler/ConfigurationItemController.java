@@ -31,11 +31,11 @@ public class ConfigurationItemController implements Serializable {
 
     public ConfigurationItemController() {
     }
-    
-    public boolean checkUser(){
-        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+
+    public boolean checkUser() {
+        if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

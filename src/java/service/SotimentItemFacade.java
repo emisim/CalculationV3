@@ -72,7 +72,6 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         return sotimentItems;
     }
 
-  
     @Override
     protected EntityManager getEntityManager() {
         return em;

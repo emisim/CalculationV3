@@ -25,11 +25,10 @@ public class DemandCategoryValidation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    
+
     @OneToOne
     private DemandCategory demandCategory;
-    
+
     @OneToMany(mappedBy = "demandCategoryValidation")
     private List<DemandCategoryValidationItem> demandCategoryValidationItems;
 

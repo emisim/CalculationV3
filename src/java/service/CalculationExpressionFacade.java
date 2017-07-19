@@ -7,6 +7,7 @@ package service;
 
 import bean.ArtDerWeiterverarbeitung;
 import bean.DemandCategory;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -38,22 +39,21 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
         super(ArtDerWeiterverarbeitung.class);
     }
 
-   
-
-  
     //Wichtig für die Evaluation unsere Expression
-    public Object evalFunction(String expression , Object input) throws ScriptException {
-        System.out.println("haa expression ==> "+expression);
-        if(input!=null && input instanceof DemandCategory){
-            // ALlle Input sinbd als Object hier gespeicherts
-            getJsEngine().put("demandCategory", (DemandCategory)input);
+    public Object evalFunction(String expression, Object input, boolean execExpression) throws ScriptException {
+        if (execExpression == true) {
+            System.out.println("haa expression ==> " + expression);
+            if (input != null && input instanceof DemandCategory) {
+                // ALlle Input sinbd als Object hier gespeicherts
+                getJsEngine().put("demandCategory", (DemandCategory) input);
+            }
+            Object obj = getJsEngine().eval(expression);
+            System.out.println("haaa l eval ==> " + obj);
+            return obj;
         }
-        Object obj= getJsEngine().eval(expression);
-        System.out.println("haaa l eval ==> "+obj);
-        return obj;
+        return "0";
     }
 
-   
     public ScriptEngine getJsEngine() {
         if (jsEngine == null) {
             jsEngine = manager.getEngineByName("JavaScript"); //BE CAREFUL about the engine name.
@@ -70,12 +70,9 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-    
-    
-    
+
     // ALles drunter wird nicht benutzt
-     public static List<String> extracteService(String expression) {
+    public static List<String> extracteService(String expression) {
         return extracteService(expression, ";", ";");
     }
 

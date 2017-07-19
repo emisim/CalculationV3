@@ -21,21 +21,19 @@ import javax.persistence.OneToMany;
 @Entity
 public class SchluesselType implements Serializable {
 
-   
-
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    
-     @OneToMany(mappedBy = "schluesselType")
+
+    @OneToMany(mappedBy = "schluesselType")
     private List<Schluessel> schluessels;
 
     public List<Schluessel> getSchluessels() {
-        if(schluessels == null)
+        if (schluessels == null) {
             schluessels = new ArrayList<>();
+        }
         return schluessels;
     }
 
@@ -79,10 +77,9 @@ public class SchluesselType implements Serializable {
         return true;
     }
 
-     @Override
+    @Override
     public String toString() {
         return name;
     }
-    
-    
+
 }

@@ -10,13 +10,13 @@
 
 
         <p:dialog id="DemandCategoryValidationItemListDlg" widgetVar="DemandCategoryValidationItemListDialog" modal="true" resizable="false" appendTo="@(body)" header="Validation Items">
-            
+
             <h:form id="DemandCategoryValidationItemListForm" style="width: 500px">
                 <p:panel header="#{bundle.ListDemandCategoryValidationItemTitle}">
                     <p:dataTable id="datalist" value="#{demandCategoryController.demandCategoryValidationItems}" var="item"
-                                 
+
                                  paginator="true"
-                                 
+
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
@@ -38,12 +38,12 @@
                             </f:facet>
                             <h:outputText value="#{item.user.nom} - #{item.user.admin==1?'Admin':''}"/>
                         </p:column>
-                        
+
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
-            </p:dialog>
+        </p:dialog>
     </ui:composition>
 
 </html>

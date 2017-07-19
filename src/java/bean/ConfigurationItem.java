@@ -37,7 +37,6 @@ public class ConfigurationItem implements Serializable {
         this.name = name;
     }
 
-    
     public BigDecimal getDefaultValue() {
         return defaultValue;
     }
@@ -54,7 +53,6 @@ public class ConfigurationItem implements Serializable {
         this.configuration = configuration;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -83,9 +81,9 @@ public class ConfigurationItem implements Serializable {
         return true;
     }
 
-  @Override
+    @Override
     public String toString() {
-        return name+"";
+        return name + "";
     }
-    
+
 }

@@ -44,99 +44,99 @@ public class DepartementController implements Serializable {
 
     public DepartementController() {
     }
-    
-    public boolean checkUser(){
-        if(SessionUtil.getConnectedUser().getAdmin() == 1){
+
+    public boolean checkUser() {
+        if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-     public List<Departement> findAll(){
-       return ejbFacade.findAll();
+
+    public List<Departement> findAll() {
+        return ejbFacade.findAll();
     }
-    
-    public void deleteDepartementWithCriteria(Departement departement){
+
+    public void deleteDepartementWithCriteria(Departement departement) {
         ejbFacade.deleteDepartementWithCriteria(departement);
     }
-    
-    public void deleteCriteriaItem(DepartementCriteriaItem criteriaItem){
+
+    public void deleteCriteriaItem(DepartementCriteriaItem criteriaItem) {
         departementCriteriaItemFacade.remove(criteriaItem);
     }
-    
-    public void deleteCriteriaWithCriteriaItem(DepartementCriteria criteria){
+
+    public void deleteCriteriaWithCriteriaItem(DepartementCriteria criteria) {
         departementCriteriaFacade.deleteCriteriaWithCriteriaItem(criteria);
     }
-    
-    public boolean renderCriteriaItem(){
+
+    public boolean renderCriteriaItem() {
         return renderCriteriaItem;
     }
-    
-    public boolean renderCriteria(){
+
+    public boolean renderCriteria() {
         return renderCriteria;
     }
-    
-    public void prepareEditCriteria(DepartementCriteria criteria){
+
+    public void prepareEditCriteria(DepartementCriteria criteria) {
         departementCriteria = criteria;
     }
-    
-    public void prepareEdit(Departement dep){
+
+    public void prepareEdit(Departement dep) {
         selected = dep;
     }
-    
-    public void prepareEditCriteriaItem(DepartementCriteriaItem criteriaItem){
+
+    public void prepareEditCriteriaItem(DepartementCriteriaItem criteriaItem) {
         departementCriteriaItem = criteriaItem;
     }
-    
-    public void prepareViewCriteriaItem(DepartementCriteriaItem criteriaItem){
+
+    public void prepareViewCriteriaItem(DepartementCriteriaItem criteriaItem) {
         departementCriteriaItem = criteriaItem;
     }
-    
-    public List<Departement> findDepartementByUser(){
+
+    public List<Departement> findDepartementByUser() {
         items = ejbFacade.findDepartementByUser();
         return items;
     }
-    
-    public void updateDepartementCriteria(){
+
+    public void updateDepartementCriteria() {
         departementCriteriaFacade.edit(departementCriteria);
     }
-    
-    public void updateDepartementCriteriaItem(){
+
+    public void updateDepartementCriteriaItem() {
         departementCriteriaItemFacade.edit(departementCriteriaItem);
     }
-    
-    public void prepareDepartementCriteria(DepartementCriteria criteria){
+
+    public void prepareDepartementCriteria(DepartementCriteria criteria) {
         departementCriteria = criteria;
     }
-    
-    public void findCriteriaByDepartement(Departement departement){
+
+    public void findCriteriaByDepartement(Departement departement) {
         departementCriterias = departementCriteriaFacade.findByDepartement(departement);
         selected = departement;
         renderCriteriaItem = false;
         renderCriteria = true;
     }
-    
-    public void createDepartementCriteria(){
+
+    public void createDepartementCriteria() {
         departementCriteria.setDepartement(selected);
         departementCriteriaFacade.create(departementCriteria);
         departementCriteria = new DepartementCriteria();
     }
-    
-    public void createDepartementCriterieItem(){
+
+    public void createDepartementCriterieItem() {
         departementCriteriaItem.setDepartementCriteria(departementCriteria);
         departementCriteriaItemFacade.create(departementCriteriaItem);
         departementCriteriaItem = new DepartementCriteriaItem();
     }
-    
-    public void findCriteriaItemByCriteria(DepartementCriteria criteria){
+
+    public void findCriteriaItemByCriteria(DepartementCriteria criteria) {
         departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(criteria);
         departementCriteria = criteria;
         renderCriteriaItem = true;
     }
 
     public DepartementCriteriaItem getDepartementCriteriaItem() {
-        if(departementCriteriaItem == null){
+        if (departementCriteriaItem == null) {
             departementCriteriaItem = new DepartementCriteriaItem();
         }
         return departementCriteriaItem;
@@ -147,7 +147,7 @@ public class DepartementController implements Serializable {
     }
 
     public DepartementCriteria getDepartementCriteria() {
-        if(departementCriteria == null){
+        if (departementCriteria == null) {
             departementCriteria = new DepartementCriteria();
         }
         return departementCriteria;
@@ -158,7 +158,7 @@ public class DepartementController implements Serializable {
     }
 
     public List<DepartementCriteriaItem> getDepartementCriteriaItems() {
-        if(departementCriteriaItems == null){
+        if (departementCriteriaItems == null) {
             departementCriteriaItems = new ArrayList<>();
         }
         return departementCriteriaItems;
@@ -169,7 +169,7 @@ public class DepartementController implements Serializable {
     }
 
     public List<DepartementCriteria> getDepartementCriterias() {
-        if(departementCriterias == null){
+        if (departementCriterias == null) {
             departementCriterias = new ArrayList<>();
         }
         return departementCriterias;
@@ -178,9 +178,9 @@ public class DepartementController implements Serializable {
     public void setDepartementCriterias(List<DepartementCriteria> departementCriterias) {
         this.departementCriterias = departementCriterias;
     }
-    
+
     public Departement getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new Departement();
         }
         return selected;
@@ -205,8 +205,6 @@ public class DepartementController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
-    
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DepartementCreated"));

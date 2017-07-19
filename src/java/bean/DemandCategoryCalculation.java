@@ -112,6 +112,4 @@ public class DemandCategoryCalculation implements Serializable {
         return "DemandCategoryCalculation{" + "id=" + id + ", departementCriteria=" + departementCriteria + ", summe=" + summe + ", valide=" + valide + ", demandCategoryCalculationItems=" + demandCategoryCalculationItems + ", demandCategoryDepartementCalculation=" + demandCategoryDepartementCalculation + '}';
     }
 
-   
-
 }

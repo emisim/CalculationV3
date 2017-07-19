@@ -28,5 +28,5 @@ public class ArtDerWeiterverarbeitungFacade extends AbstractFacade<ArtDerWeiterv
     public ArtDerWeiterverarbeitungFacade() {
         super(ArtDerWeiterverarbeitung.class);
     }
-    
+
 }

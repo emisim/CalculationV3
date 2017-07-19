@@ -28,5 +28,5 @@ public class SchluesselTypeFacade extends AbstractFacade<SchluesselType> {
     public SchluesselTypeFacade() {
         super(SchluesselType.class);
     }
-    
+
 }

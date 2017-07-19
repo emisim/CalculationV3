@@ -14,8 +14,8 @@
         </ui:define>
 
         <ui:define name="body">
-     
-            
+
+
             <h:form id="ConfigurationListForm">
                 <p:panel header="#{bundle.ListConfigurationTitle}">
                     <p:dataTable id="datalist" value="#{configurationController.items}" var="item"
@@ -37,7 +37,7 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
-                       
+
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{configurationController.prepareCreate}" update=":ConfigurationCreateForm" oncomplete="PF('ConfigurationCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConfigurationViewForm" oncomplete="PF('ConfigurationViewDialog').show()" disabled="#{empty configurationController.selected}"/>
