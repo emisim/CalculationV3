@@ -54,6 +54,10 @@
                                         <p:menuitem value="List" outcome="/configurationItem/List.xhtml"  icon="fa fa-list" />
 
                                     </p:submenu>
+                                    <p:submenu id="statistiken" label="Statistiken" icon="fa fa-bar-chart" rendered="#{userController.checkUser()}">
+                                        <p:menuitem value="DemandCategory" outcome="/statistique/demandeCategoryStatistique.xhtml"  icon="fa fa-list" />
+
+                                    </p:submenu>
 
 
 
