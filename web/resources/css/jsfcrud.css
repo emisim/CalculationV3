@@ -116,3 +116,11 @@ ui-button, button.ui-button.ui-state-hover, button.ui-button.ui-state-focus, .ui
  outline: 0 none;
 } 
 
+.ui-paginator .ui-paginator-page.ui-state-active {
+    background: #006f73;
+    color: #fff;
+    border-color: #156090;
+}
+
+
+
