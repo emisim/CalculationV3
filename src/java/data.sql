@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 20 Juillet 2017 à 13:09
--- Version du serveur :  10.1.19-MariaDB
--- Version de PHP :  5.5.38
+-- Généré le :  Jeu 20 Juillet 2017 à 19:51
+-- Version du serveur :  10.1.8-MariaDB
+-- Version de PHP :  5.6.14
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -52,6 +52,58 @@ INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
 
 INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID`) VALUES
 (1, '257.00', 'std_stz', 1);
+
+--
+-- Contenu de la table `demandcategory`
+--
+
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
+(9, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 1, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, 'PUR-Bindung', 4, NULL, NULL, NULL, '2/2 -farbig', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'walo', NULL, NULL),
+(10, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 2, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'ana', NULL, NULL);
+
+--
+-- Contenu de la table `demandcategorycalculation`
+--
+
+INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `VALIDE`, `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(17, '2827.00', 0, 27, 1),
+(18, '1028.00', 0, 27, 2),
+(19, '0.00', 0, 31, 1),
+(20, '257.00', 0, 31, 2);
+
+--
+-- Contenu de la table `demandcategorycalculationitem`
+--
+
+INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICEGLOBAL`, `DEMANDCATEGORYCALCULATION_ID`, `DEPARTEMENTCRITERIAITEM_ID`) VALUES
+(33, 1, '1285.00', '2570.00', 17, 1),
+(34, 1, '1542.00', '3084.00', 17, 2),
+(35, 1, '771.00', '1542.00', 18, 3),
+(36, 1, '257.00', '514.00', 18, 4),
+(37, 0, '0.00', '0.00', 19, 1),
+(38, 1, '0.00', '0.00', 19, 2),
+(39, 1, '0.00', '0.00', 20, 3),
+(40, 1, '257.00', '514.00', 20, 4);
+
+--
+-- Contenu de la table `demandcategorydepartementcalculation`
+--
+
+INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`) VALUES
+(27, '3855.00', 9, 1),
+(28, '0.00', 9, 2),
+(29, '0.00', 9, 3),
+(30, '0.00', 9, 4),
+(31, '3598.00', 10, 1);
+
+--
+-- Contenu de la table `demandcategoryvalidation`
+--
+
+INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`, `USER_LOGIN`) VALUES
+(11, '18:46:17', 9, NULL, 'walo'),
+(12, '18:47:47', 10, 1, 'ana'),
+(13, '18:48:08', 10, NULL, 'walo');
 
 --
 -- Contenu de la table `departement`
@@ -173,6 +225,18 @@ INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`,
 (15, '6.00', '1.00', '1.00', 'Werkstattmaterial', '2.00'),
 (16, '11.00', '1.00', '1.00', '\nWerkzeuge Holzbearbeitung', '3.00'),
 (17, '11.00', '1.00', '1.00', 'Werkzeuge Metallbearbeitung', '3.00');
+
+--
+-- Contenu de la table `sotimentitem`
+--
+
+INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) VALUES
+(22, '30.00', 9, 6),
+(23, '20.00', 9, 2),
+(24, '50.00', 9, 4),
+(25, '10.00', 10, 3),
+(26, '40.00', 10, 7),
+(27, '50.00', 10, 5);
 
 --
 -- Contenu de la table `user`

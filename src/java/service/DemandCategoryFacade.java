@@ -50,7 +50,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
     @EJB
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
-   
+    @EJB
+    private DemandCategoryValidationFacade demandCategoryValidationFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -60,6 +61,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     @Override
     public void remove(DemandCategory demandCategory) {
         em.createQuery("DELETE FROM SotimentItem item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
+        em.createQuery("DELETE FROM DemandCategoryValidation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculationItem item WHERE item.demandCategoryCalculation.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculation item WHERE item.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryDepartementCalculation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
@@ -81,6 +83,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         calcSumTotal(demandCategory);
         if (simulation == false && isSave == false) {
             edit(demandCategory);
+            demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
         }
 
     }
@@ -149,19 +152,19 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
-            if (demandCategory.getUser()!= null) {
+            if (demandCategory.getUser() != null) {
                 query += SearchUtil.addConstraint("d", "user.login", "=", demandCategory.getUser().getLogin());
             }
-            if (demandCategory.getDepartment()!= null) {
+            if (demandCategory.getDepartment() != null) {
                 query += SearchUtil.addConstraint("d", "department.id", "=", demandCategory.getDepartment().getId());
             }
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
-            if(!selectedSortiemnts.isEmpty()){
-                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);   
-                }
-            System.out.println("ha query ==> "+query);
+            if (!selectedSortiemnts.isEmpty()) {
+                query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
+            }
+            System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
             if (demandCategorys != null && !demandCategorys.isEmpty() && sotimentItems != null && !sotimentItems.isEmpty()) {
@@ -241,11 +244,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         Departement dep = user.getDepartement();
 
         if (user.getAdmin() == 1) {
-
             if (AccessDepartement.getAdminMap().containsKey(attribute)) {
                 return true;
             }
-
         } else {
             if (dep.getName().equals("contentManagement")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
@@ -296,8 +297,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             return demandCategory.getSummTotal();
         }
     }
-    
-     public void updateDepItems(List<DepartementDetail> departementDetails) {
+
+    public void updateDepItems(List<DepartementDetail> departementDetails) {
         if (departementDetails != null && !departementDetails.isEmpty()) {
             for (DepartementDetail departementCriteria : departementDetails) {
                 DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuationId());
@@ -314,27 +315,21 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             }
             JsfUtil.addSuccessMessage("Details updated");
         }
-     }
+    }
 
     public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory) {
-
         ChartSeries chartSeries = new ChartSeries();
-
         if (typeAxe == 1) {
             String requet = "select dc from DemandCategory dc where 1=1";
             requet += " AND dc.dateDemandCategory LIKE '" + year + "-%-%'";
-
             List<DemandCategory> demandCategorys = em.createQuery(requet).getResultList();
             System.out.println("methode createDemandeCategoryStat -> demandCategorys :" + demandCategorys);
             chartSeries = charSerieParAnne(year, typeSum, demandCategorys);
         } else if (typeAxe == 2) {
             chartSeries.set("summTotal", calculerSum(demandCategory));
             chartSeries.set("summDruck", demandCategory.getSummDruck());
-
         }
-
         chartSeries.setLabel("" + year);
-
         return chartSeries;
 
     }
@@ -342,19 +337,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     public ChartSeries charSerieParAnne(int year, int typeSum, List<DemandCategory> demandCategorys) {
         ChartSeries series = new ChartSeries();
         for (int i = 1; i <= 12; i++) {
-            BigDecimal a = new BigDecimal(BigInteger.ZERO);
+            BigDecimal summ = new BigDecimal(BigInteger.ZERO);
             for (DemandCategory demandCategory : demandCategorys) {
                 if (demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
                     if (typeSum == 1) {
-                        a = a.add(calculerSum(demandCategory));
+                        summ = summ.add(calculerSum(demandCategory));
                     } else {
-                        a = a.add(demandCategory.getSummDruck());
+                        summ = summ.add(demandCategory.getSummDruck());
                     }
-
                 }
             }
-            System.out.println("summ value (a)" + a);
-            series.set("mois " + i, a);
+            System.out.println("summ value (a)" + summ);
+            series.set("mois " + i, summ);
         }
         return series;
     }
@@ -364,7 +358,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
         System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
         BigDecimal sum = new BigDecimal(0);
-
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             if (demandCategoryDepartementCalculation.getSumme() != null) {
                 sum = sum.add(demandCategoryDepartementCalculation.getSumme());
@@ -376,13 +369,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
         PieChartModel pieModel = new PieChartModel();
-
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
-
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             pieModel.set("dc.Departement Calculation" + demandCategoryDepartementCalculation.getId(), demandCategoryDepartementCalculation.getSumme());
         }
-
         pieModel.setTitle("detail summTotal for demand Category(dc)");
         pieModel.setLegendPosition("w");
         pieModel.setShowDataLabels(true);
@@ -392,8 +382,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public List<DemandCategoryDepartementCalculation> findByDemandeCategory(DemandCategory demandCategory) {
-
         return em.createQuery("SELECT dc FROM DemandCategoryDepartementCalculation dc WHERE dc.demandCategory.id=" + demandCategory.getId()).getResultList();
-
     }
 }
