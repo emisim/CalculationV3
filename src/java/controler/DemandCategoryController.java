@@ -62,7 +62,6 @@ public class DemandCategoryController implements Serializable {
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
     @EJB
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
-   
     
     private List<DemandCategory> items = null;
     private DemandCategory selected;
@@ -87,32 +86,33 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> databasePublisihing;
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
-
     
-
     @PostConstruct
-    public void prepareSearchForm(){
-         User connectedUser = SessionUtil.getConnectedUser();
-        if(connectedUser.getAdmin() == 0){
+    public void prepareSearchForm() {
+        User connectedUser = SessionUtil.getConnectedUser();
+        if (connectedUser.getAdmin() == 0) {
             getSelectedForSearch().setDepartment(connectedUser.getDepartement());
             getSelectedForSearch().setUser(connectedUser);
             
         }
     }
-    public boolean adminAccess(){
-         return SessionUtil.getConnectedUser().getAdmin()==1;
-    }
-    public DemandCategoryController() {
+
+    public boolean adminAccess() {
+        return SessionUtil.getConnectedUser().getAdmin() == 1;
     }
 
+    public DemandCategoryController() {
+    }
+    
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         return ejbFacade.findSummByDepartement(demandCategory);
     }
+
     public void simuler() throws ScriptException {
         demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
     }
     
-    public void findSortimentItem(){
+    public void findSortimentItem() {
         detailSotimentItems = sortimentItemFacade.findByDemandeCategory(selected);
         sotimentItemsMixEdit = sortimentItemFacade.findByDemandeCategory(selected);
     }
@@ -210,8 +210,8 @@ public class DemandCategoryController implements Serializable {
             JsfUtil.addErrorMessage("Item deja dans la liste");
         } else if (res == -2) {
             JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
-        }else{
-            System.out.println("item ajouter avec wert = "+sortimentItem.getWert());
+        } else {
+            System.out.println("item ajouter avec wert = " + sortimentItem.getWert());
         }
     }
     
@@ -315,55 +315,46 @@ public class DemandCategoryController implements Serializable {
     }
     
     private void updateDepItems(List<DepartementDetail> departementDetails) {
-        if (departementDetails != null && !departementDetails.isEmpty()) {
-            for (DepartementDetail departementCriteria : departementDetails) {
-                DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuationId());
-                demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
-                demandCategoryCalculationFacade.edit(demandCategoryCalculation);
-                DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
-                demandCategoryCalculationItem.setPrice(new BigDecimal(departementCriteria.getPrice()));
-                demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
-                departementCriteria.getDemandCategoryDepartementCalculationId();
-                DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());
-                
-            }
-            JsfUtil.addSuccessMessage("Details updated");
-        }
+        ejbFacade.updateDepItems(departementDetails);
     }
     
     public void updateDetailDepCritarias(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, departementCriterias);
     }
     
-    public void updateDepartementCriterias(){
+    public void updateDepartementCriterias() {
         updateDepItems(departementCriterias);
     }
-        
+    
     public void updateDetailContentManagement(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, contentManagement);
     }
-    public void updateContentManagement(){
+
+    public void updateContentManagement() {
         updateDepItems(contentManagement);
     }
     
     public void updateDetailDatenManagement(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, datenManagement);
     }
-    public void updateDatenManagement(){
+
+    public void updateDatenManagement() {
         updateDepItems(datenManagement);
     }
     
     public void updateDetailDatabasePublishing(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, databasePublisihing);
     }
-    public void updateDatabasePublisihing(){
+
+    public void updateDatabasePublisihing() {
         updateDepItems(databasePublisihing);
     }
     
     public void updateDetailProjectManagement(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, projectManagement);
     }
-     public void updateProjectManagement(){
+
+    public void updateProjectManagement() {
         updateDepItems(projectManagement);
     }
     
@@ -376,7 +367,7 @@ public class DemandCategoryController implements Serializable {
                         BigDecimal subTotal = new BigDecimal(loadedDepartementDetail.getSummCriteria()).subtract(new BigDecimal(loadedDepartementDetail.getPrice()));
                         BigDecimal total = new BigDecimal(loadedDepartementDetail.getSummDepartement()).subtract(subTotal);
                         loadedDepartementDetail.setSummCriteria(subTotal + "");
-                        loadedDepartementDetail.setSummDepartement(total+"");
+                        loadedDepartementDetail.setSummDepartement(total + "");
                         loadedDepartementDetail.setPrice("0");
                         loadedDepartementDetail.setPriceGlobal("0");
                         departementDetails.set(departementDetails.indexOf(loadedDepartementDetail), loadedDepartementDetail);
@@ -609,61 +600,59 @@ public class DemandCategoryController implements Serializable {
     public void setDepartementCriterias(List<DepartementDetail> departementCriterias) {
         this.departementCriterias = departementCriterias;
     }
-
+    
     public BigDecimal getTotalSummDepartement() {
         return totalSummDepartement;
     }
-
+    
     public void setTotalSummDepartement(BigDecimal totalSummDepartement) {
         this.totalSummDepartement = totalSummDepartement;
     }
     
-    
-    
     public List<SotimentItem> getSotimentItemsMixEdit() {
         return sotimentItemsMixEdit;
     }
-
+    
     public void setSotimentItemsMixEdit(List<SotimentItem> sotimentItemsMixEdit) {
         this.sotimentItemsMixEdit = sotimentItemsMixEdit;
     }
-
+    
     public int getIndex() {
         return index;
     }
-
+    
     public void setIndex(int index) {
         this.index = index;
     }
-
+    
     public int getCmp() {
         return cmp;
     }
-
+    
     public void setCmp(int cmp) {
         this.cmp = cmp;
     }
-
+    
     public List<Sortiment> getSelectedSortiemnts() {
-        if(selectedSortiemnts == null){
+        if (selectedSortiemnts == null) {
             selectedSortiemnts = new ArrayList<>();
         }
         return selectedSortiemnts;
     }
-
+    
     public void setSelectedSortiemnts(List<Sortiment> selectedSortiemnts) {
         this.selectedSortiemnts = selectedSortiemnts;
     }
-
+    
     public List<Sortiment> getSortiments() {
-        if(sortiments == null){
+        if (sortiments == null) {
             sortiments = sortimentFacade.findAll();
         }
         return sortiments;
     }
-
+    
     public void setSortiments(List<Sortiment> sortiments) {
         this.sortiments = sortiments;
     }
-
+    
 }
