@@ -99,7 +99,7 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.ViewDemandCategoryLabel_user}" for="user"/>
-                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}" disabled="#{demandCategoryController.adminAccess()}"> 
+                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}" disabled="#{!demandCategoryController.adminAccess()}"> 
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{userController.itemsAvailableSelectOne}"
                                                                    var="user"
@@ -108,7 +108,7 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
-                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}" disabled="#{demandCategoryController.adminAccess()}">
+                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}" disabled="#{!demandCategoryController.adminAccess()}">
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
                                                                    var="departementItem"
