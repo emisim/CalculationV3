@@ -59,6 +59,16 @@ public class SearchUtil {
         }
         return requette;
     }
+    public static String addConstraintMinMaxStrict(String beanAbrev, String atributeName, Object valueMin, Object valueMax) {
+        String requette = "";
+        if (valueMin != null) {
+            requette += " AND " + beanAbrev + "." + atributeName + " > '" + valueMin + "'";
+        }
+        if (valueMax != null) {
+            requette += " AND " + beanAbrev + "." + atributeName + " < '" + valueMax + "'";
+        }
+        return requette;
+    }
 
     public static String addConstraintDate(String beanAbrev, String atributeName, String operator, Date value) {
         return addConstraint(beanAbrev, atributeName, operator, DateUtil.convertFormUtilToSql(value));
