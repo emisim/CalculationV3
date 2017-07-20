@@ -13,11 +13,11 @@
                 <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
                     <p:dataTable id="departementCriteriasDataList"  var="item" value="#{demandCategoryController.departementCriterias}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >
                         <p:headerRow>
-                            <p:column colspan="3" style="text-align:left" >
+                            <p:column colspan="4" style="text-align:left" >
                                 <h:outputText value="#{item.nomDepCritera}" />
                             </p:column>
                         </p:headerRow>
-                        <p:column headerText="check" width="30">
+                        <p:column headerText="check" width="10">
                             <p:selectBooleanCheckbox value="#{item.checked}" >
                                 <p:ajax  listener="#{demandCategoryController.updateDetailDepCritarias(item)}" update="departementCriteriasDataList" />
                             </p:selectBooleanCheckbox>
@@ -32,7 +32,7 @@
                             <h:outputText value="#{item.priceGlobalUpdate}" />
                         </p:column>
                         <p:summaryRow>
-                            <p:column colspan="3" style="text-align:right">
+                            <p:column colspan="4" style="text-align:right">
                                 <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                             </p:column>
                         </p:summaryRow>
@@ -92,7 +92,7 @@
                         <p:tab title="datenManagement">
                             <p:dataTable id="datenManagementDataList"  var="item" value="#{demandCategoryController.datenManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
@@ -117,7 +117,7 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
@@ -132,7 +132,7 @@
                         <p:tab title="databasePublishing">
                             <p:dataTable id="databasePublishingDataList"  var="item" value="#{demandCategoryController.databasePublisihing}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
@@ -157,7 +157,7 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
@@ -172,7 +172,7 @@
                         <p:tab title="projectManagement">
                             <p:dataTable id="projectManagementDataList"  var="item" value="#{demandCategoryController.projectManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
@@ -197,7 +197,7 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>

@@ -324,7 +324,7 @@
                                 </h:panelGrid>
                                 <div class="align-center ui-widget-header">
                                     <p:commandButton actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update=":growl" />
-                                    <p:commandButton actionListener="#{demandCategoryController.simuler}" value="#{bundle.Simuler}" update=":growl" />
+                                    <p:commandButton actionListener="#{demandCategoryController.simuler()}" value="#{bundle.Simuler}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()"  />
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -334,6 +334,7 @@
             </div>
 
             <ui:include src="Mix.xhtml"/>
+            <ui:include src="Detail.xhtml"/>
         </ui:define>
     </ui:composition>
 </html>

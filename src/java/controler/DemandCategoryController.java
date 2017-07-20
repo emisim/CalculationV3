@@ -85,7 +85,6 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
-    
 
     @PostConstruct
     public void prepareSearchForm() {
@@ -109,7 +108,24 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void simuler() throws ScriptException {
-        demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
+        List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
+        User user = SessionUtil.getConnectedUser();
+        Departement departement = SessionUtil.getConnectedUser().getDepartement();
+        if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
+            demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
+            departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+        }
+        if (departement == null && user.getAdmin() == 1) {
+            List<Departement> departements = departementFacade.findAll();
+            if (departements != null && !departements.isEmpty()) {
+                for (Departement departement1 : departements) {
+                    demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
+                    myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+                    params.put(departement1.getName(), myDepartementCriterias);
+                }
+            }
+        }
+        feedLists();
     }
 
     public void findSortimentItem() {
@@ -254,7 +270,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts,validationSearch);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -362,8 +378,6 @@ public class DemandCategoryController implements Serializable {
         this.validationSearch = validationSearch;
     }
 
-    
-    
     public void updateProjectManagement() {
         updateDepItems(projectManagement);
     }
@@ -375,9 +389,9 @@ public class DemandCategoryController implements Serializable {
                 System.out.println("false");
                 BigDecimal price = new BigDecimal(loadedDepartementDetail.getPriceUpdate());
                 BigDecimal subTotal = new BigDecimal(loadedDepartementDetail.getSummCriteria()).subtract(new BigDecimal(loadedDepartementDetail.getPriceUpdate()));
-                System.out.println("Subtotal :::::: "+subTotal);
+                System.out.println("Subtotal :::::: " + subTotal);
                 BigDecimal total = new BigDecimal(loadedDepartementDetail.getSummDepartement()).subtract(price);
-                System.out.println("Toootaaaal ::::::::::::::::::::::::::::::; "+total);
+                System.out.println("Toootaaaal ::::::::::::::::::::::::::::::; " + total);
                 loadedDepartementDetail.setSummCriteria(subTotal + "");
                 loadedDepartementDetail.setSummDepartement(total + "");
                 loadedDepartementDetail.setPriceUpdate("0");
@@ -387,7 +401,7 @@ public class DemandCategoryController implements Serializable {
 
             if (loadedDepartementDetail.isChecked() == true) {
                 System.out.println("True");
-                System.out.println("Totaaal ::::: "+loadedDepartementDetail.getSummDepartement());
+                System.out.println("Totaaal ::::: " + loadedDepartementDetail.getSummDepartement());
                 BigDecimal price = new BigDecimal(loadedDepartementDetail.getPrice());
                 BigDecimal priceGlobal = new BigDecimal(loadedDepartementDetail.getPriceGlobal());
                 BigDecimal subTotal = new BigDecimal(loadedDepartementDetail.getSummCriteria()).add(price);
@@ -404,16 +418,18 @@ public class DemandCategoryController implements Serializable {
                     System.out.println("vrai");
                     departementDetail2.setSummCriteria(loadedDepartementDetail.getSummCriteria());
                 }
-                 departementDetail2.setSummDepartement(loadedDepartementDetail.getSummDepartement());
+                departementDetail2.setSummDepartement(loadedDepartementDetail.getSummDepartement());
             }
         }
     }
 
     public void feedLists() {
-        contentManagement = params.get("contentManagement");
-        datenManagement = params.get("datenManagement");
-        databasePublisihing = params.get("databasePublisihing");
-        projectManagement = params.get("projectManagement");
+        if (params != null && !params.isEmpty()) {
+            contentManagement = params.get("contentManagement");
+            datenManagement = params.get("datenManagement");
+            databasePublisihing = params.get("databasePublisihing");
+            projectManagement = params.get("projectManagement");
+        }
 
     }
 
