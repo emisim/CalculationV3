@@ -13,7 +13,7 @@
 
             <h:form id="DemandCategoryValidationListForm" style="width: 500px">
                 <p:panel header="#{bundle.ListDemandCategoryValidationItemTitle}">
-                    <p:dataTable id="datalist" value="#{demandCategoryController.demandCategoryValidations}" var="item"
+                    <p:dataTable id="datalist" value="#{demandCategoryController.demandCategoryValidationItems}" var="item"
 
                                  paginator="true"
 
@@ -29,7 +29,7 @@
                                 <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_sysDate}"/>
                             </f:facet>
                             <h:outputText value="#{item.sysDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="MM/dd/yyyy  hh:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
