@@ -85,6 +85,7 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
+    private boolean save = false;
 
     @PostConstruct
     public void prepareSearchForm() {
@@ -108,6 +109,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void simuler() throws ScriptException {
+        save = false;
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
@@ -309,6 +311,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void departementeDetails(DemandCategory demandCategory) throws ScriptException {
+        save = true;
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
@@ -695,4 +698,13 @@ public class DemandCategoryController implements Serializable {
         this.sortiments = sortiments;
     }
 
+    public boolean isSave() {
+        return save;
+    }
+
+    public void setSave(boolean save) {
+        this.save = save;
+    }
+
+    
 }

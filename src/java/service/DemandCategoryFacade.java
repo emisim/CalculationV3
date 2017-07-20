@@ -327,8 +327,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                 demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
                 demandCategoryCalculationFacade.edit(demandCategoryCalculation);
                 DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
-                demandCategoryCalculationItem.setPrice(new BigDecimal(departementCriteria.getPrice()));
-                demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(departementCriteria.getPriceGlobal()));
+                demandCategoryCalculationItem.setPriceUpdate(new BigDecimal(departementCriteria.getPriceUpdate()));
+                demandCategoryCalculationItem.setPriceGlobalUpdate(new BigDecimal(departementCriteria.getPriceGlobalUpdate()));
                 demandCategoryCalculationItem.setCalcultaed(departementCriteria.isChecked());
                 demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
                 DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());

@@ -40,8 +40,8 @@
                             <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                         </f:facet>
                     </p:dataTable>
-                    <p:panel  styleClass="align-center">
-                        <p:commandButton actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                    <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                        <p:commandButton  actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
 
                     </p:panel>
                 </h:panelGroup>
@@ -84,8 +84,8 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.contentManagement.size()>0?demandCategoryController.contentManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable> 
-                            <p:panel  styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateContentManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,contentManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateContentManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,contentManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
 
                             </p:panel>
                         </p:tab>
@@ -125,8 +125,8 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.datenManagement.size()>0?demandCategoryController.datenManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable>
-                            <p:panel  styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateDatenManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,datenManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateDatenManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,datenManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                         <p:tab title="databasePublishing">
@@ -165,8 +165,8 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.databasePublisihing.size()>0?demandCategoryController.databasePublisihing.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable>
-                            <p:panel  styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateDatabasePublisihing()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,databasePublishingDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateDatabasePublisihing()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,databasePublishingDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                         <p:tab title="projectManagement">
@@ -205,8 +205,8 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.projectManagement.size()>0?demandCategoryController.projectManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable> 
-                            <p:panel styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                     </p:tabView>
