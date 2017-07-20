@@ -7,8 +7,11 @@
 package service;
 
 import bean.DemandCategory;
+import bean.DemandCategoryCalculation;
+import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
+import bean.DepartementDetail;
 import bean.Sortiment;
 import bean.SotimentItem;
 import bean.User;
@@ -40,6 +43,11 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     SotimentItemFacade sotimentItemFacade;
     private @EJB
     DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
+    @EJB
+    private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
+    @EJB
+    private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
+   
 
     @Override
     protected EntityManager getEntityManager() {
@@ -283,6 +291,23 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                     + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
             return demandCategory.getSummTotal();
+        }
+    }
+    
+     public void updateDepItems(List<DepartementDetail> departementDetails) {
+        if (departementDetails != null && !departementDetails.isEmpty()) {
+            for (DepartementDetail departementCriteria : departementDetails) {
+                DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuationId());
+                demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
+                demandCategoryCalculationFacade.edit(demandCategoryCalculation);
+                DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
+                demandCategoryCalculationItem.setPrice(new BigDecimal(departementCriteria.getPrice()));
+                demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
+                departementCriteria.getDemandCategoryDepartementCalculationId();
+                DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());
+               
+            }
+            JsfUtil.addSuccessMessage("Details updated");
         }
     }
 }
