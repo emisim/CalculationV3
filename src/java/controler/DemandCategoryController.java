@@ -84,6 +84,8 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> databasePublisihing;
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
+    private Integer validationSearch;
+    
 
     @PostConstruct
     public void prepareSearchForm() {
@@ -252,7 +254,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts,validationSearch);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -352,6 +354,16 @@ public class DemandCategoryController implements Serializable {
         updateDetails(departementDetail, projectManagement);
     }
 
+    public Integer getValidationSearch() {
+        return validationSearch;
+    }
+
+    public void setValidationSearch(Integer validationSearch) {
+        this.validationSearch = validationSearch;
+    }
+
+    
+    
     public void updateProjectManagement() {
         updateDepItems(projectManagement);
     }

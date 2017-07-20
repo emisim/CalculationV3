@@ -52,10 +52,29 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
     @EJB
     private DemandCategoryValidationFacade demandCategoryValidationFacade;
+    @EJB
+    private DepartementFacade departementFacade;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    private String findByValidation(Integer validationLevel,String beanAbrveation) {
+        int topLevel = departementFacade.findAll().size();
+        String query = "";
+        if (validationLevel != null) {
+            if (validationLevel == 0) {
+                query+=SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", "0");
+            }
+           else if (validationLevel == 1) {
+                query+=SearchUtil.addConstraintMinMaxStrict(beanAbrveation, "nbrTotalValidation", "0", topLevel);
+            }
+           else if (validationLevel == 2) {
+                query+=SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", topLevel);
+            }
+        }
+        return query;
     }
 
     @Override
@@ -79,8 +98,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-        calcSumTotal(demandCategory);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
+        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
         if (simulation == false && isSave == false) {
             edit(demandCategory);
             demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
@@ -88,9 +107,11 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    private void calcSumTotal(DemandCategory demandCategory) {
+    private void calcSumTotal(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
         demandCategory.setSummTotal(new BigDecimal(0));
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategory.getDemandCategoryDepartementCalculations();
+        if (demandCategoryDepartementCalculations == null || demandCategoryDepartementCalculations.isEmpty()) {
+            return;
+        }
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
         }
@@ -126,7 +147,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts,Integer validationLevel) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
@@ -164,6 +185,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (!selectedSortiemnts.isEmpty()) {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
+            query+=findByValidation(validationLevel, "d");
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
