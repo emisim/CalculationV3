@@ -149,15 +149,6 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlKapitetel}" for="anzahlKapitetel" rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}" />
                                     <p:inputText id="anzahlKapitetel" value="#{demandCategoryController.selected.anzahlKapitetel}" title="#{bundle.CreateDemandCategoryTitle_anzahlKapitetel}" rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}" />
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
-
-                                    <p:selectOneMenu id="correctionSchluessel" value="#{demandCategoryController.selected.correctionSchluessel}" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{correctionSchluesselController.itemsAvailableSelectOne}"
-                                                       var="correctionSchluesselItem"
-                                                       itemValue="#{correctionSchluesselItem}" itemLabel="#{correctionSchluesselItem.value}"/>
-                                    </p:selectOneMenu>
-
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mitgliederkorrekturFaktor}" for="mitgliederkorrekturFaktor" rendered="#{demandCategoryController.renderAttribute('mitgliederkorrekturFaktor')}" />
 
@@ -182,14 +173,6 @@
                                     <p:inputText id="teilnehmerZahl" value="#{demandCategoryController.selected.teilnehmerZahl}" title="#{bundle.CreateDemandCategoryTitle_teilnehmerZahl}" rendered="#{demandCategoryController.renderAttribute('teilnehmerZahl')}" />
 
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_participantFaktor}" for="participantFaktor" rendered="#{demandCategoryController.renderAttribute('participantFaktor')}" />
-                                    <p:selectOneMenu id="participantFaktor" value="#{demandCategoryController.selected.participantFaktor}" rendered="#{demandCategoryController.renderAttribute('participantFaktor')}" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{participantFaktorController.itemsAvailableSelectOne}"
-                                                       var="participantFaktorItem"
-                                                       itemValue="#{participantFaktorItem}" itemLabel="#{participantFaktorItem.value}"/>
-                                    </p:selectOneMenu>
-
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_konzeptbearbeitungFaktor}" for="konzeptbearbeitungFaktor" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" />
                                     <p:selectOneMenu id="konzeptbearbeitungFaktor" value="#{demandCategoryController.selected.konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" >
@@ -197,14 +180,18 @@
                                         <f:selectItems value="#{konzeptbearbeitungFaktorController.itemsAvailableSelectOne}"
                                                        var="konzeptbearbeitungFaktorItem"
                                                        itemValue="#{konzeptbearbeitungFaktorItem}" itemLabel="#{konzeptbearbeitungFaktorItem.value}"/>
+                                                       <!--itemValue="{konzeptbearbeitungFaktorItem}" itemLabel="{konzeptbearbeitungFaktorItem.expression?'Ja'}"/>-->
                                     </p:selectOneMenu>
+                                    
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_bearbeitungszeit}" for="bearbeitungszeit" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') }" />
+                                    <p:inputText id="bearbeitungszeit" value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.CreateDemandCategoryTitle_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') }" />
 
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlBeteiligten}" for="anzahlBeteiligten" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') }" />
+                                    <p:inputText id="anzahlBeteiligten" value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.CreateDemandCategoryTitle_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') }" />
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
-                                    <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}" />
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlMitglieder}" for="anzahlMitglieder" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') }" />
+                                    <p:inputText id="anzahlMitglieder" value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.CreateDemandCategoryTitle_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder')}" />
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtSeiten}" for="anzahlGesamtSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}" />
-                                    <p:inputText id="anzahlGesamtSeiten" value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}" />   
 
                                     <p:outputLabel value="druck" for="druck" />
                                     <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
@@ -308,15 +295,6 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_liefertermin}" for="liefertermin" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true }" />
                                     <p:calendar id="liefertermin" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.EditDemandCategoryTitle_liefertermin}"  showOn="button" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true }" />
-
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_bearbeitungszeit}" for="bearbeitungszeit" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') and demandCategoryController.selected.druck == true }" />
-                                    <p:inputText id="bearbeitungszeit" value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.CreateDemandCategoryTitle_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') and demandCategoryController.selected.druck == true }" />
-
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlBeteiligten}" for="anzahlBeteiligten" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') and demandCategoryController.selected.druck == true }" />
-                                    <p:inputText id="anzahlBeteiligten" value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.CreateDemandCategoryTitle_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') and demandCategoryController.selected.druck == true }" />
-
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlMitglieder}" for="anzahlMitglieder" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') and demandCategoryController.selected.druck == true }" />
-                                    <p:inputText id="anzahlMitglieder" value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.CreateDemandCategoryTitle_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') and demandCategoryController.selected.druck == true }" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateDemandCategory}" for="dateDemandCategory" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true }" />
                                     <p:calendar id="dateDemandCategory" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.EditDemandCategoryTitle_dateDemandCategory}"  showOn="button" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true }" />
