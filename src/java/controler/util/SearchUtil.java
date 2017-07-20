@@ -39,7 +39,7 @@ public class SearchUtil {
     }
 
     public static String addConstraintOr(String beanAbrev, String atributeName, String operator, List values) {
-        String query = " OR ( 1=0 ";
+        String query = " AND ( 1=0 ";
         if (values != null && !values.isEmpty()) {
             for (Object value : values) {
                 query += addConstraintOr(beanAbrev, atributeName, operator, value);
