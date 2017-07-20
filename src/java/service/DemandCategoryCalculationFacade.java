@@ -66,11 +66,10 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     public static void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(DemandCategory selected) {
         calculateAnzahlBestandArtikel(selected);
 
-        BigDecimal summ = summSortiment(selected, true);
-        if (summ.compareTo(new BigDecimal(0)) != 0) {
-            int sortimentFaktor = (int) (new Double(selected.getAnzahlGesamtArtikel()) / summ.doubleValue());
+        BigDecimal sortimentFaktor = summSortiment(selected, true);
+        if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
 
-            selected.setAnzahlGesamtProdukt(sortimentFaktor);
+            selected.setAnzahlGesamtProdukt((int) (new Double(selected.getAnzahlGesamtArtikel()) / sortimentFaktor.doubleValue()));
             System.out.println(" hha l faktor dyalna " + sortimentFaktor);
             System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
         }
@@ -80,11 +79,9 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     public static void calculAnzahlBestandArtikelAndAnzahlNeueProdukt(DemandCategory selected) {
         calculateAnzahlBestandArtikel(selected);
 
-        BigDecimal summ = summSortiment(selected, true);
-        if (summ.compareTo(new BigDecimal(0)) != 0) {
-            int sortimentFaktor = (int) (new Double(selected.getAnzahlNeueArtikel()) / summ.doubleValue());
-
-            selected.setAnzahlNeueProdukt(sortimentFaktor);
+        BigDecimal sortimentFaktor = summSortiment(selected, true);
+        if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
+            selected.setAnzahlNeueProdukt( (int) (new Double(selected.getAnzahlNeueArtikel()) / sortimentFaktor.doubleValue()));
             System.out.println(" hha l faktor dyalna " + sortimentFaktor);
             System.out.println("ha selected.setAnzahlNeueProdukt " + selected.getAnzahlGesamtProdukt());
         }
