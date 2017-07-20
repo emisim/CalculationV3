@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class ParticipantFaktor implements Serializable {
     private Long id;
 
     private int percent;
-    private BigDecimal wert;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert;
 
     public Long getId() {
         return id;

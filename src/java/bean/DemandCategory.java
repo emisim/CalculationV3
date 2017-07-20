@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -163,8 +164,8 @@ public class DemandCategory implements Serializable {
     private Date dateDemandCategory = new Date();
 
     //Berechnete Summen 
-    private BigDecimal summDruck = new BigDecimal(0);
-    private BigDecimal summTotal = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summDruck = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summTotal = new BigDecimal(0);
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
 

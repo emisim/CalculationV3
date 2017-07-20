@@ -6,9 +6,7 @@
 package service;
 
 import bean.DemandCategory;
-import bean.DemandCategoryCalculation;
 import bean.DemandCategoryValidation;
-import bean.DemandCategoryValidationItem;
 import bean.User;
 import controler.util.SessionUtil;
 import java.util.Date;
@@ -29,8 +27,6 @@ public class DemandCategoryValidationFacade extends AbstractFacade<DemandCategor
     private EntityManager em;
 
     @EJB
-    private DemandCategoryValidationItemFacade demandCategoryValidationItemFacade;
-    @EJB
     private DemandCategoryFacade demandCategoryFacade;
 
     @Override
@@ -42,47 +38,41 @@ public class DemandCategoryValidationFacade extends AbstractFacade<DemandCategor
         super(DemandCategoryValidation.class);
     }
 
+    private String findByUserAndDemandCategory(DemandCategory demandCategory, User user) {
+        String query = "SELECT v FROM DemandCategoryValidation v WHERE v.demandCategory.id=" + demandCategory.getId();
+        if (user != null && user.getLogin() != null) {
+            query += " and v.user.login = '" + user.getLogin() + "'";
+        }
+        return query;
+    }
+
+    public DemandCategoryValidation findByConnectedUserAndDemandCategory(DemandCategory demandCategory) {
+        return getUniqueResult(findByUserAndDemandCategory(demandCategory, SessionUtil.getConnectedUser()));
+    }
+
+    public List<DemandCategoryValidation> findByDemandCategory(DemandCategory demandCategory) {
+        return getMultipleResult(findByUserAndDemandCategory(demandCategory, null));
+    }
+
     public void checkExistanceOrCreate(DemandCategory demandCategory) {
-        System.out.println("im in checkExistanceOrCreate before if");
         User user = SessionUtil.getConnectedUser();
-        int check = demandCategoryValidationItemFacade.checkUserValidation(demandCategory);
-        if (check == 1) {
-            System.out.println("unvalidate");
-            DemandCategoryValidationItem demandCategoryValidationItem = demandCategoryValidationItemFacade.getValidationItemByDemandAndUser(demandCategory);
-            demandCategoryValidationItemFacade.remove(demandCategoryValidationItem);
-            int nbrtTotalValidation = demandCategory.getNbrTotalValidation() - 1;
-            demandCategory.setNbrTotalValidation(nbrtTotalValidation > 0 ? nbrtTotalValidation : 0);
-            demandCategoryFacade.edit(demandCategory);
+        DemandCategoryValidation demandCategoryValidation = findByConnectedUserAndDemandCategory(demandCategory);
+        int nbrValidation = 0;
+        if (demandCategoryValidation == null) {
+            nbrValidation = demandCategory.getNbrTotalValidation() + 1;
+            demandCategoryValidation = new DemandCategoryValidation();
+            demandCategoryValidation.setDemandCategory(demandCategory);
+            demandCategoryValidation.setUser(user);
+            demandCategoryValidation.setSysDate(new Date());
+            demandCategoryValidation.setDepartement(user.getDepartement());
+            create(demandCategoryValidation);
         } else {
-            System.out.println("validate");
-            if (demandCategory != null && demandCategory.getId() != null && user != null) {
-                System.out.println("im in checkExistanceOrCreate after if");
-                List<DemandCategoryValidation> demandCategorys = em.createQuery("SELECT v FROM DemandCategoryValidation v WHERE v.demandCategory.id=" + demandCategory.getId()).getResultList();
-                DemandCategoryValidationItem demandCategoryValidationItem = new DemandCategoryValidationItem();
-                if (user.getAdmin() == 1) {
-                    demandCategoryValidationItem.setDepartement("NONE");
-                } else {
-                    demandCategoryValidationItem.setDepartement(user.getDepartement().getName());
-                }
-                demandCategoryValidationItem.setSysDate(new Date());
-                demandCategoryValidationItem.setUser(user);
-                if (demandCategorys != null && demandCategorys.size() == 1) {
-                    demandCategoryValidationItem.setDemandCategoryValidation(demandCategorys.get(0));
-                    demandCategoryValidationItemFacade.create(demandCategoryValidationItem);
-                    demandCategory.setNbrTotalValidation(demandCategory.getNbrTotalValidation() + 1);
-                    demandCategoryFacade.edit(demandCategory);
-                } else {
-                    DemandCategoryValidation demandCategoryValidation = new DemandCategoryValidation();
-                    demandCategoryValidation.setDemandCategory(demandCategory);
-                    create(demandCategoryValidation);
-                    demandCategoryValidationItem.setDemandCategoryValidation(demandCategoryValidation);
-                    demandCategoryValidationItemFacade.create(demandCategoryValidationItem);
-                    demandCategory.setNbrTotalValidation(demandCategory.getNbrTotalValidation() + 1);
-                    demandCategoryFacade.edit(demandCategory);
-                }
-            }
+            nbrValidation = demandCategory.getNbrTotalValidation() - 1;
+            remove(demandCategoryValidation);
         }
 
+        demandCategory.setNbrTotalValidation(nbrValidation);
+        demandCategoryFacade.edit(demandCategory);
     }
 
 }

@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,10 +32,10 @@ public class Sortiment implements Serializable {
 
     private String name;
 
-    private BigDecimal productSchluessel = new BigDecimal(0);
-    private BigDecimal artikelPerPage = new BigDecimal(0);
-    private BigDecimal lKSchluessel = new BigDecimal(0);
-    private BigDecimal mKSchluessel = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal productSchluessel = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal artikelPerPage = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal lKSchluessel = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal mKSchluessel = new BigDecimal(0);
 
     @OneToMany(mappedBy = "sortiment")
     private List<SotimentItem> sotimentItems;

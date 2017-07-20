@@ -4,7 +4,7 @@ import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
 import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
-import bean.DemandCategoryValidationItem;
+import bean.DemandCategoryValidation;
 import bean.Departement;
 import bean.DepartementDetail;
 import bean.Sortiment;
@@ -47,8 +47,6 @@ public class DemandCategoryController implements Serializable {
     @EJB
     private service.DepartementCriteriaFacade departementCriteriaFacade;
     @EJB
-    private service.DemandCategoryValidationItemFacade demandCategoryValidationItemFacade;
-    @EJB
     private service.DemandCategoryValidationFacade demandCategoryValidationFacade;
     @EJB
     private service.SortimentFacade sortimentFacade;
@@ -76,7 +74,7 @@ public class DemandCategoryController implements Serializable {
     private List<SotimentItem> sotimentItemsMixEdit;
     private List<SotimentItem> sotimentItemsForSearch;
     private List<String> sotimentItemsForCheckBox;
-    private List<DemandCategoryValidationItem> demandCategoryValidationItems;
+    private List<DemandCategoryValidation> demandCategoryValidations;
     private int index;
     private int cmp = 0;
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
@@ -140,7 +138,7 @@ public class DemandCategoryController implements Serializable {
     }
     
     public void prepareValidateItems(DemandCategory demandCategory) {
-        demandCategoryValidationItems = demandCategoryValidationItemFacade.findByValidation(demandCategory.getDemandCategoryValidation());
+        demandCategoryValidations = demandCategoryValidationFacade.findByDemandCategory(demandCategory);
     }
     
     public void prepareSortimentItems(DemandCategory demandCategory) {
@@ -258,7 +256,7 @@ public class DemandCategoryController implements Serializable {
     }
     
     public int checkDemandValidation(DemandCategory demandCategory) {
-        return demandCategoryValidationItemFacade.checkUserValidation(demandCategory);
+        return demandCategoryValidationFacade.findByConnectedUserAndDemandCategory(demandCategory)==null?0:1;
     }
     
     public void validate(DemandCategory demandCategory) {
@@ -521,15 +519,15 @@ public class DemandCategoryController implements Serializable {
         this.sortimentItem = sortimentItem;
     }
     
-    public List<DemandCategoryValidationItem> getDemandCategoryValidationItems() {
-        if (demandCategoryValidationItems == null) {
-            demandCategoryValidationItems = new ArrayList<>();
+    public List<DemandCategoryValidation> getDemandCategoryValidations() {
+        if (demandCategoryValidations == null) {
+            demandCategoryValidations = new ArrayList<>();
         }
-        return demandCategoryValidationItems;
+        return demandCategoryValidations;
     }
     
-    public void setDemandCategoryValidationItems(List<DemandCategoryValidationItem> demandCategoryValidationItems) {
-        this.demandCategoryValidationItems = demandCategoryValidationItems;
+    public void setDemandCategoryValidationItems(List<DemandCategoryValidation> demandCategoryValidations) {
+        this.demandCategoryValidations = demandCategoryValidations;
     }
     
     public List<SotimentItem> getDetailSotimentItems() {

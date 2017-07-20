@@ -48,7 +48,7 @@
                                     </p:selectOneMenu>
 
 
-
+                                    <p:outputLabel value="Sortiment:" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
                                     <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 19 Juillet 2017 à 11:59
+-- Généré le :  Jeu 20 Juillet 2017 à 13:09
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -51,26 +51,7 @@ INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
 --
 
 INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID`) VALUES
-(1, '257', 'std_stz', 1);
-
---
--- Contenu de la table `demandcategoryvalidation`
---
-
-INSERT INTO `demandcategoryvalidation` (`ID`, `DEMANDCATEGORY_ID`) VALUES
-(2, NULL),
-(4, NULL),
-(5, NULL),
-(1, 32),
-(3, 33);
-
---
--- Contenu de la table `demandcategoryvalidationitem`
---
-
-INSERT INTO `demandcategoryvalidationitem` (`ID`, `DEPARTEMENT`, `SYSDATE`, `DEMANDCATEGORYVALIDATION_ID`, `USER_LOGIN`) VALUES
-(1, 'contentManagement', '2017-07-05', 1, 'younes'),
-(2, 'contentManagement', '2017-07-05', 3, 'younes');
+(1, '257.00', 'std_stz', 1);
 
 --
 -- Contenu de la table `departement`
@@ -136,21 +117,21 @@ INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
 --
 
 INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_ID`) VALUES
-(1, 'Hier soll BIld oder Beschreibung', 'Einfach', '1', 2),
-(2, 'Hier soll BIld oder Beschreibung', 'Standard', '1', 2),
-(3, 'Hier soll BIld oder Beschreibung', 'Komplex', '1', 2),
-(4, 'Hier soll BIld oder Beschreibung', 'Erstausgabe', '1', 1),
-(5, 'Hier soll BIld oder Beschreibung', 'Folgeausgabe', '0', 1),
-(6, 'Hier soll BIld oder Beschreibung', 'Lagerliste', '1', 3),
-(7, 'Hier soll BIld oder Beschreibung', 'E/D/E Katalog', '1', 3),
-(8, 'Hier soll BIld oder Beschreibung', 'Individueller Katalog', '1', 3),
-(9, 'Hier soll BIld oder Beschreibung', 'Fremdsprachen-Katalog', '1', 3),
-(10, NULL, 'Proz.neu / Tech. Alt', '1', 4),
-(11, NULL, 'Proz.neu / Tech.Neu', '1', 4),
-(12, NULL, 'Datenmanagemnt', '56', 5),
-(13, NULL, 'Contentmanagement', '56', 5),
-(14, NULL, 'Assetmanagement', '56', 5),
-(15, NULL, 'Allgemein', '56', 5);
+(1, 'Hier soll BIld oder Beschreibung', 'Einfach', '1.00', 2),
+(2, 'Hier soll BIld oder Beschreibung', 'Standard', '1.00', 2),
+(3, 'Hier soll BIld oder Beschreibung', 'Komplex', '1.00', 2),
+(4, 'Hier soll BIld oder Beschreibung', 'Erstausgabe', '1.00', 1),
+(5, 'Hier soll BIld oder Beschreibung', 'Folgeausgabe', '0.00', 1),
+(6, 'Hier soll BIld oder Beschreibung', 'Lagerliste', '1.00', 3),
+(7, 'Hier soll BIld oder Beschreibung', 'E/D/E Katalog', '1.00', 3),
+(8, 'Hier soll BIld oder Beschreibung', 'Individueller Katalog', '1.00', 3),
+(9, 'Hier soll BIld oder Beschreibung', 'Fremdsprachen-Katalog', '1.00', 3),
+(10, NULL, 'Proz.neu / Tech. Alt', '1.00', 4),
+(11, NULL, 'Proz.neu / Tech.Neu', '1.00', 4),
+(12, NULL, 'Datenmanagemnt', '56.00', 5),
+(13, NULL, 'Contentmanagement', '56.00', 5),
+(14, NULL, 'Assetmanagement', '56.00', 5),
+(15, NULL, 'Allgemein', '56.00', 5);
 
 --
 -- Contenu de la table `schluesseltype`
@@ -175,23 +156,23 @@ INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
 --
 
 INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`, `NAME`, `PRODUCTSCHLUESSEL`) VALUES
-(1, '16', '1', '1', 'Arbeitsschutz', '5'),
-(2, '16', '1', '1', 'Baubeschläge', '5'),
-(3, '8', '1', '1', 'Baugeräte', '3'),
-(4, '27', '1', '1', 'Befestigungstechnik', '8'),
-(5, '12', '1', '1', 'Betriebseinrichtungen', '4'),
-(6, '5', '1', '1', 'Elektrowerkzeuge', '2'),
-(7, '6', '1', '1', 'Gartentechnik', '2'),
-(8, '11', '1', '1', 'Handwerkzeuge', '3'),
-(9, '6', '1', '1', 'Haustechnik/Innendeko/Elektroinstallation', '2'),
-(10, '18', '1', '1', 'Industrietechnik', '5'),
-(11, '9', '1', '1', 'Möbelbeschläge', '3'),
-(12, '10', '1', '1', 'Präzisionswerkzeuge', '8'),
-(13, '9', '1', '1', 'Schweißtechnik', '3'),
-(14, '12', '1', '1', 'Verpackungen', '4'),
-(15, '6', '1', '1', 'Werkstattmaterial', '2'),
-(16, '11', '1', '1', '\nWerkzeuge Holzbearbeitung', '3'),
-(17, '11', '1', '1', 'Werkzeuge Metallbearbeitung', '3');
+(1, '16.00', '1.00', '1.00', 'Arbeitsschutz', '5.00'),
+(2, '16.00', '1.00', '1.00', 'Baubeschläge', '5.00'),
+(3, '8.00', '1.00', '1.00', 'Baugeräte', '3.00'),
+(4, '27.00', '1.00', '1.00', 'Befestigungstechnik', '8.00'),
+(5, '12.00', '1.00', '1.00', 'Betriebseinrichtungen', '4.00'),
+(6, '5.00', '1.00', '1.00', 'Elektrowerkzeuge', '2.00'),
+(7, '6.00', '1.00', '1.00', 'Gartentechnik', '2.00'),
+(8, '11.00', '1.00', '1.00', 'Handwerkzeuge', '3.00'),
+(9, '6.00', '1.00', '1.00', 'Haustechnik/Innendeko/Elektroinstallation', '2.00'),
+(10, '18.00', '1.00', '1.00', 'Industrietechnik', '5.00'),
+(11, '9.00', '1.00', '1.00', 'Möbelbeschläge', '3.00'),
+(12, '10.00', '1.00', '1.00', 'Präzisionswerkzeuge', '8.00'),
+(13, '9.00', '1.00', '1.00', 'Schweißtechnik', '3.00'),
+(14, '12.00', '1.00', '1.00', 'Verpackungen', '4.00'),
+(15, '6.00', '1.00', '1.00', 'Werkstattmaterial', '2.00'),
+(16, '11.00', '1.00', '1.00', '\nWerkzeuge Holzbearbeitung', '3.00'),
+(17, '11.00', '1.00', '1.00', 'Werkzeuge Metallbearbeitung', '3.00');
 
 --
 -- Contenu de la table `user`
