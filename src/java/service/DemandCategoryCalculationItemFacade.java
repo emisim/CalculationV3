@@ -50,8 +50,12 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
             DemandCategoryCalculationItem demandCategoryCalculationItem = createOrFind(departementCriteriaItem, demandCategoryCalculation);
             //evalFunction SErvice ALBATAL pour calcul
-            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
-            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            BigDecimal price = new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + "");
+            BigDecimal priceGlobal = new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + "");
+            demandCategoryCalculationItem.setPrice(price);
+            demandCategoryCalculationItem.setPriceUpdate(price);
+            demandCategoryCalculationItem.setPriceGlobal(priceGlobal);
+            demandCategoryCalculationItem.setPriceGlobalUpdate(priceGlobal);
             if (!simuler) {
                 if (isSave) {
                     create(demandCategoryCalculationItem);

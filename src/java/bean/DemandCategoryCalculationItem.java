@@ -28,7 +28,9 @@ public class DemandCategoryCalculationItem implements Serializable {
     @ManyToOne
     private DepartementCriteriaItem departementCriteriaItem;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal price;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal priceUpdate;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal priceGlobal;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal priceGlobalUpdate;
     private boolean calcultaed = true;
     @ManyToOne
     private DemandCategoryCalculation demandCategoryCalculation;
@@ -79,6 +81,22 @@ public class DemandCategoryCalculationItem implements Serializable {
         this.calcultaed = calcultaed;
     }
 
+    public BigDecimal getPriceUpdate() {
+        return priceUpdate;
+    }
+
+    public void setPriceUpdate(BigDecimal priceUpdate) {
+        this.priceUpdate = priceUpdate;
+    }
+
+    public BigDecimal getPriceGlobalUpdate() {
+        return priceGlobalUpdate;
+    }
+
+    public void setPriceGlobalUpdate(BigDecimal priceGlobalUpdate) {
+        this.priceGlobalUpdate = priceGlobalUpdate;
+    }
+    
     public Long getId() {
         return id;
     }
