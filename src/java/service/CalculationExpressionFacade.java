@@ -41,6 +41,7 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
 
     //Wichtig für die Evaluation unsere Expression
     public Object evalFunction(String expression, Object input, boolean execExpression) throws ScriptException {
+        System.out.println("ha expression"+expression+ " ha exec "+execExpression);
         if (execExpression == true) {
             System.out.println("haa expression ==> " + expression);
             if (input != null && input instanceof DemandCategory) {

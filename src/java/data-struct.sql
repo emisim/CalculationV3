@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 20 Juillet 2017 à 13:09
--- Version du serveur :  10.1.19-MariaDB
--- Version de PHP :  5.5.38
+-- Généré le :  Jeu 20 Juillet 2017 à 19:52
+-- Version du serveur :  10.1.8-MariaDB
+-- Version de PHP :  5.6.14
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -238,6 +238,14 @@ CREATE TABLE `demandcategory` (
   `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `demandcategory`
+--
+
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
+(9, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 1, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, 'PUR-Bindung', 4, NULL, NULL, NULL, '2/2 -farbig', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'walo', NULL, NULL),
+(10, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 2, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'ana', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -251,6 +259,16 @@ CREATE TABLE `demandcategorycalculation` (
   `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `demandcategorycalculation`
+--
+
+INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `VALIDE`, `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(17, '2827.00', 0, 27, 1),
+(18, '1028.00', 0, 27, 2),
+(19, '0.00', 0, 31, 1),
+(20, '257.00', 0, 31, 2);
 
 -- --------------------------------------------------------
 
@@ -267,6 +285,20 @@ CREATE TABLE `demandcategorycalculationitem` (
   `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `demandcategorycalculationitem`
+--
+
+INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICEGLOBAL`, `DEMANDCATEGORYCALCULATION_ID`, `DEPARTEMENTCRITERIAITEM_ID`) VALUES
+(33, 1, '1285.00', '2570.00', 17, 1),
+(34, 1, '1542.00', '3084.00', 17, 2),
+(35, 1, '771.00', '1542.00', 18, 3),
+(36, 1, '257.00', '514.00', 18, 4),
+(37, 0, '0.00', '0.00', 19, 1),
+(38, 1, '0.00', '0.00', 19, 2),
+(39, 1, '0.00', '0.00', 20, 3),
+(40, 1, '257.00', '514.00', 20, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -279,6 +311,17 @@ CREATE TABLE `demandcategorydepartementcalculation` (
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `demandcategorydepartementcalculation`
+--
+
+INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`) VALUES
+(27, '3855.00', 9, 1),
+(28, '0.00', 9, 2),
+(29, '0.00', 9, 3),
+(30, '0.00', 9, 4),
+(31, '3598.00', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -293,6 +336,15 @@ CREATE TABLE `demandcategoryvalidation` (
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `demandcategoryvalidation`
+--
+
+INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`, `USER_LOGIN`) VALUES
+(11, '18:46:17', 9, NULL, 'walo'),
+(12, '18:47:47', 10, 1, 'ana'),
+(13, '18:48:08', 10, NULL, 'walo');
 
 -- --------------------------------------------------------
 
@@ -648,6 +700,18 @@ CREATE TABLE `sotimentitem` (
   `SORTIMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `sotimentitem`
+--
+
+INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) VALUES
+(22, '30.00', 9, 6),
+(23, '20.00', 9, 2),
+(24, '50.00', 9, 4),
+(25, '10.00', 10, 3),
+(26, '40.00', 10, 7),
+(27, '50.00', 10, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -856,7 +920,8 @@ ALTER TABLE `demandcategorydepartementcalculation`
 ALTER TABLE `demandcategoryvalidation`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_DEMANDCATEGORYVALIDATION_DEPARTEMENT_ID` (`DEPARTEMENT_ID`),
-  ADD KEY `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` (`USER_LOGIN`);
+  ADD KEY `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` (`USER_LOGIN`),
+  ADD KEY `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`);
 
 --
 -- Index pour la table `departement`
@@ -1052,27 +1117,27 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `departement`
 --
@@ -1132,7 +1197,7 @@ ALTER TABLE `sortiment`
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --

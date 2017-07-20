@@ -50,8 +50,8 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
             DemandCategoryCalculationItem demandCategoryCalculationItem = createOrFind(departementCriteriaItem, demandCategoryCalculation);
             //evalFunction SErvice ALBATAL pour calcul
-            //demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
-            //demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
             if (!simuler) {
                 if (isSave) {
                     create(demandCategoryCalculationItem);
@@ -71,8 +71,8 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         List<DepartementCriteriaItem> departementCriteriaItems = departementCriteriaItemFacade.findByDepartementCriteria(departementCriteria);
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {
             DemandCategoryCalculationItem demandCategoryCalculationItem = find(departementCriteriaItem, demandCategoryCalculation);
-            //demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
-            //demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setPrice(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
+            demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(calculationExpressionFacade.evalFunction(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice(), demandCategory, demandCategoryCalculationItem.getCalcultaed()) + ""));
             demandCategoryCalculationItem.setDepartementCriteriaItem(departementCriteriaItem);
             res.add(demandCategoryCalculationItem);
         }

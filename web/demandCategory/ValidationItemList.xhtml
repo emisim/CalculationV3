@@ -38,6 +38,12 @@
                             </f:facet>
                             <h:outputText value="#{item.user.nom} #{item.user.prenom} - #{item.user.admin==1?'Admin':''}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_departement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.departement.name}"/>
+                        </p:column>
 
                     </p:dataTable>
                 </p:panel>
