@@ -79,8 +79,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-        calcSumTotal(demandCategory);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations= demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
+        calcSumTotal(demandCategory,demandCategoryDepartementCalculations);
         if (simulation == false && isSave == false) {
             edit(demandCategory);
             demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
@@ -88,9 +88,11 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    private void calcSumTotal(DemandCategory demandCategory) {
+    private void calcSumTotal(DemandCategory demandCategory,List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
         demandCategory.setSummTotal(new BigDecimal(0));
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategory.getDemandCategoryDepartementCalculations();
+        if(demandCategoryDepartementCalculations==null || demandCategoryDepartementCalculations.isEmpty()){
+            return ;
+        }
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
         }
