@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Layout implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private BigDecimal valuee;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal valuee;
     @OneToMany(mappedBy = "layout")
     private List<DemandCategory> demandCategorys;
 

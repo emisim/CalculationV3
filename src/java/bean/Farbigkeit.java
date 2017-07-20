@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Farbigkeit implements Serializable {
     private String id;
     //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
     private String description;
-    private BigDecimal price;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal price;
 
     public BigDecimal getPrice() {
         return price;

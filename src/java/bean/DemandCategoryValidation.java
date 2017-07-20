@@ -6,13 +6,14 @@
 package bean;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -25,28 +26,14 @@ public class DemandCategoryValidation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @OneToOne
+    @Temporal(javax.persistence.TemporalType.TIME)
+    private Date sysDate;
+    @ManyToOne
+    private User user;
+    @ManyToOne
+    private Departement departement;
+    @ManyToOne
     private DemandCategory demandCategory;
-
-    @OneToMany(mappedBy = "demandCategoryValidation")
-    private List<DemandCategoryValidationItem> demandCategoryValidationItems;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<DemandCategoryValidationItem> getDemandCategoryValidationItems() {
-        return demandCategoryValidationItems;
-    }
-
-    public void setDemandCategoryValidationItems(List<DemandCategoryValidationItem> demandCategoryValidationItems) {
-        this.demandCategoryValidationItems = demandCategoryValidationItems;
-    }
 
     public DemandCategory getDemandCategory() {
         return demandCategory;
@@ -56,9 +43,66 @@ public class DemandCategoryValidation implements Serializable {
         this.demandCategory = demandCategory;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+   
+
+    public Date getSysDate() {
+        return sysDate;
+    }
+
+    public void setSysDate(Date sysDate) {
+        this.sysDate = sysDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
+    
+    
+
     @Override
-    public String toString() {
-        return "DemandCategoryValidation{" + "id=" + id + ", demandCategory=" + demandCategory + ", demandCategoryValidationItems=" + demandCategoryValidationItems + '}';
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DemandCategoryValidation other = (DemandCategoryValidation) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 }

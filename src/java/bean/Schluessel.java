@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Schluessel implements Serializable {
     private Long id;
     private String label;
     private String description;
-    private BigDecimal wert = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert = new BigDecimal(0);
 
     @ManyToOne
     private SchluesselType schluesselType;

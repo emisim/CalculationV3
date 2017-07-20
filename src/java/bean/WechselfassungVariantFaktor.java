@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class WechselfassungVariantFaktor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean expression;
-    private BigDecimal wert;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert;
 
     public boolean isExpression() {
         return expression;

@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class SotimentItem implements Serializable {
 
     @ManyToOne
     private Sortiment sortiment;
-    private BigDecimal wert = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert = new BigDecimal(0);
 
     public SotimentItem() {
     }
