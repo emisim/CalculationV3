@@ -37,8 +37,8 @@
                         </p:summaryRow>
                     </p:dataTable>
                     <div class="ui-widget-header" style="text-align: right;height: 30px;">
-                                <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;" />
-                            </div>
+                        <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                    </div>
                     <p:commandButton actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                 </h:panelGroup>
 
@@ -53,7 +53,7 @@
                                 </p:headerRow>
                                 <p:column headerText="check" width="30">
                                     <p:selectBooleanCheckbox value="#{item.checked}" >
-                                        <p:ajax  listener="#{demandCategoryController.updateDetailContentManagement(item)}" update="DemandCategoryDetailForm,contentManagementDataList" />
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailContentManagement(item)}" update="contentManagementDataList" />
                                     </p:selectBooleanCheckbox>
                                 </p:column>
                                 <p:column headerText="Description" width="150">
@@ -77,11 +77,10 @@
                                     </p:column>
                                 </p:summaryRow>
                             </p:dataTable>  
-                            <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                            <div class="ui-widget-header" style="text-align: right;height: 30px;" id="contentManagementSumm">
                                 <h:outputText value="Total Prices : #{demandCategoryController.contentManagement.size()>0?demandCategoryController.contentManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                             </div>
                             <p:commandButton actionListener="#{demandCategoryController.updateContentManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,contentManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
-
                         </p:tab>
                         <p:tab title="datenManagement">
                             <p:dataTable id="datenManagementDataList"  var="item" value="#{demandCategoryController.datenManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
@@ -92,7 +91,7 @@
                                 </p:headerRow>
                                 <p:column headerText="check" width="30">
                                     <p:selectBooleanCheckbox value="#{item.checked}" >
-                                        <p:ajax  listener="#{demandCategoryController.updateDetailDatenManagement(item)}" update="DemandCategoryDetailForm,datenManagementDataList" />
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailDatenManagement(item)}" update="datenManagementDataList" />
                                     </p:selectBooleanCheckbox>
                                 </p:column>
                                 <p:column headerText="Description" width="150">
@@ -116,7 +115,7 @@
                                     </p:column>
                                 </p:summaryRow>
                             </p:dataTable> 
-                             <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                            <div class="ui-widget-header" style="text-align: right;height: 30px;">
                                 <h:outputText value="Total Prices : #{demandCategoryController.datenManagement.size()>0?demandCategoryController.datenManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                             </div>
                             <p:commandButton actionListener="#{demandCategoryController.updateDatenManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,datenManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
@@ -130,7 +129,7 @@
                                 </p:headerRow>
                                 <p:column headerText="check" width="30">
                                     <p:selectBooleanCheckbox value="#{item.checked}" >
-                                        <p:ajax  listener="#{demandCategoryController.updateDetailDatabasePublishing(item)}" update="DemandCategoryDetailForm,databasePublishingDataList" />
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailDatabasePublishing(item)}" update="databasePublishingDataList" />
                                     </p:selectBooleanCheckbox>
                                 </p:column>
                                 <p:column headerText="Description" width="150">
@@ -154,8 +153,8 @@
                                     </p:column>
                                 </p:summaryRow>
                             </p:dataTable>
-                             <div class="ui-widget-header" style="text-align: right;height: 30px;">
-                                 <h:outputText value="Total Prices : #{demandCategoryController.databasePublisihing.size()>0?demandCategoryController.databasePublisihing.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                <h:outputText value="Total Prices : #{demandCategoryController.databasePublisihing.size()>0?demandCategoryController.databasePublisihing.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                             </div>
                             <p:commandButton actionListener="#{demandCategoryController.updateDatabasePublisihing()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,databasePublishingDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                         </p:tab>
@@ -168,7 +167,7 @@
                                 </p:headerRow>
                                 <p:column headerText="check" width="30">
                                     <p:selectBooleanCheckbox value="#{item.checked}" >
-                                        <p:ajax  listener="#{demandCategoryController.updateDetailProjectManagement(item)}" update="DemandCategoryDetailForm,projectManagementDataList" />
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailProjectManagement(item)}" update="projectManagementDataList" />
                                     </p:selectBooleanCheckbox>
                                 </p:column>
                                 <p:column headerText="Description" width="150">
@@ -192,8 +191,8 @@
                                     </p:column>
                                 </p:summaryRow>
                             </p:dataTable> 
-                             <div class="ui-widget-header" style="text-align: right;height: 30px;">
-                                 <h:outputText value="Total Prices : #{demandCategoryController.projectManagement.size()>0?demandCategoryController.projectManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                <h:outputText value="Total Prices : #{demandCategoryController.projectManagement.size()>0?demandCategoryController.projectManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                             </div>
                             <p:commandButton actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                         </p:tab>
