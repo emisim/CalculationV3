@@ -20,6 +20,7 @@ import controler.util.JsfUtil;
 import controler.util.SearchUtil;
 import controler.util.SessionUtil;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +29,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -76,19 +79,20 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
         demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
         calcSumTotal(demandCategory);
-        if(simulation==false && isSave==false){
+        if (simulation == false && isSave == false) {
             edit(demandCategory);
         }
 
     }
 
-    private void calcSumTotal(DemandCategory demandCategory){
+    private void calcSumTotal(DemandCategory demandCategory) {
         demandCategory.setSummTotal(new BigDecimal(0));
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations= demandCategory.getDemandCategoryDepartementCalculations();
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategory.getDemandCategoryDepartementCalculations();
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
         }
     }
+
     private void prepareSave(DemandCategory demandCategory, boolean isSave) {
         demandCategory.setUser(SessionUtil.getConnectedUser());
         demandCategory.setDepartment(SessionUtil.getConnectedUser().getDepartement());
@@ -118,7 +122,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
 
     }
-    
+
     public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
@@ -273,16 +277,15 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public List<DemandCategory> findByDepartement() {
         User connectedUser = SessionUtil.getConnectedUser();
-        if(connectedUser.getAdmin() == 0){
-            String requette = "select dem from DemandCategory dem where dem.department.id = '"+connectedUser.getDepartement().getId()+"'";
+        if (connectedUser.getAdmin() == 0) {
+            String requette = "select dem from DemandCategory dem where dem.department.id = '" + connectedUser.getDepartement().getId() + "'";
             return em.createQuery(requette).getResultList();
-        }else{
+        } else {
             return findAll();
         }
-        
-    
+
     }
-    
+
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return demandCategory.getSummTotal();
@@ -302,12 +305,95 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                 demandCategoryCalculationFacade.edit(demandCategoryCalculation);
                 DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
                 demandCategoryCalculationItem.setPrice(new BigDecimal(departementCriteria.getPrice()));
+                demandCategoryCalculationItem.setPriceGlobal(new BigDecimal(departementCriteria.getPriceGlobal()));
+                demandCategoryCalculationItem.setCalcultaed(departementCriteria.isChecked());
                 demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
-                departementCriteria.getDemandCategoryDepartementCalculationId();
                 DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());
-               
+                demandCategoryDepartementCalculation.setSumme(new BigDecimal(departementCriteria.getSummDepartement()));
+                demandCategoryDepartementCalculationFacade.edit(demandCategoryDepartementCalculation);
             }
             JsfUtil.addSuccessMessage("Details updated");
         }
+     }
+
+    public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory) {
+
+        ChartSeries chartSeries = new ChartSeries();
+
+        if (typeAxe == 1) {
+            String requet = "select dc from DemandCategory dc where 1=1";
+            requet += " AND dc.dateDemandCategory LIKE '" + year + "-%-%'";
+
+            List<DemandCategory> demandCategorys = em.createQuery(requet).getResultList();
+            System.out.println("methode createDemandeCategoryStat -> demandCategorys :" + demandCategorys);
+            chartSeries = charSerieParAnne(year, typeSum, demandCategorys);
+        } else if (typeAxe == 2) {
+            chartSeries.set("summTotal", calculerSum(demandCategory));
+            chartSeries.set("summDruck", demandCategory.getSummDruck());
+
+        }
+
+        chartSeries.setLabel("" + year);
+
+        return chartSeries;
+
+    }
+
+    public ChartSeries charSerieParAnne(int year, int typeSum, List<DemandCategory> demandCategorys) {
+        ChartSeries series = new ChartSeries();
+        for (int i = 1; i <= 12; i++) {
+            BigDecimal a = new BigDecimal(BigInteger.ZERO);
+            for (DemandCategory demandCategory : demandCategorys) {
+                if (demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
+                    if (typeSum == 1) {
+                        a = a.add(calculerSum(demandCategory));
+                    } else {
+                        a = a.add(demandCategory.getSummDruck());
+                    }
+
+                }
+            }
+            System.out.println("summ value (a)" + a);
+            series.set("mois " + i, a);
+        }
+        return series;
+    }
+
+    private BigDecimal calculerSum(DemandCategory demandCategory) {
+
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
+        System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
+        BigDecimal sum = new BigDecimal(0);
+
+        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
+            if (demandCategoryDepartementCalculation.getSumme() != null) {
+                sum = sum.add(demandCategoryDepartementCalculation.getSumme());
+            }
+        }
+        System.out.println("sum ---> " + sum);
+        return sum;
+    }
+
+    public PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
+        PieChartModel pieModel = new PieChartModel();
+
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
+
+        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
+            pieModel.set("dc.Departement Calculation" + demandCategoryDepartementCalculation.getId(), demandCategoryDepartementCalculation.getSumme());
+        }
+
+        pieModel.setTitle("detail summTotal for demand Category(dc)");
+        pieModel.setLegendPosition("w");
+        pieModel.setShowDataLabels(true);
+        pieModel.setDiameter(360);
+
+        return pieModel;
+    }
+
+    public List<DemandCategoryDepartementCalculation> findByDemandeCategory(DemandCategory demandCategory) {
+
+        return em.createQuery("SELECT dc FROM DemandCategoryDepartementCalculation dc WHERE dc.demandCategory.id=" + demandCategory.getId()).getResultList();
+
     }
 }

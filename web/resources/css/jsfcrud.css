@@ -105,14 +105,32 @@ img-border {
     background: #006f73;
 }
 
- .ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
 {border:1px solid #ec870e;
  font-weight:normal;
  color:#212121}
 
 ui-button, button.ui-button.ui-state-hover, button.ui-button.ui-state-focus, .ui-button.ui-state-focus{
- border:1px solid #ec870e;
- background:#ec870e;   
- outline: 0 none;
+    border:1px solid #ec870e;
+    background:#ec870e;   
+    outline: 0 none;
 } 
 
+.ui-paginator .ui-paginator-page.ui-state-active {
+    background: #006f73;
+    color: #fff;
+    border-color: #156090;
+}
+
+ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #ec870e;
+    background: #ec870e;
+    color: #fff;
+}
+
+
+.ui-chkbox-box.ui-widget.ui-corner-all.ui-state-default.ui-state-active.ui-chkbox-box.ui-state-active, .ui-chkbox-box.ui-state-focus.ui-state-active, .ui-radiobutton-box.ui-state-active, .ui-radiobutton-box.ui-state-focus.ui-state-active {
+    border: 1px solid #ec870e;
+    background: #ec870e;
+    color: #fff;
+}
