@@ -152,40 +152,11 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
         if (demandCategory != null) {
-            if (demandCategory.getProduct() != null) {
-                query += SearchUtil.addConstraint("d", "product.id", "=", demandCategory.getProduct().getId());
-            }
-            if (demandCategory.getCategory() != null) {
-                query += SearchUtil.addConstraint("d", "category.id", "=", demandCategory.getCategory().getId());
-            }
-            if (demandCategory.getCorrectionSchluessel() != null) {
-                query += SearchUtil.addConstraint("d", "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
-            }
-            if (demandCategory.getMitgliederkorrekturFaktor() != null) {
-                query += SearchUtil.addConstraint("d", "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
-            }
-            if (demandCategory.getWechselfassungVariantFaktor() != null) {
-                query += SearchUtil.addConstraint("d", "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
-            }
-            if (demandCategory.getParticipantFaktor() != null) {
-                query += SearchUtil.addConstraint("d", "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
-            }
-            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-                query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
-            }
-            if (demandCategory.getUser() != null) {
-                query += SearchUtil.addConstraint("d", "user.login", "=", demandCategory.getUser().getLogin());
-            }
-            if (demandCategory.getDepartment() != null) {
-                query += SearchUtil.addConstraint("d", "department.id", "=", demandCategory.getDepartment().getId());
-            }
-            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-                query += SearchUtil.addConstraint("d", "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
-            }
+            query = getQuery(demandCategory, query,"d");
+
             if (!selectedSortiemnts.isEmpty()) {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
-            query+=findByValidation(validationLevel, "d");
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -339,20 +310,40 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
     }
 
-    public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory) {
+    public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory, List<String> departements, DemandCategory selectedForSearch) {
         ChartSeries chartSeries = new ChartSeries();
-        if (typeAxe == 1) {
-            String requet = "select dc from DemandCategory dc where 1=1";
-            requet += " AND dc.dateDemandCategory LIKE '" + year + "-%-%'";
-            List<DemandCategory> demandCategorys = em.createQuery(requet).getResultList();
-            System.out.println("methode createDemandeCategoryStat -> demandCategorys :" + demandCategorys);
-            chartSeries = charSerieParAnne(year, typeSum, demandCategorys);
-        } else if (typeAxe == 2) {
+
+        if (typeAxe == 2) {
             chartSeries.set("summTotal", calculerSum(demandCategory));
             chartSeries.set("summDruck", demandCategory.getSummDruck());
+            return chartSeries;
+        } else {
+
+            String query = "SELECT dc FROM DemandCategory dc WHERE 1=1 ";
+            if (selectedForSearch != null) {
+                query = getQuery(selectedForSearch, query,"dc");
+            }
+
+            if (typeAxe == 0 && !departements.isEmpty()) {
+
+                query += " AND (";
+                for (String departement : departements) {
+                    query += (departements.size() != 2 && departements.indexOf(departement) == (departements.size() - 1) || departements.indexOf(departement) == 0) ? " " : " OR ";
+                    query += "dc.department.name='" + departement + "'";
+                }
+                query += " )";
+
+            }
+            query += " AND dc.dateDemandCategory LIKE '" + year + "-%-%'";
+            System.out.println("reauet--| " + query);
+            List<DemandCategory> demandCategorys = em.createQuery(query).getResultList();
+            System.out.println("methode createDemandeCategoryStat -> demandCategorys :" + demandCategorys);
+            chartSeries = charSerieParAnne(year, typeSum, demandCategorys);
+
+            chartSeries.setLabel("" + year);
+
+            return chartSeries;
         }
-        chartSeries.setLabel("" + year);
-        return chartSeries;
 
     }
 
@@ -361,7 +352,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         for (int i = 1; i <= 12; i++) {
             BigDecimal summ = new BigDecimal(BigInteger.ZERO);
             for (DemandCategory demandCategory : demandCategorys) {
-                if (demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
+                if (demandCategory.getDateDemandCategory() != null && demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
                     if (typeSum == 1) {
                         summ = summ.add(calculerSum(demandCategory));
                     } else {
@@ -389,11 +380,26 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return sum;
     }
 
+    private BigDecimal calculerSumDruck(DemandCategory demandCategory) {
+
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
+        System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
+        BigDecimal sum = new BigDecimal(0);
+
+        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
+            if (demandCategoryDepartementCalculation.getSumme() != null) {
+                sum = sum.add(demandCategoryDepartementCalculation.getSumme());
+            }
+        }
+        System.out.println("sum ---> " + sum);
+        return sum;
+    }
+
     public PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
         PieChartModel pieModel = new PieChartModel();
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            pieModel.set("dc.Departement Calculation" + demandCategoryDepartementCalculation.getId(), demandCategoryDepartementCalculation.getSumme());
+            pieModel.set("dc.Departement Calculation( " + demandCategoryDepartementCalculation + " )", demandCategoryDepartementCalculation.getSumme());
         }
         pieModel.setTitle("detail summTotal for demand Category(dc)");
         pieModel.setLegendPosition("w");
@@ -405,5 +411,40 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public List<DemandCategoryDepartementCalculation> findByDemandeCategory(DemandCategory demandCategory) {
         return em.createQuery("SELECT dc FROM DemandCategoryDepartementCalculation dc WHERE dc.demandCategory.id=" + demandCategory.getId()).getResultList();
+    }
+
+    public String getQuery(DemandCategory demandCategory, String query ,String varSql) {
+
+        if (demandCategory.getProduct() != null) {
+            query += SearchUtil.addConstraint(varSql, "product.id", "=", demandCategory.getProduct().getId());
+        }
+        if (demandCategory.getCategory() != null) {
+            query += SearchUtil.addConstraint(varSql, "category.id", "=", demandCategory.getCategory().getId());
+        }
+        if (demandCategory.getCorrectionSchluessel() != null) {
+            query += SearchUtil.addConstraint(varSql, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
+        }
+        if (demandCategory.getMitgliederkorrekturFaktor() != null) {
+            query += SearchUtil.addConstraint(varSql, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
+        }
+        if (demandCategory.getWechselfassungVariantFaktor() != null) {
+            query += SearchUtil.addConstraint(varSql, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
+        }
+        if (demandCategory.getParticipantFaktor() != null) {
+            query += SearchUtil.addConstraint(varSql, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
+        }
+        if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+            query += SearchUtil.addConstraint(varSql, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+        }
+        if (demandCategory.getUser() != null) {
+            query += SearchUtil.addConstraint(varSql, "user.login", "=", demandCategory.getUser().getLogin());
+        }
+        if (demandCategory.getDepartment() != null) {
+            query += SearchUtil.addConstraint(varSql, "department.id", "=", demandCategory.getDepartment().getId());
+        }
+        if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+            query += SearchUtil.addConstraint(varSql, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+        }
+        return query;
     }
 }
