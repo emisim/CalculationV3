@@ -94,10 +94,6 @@
                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn()}" update="anzahlSonderSeiten, anzahlGenerierungUpdateSeiten" />
                                     </p:inputText>
 
-
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_percentSeitenFaktor}" for="percentSeitenFaktor" rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}" />
-                                    <p:inputText id="percentSeitenFaktor" value="#{demandCategoryController.selected.percentSeitenFaktor}" title="#{bundle.CreateDemandCategoryTitle_percentSeitenFaktor}" rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}" />
-
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlSonderSeiten}" for="anzahlSonderSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlSonderSeiten')}" />
                                     <p:inputText id="anzahlSonderSeiten" value="#{demandCategoryController.selected.anzahlSonderSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlSonderSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlSonderSeiten')}" >
                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlGenerierungUpdateSeitenn()}" update="anzahlGenerierungUpdateSeiten" />

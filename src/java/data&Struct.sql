@@ -375,7 +375,7 @@ CREATE TABLE `departement` (
 --
 
 INSERT INTO `departement` (`ID`, `NAME`) VALUES
-(1, 'contentManagement'),
+(1, 'Contentmanagement'),
 (2, 'datenManagement'),
 (3, 'databasePublishing'),
 (4, 'projectManagement');
