@@ -28,5 +28,5 @@ public class KatalogartFacade extends AbstractFacade<Katalogart> {
     public KatalogartFacade() {
         super(Katalogart.class);
     }
-    
+
 }

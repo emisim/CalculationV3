@@ -61,8 +61,6 @@ public class Katalogart implements Serializable {
     public void setDemandCategorys(List<DemandCategory> demandCategorys) {
         this.demandCategorys = demandCategorys;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -86,7 +84,7 @@ public class Katalogart implements Serializable {
 
     @Override
     public String toString() {
-        return name+"";
+        return name + "";
     }
-    
+
 }

@@ -28,5 +28,5 @@ public class AusgabeFacade extends AbstractFacade<Ausgabe> {
     public AusgabeFacade() {
         super(Ausgabe.class);
     }
-    
+
 }

@@ -42,8 +42,6 @@ public class PapierMaterialAuswaehlen implements Serializable {
         this.description = description;
     }
 
-    
-  
     public String getId() {
         return id;
     }
@@ -72,9 +70,9 @@ public class PapierMaterialAuswaehlen implements Serializable {
         return true;
     }
 
-     @Override
+    @Override
     public String toString() {
         return id;
     }
-    
+
 }

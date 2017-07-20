@@ -28,5 +28,5 @@ public class UmschlagFarbigkeitFacade extends AbstractFacade<UmschlagFarbigkeit>
     public UmschlagFarbigkeitFacade() {
         super(UmschlagFarbigkeit.class);
     }
-    
+
 }

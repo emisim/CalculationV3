@@ -42,9 +42,6 @@ public class Bindung implements Serializable {
         this.description = description;
     }
 
-    
-  
-
     public String getId() {
         return id;
     }
@@ -77,5 +74,5 @@ public class Bindung implements Serializable {
     public String toString() {
         return id;
     }
-    
+
 }

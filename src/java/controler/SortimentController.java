@@ -90,8 +90,6 @@ public class SortimentController implements Serializable {
     public void setSotimentItems(List<SotimentItem> sotimentItems) {
         this.sotimentItems = sotimentItems;
     }
-    
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -132,10 +130,8 @@ public class SortimentController implements Serializable {
     public List<Sortiment> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
-    
 
-    @FacesConverter(forClass = Sortiment.class)
+    @FacesConverter(forClass = Sortiment.class,value = "sortimentConverter")
     public static class SortimentControllerConverter implements Converter {
 
         @Override

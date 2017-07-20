@@ -42,7 +42,6 @@ public class Farbigkeit implements Serializable {
         this.description = description;
     }
 
-    
     public String getId() {
         return id;
     }
@@ -75,5 +74,5 @@ public class Farbigkeit implements Serializable {
     public String toString() {
         return id;
     }
-    
+
 }

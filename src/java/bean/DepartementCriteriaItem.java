@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class DepartementCriteriaItem implements Serializable {
 
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +28,7 @@ public class DepartementCriteriaItem implements Serializable {
     private String description;
     @ManyToOne
     private DepartementCriteria departementCriteria;
+
     public String getArithmitiqueExpresionForUnitePrice() {
         return arithmitiqueExpresionForUnitePrice;
     }
@@ -89,7 +89,7 @@ public class DepartementCriteriaItem implements Serializable {
         return true;
     }
 
-   @Override
+    @Override
     public String toString() {
         return description;
     }

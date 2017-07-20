@@ -29,16 +29,8 @@
                                            itemValue="#{productItem}" itemLabel="#{productItem.label}"/>
                         </p:selectOneMenu>
 
-                        <p:selectOneMenu id="sortiment" value="#{demandCategoryController.sortiment}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" autoWidth="false" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--Select Sortiment--"/>
-                            <f:selectItems value="#{sortimentController.itemsAvailableSelectOne}"
-                                           var="sortimentItem"
-                                           itemValue="#{sortimentItem}" itemLabel="#{sortimentItem.name}"/>
-                        </p:selectOneMenu>
-
-
-                        <p:commandButton id="mix" value="Mix"  oncomplete="PF('MixDialog').show()" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
-
+                        <p:outputLabel value="Sortiment:" for="mix" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
+                        <p:commandButton id="mix" value="Select"  oncomplete="PF('MixEditDialog').show()" actionListener="#{demandCategoryController.findSortimentItem()}" rendered="#{demandCategoryController.renderAttribute('sortiment')}" />
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_layout}" for="layout" rendered="#{demandCategoryController.renderAttribute('layout')}" />
                         <p:selectOneMenu id="layout" value="#{demandCategoryController.selected.layout}" rendered="#{demandCategoryController.renderAttribute('layout')}" >
@@ -194,12 +186,12 @@
                                            itemValue="#{konzeptbearbeitungFaktorItem}"/>
                         </p:selectOneMenu>
 
-                        <p:outputLabel value="druck" for="druck" rendered="false"/>
-                        <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" rendered="false" >
+                        <p:outputLabel value="druck" for="druck"/>
+                        <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
                             <p:ajax process="druck" update="afterDruck" listener="#{demandCategoryController.checkDruck()}" />
                         </p:selectBooleanCheckbox>
                     </h:panelGrid>
-                    <h:panelGrid id="afterDruck" columns="8" cellpadding="7" rendered="false">
+                    <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                         <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" >
@@ -308,12 +300,7 @@
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateDemandCategory}" for="dateDemandCategory" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true }" />
                         <p:calendar id="dateDemandCategory" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.EditDemandCategoryTitle_dateDemandCategory}"  showOn="button" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true }" />
 
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summDruck}" for="summDruck" rendered="#{demandCategoryController.renderAttribute('summDruck') and demandCategoryController.selected.druck == true }" />
-                        <p:inputText id="summDruck" value="#{demandCategoryController.selected.summDruck}" title="#{bundle.CreateDemandCategoryTitle_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck') and demandCategoryController.selected.druck == true }" />
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summTotal}" for="summTotal" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true }" />
-                        <p:inputText id="summTotal" value="#{demandCategoryController.selected.summTotal}" title="#{bundle.CreateDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true }" />
-
+                      
                     </h:panelGrid>
                     <div class="align-center ui-widget-header">
                         <p:commandButton actionListener="#{demandCategoryController.update}" value="#{bundle.Save}" update="display,:DemandCategoryListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandCategoryEditDialog');"/>
@@ -321,7 +308,8 @@
                     </div>
                 </h:panelGroup>
             </h:form>
+            
         </p:dialog>
-
+ <ui:include src="MixEdit.xhtml"/>
     </ui:composition>
 </html>

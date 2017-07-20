@@ -29,8 +29,7 @@ public class Ausgabe implements Serializable {
     private BigDecimal valuee;
     @OneToMany(mappedBy = "ausgabe")
     private List<DemandCategory> demandCategorys;
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -62,8 +61,6 @@ public class Ausgabe implements Serializable {
     public void setDemandCategorys(List<DemandCategory> demandCategorys) {
         this.demandCategorys = demandCategorys;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -87,7 +84,7 @@ public class Ausgabe implements Serializable {
 
     @Override
     public String toString() {
-        return name+"";
+        return name + "";
     }
-    
+
 }

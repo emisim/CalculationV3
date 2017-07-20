@@ -81,7 +81,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
             }
 
             //Save calculation
-            demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.save(demandCategory, demandCategoryDepartementCalculation, similuer,isSave));
+            demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.save(demandCategory, demandCategoryDepartementCalculation, similuer, isSave));
             demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
             if (!similuer) {
                 edit(demandCategoryDepartementCalculation);
@@ -91,8 +91,8 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         }
         return res;
     }
-    
-      public List<DemandCategoryDepartementCalculation> detail(DemandCategory demandCategory, Departement departement) throws ScriptException {
+
+    public List<DemandCategoryDepartementCalculation> detail(DemandCategory demandCategory, Departement departement) throws ScriptException {
         List<DemandCategoryDepartementCalculation> res = new ArrayList();
         List<Departement> departements = new ArrayList();
         if (departement == null || departement.getId() == null) {
@@ -126,7 +126,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         demandCategoryDepartementCalculation.setDepartement(departement);
         return demandCategoryDepartementCalculation;
     }
-    
+
     private DemandCategoryDepartementCalculation find(Departement departement, DemandCategory demandCategory) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
                 + "item.demandCategory.id=" + demandCategory.getId() + " AND item.departement.id=" + departement.getId();
@@ -138,8 +138,6 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         }
         return new DemandCategoryDepartementCalculation();
     }
-    
-    
 
     private BigDecimal calculerSum(List<DemandCategoryCalculation> demandCategoryCalculations) {
         BigDecimal sum = new BigDecimal(0);

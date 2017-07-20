@@ -28,5 +28,5 @@ public class BindungFacade extends AbstractFacade<Bindung> {
     public BindungFacade() {
         super(Bindung.class);
     }
-    
+
 }

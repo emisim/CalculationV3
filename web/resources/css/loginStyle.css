@@ -1,14 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 
 .bodyLogin {
-/*    //background: url(../image/pattern.png) repeat center center fixed;*/
+    /*    //background: url(../image/pattern.png) repeat center center fixed;*/
     background-color: white;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     font-family: 'Roboto', sans-serif;
-/*    //-webkit-filter: blur(5px);*/
+    /*    //-webkit-filter: blur(5px);*/
 }
 
 .bodyLogin img {
@@ -83,7 +83,7 @@
     border: 0px;
     color: #fff;
     text-shadow: 0 1px rgba(0,0,0,0.1); 
-/*    //background-color: #4d90fe;*/
+    /*    //background-color: #4d90fe;*/
     /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 

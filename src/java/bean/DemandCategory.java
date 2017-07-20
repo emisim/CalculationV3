@@ -25,13 +25,11 @@ import javax.persistence.Temporal;
 @Entity
 public class DemandCategory implements Serializable {
 
-    
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @OneToOne(mappedBy = "demandCategory")
     private DemandCategoryValidation demandCategoryValidation;
 
@@ -170,6 +168,37 @@ public class DemandCategory implements Serializable {
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
 
+    @ManyToOne
+    private User user;
+    @ManyToOne
+    private Departement department;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateSystem = new Date();
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Departement getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Departement department) {
+        this.department = department;
+    }
+
+    public Date getDateSystem() {
+        return dateSystem;
+    }
+
+    public void setDateSystem(Date dateSystem) {
+        this.dateSystem = dateSystem;
+    }
+
     public List<DemandCategoryDepartementCalculation> getDemandCategoryDepartementCalculations() {
         return demandCategoryDepartementCalculations;
     }
@@ -187,7 +216,7 @@ public class DemandCategory implements Serializable {
     }
 
     public DemandCategoryValidation getDemandCategoryValidation() {
-        if(demandCategoryValidation == null){
+        if (demandCategoryValidation == null) {
             demandCategoryValidation = new DemandCategoryValidation();
         }
         return demandCategoryValidation;

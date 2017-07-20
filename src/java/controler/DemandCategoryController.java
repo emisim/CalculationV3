@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -69,7 +70,10 @@ public class DemandCategoryController implements Serializable {
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
+    private List<Sortiment> selectedSortiemnts;
+    private List<Sortiment> sortiments;
     private List<SotimentItem> detailSotimentItems;
+    private List<SotimentItem> sotimentItemsMixEdit;
     private List<SotimentItem> sotimentItemsForSearch;
     private List<String> sotimentItemsForCheckBox;
     private List<DemandCategoryValidationItem> demandCategoryValidationItems;
@@ -77,18 +81,40 @@ public class DemandCategoryController implements Serializable {
     private int cmp = 0;
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
     private List<DepartementDetail> departementCriterias;
-    Map<String, List<DepartementDetail>> params;
+    private Map<String, List<DepartementDetail>> params;
     private List<DepartementDetail> contentManagement;
     private List<DepartementDetail> datenManagement;
     private List<DepartementDetail> databasePublisihing;
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
+
     
+
+    @PostConstruct
+    public void prepareSearchForm(){
+         User connectedUser = SessionUtil.getConnectedUser();
+        if(connectedUser.getAdmin() == 0){
+            getSelectedForSearch().setDepartment(connectedUser.getDepartement());
+            getSelectedForSearch().setUser(connectedUser);
+            
+        }
+    }
+    public boolean adminAccess(){
+         return SessionUtil.getConnectedUser().getAdmin()==1;
+    }
     public DemandCategoryController() {
     }
-    
+
+    public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
+        return ejbFacade.findSummByDepartement(demandCategory);
+    }
     public void simuler() throws ScriptException {
         demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(selected, SessionUtil.getConnectedUser().getDepartement());
+    }
+    
+    public void findSortimentItem(){
+        detailSotimentItems = sortimentItemFacade.findByDemandeCategory(selected);
+        sotimentItemsMixEdit = sortimentItemFacade.findByDemandeCategory(selected);
     }
     
     public boolean checkUser() {
@@ -102,7 +128,6 @@ public class DemandCategoryController implements Serializable {
     public void removeSortimentItem(SotimentItem sItem) {
         System.out.println("hahowa element a supprimer : " + sItem.getWert());
         index = sItem.getId().intValue();
-        
         sotimentItems.remove(sItem);
     }
     
@@ -185,6 +210,8 @@ public class DemandCategoryController implements Serializable {
             JsfUtil.addErrorMessage("Item deja dans la liste");
         } else if (res == -2) {
             JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
+        }else{
+            System.out.println("item ajouter avec wert = "+sortimentItem.getWert());
         }
     }
     
@@ -227,7 +254,7 @@ public class DemandCategoryController implements Serializable {
     }
     
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts);
     }
     
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -260,7 +287,7 @@ public class DemandCategoryController implements Serializable {
     
     public List<DemandCategory> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findByDepartement();
         }
         return items;
     }
@@ -386,6 +413,7 @@ public class DemandCategoryController implements Serializable {
                 if (persistAction == PersistAction.CREATE) {
                     getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, true);
                 } else if (persistAction == PersistAction.UPDATE) {
+                    sortimentItemFacade.delete(detailSotimentItems);
                     getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, false);
                 } else {
                     getFacade().remove(selected);
@@ -592,4 +620,50 @@ public class DemandCategoryController implements Serializable {
     
     
     
+    public List<SotimentItem> getSotimentItemsMixEdit() {
+        return sotimentItemsMixEdit;
+    }
+
+    public void setSotimentItemsMixEdit(List<SotimentItem> sotimentItemsMixEdit) {
+        this.sotimentItemsMixEdit = sotimentItemsMixEdit;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getCmp() {
+        return cmp;
+    }
+
+    public void setCmp(int cmp) {
+        this.cmp = cmp;
+    }
+
+    public List<Sortiment> getSelectedSortiemnts() {
+        if(selectedSortiemnts == null){
+            selectedSortiemnts = new ArrayList<>();
+        }
+        return selectedSortiemnts;
+    }
+
+    public void setSelectedSortiemnts(List<Sortiment> selectedSortiemnts) {
+        this.selectedSortiemnts = selectedSortiemnts;
+    }
+
+    public List<Sortiment> getSortiments() {
+        if(sortiments == null){
+            sortiments = sortimentFacade.findAll();
+        }
+        return sortiments;
+    }
+
+    public void setSortiments(List<Sortiment> sortiments) {
+        this.sortiments = sortiments;
+    }
+
 }

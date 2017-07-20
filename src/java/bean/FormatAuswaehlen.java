@@ -42,10 +42,6 @@ public class FormatAuswaehlen implements Serializable {
         this.description = description;
     }
 
-    
-    
-   
-
     public String getId() {
         return id;
     }
@@ -78,5 +74,5 @@ public class FormatAuswaehlen implements Serializable {
     public String toString() {
         return id;
     }
-    
+
 }

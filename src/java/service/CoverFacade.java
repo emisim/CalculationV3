@@ -28,5 +28,5 @@ public class CoverFacade extends AbstractFacade<Cover> {
     public CoverFacade() {
         super(Cover.class);
     }
-    
+
 }

@@ -32,7 +32,7 @@
                         <p:inputText id="priceGlobal" value="#{demandCategoryCalculationItemController.selected.priceGlobal}" title="#{bundle.EditDemandCategoryCalculationItemTitle_priceGlobal}" />
                         <p:outputLabel value="#{bundle.EditDemandCategoryCalculationItemLabel_calcultaed}" for="calcultaed" />
                         <p:selectBooleanCheckbox id="calcultaed" value="#{demandCategoryCalculationItemController.selected.calcultaed}" />
-                      
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandCategoryCalculationItemController.update}" value="#{bundle.Save}" update="display,:DemandCategoryCalculationItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandCategoryCalculationItemEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryCalculationItemEditDialog.hide()"/>

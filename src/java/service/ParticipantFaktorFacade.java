@@ -28,5 +28,5 @@ public class ParticipantFaktorFacade extends AbstractFacade<ParticipantFaktor> {
     public ParticipantFaktorFacade() {
         super(ParticipantFaktor.class);
     }
-    
+
 }

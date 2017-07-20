@@ -26,7 +26,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    
+
     @OneToMany(mappedBy = "category")
     private List<DemandCategory> demandCategorys;
 
@@ -34,8 +34,9 @@ public class Category implements Serializable {
     private List<Product> products;
 
     public List<DemandCategory> getDemandCategorys() {
-        if(demandCategorys == null)
-                demandCategorys = new ArrayList<>();
+        if (demandCategorys == null) {
+            demandCategorys = new ArrayList<>();
+        }
         return demandCategorys;
     }
 
@@ -52,8 +53,9 @@ public class Category implements Serializable {
     }
 
     public List<Product> getProducts() {
-        if( products == null)
+        if (products == null) {
             products = new ArrayList<>();
+        }
         return products;
     }
 
@@ -61,7 +63,6 @@ public class Category implements Serializable {
         this.products = products;
     }
 
-    
     public Long getId() {
         return id;
     }

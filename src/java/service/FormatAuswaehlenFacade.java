@@ -28,5 +28,5 @@ public class FormatAuswaehlenFacade extends AbstractFacade<FormatAuswaehlen> {
     public FormatAuswaehlenFacade() {
         super(FormatAuswaehlen.class);
     }
-    
+
 }

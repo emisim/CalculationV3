@@ -16,8 +16,6 @@ import java.util.List;
  */
 public class SearchUtil {
 
-  
-
     public static String addConstraint(String beanAbrev, String atributeName, String operator, Object value) {
         boolean condition = value != null;
         if (value != null && value.getClass().getSimpleName().equals("String")) {
@@ -41,12 +39,12 @@ public class SearchUtil {
     }
 
     public static String addConstraintOr(String beanAbrev, String atributeName, String operator, List values) {
-        String query = "";
+        String query = " OR ( 1=0 ";
         if (values != null && !values.isEmpty()) {
             for (Object value : values) {
                 query += addConstraintOr(beanAbrev, atributeName, operator, value);
             }
-            return query;
+            return query+")";
         }
         return "";
     }
@@ -96,6 +94,5 @@ public class SearchUtil {
         }
         return requete;
     }
- 
-   
+
 }

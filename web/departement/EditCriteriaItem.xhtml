@@ -18,7 +18,7 @@
                         <p:inputText id="arithmitiqueExpresionForUnitePrice" value="#{departementController.departementCriteriaItem.arithmitiqueExpresionForUnitePrice}" title="#{bundle.EditDepartementCriteriaItemTitle_arithmitiqueExpresionForUnitePrice}" />
                         <p:outputLabel value="#{bundle.EditDepartementCriteriaItemLabel_arithmitiqueExpresionForGlobalPrice}" for="arithmitiqueExpresionForGlobalPrice" />
                         <p:inputText id="arithmitiqueExpresionForGlobalPrice" value="#{departementController.departementCriteriaItem.arithmitiqueExpresionForGlobalPrice}" title="#{bundle.EditDepartementCriteriaItemTitle_arithmitiqueExpresionForGlobalPrice}" />
-                        
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{departementController.updateDepartementCriteriaItem()}" value="#{bundle.Save}" update="display,:DepartementCriteriaItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DepartementCriteriaItemEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DepartementCriteriaItemEditDialog.hide()"/>

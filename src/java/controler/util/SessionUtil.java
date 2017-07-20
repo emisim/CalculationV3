@@ -13,8 +13,6 @@ public class SessionUtil {
     private SessionUtil() {
     }
 
-  
-
     public static void registerUser(User user) {
         //clone user before
         setAttribute("user", user);
@@ -23,18 +21,18 @@ public class SessionUtil {
     public static User getConnectedUser() {
         return (User) getAttribute("user");
     }
-    
+
     public static void setAttribute(String cle, Object valeur) {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (fc != null && fc.getExternalContext() != null) {
             getSession(fc).setAttribute(cle, valeur);
         }
     }
-    
+
     private static HttpSession getSession(FacesContext fc) {
         return (HttpSession) fc.getExternalContext().getSession(false);
     }
-    
+
     public static Object getAttribute(String cle) {
         FacesContext fc = FacesContext.getCurrentInstance();
         Object res = null;
@@ -43,27 +41,24 @@ public class SessionUtil {
         }
         return res;
     }
-    
+
     private static boolean isContextOk(FacesContext fc) {
         boolean res = (fc != null
                 && fc.getExternalContext() != null
                 && fc.getExternalContext().getSession(false) != null);
         return res;
     }
-    
-     public static void redirect(String pagePath) throws IOException {
+
+    public static void redirect(String pagePath) throws IOException {
 //        if (!pagePath.endsWith(".xhtml")) {
 //            pagePath += ".xhtml";
 //        }
         FacesContext.getCurrentInstance().getExternalContext().redirect(pagePath);
 
     }
-     
-      public static HttpSession getSession() {
+
+    public static HttpSession getSession() {
         return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     }
-     
-    
 
-    
 }

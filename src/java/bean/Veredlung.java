@@ -42,8 +42,6 @@ public class Veredlung implements Serializable {
         this.description = description;
     }
 
- 
-
     public String getId() {
         return id;
     }
@@ -74,7 +72,7 @@ public class Veredlung implements Serializable {
 
     @Override
     public String toString() {
-        return id ;
+        return id;
     }
-    
+
 }

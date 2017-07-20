@@ -32,7 +32,6 @@ public class DemandCategoryValidationItem implements Serializable {
     @ManyToOne
     private User user;
     private String departement;
-    
 
     public Integer getId() {
         return id;
@@ -79,5 +78,4 @@ public class DemandCategoryValidationItem implements Serializable {
         return "DemandCategoryValidationItem{" + "id=" + id + ", demandCategoryValidation=" + demandCategoryValidation + ", sysDate=" + sysDate + ", user=" + user + ", departement=" + departement + '}';
     }
 
-    
 }

@@ -28,5 +28,5 @@ public class UmschlagPapierAuswaehlenFacade extends AbstractFacade<UmschlagPapie
     public UmschlagPapierAuswaehlenFacade() {
         super(UmschlagPapierAuswaehlen.class);
     }
-    
+
 }

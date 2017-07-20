@@ -72,7 +72,6 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         return sotimentItems;
     }
 
-  
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -87,6 +86,14 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
         String requette = "select item from SotimentItem item where item.demandCategory.id = '" + demandCategory.getId() + "'";
         return em.createQuery(requette).getResultList();
 
+    }
+
+    public void delete(List<SotimentItem> detailSotimentItems) {
+        
+        for (SotimentItem detailSotimentItem : detailSotimentItems) {
+            remove(detailSotimentItem);
+        }
+    
     }
 
 }

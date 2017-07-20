@@ -8,9 +8,9 @@
 
     <ui:composition>
 
-        <p:dialog id="MixDlg" widgetVar="MixDialog" modal="true" resizable="false" appendTo="@(body)" width="1000" header="Sortiemnt Items">
+        <p:dialog id="MixEditDlg" widgetVar="MixEditDialog" modal="true" resizable="false" appendTo="@(body)" width="1000" header="Sortiemnt Items">
 
-            <h:form id="MixInfoForm">
+            <h:form id="MixEditInfoForm">
                 <p:fieldset legend="Info" >
                     <h:panelGrid columns="6" cellpadding="5" >
 
@@ -20,7 +20,7 @@
                             <f:selectItems value="#{demandCategoryController.findAllSortiment()}"
                                            var="sortimentItem"
                                            itemValue="#{sortimentItem}"
-                                           itemLabel="#{sortimentItem.name}"
+                                           itemLabel =" #{sortimentItem.name}"
                                            />
 
                         </p:selectOneMenu>
@@ -28,17 +28,17 @@
                         <p:outputLabel for="wert" value="Wert in %" />
                         <p:inputText id="wert" value="#{demandCategoryController.sortimentItem.wert}" />
 
-                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixListForm,:growl"/>
+                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixEditListForm,:growl"/>
 
                     </h:panelGrid>
 
                 </p:fieldset>
             </h:form>
 
-            <h:form id="MixListForm">
+            <h:form id="MixEditListForm">
 
                 <p:panel header="Mix">
-                    <p:dataTable id="datalist" value="#{demandCategoryController.sotimentItems}" var="item"
+                    <p:dataTable id="datalist" value="#{demandCategoryController.sotimentItemsMixEdit}" var="item"
                                  selectionMode="single" selection="#{demandCategoryController.sortimentItem}"
                                  paginator="true"
                                  rowKey="#{item.id}"
@@ -59,7 +59,7 @@
                             </f:facet>
                             <h:outputText value="#{item.wert}"/>
                         </p:column>
-
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Action"/>
@@ -68,8 +68,8 @@
                         </p:column>
 
                     </p:dataTable>
-
-                    <p:commandButton value="Bestätigen" oncomplete="handleSubmit(args,'MixDialog');" />
+                    
+                    <p:commandButton value="Bestätigen" oncomplete="handleSubmit(args,'MixEditDialog');" />
 
                 </p:panel>
 

@@ -37,7 +37,7 @@ public class User implements Serializable {
     @ManyToOne
     private Departement departement;
     private int admin;
-    
+
     public int getAdmin() {
         return admin;
     }
@@ -45,8 +45,6 @@ public class User implements Serializable {
     public void setAdmin(int admin) {
         this.admin = admin;
     }
-    
-    
 
     public Departement getDepartement() {
         return departement;

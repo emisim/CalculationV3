@@ -13,7 +13,7 @@ import javax.faces.application.FacesMessage;
  */
 public class MessageManager {
 
-   Message message;
+    Message message;
 
     public static Message createInfoMessage(int resultat, String text) {
         return new Message(resultat, text, FacesMessage.SEVERITY_INFO);
@@ -30,7 +30,6 @@ public class MessageManager {
     public MessageManager() {
     }
 
-   
     public static void showMessage(Message message) {
         if (message != null) {
             if (message.getSeverity() == FacesMessage.SEVERITY_ERROR) {
@@ -44,9 +43,5 @@ public class MessageManager {
             }
         }
     }
-
-   
-
-   
 
 }
