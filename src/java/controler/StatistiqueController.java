@@ -6,13 +6,18 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.Departement;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
@@ -34,11 +39,14 @@ public class StatistiqueController implements Serializable {
     private int secondYear;
     private int typeSum;
     private int typeAxeX;
-    private int typeChart = 2;
+
     private BarChartModel barModel;
     private LineChartModel lineModel;
     private PieChartModel pieChartModel;
     private DemandCategory demandCategory;
+    private DemandCategory selectedForSearch;
+    private Date date = new Date();
+    private List<String> departements;
 
     /**
      * Creates a new instance of statistiqueController
@@ -47,6 +55,9 @@ public class StatistiqueController implements Serializable {
     }
 
     public int getFirstYear() {
+        if (firstYear == 0) {
+            firstYear = date.getYear() + 1900;
+        }
         return firstYear;
     }
 
@@ -55,6 +66,9 @@ public class StatistiqueController implements Serializable {
     }
 
     public int getSecondYear() {
+        if (secondYear == 0) {
+            secondYear = date.getYear() + 1900;
+        }
         return secondYear;
     }
 
@@ -118,14 +132,6 @@ public class StatistiqueController implements Serializable {
         this.pieChartModel = pieChartModel;
     }
 
-    public int getTypeChart() {
-        return typeChart;
-    }
-
-    public void setTypeChart(int typeChart) {
-        this.typeChart = typeChart;
-    }
-
     public DemandCategory getDemandCategory() {
         if (demandCategory == null) {
             demandCategory = new DemandCategory();
@@ -137,15 +143,38 @@ public class StatistiqueController implements Serializable {
         this.demandCategory = demandCategory;
     }
 
+    public List<String> getDepartements() {
+        System.out.println("departements ---> " + departements);
+        if (departements == null) {
+            departements = new ArrayList<>();
+        }
+        return departements;
+    }
+
+    public void setDepartements(List<String> departements) {
+        this.departements = departements;
+    }
+
+    public DemandCategory getSelectedForSearch() {
+        if (selectedForSearch == null) {
+            selectedForSearch = new DemandCategory();
+        }
+        return selectedForSearch;
+    }
+
+    public void setSelectedForSearch(DemandCategory selectedForSearch) {
+        this.selectedForSearch = selectedForSearch;
+    }
+
     public void createDemandeCategoryStat() {
         System.out.println("------------------------------------------- createDemandeCategoryStat() --------------------------------");
-        barModel=null;
-        lineModel=null;
-        pieChartModel=null;
-        ChartSeries seriesFirstYear = demandCategoryFacade.createDemandeCategoryStat(firstYear, typeSum, typeAxeX,demandCategory);
-        ChartSeries serieSecondYear = demandCategoryFacade.createDemandeCategoryStat(secondYear, typeSum, typeAxeX,demandCategory);
-        if (typeAxeX == 1) {
-//            if (typeChart == 1) {
+        barModel = null;
+        lineModel = null;
+        pieChartModel = null;
+        System.out.println("selectedForSearch-->" + selectedForSearch);
+        ChartSeries seriesFirstYear = demandCategoryFacade.createDemandeCategoryStat(firstYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch);
+        ChartSeries serieSecondYear = demandCategoryFacade.createDemandeCategoryStat(secondYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch);
+        if (typeAxeX == 1 || typeAxeX==0) {
             System.out.println("statistique lineModel ");
             lineModel = new LineChartModel();
             lineModel.addSeries(seriesFirstYear);
@@ -159,20 +188,6 @@ public class StatistiqueController implements Serializable {
             Axis yAxis = lineModel.getAxis(AxisType.Y);
             yAxis.setLabel("Montant");
             yAxis.setMin(0);
-//            } else if (typeChart == 2) {
-//                System.out.println("case 2");
-//                barModel = new BarChartModel();
-//                barModel.addSeries(seriesFirstYear);
-//                barModel.addSeries(serieSecondYear);
-//                barModel.setTitle("Statistique");
-//                barModel.setLegendPosition("ne");
-//                barModel.setAnimate(true);
-//                Axis xAxis = barModel.getAxis(AxisType.X);
-//                xAxis.setLabel("Date Debut");
-//                Axis yAxis = barModel.getAxis(AxisType.Y);
-//                yAxis.setLabel("Montant");
-//                yAxis.setMin(0);
-//            }
         } else if (typeAxeX == 2) {
             System.out.println("typeAxeX " + typeAxeX);
             barModel = new BarChartModel();
@@ -188,7 +203,8 @@ public class StatistiqueController implements Serializable {
 
             pieChartModel = demandCategoryFacade.createDemandeCategoryPieModel(demandCategory);
         }
-
+        seriesFirstYear = new ChartSeries();
+        serieSecondYear = new ChartSeries();
         System.out.println("------------------------------------------- END ------------------------------------------------------------");
     }
 
