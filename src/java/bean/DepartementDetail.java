@@ -5,12 +5,15 @@
  */
 package bean;
 
+import java.util.Objects;
+
 /**
  *
  * @author simo
  */
 public class DepartementDetail {
-
+    
+    private Long id;
     private String nomDepCritera;
     private String descrDepCriteriaItem;
     private String arithmitiqueExpresionForUnitePrice;
@@ -19,10 +22,24 @@ public class DepartementDetail {
     private String priceGlobal;
     private String summCriteria;
     private String summDepartement;
+    private boolean checked;
+    private Long demandCategoryCalcuationId;
+    private Long demandCategoryDepartementCalculationId;
+    private Long demandCategoryCalculationItemId;
 
     public DepartementDetail() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+    
     public String getNomDepCritera() {
         return nomDepCritera;
     }
@@ -87,9 +104,75 @@ public class DepartementDetail {
         this.summDepartement = summDepartement;
     }
 
-    @Override
-    public String toString() {
-        return "DepartementDetail{" + "nomDepCritera=" + nomDepCritera + ", descrDepCriteriaItem=" + descrDepCriteriaItem + ", arithmitiqueExpresionForUnitePrice=" + arithmitiqueExpresionForUnitePrice + ", arithmitiqueExpresionForGlobalPrice=" + arithmitiqueExpresionForGlobalPrice + '}';
+    public boolean isChecked() {
+        return checked;
     }
 
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public Long getDemandCategoryCalcuationId() {
+        return demandCategoryCalcuationId;
+    }
+
+    public void setDemandCategoryCalcuationId(Long demandCategoryCalcuationId) {
+        this.demandCategoryCalcuationId = demandCategoryCalcuationId;
+    }
+
+    public Long getDemandCategoryDepartementCalculationId() {
+        return demandCategoryDepartementCalculationId;
+    }
+
+    public void setDemandCategoryDepartementCalculationId(Long demandCategoryDepartementCalculationId) {
+        this.demandCategoryDepartementCalculationId = demandCategoryDepartementCalculationId;
+    }
+
+    public Long getDemandCategoryCalculationItemId() {
+        return demandCategoryCalculationItemId;
+    }
+
+    public void setDemandCategoryCalculationItemId(Long demandCategoryCalculationItemId) {
+        this.demandCategoryCalculationItemId = demandCategoryCalculationItemId;
+    }
+    
+    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.nomDepCritera);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DepartementDetail other = (DepartementDetail) obj;
+        if (!Objects.equals(this.nomDepCritera, other.nomDepCritera)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        return "DepartementDetail{" + "id=" + id + ", nomDepCritera=" + nomDepCritera + '}';
+    }
+   
+    
 }

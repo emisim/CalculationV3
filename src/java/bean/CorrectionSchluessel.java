@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class CorrectionSchluessel implements Serializable {
 
     // Hier wird der Wert der durch die Bechnung von 100* gesamtArtikel/New_Artikel
     private int percent;
-    private BigDecimal wert;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert;
 
     @OneToMany(mappedBy = "correctionSchluessel")
     private List<DemandCategory> demandCategorys;

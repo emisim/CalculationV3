@@ -7,6 +7,7 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +27,8 @@ public class DemandCategoryCalculationItem implements Serializable {
     private Long id;
     @ManyToOne
     private DepartementCriteriaItem departementCriteriaItem;
-    private BigDecimal price;
-    private BigDecimal priceGlobal;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal price;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal priceGlobal;
     private boolean calcultaed = true;
     @ManyToOne
     private DemandCategoryCalculation demandCategoryCalculation;

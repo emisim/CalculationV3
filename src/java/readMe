@@ -1,8 +1,0 @@
-risala li al hazdoure hhh
-DemandCategoryCalculationFacade : save 
-==> j'ai commenter  
- // demandCategoryCalculation.setDemandCategoryCalculationItems(demandCategoryCalculationItemFacade.save(demandCategoryCalculation, demandCategory, similuer));
- // demandCategoryCalculation.setSumme(calculerSum(demandCategoryCalculation.getDemandCategoryCalculationItems()));
-==> Pour ?: bite hi njreb save demandCategory & DemandCategoryDepartementCalculation & demandCategoryCalculation 
-o 3addd nchouf demandCategoryCalculationItem
-==> Exception findOrCreate ma3aret malehaaaaa hhhh lilahe ila machofeha maleha

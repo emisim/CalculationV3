@@ -25,6 +25,24 @@ public abstract class AbstractFacade<T> {
         return maxId.get(0) + 1;
     }
 
+    public T getUniqueResult(String query) {
+        List<T> list = getEntityManager().createQuery(query).getResultList();
+        if (list != null && list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+
+    }
+
+    public List<T> getMultipleResult(String query) {
+        List<T> list = getEntityManager().createQuery(query).getResultList();
+        if (list != null && list.size() > 0) {
+            return list;
+        }
+        return null;
+
+    }
+
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }

@@ -10,8 +10,9 @@
 
         <p:dialog id="DemandCategoryViewDlg" widgetVar="DemandCategoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDemandCategoryTitle}">
             <h:form id="DemandCategoryViewForm">
+                <h3>Info General</h3>
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="6" rendered="#{demandCategoryController.selected != null}" style="margin: 3px" >
+                    <p:panelGrid columns="8" rendered="#{demandCategoryController.selected != null}" style="margin: 3px" >
 
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_user}"/>
                         <h:outputText value="#{demandCategoryController.selected.user}" title="#{bundle.ViewDemandCategoryTitle_user}"/>
@@ -30,11 +31,20 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_product}" rendered="#{demandCategoryController.renderAttribute('product')}"/>
                         <h:outputText value="#{demandCategoryController.selected.product.label}" title="#{bundle.ViewDemandCategoryTitle_product}" rendered="#{demandCategoryController.renderAttribute('product')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.schluessel.description}" title="#{bundle.ViewDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}"/>
+                        <h:outputLabel value="#{bundle.CreateDemandCategoryLabel_layout}" rendered="#{demandCategoryController.renderAttribute('layout')}" />
+                        <h:outputText value="#{demandCategoryController.selected.layout.name}" title="#{bundle.ViewDemandCategoryTitle_layout}" rendered="#{demandCategoryController.renderAttribute('layout')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
+                        <h:outputLabel value="#{bundle.CreateDemandCategoryLabel_katalogart}" rendered="#{demandCategoryController.renderAttribute('katalogart')}" />
+                        <h:outputText value="#{demandCategoryController.selected.katalogart.name}" title="#{bundle.ViewDemandCategoryTitle_katalogart}" rendered="#{demandCategoryController.renderAttribute('katalogart')}"/>
+
+                        <h:outputLabel value="#{bundle.CreateDemandCategoryLabel_prozess}" rendered="#{demandCategoryController.renderAttribute('prozess')}" />
+                        <h:outputText value="#{demandCategoryController.selected.prozess.name}" title="#{bundle.ViewDemandCategoryTitle_prozess}" rendered="#{demandCategoryController.renderAttribute('prozess')}"/>
+
+                        <h:outputLabel value="#{bundle.CreateDemandCategoryLabel_ausgabe}" rendered="#{demandCategoryController.renderAttribute('ausgabe')}" />
+                        <h:outputText value="#{demandCategoryController.selected.ausgabe.name}" title="#{bundle.ViewDemandCategoryTitle_ausgabe}" rendered="#{demandCategoryController.renderAttribute('ausgabe')}"/>
+
+                        <h:outputLabel value="#{bundle.CreateDemandCategoryLabel_umfang}" rendered="#{demandCategoryController.renderAttribute('umfang')}" />
+                        <h:outputText value="#{demandCategoryController.selected.umfang}" title="#{bundle.ViewDemandCategoryTitle_umfang}" rendered="#{demandCategoryController.renderAttribute('umfang')}"/>
 
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_percentSeitenFaktor}" rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}"/>
                         <h:outputText value="#{demandCategoryController.selected.percentSeitenFaktor}" title="#{bundle.ViewDemandCategoryTitle_percentSeitenFaktor}" rendered="#{demandCategoryController.renderAttribute('percentSeitenFaktor')}"/>
@@ -99,63 +109,76 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}"/>
                         <h:outputText value="#{demandCategoryController.selected.konzeptbearbeitungFaktor.value}" title="#{bundle.ViewDemandCategoryTitle_konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.formatAuswaehlen.description}" title="#{bundle.ViewDemandCategoryTitle_formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}"/>
+                        <h:outputText value="#{demandCategoryController.selected.schluessel.description}" title="#{bundle.ViewDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_papierMaterialAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.papierMaterialAuswaehlen.description}" title="#{bundle.ViewDemandCategoryTitle_papierMaterialAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_seitenanzahl}" rendered="#{demandCategoryController.renderAttribute('seitenanzahl')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.seitenanzahl}" title="#{bundle.ViewDemandCategoryTitle_seitenanzahl}" rendered="#{demandCategoryController.renderAttribute('seitenanzahl')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_farbigkeit}" rendered="#{demandCategoryController.renderAttribute('farbigkeit')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.farbigkeit.description}" title="#{bundle.ViewDemandCategoryTitle_farbigkeit}" rendered="#{demandCategoryController.renderAttribute('farbigkeit')}"/>
+                    </p:panelGrid>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_artDerWeiterverarbeitung}" rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.artDerWeiterverarbeitung.description}" title="#{bundle.ViewDemandCategoryTitle_artDerWeiterverarbeitung}" rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung')}"/>
+                    <h3><p:outputLabel rendered="#{demandCategoryController.selected != null and demandCategoryController.selected.druck eq true }">Info Druck</p:outputLabel></h3>
+                    <p:panelGrid columns="8" id="afterDruck" rendered="#{demandCategoryController.selected != null and demandCategoryController.selected.druck eq true }" style="margin: 3px"  >
+                        <h:outputLabel value="druck" for="druck" />
+                        <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.formatAuswaehlen.description}" title="#{bundle.ViewDemandCategoryTitle_formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_veredlung}" rendered="#{demandCategoryController.renderAttribute('veredlung')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.veredlung.description}" title="#{bundle.ViewDemandCategoryTitle_veredlung}" rendered="#{demandCategoryController.renderAttribute('veredlung')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_papierMaterialAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.papierMaterialAuswaehlen.description}" title="#{bundle.ViewDemandCategoryTitle_papierMaterialAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_umschlagPapierAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('umschlagPapierAuswaehlen')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.umschlagPapierAuswaehlen.description}" title="#{bundle.ViewDemandCategoryTitle_umschlagPapierAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('umschlagPapierAuswaehlen')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_seitenanzahl}" rendered="#{demandCategoryController.renderAttribute('seitenanzahl') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.seitenanzahl}" title="#{bundle.ViewDemandCategoryTitle_seitenanzahl}" rendered="#{demandCategoryController.renderAttribute('seitenanzahl') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_umschlagFarbigkeit}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.umschlagFarbigkeit.description}" title="#{bundle.ViewDemandCategoryTitle_umschlagFarbigkeit}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_farbigkeit}" rendered="#{demandCategoryController.renderAttribute('farbigkeit') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.farbigkeit.description}" title="#{bundle.ViewDemandCategoryTitle_farbigkeit}" rendered="#{demandCategoryController.renderAttribute('farbigkeit') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_cover}" rendered="#{demandCategoryController.renderAttribute('cover')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.cover.description}" title="#{bundle.ViewDemandCategoryTitle_cover}" rendered="#{demandCategoryController.renderAttribute('cover')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_artDerWeiterverarbeitung}" rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.artDerWeiterverarbeitung.description}" title="#{bundle.ViewDemandCategoryTitle_artDerWeiterverarbeitung}" rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bindung}" rendered="#{demandCategoryController.renderAttribute('bindung')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.bindung.description}" title="#{bundle.ViewDemandCategoryTitle_bindung}" rendered="#{demandCategoryController.renderAttribute('bindung')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_veredlung}" rendered="#{demandCategoryController.renderAttribute('veredlung') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.veredlung.description}" title="#{bundle.ViewDemandCategoryTitle_veredlung}" rendered="#{demandCategoryController.renderAttribute('veredlung') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_auflage}" rendered="#{demandCategoryController.renderAttribute('auflage')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.auflage.description}" title="#{bundle.ViewDemandCategoryTitle_auflage}" rendered="#{demandCategoryController.renderAttribute('auflage')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_umschlagPapierAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('umschlagPapierAuswaehlen') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.umschlagPapierAuswaehlen.description}" title="#{bundle.ViewDemandCategoryTitle_umschlagPapierAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('umschlagPapierAuswaehlen') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_liefertermin}" rendered="#{demandCategoryController.renderAttribute('liefertermin')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.ViewDemandCategoryTitle_liefertermin}" rendered="#{demandCategoryController.renderAttribute('liefertermin')}">
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_umschlagFarbigkeit}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.umschlagFarbigkeit.description}" title="#{bundle.ViewDemandCategoryTitle_umschlagFarbigkeit}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true}"/>
+
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_cover}" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.cover.description}" title="#{bundle.ViewDemandCategoryTitle_cover}" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true}"/>
+
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bindung}" rendered="#{demandCategoryController.renderAttribute('bindung') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.bindung.description}" title="#{bundle.ViewDemandCategoryTitle_bindung}" rendered="#{demandCategoryController.renderAttribute('bindung') and demandCategoryController.selected.druck == true}"/>
+
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_auflage}" rendered="#{demandCategoryController.renderAttribute('auflage') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.auflage.description}" title="#{bundle.ViewDemandCategoryTitle_auflage}" rendered="#{demandCategoryController.renderAttribute('auflage') and demandCategoryController.selected.druck == true}"/>
+
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_liefertermin}" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.ViewDemandCategoryTitle_liefertermin}" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateDemandCategory}" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.ViewDemandCategoryTitle_dateDemandCategory}" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory')}">
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateDemandCategory}" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.ViewDemandCategoryTitle_dateDemandCategory}" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.summDruck}" title="#{bundle.ViewDemandCategoryTitle_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summDruck}" title="#{bundle.ViewDemandCategoryTitle_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.summTotal}" title="#{bundle.ViewDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal')}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summTotal}" title="#{bundle.ViewDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
 
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="DemandCategoryViewDialog.hide()"/>
