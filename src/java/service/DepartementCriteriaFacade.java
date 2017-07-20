@@ -59,13 +59,13 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
     public List<DepartementDetail> detailDepartement(List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) throws ScriptException {
         
         List<DepartementDetail> departementDetails = new ArrayList<>();
+        int i = 0;
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             String summ = demandCategoryDepartementCalculation.getSumme() + "";
             for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryDepartementCalculation.getDemandCategoryCalculations()) {
-                System.out.println("DepartementCruteudhdkdbhkdbhdbhj ::::::::::: "+demandCategoryCalculation);
+                System.out.println("Departement ::::::::::: "+demandCategoryCalculation);
                 String summCriteria = demandCategoryCalculation.getSumme() + "";
                 String nomDepCriteria = demandCategoryCalculation.getDepartementCriteria().getName();
-                
                 for (DemandCategoryCalculationItem demandCategoryCalculationItem : demandCategoryCalculation.getDemandCategoryCalculationItems()) {
                     DepartementCriteriaItem departementCriteriaItem = demandCategoryCalculationItem.getDepartementCriteriaItem();
                     DepartementDetail departementDetail = new DepartementDetail();
@@ -77,7 +77,13 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
                     departementDetail.setArithmitiqueExpresionForGlobalPrice(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice());
                     departementDetail.setSummCriteria(summCriteria);
                     departementDetail.setSummDepartement(summ);
+                    departementDetail.setChecked(true);
+                    departementDetail.setId(new Long(i));
+                    departementDetail.setDemandCategoryCalcuationId(demandCategoryCalculation.getId());
+                    departementDetail.setDemandCategoryDepartementCalculationId(demandCategoryDepartementCalculation.getId());
+                    departementDetail.setDemandCategoryCalculationItemId(demandCategoryCalculationItem.getId());
                     departementDetails.add(departementDetail);
+                    i++;
                 }
             }
         }
@@ -113,9 +119,7 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
             departementCriteriaItemFacade.remove(departementCriteriaItem);
             
         }
-        
         remove(criteria);
-     
     }
 
     public List<DepartementCriteria> findByUser() {

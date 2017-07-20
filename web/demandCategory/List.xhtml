@@ -533,14 +533,11 @@
                                         <f:facet name="header">
                                             <h:outputText value="Action"/>
                                         </f:facet>
+                                        <p:commandButton id="detailCat" title="Detail" icon="ui-icon-list"  actionListener="#{demandCategoryController.departementeDetails(item)}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()"  />
                                         <p:commandButton id="valider" title="Valider" icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
                                         <p:commandButton id="detailValider" icon="fa fa-bars" title="Detail Validation" actionListener="#{demandCategoryController.prepareValidateItems(item)}" update=":DemandCategoryValidationItemListForm" oncomplete="PF('DemandCategoryValidationItemListDialog').show()" />
                                         <p:commandButton id="detailSortiemnt" icon="fa fa-info-circle" title="Detail Sortiment" actionListener="#{demandCategoryController.prepareSortimentItems(item)}" update=":SotimentItemListForm" oncomplete="PF('SortiementItemListDialog').show()" />
                                     </p:column>
-
-
-
-
                                     <f:facet name="footer" >
                                         <p:commandButton id="detailButton"   icon="fa fa-list" value="#{bundle.Detail}"  update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}" />
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
