@@ -510,12 +510,13 @@ public class DemandCategoryController implements Serializable {
         this.sortimentItem = sortimentItem;
     }
     
-    public List<DemandCategoryValidation> getDemandCategoryValidations() {
+    public List<DemandCategoryValidation> getDemandCategoryValidationItems() {
         if (demandCategoryValidations == null) {
             demandCategoryValidations = new ArrayList<>();
         }
         return demandCategoryValidations;
     }
+    
     
     public void setDemandCategoryValidationItems(List<DemandCategoryValidation> demandCategoryValidations) {
         this.demandCategoryValidations = demandCategoryValidations;
