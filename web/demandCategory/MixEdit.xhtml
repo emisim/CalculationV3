@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MixEditDlg" widgetVar="MixEditDialog" modal="true" resizable="false" appendTo="@(body)" width="1000" header="Sortiemnt Items">
+
+            <h:form id="MixEditInfoForm">
+                <p:fieldset legend="Info" >
+                    <h:panelGrid columns="6" cellpadding="5" >
+
+                        <p:outputLabel for="sortimentMix" value="Sortiment" />
+                        <p:selectOneMenu id="sortimentMix" value="#{demandCategoryController.sortimentItem.sortiment}" converter="sortimentConverter">
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                            <f:selectItems value="#{demandCategoryController.findAllSortiment()}"
+                                           var="sortimentItem"
+                                           itemValue="#{sortimentItem}"
+                                           itemLabel =" #{sortimentItem.name}"
+                                           />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="wert" value="Wert in %" />
+                        <p:inputText id="wert" value="#{demandCategoryController.sortimentItem.wert}" />
+
+                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixEditListForm,:growl"/>
+
+                    </h:panelGrid>
+
+                </p:fieldset>
+            </h:form>
+
+            <h:form id="MixEditListForm">
+
+                <p:panel header="Mix">
+                    <p:dataTable id="datalist" value="#{demandCategoryController.sotimentItemsMixEdit}" var="item"
+                                 selectionMode="single" selection="#{demandCategoryController.sortimentItem}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sortiment"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sortiment.name}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Wert in %"/>
+                            </f:facet>
+                            <h:outputText value="#{item.wert}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                            <p:commandButton value="delete" actionListener="#{demandCategoryController.removeSortimentItem(item)}" update="datalist"/>
+                        </p:column>
+
+                    </p:dataTable>
+                    
+                    <p:commandButton value="Bestätigen" oncomplete="handleSubmit(args,'MixEditDialog');" />
+
+                </p:panel>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
