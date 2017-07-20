@@ -33,7 +33,6 @@ public class DemandCategoryValidationFacade extends AbstractFacade<DemandCategor
     protected EntityManager getEntityManager() {
         return em;
     }
-
     public DemandCategoryValidationFacade() {
         super(DemandCategoryValidation.class);
     }

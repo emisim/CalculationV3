@@ -19,7 +19,9 @@ public class DepartementDetail {
     private String arithmitiqueExpresionForUnitePrice;
     private String arithmitiqueExpresionForGlobalPrice;
     private String price;
+    private String priceUpdate;
     private String priceGlobal;
+    private String priceGlobalUpdate;
     private String summCriteria;
     private String summDepartement;
     private boolean checked;
@@ -135,7 +137,22 @@ public class DepartementDetail {
     public void setDemandCategoryCalculationItemId(Long demandCategoryCalculationItemId) {
         this.demandCategoryCalculationItemId = demandCategoryCalculationItemId;
     }
-    
+
+    public String getPriceUpdate() {
+        return priceUpdate;
+    }
+
+    public void setPriceUpdate(String priceUpdate) {
+        this.priceUpdate = priceUpdate;
+    }
+
+    public String getPriceGlobalUpdate() {
+        return priceGlobalUpdate;
+    }
+
+    public void setPriceGlobalUpdate(String priceGlobalUpdate) {
+        this.priceGlobalUpdate = priceGlobalUpdate;
+    }
     
 
     @Override

@@ -9,9 +9,9 @@
     <ui:composition>
 
 
-        <p:dialog id="DemandCategoryValidationItemListDlg" widgetVar="DemandCategoryValidationItemListDialog" modal="true" resizable="false" appendTo="@(body)" header="Validation Items">
+        <p:dialog id="DemandCategoryValidationListDlg" widgetVar="DemandCategoryValidationListDialog" modal="true" resizable="false" appendTo="@(body)" header="Validation Items">
 
-            <h:form id="DemandCategoryValidationItemListForm" style="width: 500px">
+            <h:form id="DemandCategoryValidationListForm" style="width: 500px">
                 <p:panel header="#{bundle.ListDemandCategoryValidationItemTitle}">
                     <p:dataTable id="datalist" value="#{demandCategoryController.demandCategoryValidationItems}" var="item"
 
@@ -29,14 +29,20 @@
                                 <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_sysDate}"/>
                             </f:facet>
                             <h:outputText value="#{item.sysDate}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="MM/dd/yyyy  hh:mm:ss" />
                             </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_user}"/>
                             </f:facet>
-                            <h:outputText value="#{item.user.nom} - #{item.user.admin==1?'Admin':''}"/>
+                            <h:outputText value="#{item.user.nom} #{item.user.prenom} - #{item.user.admin==1?'Admin':''}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandCategoryValidationItemTitle_departement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.departement.name}"/>
                         </p:column>
 
                     </p:dataTable>

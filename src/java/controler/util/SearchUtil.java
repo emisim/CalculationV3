@@ -39,7 +39,7 @@ public class SearchUtil {
     }
 
     public static String addConstraintOr(String beanAbrev, String atributeName, String operator, List values) {
-        String query = " OR ( 1=0 ";
+        String query = " AND ( 1=0 ";
         if (values != null && !values.isEmpty()) {
             for (Object value : values) {
                 query += addConstraintOr(beanAbrev, atributeName, operator, value);
@@ -56,6 +56,16 @@ public class SearchUtil {
         }
         if (valueMax != null) {
             requette += " AND " + beanAbrev + "." + atributeName + " <= '" + valueMax + "'";
+        }
+        return requette;
+    }
+    public static String addConstraintMinMaxStrict(String beanAbrev, String atributeName, Object valueMin, Object valueMax) {
+        String requette = "";
+        if (valueMin != null) {
+            requette += " AND " + beanAbrev + "." + atributeName + " > '" + valueMin + "'";
+        }
+        if (valueMax != null) {
+            requette += " AND " + beanAbrev + "." + atributeName + " < '" + valueMax + "'";
         }
         return requette;
     }

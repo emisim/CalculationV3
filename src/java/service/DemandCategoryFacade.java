@@ -50,15 +50,37 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
     @EJB
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
+    @EJB
+    private DemandCategoryValidationFacade demandCategoryValidationFacade;
+    @EJB
+    private DepartementFacade departementFacade;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    private String findByValidation(Integer validationLevel,String beanAbrveation) {
+        int topLevel = departementFacade.findAll().size();
+        String query = "";
+        if (validationLevel != null) {
+            if (validationLevel == 0) {
+                query+=SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", "0");
+            }
+           else if (validationLevel == 1) {
+                query+=SearchUtil.addConstraintMinMaxStrict(beanAbrveation, "nbrTotalValidation", "0", topLevel);
+            }
+           else if (validationLevel == 2) {
+                query+=SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", topLevel);
+            }
+        }
+        return query;
+    }
+
     @Override
     public void remove(DemandCategory demandCategory) {
         em.createQuery("DELETE FROM SotimentItem item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
+        em.createQuery("DELETE FROM DemandCategoryValidation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculationItem item WHERE item.demandCategoryCalculation.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryCalculation item WHERE item.demandCategoryDepartementCalculation.demandCategory.id=" + demandCategory.getId()).executeUpdate();
         em.createQuery("DELETE FROM DemandCategoryDepartementCalculation item WHERE item.demandCategory.id=" + demandCategory.getId()).executeUpdate();
@@ -76,17 +98,20 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-        calcSumTotal(demandCategory);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
+        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
         if (simulation == false && isSave == false) {
             edit(demandCategory);
+            demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
         }
 
     }
 
-    private void calcSumTotal(DemandCategory demandCategory) {
+    private void calcSumTotal(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
         demandCategory.setSummTotal(new BigDecimal(0));
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategory.getDemandCategoryDepartementCalculations();
+        if (demandCategoryDepartementCalculations == null || demandCategoryDepartementCalculations.isEmpty()) {
+            return;
+        }
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
         }
@@ -122,7 +147,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts,Integer validationLevel) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
@@ -212,11 +237,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         Departement dep = user.getDepartement();
 
         if (user.getAdmin() == 1) {
-
             if (AccessDepartement.getAdminMap().containsKey(attribute)) {
                 return true;
             }
-
         } else {
             if (dep.getName().equals("contentManagement")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
@@ -327,19 +350,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     public ChartSeries charSerieParAnne(int year, int typeSum, List<DemandCategory> demandCategorys) {
         ChartSeries series = new ChartSeries();
         for (int i = 1; i <= 12; i++) {
-            BigDecimal a = new BigDecimal(BigInteger.ZERO);
+            BigDecimal summ = new BigDecimal(BigInteger.ZERO);
             for (DemandCategory demandCategory : demandCategorys) {
                 if (demandCategory.getDateDemandCategory() != null && demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
                     if (typeSum == 1) {
-                        a = a.add(calculerSum(demandCategory));
+                        summ = summ.add(calculerSum(demandCategory));
                     } else {
-                        a = a.add(demandCategory.getSummDruck());
+                        summ = summ.add(demandCategory.getSummDruck());
                     }
-
                 }
             }
-            System.out.println("summ value (a)" + a);
-            series.set("mois " + i, a);
+            System.out.println("summ value (a)" + summ);
+            series.set("mois " + i, summ);
         }
         return series;
     }
@@ -349,7 +371,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
         System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
         BigDecimal sum = new BigDecimal(0);
-
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             if (demandCategoryDepartementCalculation.getSumme() != null) {
                 sum = sum.add(demandCategoryDepartementCalculation.getSumme());
@@ -376,13 +397,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
         PieChartModel pieModel = new PieChartModel();
-
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
-
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             pieModel.set("dc.Departement Calculation( " + demandCategoryDepartementCalculation + " )", demandCategoryDepartementCalculation.getSumme());
         }
-
         pieModel.setTitle("detail summTotal for demand Category(dc)");
         pieModel.setLegendPosition("w");
         pieModel.setShowDataLabels(true);
@@ -392,9 +410,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public List<DemandCategoryDepartementCalculation> findByDemandeCategory(DemandCategory demandCategory) {
-
         return em.createQuery("SELECT dc FROM DemandCategoryDepartementCalculation dc WHERE dc.demandCategory.id=" + demandCategory.getId()).getResultList();
-
     }
 
     public String getQuery(DemandCategory demandCategory, String query ,String varSql) {
