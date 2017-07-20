@@ -98,3 +98,21 @@ img-border {
 .ede-color{
     color: #006f73;
 }
+
+.ui-button, button.ui-button.ui-state-default, .ui-button.ui-state-default {
+    border: 1px solid #006f73;
+    color: #fff;
+    background: #006f73;
+}
+
+ .ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+{border:1px solid #ec870e;
+ font-weight:normal;
+ color:#212121}
+
+ui-button, button.ui-button.ui-state-hover, button.ui-button.ui-state-focus, .ui-button.ui-state-focus{
+ border:1px solid #ec870e;
+ background:#ec870e;   
+ outline: 0 none;
+} 
+

@@ -3,20 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
 
         <p:dialog id="DemandCategoryDetailDlg" width="1200" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Departements':userController.connectedUser.departement}" >
-            <h:form id="DemandCategoryDetailForm" rendered="#{demandCategoryController.selected!=null}">
+            <h:form id="DemandCategoryDetailForm">
                 <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
-                    <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                    <p:dataTable id="departementCriteriasDataList"  var="item" value="#{demandCategoryController.departementCriterias}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >
                         <p:headerRow>
                             <p:column colspan="3" style="text-align:left" >
                                 <h:outputText value="#{item.nomDepCritera}" />
                             </p:column>
                         </p:headerRow>
+                        <p:column headerText="check" width="30">
+                            <p:selectBooleanCheckbox value="#{item.checked}" >
+                                <p:ajax  listener="#{demandCategoryController.updateDetailDepCritarias(item)}" update="DemandCategoryDetailForm,departementCriteriasDataList" />
+                            </p:selectBooleanCheckbox>
+                        </p:column>
                         <p:column headerText="Description" width="80">
                             <h:outputText value="#{item.descrDepCriteriaItem}" />
                         </p:column>
@@ -26,24 +30,32 @@
                         <p:column headerText="Global price" width="50" >
                             <h:outputText value="#{item.priceGlobal}" />
                         </p:column>
-
                         <p:summaryRow>
                             <p:column colspan="3" style="text-align:right">
                                 <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                             </p:column>
                         </p:summaryRow>
                     </p:dataTable>
+                    <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            </div>
+                    <p:commandButton actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                 </h:panelGroup>
 
                 <h:panelGroup id="displayForAdmin" rendered="#{userController.connectedUser.admin == 1 and userController.connectedUser.departement==null}" >
                     <p:tabView id="displayTabForAdmin" >
                         <p:tab title="contentManagement">
-                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('contentManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                            <p:dataTable id="contentManagementDataList"  var="item" value="#{demandCategoryController.contentManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
+                                <p:column headerText="check" width="30">
+                                    <p:selectBooleanCheckbox value="#{item.checked}" >
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailContentManagement(item)}" update="DemandCategoryDetailForm,contentManagementDataList" />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
                                 <p:column headerText="Description" width="150">
                                     <h:outputText value="#{item.descrDepCriteriaItem}" />
                                 </p:column>
@@ -60,19 +72,29 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
                             </p:dataTable>  
+                            <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                <h:outputText value="Total Prices : #{demandCategoryController.contentManagement.size()>0?demandCategoryController.contentManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            </div>
+                            <p:commandButton actionListener="#{demandCategoryController.updateContentManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,contentManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+
                         </p:tab>
                         <p:tab title="datenManagement">
-                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('datenManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                            <p:dataTable id="datenManagementDataList"  var="item" value="#{demandCategoryController.datenManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
                                     <p:column colspan="5" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
+                                <p:column headerText="check" width="30">
+                                    <p:selectBooleanCheckbox value="#{item.checked}" >
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailDatenManagement(item)}" update="DemandCategoryDetailForm,datenManagementDataList" />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
                                 <p:column headerText="Description" width="150">
                                     <h:outputText value="#{item.descrDepCriteriaItem}" />
                                 </p:column>
@@ -93,15 +115,24 @@
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
-                            </p:dataTable>  
+                            </p:dataTable> 
+                             <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                <h:outputText value="Total Prices : #{demandCategoryController.datenManagement.size()>0?demandCategoryController.datenManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            </div>
+                            <p:commandButton actionListener="#{demandCategoryController.updateDatenManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,datenManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                         </p:tab>
                         <p:tab title="databasePublishing">
-                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('databasePublishing')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                            <p:dataTable id="databasePublishingDataList"  var="item" value="#{demandCategoryController.databasePublisihing}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
                                     <p:column colspan="5" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
+                                <p:column headerText="check" width="30">
+                                    <p:selectBooleanCheckbox value="#{item.checked}" >
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailDatabasePublishing(item)}" update="DemandCategoryDetailForm,databasePublishingDataList" />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
                                 <p:column headerText="Description" width="150">
                                     <h:outputText value="#{item.descrDepCriteriaItem}" />
                                 </p:column>
@@ -122,15 +153,24 @@
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
-                            </p:dataTable>  
+                            </p:dataTable>
+                             <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                 <h:outputText value="Total Prices : #{demandCategoryController.databasePublisihing.size()>0?demandCategoryController.databasePublisihing.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            </div>
+                            <p:commandButton actionListener="#{demandCategoryController.updateDatabasePublisihing()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,databasePublishingDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                         </p:tab>
                         <p:tab title="projectManagement">
-                            <p:dataTable  var="item" value="#{demandCategoryController.departementeDetails('projectManagement')}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
+                            <p:dataTable id="projectManagementDataList"  var="item" value="#{demandCategoryController.projectManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
                                     <p:column colspan="5" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
+                                <p:column headerText="check" width="30">
+                                    <p:selectBooleanCheckbox value="#{item.checked}" >
+                                        <p:ajax  listener="#{demandCategoryController.updateDetailProjectManagement(item)}" update="DemandCategoryDetailForm,projectManagementDataList" />
+                                    </p:selectBooleanCheckbox>
+                                </p:column>
                                 <p:column headerText="Description" width="150">
                                     <h:outputText value="#{item.descrDepCriteriaItem}" />
                                 </p:column>
@@ -151,9 +191,12 @@
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
-                            </p:dataTable>  
+                            </p:dataTable> 
+                             <div class="ui-widget-header" style="text-align: right;height: 30px;">
+                                 <h:outputText value="Total Prices : #{demandCategoryController.projectManagement.size()>0?demandCategoryController.projectManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            </div>
+                            <p:commandButton actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                         </p:tab>
-
                     </p:tabView>
                 </h:panelGroup>
 
