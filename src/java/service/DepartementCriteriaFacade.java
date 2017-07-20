@@ -63,7 +63,7 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             String summ = demandCategoryDepartementCalculation.getSumme() + "";
             for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryDepartementCalculation.getDemandCategoryCalculations()) {
-                System.out.println("Departement ::::::::::: "+demandCategoryCalculation);
+                System.out.println("Departement ::::::::::: " + demandCategoryCalculation);
                 String summCriteria = demandCategoryCalculation.getSumme() + "";
                 String nomDepCriteria = demandCategoryCalculation.getDepartementCriteria().getName();
                 for (DemandCategoryCalculationItem demandCategoryCalculationItem : demandCategoryCalculation.getDemandCategoryCalculationItems()) {
@@ -77,7 +77,7 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
                     departementDetail.setArithmitiqueExpresionForGlobalPrice(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice());
                     departementDetail.setSummCriteria(summCriteria);
                     departementDetail.setSummDepartement(summ);
-                    departementDetail.setChecked(true);
+                    departementDetail.setChecked(demandCategoryCalculationItem.getCalcultaed());
                     departementDetail.setId(new Long(i));
                     departementDetail.setDemandCategoryCalcuationId(demandCategoryCalculation.getId());
                     departementDetail.setDemandCategoryDepartementCalculationId(demandCategoryDepartementCalculation.getId());
