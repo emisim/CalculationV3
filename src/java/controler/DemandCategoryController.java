@@ -137,7 +137,7 @@ public class DemandCategoryController implements Serializable {
         return 1;
     }
     
-    public void prepareValidateItems(DemandCategory demandCategory) {
+    public void prepareValidate(DemandCategory demandCategory) {
         demandCategoryValidations = demandCategoryValidationFacade.findByDemandCategory(demandCategory);
     }
     
