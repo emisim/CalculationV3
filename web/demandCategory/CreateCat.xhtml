@@ -73,7 +73,6 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_prozess}" for="prozess" rendered="#{demandCategoryController.renderAttribute('prozess')}" />
                                     <p:selectOneMenu id="prozess" value="#{demandCategoryController.selected.prozess}" rendered="#{demandCategoryController.renderAttribute('prozess')}" >
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-
                                         <f:selectItems value="#{prozessController.itemsAvailableSelectOne}"
                                                        var="prozessItem"
                                                        itemValue="#{prozessItem}" itemLabel="#{prozessItem.name}"/>
