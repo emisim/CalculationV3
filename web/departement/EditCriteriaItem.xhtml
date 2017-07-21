@@ -14,8 +14,13 @@
                     <p:panelGrid columns="2" rendered="#{departementController.departementCriteriaItem != null}">
                         <p:outputLabel value="#{bundle.EditDepartementCriteriaItemLabel_description}" for="description" />
                         <p:inputText id="description" value="#{departementController.departementCriteriaItem.description}" title="#{bundle.EditDepartementCriteriaItemTitle_description}" />
+                        
                         <p:outputLabel value="#{bundle.EditDepartementCriteriaItemLabel_arithmitiqueExpresionForUnitePrice}" for="arithmitiqueExpresionForUnitePrice" />
                         <p:inputText id="arithmitiqueExpresionForUnitePrice" value="#{departementController.departementCriteriaItem.arithmitiqueExpresionForUnitePrice}" title="#{bundle.EditDepartementCriteriaItemTitle_arithmitiqueExpresionForUnitePrice}" />
+                        
+                         <p:outputLabel value="#{bundle.EditDepartementCriteriaItemLabel_descriptionGlobal}" for="descriptionGlobal" />
+                         <p:inputText id="descriptionGlobal" value="#{departementController.departementCriteriaItem.descriptionGlobal}" title="#{bundle.EditDepartementCriteriaItemTitle_descriptionGlobal}" />
+                        
                         <p:outputLabel value="#{bundle.EditDepartementCriteriaItemLabel_arithmitiqueExpresionForGlobalPrice}" for="arithmitiqueExpresionForGlobalPrice" />
                         <p:inputText id="arithmitiqueExpresionForGlobalPrice" value="#{departementController.departementCriteriaItem.arithmitiqueExpresionForGlobalPrice}" title="#{bundle.EditDepartementCriteriaItemTitle_arithmitiqueExpresionForGlobalPrice}" />
 
