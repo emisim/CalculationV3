@@ -1,8 +1,6 @@
 package controler;
 
 import bean.DemandCategory;
-import bean.DemandCategoryCalculation;
-import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.DemandCategoryValidation;
 import bean.Departement;
@@ -18,6 +16,7 @@ import service.DemandCategoryFacade;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +84,8 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
+    private Date sysDateMin;
+    private Date sysDateMax;
     private boolean save = false;
 
     @PostConstruct
@@ -272,7 +273,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch,sysDateMin,sysDateMax);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -704,6 +705,22 @@ public class DemandCategoryController implements Serializable {
 
     public void setSave(boolean save) {
         this.save = save;
+    }
+
+    public Date getSysDateMin() {
+        return sysDateMin;
+    }
+
+    public void setSysDateMin(Date sysDateMin) {
+        this.sysDateMin = sysDateMin;
+    }
+
+    public Date getSysDateMax() {
+        return sysDateMax;
+    }
+
+    public void setSysDateMax(Date sysDateMax) {
+        this.sysDateMax = sysDateMax;
     }
 
     

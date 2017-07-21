@@ -22,6 +22,7 @@ import controler.util.SessionUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
@@ -60,18 +61,16 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return em;
     }
 
-    private String findByValidation(Integer validationLevel,String beanAbrveation) {
+    private String findByValidation(Integer validationLevel, String beanAbrveation) {
         int topLevel = departementFacade.findAll().size();
         String query = "";
         if (validationLevel != null) {
             if (validationLevel == 0) {
-                query+=SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", "0");
-            }
-           else if (validationLevel == 1) {
-                query+=SearchUtil.addConstraintMinMaxStrict(beanAbrveation, "nbrTotalValidation", "0", topLevel);
-            }
-           else if (validationLevel == 2) {
-                query+=SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", topLevel);
+                query += SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", "0");
+            } else if (validationLevel == 1) {
+                query += SearchUtil.addConstraintMinMaxStrict(beanAbrveation, "nbrTotalValidation", "0", topLevel);
+            } else if (validationLevel == 2) {
+                query += SearchUtil.addConstraint(beanAbrveation, "nbrTotalValidation", "=", topLevel);
             }
         }
         return query;
@@ -147,16 +146,19 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts,Integer validationLevel) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel,Date sysDateMin,Date sysDateMax) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
         if (demandCategory != null) {
-            query = getQuery(demandCategory, query,"d");
+            query = getQuery(demandCategory, query, "d");
 
             if (!selectedSortiemnts.isEmpty()) {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
+            
+            query += SearchUtil.addConstraintMinMaxDate("d", "dateSystem", sysDateMin, sysDateMax);
+           
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -321,7 +323,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
             String query = "SELECT dc FROM DemandCategory dc WHERE 1=1 ";
             if (selectedForSearch != null) {
-                query = getQuery(selectedForSearch, query,"dc");
+                query = getQuery(selectedForSearch, query, "dc");
             }
 
             if (typeAxe == 0 && !departements.isEmpty()) {
@@ -413,7 +415,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return em.createQuery("SELECT dc FROM DemandCategoryDepartementCalculation dc WHERE dc.demandCategory.id=" + demandCategory.getId()).getResultList();
     }
 
-    public String getQuery(DemandCategory demandCategory, String query ,String varSql) {
+    public String getQuery(DemandCategory demandCategory, String query, String varSql) {
 
         if (demandCategory.getProduct() != null) {
             query += SearchUtil.addConstraint(varSql, "product.id", "=", demandCategory.getProduct().getId());
@@ -442,6 +444,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if (demandCategory.getDepartment() != null) {
             query += SearchUtil.addConstraint(varSql, "department.id", "=", demandCategory.getDepartment().getId());
         }
+
         if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
             query += SearchUtil.addConstraint(varSql, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
         }
