@@ -8,6 +8,7 @@ package service;
 import bean.ArtDerWeiterverarbeitung;
 import bean.DemandCategory;
 import bean.DemandCategoryDepartementCalculation;
+import controler.util.SearchUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -27,11 +28,57 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
-    
-    private @EJB DemandCategoryFacade demandCategoryFacade;
-    private @EJB DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
 
-    public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory, List<String> departements, DemandCategory selectedForSearch,Integer validationLevel) {
+    private @EJB
+    DemandCategoryFacade demandCategoryFacade;
+    private @EJB
+    DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
+
+   
+    public BigDecimal[] generateStatForYear(int year, int typeSum, List<String> departements, DemandCategory selectedForSearch, Integer validationLevel) {
+        BigDecimal[] summs = new BigDecimal[12];
+        for (int i = 1; i <= 12; i++) {
+            summs[i - 1] = generateStatForMonthAndYear(year, i, typeSum, departements, selectedForSearch, validationLevel);
+        }
+        return summs;
+    }
+
+    private BigDecimal generateStatForMonthAndYear(int year, int month, int typeSum, List<String> departements, DemandCategory selectedForSearch, Integer validationLevel) {
+        String[] queryHelper = constructQueryHelper(month, departements, typeSum);
+        String query = "SELECT " + queryHelper[0] + " FROM " + queryHelper[1] + " WHERE " + queryHelper[2];
+        query += " AND dc.dateDemandCategory LIKE " + year + "-" + queryHelper[3] + "-%";
+        query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
+        query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        return (BigDecimal) em.createQuery(query).getSingleResult();
+    }
+
+     private String[] constructQueryHelper(int month, List<String> departements, int typeSum) {
+        String monthInQuery = "" + month;
+        String beanAbreviation = "dc";
+        String summQuery = "";
+        String fromQuery = "DemandCategory dc";
+        String wherequery = "1=1";
+        if (month < 10) {
+            monthInQuery = "0" + month;
+        }
+        if (departements != null && !departements.isEmpty()) {
+            fromQuery += " , DemandCategoryDepartementCalculation dcdc";
+        }
+        if (typeSum == 1) {
+            summQuery = beanAbreviation + ".summTotal";
+        } else if (typeSum == 2) {
+            summQuery = beanAbreviation + ".summDruck";
+        } else if (typeSum == 3) {
+            summQuery = beanAbreviation + ".summDruck + " + beanAbreviation + ".summTotal";
+        } else {
+            summQuery = beanAbreviation + ".summe";
+            beanAbreviation = "dcdc";
+            wherequery = " dcdc.demandCategory.id=dc.id";
+        }
+        return new String[]{summQuery, fromQuery, wherequery, monthInQuery};
+    }
+////////////////////////////////////////////// CODE DYIAL DAK SYED ////////////////////////////////////////
+    public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory, List<String> departements, DemandCategory selectedForSearch, Integer validationLevel) {
         ChartSeries chartSeries = new ChartSeries();
 
         if (typeAxe == 2) {
@@ -42,7 +89,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
             String query = "SELECT dc FROM DemandCategory dc WHERE 1=1 ";
             if (selectedForSearch != null) {
-                query += demandCategoryFacade.constructSearchQuery(selectedForSearch,validationLevel, "dc");
+                query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
             }
 
             if (typeAxe == 0 && !departements.isEmpty()) {
@@ -89,7 +136,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
     private BigDecimal calculerSum(DemandCategory demandCategory) {
 
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory,null);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory, null);
         System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
         BigDecimal sum = new BigDecimal(0);
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
@@ -103,7 +150,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
     private BigDecimal calculerSumDruck(DemandCategory demandCategory) {
 
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory,null);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory, null);
         System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
         BigDecimal sum = new BigDecimal(0);
 
@@ -118,7 +165,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
     public PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
         PieChartModel pieModel = new PieChartModel();
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory,null);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory, null);
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
             pieModel.set("dc.Departement Calculation( " + demandCategoryDepartementCalculation + " )", demandCategoryDepartementCalculation.getSumme());
         }
