@@ -83,6 +83,7 @@ public class StatistiqueController implements Serializable {
     }
 
     private void paramGraphForConstruction(CartesianChartModel model) {
+        System.out.println("Statistiques des années " + firstYear + " et " + secondYear);
         model.setTitle("Statistiques des années " + firstYear + " et " + secondYear);
         model.setLegendPosition("e");
         Axis yAxis = model.getAxis(AxisType.Y);

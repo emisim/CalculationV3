@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 20 Juillet 2017 à 20:04
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+-- Généré le :  Ven 21 Juillet 2017 à 20:45
+-- Version du serveur :  10.1.8-MariaDB
+-- Version de PHP :  5.6.14
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -245,7 +245,10 @@ CREATE TABLE `demandcategory` (
 INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
 (9, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 1, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, 'PUR-Bindung', 4, NULL, NULL, NULL, '2/2 -farbig', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'walo', NULL, NULL),
 (10, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 2, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'ana', NULL, NULL),
-(11, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-20', '2017-07-20', 0, '2017-07-20', 0, 10, 0, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 'kiki', NULL, NULL);
+(11, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-20', '2017-07-20', 0, '2017-07-20', 0, 10, 0, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 'kiki', NULL, NULL),
+(15, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-21', '2017-07-21', 1, '2017-07-21', 0, 10, 17, '0.00', '3855.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, '1/1 -farbig', NULL, NULL, NULL, NULL, NULL, '70 g/qm', NULL, 3, NULL, NULL, NULL, 'walo', NULL, NULL),
+(17, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-21', '2017-07-21', 1, '2017-07-21', 0, 10, 17, '0.00', '3855.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, '2/2 -farbig', NULL, NULL, NULL, NULL, NULL, '80 g/qm', NULL, 4, NULL, NULL, NULL, 'walo', NULL, NULL),
+(18, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-21', '2017-07-21', 1, '2017-07-21', 0, 10, 17, '0.00', '3855.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, '2/2 -farbig', NULL, NULL, NULL, NULL, NULL, '80 g/qm', NULL, 2, NULL, NULL, NULL, 'walo', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,7 +274,13 @@ INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `VALIDE`, `DEMANDCATEGOR
 (19, '0.00', 0, 31, 1),
 (20, '257.00', 0, 31, 2),
 (21, '2827.00', 0, 32, 1),
-(22, '1028.00', 0, 32, 2);
+(22, '1028.00', 0, 32, 2),
+(25, '2827.00', 0, 42, 1),
+(26, '1028.00', 0, 42, 2),
+(29, '1542.00', 0, 50, 1),
+(30, '1028.00', 0, 50, 2),
+(31, '2827.00', 0, 54, 1),
+(32, '1028.00', 0, 54, 2);
 
 -- --------------------------------------------------------
 
@@ -306,7 +315,19 @@ INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICE
 (41, 1, '1285.00', '1285.00', '2570.00', '2570.00', 21, 1),
 (42, 1, '1542.00', '1542.00', '3084.00', '3084.00', 21, 2),
 (43, 1, '771.00', '771.00', '1542.00', '1542.00', 22, 3),
-(44, 1, '257.00', '257.00', '514.00', '514.00', 22, 4);
+(44, 1, '257.00', '257.00', '514.00', '514.00', 22, 4),
+(49, 1, '1285.00', '1285.00', '2570.00', '2570.00', 25, 1),
+(50, 1, '1542.00', '1542.00', '3084.00', '3084.00', 25, 2),
+(51, 1, '771.00', '771.00', '1542.00', '1542.00', 26, 3),
+(52, 1, '257.00', '257.00', '514.00', '514.00', 26, 4),
+(57, 0, '1285.00', '0.00', '2570.00', '0.00', 29, 1),
+(58, 1, '1542.00', '1542.00', '3084.00', '3084.00', 29, 2),
+(59, 1, '771.00', '771.00', '1542.00', '1542.00', 30, 3),
+(60, 1, '257.00', '257.00', '514.00', '514.00', 30, 4),
+(61, 1, '1285.00', '1285.00', '2570.00', '2570.00', 31, 1),
+(62, 1, '1542.00', '1542.00', '3084.00', '3084.00', 31, 2),
+(63, 1, '771.00', '771.00', '1542.00', '1542.00', 32, 3),
+(64, 1, '257.00', '257.00', '514.00', '514.00', 32, 4);
 
 -- --------------------------------------------------------
 
@@ -334,7 +355,19 @@ INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `DEMANDCATEGO
 (32, '3855.00', 11, 1),
 (33, '0.00', 11, 2),
 (34, '0.00', 11, 3),
-(35, '0.00', 11, 4);
+(35, '0.00', 11, 4),
+(42, '3855.00', 15, 1),
+(43, '0.00', 15, 2),
+(44, '0.00', 15, 3),
+(45, '0.00', 15, 4),
+(50, '2570.00', 17, 1),
+(51, '0.00', 17, 2),
+(52, '0.00', 17, 3),
+(53, '0.00', 17, 4),
+(54, '3855.00', 18, 1),
+(55, '0.00', 18, 2),
+(56, '0.00', 18, 3),
+(57, '0.00', 18, 4);
 
 -- --------------------------------------------------------
 
@@ -411,18 +444,19 @@ CREATE TABLE `departementcriteriaitem` (
   `ARITHMITIQUEEXPRESIONFORGLOBALPRICE` varchar(255) DEFAULT NULL,
   `ARITHMITIQUEEXPRESIONFORUNITEPRICE` varchar(255) DEFAULT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
+  `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL,
+  `DESCRIPTIONGLOBAL` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `departementcriteriaitem`
 --
 
-INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '10*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '5*std_stz', 1),
-(2, '12*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '6*std_stz', 1),
-(3, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '1*std_stz', 2),
-(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2);
+INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DEPARTEMENTCRITERIA_ID`, `DESCRIPTIONGLOBAL`) VALUES
+(1, '10*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '5*std_stz', 1, '10*std_stz'),
+(2, '12*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '6*std_stz', 1, '12*std_stz'),
+(3, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*std_stz', 2, '6*std_stz'),
+(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', 2, 'anzahlGesamtProdukt*std_stz/5');
 
 -- --------------------------------------------------------
 
@@ -723,7 +757,16 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 (24, '50.00', 9, 4),
 (25, '10.00', 10, 3),
 (26, '40.00', 10, 7),
-(27, '50.00', 10, 5);
+(27, '50.00', 10, 5),
+(36, '20.00', 15, 3),
+(37, '10.00', 15, 1),
+(38, '20.00', 15, 8),
+(39, '50.00', 15, 5),
+(43, '90.00', 17, 2),
+(44, '10.00', 17, 1),
+(45, '50.00', 18, 2),
+(46, '10.00', 18, 1),
+(47, '40.00', 18, 5);
 
 -- --------------------------------------------------------
 
@@ -1130,22 +1173,22 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
@@ -1210,7 +1253,7 @@ ALTER TABLE `sortiment`
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --

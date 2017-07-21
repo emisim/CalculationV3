@@ -55,6 +55,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         query += " AND dc.dateDemandCategory LIKE '" + year + "-" + queryHelper[3] + "-%'";
         query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
         query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        System.out.println("reauet--| " + query);
         List<BigDecimal> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
             return res.get(0);
@@ -72,121 +73,23 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
             monthInQuery = "0" + month;
         }
         if (departements != null && !departements.isEmpty()) {
-            System.out.println("departement null");
             fromQuery += " , DemandCategoryDepartementCalculation dcdc";
         }
         if (typeSum == 1) {
-            summQuery = "SUM(" + beanAbreviation + ".summTotal)";
+            summQuery = " SUM(" + beanAbreviation + ".summTotal)";
         } else if (typeSum == 2) {
-            summQuery = "SUM(" + beanAbreviation + ".summDruck)";
+            summQuery = " SUM(" + beanAbreviation + ".summDruck)";
         } else if (typeSum == 3) {
-            summQuery = "SUM(" + beanAbreviation + ".summDruck)" + " , SUM(" + beanAbreviation + ".summTotal)";
+            summQuery = " SUM(" + beanAbreviation + ".summDruck" + " + " + beanAbreviation + ".summTotal)";
         } else {
-            beanAbreviation = "dcdc";
-            summQuery = "SUM(" + beanAbreviation + ".summe)";
-            wherequery = " dcdc.demandCategory.id=dc.id";
+            if (departements != null && !departements.isEmpty()) {
+                beanAbreviation = "dcdc";
+                summQuery = "SUM(" + beanAbreviation + ".summe)";
+                wherequery = " dcdc.demandCategory.id=dc.id";
+            }
+
         }
         return new String[]{summQuery, fromQuery, wherequery, monthInQuery};
-    }
-////////////////////////////////////////////// CODE DYIAL DAK SYED ////////////////////////////////////////
-
-    private ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory, List<String> departements, DemandCategory selectedForSearch, Integer validationLevel) {
-        ChartSeries chartSeries = new ChartSeries();
-
-        if (typeAxe == 2) {
-            chartSeries.set("summTotal", calculerSum(demandCategory));
-            chartSeries.set("summDruck", demandCategory.getSummDruck());
-            return chartSeries;
-        } else {
-
-            String query = "SELECT dc FROM DemandCategory dc WHERE 1=1 ";
-            if (selectedForSearch != null) {
-                query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
-            }
-
-            if (typeAxe == 0 && !departements.isEmpty()) {
-
-                query += " AND (";
-                for (String departement : departements) {
-                    query += (departements.size() != 2 && departements.indexOf(departement) == (departements.size() - 1) || departements.indexOf(departement) == 0) ? " " : " OR ";
-                    query += "dc.department.name='" + departement + "'";
-                }
-                query += " )";
-
-            }
-            query += " AND dc.dateDemandCategory LIKE '" + year + "-%-%'";
-            System.out.println("reauet--| " + query);
-            List<DemandCategory> demandCategorys = em.createQuery(query).getResultList();
-            System.out.println("methode createDemandeCategoryStat -> demandCategorys :" + demandCategorys);
-            chartSeries = charSerieParAnne(year, typeSum, demandCategorys);
-
-            chartSeries.setLabel("" + year);
-
-            return chartSeries;
-        }
-
-    }
-
-    private ChartSeries charSerieParAnne(int year, int typeSum, List<DemandCategory> demandCategorys) {
-        ChartSeries series = new ChartSeries();
-        for (int i = 1; i <= 12; i++) {
-            BigDecimal summ = new BigDecimal(BigInteger.ZERO);
-            for (DemandCategory demandCategory : demandCategorys) {
-                if (demandCategory.getDateDemandCategory() != null && demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
-                    if (typeSum == 1) {
-                        summ = summ.add(calculerSum(demandCategory));
-                    } else {
-                        summ = summ.add(demandCategory.getSummDruck());
-                    }
-                }
-            }
-            System.out.println("summ value (a)" + summ);
-            series.set("mois " + i, summ);
-        }
-        return series;
-    }
-
-    private BigDecimal calculerSum(DemandCategory demandCategory) {
-
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory, null);
-        System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
-        BigDecimal sum = new BigDecimal(0);
-        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            if (demandCategoryDepartementCalculation.getSumme() != null) {
-                sum = sum.add(demandCategoryDepartementCalculation.getSumme());
-            }
-        }
-        System.out.println("sum ---> " + sum);
-        return sum;
-    }
-
-    private BigDecimal calculerSumDruck(DemandCategory demandCategory) {
-
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory, null);
-        System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
-        BigDecimal sum = new BigDecimal(0);
-
-        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            if (demandCategoryDepartementCalculation.getSumme() != null) {
-                sum = sum.add(demandCategoryDepartementCalculation.getSumme());
-            }
-        }
-        System.out.println("sum ---> " + sum);
-        return sum;
-    }
-
-    private PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
-        PieChartModel pieModel = new PieChartModel();
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findByDemandCategory(demandCategory, null);
-        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            pieModel.set("dc.Departement Calculation( " + demandCategoryDepartementCalculation + " )", demandCategoryDepartementCalculation.getSumme());
-        }
-        pieModel.setTitle("detail summTotal for demand Category(dc)");
-        pieModel.setLegendPosition("w");
-        pieModel.setShowDataLabels(true);
-        pieModel.setDiameter(360);
-
-        return pieModel;
     }
 
     @Override
