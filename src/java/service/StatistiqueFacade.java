@@ -55,6 +55,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         query += " AND dc.dateDemandCategory LIKE '" + year + "-" + queryHelper[3] + "-%'";
         query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
         query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        System.out.println("reauet--| " + query);
         List<BigDecimal> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
             return res.get(0);
@@ -72,7 +73,6 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
             monthInQuery = "0" + month;
         }
         if (departements != null && !departements.isEmpty()) {
-            System.out.println("departement null");
             fromQuery += " , DemandCategoryDepartementCalculation dcdc";
         }
         if (typeSum == 1) {
@@ -82,9 +82,13 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         } else if (typeSum == 3) {
             summQuery = "SUM(" + beanAbreviation + ".summDruck)" + " , SUM(" + beanAbreviation + ".summTotal)";
         } else {
-            beanAbreviation = "dcdc";
-            summQuery = "SUM(" + beanAbreviation + ".summe)";
-            wherequery = " dcdc.demandCategory.id=dc.id";
+
+            if (departements != null && !departements.isEmpty()) {
+                beanAbreviation = "dcdc";
+                summQuery = "SUM(" + beanAbreviation + ".summe)";
+                wherequery = " dcdc.demandCategory.id=dc.id";
+            }
+
         }
         return new String[]{summQuery, fromQuery, wherequery, monthInQuery};
     }
