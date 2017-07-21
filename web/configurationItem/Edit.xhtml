@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConfigurationItemEditDlg" widgetVar="ConfigurationItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConfigurationItemTitle}">
+            <h:form id="ConfigurationItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{configurationItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConfigurationItemLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{configurationItemController.selected.name}" title="#{bundle.EditConfigurationItemTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditConfigurationItemLabel_defaultValue}" for="defaultValue" />
+                        <p:inputText id="defaultValue" value="#{configurationItemController.selected.defaultValue}" title="#{bundle.EditConfigurationItemTitle_defaultValue}" />
+                        <p:outputLabel value="#{bundle.EditConfigurationItemLabel_configuration}" for="configuration" />
+                        <p:selectOneMenu id="configuration" value="#{configurationItemController.selected.configuration}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{configurationController.itemsAvailableSelectOne}"
+                                           var="configurationItem"
+                                           itemValue="#{configurationItem}"/>
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{configurationItemController.update}" value="#{bundle.Save}" update="display,:ConfigurationItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConfigurationItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConfigurationItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

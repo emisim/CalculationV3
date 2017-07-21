@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12 " >
+                    <h:form>
+                        <p:breadCrumb>
+                            <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                            <p:menuitem value="Settings" url="#" />
+                        </p:breadCrumb>   
+                    </h:form>
+                </div>
+            </div><br></br>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12">
+                    <p:tabView id="parametrageTab" >
+
+
+                        <p:tab title="Katalogart">
+                            <ui:include src="katalogart/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Produkt">
+                            <ui:include src="product/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Layout">
+                            <ui:include src="layout/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Sortiment">
+                            <ui:include src="sortiment/List.xhtml"/>
+                        </p:tab> 
+
+                        <p:tab title="Prozess">
+                            <ui:include src="prozess/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Ausgabe">
+                            <ui:include src="ausgabe/List.xhtml"/>
+                        </p:tab>
+
+
+
+                        <p:tab title="ParticipantFaktor">
+                            <ui:include src="participantFaktor/List.xhtml"/>
+                        </p:tab> 
+
+                        <p:tab title="CorrectionSchluessel">
+                            <ui:include src="correctionSchluessel/List.xhtml"/>
+                        </p:tab> 
+
+                        <p:tab title="MitgliederkorrekturFaktor">
+                            <ui:include src="mitgliederkorrekturFaktor/List.xhtml"/>
+                        </p:tab> 
+
+                        <p:tab title="KonzeptbearbeitungFaktor">
+                            <ui:include src="konzeptbearbeitungFaktor/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="WechselfassungVariantFaktor">
+                            <ui:include src="WechselfassungVariantFaktor/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="ArtDerWeiterverarbeitung">
+                            <ui:include src="artDerWeiterverarbeitung/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Auflage">
+                            <ui:include src="auflage/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Bindung">
+                            <ui:include src="bindung/List.xhtml"/>
+                        </p:tab> 
+
+
+
+                        <p:tab title="Cover">
+                            <ui:include src="cover/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Farbigkeit">
+                            <ui:include src="farbigkeit/List.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="FormatAuswaehlen">
+                            <ui:include src="formatAuswaehlen/List.xhtml"/>
+                        </p:tab>
+
+
+
+
+                        <p:tab title="Seiten">
+                            <ui:include src="seiten/List.xhtml"/>
+                        </p:tab> 
+
+
+
+
+
+
+
+                        <!--                <p:tab title="schluessel">
+                                            <ui:include src="schluessel/List.xhtml"/>
+                                        </p:tab> 
+                        
+                                        <p:tab title="schluesselType">
+                                            <ui:include src="schluesselType/List.xhtml"/>
+                                        </p:tab> 
+                        -->
+
+                    </p:tabView>     
+                </div> 
+            </div>
+
+
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

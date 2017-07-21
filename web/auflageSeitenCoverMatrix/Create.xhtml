@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AuflageSeitenCoverMatrixCreateDlg" widgetVar="AuflageSeitenCoverMatrixCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAuflageSeitenCoverMatrixTitle}">
+            <h:form id="AuflageSeitenCoverMatrixCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{auflageSeitenCoverMatrixController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_cover}" for="cover" />
+                        <p:selectOneMenu id="cover" value="#{auflageSeitenCoverMatrixController.selected.cover}" >
+                            <f:selectItems value="#{coverController.itemsAvailableSelectOne}"
+                                           var="coverItem"
+                                           itemValue="#{coverItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_auflage}" for="auflage" />
+                        <p:selectOneMenu id="auflage" value="#{auflageSeitenCoverMatrixController.selected.auflage}" >
+                            <f:selectItems value="#{auflageController.itemsAvailableSelectOne}"
+                                           var="auflageItem"
+                                           itemValue="#{auflageItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_seiten}" for="seiten" />
+                        <p:selectOneMenu id="seiten" value="#{auflageSeitenCoverMatrixController.selected.seiten}" >
+                            <f:selectItems value="#{seitenController.itemsAvailableSelectOne}"
+                                           var="seitenItem"
+                                           itemValue="#{seitenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{auflageSeitenCoverMatrixController.selected.price}" title="#{bundle.CreateAuflageSeitenCoverMatrixTitle_price}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{auflageSeitenCoverMatrixController.create}" value="#{bundle.Save}" update="display,:AuflageSeitenCoverMatrixListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuflageSeitenCoverMatrixCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AuflageSeitenCoverMatrixCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

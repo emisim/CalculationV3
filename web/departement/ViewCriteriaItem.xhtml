@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartementCriteriaItemViewDlg" widgetVar="DepartementCriteriaItemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDepartementCriteriaItemTitle}">
+            <h:form id="DepartementCriteriaItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{departementController.departementCriteriaItem != null}">
+                        <h:outputText value="#{bundle.ViewDepartementCriteriaItemLabel_description}"/>
+                        <h:outputText value="#{departementController.departementCriteriaItem.description}" title="#{bundle.ViewDepartementCriteriaItemTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewDepartementCriteriaItemLabel_arithmitiqueExpresionForUnitePrice}"/>
+                        <h:outputText value="#{departementController.departementCriteriaItem.arithmitiqueExpresionForUnitePrice}" title="#{bundle.ViewDepartementCriteriaItemTitle_arithmitiqueExpresionForUnitePrice}"/>
+                        <h:outputText value="#{bundle.ViewDepartementCriteriaItemLabel_arithmitiqueExpresionForGlobalPrice}"/>
+                        <h:outputText value="#{departementController.departementCriteriaItem.arithmitiqueExpresionForGlobalPrice}" title="#{bundle.ViewDepartementCriteriaItemTitle_arithmitiqueExpresionForGlobalPrice}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DepartementCriteriaItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
