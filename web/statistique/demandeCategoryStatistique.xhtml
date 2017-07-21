@@ -178,6 +178,14 @@
                                 <div class="ui-widget-header align-center">
                                     <p:commandButton id="rechercheButton" actionListener="#{statistiqueController.afficherChart()}" icon="ui-icon-search" value="Search" update=":statListForm,:statListForm:barChart"/>
                                 </div>
+                                <p:blockUI block="pageLayout" trigger="rechercheButton" >
+                                    <h:panelGroup id="displayBlock" >
+                                        <div class="align-center" style="width: 100%;">
+                                            <p:graphicImage  value ="../resources/image/hourglass.gif" width="32" height="32"  /><br></br>
+                                            <p:outputLabel value="Research in progress..." styleClass="text-font"/> 
+                                        </div>
+                                    </h:panelGroup>
+                                </p:blockUI>
                             </p:fieldset>
 
                         </h:form>
@@ -185,12 +193,12 @@
                 </div>
                 <div Class="ui-grid-row">
                     <div Class="ui-grid-col-12">
-                        <h:form id="statListForm" style="margin-top: 50px;">
+                        <h:form id="statListForm">
 
 
                             <!--                            <p:chart id="lineChart" type="line"  model="# {statistiqueController.lineModel}" style="width:100%;height:500px;" rendered="# {statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0}"/>-->
 
-                            <p:chart id="barChart" type="bar" model="#{statistiqueController.barModel}" style="width: 50%;height: 500px;float: left;" />
+                            <p:chart id="barChart" type="bar" model="#{statistiqueController.barModel}" style="width: 100%;height: 500px;" />
                             <!--                            <p:chart id="pieChart" type="pie" model="# {statistiqueController.pieChartModel}" style="width: 50%;height: 500px;float: left;" rendered="# {statistiqueController.typeAxeX==2}"/>-->
                         </h:form>
                     </div>

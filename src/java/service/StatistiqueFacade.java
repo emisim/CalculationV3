@@ -72,17 +72,18 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
             monthInQuery = "0" + month;
         }
         if (departements != null && !departements.isEmpty()) {
+            System.out.println("departement null");
             fromQuery += " , DemandCategoryDepartementCalculation dcdc";
         }
         if (typeSum == 1) {
-            summQuery = beanAbreviation + ".summTotal";
+            summQuery = "SUM(" + beanAbreviation + ".summTotal)";
         } else if (typeSum == 2) {
-            summQuery = beanAbreviation + ".summDruck";
+            summQuery = "SUM(" + beanAbreviation + ".summDruck)";
         } else if (typeSum == 3) {
-            summQuery = beanAbreviation + ".summDruck + " + beanAbreviation + ".summTotal";
+            summQuery = "SUM(" + beanAbreviation + ".summDruck)" + " , SUM(" + beanAbreviation + ".summTotal)";
         } else {
-            summQuery = beanAbreviation + ".summe";
             beanAbreviation = "dcdc";
+            summQuery = "SUM(" + beanAbreviation + ".summe)";
             wherequery = " dcdc.demandCategory.id=dc.id";
         }
         return new String[]{summQuery, fromQuery, wherequery, monthInQuery};
