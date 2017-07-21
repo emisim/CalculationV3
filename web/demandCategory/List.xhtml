@@ -91,7 +91,7 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_konzeptbearbeitungFaktor}" for="konzeptbearbeitungFaktor" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" />
-                                                <p:selectOneMenu id="konzeptbearbeitungFaktor" value="#{demandCategoryController.selectedForSearch.konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" >
+                                                <p:selectOneMenu id="konzeptbearbeitungFaktor" value="#{demandCategoryController.selectedForSearch.konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}" autoWidth="false">
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{konzeptbearbeitungFaktorController.itemsAvailableSelectOne}"
                                                                    var="konzeptbearbeitungFaktorItem"
