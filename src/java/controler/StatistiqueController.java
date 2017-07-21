@@ -6,9 +6,11 @@
 package controler;
 
 import bean.DemandCategory;
+import controler.util.MathUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ import javax.ejb.EJB;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
@@ -36,7 +39,7 @@ public class StatistiqueController implements Serializable {
     private int firstYear;
     private int secondYear;
     private int typeSum;
-    private int typeAxeX;
+    private int typeAxeX = 2;
     private Integer validationLevel;
 
     private BarChartModel barModel;
@@ -46,64 +49,123 @@ public class StatistiqueController implements Serializable {
     private DemandCategory selectedForSearch;
     private Date date = new Date();
     private List<String> departements;
+    private int typeChart;
+    private LineChartModel chartModel;
+
+    private BigDecimal max;
 
     /**
      * Creates a new instance of statistiqueController
      */
-    
-     public void createDemandeCategoryStat() {
-        System.out.println("------------------------------------------- createDemandeCategoryStat() --------------------------------");
-        barModel = null;
-        lineModel = null;
-        pieChartModel = null;
-        System.out.println("selectedForSearch-->" + selectedForSearch);
-        ChartSeries seriesFirstYear = statistiqueFacade.createDemandeCategoryStat(firstYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch,validationLevel);
-        ChartSeries serieSecondYear = statistiqueFacade.createDemandeCategoryStat(secondYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch,validationLevel);
-        if (typeAxeX == 1 || typeAxeX==0) {
-            System.out.println("statistique lineModel ");
-            lineModel = new LineChartModel();
-            lineModel.addSeries(seriesFirstYear);
-            lineModel.addSeries(serieSecondYear);
-            lineModel.setTitle("Statistique");
-            lineModel.setLegendPosition("ne");
-            lineModel.setAnimate(true);
-            Axis xAxis = lineModel.getAxis(AxisType.X);
-            lineModel.getAxes().put(AxisType.X, new CategoryAxis(""));
-            xAxis.setLabel("mois");
-            Axis yAxis = lineModel.getAxis(AxisType.Y);
-            yAxis.setLabel("Montant");
-            yAxis.setMin(0);
-        } else if (typeAxeX == 2) {
-            System.out.println("typeAxeX " + typeAxeX);
-            barModel = new BarChartModel();
-            barModel.addSeries(seriesFirstYear);
-            barModel.setTitle("Statistique");
-            barModel.setLegendPosition("ne");
-            barModel.setAnimate(true);
-            Axis xAxis = barModel.getAxis(AxisType.X);
-            xAxis.setLabel("");
-            Axis yAxis = barModel.getAxis(AxisType.Y);
-            yAxis.setLabel("Values");
-            yAxis.setMin(0);
-
-            pieChartModel = statistiqueFacade.createDemandeCategoryPieModel(demandCategory);
+    public void afficherChart() {
+        if (typeChart == 1) {
+            createLineModel();
+        } else if (typeChart == 2) {
+            createBarModel();
         }
-        seriesFirstYear = new ChartSeries();
-        serieSecondYear = new ChartSeries();
-        System.out.println("------------------------------------------- END ------------------------------------------------------------");
     }
+
+    
+    public void createLineModel() {
+        chartModel = initCategoryModel();
+        paramGraphForConstruction(chartModel);
+    }
+
+    private LineChartModel initCategoryModel() {
+        LineChartModel model = new LineChartModel();
+        attachResultatToModelForConstrution(model);
+        return model;
+    }
+
+    private void createBarModel() {
+        barModel = initBarModelForConstruction();
+        paramGraphForConstruction(barModel);
+    }
+
+    private void paramGraphForConstruction(CartesianChartModel model) {
+        model.setTitle("Statistiques des années " + firstYear + " et " + secondYear);
+        model.setLegendPosition("e");
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("SUMM");
+        yAxis.setMin(0);
+        yAxis.setMax(max.multiply(new BigDecimal(1.1)));
+        Axis xAxis = model.getAxis(AxisType.X);
+        xAxis.setMin(0);
+        xAxis.setTickAngle(-30);
+    }
+
+    private BarChartModel initBarModelForConstruction() {
+        BarChartModel model = new BarChartModel();
+        attachResultatToModelForConstrution(model);
+        return model;
+    }
+
+    private void attachResultatToModelForConstrution(CartesianChartModel model) {
+        BigDecimal[][] resultats = statistiqueFacade.generateStatForYear(firstYear, secondYear, typeSum, departements, selectedForSearch, validationLevel);
+        for (int i = 0; i < 12; i++) {
+            System.out.println("ha res " + resultats[0][i]);
+            System.out.println("ha res " + resultats[1][i]);
+        }
+        max = MathUtil.calculerMax(resultats);
+        System.out.println("haaaa lmax" + max);
+        ChartSeries annee1 = new ChartSeries();
+        annee1.setLabel("Année " + firstYear);
+        ChartSeries annee2 = new ChartSeries();
+        annee2.setLabel("Année " + secondYear);
+
+        for (int i = 0; i < 12; i++) {
+            annee1.set("mois " + (i + 1), resultats[0][i]);
+            annee2.set("mois " + (i + 1), resultats[1][i]);
+
+        }
+
+        model.addSeries(annee1);
+        model.addSeries(annee2);
+    }
+
+    public void setTypeChart(int typeChart) {
+        this.typeChart = typeChart;
+    }
+
+    public BarChartModel getBarModel() {
+        if (barModel == null) {
+            barModel = new BarChartModel();
+        }
+        return barModel;
+    }
+
     public StatistiqueController() {
     }
 
     public int getFirstYear() {
         if (firstYear == 0) {
-            firstYear = date.getYear() + 1900 -1;
+            firstYear = date.getYear() + 1900 - 1;
         }
         return firstYear;
     }
 
     public void setFirstYear(int firstYear) {
         this.firstYear = firstYear;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public LineChartModel getChartModel() {
+        return chartModel;
+    }
+
+    public void setChartModel(LineChartModel chartModel) {
+        this.chartModel = chartModel;
+    }
+
+    public int getTypeChart() {
+        return typeChart;
     }
 
     public int getSecondYear() {
@@ -133,16 +195,6 @@ public class StatistiqueController implements Serializable {
         this.secondYear = secondYear;
     }
 
-    public BarChartModel getBarModel() {
-        if (barModel == null) {
-            barModel = new BarChartModel();
-            barModel.addSeries(new ChartSeries(""));
-            Axis xAxis = barModel.getAxis(AxisType.X);
-            Axis yAxis = barModel.getAxis(AxisType.Y);
-        }
-        return barModel;
-    }
-
     public void setBarModel(BarChartModel barModel) {
         this.barModel = barModel;
     }
@@ -150,9 +202,6 @@ public class StatistiqueController implements Serializable {
     public LineChartModel getLineModel() {
         if (lineModel == null) {
             lineModel = new LineChartModel();
-            lineModel.addSeries(new ChartSeries(""));
-            Axis xAxis = lineModel.getAxis(AxisType.X);
-            Axis yAxis = lineModel.getAxis(AxisType.Y);
         }
         return lineModel;
     }
@@ -164,7 +213,6 @@ public class StatistiqueController implements Serializable {
     public PieChartModel getPieChartModel() {
         if (pieChartModel == null) {
             pieChartModel = new PieChartModel();
-            pieChartModel.set("", 0);
         }
         return pieChartModel;
     }
@@ -214,9 +262,5 @@ public class StatistiqueController implements Serializable {
     public void setValidationLevel(Integer validationLevel) {
         this.validationLevel = validationLevel;
     }
-    
-    
-
-   
 
 }
