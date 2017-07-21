@@ -57,7 +57,14 @@
 
                                         </p:selectOneMenu>
                                     </p:column>
+                                    <p:outputLabel value="#{bundle.ListDemandCategoryTitle_nbrTotalValidation}" for="validation" />
+                                    <p:selectOneMenu id="validation" value="#{demandCategoryController.validationSearch}" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItem itemValue="2" itemLabel="Valide"/>
+                                        <f:selectItem itemValue="1" itemLabel="En Cours"/>
+                                        <f:selectItem itemValue="0" itemLabel="Non Valide"/>
 
+                                    </p:selectOneMenu>
 
                                     <p:column rendered="#{statistiqueController.typeAxeX!= null and statistiqueController.typeAxeX==2}">
                                         <p:outputLabel  value="type Demande Category Departement Calculation" for="typeDemande" />

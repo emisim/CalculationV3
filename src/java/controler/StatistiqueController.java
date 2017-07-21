@@ -6,7 +6,6 @@
 package controler;
 
 import bean.DemandCategory;
-import bean.Departement;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -17,12 +16,11 @@ import javax.ejb.EJB;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.PieChartModel;
-import service.DemandCategoryFacade;
+import service.StatistiqueFacade;
 
 /**
  *
@@ -33,12 +31,13 @@ import service.DemandCategoryFacade;
 public class StatistiqueController implements Serializable {
 
     @EJB
-    DemandCategoryFacade demandCategoryFacade;
+    StatistiqueFacade statistiqueFacade;
     //attribute for DemandCategory statistique
     private int firstYear;
     private int secondYear;
     private int typeSum;
     private int typeAxeX;
+    private Integer validationLevel;
 
     private BarChartModel barModel;
     private LineChartModel lineModel;
@@ -51,12 +50,54 @@ public class StatistiqueController implements Serializable {
     /**
      * Creates a new instance of statistiqueController
      */
+    
+     public void createDemandeCategoryStat() {
+        System.out.println("------------------------------------------- createDemandeCategoryStat() --------------------------------");
+        barModel = null;
+        lineModel = null;
+        pieChartModel = null;
+        System.out.println("selectedForSearch-->" + selectedForSearch);
+        ChartSeries seriesFirstYear = statistiqueFacade.createDemandeCategoryStat(firstYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch,validationLevel);
+        ChartSeries serieSecondYear = statistiqueFacade.createDemandeCategoryStat(secondYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch,validationLevel);
+        if (typeAxeX == 1 || typeAxeX==0) {
+            System.out.println("statistique lineModel ");
+            lineModel = new LineChartModel();
+            lineModel.addSeries(seriesFirstYear);
+            lineModel.addSeries(serieSecondYear);
+            lineModel.setTitle("Statistique");
+            lineModel.setLegendPosition("ne");
+            lineModel.setAnimate(true);
+            Axis xAxis = lineModel.getAxis(AxisType.X);
+            lineModel.getAxes().put(AxisType.X, new CategoryAxis(""));
+            xAxis.setLabel("mois");
+            Axis yAxis = lineModel.getAxis(AxisType.Y);
+            yAxis.setLabel("Montant");
+            yAxis.setMin(0);
+        } else if (typeAxeX == 2) {
+            System.out.println("typeAxeX " + typeAxeX);
+            barModel = new BarChartModel();
+            barModel.addSeries(seriesFirstYear);
+            barModel.setTitle("Statistique");
+            barModel.setLegendPosition("ne");
+            barModel.setAnimate(true);
+            Axis xAxis = barModel.getAxis(AxisType.X);
+            xAxis.setLabel("");
+            Axis yAxis = barModel.getAxis(AxisType.Y);
+            yAxis.setLabel("Values");
+            yAxis.setMin(0);
+
+            pieChartModel = statistiqueFacade.createDemandeCategoryPieModel(demandCategory);
+        }
+        seriesFirstYear = new ChartSeries();
+        serieSecondYear = new ChartSeries();
+        System.out.println("------------------------------------------- END ------------------------------------------------------------");
+    }
     public StatistiqueController() {
     }
 
     public int getFirstYear() {
         if (firstYear == 0) {
-            firstYear = date.getYear() + 1900;
+            firstYear = date.getYear() + 1900 -1;
         }
         return firstYear;
     }
@@ -166,46 +207,16 @@ public class StatistiqueController implements Serializable {
         this.selectedForSearch = selectedForSearch;
     }
 
-    public void createDemandeCategoryStat() {
-        System.out.println("------------------------------------------- createDemandeCategoryStat() --------------------------------");
-        barModel = null;
-        lineModel = null;
-        pieChartModel = null;
-        System.out.println("selectedForSearch-->" + selectedForSearch);
-        ChartSeries seriesFirstYear = demandCategoryFacade.createDemandeCategoryStat(firstYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch);
-        ChartSeries serieSecondYear = demandCategoryFacade.createDemandeCategoryStat(secondYear, typeSum, typeAxeX, demandCategory, departements,selectedForSearch);
-        if (typeAxeX == 1 || typeAxeX==0) {
-            System.out.println("statistique lineModel ");
-            lineModel = new LineChartModel();
-            lineModel.addSeries(seriesFirstYear);
-            lineModel.addSeries(serieSecondYear);
-            lineModel.setTitle("Statistique");
-            lineModel.setLegendPosition("ne");
-            lineModel.setAnimate(true);
-            Axis xAxis = lineModel.getAxis(AxisType.X);
-            lineModel.getAxes().put(AxisType.X, new CategoryAxis(""));
-            xAxis.setLabel("mois");
-            Axis yAxis = lineModel.getAxis(AxisType.Y);
-            yAxis.setLabel("Montant");
-            yAxis.setMin(0);
-        } else if (typeAxeX == 2) {
-            System.out.println("typeAxeX " + typeAxeX);
-            barModel = new BarChartModel();
-            barModel.addSeries(seriesFirstYear);
-            barModel.setTitle("Statistique");
-            barModel.setLegendPosition("ne");
-            barModel.setAnimate(true);
-            Axis xAxis = barModel.getAxis(AxisType.X);
-            xAxis.setLabel("");
-            Axis yAxis = barModel.getAxis(AxisType.Y);
-            yAxis.setLabel("Values");
-            yAxis.setMin(0);
-
-            pieChartModel = demandCategoryFacade.createDemandeCategoryPieModel(demandCategory);
-        }
-        seriesFirstYear = new ChartSeries();
-        serieSecondYear = new ChartSeries();
-        System.out.println("------------------------------------------- END ------------------------------------------------------------");
+    public Integer getValidationLevel() {
+        return validationLevel;
     }
+
+    public void setValidationLevel(Integer validationLevel) {
+        this.validationLevel = validationLevel;
+    }
+    
+    
+
+   
 
 }

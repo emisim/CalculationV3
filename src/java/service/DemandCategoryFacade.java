@@ -22,7 +22,6 @@ import controler.util.SessionUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
@@ -146,19 +145,16 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel,Date sysDateMin,Date sysDateMax) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
         if (demandCategory != null) {
-            query = getQuery(demandCategory, query, "d");
+            query += constructSearchQuery(demandCategory, validationLevel,"d");
 
             if (!selectedSortiemnts.isEmpty()) {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
-            
-            query += SearchUtil.addConstraintMinMaxDate("d", "dateSystem", sysDateMin, sysDateMax);
-           
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -198,79 +194,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         super(DemandCategory.class);
     }
 
-    public boolean renderAttribute(String attribute) {
-        User user = SessionUtil.getConnectedUser();
-        Departement dep = user.getDepartement();
-
-        if (user.getAdmin() == 1) {
-            return true;
-        } else {
-            if (dep.getName().equals("contentManagement")) {
-                if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            if (dep.getName().equals("datenManagement")) {
-                if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            if (dep.getName().equals("databasePublishing")) {
-                if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            if (dep.getName().equals("projectManagement")) {
-                if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            return false;
-
-        }
-    }
-
-    public boolean renderAttributeForList(String attribute) {
-        User user = SessionUtil.getConnectedUser();
-        Departement dep = user.getDepartement();
-
-        if (user.getAdmin() == 1) {
-            if (AccessDepartement.getAdminMap().containsKey(attribute)) {
-                return true;
-            }
-        } else {
-            if (dep.getName().equals("contentManagement")) {
-                if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            if (dep.getName().equals("datenManagement")) {
-                if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            if (dep.getName().equals("databasePublishing")) {
-                if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-            if (dep.getName().equals("projectManagement")) {
-                if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
-                    return true;
-                }
-            }
-
-        }
-        return false;
-    }
-
+   
     public List<DemandCategory> findByDepartement() {
         User connectedUser = SessionUtil.getConnectedUser();
         if (connectedUser.getAdmin() == 0) {
@@ -312,142 +236,39 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
     }
 
-    public ChartSeries createDemandeCategoryStat(int year, int typeSum, int typeAxe, DemandCategory demandCategory, List<String> departements, DemandCategory selectedForSearch) {
-        ChartSeries chartSeries = new ChartSeries();
-
-        if (typeAxe == 2) {
-            chartSeries.set("summTotal", calculerSum(demandCategory));
-            chartSeries.set("summDruck", demandCategory.getSummDruck());
-            return chartSeries;
-        } else {
-
-            String query = "SELECT dc FROM DemandCategory dc WHERE 1=1 ";
-            if (selectedForSearch != null) {
-                query = getQuery(selectedForSearch, query, "dc");
-            }
-
-            if (typeAxe == 0 && !departements.isEmpty()) {
-
-                query += " AND (";
-                for (String departement : departements) {
-                    query += (departements.size() != 2 && departements.indexOf(departement) == (departements.size() - 1) || departements.indexOf(departement) == 0) ? " " : " OR ";
-                    query += "dc.department.name='" + departement + "'";
-                }
-                query += " )";
-
-            }
-            query += " AND dc.dateDemandCategory LIKE '" + year + "-%-%'";
-            System.out.println("reauet--| " + query);
-            List<DemandCategory> demandCategorys = em.createQuery(query).getResultList();
-            System.out.println("methode createDemandeCategoryStat -> demandCategorys :" + demandCategorys);
-            chartSeries = charSerieParAnne(year, typeSum, demandCategorys);
-
-            chartSeries.setLabel("" + year);
-
-            return chartSeries;
-        }
-
-    }
-
-    public ChartSeries charSerieParAnne(int year, int typeSum, List<DemandCategory> demandCategorys) {
-        ChartSeries series = new ChartSeries();
-        for (int i = 1; i <= 12; i++) {
-            BigDecimal summ = new BigDecimal(BigInteger.ZERO);
-            for (DemandCategory demandCategory : demandCategorys) {
-                if (demandCategory.getDateDemandCategory() != null && demandCategory.getDateDemandCategory().getMonth() + 1 == i && demandCategory.getDateDemandCategory().getYear() + 1900 == year) {
-                    if (typeSum == 1) {
-                        summ = summ.add(calculerSum(demandCategory));
-                    } else {
-                        summ = summ.add(demandCategory.getSummDruck());
-                    }
-                }
-            }
-            System.out.println("summ value (a)" + summ);
-            series.set("mois " + i, summ);
-        }
-        return series;
-    }
-
-    private BigDecimal calculerSum(DemandCategory demandCategory) {
-
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
-        System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
-        BigDecimal sum = new BigDecimal(0);
-        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            if (demandCategoryDepartementCalculation.getSumme() != null) {
-                sum = sum.add(demandCategoryDepartementCalculation.getSumme());
-            }
-        }
-        System.out.println("sum ---> " + sum);
-        return sum;
-    }
-
-    private BigDecimal calculerSumDruck(DemandCategory demandCategory) {
-
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
-        System.out.println("demandCategorys-->" + demandCategoryDepartementCalculations.size());
-        BigDecimal sum = new BigDecimal(0);
-
-        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            if (demandCategoryDepartementCalculation.getSumme() != null) {
-                sum = sum.add(demandCategoryDepartementCalculation.getSumme());
-            }
-        }
-        System.out.println("sum ---> " + sum);
-        return sum;
-    }
-
-    public PieChartModel createDemandeCategoryPieModel(DemandCategory demandCategory) {
-        PieChartModel pieModel = new PieChartModel();
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = findByDemandeCategory(demandCategory);
-        for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            pieModel.set("dc.Departement Calculation( " + demandCategoryDepartementCalculation + " )", demandCategoryDepartementCalculation.getSumme());
-        }
-        pieModel.setTitle("detail summTotal for demand Category(dc)");
-        pieModel.setLegendPosition("w");
-        pieModel.setShowDataLabels(true);
-        pieModel.setDiameter(360);
-
-        return pieModel;
-    }
-
-    public List<DemandCategoryDepartementCalculation> findByDemandeCategory(DemandCategory demandCategory) {
-        return em.createQuery("SELECT dc FROM DemandCategoryDepartementCalculation dc WHERE dc.demandCategory.id=" + demandCategory.getId()).getResultList();
-    }
-
-    public String getQuery(DemandCategory demandCategory, String query, String varSql) {
-
+    public String constructSearchQuery(DemandCategory demandCategory,Integer validationLevel, String beanAbreviation) {
+        String query = "";
         if (demandCategory.getProduct() != null) {
-            query += SearchUtil.addConstraint(varSql, "product.id", "=", demandCategory.getProduct().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "product.id", "=", demandCategory.getProduct().getId());
         }
         if (demandCategory.getCategory() != null) {
-            query += SearchUtil.addConstraint(varSql, "category.id", "=", demandCategory.getCategory().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "category.id", "=", demandCategory.getCategory().getId());
         }
         if (demandCategory.getCorrectionSchluessel() != null) {
-            query += SearchUtil.addConstraint(varSql, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
         }
         if (demandCategory.getMitgliederkorrekturFaktor() != null) {
-            query += SearchUtil.addConstraint(varSql, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
         }
         if (demandCategory.getWechselfassungVariantFaktor() != null) {
-            query += SearchUtil.addConstraint(varSql, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
         }
         if (demandCategory.getParticipantFaktor() != null) {
-            query += SearchUtil.addConstraint(varSql, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
         }
         if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-            query += SearchUtil.addConstraint(varSql, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
         }
         if (demandCategory.getUser() != null) {
-            query += SearchUtil.addConstraint(varSql, "user.login", "=", demandCategory.getUser().getLogin());
+            query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
         }
         if (demandCategory.getDepartment() != null) {
-            query += SearchUtil.addConstraint(varSql, "department.id", "=", demandCategory.getDepartment().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
         }
-
         if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-            query += SearchUtil.addConstraint(varSql, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
         }
+        query+=findByValidation(validationLevel, beanAbreviation);
         return query;
     }
 }

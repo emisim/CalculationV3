@@ -16,7 +16,6 @@ import service.DemandCategoryFacade;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +33,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
+import service.AccessFacade;
 import service.DemandCategoryCalculationItemFacade;
 import service.DemandCategoryDepartementCalculationFacade;
 
@@ -59,6 +59,8 @@ public class DemandCategoryController implements Serializable {
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
     @EJB
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
+    @EJB
+    private AccessFacade accessFacade;
 
     private List<DemandCategory> items = null;
     private DemandCategory selected;
@@ -84,8 +86,6 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
-    private Date sysDateMin;
-    private Date sysDateMax;
     private boolean save = false;
 
     @PostConstruct
@@ -199,12 +199,12 @@ public class DemandCategoryController implements Serializable {
 //        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
 //    }
     public boolean renderAttribute(String attribute) {
-        boolean isSet = ejbFacade.renderAttribute(attribute);
+        boolean isSet = accessFacade.renderAttribute(attribute);
         return isSet;
     }
 
     public boolean renderAttributeForList(String attribute) {
-        boolean isSet = ejbFacade.renderAttributeForList(attribute);
+        boolean isSet = accessFacade.renderAttributeForList(attribute);
         return isSet;
     }
 
@@ -273,7 +273,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch,sysDateMin,sysDateMax);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -705,22 +705,6 @@ public class DemandCategoryController implements Serializable {
 
     public void setSave(boolean save) {
         this.save = save;
-    }
-
-    public Date getSysDateMin() {
-        return sysDateMin;
-    }
-
-    public void setSysDateMin(Date sysDateMin) {
-        this.sysDateMin = sysDateMin;
-    }
-
-    public Date getSysDateMax() {
-        return sysDateMax;
-    }
-
-    public void setSysDateMax(Date sysDateMax) {
-        this.sysDateMax = sysDateMax;
     }
 
     
