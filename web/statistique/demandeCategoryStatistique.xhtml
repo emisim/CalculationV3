@@ -173,7 +173,7 @@
                                     </p:selectOneMenu>
                                 </h:panelGrid>
                                 <div class="ui-widget-header align-center">
-                                    <p:commandButton id="rechercheButton" actionListener="#{statistiqueController.afficherChart()}" icon="ui-icon-search" value="Search" update=":statListForm,:statListForm:barChart"/>
+                                    <p:commandButton id="rechercheButton" actionListener="#{statistiqueController.afficherChart()}" icon="ui-icon-search" value="Search" update=":statListForm:barChart"/>
                                 </div>
                                 <p:blockUI block="pageLayout" trigger="rechercheButton" >
                                     <h:panelGroup id="displayBlock" >
