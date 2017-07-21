@@ -20,43 +20,22 @@
                             <p:fieldset id="StatField" legend="Search Criteria" style="margin-bottom:20px" >
                                 <h:panelGrid id="champsInput" columns="8" style="width:100%;" >
 
-                                    <p:column >
-                                        <p:outputLabel  value="Type de Recherche" for="AxeX" />
-                                    </p:column>
-                                    <p:column>
-                                        <p:selectOneMenu required="true" label="Type de Recherche" id="AxeX" value="#{statistiqueController.typeAxeX}" autoWidth="false">
-                                            <f:selectItem itemValue="0" itemLabel="--SELECT--"/>
-                                            <f:selectItem itemValue="1" itemLabel="pour un anne" />
-                                            <f:selectItem itemValue="2" itemLabel="pour une demandeCategory" />
-                                            <p:ajax process="AxeX" update="champsInput"/>
-                                        </p:selectOneMenu>
-                                    </p:column>
 
-                                    <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
-                                        <p:outputLabel value="First Year" for="firstYear" />
-                                    </p:column>
-                                    <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
-                                        <p:inputText id="firstYear"  value="#{statistiqueController.firstYear}" />
-                                    </p:column>
-                                    <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
-                                        <p:outputLabel value="Second Year" for="SecondYear" />
-                                    </p:column>
-                                    <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
-                                        <p:inputText id="SecondYear"  value="#{statistiqueController.secondYear}" />
-                                    </p:column>
+                                    <p:outputLabel value="First Year" for="firstYear" />
+                                    <p:inputText id="firstYear"  value="#{statistiqueController.firstYear}" />
 
-                                    <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
-                                        <p:outputLabel  value="type summ" for="typeSumm"  />
-                                    </p:column>
-                                    <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
-                                        <p:selectOneMenu id="typeSumm" value="#{statistiqueController.typeSum}" autoWidth="false" >
+                                    <p:outputLabel value="Second Year" for="SecondYear" />
+                                    <p:inputText id="SecondYear"  value="#{statistiqueController.secondYear}" />
 
-                                            <f:selectItem itemValue="0" itemLabel="--SELECT--"/>
-                                            <f:selectItem itemValue="1" itemLabel="summTotal"/>
-                                            <f:selectItem itemValue="2" itemLabel="summDruck"  />
+                                    <p:outputLabel  value="type summ" for="typeSumm" />
+                                    <p:selectOneMenu id="typeSumm" value="#{statistiqueController.typeSum}" autoWidth="false">
 
-                                        </p:selectOneMenu>
-                                    </p:column>
+                                        <f:selectItem itemValue="0" itemLabel="--SELECT--"/>
+                                        <f:selectItem itemValue="1" itemLabel="summTotal"/>
+                                        <f:selectItem itemValue="2" itemLabel="summDruck"  />
+
+                                    </p:selectOneMenu>
+
                                     <p:outputLabel value="#{bundle.ListDemandCategoryTitle_nbrTotalValidation}" for="validation" />
                                     <p:selectOneMenu id="validation" value="#{demandCategoryController.validationSearch}" autoWidth="false" >
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
@@ -83,7 +62,7 @@
                                         <p:outputLabel  value="departement" for="typeDepartement" />
                                     </p:column>
                                     <p:column >
-                                        <p:selectCheckboxMenu id="typeDepartement" value="#{statistiqueController.departements}" label="-- Select Departement --"
+                                        <p:selectCheckboxMenu id="typeDepartement" value="#{statistiqueController.departements}" label="-- Select Departement --" 
                                                               filter="true" filterMatchMode="startsWith" >
                                             <f:selectItems value="#{departementController.itemsAvailableSelectMany}" var="dep" itemLabel="#{dep}" itemValue="#{dep}" />
                                         </p:selectCheckboxMenu>
@@ -168,12 +147,12 @@
 
                                     <p:outputLabel value="type Chart" for="typeChart" style="display:block;width:60px;margin-left:15px"/>
                                     <p:selectOneMenu id="typeChart" value="#{statistiqueController.typeChart}">
-                                        <f:selectItem itemValue="1" itemLabel="lineaire"  />
                                         <f:selectItem itemValue="2" itemLabel="bar" />
+                                        <f:selectItem itemValue="1" itemLabel="lineaire"  />
                                     </p:selectOneMenu>
                                 </h:panelGrid>
                                 <div class="ui-widget-header align-center">
-                                    <p:commandButton id="rechercheButton" actionListener="#{statistiqueController.afficherChart()}" icon="ui-icon-search" value="Search" update=":statListForm,:statListForm:barChart"/>
+                                    <p:commandButton id="rechercheButton" actionListener="#{statistiqueController.afficherChart()}" icon="ui-icon-search" value="Search" update=":statListForm,:statListForm:lineChart,:statListForm:barChart"/>
                                 </div>
                                 <p:blockUI block="pageLayout" trigger="rechercheButton" >
                                     <h:panelGroup id="displayBlock" >
@@ -193,9 +172,9 @@
                         <h:form id="statListForm">
 
 
-                            <!--                            <p:chart id="lineChart" type="line"  model="# {statistiqueController.lineModel}" style="width:100%;height:500px;" rendered="# {statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0}"/>-->
+                            <p:chart id="lineChart" type="line"  model="#{statistiqueController.chartModel}" style="width:100%;height:500px;" rendered="#{statistiqueController.typeChart==1}"/>
 
-                            <p:chart id="barChart" type="bar" model="#{statistiqueController.barModel}" style="width: 100%;height: 500px;" />
+                            <p:chart id="barChart" type="bar" model="#{statistiqueController.barModel}" style="width: 100%;height: 500px;" rendered="#{statistiqueController.typeChart==2}"/>
                             <!--                            <p:chart id="pieChart" type="pie" model="# {statistiqueController.pieChartModel}" style="width: 50%;height: 500px;float: left;" rendered="# {statistiqueController.typeAxeX==2}"/>-->
                         </h:form>
                     </div>
