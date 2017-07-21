@@ -13,11 +13,11 @@
                 <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
                     <p:dataTable id="departementCriteriasDataList"  var="item" value="#{demandCategoryController.departementCriterias}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >
                         <p:headerRow>
-                            <p:column colspan="3" style="text-align:left" >
+                            <p:column colspan="4" style="text-align:left" >
                                 <h:outputText value="#{item.nomDepCritera}" />
                             </p:column>
                         </p:headerRow>
-                        <p:column headerText="check" width="30">
+                        <p:column headerText="check" width="10">
                             <p:selectBooleanCheckbox value="#{item.checked}" >
                                 <p:ajax  listener="#{demandCategoryController.updateDetailDepCritarias(item)}" update="departementCriteriasDataList" />
                             </p:selectBooleanCheckbox>
@@ -32,7 +32,7 @@
                             <h:outputText value="#{item.priceGlobalUpdate}" />
                         </p:column>
                         <p:summaryRow>
-                            <p:column colspan="3" style="text-align:right">
+                            <p:column colspan="4" style="text-align:right">
                                 <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                             </p:column>
                         </p:summaryRow>
@@ -40,8 +40,8 @@
                             <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                         </f:facet>
                     </p:dataTable>
-                    <p:panel  styleClass="align-center">
-                        <p:commandButton actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                    <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                        <p:commandButton  actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
 
                     </p:panel>
                 </h:panelGroup>
@@ -84,15 +84,15 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.contentManagement.size()>0?demandCategoryController.contentManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable> 
-                            <p:panel  styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateContentManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,contentManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateContentManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,contentManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
 
                             </p:panel>
                         </p:tab>
                         <p:tab title="datenManagement">
                             <p:dataTable id="datenManagementDataList"  var="item" value="#{demandCategoryController.datenManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
@@ -117,7 +117,7 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
@@ -125,14 +125,14 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.datenManagement.size()>0?demandCategoryController.datenManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable>
-                            <p:panel  styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateDatenManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,datenManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateDatenManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,datenManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                         <p:tab title="databasePublishing">
                             <p:dataTable id="databasePublishingDataList"  var="item" value="#{demandCategoryController.databasePublisihing}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
@@ -157,7 +157,7 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
@@ -165,14 +165,14 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.databasePublisihing.size()>0?demandCategoryController.databasePublisihing.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable>
-                            <p:panel  styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateDatabasePublisihing()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,databasePublishingDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateDatabasePublisihing()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,databasePublishingDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                         <p:tab title="projectManagement">
                             <p:dataTable id="projectManagementDataList"  var="item" value="#{demandCategoryController.projectManagement}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true">
                                 <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
+                                    <p:column colspan="6" style="text-align:left" >
                                         <h:outputText value="#{item.nomDepCritera}" />
                                     </p:column>
                                 </p:headerRow>
@@ -197,7 +197,7 @@
                                     <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
+                                    <p:column colspan="6" style="text-align:right">
                                         <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
                                     </p:column>
                                 </p:summaryRow>
@@ -205,8 +205,8 @@
                                     <h:outputText value="Total Prices : #{demandCategoryController.projectManagement.size()>0?demandCategoryController.projectManagement.get(0).summDepartement:'0'} $" style="font-size:18px;" />
                                 </f:facet>
                             </p:dataTable> 
-                            <p:panel styleClass="align-center">
-                                <p:commandButton actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                            <p:panel styleClass="align-center" rendered="#{demandCategoryController.save}">
+                                <p:commandButton   actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                     </p:tabView>

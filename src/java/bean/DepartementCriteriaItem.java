@@ -26,6 +26,7 @@ public class DepartementCriteriaItem implements Serializable {
     private String arithmitiqueExpresionForUnitePrice;
     private String arithmitiqueExpresionForGlobalPrice;
     private String description;
+    private String descriptionGlobal;
     @ManyToOne
     private DepartementCriteria departementCriteria;
 
@@ -60,6 +61,16 @@ public class DepartementCriteriaItem implements Serializable {
     public void setDepartementCriteria(DepartementCriteria departementCriteria) {
         this.departementCriteria = departementCriteria;
     }
+
+    public String getDescriptionGlobal() {
+        return descriptionGlobal;
+    }
+
+    public void setDescriptionGlobal(String descriptionGlobal) {
+        this.descriptionGlobal = descriptionGlobal;
+    }
+    
+    
 
     public Long getId() {
         return id;

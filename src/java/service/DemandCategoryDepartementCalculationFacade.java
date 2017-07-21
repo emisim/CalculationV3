@@ -50,7 +50,8 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         return demandCategoryDepartementCalculations;
     }
 
-    private List<DemandCategoryDepartementCalculation> findByDemandCategory(DemandCategory demandCategory, Departement departement) {
+   
+    public List<DemandCategoryDepartementCalculation> findByDemandCategory(DemandCategory demandCategory, Departement departement) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE 1=1";
         if (demandCategory != null && demandCategory.getId() != null) {
             query += SearchUtil.addConstraint("item", "demandCategory.id", "=", demandCategory.getId());
