@@ -51,14 +51,14 @@
                                     <p:column rendered="#{statistiqueController.typeAxeX!= null and (statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0)}">
                                         <p:selectOneMenu id="typeSumm" value="#{statistiqueController.typeSum}" autoWidth="false" >
 
-                                            <f:selectItem itemValue="0" itemLabel="--selected--"/>
+                                            <f:selectItem itemValue="0" itemLabel="--SELECT--"/>
                                             <f:selectItem itemValue="1" itemLabel="summTotal"/>
                                             <f:selectItem itemValue="2" itemLabel="summDruck"  />
 
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:outputLabel value="#{bundle.ListDemandCategoryTitle_nbrTotalValidation}" for="validation" />
-                                    <p:selectOneMenu id="validation" value="#{demandCategoryController.validationSearch}" >
+                                    <p:selectOneMenu id="validation" value="#{demandCategoryController.validationSearch}" autoWidth="false" >
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItem itemValue="2" itemLabel="Valide"/>
                                         <f:selectItem itemValue="1" itemLabel="En Cours"/>
@@ -71,7 +71,7 @@
                                     </p:column>
                                     <p:column rendered="#{statistiqueController.typeAxeX!= null and statistiqueController.typeAxeX==2}">
                                         <p:selectOneMenu id="typeDemande" value="#{statistiqueController.demandCategory}"  autoWidth="false">
-                                            <f:selectItem  itemLabel="--selected--"/>
+                                            <f:selectItem  itemLabel="--SELECT--"/>
                                             <f:selectItems value="#{demandCategoryController.itemsAvailableSelectMany}" 
                                                            var="item" itemValue="#{item}" itemLabel="#{item}"/>
 

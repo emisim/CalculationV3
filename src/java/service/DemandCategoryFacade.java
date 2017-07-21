@@ -15,13 +15,13 @@ import bean.DepartementDetail;
 import bean.Sortiment;
 import bean.SotimentItem;
 import bean.User;
-import controler.util.AccessDepartement;
 import controler.util.JsfUtil;
 import controler.util.SearchUtil;
 import controler.util.SessionUtil;
+import static java.lang.System.out;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
@@ -29,8 +29,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
-import org.primefaces.model.chart.ChartSeries;
-import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -145,7 +143,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
@@ -155,6 +153,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (!selectedSortiemnts.isEmpty()) {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
+            query += SearchUtil.addConstraintMinMaxDate("d", "dateSystem", dateSysMin, dateSysMax);
+           
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -268,6 +268,33 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
+        }
+        if (demandCategory.getCategory() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "category.id", "=", demandCategory.getCategory().getId());
+        }
+        if (demandCategory.getCorrectionSchluessel() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
+        }
+        if (demandCategory.getMitgliederkorrekturFaktor() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
+        }
+        if (demandCategory.getWechselfassungVariantFaktor() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
+        }
+        if (demandCategory.getParticipantFaktor() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
+        }
+        if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+        }
+        if (demandCategory.getUser() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
+        }
+        if (demandCategory.getDepartment() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
+        }
+        if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+            query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
         }
         query += findByValidation(validationLevel, beanAbreviation);
         return query;
