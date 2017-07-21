@@ -16,6 +16,7 @@ import service.DemandCategoryFacade;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,8 @@ public class DemandCategoryController implements Serializable {
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
     private boolean save = false;
+    private Date dateSysMin;
+    private Date dateSysMax;
 
     @PostConstruct
     public void prepareSearchForm() {
@@ -273,7 +276,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch);
+        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch,dateSysMin,dateSysMax);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -707,5 +710,22 @@ public class DemandCategoryController implements Serializable {
         this.save = save;
     }
 
+    public Date getDateSysMin() {
+        return dateSysMin;
+    }
+
+    public void setDateSysMin(Date dateSysMin) {
+        this.dateSysMin = dateSysMin;
+    }
+
+    public Date getDateSysMax() {
+        return dateSysMax;
+    }
+
+    public void setDateSysMax(Date dateSysMax) {
+        this.dateSysMax = dateSysMax;
+    }
+
+    
     
 }

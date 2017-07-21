@@ -15,13 +15,13 @@ import bean.DepartementDetail;
 import bean.Sortiment;
 import bean.SotimentItem;
 import bean.User;
-import controler.util.AccessDepartement;
 import controler.util.JsfUtil;
 import controler.util.SearchUtil;
 import controler.util.SessionUtil;
+import static java.lang.System.out;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.EJB;
@@ -29,8 +29,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
-import org.primefaces.model.chart.ChartSeries;
-import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -145,16 +143,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
         if (demandCategory != null) {
-            query += constructSearchQuery(demandCategory, validationLevel,"d");
+            query += constructSearchQuery(demandCategory, validationLevel, "d");
 
             if (!selectedSortiemnts.isEmpty()) {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
+            query += SearchUtil.addConstraintMinMaxDate("d", "dateSystem", dateSysMin, dateSysMax);
+           
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -194,7 +194,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         super(DemandCategory.class);
     }
 
-   
     public List<DemandCategory> findByDepartement() {
         User connectedUser = SessionUtil.getConnectedUser();
         if (connectedUser.getAdmin() == 0) {
@@ -236,7 +235,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
     }
 
-    public String constructSearchQuery(DemandCategory demandCategory,Integer validationLevel, String beanAbreviation) {
+    public String constructSearchQuery(DemandCategory demandCategory, Integer validationLevel, String beanAbreviation) {
         String query = "";
         if (demandCategory.getProduct() != null) {
             query += SearchUtil.addConstraint(beanAbreviation, "product.id", "=", demandCategory.getProduct().getId());
@@ -268,7 +267,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
             query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
         }
-        query+=findByValidation(validationLevel, beanAbreviation);
+        query += findByValidation(validationLevel, beanAbreviation);
         return query;
     }
 }
