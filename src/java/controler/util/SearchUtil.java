@@ -104,5 +104,9 @@ public class SearchUtil {
         }
         return requete;
     }
+    
+    public static boolean isStringNullOrVide(String str){
+        return (str==null || str.equals(""));
+    }
 
 }

@@ -28,9 +28,19 @@ public class Ausgabe implements Serializable {
     private Long id;
     private String name;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal valuee;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal price;
     @OneToMany(mappedBy = "ausgabe")
     private List<DemandCategory> demandCategorys;
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    
     public Long getId() {
         return id;
     }

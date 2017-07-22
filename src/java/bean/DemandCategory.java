@@ -56,6 +56,9 @@ public class DemandCategory implements Serializable {
     @ManyToOne
     private Ausgabe ausgabe;
 
+    @ManyToOne
+    private Register register;
+
     // Schlüssel beinhaltet mehrere Keys: Layout Ausgabe....
     @ManyToOne
     private Schluessel Schluessel;
@@ -63,7 +66,10 @@ public class DemandCategory implements Serializable {
     private int umfang;
 
     //Seiten
-    private int anzahlGesamtSeiten = 2;
+    private int anzahlGesamtSeiten;
+    //Druck Seiten
+    @ManyToOne
+    private Seiten druckSeiten;
     //10% für den ANzahl dere Seiten
     private int percentSeitenFaktor = 10;
     private int anzahlSonderSeiten = 3;
@@ -91,6 +97,15 @@ public class DemandCategory implements Serializable {
 
     private int nbrTotalValidation;
 
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal artikelPerPagelFaktor = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal lKSchluesselFaktor = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal mKSchluesselFaktor = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal ProductSchluesselFaktor = new BigDecimal(0);
+
     //Aufwand für Allg.Änderung    
     @ManyToOne
     private CorrectionSchluessel correctionSchluessel;
@@ -103,7 +118,7 @@ public class DemandCategory implements Serializable {
     private WechselfassungVariantFaktor wechselfassungVariantFaktor;
 
     //Teilnehmerzahl
-    private int teilnehmerZahl = 16;
+    private int teilnehmerZahl = 16; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
     @ManyToOne
     private ParticipantFaktor participantFaktor;
 
@@ -131,18 +146,13 @@ public class DemandCategory implements Serializable {
 
     private boolean umschlag;
     @ManyToOne
-
     private UmschlagPapierAuswaehlen umschlagPapierAuswaehlen;
     @ManyToOne
-
     private UmschlagFarbigkeit umschlagFarbigkeit;
     @ManyToOne
-
     private Cover cover;
-
     @ManyToOne
     private Bindung bindung;
-
     @ManyToOne
     private Auflage auflage;
 
@@ -164,8 +174,10 @@ public class DemandCategory implements Serializable {
     private Date dateDemandCategory = new Date();
 
     //Berechnete Summen 
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summDruck = new BigDecimal(0);
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summTotal = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal summDruck = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal summTotal = new BigDecimal(0);
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
 
@@ -175,6 +187,62 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    public Seiten getDruckSeiten() {
+        return druckSeiten;
+    }
+
+    public BigDecimal getArtikelPerPagelFaktor() {
+        return artikelPerPagelFaktor;
+    }
+
+    public void setArtikelPerPagelFaktor(BigDecimal artikelPerPagelFaktor) {
+        this.artikelPerPagelFaktor = artikelPerPagelFaktor;
+    }
+
+    public BigDecimal getlKSchluesselFaktor() {
+        return lKSchluesselFaktor;
+    }
+
+    public void setlKSchluesselFaktor(BigDecimal lKSchluesselFaktor) {
+        this.lKSchluesselFaktor = lKSchluesselFaktor;
+    }
+
+    public BigDecimal getmKSchluesselFaktor() {
+        return mKSchluesselFaktor;
+    }
+
+    public void setmKSchluesselFaktor(BigDecimal mKSchluesselFaktor) {
+        this.mKSchluesselFaktor = mKSchluesselFaktor;
+    }
+
+    public BigDecimal getProductSchluesselFaktor() {
+        return ProductSchluesselFaktor;
+    }
+
+    public void setProductSchluesselFaktor(BigDecimal ProductSchluesselFaktor) {
+        this.ProductSchluesselFaktor = ProductSchluesselFaktor;
+    }
+
+    public void setDruckSeiten(Seiten druckSeiten) {
+        this.druckSeiten = druckSeiten;
+    }
+
+    public int getAnzahlGesamtSeiten() {
+        return anzahlGesamtSeiten;
+    }
+
+    public void setAnzahlGesamtSeiten(int anzahlGesamtSeiten) {
+        this.anzahlGesamtSeiten = anzahlGesamtSeiten;
+    }
+
+    public Register getRegister() {
+        return register;
+    }
+
+    public void setRegister(Register register) {
+        this.register = register;
+    }
 
     public User getUser() {
         return user;
@@ -313,14 +381,6 @@ public class DemandCategory implements Serializable {
 
     public void setSchluessel(Schluessel Schluessel) {
         this.Schluessel = Schluessel;
-    }
-
-    public int getAnzahlGesamtSeiten() {
-        return anzahlGesamtSeiten;
-    }
-
-    public void setAnzahlGesamtSeiten(int anzahlGesamtSeiten) {
-        this.anzahlGesamtSeiten = anzahlGesamtSeiten;
     }
 
     public int getPercentSeitenFaktor() {

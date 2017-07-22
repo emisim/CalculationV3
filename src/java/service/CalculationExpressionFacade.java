@@ -32,6 +32,9 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
 
     @EJB
     private ConfigurationItemFacade configurationItemFacade;
+    @EJB
+    private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
+    
     ScriptEngineManager manager = new ScriptEngineManager();
     ScriptEngine jsEngine;
 
@@ -59,6 +62,7 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
         if (jsEngine == null) {
             jsEngine = manager.getEngineByName("JavaScript"); //BE CAREFUL about the engine name.
             jsEngine.put("configurationItemFacade", configurationItemFacade);
+            jsEngine.put("demandCategoryCalculationFacade", demandCategoryCalculationFacade);
         }
         return jsEngine;
     }

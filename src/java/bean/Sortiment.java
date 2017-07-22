@@ -32,10 +32,14 @@ public class Sortiment implements Serializable {
 
     private String name;
 
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal productSchluessel = new BigDecimal(0);
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal artikelPerPage = new BigDecimal(0);
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal lKSchluessel = new BigDecimal(0);
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal mKSchluessel = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal artikelPerPage = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal lKSchluessel = new BigDecimal(10.3);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal mKSchluessel = new BigDecimal(10.4);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal productSchluessel = new BigDecimal(0);
 
     @OneToMany(mappedBy = "sortiment")
     private List<SotimentItem> sotimentItems;

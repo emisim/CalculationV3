@@ -25,17 +25,34 @@ public class AuflageSeitenCoverMatrix implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private Auflage auflage;
-
     @ManyToOne
     private Seiten seiten;
 
     @ManyToOne
-    private Cover cover;
+    private FormatAuswaehlen formatAuswaehlen;
+    @ManyToOne
+    private Farbigkeit farbigkeit;
 
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal price;
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal price;
+
+    public FormatAuswaehlen getFormatAuswaehlen() {
+        return formatAuswaehlen;
+    }
+
+    public void setFormatAuswaehlen(FormatAuswaehlen formatAuswaehlen) {
+        this.formatAuswaehlen = formatAuswaehlen;
+    }
+
+    public Farbigkeit getFarbigkeit() {
+        return farbigkeit;
+    }
+
+    public void setFarbigkeit(Farbigkeit farbigkeit) {
+        this.farbigkeit = farbigkeit;
+    }
 
     public Long getId() {
         return id;
@@ -45,14 +62,7 @@ public class AuflageSeitenCoverMatrix implements Serializable {
         this.id = id;
     }
 
-    public Cover getCover() {
-        return cover;
-    }
-
-    public void setCover(Cover cover) {
-        this.cover = cover;
-    }
-
+  
     public Auflage getAuflage() {
         return auflage;
     }

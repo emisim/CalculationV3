@@ -20,6 +20,9 @@ public class CorrectionSchluesselFacade extends AbstractFacade<CorrectionSchlues
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
+    public CorrectionSchluessel findByPercent(int percent){
+        return getUniqueResult("SELECT item FROM CorrectionSchluessel item WHERE item.percent="+percent);
+    }
     @Override
     protected EntityManager getEntityManager() {
         return em;
