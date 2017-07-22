@@ -53,8 +53,8 @@
                                                 </p:selectOneMenu>
                                                 <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}"/>
                                                 <p:selectCheckboxMenu id="sortiment"  value="#{demandCategoryController.selectedSortiemnts}" label="--SELECT--" rendered="#{demandCategoryController.renderAttribute('sortiment')}"
-                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px" converter="sortimentConverter" >
-                                                    <f:selectItems value="#{demandCategoryController.sortiments}" var="item" itemLabel="#{item.name}" />
+                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px">
+                                                    <f:selectItems value="#{demandCategoryController.sortiments}" var="item" itemValue="#{item}" itemLabel="#{item}" />
                                                 </p:selectCheckboxMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
@@ -98,7 +98,7 @@
                                                                    itemValue="#{konzeptbearbeitungFaktorItem}"/>
                                                 </p:selectOneMenu>
 
-                                                <p:outputLabel value="#{bundle.ViewDemandCategoryLabel_user}" for="user"/>
+                                                <p:outputLabel value="User:" for="user"/>
                                                 <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}" disabled="#{!demandCategoryController.adminAccess()}" autoWidth="false" > 
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{userController.itemsAvailableSelectOne}"

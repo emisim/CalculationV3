@@ -171,43 +171,40 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<String> sortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
-        List<SotimentItem> myItems = new ArrayList<>();
-        String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
-        if (demandCategory != null) {
-            query += constructSearchQuery(demandCategory, validationLevel, "d");
+        String[] queryHelper = constructQueryHelper(sortiemnts);
 
-            if (!selectedSortiemnts.isEmpty()) {
-                query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
-            }
-            query += SearchUtil.addConstraintMinMaxDate("d", "dateSystem", dateSysMin, dateSysMax);
-
-            System.out.println("ha query ==> " + query);
-            demandCategorys = em.createQuery(query).getResultList();
-            List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
-            if (demandCategorys != null && !demandCategorys.isEmpty() && sotimentItems != null && !sotimentItems.isEmpty()) {
-                System.out.println("items avant :::: " + sotimentItems);
-                myItems = convertToLong(sotimentItems);
-                System.out.println("items aprés :::: " + myItems);
-                for (DemandCategory loadedDemandCategory : demandCategorys) {
-                    List<SotimentItem> items = sotimentItemFacade.findByDemandeCategory(loadedDemandCategory);
-                    if (myItems.containsAll(items)) {
-                        System.out.println("it conatains :::: true");
-                        demandCategorysWithSortiements.add(loadedDemandCategory);
-                    }
-                }
-            }
-            if (!demandCategorysWithSortiements.isEmpty()) {
-                demandCategorys = demandCategorysWithSortiements;
-            }
+        String query = "SELECT " + queryHelper[0] + " FROM " + queryHelper[1] + " WHERE " + queryHelper[2];
+        query += constructSearchQuery(demandCategory, validationLevel, "dc");
+        query += SearchUtil.addConstraintMinMaxDate("dc", "dateSystem", dateSysMin, dateSysMax);
+        if (sortiemnts != null && !sortiemnts.isEmpty()) {
+            query += SearchUtil.addConstraintOr("so", "sortiment.name", "=", sortiemnts);
         }
-        System.out.println("query ::::::: " + query);
+
+        System.out.println("ha query ==> " + query);
+        demandCategorys = em.createQuery(query).getResultList();
+
         if (demandCategorys != null && demandCategorys.isEmpty()) {
             JsfUtil.addErrorMessage("Kein Ergebnis gefunden!");
         }
 
         return demandCategorys;
+    }
+
+    private String[] constructQueryHelper(List<String> sortiemnts) {
+
+        String beanAbreviation = "distinct(dc)";
+        String fromQuery = "DemandCategory dc";
+        String wherequery = "1=1";
+
+        if (sortiemnts != null && !sortiemnts.isEmpty()) {
+            fromQuery += " , SotimentItem so";
+            wherequery = " so.demandCategory.id = dc.id";
+        }
+
+        return new String[]{beanAbreviation, fromQuery, wherequery};
+
     }
 
     private List<SotimentItem> convertToLong(List<String> sotiementItems) {
@@ -297,9 +294,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
-            if (demandCategory.getCategory() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "category.id", "=", demandCategory.getCategory().getId());
-            }
+
             if (demandCategory.getCorrectionSchluessel() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
             }
@@ -329,18 +324,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return query;
     }
 
-  
     public BigDecimal findByDateMinMax(Date dateMin, Date dateMax, String nameDepartement) {
         String requet = "SELECT SUM(dc.summTotal) FROM DemandCategory dc WHERE 1=1";
 
         requet += SearchUtil.addConstraintMinMaxDate("dc", "dateDemandCategory", dateMin, dateMax);
         requet += " AND dc.department.name='" + nameDepartement + "'";
 
-        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> "+requet);
+        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> " + requet);
         List<BigDecimal> res = em.createQuery(requet).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
             return res.get(0);
         }
         return new BigDecimal(0);
     }
+
 }
