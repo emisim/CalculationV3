@@ -8,32 +8,41 @@ package bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
- * @author
+ * @author t3500
  */
 @Entity
-public class Layout implements Serializable {
+public class Register implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private boolean expression;
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal valuee;
-    
-    @OneToMany(mappedBy = "layout")
-    private List<DemandCategory> demandCategorys;
+    BigDecimal price;
 
-   
+    public boolean isExpression() {
+        return expression;
+    }
+
+    public void setExpression(boolean expression) {
+        this.expression = expression;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public Long getId() {
         return id;
@@ -41,30 +50,6 @@ public class Layout implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getValuee() {
-        return valuee;
-    }
-
-    public void setValuee(BigDecimal value) {
-        this.valuee = value;
-    }
-
-    public List<DemandCategory> getDemandCategorys() {
-        return demandCategorys;
-    }
-
-    public void setDemandCategorys(List<DemandCategory> demandCategorys) {
-        this.demandCategorys = demandCategorys;
     }
 
     @Override
@@ -77,10 +62,10 @@ public class Layout implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Layout)) {
+        if (!(object instanceof Register)) {
             return false;
         }
-        Layout other = (Layout) object;
+        Register other = (Register) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +74,7 @@ public class Layout implements Serializable {
 
     @Override
     public String toString() {
-        return name + "";
+        return "bean.Register[ id=" + id + " ]";
     }
 
 }

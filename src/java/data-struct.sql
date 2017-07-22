@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 22 Juillet 2017 à 01:09
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+-- Généré le :  Sam 22 Juillet 2017 à 22:21
+-- Version du serveur :  10.1.19-MariaDB
+-- Version de PHP :  5.5.38
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -32,7 +32,7 @@ CREATE TABLE `artderweiterverarbeitung` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -42,8 +42,9 @@ CREATE TABLE `artderweiterverarbeitung` (
 
 CREATE TABLE `auflage` (
   `ID` int(11) NOT NULL,
-  `DESCRIPTION` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `PRICE` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -55,9 +56,10 @@ CREATE TABLE `auflageseitencovermatrix` (
   `ID` bigint(20) NOT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL,
   `AUFLAGE_ID` int(11) DEFAULT NULL,
-  `COVER_ID` varchar(255) DEFAULT NULL,
+  `FARBIGKEIT_ID` varchar(255) DEFAULT NULL,
+  `FORMATAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `SEITEN_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -68,8 +70,17 @@ CREATE TABLE `auflageseitencovermatrix` (
 CREATE TABLE `ausgabe` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
+  `PRICE` decimal(10,2) DEFAULT NULL,
   `VALUEE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `ausgabe`
+--
+
+INSERT INTO `ausgabe` (`ID`, `NAME`, `PRICE`, `VALUEE`) VALUES
+(7, 'Erstausgabe', NULL, '1.00'),
+(8, 'Folgeausgabe', NULL, '1.00');
 
 -- --------------------------------------------------------
 
@@ -81,7 +92,7 @@ CREATE TABLE `bindung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `bindung`
@@ -100,7 +111,7 @@ INSERT INTO `bindung` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 CREATE TABLE `category` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `category`
@@ -121,7 +132,7 @@ INSERT INTO `category` (`ID`, `NAME`) VALUES
 CREATE TABLE `configuration` (
   `ID` bigint(20) NOT NULL,
   `DATEAPPLICATION` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `configuration`
@@ -141,14 +152,15 @@ CREATE TABLE `configurationitem` (
   `DEFAULTVALUE` decimal(10,2) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `CONFIGURATION_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `configurationitem`
 --
 
 INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID`) VALUES
-(1, '257.00', 'std_stz', 1);
+(1, '56.00', 'std_stz', 1),
+(2, '70.00', 'std_stz_dtp', NULL);
 
 -- --------------------------------------------------------
 
@@ -160,7 +172,114 @@ CREATE TABLE `correctionschluessel` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
   `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `correctionschluessel`
+--
+
+INSERT INTO `correctionschluessel` (`ID`, `PERCENT`, `WERT`) VALUES
+(1, 0, '1.00'),
+(2, 1, '1.00'),
+(3, 2, '1.00'),
+(4, 3, '1.00'),
+(5, 4, '1.00'),
+(6, 5, '1.00'),
+(7, 6, '1.00'),
+(8, 7, '1.00'),
+(9, 8, '1.00'),
+(10, 9, '1.00'),
+(11, 10, '1.00'),
+(12, 11, '1.00'),
+(13, 12, '1.00'),
+(14, 13, '1.00'),
+(15, 14, '1.00'),
+(17, 15, '1.00'),
+(18, 16, '1.00'),
+(19, 17, '1.00'),
+(20, 18, '1.00'),
+(21, 19, '1.00'),
+(22, 20, '1.00'),
+(23, 21, '1.00'),
+(24, 22, '1.00'),
+(25, 23, '1.00'),
+(26, 24, '1.00'),
+(27, 25, '1.00'),
+(28, 26, '1.00'),
+(29, 27, '1.00'),
+(30, 28, '1.00'),
+(31, 29, '1.00'),
+(32, 30, '1.00'),
+(33, 31, '1.00'),
+(34, 32, '1.00'),
+(35, 33, '1.00'),
+(36, 34, '1.00'),
+(37, 35, '1.00'),
+(38, 36, '1.00'),
+(39, 37, '1.00'),
+(40, 38, '1.00'),
+(41, 39, '1.00'),
+(42, 40, '1.00'),
+(43, 41, '1.00'),
+(44, 42, '1.00'),
+(45, 43, '1.00'),
+(46, 44, '1.00'),
+(47, 45, '1.00'),
+(48, 46, '1.00'),
+(49, 47, '1.00'),
+(50, 48, '1.00'),
+(51, 49, '1.00'),
+(52, 50, '1.00'),
+(53, 51, '1.00'),
+(54, 52, '1.00'),
+(55, 53, '1.00'),
+(56, 54, '1.00'),
+(57, 55, '1.00'),
+(58, 56, '1.00'),
+(59, 57, '1.00'),
+(60, 58, '1.00'),
+(61, 59, '1.00'),
+(62, 60, '1.00'),
+(63, 61, '1.00'),
+(64, 62, '1.00'),
+(65, 63, '1.00'),
+(66, 64, '1.00'),
+(67, 65, '1.00'),
+(68, 66, '1.00'),
+(69, 67, '1.00'),
+(70, 68, '1.00'),
+(71, 69, '1.00'),
+(72, 70, '1.00'),
+(73, 71, '1.00'),
+(74, 72, '1.00'),
+(75, 73, '1.00'),
+(76, 74, '1.00'),
+(77, 75, '1.00'),
+(78, 76, '1.00'),
+(79, 77, '1.00'),
+(80, 78, '1.00'),
+(81, 79, '1.00'),
+(82, 80, '1.00'),
+(83, 81, '1.00'),
+(84, 82, '1.00'),
+(85, 83, '1.00'),
+(86, 84, '1.00'),
+(87, 85, '1.00'),
+(88, 86, '1.00'),
+(89, 87, '1.00'),
+(90, 88, '1.00'),
+(91, 89, '1.00'),
+(92, 90, '1.00'),
+(93, 91, '1.00'),
+(94, 92, '1.00'),
+(95, 93, '1.00'),
+(96, 94, '1.00'),
+(97, 95, '1.00'),
+(98, 96, '1.00'),
+(99, 97, '1.00'),
+(100, 98, '1.00'),
+(101, 99, '1.00'),
+(102, 100, '1.00');
 
 -- --------------------------------------------------------
 
@@ -172,7 +291,7 @@ CREATE TABLE `cover` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -221,6 +340,7 @@ CREATE TABLE `demandcategory` (
   `CORRECTIONSCHLUESSEL_ID` bigint(20) DEFAULT NULL,
   `COVER_ID` varchar(255) DEFAULT NULL,
   `DEPARTMENT_ID` bigint(20) DEFAULT NULL,
+  `DRUCKSEITEN_ID` bigint(20) DEFAULT NULL,
   `FARBIGKEIT_ID` varchar(255) DEFAULT NULL,
   `FORMATAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `KATALOGART_ID` bigint(20) DEFAULT NULL,
@@ -231,22 +351,17 @@ CREATE TABLE `demandcategory` (
   `PARTICIPANTFAKTOR_ID` bigint(20) DEFAULT NULL,
   `PRODUCT_ID` bigint(20) DEFAULT NULL,
   `PROZESS_ID` bigint(20) DEFAULT NULL,
+  `REGISTER_ID` bigint(20) DEFAULT NULL,
   `UMSCHLAGFARBIGKEIT_ID` bigint(20) DEFAULT NULL,
   `UMSCHLAGPAPIERAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL,
   `VEREDLUNG_ID` varchar(255) DEFAULT NULL,
-  `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `demandcategory`
---
-
-INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
-(9, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 1, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, 'PUR-Bindung', 4, NULL, NULL, NULL, '2/2 -farbig', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'walo', NULL, NULL),
-(10, 8, 12, 5, 2, 4, 6, 10, 2, 4, 15, 13, 14, 20, 7, 11, 3, 9, 3, '2017-07-20', '2017-07-20', 1, '2017-07-20', 2, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, 'ana', NULL, NULL),
-(11, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-20', '2017-07-20', 0, '2017-07-20', 0, 10, 0, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 'kiki', NULL, NULL),
-(12, 8, 12, 5, 0, 4, 6, 10, 2, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-20', '2017-07-20', 0, '2017-07-20', 0, 10, 0, '0.00', '3855.00', 16, 0, 0, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 'ana', NULL, NULL);
+  `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL,
+  `PRODUCTSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
+  `ARTIKELPERPAGELFAKTOR` decimal(10,2) NOT NULL,
+  `LKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
+  `MKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -260,21 +375,7 @@ CREATE TABLE `demandcategorycalculation` (
   `VALIDE` tinyint(1) DEFAULT '0',
   `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `demandcategorycalculation`
---
-
-INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `VALIDE`, `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(17, '2827.00', 0, 27, 1),
-(18, '1028.00', 0, 27, 2),
-(19, '0.00', 0, 31, 1),
-(20, '257.00', 0, 31, 2),
-(21, '2827.00', 0, 32, 1),
-(22, '1028.00', 0, 32, 2),
-(23, '2827.00', 0, 36, 1),
-(24, '1028.00', 0, 36, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -286,34 +387,12 @@ CREATE TABLE `demandcategorycalculationitem` (
   `ID` bigint(20) NOT NULL,
   `CALCULTAED` tinyint(1) DEFAULT '0',
   `PRICE` decimal(10,2) DEFAULT NULL,
-  `PRICEUPDATE` decimal(10,2) DEFAULT NULL,
   `PRICEGLOBAL` decimal(10,2) DEFAULT NULL,
   `PRICEGLOBALUPDATE` decimal(10,2) DEFAULT NULL,
+  `PRICEUPDATE` decimal(10,2) DEFAULT NULL,
   `DEMANDCATEGORYCALCULATION_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `demandcategorycalculationitem`
---
-
-INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICEUPDATE`, `PRICEGLOBAL`, `PRICEGLOBALUPDATE`, `DEMANDCATEGORYCALCULATION_ID`, `DEPARTEMENTCRITERIAITEM_ID`) VALUES
-(33, 1, '1285.00', '0.00', '2570.00', '0.00', 17, 1),
-(34, 1, '1542.00', '0.00', '3084.00', '0.00', 17, 2),
-(35, 1, '771.00', '0.00', '1542.00', '0.00', 18, 3),
-(36, 1, '257.00', '0.00', '514.00', '0.00', 18, 4),
-(37, 0, '0.00', '0.00', '0.00', '0.00', 19, 1),
-(38, 1, '0.00', '0.00', '0.00', '0.00', 19, 2),
-(39, 1, '0.00', '0.00', '0.00', '0.00', 20, 3),
-(40, 1, '257.00', '0.00', '514.00', '0.00', 20, 4),
-(41, 1, '1285.00', '1285.00', '2570.00', '2570.00', 21, 1),
-(42, 1, '1542.00', '1542.00', '3084.00', '3084.00', 21, 2),
-(43, 1, '771.00', '771.00', '1542.00', '1542.00', 22, 3),
-(44, 1, '257.00', '257.00', '514.00', '514.00', 22, 4),
-(45, 1, '1285.00', '1285.00', '2570.00', '2570.00', 23, 1),
-(46, 1, '1542.00', '1542.00', '3084.00', '3084.00', 23, 2),
-(47, 1, '771.00', '771.00', '1542.00', '1542.00', 24, 3),
-(48, 1, '257.00', '257.00', '514.00', '514.00', 24, 4);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -326,23 +405,7 @@ CREATE TABLE `demandcategorydepartementcalculation` (
   `SUMME` decimal(10,2) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `demandcategorydepartementcalculation`
---
-
-INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`) VALUES
-(27, '3855.00', 9, 1),
-(28, '0.00', 9, 2),
-(29, '0.00', 9, 3),
-(30, '0.00', 9, 4),
-(31, '3598.00', 10, 1),
-(32, '3855.00', 11, 1),
-(33, '0.00', 11, 2),
-(34, '0.00', 11, 3),
-(35, '0.00', 11, 4),
-(36, '3855.00', 12, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -356,16 +419,7 @@ CREATE TABLE `demandcategoryvalidation` (
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `demandcategoryvalidation`
---
-
-INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`, `USER_LOGIN`) VALUES
-(11, '18:46:17', 9, NULL, 'walo'),
-(12, '18:47:47', 10, 1, 'ana'),
-(13, '18:48:08', 10, NULL, 'walo');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -376,7 +430,7 @@ INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `D
 CREATE TABLE `departement` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `departement`
@@ -386,7 +440,10 @@ INSERT INTO `departement` (`ID`, `NAME`) VALUES
 (1, 'contentManagement'),
 (2, 'datenManagement'),
 (3, 'databasePublishing'),
-(4, 'projectManagement');
+(4, 'projectManagement'),
+(5, 'Assetmanagement'),
+(6, 'Media IT'),
+(8, 'InitialCosts');
 
 -- --------------------------------------------------------
 
@@ -398,7 +455,7 @@ CREATE TABLE `departementcriteria` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `departementcriteria`
@@ -406,7 +463,32 @@ CREATE TABLE `departementcriteria` (
 
 INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
 (1, 'Allgemein', 1),
-(2, 'Reda', 1);
+(2, 'Reda', 1),
+(3, 'Reda Online', 1),
+(4, 'Informatica', 1),
+(5, 'LK MG Korrektur', 1),
+(6, 'Pruefungen', 1),
+(7, 'Sonstiges', 1),
+(8, 'Fremdsprachen', 1),
+(9, 'Masterlist', 2),
+(10, 'Datenbeschaffung', 2),
+(11, 'Preisbeschaffung', 2),
+(12, 'ASD', 2),
+(13, 'Informatica', 2),
+(14, 'Sprache', 2),
+(15, 'Fixkosten', 3),
+(16, '1.Datenimport', 3),
+(17, '2. Datenimport', 3),
+(18, 'Druckdatenerstellung', 3),
+(19, 'Sonstiges', 3),
+(20, 'ECC', 3),
+(21, 'Produktaufnahme einer Produktgruppe', 5),
+(22, 'Fotoshootings', 5),
+(23, 'Lizenz', 5),
+(24, 'Konzeption', 6),
+(25, 'Programmierung', 6),
+(27, 'Initial Kosten, diesen fallen unabhängig vom Endprodukt immer an', 8),
+(28, 'Projektmanagement Leistungen:', 4);
 
 -- --------------------------------------------------------
 
@@ -421,17 +503,72 @@ CREATE TABLE `departementcriteriaitem` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `DESCRIPTIONGLOBAL` varchar(255) DEFAULT NULL,
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `departementcriteriaitem`
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DESCRIPTIONGLOBAL`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '10*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '5*std_stz', NULL, 1),
-(2, '12*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '6*std_stz', NULL, 1),
-(3, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '1*std_stz', NULL, 2),
-(4, 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5', 'demandCategory.getAnzahlGesamtProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10', 'anzahlGesamtProdukt*std_stz/10', NULL, 2);
+(1, '(8*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Erstellung Datenpflegeguide', NULL, 1),
+(2, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung Redaktionsguide', NULL, 1),
+(3, '1*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Katalog Reda_Vorausgabe kopieren', NULL, 2),
+(4, '8*demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/100', 'demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/100', 'PDF-Generator Reda', NULL, 2),
+(5, '10*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung', NULL, 9),
+(6, '', '', 'Klassifizierung Neuheiten Information = LK_Schlüssel*Korrektirschlüssel*Prpzessschlüssel*Anzahl_Artikel_Neu*(8*std_satz/90)', NULL, 13),
+(7, '3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Masterlisten Prüfung', NULL, 1),
+(8, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Testdaten bereitstellen', NULL, 1),
+(11, 'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', '0.3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', 'Preis Artikel Reda-Online Pflege', NULL, 3),
+(12, '16*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Online Pflege(2 Tage)', NULL, 3),
+(13, 'demandCategory.getUmfang()*8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/70', '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/70', 'PDF Generator Informatica ', NULL, 4),
+(14, 'demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()*0.5', '0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Lieferantenkorrektur Versand', NULL, 5),
+(15, '', '', 'Mitgliederkorrektur Versand', NULL, 5),
+(16, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', 'Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte', NULL, 2),
+(17, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext für neue Produkte ', NULL, 2),
+(19, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext neue Produkte', NULL, 4),
+(20, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', 'Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte', NULL, 4),
+(21, '', '', 'redaktionelle Korrektur inkl. Einarbeitung LK', NULL, 5),
+(22, '', '', 'Korrekturlesen mit Kunden', NULL, 5),
+(23, '', '', 'Redaktionelle Korrekturlesen inkl. MK', NULL, 5),
+(24, '', '', 'Redaktionelle Korrekturlesen Digiphase', NULL, 5),
+(25, '', '', 'Großplott Prüfung', NULL, 6),
+(26, 'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '2.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Preisprüfung aus Satz, KG-Nummer, etc', NULL, 6),
+(27, 'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.005*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung IVZ/Synonympflege', NULL, 7),
+(28, '1.5*8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale ECC Publikationskonfigurator bei LL', NULL, 7),
+(29, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)', NULL, 7),
+(30, 'demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/19', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/19', 'Korrektorat (P. Mensch extern)', NULL, 7),
+(31, 'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'Übersetzungsmanagement Marketingdaten', NULL, 8),
+(32, '4*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'Pauschale Übersetzunsmanagement ', NULL, 8),
+(33, '(demandCategory.getAnzahlNeueProdukt()*(0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60))', '(0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60)', 'Datenbeschaffung pro Produkt Neuheit', NULL, 10),
+(34, '(demandCategory.getAnzahlNeueArtikel()*(configurationItemFacade.findByName(''std_stz_dtp‘).getDefaultValue()/200))', '(configurationItemFacade.findByName(''std_stz_dtp‘).getDefaultValue()/200)', 'Datenbeschaffung pro Artikel Neuheit', NULL, 10),
+(35, '(demandCategory.getAnzahlLieferantNeu()*(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Datenbeschaffung pro Lieferanten Neuheit ', NULL, 10),
+(36, '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Preisbeschaffung (1/2 Tag)', NULL, 11),
+(37, '(demandCategory.getAnzahlLieferantNeu()*(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Preisbechaffung pro Lieferanten Neuheit ', NULL, 11),
+(38, '(demandCategory.getAnzahlLieferantGesamt()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/6.25))', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/6.25)', 'Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)', NULL, 11),
+(39, '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Preisprüfung (1/2 Tag)', NULL, 11),
+(40, '(demandCategory.getAnzahlGesamtArtikel()*(demandCategory.getCorrectionSchluessel()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200)))', '(demandCategory.getCorrectionSchluessel()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200))', 'Stammdatenpflege (ASD, Modul)', NULL, 12),
+(41, '(demandCategory.getAnzahlGesamtArtikel()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/1000))', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/1000)', 'Übersetzungsmanagement Stammdaten (1000 Art/std)', NULL, 14),
+(42, '(demandCategory.getAnzahlBeteiligten()*(4.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(4.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Abstimmungsgespräche (Festsatz/Laufzeit in Monaten nach Personen (1xTPV + 1x0,5 Grl) ca 0,25h)', NULL, 27),
+(43, '(demandCategory.getAnzahlBeteiligten()*(demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ', NULL, 27),
+(44, '(demandCategory.getAnzahlBeteiligten()((demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/4))', '((demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/4)', 'Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ', NULL, 27),
+(45, '((demandCategory.getBearbeitungszeit()*(0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ', NULL, 27),
+(46, '(6*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(6*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Projektplanung = 6 std', NULL, 27),
+(47, '(1.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(1.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Projektvorbereitung = 1,5 std', NULL, 27),
+(48, '', '', 'Pauschale Kalkulation inkl. Prüfschleife und Abstimmung GF', NULL, 28),
+(49, '', '', 'Nachkalkulation zur Druckvergabe', NULL, 28),
+(50, '', '', 'Bestellformular inkl. Baukastenanhang erstellen und prüfen', NULL, 28),
+(51, '', '', 'Planung inkl. Prüfschleifen und Freigaben', NULL, 28),
+(52, '', '', 'Projektvorbereitung (Statuslisten, Ordner, Checklisten...)', NULL, 28),
+(53, '', '', 'Präsentationserstellung', NULL, 28),
+(54, '', '', 'Händlerabwicklung', NULL, 28),
+(55, '', '', 'Dokumentation', NULL, 28),
+(58, '', '', 'Digitales Archiv', NULL, 28),
+(59, '', '', 'Druckformschreibung', NULL, 28),
+(60, '', '', 'Druckabnahme', NULL, 28),
+(61, '', '', 'Verarbeitungsüberwachung', NULL, 28),
+(62, '', '', 'Weiterberchnung (Vorbereitung und Durchführung)', NULL, 28),
+(63, '(3*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(3*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Endabrechnung (Pauschal)', NULL, 28),
+(64, '', '', 'Erstellung und Auswertung von Befragungen (Pauschal)', NULL, 28);
 
 -- --------------------------------------------------------
 
@@ -443,7 +580,7 @@ CREATE TABLE `farbigkeit` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `farbigkeit`
@@ -452,7 +589,8 @@ CREATE TABLE `farbigkeit` (
 INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 ('1/1 -farbig', NULL, NULL),
 ('2/2 -farbig', NULL, NULL),
-('3/3 -farbig', NULL, NULL);
+('3/3 -farbig', NULL, NULL),
+('4/4 c', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -464,7 +602,7 @@ CREATE TABLE `formatauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -476,7 +614,18 @@ CREATE TABLE `katalogart` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `VALUEE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `katalogart`
+--
+
+INSERT INTO `katalogart` (`ID`, `NAME`, `VALUEE`) VALUES
+(1, 'Lagerliste', '1.00'),
+(2, 'E/D/E Katalog', '1.00'),
+(3, 'Individueller Katalog', '1.00'),
+(4, 'Fremdsprachen Katalog', '1.00'),
+(51, 'Preisliste', '1.00');
 
 -- --------------------------------------------------------
 
@@ -488,7 +637,15 @@ CREATE TABLE `konzeptbearbeitungfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
   `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `konzeptbearbeitungfaktor`
+--
+
+INSERT INTO `konzeptbearbeitungfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
+(1, 1, '1.35'),
+(2, 0, '1.00');
 
 -- --------------------------------------------------------
 
@@ -500,7 +657,30 @@ CREATE TABLE `layout` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `VALUEE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `layout`
+--
+
+INSERT INTO `layout` (`ID`, `NAME`, `VALUEE`) VALUES
+(1, 'Einfach', '1.00'),
+(2, 'Standard', '1.00'),
+(3, 'Komplex', '1.00'),
+(52, 'individuelles', '2.30');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `layoutpricing`
+--
+
+CREATE TABLE `layoutpricing` (
+  `ID` bigint(20) NOT NULL,
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL,
+  `LAYOUT_ID` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -512,7 +692,15 @@ CREATE TABLE `mitgliederkorrekturfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
   `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `mitgliederkorrekturfaktor`
+--
+
+INSERT INTO `mitgliederkorrekturfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
+(2, 0, '1.00'),
+(3, 0, '1.00');
 
 -- --------------------------------------------------------
 
@@ -524,7 +712,7 @@ CREATE TABLE `papiermaterialauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `papiermaterialauswaehlen`
@@ -546,7 +734,16 @@ CREATE TABLE `participantfaktor` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
   `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `participantfaktor`
+--
+
+INSERT INTO `participantfaktor` (`ID`, `PERCENT`, `WERT`) VALUES
+(1, 20, '1.00'),
+(2, 21, '1.00'),
+(3, 36, '1.00');
 
 -- --------------------------------------------------------
 
@@ -559,7 +756,7 @@ CREATE TABLE `product` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
   `CATEGORY_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `product`
@@ -571,7 +768,8 @@ INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
 (3, NULL, 'Industrietechnik', 1),
 (4, NULL, 'Baugerät', 1),
 (5, NULL, 'LL Gartentechnik', 1),
-(6, NULL, 'Plus1 Nachdruck', 1);
+(6, NULL, 'Plus1 Nachdruck', 1),
+(7, '', 'Haustechnik 2017', 1);
 
 -- --------------------------------------------------------
 
@@ -583,7 +781,27 @@ CREATE TABLE `prozess` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `VALUEE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `prozess`
+--
+
+INSERT INTO `prozess` (`ID`, `NAME`, `VALUEE`) VALUES
+(5, 'Proz.Neu / Tech.Alt', '1.00'),
+(6, 'Prozess.Neu / Tech.Neu', '1.00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `register`
+--
+
+CREATE TABLE `register` (
+  `ID` bigint(20) NOT NULL,
+  `EXPRESSION` tinyint(1) DEFAULT '0',
+  `PRICE` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -597,7 +815,7 @@ CREATE TABLE `schluessel` (
   `LABEL` varchar(255) DEFAULT NULL,
   `WERT` decimal(10,2) DEFAULT NULL,
   `SCHLUESSELTYPE_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `schluessel`
@@ -618,7 +836,8 @@ INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_
 (12, NULL, 'Datenmanagemnt', '56.00', 5),
 (13, NULL, 'Contentmanagement', '56.00', 5),
 (14, NULL, 'Assetmanagement', '56.00', 5),
-(15, NULL, 'Allgemein', '56.00', 5);
+(15, NULL, 'Allgemein', '56.00', 5),
+(16, 'rettest', '', '1.00', 6);
 
 -- --------------------------------------------------------
 
@@ -629,7 +848,7 @@ INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_
 CREATE TABLE `schluesseltype` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `schluesseltype`
@@ -640,7 +859,8 @@ INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
 (2, 'Layout'),
 (3, 'Katalogart'),
 (4, 'Prozess/Technik'),
-(5, 'Kostenschlüssel');
+(5, 'Kostenschlüssel'),
+(6, 'taoufik_key');
 
 -- --------------------------------------------------------
 
@@ -651,7 +871,55 @@ INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
 CREATE TABLE `seiten` (
   `ID` bigint(20) NOT NULL,
   `NBREPAGE` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `seiten`
+--
+
+INSERT INTO `seiten` (`ID`, `NBREPAGE`) VALUES
+(78, 1),
+(79, 2),
+(80, 4),
+(81, 8),
+(82, 16),
+(83, 24),
+(84, 32),
+(85, 64),
+(86, 80),
+(87, 100),
+(88, 148),
+(89, 200),
+(90, 244),
+(91, 300),
+(92, 324),
+(93, 400),
+(94, 452),
+(95, 500),
+(96, 548),
+(97, 600),
+(98, 644),
+(99, 700),
+(100, 752),
+(101, 800),
+(102, 852),
+(103, 900),
+(104, 964),
+(105, 1000),
+(106, 1056),
+(107, 1104),
+(108, 1152),
+(109, 1200),
+(110, 1264),
+(111, 1312),
+(112, 1360),
+(113, 1408),
+(114, 1472),
+(115, 1504),
+(116, 1568),
+(117, 1600),
+(118, 1680),
+(119, 1760);
 
 -- --------------------------------------------------------
 
@@ -662,7 +930,7 @@ CREATE TABLE `seiten` (
 CREATE TABLE `sequence` (
   `SEQ_NAME` varchar(50) NOT NULL,
   `SEQ_COUNT` decimal(38,0) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `sequence`
@@ -684,30 +952,30 @@ CREATE TABLE `sortiment` (
   `MKSCHLUESSEL` decimal(10,2) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `PRODUCTSCHLUESSEL` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `sortiment`
 --
 
 INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`, `NAME`, `PRODUCTSCHLUESSEL`) VALUES
-(1, '16.00', '1.00', '1.00', 'Arbeitsschutz', '5.00'),
-(2, '16.00', '1.00', '1.00', 'Baubeschläge', '5.00'),
-(3, '8.00', '1.00', '1.00', 'Baugeräte', '3.00'),
-(4, '27.00', '1.00', '1.00', 'Befestigungstechnik', '8.00'),
-(5, '12.00', '1.00', '1.00', 'Betriebseinrichtungen', '4.00'),
-(6, '5.00', '1.00', '1.00', 'Elektrowerkzeuge', '2.00'),
-(7, '6.00', '1.00', '1.00', 'Gartentechnik', '2.00'),
-(8, '11.00', '1.00', '1.00', 'Handwerkzeuge', '3.00'),
-(9, '6.00', '1.00', '1.00', 'Haustechnik/Innendeko/Elektroinstallation', '2.00'),
-(10, '18.00', '1.00', '1.00', 'Industrietechnik', '5.00'),
-(11, '9.00', '1.00', '1.00', 'Möbelbeschläge', '3.00'),
-(12, '10.00', '1.00', '1.00', 'Präzisionswerkzeuge', '8.00'),
-(13, '9.00', '1.00', '1.00', 'Schweißtechnik', '3.00'),
-(14, '12.00', '1.00', '1.00', 'Verpackungen', '4.00'),
-(15, '6.00', '1.00', '1.00', 'Werkstattmaterial', '2.00'),
-(16, '11.00', '1.00', '1.00', '\nWerkzeuge Holzbearbeitung', '3.00'),
-(17, '11.00', '1.00', '1.00', 'Werkzeuge Metallbearbeitung', '3.00');
+(1, '15.80', '1.10', '1.05', 'Arbeitsschutz', '4.70'),
+(2, '16.10', '1.00', '1.00', 'Baubeschläge', '4.80'),
+(3, '8.40', '1.00', '1.00', 'Baugeräte', '2.50'),
+(4, '26.90', '1.00', '1.00', 'Befestigungstechnik', '8.00'),
+(5, '12.10', '1.10', '1.05', 'Betriebseinrichtungen', '3.60'),
+(6, '5.38', '1.15', '1.08', 'Elektrowerkzeuge', '1.60'),
+(7, '5.70', '1.00', '1.00', 'Gartentechnik', '2.00'),
+(8, '11.10', '1.00', '1.01', 'Handwerkzeuge', '3.30'),
+(9, '6.10', '1.00', '1.00', 'Haustechnik/Innendeko/Elektroinstallation', '1.80'),
+(10, '17.50', '1.00', '1.00', 'Industrietechnik', '5.20'),
+(11, '9.10', '1.00', '1.00', 'Möbelbeschläge', '2.70'),
+(12, '10.00', '1.05', '1.03', 'Präzisionswerkzeuge', '7.60'),
+(13, '9.10', '1.08', '1.04', 'Schweißtechnik', '2.70'),
+(14, '12.40', '1.00', '1.00', 'Verpackungen', '3.70'),
+(15, '5.70', '1.05', '1.05', 'Werkstattmaterial', '1.70'),
+(16, '11.10', '1.03', '1.01', 'Werkzeuge Holzbearbeitung', '3.30'),
+(17, '11.10', '1.03', '1.01', 'Werkzeuge Metallbearbeitung', '3.30');
 
 -- --------------------------------------------------------
 
@@ -720,19 +988,7 @@ CREATE TABLE `sotimentitem` (
   `WERT` decimal(10,2) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `SORTIMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `sotimentitem`
---
-
-INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) VALUES
-(22, '30.00', 9, 6),
-(23, '20.00', 9, 2),
-(24, '50.00', 9, 4),
-(25, '10.00', 10, 3),
-(26, '40.00', 10, 7),
-(27, '50.00', 10, 5);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -745,7 +1001,7 @@ CREATE TABLE `umschlagfarbigkeit` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -757,7 +1013,7 @@ CREATE TABLE `umschlagpapierauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -777,16 +1033,25 @@ CREATE TABLE `user` (
   `PRENOM` varchar(255) DEFAULT NULL,
   `TEL` varchar(255) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
+('', 0, 0, '', 0, 0, '', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', '', '', 3),
+('admin', 1, 0, 'admin@ede.de', 1, 0, 'Admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin', '012345', NULL),
 ('ana', 0, 0, 'ana', 1, 0, 'ana', 'b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64', 'ana', '00000', 1),
-('anas', 0, 1, 'anas@gmail.com', 1, 3, 'anas', '9d171d82134b0ec576fe121cf857321819cf3a59bc0138af35862c2caa617d57', 'anas', '06', 1),
-('kiki', 1, 0, 'kiki', 1, 1, 'kiki', '888da5db853449fff82b07cbdbf7c755ece0783aa670bb36cc5c4cc9a68fb864', 'kiki', 'kiki', NULL),
+('anas', 0, 0, 'user@gmail.com', 1, 0, 'anas', 'c157889e0fd5d7fc0d9a8d951fd64604ebeeb441de6519433dd8f931493dd5da', 'anas', '06', 1),
+('assetmanagement', 0, 0, '', 1, 0, 'assetmanagement', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', 5),
+('CM_user', 0, 0, 'CM_user@ede.de', 1, 0, 'CM_user', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'CM_user', '01234567', 1),
+('contentmanagement_user', 0, 0, 'xy@ede.de', 1, 0, 'x', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'y', '012356', 1),
+('datamanagement', 0, 0, '', 1, 0, 'user', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '', '', 2),
+('dmd', 0, 0, '', 1, 0, 'dm', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '', '', 2),
+('DTP_user', 0, 0, 'DTP_user@ede.de', 1, 0, 'DTP_user', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '01234567', 3),
+('kiki', 1, 0, 'kiki', 1, 2, 'kiki', '888da5db853449fff82b07cbdbf7c755ece0783aa670bb36cc5c4cc9a68fb864', 'kiki', 'kiki', NULL),
+('mediIT', 0, 0, 'mediIT@ede.de', 1, 0, '', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', 6),
 ('walo', 1, 0, 'walo', 1, 0, 'walo', '41d119f6079d09b46a5c950a03b455c99ec6c9b6f1726401a52c85d0b17d4b54', 'walo', '00000', NULL),
 ('younes', 1, 0, 'younes@gmail.com', 1, 0, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
 
@@ -800,7 +1065,7 @@ CREATE TABLE `veredlung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -812,7 +1077,15 @@ CREATE TABLE `wechselfassungvariantfaktor` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` tinyint(1) DEFAULT '0',
   `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `wechselfassungvariantfaktor`
+--
+
+INSERT INTO `wechselfassungvariantfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
+(1, 1, '1.20'),
+(2, 0, '1.00');
 
 --
 -- Index pour les tables exportées
@@ -836,8 +1109,9 @@ ALTER TABLE `auflage`
 ALTER TABLE `auflageseitencovermatrix`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` (`SEITEN_ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_COVER_ID` (`COVER_ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` (`AUFLAGE_ID`);
+  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
+  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` (`AUFLAGE_ID`),
+  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_FARBIGKEIT_ID` (`FARBIGKEIT_ID`);
 
 --
 -- Index pour la table `ausgabe`
@@ -887,30 +1161,32 @@ ALTER TABLE `cover`
 --
 ALTER TABLE `demandcategory`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
   ADD KEY `FK_DEMANDCATEGORY_PROZESS_ID` (`PROZESS_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_SCHLUESSEL_ID` (`SCHLUESSEL_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_REGISTER_ID` (`REGISTER_ID`),
   ADD KEY `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` (`CORRECTIONSCHLUESSEL_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` (`ARTDERWEITERVERARBEITUNG_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_AUFLAGE_ID` (`AUFLAGE_ID`),
   ADD KEY `FK_DEMANDCATEGORY_PRODUCT_ID` (`PRODUCT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_CATEGORY_ID` (`CATEGORY_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` (`UMSCHLAGPAPIERAUSWAEHLEN_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_BINDUNG_ID` (`BINDUNG_ID`),
   ADD KEY `FK_DEMANDCATEGORY_DEPARTMENT_ID` (`DEPARTMENT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` (`KONZEPTBEARBEITUNGFAKTOR_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` (`PAPIERMATERIALAUSWAEHLEN_ID`),
   ADD KEY `FK_DEMANDCATEGORY_VEREDLUNG_ID` (`VEREDLUNG_ID`),
   ADD KEY `FK_DEMANDCATEGORY_COVER_ID` (`COVER_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` (`UMSCHLAGFARBIGKEIT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` (`PARTICIPANTFAKTOR_ID`),
   ADD KEY `FK_DEMANDCATEGORY_LAYOUT_ID` (`LAYOUT_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` (`WECHSELFASSUNGVARIANTFAKTOR_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_AUSGABE_ID` (`AUSGABE_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_FARBIGKEIT_ID` (`FARBIGKEIT_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_DRUCKSEITEN_ID` (`DRUCKSEITEN_ID`),
   ADD KEY `FK_DEMANDCATEGORY_MITGLIEDERKORREKTURFAKTOR_ID` (`MITGLIEDERKORREKTURFAKTOR_ID`),
   ADD KEY `FK_DEMANDCATEGORY_USER_LOGIN` (`USER_LOGIN`),
-  ADD KEY `FK_DEMANDCATEGORY_KATALOGART_ID` (`KATALOGART_ID`);
+  ADD KEY `FK_DEMANDCATEGORY_KATALOGART_ID` (`KATALOGART_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_SCHLUESSEL_ID` (`SCHLUESSEL_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` (`ARTDERWEITERVERARBEITUNG_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_AUFLAGE_ID` (`AUFLAGE_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` (`UMSCHLAGPAPIERAUSWAEHLEN_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_BINDUNG_ID` (`BINDUNG_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` (`PAPIERMATERIALAUSWAEHLEN_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` (`UMSCHLAGFARBIGKEIT_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` (`WECHSELFASSUNGVARIANTFAKTOR_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_AUSGABE_ID` (`AUSGABE_ID`),
+  ADD KEY `FK_DEMANDCATEGORY_FARBIGKEIT_ID` (`FARBIGKEIT_ID`);
 
 --
 -- Index pour la table `demandcategorycalculation`
@@ -996,6 +1272,14 @@ ALTER TABLE `layout`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `layoutpricing`
+--
+ALTER TABLE `layoutpricing`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` (`DEPARTEMENTCRITERIAITEM_ID`),
+  ADD KEY `FK_LAYOUTPRICING_LAYOUT_ID` (`LAYOUT_ID`);
+
+--
 -- Index pour la table `mitgliederkorrekturfaktor`
 --
 ALTER TABLE `mitgliederkorrekturfaktor`
@@ -1024,6 +1308,12 @@ ALTER TABLE `product`
 -- Index pour la table `prozess`
 --
 ALTER TABLE `prozess`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `register`
+--
+ALTER TABLE `register`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -1129,87 +1419,87 @@ ALTER TABLE `configuration`
 -- AUTO_INCREMENT pour la table `configurationitem`
 --
 ALTER TABLE `configurationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `correctionschluessel`
 --
 ALTER TABLE `correctionschluessel`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `departement`
 --
 ALTER TABLE `departement`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT pour la table `konzeptbearbeitungfaktor`
 --
 ALTER TABLE `konzeptbearbeitungfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `mitgliederkorrekturfaktor`
 --
 ALTER TABLE `mitgliederkorrekturfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `participantfaktor`
 --
 ALTER TABLE `participantfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `schluessel`
 --
 ALTER TABLE `schluessel`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `schluesseltype`
 --
 ALTER TABLE `schluesseltype`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `seiten`
 --
 ALTER TABLE `seiten`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 --
 -- AUTO_INCREMENT pour la table `sortiment`
 --
@@ -1219,7 +1509,7 @@ ALTER TABLE `sortiment`
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --
@@ -1229,7 +1519,7 @@ ALTER TABLE `umschlagfarbigkeit`
 -- AUTO_INCREMENT pour la table `wechselfassungvariantfaktor`
 --
 ALTER TABLE `wechselfassungvariantfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
@@ -1239,7 +1529,8 @@ ALTER TABLE `wechselfassungvariantfaktor`
 --
 ALTER TABLE `auflageseitencovermatrix`
   ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` FOREIGN KEY (`AUFLAGE_ID`) REFERENCES `auflage` (`ID`),
-  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
+  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_FARBIGKEIT_ID` FOREIGN KEY (`FARBIGKEIT_ID`) REFERENCES `farbigkeit` (`ID`),
+  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_FORMATAUSWAEHLEN_ID` FOREIGN KEY (`FORMATAUSWAEHLEN_ID`) REFERENCES `formatauswaehlen` (`ID`),
   ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` FOREIGN KEY (`SEITEN_ID`) REFERENCES `seiten` (`ID`);
 
 --
@@ -1260,6 +1551,7 @@ ALTER TABLE `demandcategory`
   ADD CONSTRAINT `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` FOREIGN KEY (`CORRECTIONSCHLUESSEL_ID`) REFERENCES `correctionschluessel` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_DEPARTMENT_ID` FOREIGN KEY (`DEPARTMENT_ID`) REFERENCES `departement` (`ID`),
+  ADD CONSTRAINT `FK_DEMANDCATEGORY_DRUCKSEITEN_ID` FOREIGN KEY (`DRUCKSEITEN_ID`) REFERENCES `seiten` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_FARBIGKEIT_ID` FOREIGN KEY (`FARBIGKEIT_ID`) REFERENCES `farbigkeit` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` FOREIGN KEY (`FORMATAUSWAEHLEN_ID`) REFERENCES `formatauswaehlen` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_KATALOGART_ID` FOREIGN KEY (`KATALOGART_ID`) REFERENCES `katalogart` (`ID`),
@@ -1270,6 +1562,7 @@ ALTER TABLE `demandcategory`
   ADD CONSTRAINT `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` FOREIGN KEY (`PARTICIPANTFAKTOR_ID`) REFERENCES `participantfaktor` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_PRODUCT_ID` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_PROZESS_ID` FOREIGN KEY (`PROZESS_ID`) REFERENCES `prozess` (`ID`),
+  ADD CONSTRAINT `FK_DEMANDCATEGORY_REGISTER_ID` FOREIGN KEY (`REGISTER_ID`) REFERENCES `register` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_SCHLUESSEL_ID` FOREIGN KEY (`SCHLUESSEL_ID`) REFERENCES `schluessel` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`),
   ADD CONSTRAINT `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` FOREIGN KEY (`UMSCHLAGPAPIERAUSWAEHLEN_ID`) REFERENCES `umschlagpapierauswaehlen` (`ID`),
@@ -1317,6 +1610,13 @@ ALTER TABLE `departementcriteria`
 --
 ALTER TABLE `departementcriteriaitem`
   ADD CONSTRAINT `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`);
+
+--
+-- Contraintes pour la table `layoutpricing`
+--
+ALTER TABLE `layoutpricing`
+  ADD CONSTRAINT `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
+  ADD CONSTRAINT `FK_LAYOUTPRICING_LAYOUT_ID` FOREIGN KEY (`LAYOUT_ID`) REFERENCES `layout` (`ID`);
 
 --
 -- Contraintes pour la table `product`

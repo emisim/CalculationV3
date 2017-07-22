@@ -6,6 +6,7 @@
  */
 package service;
 
+import bean.AuflageSeitenCoverMatrix;
 import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
 import bean.DemandCategoryCalculationItem;
@@ -18,7 +19,6 @@ import bean.User;
 import controler.util.JsfUtil;
 import controler.util.SearchUtil;
 import controler.util.SessionUtil;
-import static java.lang.System.out;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +42,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     private @EJB
     SotimentItemFacade sotimentItemFacade;
+    private @EJB
+    AuflageSeitenCoverMatrixFacade auflageSeitenCoverMatrixFacade;
     private @EJB
     DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
     @EJB
@@ -84,7 +86,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
-        prepareSave(demandCategory, isSave);
+        prepare(demandCategory, isSave);
+
         if (!simulation) {
             if (isSave) {
                 create(demandCategory);
@@ -96,9 +99,15 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
         calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
+        calcSumDruck(demandCategory);
+        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
+
         if (simulation == false && isSave == false) {
             edit(demandCategory);
             demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
+        }
+        if (simulation == false) {
+            edit(demandCategory);
         }
 
     }
@@ -113,13 +122,33 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
     }
 
-    private void prepareSave(DemandCategory demandCategory, boolean isSave) {
+    private int calcSumDruck(DemandCategory demandCategory) {
+        demandCategory.setSummDruck(new BigDecimal(0));
+        AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit());
+        boolean hardCover = demandCategory.getCover().getDescription().toLowerCase().contains("hard");
+        if (demandCategory == null || demandCategory.getCover() == null || SearchUtil.isStringNullOrVide(demandCategory.getCover().getDescription())) {
+            return -1;
+        } else if (hardCover && (auflageSeitenCoverMatrix == null || auflageSeitenCoverMatrix.getPrice() == null)) {
+            return -2;
+        } else {
+            BigDecimal summDruck = new BigDecimal(0);
+            if (hardCover) {
+                summDruck = (demandCategory.getCover().getPrice().add(auflageSeitenCoverMatrix.getPrice()).add(demandCategory.getRegister().getPrice())).multiply(demandCategory.getAuflage().getPrice());
+            } else {
+                summDruck = auflageSeitenCoverMatrix.getPrice().multiply(demandCategory.getAuflage().getPrice());
+            }
+            demandCategory.setSummDruck(summDruck);
+            return 1;
+        }
+
+    }
+
+    private void prepare(DemandCategory demandCategory, boolean isSave) {
         demandCategory.setUser(SessionUtil.getConnectedUser());
         demandCategory.setDepartment(SessionUtil.getConnectedUser().getDepartement());
         if (!demandCategory.isDruck()) {
             demandCategory.setFormatAuswaehlen(null);
             demandCategory.setPapierMaterialAuswaehlen(null);
-            demandCategory.setSeitenanzahl(0);
             demandCategory.setFarbigkeit(null);
             demandCategory.setArtDerWeiterverarbeitung(null);
             demandCategory.setVeredlung(null);
@@ -131,7 +160,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setBearbeitungszeit(0);
             demandCategory.setAnzahlBeteiligten(0);
             demandCategory.setAnzahlMitglieder(0);
-            demandCategory.setSummDruck(new BigDecimal(0));
         }
         if (!demandCategory.isUmschlag()) {
             demandCategory.setUmschlagPapierAuswaehlen(null);
@@ -191,7 +219,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public DemandCategoryFacade() {
-        super(DemandCategory.class);
+        super(DemandCategory.class
+        );
     }
 
     public List<DemandCategory> findByDepartement() {

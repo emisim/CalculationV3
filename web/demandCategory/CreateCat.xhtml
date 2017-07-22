@@ -144,6 +144,10 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlKapitetel}" for="anzahlKapitetel" rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}" />
                                     <p:inputText id="anzahlKapitetel" value="#{demandCategoryController.selected.anzahlKapitetel}" title="#{bundle.CreateDemandCategoryTitle_anzahlKapitetel}" rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}" />
 
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
+                                    <p:inputText id="correctionSchluessel" value="#{demandCategoryController.selected.correctionSchluessel}" title="#{bundle.CreateDemandCategoryTitle_anzahlKapitetel}" disabled="true" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
+
+
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mitgliederkorrekturFaktor}" for="mitgliederkorrekturFaktor" rendered="#{demandCategoryController.renderAttribute('mitgliederkorrekturFaktor')}" />
 
@@ -151,7 +155,11 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{mitgliederkorrekturFaktorController.itemsAvailableSelectOne}"
                                                        var="mitgliederkorrekturFaktorItem"
-                                                       itemValue="#{mitgliederkorrekturFaktorItem}" itemLabel="#{mitgliederkorrekturFaktorItem.value}"/>
+                                                       itemValue="#{mitgliederkorrekturFaktorItem}" 
+                                                       itemLabel="#{mitgliederkorrekturFaktorItem.expression?'Ja':'Nein'}"
+                                                       />
+                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandProdukt()}" update="anzahlBestandProdukt" />
+
                                     </p:selectOneMenu>
 
 
@@ -160,7 +168,9 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{wechselfassungVariantFaktorController.itemsAvailableSelectOne}"
                                                        var="wechselfassungVariantFaktorItem"
-                                                       itemValue="#{wechselfassungVariantFaktorItem}"/>
+                                                       itemValue="#{wechselfassungVariantFaktorItem}"
+                                                       itemLabel="#{wechselfassungVariantFaktorItem.expression?'Ja':'Nein'}"
+                                                       />
                                     </p:selectOneMenu>
 
 
@@ -174,8 +184,9 @@
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{konzeptbearbeitungFaktorController.itemsAvailableSelectOne}"
                                                        var="konzeptbearbeitungFaktorItem"
-                                                       itemValue="#{konzeptbearbeitungFaktorItem}" itemLabel="#{konzeptbearbeitungFaktorItem.value}"/>
-                                                       <!--itemValue="{konzeptbearbeitungFaktorItem}" itemLabel="{konzeptbearbeitungFaktorItem.expression?'Ja'}"/>-->
+                                                       itemValue="#{konzeptbearbeitungFaktorItem}" 
+                                                       itemLabel="#{konzeptbearbeitungFaktorItem.expression?'Ja':'Nein'}"
+                                                       />
                                     </p:selectOneMenu>
                                     
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_bearbeitungszeit}" for="bearbeitungszeit" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') }" />

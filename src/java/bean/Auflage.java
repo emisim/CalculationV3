@@ -6,6 +6,8 @@
 package bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,16 @@ public class Auflage implements Serializable {
     private Integer id;
     //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
     private String description;
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal price;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public String getDescription() {
         return description;

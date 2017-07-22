@@ -184,23 +184,20 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt() {
-        selected.setSotimentItems(sotimentItems);
-        DemandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(selected);
+        demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(selected,sotimentItems);
+        
     }
 
     public void calculAnzahlBestandArtikelAndAnzahlNeueProdukt() {
-        selected.setSotimentItems(sotimentItems);
-        DemandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlNeueProdukt(selected);
+        demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlNeueProdukt(selected,sotimentItems);
+        
     }
 
     public void calculAnzahlBestandProdukt() {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
 
-//    public void calculAnzahlNeuProdukt() {
-//        selected.setSotimentItems(sotimentItems);
-//        DemandCategoryCalculationFacade.calculAnzahlNeuProdukt(selected);
-//    }
+
     public boolean renderAttribute(String attribute) {
         boolean isSet = accessFacade.renderAttribute(attribute);
         return isSet;
