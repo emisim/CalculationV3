@@ -64,7 +64,6 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         }
         return new BigDecimal(0);
     }
-
     private String[] constructQueryHelper(int month, List<String> departements, int typeSum) {
         String monthInQuery = "" + month;
         String beanAbreviation = "dc";

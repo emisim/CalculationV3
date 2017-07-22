@@ -716,6 +716,14 @@ public class DemandCategoryController implements Serializable {
         this.dateSysMax = dateSysMax;
     }
 
+    public List<String> getSelectedSortiemnts() {
+        return selectedSortiemnts;
+    }
+
+    public void setSelectedSortiemnts(List<String> selectedSortiemnts) {
+        this.selectedSortiemnts = selectedSortiemnts;
+    }
+
     
     
 }

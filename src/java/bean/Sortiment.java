@@ -127,7 +127,7 @@ public class Sortiment implements Serializable {
 
     @Override
     public String toString() {
-        return id + "";
+        return name;
     }
 
 }
