@@ -53,8 +53,8 @@
                                                 </p:selectOneMenu>
                                                 <p:outputLabel value="#{bundle.CreateSotimentItemLabel_sortiment}" for="sortiment" rendered="#{demandCategoryController.renderAttribute('sortiment')}"/>
                                                 <p:selectCheckboxMenu id="sortiment"  value="#{demandCategoryController.selectedSortiemnts}" label="--SELECT--" rendered="#{demandCategoryController.renderAttribute('sortiment')}"
-                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px" converter="sortimentConverter" >
-                                                    <f:selectItems value="#{demandCategoryController.sortiments}" var="item" itemLabel="#{item.name}" />
+                                                                      filter="true" filterMatchMode="contains"  panelStyle="width:250px">
+                                                    <f:selectItems value="#{demandCategoryController.sortiments}" var="item" itemValue="#{item.name}" />
                                                 </p:selectCheckboxMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />

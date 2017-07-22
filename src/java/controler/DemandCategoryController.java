@@ -69,7 +69,7 @@ public class DemandCategoryController implements Serializable {
     private Sortiment sortiment;
     private SotimentItem sortimentItem;
     private List<SotimentItem> sotimentItems;
-    private List<Sortiment> selectedSortiemnts;
+    private List<String> selectedSortiemnts;
     private List<Sortiment> sortiments;
     private List<SotimentItem> detailSotimentItems;
     private List<SotimentItem> sotimentItemsMixEdit;
@@ -682,16 +682,7 @@ public class DemandCategoryController implements Serializable {
         this.cmp = cmp;
     }
 
-    public List<Sortiment> getSelectedSortiemnts() {
-        if (selectedSortiemnts == null) {
-            selectedSortiemnts = new ArrayList<>();
-        }
-        return selectedSortiemnts;
-    }
-
-    public void setSelectedSortiemnts(List<Sortiment> selectedSortiemnts) {
-        this.selectedSortiemnts = selectedSortiemnts;
-    }
+    
 
     public List<Sortiment> getSortiments() {
         if (sortiments == null) {

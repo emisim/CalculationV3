@@ -143,7 +143,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<Sortiment> selectedSortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<String> selectedSortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         List<SotimentItem> myItems = new ArrayList<>();
         String query = "SELECT distinct(d) from DemandCategory d, SotimentItem s WHERE s.demandCategory.id = d.id";
