@@ -12,10 +12,22 @@
         </ui:define>
         <ui:define name="body">
             <div Class="ui-grid ui-grid-responsive">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-12 " >
+                        <h:form>
+                            <p:breadCrumb>
+                                <p:menuitem value="Categories" url="../menu/menu.xhtml"  />
+                                <p:menuitem value="Statistiken " url="#" />
+                                <p:menuitem value="Departement" url="#" />
+                            </p:breadCrumb>   
+                        </h:form>
+
+                    </div>
+                </div><br></br>
                 <div Class="ui-grid-row">
                     <div Class="ui-grid-col-12">
                         <h:form id="chartView">
-                            <p:fieldset id="StatField" legend="Search Criteria" style="margin-bottom:20px" >
+                            <p:fieldset id="StatField" legend="Erweiterte Suche" toggleable="true" toggleSpeed="500" style="margin-bottom:20px" >
                                 <h:panelGrid id="champsInput" columns="4" style="width:50%;margin-left: 25%;" >
 
                                     <p:outputLabel value="First date" for="date1" />
