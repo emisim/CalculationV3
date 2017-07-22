@@ -75,8 +75,8 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
                     departementDetail.setPriceGlobalUpdate(demandCategoryCalculationItem.getPriceGlobalUpdate()+ "");
                     departementDetail.setNomDepCritera(nomDepCriteria);
                     departementDetail.setDescrDepCriteriaItem(departementCriteriaItem.getDescription());
-                    departementDetail.setArithmitiqueExpresionForUnitePrice(departementCriteriaItem.getDescription());
-                    departementDetail.setArithmitiqueExpresionForGlobalPrice(departementCriteriaItem.getDescriptionGlobal());
+                    departementDetail.setArithmitiqueExpresionForUnitePrice(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice());
+                    departementDetail.setArithmitiqueExpresionForGlobalPrice(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice());
                     departementDetail.setSummCriteria(summCriteria);
                     departementDetail.setSummDepartement(summ);
                     departementDetail.setChecked(demandCategoryCalculationItem.getCalcultaed());
