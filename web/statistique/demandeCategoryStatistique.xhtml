@@ -168,8 +168,9 @@
 
                                     <p:outputLabel value="type Chart" for="typeChart" style="display:block;width:60px;margin-left:15px"/>
                                     <p:selectOneMenu id="typeChart" value="#{statistiqueController.typeChart}">
-                                        <f:selectItem itemValue="1" itemLabel="lineaire"  />
                                         <f:selectItem itemValue="2" itemLabel="bar" />
+                                        <f:selectItem itemValue="1" itemLabel="lineaire"  />
+                                        
                                     </p:selectOneMenu>
                                 </h:panelGrid>
                                 <div class="ui-widget-header align-center">
@@ -184,7 +185,6 @@
                                     </h:panelGroup>
                                 </p:blockUI>
                             </p:fieldset>
-
                         </h:form>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
 
                             <!--                            <p:chart id="lineChart" type="line"  model="# {statistiqueController.lineModel}" style="width:100%;height:500px;" rendered="# {statistiqueController.typeAxeX==1 or statistiqueController.typeAxeX==0}"/>-->
 
-                            <p:chart id="barChart" type="bar" model="#{statistiqueController.barModel}" style="width: 100%;height: 500px;" />
+                            <p:chart id="barChart" type="bar" model="#{statistiqueController.barModel}" style="width: 100%;height: 500px;"  />
                             <!--                            <p:chart id="pieChart" type="pie" model="# {statistiqueController.pieChartModel}" style="width: 50%;height: 500px;float: left;" rendered="# {statistiqueController.typeAxeX==2}"/>-->
                         </h:form>
                     </div>

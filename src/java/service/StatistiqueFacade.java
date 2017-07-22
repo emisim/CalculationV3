@@ -54,7 +54,9 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         String query = "SELECT " + queryHelper[0] + " FROM " + queryHelper[1] + " WHERE " + queryHelper[2];
         query += " AND dc.dateDemandCategory LIKE '" + year + "-" + queryHelper[3] + "-%'";
         query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
-        query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        if (departements != null && !departements.isEmpty()) {
+            query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        }
         System.out.println("reauet--| " + query);
         List<BigDecimal> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
@@ -82,7 +84,6 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         } else if (typeSum == 3) {
             summQuery = "SUM(" + beanAbreviation + ".summDruck)" + " , SUM(" + beanAbreviation + ".summTotal)";
         } else {
-
             if (departements != null && !departements.isEmpty()) {
                 beanAbreviation = "dcdc";
                 summQuery = "SUM(" + beanAbreviation + ".summe)";

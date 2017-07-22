@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -54,6 +55,16 @@ public class StatistiqueController implements Serializable {
 
     private BigDecimal max;
 
+    @PostConstruct
+    public void init() {
+        barModel = new BarChartModel();
+        ChartSeries annee1 = new ChartSeries();
+        for (int i = 0; i < 12; i++) {
+            annee1.set("mois " + (i + 1), 0);
+        }
+        barModel.addSeries(annee1);
+    }
+
     /**
      * Creates a new instance of statistiqueController
      */
@@ -65,7 +76,6 @@ public class StatistiqueController implements Serializable {
         }
     }
 
-    
     public void createLineModel() {
         chartModel = initCategoryModel();
         paramGraphForConstruction(chartModel);
@@ -78,13 +88,15 @@ public class StatistiqueController implements Serializable {
     }
 
     private void createBarModel() {
-        barModel = initBarModelForConstruction();
+        barModel = new BarChartModel();
+        initBarModelForConstruction(barModel);
         paramGraphForConstruction(barModel);
     }
 
     private void paramGraphForConstruction(CartesianChartModel model) {
         model.setTitle("Statistiques des années " + firstYear + " et " + secondYear);
         model.setLegendPosition("e");
+        model.setAnimate(true);
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("SUMM");
         yAxis.setMin(0);
@@ -94,10 +106,9 @@ public class StatistiqueController implements Serializable {
         xAxis.setTickAngle(-30);
     }
 
-    private BarChartModel initBarModelForConstruction() {
-        BarChartModel model = new BarChartModel();
+    private void initBarModelForConstruction(CartesianChartModel model) {
         attachResultatToModelForConstrution(model);
-        return model;
+        System.out.println("Model size :::::: " + model.getSeries().size());
     }
 
     private void attachResultatToModelForConstrution(CartesianChartModel model) {
@@ -118,7 +129,8 @@ public class StatistiqueController implements Serializable {
             annee2.set("mois " + (i + 1), resultats[1][i]);
 
         }
-
+        System.out.println("annee1 ::: " + annee1);
+        System.out.println("annee2 ::: " + annee2);
         model.addSeries(annee1);
         model.addSeries(annee2);
     }
@@ -129,7 +141,6 @@ public class StatistiqueController implements Serializable {
 
     public BarChartModel getBarModel() {
         if (barModel == null) {
-            barModel = new BarChartModel();
         }
         return barModel;
     }
