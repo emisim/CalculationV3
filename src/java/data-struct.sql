@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 22 Juillet 2017 à 21:30
+-- Généré le :  Sam 22 Juillet 2017 à 22:21
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -356,7 +356,11 @@ CREATE TABLE `demandcategory` (
   `UMSCHLAGPAPIERAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL,
   `VEREDLUNG_ID` varchar(255) DEFAULT NULL,
-  `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
+  `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL,
+  `PRODUCTSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
+  `ARTIKELPERPAGELFAKTOR` decimal(10,2) NOT NULL,
+  `LKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
+  `MKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

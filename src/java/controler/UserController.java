@@ -38,6 +38,7 @@ public class UserController implements Serializable {
     private String oldPassword;
     private String newPassword;
     private String newRepetePassword;
+    private String pwdForUpdate;
 
     public UserController() {
     }
@@ -167,6 +168,15 @@ public class UserController implements Serializable {
         this.selected = selected;
     }
 
+    public String getPwdForUpdate() {
+        return pwdForUpdate;
+    }
+
+    public void setPwdForUpdate(String pwdForUpdate) {
+        this.pwdForUpdate = pwdForUpdate;
+    }
+
+    
     protected void setEmbeddableKeys() {
     }
 
@@ -214,7 +224,7 @@ public class UserController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    selected.setPassword(HashageUtil.sha256(selected.getPassword()));
+                    selected.setPassword(HashageUtil.sha256(pwdForUpdate));
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);

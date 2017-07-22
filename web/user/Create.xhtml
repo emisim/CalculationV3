@@ -13,7 +13,10 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUserLabel_admin}" for="admin" />
-                        <p:inputText id="admin" value="#{userController.selected.admin}" title="#{bundle.CreateUserTitle_admin}" />
+                        <p:selectOneMenu id="admin" value="#{userController.selected.admin}" title="#{bundle.CreateUserTitle_admin}" >
+                            <f:selectItem itemValue="0" itemLabel="no"/>
+                            <f:selectItem itemValue="1" itemLabel="yes"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
                         <p:selectOneMenu id="departement" value="#{userController.selected.departement}" >
                             <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
@@ -21,9 +24,9 @@
                                            itemValue="#{departementItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateUserLabel_login}" for="login" />
-                        <p:inputText id="login" value="#{userController.selected.login}" title="#{bundle.CreateUserTitle_login}" />
+                        <p:inputText id="login" value="#{userController.selected.login}" title="#{bundle.CreateUserTitle_login}" required="true" requiredMessage="login required" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}" />
+                        <p:inputText id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}" required="true" requiredMessage="password required"/>
                         <p:outputLabel value="#{bundle.CreateUserLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{userController.selected.nom}" title="#{bundle.CreateUserTitle_nom}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_prenom}" for="prenom" />
@@ -33,9 +36,11 @@
                         <p:outputLabel value="#{bundle.CreateUserLabel_tel}" for="tel" />
                         <p:inputText id="tel" value="#{userController.selected.tel}" title="#{bundle.CreateUserTitle_tel}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_blocked}" for="blocked" />
-                        <p:inputText id="blocked" value="#{userController.selected.blocked}" title="#{bundle.CreateUserTitle_blocked}" />
-                        <p:outputLabel value="#{bundle.CreateUserLabel_nbrCnx}" for="nbrCnx" />
-                        <p:inputText id="nbrCnx" value="#{userController.selected.nbrCnx}" title="#{bundle.CreateUserTitle_nbrCnx}" />
+                        <p:selectOneMenu id="blocked" value="#{userController.selected.blocked}" title="#{bundle.EditUserTitle_blocked}" >
+                            <f:selectItem itemValue="0" itemLabel="non blocked"/>
+                            <f:selectItem itemValue="1" itemLabel="blocked"/>
+                        </p:selectOneMenu>    
+                      
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UserCreateDialog.hide()"/>

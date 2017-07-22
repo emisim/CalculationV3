@@ -54,7 +54,9 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         String query = "SELECT " + queryHelper[0] + " FROM " + queryHelper[1] + " WHERE " + queryHelper[2];
         query += " AND dc.dateDemandCategory LIKE '" + year + "-" + queryHelper[3] + "-%'";
         query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
-        query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        if (departements != null && !departements.isEmpty()) {
+            query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
+        }
         System.out.println("reauet--| " + query);
         List<BigDecimal> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
@@ -86,6 +88,14 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
                 beanAbreviation = "dcdc";
                 summQuery = "SUM(" + beanAbreviation + ".summe)";
                 wherequery = " dcdc.demandCategory.id=dc.id";
+            } else {
+                /*
+                    if departements == null et typeSum != {1,2,3} we return requet always false( wherequery = " 1=0 " ) 
+                    resultat return = String[]{"SUM(" + beanAbreviation + ".summTotal)", "DemandCategory dc", " 1=0 ", monthInQuery}
+                */
+                wherequery = " 1=0 ";
+                //requet toujours faux quelque soit summQuery
+                summQuery = summQuery = " SUM(" + beanAbreviation + ".summTotal)";
             }
 
         }

@@ -30,13 +30,12 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         boolean resourceRequest = req.getRequestURI().startsWith(req.getContextPath() + "/faces" + ResourceHandler.RESOURCE_IDENTIFIER);
+        boolean imageResources = req.getRequestURI().endsWith("png") || req.getRequestURI().endsWith("jpg");
         User user = (User) session.getAttribute("user");
         try {
-            if ((session.getAttribute("user") != null && user.getLogin() != null) || req.getRequestURI().endsWith("index.xhtml") || req.getRequestURI().endsWith("/") || resourceRequest) {
-                System.out.println("do filter");
+            if ((session.getAttribute("user") != null && user.getLogin() != null) || req.getRequestURI().endsWith("index.xhtml") || req.getRequestURI().endsWith("/") || resourceRequest || imageResources) {
                 chain.doFilter(request, response);
             } else {
-                System.out.println("else filter");
                 HttpServletResponse res = (HttpServletResponse) response;
                 res.sendRedirect("../index.xhtml");
                 return;

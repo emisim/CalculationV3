@@ -16,6 +16,7 @@ public class DepartementDetail {
     private Long id;
     private String nomDepCritera;
     private String descrDepCriteriaItem;
+    private String descrDepCriteriaItemGlobal;
     private String arithmitiqueExpresionForUnitePrice;
     private String arithmitiqueExpresionForGlobalPrice;
     private String price;
@@ -153,6 +154,15 @@ public class DepartementDetail {
     public void setPriceGlobalUpdate(String priceGlobalUpdate) {
         this.priceGlobalUpdate = priceGlobalUpdate;
     }
+
+    public String getDescrDepCriteriaItemGlobal() {
+        return descrDepCriteriaItemGlobal;
+    }
+
+    public void setDescrDepCriteriaItemGlobal(String descrDepCriteriaItemGlobal) {
+        this.descrDepCriteriaItemGlobal = descrDepCriteriaItemGlobal;
+    }
+    
     
 
     @Override
