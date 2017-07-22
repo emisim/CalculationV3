@@ -30,7 +30,7 @@
                 </p:column>
 
                 <f:facet name="footer">
-                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{categoryController.prepareCreate}" update=":CategoryCreateForm" oncomplete="PF('CategoryCreateDialog').show()"/>
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{categoryController.prepareCreate}" update=":parametrageTab:CategoryCreateForm" oncomplete="PF('CategoryCreateDialog').show()"/>
                     <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:CategoryViewForm" oncomplete="PF('CategoryViewDialog').show()" disabled="#{empty categoryController.selected}"/>
                     <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:CategoryEditForm" oncomplete="PF('CategoryEditDialog').show()" disabled="#{empty categoryController.selected}"/>
                     <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{categoryController.destroy}" update=":growl,datalist" disabled="#{empty categoryController.selected}"/>

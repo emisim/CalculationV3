@@ -450,6 +450,8 @@ public class DemandCategoryController implements Serializable {
             try {
                 if (persistAction == PersistAction.CREATE) {
                     getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, true);
+                    selected=null;
+                    getSelected();
                 } else if (persistAction == PersistAction.UPDATE) {
                     sortimentItemFacade.delete(detailSotimentItems);
                     getFacade().save(sotimentItems, selected, SessionUtil.getConnectedUser().getDepartement(), false, false);

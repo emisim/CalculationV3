@@ -6,6 +6,7 @@
 package controler;
 
 import bean.DemandCategory;
+import bean.Departement;
 import controler.util.MathUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -20,10 +21,11 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.CartesianChartModel;
-import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.PieChartModel;
+import service.DemandCategoryFacade;
+import service.DepartementFacade;
 import service.StatistiqueFacade;
 
 /**
@@ -36,6 +38,10 @@ public class StatistiqueController implements Serializable {
 
     @EJB
     StatistiqueFacade statistiqueFacade;
+    @EJB
+    DemandCategoryFacade demandCategoryFacade;
+    @EJB
+    DepartementFacade departementFacade;
     //attribute for DemandCategory statistique
     private int firstYear;
     private int secondYear;
@@ -49,11 +55,29 @@ public class StatistiqueController implements Serializable {
     private DemandCategory demandCategory;
     private DemandCategory selectedForSearch;
     private Date date = new Date();
+    private Date dateMin;
+    private Date dateMax;
     private List<String> departements;
     private int typeChart;
     private LineChartModel chartModel;
 
     private BigDecimal max;
+
+    public void afficherDepartementPieChart() {
+        pieChartModel = new PieChartModel();
+       
+        for (Departement dep : departementFacade.findAll()) {
+            if (dep != null) {
+                pieChartModel.set("" + dep.getName(), demandCategoryFacade.findByDateMinMax(dateMin,dateMax,dep.getName()));
+            }
+        }
+        pieChartModel.setTitle("Departement Chart");
+        pieChartModel.setLegendPosition("e");
+        pieChartModel.setShowDataLabels(true);
+        pieChartModel.setDiameter(370);
+    }
+    
+   
 
     @PostConstruct
     public void init() {
@@ -94,6 +118,7 @@ public class StatistiqueController implements Serializable {
     }
 
     private void paramGraphForConstruction(CartesianChartModel model) {
+        System.out.println("Statistiques des années " + firstYear + " et " + secondYear);
         model.setTitle("Statistiques des années " + firstYear + " et " + secondYear);
         model.setLegendPosition("e");
         model.setAnimate(true);
@@ -168,6 +193,9 @@ public class StatistiqueController implements Serializable {
     }
 
     public LineChartModel getChartModel() {
+        if (chartModel == null) {
+            chartModel = new LineChartModel();
+        }
         return chartModel;
     }
 
@@ -272,6 +300,28 @@ public class StatistiqueController implements Serializable {
 
     public void setValidationLevel(Integer validationLevel) {
         this.validationLevel = validationLevel;
+    }
+
+    public Date getDateMin() {
+        if (dateMin == null) {
+            dateMin = new Date();
+        }
+        return dateMin;
+    }
+
+    public void setDateMin(Date dateMin) {
+        this.dateMin = dateMin;
+    }
+
+    public Date getDateMax() {
+        if (dateMax == null) {
+            dateMax = new Date();
+        }
+        return dateMax;
+    }
+
+    public void setDateMax(Date dateMax) {
+        this.dateMax = dateMax;
     }
 
 }

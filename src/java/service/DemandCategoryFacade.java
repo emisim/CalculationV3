@@ -154,7 +154,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                 query += SearchUtil.addConstraintOr("s", "sortiment.id", "=", selectedSortiemnts);
             }
             query += SearchUtil.addConstraintMinMaxDate("d", "dateSystem", dateSysMin, dateSysMax);
-           
+
             System.out.println("ha query ==> " + query);
             demandCategorys = em.createQuery(query).getResultList();
             List<DemandCategory> demandCategorysWithSortiements = new ArrayList<>();
@@ -268,35 +268,50 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
             }
-        }
-        if (demandCategory.getCategory() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "category.id", "=", demandCategory.getCategory().getId());
-        }
-        if (demandCategory.getCorrectionSchluessel() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
-        }
-        if (demandCategory.getMitgliederkorrekturFaktor() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
-        }
-        if (demandCategory.getWechselfassungVariantFaktor() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
-        }
-        if (demandCategory.getParticipantFaktor() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
-        }
-        if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
-        }
-        if (demandCategory.getUser() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
-        }
-        if (demandCategory.getDepartment() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
-        }
-        if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-            query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            if (demandCategory.getCategory() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "category.id", "=", demandCategory.getCategory().getId());
+            }
+            if (demandCategory.getCorrectionSchluessel() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
+            }
+            if (demandCategory.getMitgliederkorrekturFaktor() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
+            }
+            if (demandCategory.getWechselfassungVariantFaktor() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
+            }
+            if (demandCategory.getParticipantFaktor() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
+            }
+            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            }
+            if (demandCategory.getUser() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
+            }
+            if (demandCategory.getDepartment() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
+            }
+            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+            }
         }
         query += findByValidation(validationLevel, beanAbreviation);
         return query;
+    }
+
+  
+    public BigDecimal findByDateMinMax(Date dateMin, Date dateMax, String nameDepartement) {
+        String requet = "SELECT SUM(dc.summTotal) FROM DemandCategory dc WHERE 1=1";
+
+        requet += SearchUtil.addConstraintMinMaxDate("dc", "dateDemandCategory", dateMin, dateMax);
+        requet += " AND dc.department.name='" + nameDepartement + "'";
+
+        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> "+requet);
+        List<BigDecimal> res = em.createQuery(requet).getResultList();
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            return res.get(0);
+        }
+        return new BigDecimal(0);
     }
 }
