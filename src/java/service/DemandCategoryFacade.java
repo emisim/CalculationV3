@@ -328,4 +328,19 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         query += findByValidation(validationLevel, beanAbreviation);
         return query;
     }
+
+  
+    public BigDecimal findByDateMinMax(Date dateMin, Date dateMax, String nameDepartement) {
+        String requet = "SELECT SUM(dc.summTotal) FROM DemandCategory dc WHERE 1=1";
+
+        requet += SearchUtil.addConstraintMinMaxDate("dc", "dateDemandCategory", dateMin, dateMax);
+        requet += " AND dc.department.name='" + nameDepartement + "'";
+
+        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> "+requet);
+        List<BigDecimal> res = em.createQuery(requet).getResultList();
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            return res.get(0);
+        }
+        return new BigDecimal(0);
+    }
 }

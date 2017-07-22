@@ -104,7 +104,7 @@ public class DemandCategory implements Serializable {
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal mKSchluesselFaktor = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal ProductSchluesselFaktor = new BigDecimal(0);
+    BigDecimal productSchluesselFaktor = new BigDecimal(0);
 
     //Aufwand für Allg.Änderung    
     @ManyToOne
@@ -217,11 +217,11 @@ public class DemandCategory implements Serializable {
     }
 
     public BigDecimal getProductSchluesselFaktor() {
-        return ProductSchluesselFaktor;
+        return productSchluesselFaktor;
     }
 
     public void setProductSchluesselFaktor(BigDecimal ProductSchluesselFaktor) {
-        this.ProductSchluesselFaktor = ProductSchluesselFaktor;
+        this.productSchluesselFaktor = ProductSchluesselFaktor;
     }
 
     public void setDruckSeiten(Seiten druckSeiten) {

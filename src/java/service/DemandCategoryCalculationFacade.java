@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,6 +6,7 @@
  */
 package service;
 
+import bean.ConfigurationItem;
 import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
 import bean.DemandCategoryCalculationItem;
@@ -205,9 +207,11 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         System.out.println("Auery  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + query);
         return em.createQuery(query).getResultList();
     }
+    @EJB ConfigurationItemFacade configurationItemFacade;
 
     //Hier werden alle Calculation gesucht oder gespeichert
     public List<DemandCategoryCalculation> save(DemandCategory demandCategory, DemandCategoryDepartementCalculation demandCategoryDepartementCalculation, boolean similuer, boolean isSave) throws ScriptException {
+
         List<DemandCategoryCalculation> res = new ArrayList();
         List<DepartementCriteria> departementCriterias = departementCriteriaFacade.findDepartementCriteriaWithItemsByDepartement(demandCategoryDepartementCalculation.getDepartement());
         for (DepartementCriteria departementCriteria : departementCriterias) {

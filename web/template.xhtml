@@ -31,7 +31,6 @@
                                 <br/>
                                 <p:menubar>
 
-
                                     <p:submenu id="parametrage" label="Settings" icon="fa fa-gears" rendered="#{userController.checkUser()}" >
                                         <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml" icon="fa fa-list"  />
                                     </p:submenu>
@@ -56,6 +55,7 @@
                                     </p:submenu>
                                     <p:submenu id="statistiken" label="Statistiken" icon="fa fa-bar-chart" rendered="#{userController.checkUser()}">
                                         <p:menuitem value="DemandCategory" outcome="/statistique/demandeCategoryStatistique.xhtml"  icon="fa fa-list" />
+                                        <p:menuitem value="departement" outcome="/statistique/departementStatistique.xhtml"  icon="fa fa-list" />
 
                                     </p:submenu>
 
@@ -78,7 +78,7 @@
                     </h:form>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="center" id="pageLayout">
+                <p:layoutUnit position="center" id="pageLayout" >
                     <ui:insert name="body"/>
                 </p:layoutUnit>
 

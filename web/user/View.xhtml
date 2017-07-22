@@ -13,13 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
                         <h:outputText value="#{bundle.ViewUserLabel_admin}"/>
-                        <h:outputText value="#{userController.selected.admin}" title="#{bundle.ViewUserTitle_admin}"/>
+                        <h:outputText value="#{userController.selected.admin==1?'yes':'no'}" title="#{bundle.ViewUserTitle_admin}"/>
                         <h:outputText value="#{bundle.ViewUserLabel_departement}"/>
-                        <h:outputText value="#{userController.selected.departement}" title="#{bundle.ViewUserTitle_departement}"/>
+                        <h:outputText value="#{userController.selected.departement.name}" title="#{bundle.ViewUserTitle_departement}"/>
                         <h:outputText value="#{bundle.ViewUserLabel_login}"/>
                         <h:outputText value="#{userController.selected.login}" title="#{bundle.ViewUserTitle_login}"/>
-                        <h:outputText value="#{bundle.ViewUserLabel_password}"/>
-                        <h:outputText value="#{userController.selected.password}" title="#{bundle.ViewUserTitle_password}"/>
                         <h:outputText value="#{bundle.ViewUserLabel_nom}"/>
                         <h:outputText value="#{userController.selected.nom}" title="#{bundle.ViewUserTitle_nom}"/>
                         <h:outputText value="#{bundle.ViewUserLabel_prenom}"/>
@@ -29,7 +27,7 @@
                         <h:outputText value="#{bundle.ViewUserLabel_tel}"/>
                         <h:outputText value="#{userController.selected.tel}" title="#{bundle.ViewUserTitle_tel}"/>
                         <h:outputText value="#{bundle.ViewUserLabel_blocked}"/>
-                        <h:outputText value="#{userController.selected.blocked}" title="#{bundle.ViewUserTitle_blocked}"/>
+                        <h:outputText value="#{userController.selected.blocked==1?'yes':'no'}" title="#{bundle.ViewUserTitle_blocked}"/>
                         <h:outputText value="#{bundle.ViewUserLabel_nbrCnx}"/>
                         <h:outputText value="#{userController.selected.nbrCnx}" title="#{bundle.ViewUserTitle_nbrCnx}"/>
                     </p:panelGrid>

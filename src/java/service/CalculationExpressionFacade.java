@@ -7,6 +7,7 @@ package service;
 
 import bean.ArtDerWeiterverarbeitung;
 import bean.DemandCategory;
+import controler.util.SearchUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
     private ConfigurationItemFacade configurationItemFacade;
     @EJB
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
-    
+
     ScriptEngineManager manager = new ScriptEngineManager();
     ScriptEngine jsEngine;
 
@@ -43,17 +44,23 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
     }
 
     //Wichtig für die Evaluation unsere Expression
-    public Object evalFunction(String expression, Object input, boolean execExpression) throws ScriptException {
-        System.out.println("ha expression"+expression+ " ha exec "+execExpression);
+    public Object evalFunction(String expression, DemandCategory demandCategory, boolean execExpression) throws ScriptException {
+        System.out.println("ha expression" + expression + " ha exec " + execExpression);
+        System.out.println("haa input " + demandCategory);
         if (execExpression == true) {
             System.out.println("haa expression ==> " + expression);
-            if (input != null && input instanceof DemandCategory) {
+            System.out.println("ha demandCategory != null lwela " + (demandCategory != null));
+            System.out.println("ha SearchUtil.isStringNullOrVide(expression) tanyia " + (!SearchUtil.isStringNullOrVide(expression)));
+            if (demandCategory != null) {
                 // ALlle Input sinbd als Object hier gespeicherts
-                getJsEngine().put("demandCategory", (DemandCategory) input);
+                System.out.println("hana foste if o haaa demandCategory " + demandCategory);
+                getJsEngine().put("demandCategory", demandCategory);
             }
-            Object obj = getJsEngine().eval(expression);
-            System.out.println("haaa l eval ==> " + obj);
-            return obj;
+            if (!SearchUtil.isStringNullOrVide(expression)) {
+                Object obj = getJsEngine().eval(expression);
+                System.out.println("haaa l eval ==> " + obj);
+                return obj;
+            }
         }
         return "0";
     }
