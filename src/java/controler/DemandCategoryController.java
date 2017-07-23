@@ -452,7 +452,9 @@ public class DemandCategoryController implements Serializable {
                 } else {
                     getFacade().remove(selected);
                 }
+                selected.setSotimentItems(null);
                 selected = null;
+                sotimentItems=null;
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";
