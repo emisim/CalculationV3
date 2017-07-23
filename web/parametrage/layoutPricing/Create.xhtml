@@ -13,13 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{layoutPricingController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateLayoutPricingLabel_departementCriteriaItem}" for="departementCriteriaItem" />
-                        <p:selectOneMenu id="departementCriteriaItem" value="#{layoutPricingController.selected.departementCriteriaItem}" >
+                        <p:selectOneMenu id="departementCriteriaItem" value="#{layoutPricingController.selected.departementCriteriaItem}" autoWidth="false" >
                             <f:selectItems value="#{departementCriteriaItemController.itemsAvailableSelectOne}"
                                            var="departementCriteriaItemItem"
                                            itemValue="#{departementCriteriaItemItem}" itemLabel="#{departementCriteriaItemItem.description}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateLayoutPricingLabel_layout}" for="layout" />
-                        <p:selectOneMenu id="layout" value="#{layoutPricingController.selected.layout}" >
+                        <p:selectOneMenu id="layout" value="#{layoutPricingController.selected.layout}" autoWidth="false" >
                             <f:selectItems value="#{layoutController.itemsAvailableSelectOne}"
                                            var="layoutItem"
                                            itemValue="#{layoutItem}" itemLabel="#{layoutItem.name}"/>
