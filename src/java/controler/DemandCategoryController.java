@@ -699,6 +699,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public boolean isSave() {
+        save = false;
         return save;
     }
 
