@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 23 Juillet 2017 à 13:41
+-- Généré le :  Dim 23 Juillet 2017 à 19:55
 -- Version du serveur :  10.1.19-MariaDB
 -- Version de PHP :  5.5.38
 
@@ -1217,7 +1217,12 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 --
 
 CREATE TABLE `teilnehmerzahlpricing` (
-  `ID` bigint(20) NOT NULL
+  `ID` bigint(20) NOT NULL,
+  `PRICE` decimal(10,2) NOT NULL,
+  `TEILNEHMERZAHLMIN` varchar(255) NOT NULL,
+  `TEILNEHMERZAHLMINOPERATOR` varchar(255) NOT NULL,
+  `TEILNEHMERZAHLMAX` varchar(255) NOT NULL,
+  `TEILNEHMERZAHLMAXOPERATOR` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1746,6 +1751,11 @@ ALTER TABLE `sortiment`
 --
 ALTER TABLE `sotimentitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT pour la table `teilnehmerzahlpricing`
+--
+ALTER TABLE `teilnehmerzahlpricing`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --

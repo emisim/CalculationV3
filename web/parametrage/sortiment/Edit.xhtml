@@ -19,9 +19,9 @@
                         <p:outputLabel value="#{bundle.EditSortimentLabel_artikelPerPage}" for="artikelPerPage" />
                         <p:inputText id="artikelPerPage" value="#{sortimentController.selected.artikelPerPage}" title="#{bundle.EditSortimentTitle_artikelPerPage}" />
                         <p:outputLabel value="#{bundle.EditSortimentLabel_lKSchluessel}" for="lKSchluessel" />
-                        <p:inputText id="lKSchluessel" value="#{sortimentController.selected.lKSchluessel}" title="#{bundle.EditSortimentTitle_lKSchluessel}" />
+                        <p:inputText id="lKSchluessel" value="#{sortimentController.selected.lkSchluessel}" title="#{bundle.EditSortimentTitle_lKSchluessel}" />
                         <p:outputLabel value="#{bundle.EditSortimentLabel_mKSchluessel}" for="mKSchluessel" />
-                        <p:inputText id="mKSchluessel" value="#{sortimentController.selected.mKSchluessel}" title="#{bundle.EditSortimentTitle_mKSchluessel}" />
+                        <p:inputText id="mKSchluessel" value="#{sortimentController.selected.mkSchluessel}" title="#{bundle.EditSortimentTitle_mKSchluessel}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{sortimentController.update}" value="#{bundle.Save}" update="display,:parametrageTab:SortimentListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SortimentEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SortimentEditDialog.hide()"/>

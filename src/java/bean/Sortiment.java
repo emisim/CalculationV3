@@ -35,9 +35,9 @@ public class Sortiment implements Serializable {
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal artikelPerPage = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal lKSchluessel = new BigDecimal(10.3);
+    BigDecimal lkSchluessel = new BigDecimal(10.3);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal mKSchluessel = new BigDecimal(10.4);
+    BigDecimal mkSchluessel = new BigDecimal(10.4);
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal productSchluessel = new BigDecimal(0);
 
@@ -84,20 +84,20 @@ public class Sortiment implements Serializable {
         this.artikelPerPage = artikelPerPage;
     }
 
-    public BigDecimal getlKSchluessel() {
-        return lKSchluessel;
+    public BigDecimal getLkSchluessel() {
+        return lkSchluessel;
     }
 
-    public void setlKSchluessel(BigDecimal lKSchluessel) {
-        this.lKSchluessel = lKSchluessel;
+    public void setLkSchluessel(BigDecimal lKSchluessel) {
+        this.lkSchluessel = lKSchluessel;
     }
 
-    public BigDecimal getmKSchluessel() {
-        return mKSchluessel;
+    public BigDecimal getMkschluessel() {
+        return mkSchluessel;
     }
 
-    public void setmKSchluessel(BigDecimal mKSchluessel) {
-        this.mKSchluessel = mKSchluessel;
+    public void setMkSchluessel(BigDecimal mkSchluessel) {
+        this.mkSchluessel = mkSchluessel;
     }
 
     @Override

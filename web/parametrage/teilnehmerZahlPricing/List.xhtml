@@ -64,10 +64,10 @@
                             <h:outputText value="#{item.id}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{teilnehmerZahlPricingController.prepareCreate}" update=":TeilnehmerZahlPricingCreateForm" oncomplete="PF('TeilnehmerZahlPricingCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TeilnehmerZahlPricingViewForm" oncomplete="PF('TeilnehmerZahlPricingViewDialog').show()" disabled="#{empty teilnehmerZahlPricingController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TeilnehmerZahlPricingEditForm" oncomplete="PF('TeilnehmerZahlPricingEditDialog').show()" disabled="#{empty teilnehmerZahlPricingController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{teilnehmerZahlPricingController.destroy}" update=":growl,datalist" disabled="#{empty teilnehmerZahlPricingController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{teilnehmerZahlPricingController.prepareCreate}" update=":parametrageTab:TeilnehmerZahlPricingCreateForm" oncomplete="PF('TeilnehmerZahlPricingCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:TeilnehmerZahlPricingViewForm" oncomplete="PF('TeilnehmerZahlPricingViewDialog').show()" disabled="#{empty teilnehmerZahlPricingController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:TeilnehmerZahlPricingEditForm" oncomplete="PF('TeilnehmerZahlPricingEditDialog').show()" disabled="#{empty teilnehmerZahlPricingController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{teilnehmerZahlPricingController.destroy}" update=":growl,:parametrageTab:datalist" disabled="#{empty teilnehmerZahlPricingController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

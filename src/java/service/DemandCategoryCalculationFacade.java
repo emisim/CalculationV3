@@ -176,9 +176,9 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
             if (ordreSortiement == 1) {
                 return (percentwert.multiply(sotimentItem.getSortiment().getArtikelPerPage()));
             } else if (ordreSortiement == 2) {
-                return (percentwert.multiply(sotimentItem.getSortiment().getlKSchluessel()));
+                return (percentwert.multiply(sotimentItem.getSortiment().getLkSchluessel()));
             } else if (ordreSortiement == 3) {
-                return (percentwert.multiply(sotimentItem.getSortiment().getmKSchluessel()));
+                return (percentwert.multiply(sotimentItem.getSortiment().getMkschluessel()));
             } else {
                 return (percentwert.multiply(sotimentItem.getSortiment().getProductSchluessel()));
             }
