@@ -106,8 +106,13 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             edit(demandCategory);
             demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
         }
-        if (simulation == false) {
-            edit(demandCategory);
+         if (!simulation) {
+            if (isSave) {
+                create(demandCategory);
+            } else {
+                edit(demandCategory);
+            }
+            System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
 
     }
