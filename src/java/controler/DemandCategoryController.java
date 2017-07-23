@@ -27,7 +27,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -35,6 +34,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.view.ViewScoped;
 import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
+import org.primefaces.context.RequestContext;
 import service.AccessFacade;
 import service.DemandCategoryCalculationItemFacade;
 import service.DemandCategoryDepartementCalculationFacade;
@@ -124,21 +124,27 @@ public class DemandCategoryController implements Serializable {
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
-        if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
-            demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
-            departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-        }
-        if (departement == null && user.getAdmin() == 1) {
-            List<Departement> departements = departementFacade.findAll();
-            if (departements != null && !departements.isEmpty()) {
-                for (Departement departement1 : departements) {
-                    demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
-                    myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-                    params.put(departement1.getName(), myDepartementCriterias);
+        if (selected != null && selected.getSotimentItems()!=null && !selected.getSotimentItems().isEmpty()) {
+            if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
+                demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
+                departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+            }
+            if (departement == null && user.getAdmin() == 1) {
+                List<Departement> departements = departementFacade.findAll();
+                if (departements != null && !departements.isEmpty()) {
+                    for (Departement departement1 : departements) {
+                        demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
+                        myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+                        params.put(departement1.getName(), myDepartementCriterias);
+                    }
                 }
             }
+            feedLists();
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('DemandCategoryDetailDialog').show();");
+        } else {
+            JsfUtil.addWrningMessage("Sortiment items required");
         }
-        feedLists();
     }
 
     public void findSortimentItem() {

@@ -308,7 +308,7 @@
                                 </h:panelGrid>
                                 <div class="align-center ui-widget-header">
                                     <p:commandButton icon="fa fa-plus-square-o" actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update=":growl,:DemandCategoryCreateForm:display" />
-                                    <p:commandButton icon="fa fa-cubes" actionListener="#{demandCategoryController.simuler()}" value="#{bundle.Simuler}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()"  />
+                                    <p:commandButton icon="fa fa-cubes" actionListener="#{demandCategoryController.simuler()}" value="#{bundle.Simuler}" update=":DemandCategoryDetailForm,:growl"   />
                                 </div>
                             </h:panelGroup>
                         </h:form>
