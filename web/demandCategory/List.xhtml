@@ -165,8 +165,8 @@
                                              rowsPerPageTemplate="10,20,30,40,50"
                                              >
 
-                                    <p:ajax event="rowSelect"   update="viewButton editButton deleteButton"/>
-                                    <p:ajax event="rowUnselect" update="viewButton editButton deleteButton"/>
+                                    <p:ajax event="rowSelect"   update=" editButton deleteButton"/>
+                                    <p:ajax event="rowUnselect" update=" editButton deleteButton"/>
 
 
                                     <p:column>
@@ -554,7 +554,6 @@
                                         </h:outputText>
                                     </p:column>
 
-
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('summDruck')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_summDruck}"/>
@@ -574,16 +573,12 @@
                                         </f:facet>
                                         <p:commandButton id="detailCat" title="Detail" icon="fa fa-th-large"  actionListener="#{demandCategoryController.departementeDetails(item)}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()"  />
                                         <p:commandButton id="valider" title="Valider" icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
-                                        <p:commandButton id="detailValider" icon="fa fa-bars" title="Detail Validation" actionListener="#{demandCategoryController.prepareValidate(item)}" update=":DemandCategoryValidationListForm" oncomplete="PF('DemandCategoryValidationListDialog').show()" />
-                                        <p:commandButton id="detailSortiemnt" icon="fa fa-info-circle" title="Detail Sortiment" actionListener="#{demandCategoryController.prepareSortimentItems(item)}" update=":SotimentItemListForm" oncomplete="PF('SortiementItemListDialog').show()" />
                                     </p:column>
                                     <f:facet name="footer" >
-                                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandCategoryViewForm" oncomplete="PF('DemandCategoryViewDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
-                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}"/>
-                                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}" rendered="#{demandCategoryController.checkUser()}">
+                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DemandCategoryEditForm" oncomplete="PF('DemandCategoryEditDialog').show()" disabled="#{empty demandCategoryController.selected}" />
+                                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{demandCategoryController.destroy}" update=":growl,datalist" disabled="#{empty demandCategoryController.selected}" >
                                             <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
                                         </p:commandButton>
-
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                             <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
@@ -597,9 +592,6 @@
             </div>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="Detail.xhtml"/>
-            <ui:include src="View.xhtml"/>
-            <ui:include src="ValidationItemList.xhtml"/>
-            <ui:include src="SortimentItemList.xhtml"/>
         </ui:define>
     </ui:composition>
 

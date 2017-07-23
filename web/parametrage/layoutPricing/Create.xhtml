@@ -16,20 +16,19 @@
                         <p:selectOneMenu id="departementCriteriaItem" value="#{layoutPricingController.selected.departementCriteriaItem}" >
                             <f:selectItems value="#{departementCriteriaItemController.itemsAvailableSelectOne}"
                                            var="departementCriteriaItemItem"
-                                           itemValue="#{departementCriteriaItemItem}"/>
+                                           itemValue="#{departementCriteriaItemItem}" itemLabel="#{departementCriteriaItemItem.description}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateLayoutPricingLabel_layout}" for="layout" />
                         <p:selectOneMenu id="layout" value="#{layoutPricingController.selected.layout}" >
                             <f:selectItems value="#{layoutController.itemsAvailableSelectOne}"
                                            var="layoutItem"
-                                           itemValue="#{layoutItem}"/>
+                                           itemValue="#{layoutItem}" itemLabel="#{layoutItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateLayoutPricingLabel_price}" for="price" />
                         <p:inputText id="price" value="#{layoutPricingController.selected.price}" title="#{bundle.CreateLayoutPricingTitle_price}" />
-                        <p:outputLabel value="#{bundle.CreateLayoutPricingLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{layoutPricingController.selected.id}" title="#{bundle.CreateLayoutPricingTitle_id}" />
+                      
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{layoutPricingController.create}" value="#{bundle.Save}" update="display,:LayoutPricingListForm:datalist,:growl" oncomplete="handleSubmit(args,'LayoutPricingCreateDialog');"/>
+                    <p:commandButton actionListener="#{layoutPricingController.create}" value="#{bundle.Save}" update="display,:parametrageTab:LayoutPricingListForm:datalist,:growl" oncomplete="handleSubmit(args,'LayoutPricingCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LayoutPricingCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

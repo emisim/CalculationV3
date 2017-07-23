@@ -312,6 +312,9 @@ public class DemandCategoryController implements Serializable {
 
     public void departementeDetails(DemandCategory demandCategory) throws ScriptException {
         save = true;
+        selected = demandCategory;
+        prepareValidate(demandCategory);
+        prepareSortimentItems(demandCategory);
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
@@ -331,6 +334,7 @@ public class DemandCategoryController implements Serializable {
 
         }
         feedLists();
+       
     }
 
     private void updateDepItems(List<DepartementDetail> departementDetails) {

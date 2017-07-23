@@ -10,10 +10,7 @@
     <ui:composition>
 
 
-        <p:dialog id="SortimentItemListDlg" widgetVar="SortiementItemListDialog" modal="true" resizable="false" appendTo="@(body)" header="Sortiemnt Items">
-
-
-            <h:form id="SotimentItemListForm" style="width: 900px">
+            <h:form id="SotimentItemListForm" >
                 <p:panel header="#{bundle.ListSotimentItemTitle}">
                     <p:dataTable id="datalist" value="#{demandCategoryController.detailSotimentItems}" var="item"
                                  paginator="true"
@@ -42,7 +39,7 @@
                     </p:dataTable>
                 </p:panel>
             </h:form>
-        </p:dialog>
+       
     </ui:composition>
 
 

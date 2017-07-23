@@ -9,9 +9,8 @@
     <ui:composition>
 
 
-        <p:dialog id="DemandCategoryValidationListDlg" widgetVar="DemandCategoryValidationListDialog" modal="true" resizable="false" appendTo="@(body)" header="Validation Items">
 
-            <h:form id="DemandCategoryValidationListForm" style="width: 500px">
+            <h:form id="DemandCategoryValidationListForm" >
                 <p:panel header="#{bundle.ListDemandCategoryValidationItemTitle}">
                     <p:dataTable id="datalist" value="#{demandCategoryController.demandCategoryValidationItems}" var="item"
 
@@ -49,7 +48,6 @@
                 </p:panel>
             </h:form>
 
-        </p:dialog>
     </ui:composition>
 
 </html>

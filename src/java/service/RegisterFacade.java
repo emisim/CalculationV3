@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class RegisterFacade extends AbstractFacade<Register> {
 
-    @PersistenceContext(unitName = "kt_FST_2_binPU")
+    @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
     @Override

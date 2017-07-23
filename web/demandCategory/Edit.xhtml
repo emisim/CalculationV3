@@ -14,7 +14,7 @@
                     <h:panelGrid columns="8" cellpadding="7">
 
                         <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
-                        <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" >
+                        <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
                             <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
                                            var="categoryItem"
@@ -22,7 +22,7 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_product}" for="product" rendered="#{demandCategoryController.renderAttribute('product')}" />
-                        <p:selectOneMenu id="product" value="#{demandCategoryController.selected.product}" rendered="#{demandCategoryController.renderAttribute('product')}" >
+                        <p:selectOneMenu id="product" value="#{demandCategoryController.selected.product}" rendered="#{demandCategoryController.renderAttribute('product')}" autoWidth="false" >
                             <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{productController.itemsAvailableSelectOne}"
                                            var="productItem"
