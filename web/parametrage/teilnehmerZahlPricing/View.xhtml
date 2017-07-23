@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TeilnehmerZahlPricingViewDlg" widgetVar="TeilnehmerZahlPricingViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTeilnehmerZahlPricingTitle}">
+            <h:form id="TeilnehmerZahlPricingViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{teilnehmerZahlPricingController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTeilnehmerZahlPricingLabel_teilnehmerZahlMinOperator}"/>
+                        <h:outputText value="#{teilnehmerZahlPricingController.selected.teilnehmerZahlMinOperator}" title="#{bundle.ViewTeilnehmerZahlPricingTitle_teilnehmerZahlMinOperator}"/>
+                        <h:outputText value="#{bundle.ViewTeilnehmerZahlPricingLabel_teilnehmerZahlMaxOperator}"/>
+                        <h:outputText value="#{teilnehmerZahlPricingController.selected.teilnehmerZahlMaxOperator}" title="#{bundle.ViewTeilnehmerZahlPricingTitle_teilnehmerZahlMaxOperator}"/>
+                        <h:outputText value="#{bundle.ViewTeilnehmerZahlPricingLabel_teilnehmerZahlMin}"/>
+                        <h:outputText value="#{teilnehmerZahlPricingController.selected.teilnehmerZahlMin}" title="#{bundle.ViewTeilnehmerZahlPricingTitle_teilnehmerZahlMin}"/>
+                        <h:outputText value="#{bundle.ViewTeilnehmerZahlPricingLabel_teilnehmerZahlMax}"/>
+                        <h:outputText value="#{teilnehmerZahlPricingController.selected.teilnehmerZahlMax}" title="#{bundle.ViewTeilnehmerZahlPricingTitle_teilnehmerZahlMax}"/>
+                        <h:outputText value="#{bundle.ViewTeilnehmerZahlPricingLabel_price}"/>
+                        <h:outputText value="#{teilnehmerZahlPricingController.selected.price}" title="#{bundle.ViewTeilnehmerZahlPricingTitle_price}"/>
+                        <h:outputText value="#{bundle.ViewTeilnehmerZahlPricingLabel_id}"/>
+                        <h:outputText value="#{teilnehmerZahlPricingController.selected.id}" title="#{bundle.ViewTeilnehmerZahlPricingTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TeilnehmerZahlPricingViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

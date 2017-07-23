@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LayoutPricingEditDlg" widgetVar="LayoutPricingEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLayoutPricingTitle}">
+            <h:form id="LayoutPricingEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{layoutPricingController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLayoutPricingLabel_departementCriteriaItem}" for="departementCriteriaItem" />
+                        <p:selectOneMenu id="departementCriteriaItem" value="#{layoutPricingController.selected.departementCriteriaItem}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departementCriteriaItemController.itemsAvailableSelectOne}"
+                                           var="departementCriteriaItemItem"
+                                           itemValue="#{departementCriteriaItemItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLayoutPricingLabel_layout}" for="layout" />
+                        <p:selectOneMenu id="layout" value="#{layoutPricingController.selected.layout}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{layoutController.itemsAvailableSelectOne}"
+                                           var="layoutItem"
+                                           itemValue="#{layoutItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLayoutPricingLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{layoutPricingController.selected.price}" title="#{bundle.EditLayoutPricingTitle_price}" />
+                        <p:outputLabel value="#{bundle.EditLayoutPricingLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{layoutPricingController.selected.id}" title="#{bundle.EditLayoutPricingTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{layoutPricingController.update}" value="#{bundle.Save}" update="display,:LayoutPricingListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LayoutPricingEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LayoutPricingEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
