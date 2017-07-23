@@ -25,7 +25,7 @@
                         <p:outputLabel value="#{bundle.CreateTeilnehmerZahlPricingLabel_id}" for="id" />
                         <p:inputText id="id" value="#{teilnehmerZahlPricingController.selected.id}" title="#{bundle.CreateTeilnehmerZahlPricingTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{teilnehmerZahlPricingController.create}" value="#{bundle.Save}" update="display,:TeilnehmerZahlPricingListForm:datalist,:growl" oncomplete="handleSubmit(args,'TeilnehmerZahlPricingCreateDialog');"/>
+                    <p:commandButton actionListener="#{teilnehmerZahlPricingController.create}" value="#{bundle.Save}" update="display,:parametrageTab:TeilnehmerZahlPricingListForm:datalist,:growl" oncomplete="handleSubmit(args,'TeilnehmerZahlPricingCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TeilnehmerZahlPricingCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
