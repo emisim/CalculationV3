@@ -101,6 +101,12 @@ public class DemandCategoryController implements Serializable {
         }
     }
 
+    public void initAction() {
+        selected.setSotimentItems(null);
+        selected = null;
+        sotimentItems = null;
+    }
+
     public boolean adminAccess() {
         return SessionUtil.getConnectedUser().getAdmin() == 1;
     }
@@ -456,9 +462,7 @@ public class DemandCategoryController implements Serializable {
                 } else {
                     getFacade().remove(selected);
                 }
-                selected.setSotimentItems(null);
-                selected = null;
-                sotimentItems=null;
+
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";
