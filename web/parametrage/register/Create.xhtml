@@ -14,10 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{registerController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateRegisterLabel_price}" for="price" />
                         <p:inputText id="price" value="#{registerController.selected.price}" title="#{bundle.CreateRegisterTitle_price}" />
-                        <p:outputLabel value="#{bundle.CreateRegisterLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{registerController.selected.id}" title="#{bundle.CreateRegisterTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{registerController.create}" value="#{bundle.Save}" update="display,:RegisterListForm:datalist,:growl" oncomplete="handleSubmit(args,'RegisterCreateDialog');"/>
+                    <p:commandButton actionListener="#{registerController.create}" value="#{bundle.Save}" update="display,:parametrageTab:RegisterListForm:datalist,:growl" oncomplete="handleSubmit(args,'RegisterCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RegisterCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

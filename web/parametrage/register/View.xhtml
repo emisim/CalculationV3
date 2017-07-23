@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{registerController.selected != null}">
                         <h:outputText value="#{bundle.ViewRegisterLabel_price}"/>
                         <h:outputText value="#{registerController.selected.price}" title="#{bundle.ViewRegisterTitle_price}"/>
-                        <h:outputText value="#{bundle.ViewRegisterLabel_id}"/>
-                        <h:outputText value="#{registerController.selected.id}" title="#{bundle.ViewRegisterTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="RegisterViewDialog.hide()"/>
                 </h:panelGroup>

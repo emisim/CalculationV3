@@ -29,6 +29,8 @@ public class DepartementDetail {
     private Long demandCategoryCalcuationId;
     private Long demandCategoryDepartementCalculationId;
     private Long demandCategoryCalculationItemId;
+    private String summTotal;
+    private String summDruck;
 
     public DepartementDetail() {
     }
@@ -162,9 +164,23 @@ public class DepartementDetail {
     public void setDescrDepCriteriaItemGlobal(String descrDepCriteriaItemGlobal) {
         this.descrDepCriteriaItemGlobal = descrDepCriteriaItemGlobal;
     }
-    
-    
 
+    public String getSummTotal() {
+        return summTotal;
+    }
+
+    public void setSummTotal(String summTotal) {
+        this.summTotal = summTotal;
+    }
+
+    public String getSummDruck() {
+        return summDruck;
+    }
+
+    public void setSummDruck(String summDruck) {
+        this.summDruck = summDruck;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

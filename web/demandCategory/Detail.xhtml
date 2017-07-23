@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="DemandCategoryDetailDlg" width="1200" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Departements':userController.connectedUser.departement}" >
+        <p:dialog id="DemandCategoryDetailDlg" width="1200" style="height: 50%;max-height: 600px;overflow: auto;" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Departements':userController.connectedUser.departement}" >
             <h:form id="DemandCategoryDetailForm">
                 <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
                     <p:dataTable id="departementCriteriasDataList"  var="item" value="#{demandCategoryController.departementCriterias}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >
@@ -25,8 +25,8 @@
                         <p:column headerText="Description" width="80">
                             <h:outputText value="#{item.descrDepCriteriaItem}" />
                         </p:column>
-                         <p:column headerText="Global Description" width="80">
-                             <h:outputText value="#{item.descrDepCriteriaItemGlobal}" />
+                        <p:column headerText="Global Description" width="80">
+                            <h:outputText value="#{item.descrDepCriteriaItemGlobal}" />
                         </p:column>
                         <p:column headerText="Unit Price" width="50" >
                             <h:outputText value="#{item.priceUpdate}" />
@@ -40,7 +40,11 @@
                             </p:column>
                         </p:summaryRow>
                         <f:facet name="footer">
-                            <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;" />
+                            
+                                    <h:outputText value="Summ Total : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summTotal:'0'} $ | Summ Druck : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDruck:'0'} $" style="margin-right: 700px;" />
+                               
+                                    <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $" style="font-size:18px;text-align: left;" />
+                               
                         </f:facet>
                     </p:dataTable>
                     <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
@@ -143,8 +147,8 @@
                                 <p:column headerText="Description" width="150">
                                     <h:outputText value="#{item.descrDepCriteriaItem}" />
                                 </p:column>
-                                 <p:column headerText="Global Description" width="150">
-                                     <h:outputText value="#{item.descrDepCriteriaItemGlobal}" />
+                                <p:column headerText="Global Description" width="150">
+                                    <h:outputText value="#{item.descrDepCriteriaItemGlobal}" />
                                 </p:column>
                                 <p:column headerText="Unit Price" width="50" >
                                     <h:outputText value="#{item.priceUpdate}" />
