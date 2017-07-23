@@ -48,7 +48,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{bundle.ListSortimentTitle_mKSchluessel}"/>
                     </f:facet>
-                    <h:outputText value="#{item.mkSchluessel}"/>
+                    <h:outputText value="#{item.mkschluessel}"/>
                 </p:column>
                 <f:facet name="footer">
                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{sortimentController.prepareCreate}" update=":parametrageTab:SortimentCreateForm" oncomplete="PF('SortimentCreateDialog').show()"/>
