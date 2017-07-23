@@ -215,7 +215,7 @@
                                 </f:facet>
                             </p:dataTable> 
                             <p:panel styleClass="align-center" rendered="#{demandCategoryController.save}">
-                                <p:commandButton   actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update="DemandCategoryListForm:datalist,DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
+                                <p:commandButton   actionListener="#{demandCategoryController.updateProjectManagement()}" value="#{bundle.Save}" update=":DemandCategoryListForm,DemandCategoryDetailForm,projectManagementDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
                             </p:panel>
                         </p:tab>
                         <p:tab title="Infos">
