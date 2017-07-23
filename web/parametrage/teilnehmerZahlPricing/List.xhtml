@@ -6,14 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-
-
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListTeilnehmerZahlPricingTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
             <h:form id="TeilnehmerZahlPricingListForm">
                 <p:panel header="#{bundle.ListTeilnehmerZahlPricingTitle}">
                     <p:dataTable id="datalist" value="#{teilnehmerZahlPricingController.items}" var="item"
@@ -76,7 +68,6 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+  
 
 </html>
