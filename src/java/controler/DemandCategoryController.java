@@ -32,6 +32,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.view.ViewScoped;
 import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
 import service.AccessFacade;
@@ -39,7 +40,7 @@ import service.DemandCategoryCalculationItemFacade;
 import service.DemandCategoryDepartementCalculationFacade;
 
 @Named("demandCategoryController")
-@SessionScoped
+@ViewScoped
 public class DemandCategoryController implements Serializable {
 
     @EJB
@@ -340,7 +341,7 @@ public class DemandCategoryController implements Serializable {
 
         }
         feedLists();
-       
+
     }
 
     private void updateDepItems(List<DepartementDetail> departementDetails) {
@@ -455,15 +456,25 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
+                    if (getSotimentItems() != null && !getSotimentItems().isEmpty()) {
+                        getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
+                        JsfUtil.addSuccessMessage(successMessage);
+                    } else {
+                        JsfUtil.addWrningMessage("Sortiement items required");
+                    }
                 } else if (persistAction == PersistAction.UPDATE) {
                     sortimentItemFacade.delete(detailSotimentItems);
-                    getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, false);
+                    if (getSotimentItems() != null && !getSotimentItems().isEmpty()) {
+                        getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, false);
+                        JsfUtil.addSuccessMessage(successMessage);
+                    } else {
+                        JsfUtil.addWrningMessage("Sortiement items required");
+                    }
                 } else {
                     getFacade().remove(selected);
+                    JsfUtil.addSuccessMessage(successMessage);
                 }
 
-                JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -699,7 +710,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public boolean isSave() {
-        
+
         return save;
     }
 
