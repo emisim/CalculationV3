@@ -432,19 +432,19 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    if (getSotimentItems() != null && !getSotimentItems().isEmpty()) {
+                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100))==0) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
                         JsfUtil.addSuccessMessage(successMessage);
                     } else {
-                        JsfUtil.addWrningMessage("Sortiement items required");
+                        JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
                     }
                 } else if (persistAction == PersistAction.UPDATE) {
                     sortimentItemFacade.delete(detailSotimentItems);
-                    if (getSotimentItems() != null && !getSotimentItems().isEmpty()) {
+                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100))==0) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, false);
                         JsfUtil.addSuccessMessage(successMessage);
                     } else {
-                        JsfUtil.addWrningMessage("Sortiement items required");
+                        JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
                     }
                 } else {
                     getFacade().remove(selected);
