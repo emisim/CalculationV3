@@ -156,18 +156,4 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
 
     
 
-public BigDecimal findByDateMinMax(Date dateMin, Date dateMax, String nameDepartement) {
-        String requet = "SELECT SUM(dcdc.summe) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
-
-        requet += SearchUtil.addConstraintMinMaxDate("dcdc", "demandCategory.dateDemandCategory", dateMin, dateMax);
-        requet += " AND dcdc.departement.name='" + nameDepartement + "'";
-
-        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> " + requet);
-        List<BigDecimal> res = em.createQuery(requet).getResultList();
-        if (res != null && !res.isEmpty() && res.get(0) != null) {
-            System.out.println("res.get(0) = "+res.get(0));
-            return res.get(0);
-        }
-        return new BigDecimal(0);
-    }
 }
