@@ -117,12 +117,14 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     private void calcSumTotal(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
-        demandCategory.setSummTotal(new BigDecimal(0));
+        demandCategory.setSummUnitPrice(new BigDecimal(0));
+        demandCategory.setSummeGlobal(new BigDecimal(0));
         if (demandCategoryDepartementCalculations == null || demandCategoryDepartementCalculations.isEmpty()) {
             return;
         }
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
+            demandCategory.setSummUnitPrice(demandCategory.getSummUnitPrice().add(demandCategoryDepartementCalculation.getSumme()));
+            demandCategory.setSummeGlobal(demandCategory.getSummeGlobal().add(demandCategoryDepartementCalculation.getSummeGlobal()));
         }
     }
 
@@ -238,12 +240,12 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
-            return demandCategory.getSummTotal();
+            return demandCategory.getSummeGlobal();
         } else if (SessionUtil.getConnectedUser().getDepartement() != null && !Objects.equals(SessionUtil.getConnectedUser().getDepartement().getId(), demandCategory.getDepartment().getId())) {
-            return (BigDecimal) em.createQuery("SELECT item.summe FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
+            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
                     + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
-            return demandCategory.getSummTotal();
+            return demandCategory.getSummeGlobal();
         }
     }
 

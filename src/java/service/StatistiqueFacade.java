@@ -80,15 +80,15 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
         }
         if (typeSum == 1) {
-            summQuery = " SUM(" + beanAbreviation + ".summTotal)";
+            summQuery = " SUM(" + beanAbreviation + ".summGlobal)";
         } else if (typeSum == 2) {
             summQuery = " SUM(" + beanAbreviation + ".summDruck)";
         } else if (typeSum == 3) {
-            summQuery = " SUM(" + beanAbreviation + ".summDruck" + " + " + beanAbreviation + ".summTotal)";
+            summQuery = " SUM(" + beanAbreviation + ".summDruck" + " + " + beanAbreviation + ".summGlobal)";
         } else {
             if (departements != null && !departements.isEmpty()) {
                 beanAbreviation = "dcdc";
-                summQuery = "SUM(" + beanAbreviation + ".summe)";
+                summQuery = "SUM(" + beanAbreviation + ".summeGlobal)";
                 wherequery = " dcdc.demandCategory.id=dc.id";
             } else {
                 /*
@@ -97,7 +97,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
                  */
                 wherequery = " 1=0 ";
                 //requet toujours faux quelque soit summQuery
-                summQuery = summQuery = " SUM(" + beanAbreviation + ".summTotal)";
+                summQuery = summQuery = " SUM(" + beanAbreviation + ".summGlobal)";
             }
 
         }

@@ -128,8 +128,11 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_teilnehmerZahlPricing}"/>
                         <h:outputText value="#{demandCategoryController.selected.teilnehmerZahlPricing}" title="#{bundle.ViewDemandCategoryTitle_teilnehmerZahlPricing}"/>
                     
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.summTotal}" title="#{bundle.ViewDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summUnitPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCateViewDemandCategoryLabel_summTotalgoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summUnitPrice}" title="#{bundle.ViewDemandCategoryTitle_summUnitPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                       
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGolbalPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summeGlobal}" title="#{bundle.ViewDemandCategoryTitle_summGolbalPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
 
 
                     </p:panelGrid>
