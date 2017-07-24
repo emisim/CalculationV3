@@ -119,6 +119,8 @@ public class DemandCategory implements Serializable {
 
     //Teilnehmerzahl
     private int teilnehmerZahl = 16; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal teilnehmerZahlPricing = new BigDecimal(0);
     @ManyToOne
     private ParticipantFaktor participantFaktor;
 
@@ -187,6 +189,14 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    public BigDecimal getTeilnehmerZahlPricing() {
+        return teilnehmerZahlPricing;
+    }
+
+    public void setTeilnehmerZahlPricing(BigDecimal teilnehmerZahlPricing) {
+        this.teilnehmerZahlPricing = teilnehmerZahlPricing;
+    }
 
     public Seiten getDruckSeiten() {
         return druckSeiten;

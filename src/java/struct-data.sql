@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 24 Juillet 2017 à 17:24
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+-- Généré le :  Lun 24 Juillet 2017 à 22:53
+-- Version du serveur :  10.1.8-MariaDB
+-- Version de PHP :  5.6.14
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -329,6 +329,7 @@ CREATE TABLE `demandcategory` (
   `SUMMDRUCK` decimal(10,2) DEFAULT NULL,
   `SUMMTOTAL` decimal(10,2) DEFAULT NULL,
   `TEILNEHMERZAHL` int(11) DEFAULT NULL,
+  `TEILNEHMERZAHLPRICING` decimal(10,2) DEFAULT NULL,
   `UMFANG` int(11) DEFAULT NULL,
   `UMSCHLAG` tinyint(1) DEFAULT '0',
   `SCHLUESSEL_ID` bigint(20) DEFAULT NULL,
@@ -367,11 +368,15 @@ CREATE TABLE `demandcategory` (
 -- Contenu de la table `demandcategory`
 --
 
-INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`, `PRODUCTSCHLUESSELFAKTOR`, `ARTIKELPERPAGELFAKTOR`, `LKSCHLUESSELFAKTOR`, `MKSCHLUESSELFAKTOR`) VALUES
-(24, -1, 0, 5, 2, 0, 6, 2, 0, 4, 15, 13, 14, 20, 7, 2, 0, 9, 3, '2017-07-23', '2017-07-23', 1, '2017-07-23', 0, 10, 17, '0.00', '2338.19', 16, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '2.72', '9.14', '1.01', '1.01'),
-(25, -1, -1, 5, 0, 0, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 0, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '2128.19', 16, 0, 0, NULL, NULL, NULL, 7, NULL, 1, 102, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '0.00', '0.00', '0.00', '0.00'),
-(26, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, 7, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'kiki', NULL, 1, '0.00', '0.00', '0.00', '0.00'),
-(27, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-24', '2017-07-24', 0, '2017-07-24', 0, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, 8, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'ana', NULL, NULL, '0.00', '0.00', '0.00', '0.00');
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `TEILNEHMERZAHLPRICING`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`, `PRODUCTSCHLUESSELFAKTOR`, `ARTIKELPERPAGELFAKTOR`, `LKSCHLUESSELFAKTOR`, `MKSCHLUESSELFAKTOR`) VALUES
+(24, -1, 0, 5, 2, 0, 6, 2, 0, 4, 15, 13, 14, 20, 7, 2, 0, 9, 3, '2017-07-23', '2017-07-23', 1, '2017-07-23', 0, 10, 17, '0.00', '2338.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '2.72', '9.14', '1.01', '1.01'),
+(25, -1, -1, 5, 0, 0, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 0, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '2128.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 1, 102, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '0.00', '0.00', '0.00', '0.00'),
+(26, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'kiki', NULL, 1, '0.00', '0.00', '0.00', '0.00'),
+(27, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-24', '2017-07-24', 0, '2017-07-24', 0, 10, 17, '0.00', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 8, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'ana', NULL, NULL, '0.00', '0.00', '0.00', '0.00'),
+(29, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 0, 10, 17, '0.00', '2338.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05'),
+(30, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 0, 10, 17, '0.00', '2338.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05'),
+(32, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 1, 10, 17, '0.00', '2338.19', 16, '1.00', 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05'),
+(33, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 1, 10, 17, '0.00', '2338.19', 21, '1.20', 0, 0, NULL, NULL, NULL, 7, NULL, 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05');
 
 -- --------------------------------------------------------
 
@@ -450,7 +455,115 @@ INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `SUMMEGLOBAL`, `VALIDE`,
 (425, '224.00', NULL, 0, 112, 1),
 (426, NULL, NULL, 0, 112, 2),
 (427, '224.00', NULL, 0, 113, 1),
-(428, NULL, NULL, 0, 113, 2);
+(428, NULL, NULL, 0, 113, 2),
+(430, '224.00', '1400', 0, 115, 1),
+(431, '72.80', '73', 0, 115, 2),
+(432, '56.28', '898', 0, 115, 3),
+(433, '23.20', '17', 0, 115, 4),
+(434, '28.00', '392', 0, 115, 5),
+(435, '140.00', '2100', 0, 115, 6),
+(436, '115.23', '1120', 0, 115, 7),
+(437, '44.80', '560', 0, 115, 8),
+(438, '56.00', '560', 0, 116, 9),
+(439, '28.58', '395', 0, 116, 10),
+(440, '484.96', '956', 0, 116, 11),
+(441, '0.28', '2', 0, 116, 12),
+(442, '0.00', '0', 0, 116, 13),
+(443, '0.06', '0', 0, 116, 14),
+(444, '0.00', '0', 0, 117, 15),
+(445, '0.00', '0', 0, 117, 16),
+(446, '0.00', '0', 0, 117, 17),
+(447, '0.00', '0', 0, 117, 18),
+(448, '0.00', '0', 0, 117, 19),
+(449, '0.00', '0', 0, 117, 20),
+(450, '168.00', '168', 0, 118, 28),
+(451, '0.00', '0', 0, 119, 21),
+(452, '0.00', '0', 0, 119, 22),
+(453, '0.00', '0', 0, 119, 23),
+(454, '0.00', '0', 0, 120, 24),
+(455, '0.00', '0', 0, 120, 25),
+(456, '896.00', '1386', 0, 121, 27),
+(457, '224.00', '1400', 0, 122, 1),
+(458, '72.80', '73', 0, 122, 2),
+(459, '56.28', '898', 0, 122, 3),
+(460, '23.20', '17', 0, 122, 4),
+(461, '28.00', '392', 0, 122, 5),
+(462, '140.00', '2100', 0, 122, 6),
+(463, '115.23', '1120', 0, 122, 7),
+(464, '44.80', '560', 0, 122, 8),
+(465, '56.00', '560', 0, 123, 9),
+(466, '28.58', '395', 0, 123, 10),
+(467, '484.96', '956', 0, 123, 11),
+(468, '0.28', '2', 0, 123, 12),
+(469, '0.00', '0', 0, 123, 13),
+(470, '0.06', '0', 0, 123, 14),
+(471, '0.00', '0', 0, 124, 15),
+(472, '0.00', '0', 0, 124, 16),
+(473, '0.00', '0', 0, 124, 17),
+(474, '0.00', '0', 0, 124, 18),
+(475, '0.00', '0', 0, 124, 19),
+(476, '0.00', '0', 0, 124, 20),
+(477, '168.00', '168', 0, 125, 28),
+(478, '0.00', '0', 0, 126, 21),
+(479, '0.00', '0', 0, 126, 22),
+(480, '0.00', '0', 0, 126, 23),
+(481, '0.00', '0', 0, 127, 24),
+(482, '0.00', '0', 0, 127, 25),
+(483, '896.00', '1386', 0, 128, 27),
+(511, '224.00', '1400', 0, 136, 1),
+(512, '72.80', '73', 0, 136, 2),
+(513, '56.28', '898', 0, 136, 3),
+(514, '23.20', '17', 0, 136, 4),
+(515, '28.00', '392', 0, 136, 5),
+(516, '140.00', '2100', 0, 136, 6),
+(517, '115.23', '1120', 0, 136, 7),
+(518, '44.80', '560', 0, 136, 8),
+(519, '56.00', '560', 0, 137, 9),
+(520, '28.58', '395', 0, 137, 10),
+(521, '484.96', '956', 0, 137, 11),
+(522, '0.28', '2', 0, 137, 12),
+(523, '0.00', '0', 0, 137, 13),
+(524, '0.06', '0', 0, 137, 14),
+(525, '0.00', '0', 0, 138, 15),
+(526, '0.00', '0', 0, 138, 16),
+(527, '0.00', '0', 0, 138, 17),
+(528, '0.00', '0', 0, 138, 18),
+(529, '0.00', '0', 0, 138, 19),
+(530, '0.00', '0', 0, 138, 20),
+(531, '168.00', '168', 0, 139, 28),
+(532, '0.00', '0', 0, 140, 21),
+(533, '0.00', '0', 0, 140, 22),
+(534, '0.00', '0', 0, 140, 23),
+(535, '0.00', '0', 0, 141, 24),
+(536, '0.00', '0', 0, 141, 25),
+(537, '896.00', '1386', 0, 142, 27),
+(538, '224.00', '1400', 0, 143, 1),
+(539, '72.80', '73', 0, 143, 2),
+(540, '56.28', '898', 0, 143, 3),
+(541, '23.20', '17', 0, 143, 4),
+(542, '28.00', '392', 0, 143, 5),
+(543, '140.00', '2100', 0, 143, 6),
+(544, '115.23', '1120', 0, 143, 7),
+(545, '44.80', '560', 0, 143, 8),
+(546, '56.00', '560', 0, 144, 9),
+(547, '28.58', '395', 0, 144, 10),
+(548, '484.96', '956', 0, 144, 11),
+(549, '0.28', '2', 0, 144, 12),
+(550, '0.00', '0', 0, 144, 13),
+(551, '0.06', '0', 0, 144, 14),
+(552, '0.00', '0', 0, 145, 15),
+(553, '0.00', '0', 0, 145, 16),
+(554, '0.00', '0', 0, 145, 17),
+(555, '0.00', '0', 0, 145, 18),
+(556, '0.00', '0', 0, 145, 19),
+(557, '0.00', '0', 0, 145, 20),
+(558, '168.00', '168', 0, 146, 28),
+(559, '0.00', '0', 0, 147, 21),
+(560, '0.00', '0', 0, 147, 22),
+(561, '0.00', '0', 0, 147, 23),
+(562, '0.00', '0', 0, 148, 24),
+(563, '0.00', '0', 0, 148, 25),
+(564, '896.00', '1386', 0, 149, 27);
 
 -- --------------------------------------------------------
 
@@ -603,7 +716,243 @@ INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICE
 (939, 1, '56.00', '168.00', '168.00', '56.00', 427, 7),
 (940, 1, '56.00', '448.00', '448.00', '56.00', 427, 8),
 (941, 1, '56.00', '56.00', '56.00', '56.00', 428, 3),
-(942, 1, '0.00', '0.00', '0.00', '0.00', 428, 4);
+(942, 1, '0.00', '0.00', '0.00', '0.00', 428, 4),
+(943, 1, '56.00', '448.00', '448.00', '56.00', 430, 1),
+(944, 1, '56.00', '336.00', '336.00', '56.00', 430, 2),
+(945, 1, '56.00', '168.00', '168.00', '56.00', 430, 7),
+(946, 1, '56.00', '448.00', '448.00', '56.00', 430, 8),
+(947, 1, '56.00', '56.00', '56.00', '56.00', 431, 3),
+(948, 1, '0.00', '0.00', '0.00', '0.00', 431, 4),
+(949, 1, '5.60', '5.60', '5.60', '5.60', 431, 16),
+(950, 1, '11.20', '11.20', '11.20', '11.20', 431, 17),
+(951, 1, '0.28', '1.68', '1.68', '0.28', 432, 11),
+(952, 1, '56.00', '896.00', '896.00', '56.00', 432, 12),
+(953, 1, '6.40', '0.00', '0.00', '6.40', 433, 13),
+(954, 1, '11.20', '11.20', '11.20', '11.20', 433, 19),
+(955, 1, '5.60', '5.60', '5.60', '5.60', 433, 20),
+(956, 1, '28.00', '392.00', '392.00', '28.00', 434, 14),
+(957, 1, '0.00', '0.00', '0.00', '0.00', 434, 15),
+(958, 1, '0.00', '0.00', '0.00', '0.00', 434, 21),
+(959, 1, '0.00', '0.00', '0.00', '0.00', 434, 22),
+(960, 1, '0.00', '0.00', '0.00', '0.00', 434, 23),
+(961, 1, '0.00', '0.00', '0.00', '0.00', 434, 24),
+(962, 1, '0.00', '0.00', '0.00', '0.00', 435, 25),
+(963, 1, '140.00', '2100.00', '2100.00', '140.00', 435, 26),
+(964, 1, '0.28', '0.28', '0.28', '0.28', 436, 27),
+(965, 1, '56.00', '672.00', '672.00', '56.00', 436, 28),
+(966, 1, '56.00', '448.00', '448.00', '56.00', 436, 29),
+(967, 1, '2.95', '0.00', '0.00', '2.95', 436, 30),
+(968, 1, '22.40', '336.00', '336.00', '22.40', 437, 31),
+(969, 1, '22.40', '224.00', '224.00', '22.40', 437, 32),
+(970, 1, '56.00', '560.00', '560.00', '56.00', 438, 5),
+(971, 1, '0.23', '0.23', '0.23', '0.23', 439, 33),
+(972, 1, '0.35', '2.45', '2.45', '0.35', 439, 34),
+(973, 1, '28.00', '392.00', '392.00', '28.00', 439, 35),
+(974, 1, '224.00', '224.00', '224.00', '224.00', 440, 36),
+(975, 1, '28.00', '392.00', '392.00', '28.00', 440, 37),
+(976, 1, '8.96', '116.48', '116.48', '8.96', 440, 38),
+(977, 1, '224.00', '224.00', '224.00', '224.00', 440, 39),
+(978, 1, '0.28', '1.68', '1.68', '0.28', 441, 40),
+(979, 1, '0.00', '0.00', '0.00', '0.00', 442, 6),
+(980, 1, '0.06', '0.34', '0.34', '0.06', 443, 41),
+(981, 1, '0.00', '0.00', '0.00', '0.00', 450, 48),
+(982, 1, '0.00', '0.00', '0.00', '0.00', 450, 49),
+(983, 1, '0.00', '0.00', '0.00', '0.00', 450, 50),
+(984, 1, '0.00', '0.00', '0.00', '0.00', 450, 51),
+(985, 1, '0.00', '0.00', '0.00', '0.00', 450, 52),
+(986, 1, '0.00', '0.00', '0.00', '0.00', 450, 53),
+(987, 1, '0.00', '0.00', '0.00', '0.00', 450, 54),
+(988, 1, '0.00', '0.00', '0.00', '0.00', 450, 55),
+(989, 1, '0.00', '0.00', '0.00', '0.00', 450, 58),
+(990, 1, '0.00', '0.00', '0.00', '0.00', 450, 59),
+(991, 1, '0.00', '0.00', '0.00', '0.00', 450, 60),
+(992, 1, '0.00', '0.00', '0.00', '0.00', 450, 61),
+(993, 1, '0.00', '0.00', '0.00', '0.00', 450, 62),
+(994, 1, '168.00', '168.00', '168.00', '168.00', 450, 63),
+(995, 1, '0.00', '0.00', '0.00', '0.00', 450, 64),
+(996, 1, '252.00', '504.00', '504.00', '252.00', 456, 42),
+(997, 1, '168.00', '336.00', '336.00', '168.00', 456, 43),
+(998, 1, '42.00', '84.00', '84.00', '42.00', 456, 44),
+(999, 1, '14.00', '42.00', '42.00', '14.00', 456, 45),
+(1000, 1, '336.00', '336.00', '336.00', '336.00', 456, 46),
+(1001, 1, '84.00', '84.00', '84.00', '84.00', 456, 47),
+(1002, 1, '56.00', '448.00', '448.00', '56.00', 457, 1),
+(1003, 1, '56.00', '336.00', '336.00', '56.00', 457, 2),
+(1004, 1, '56.00', '168.00', '168.00', '56.00', 457, 7),
+(1005, 1, '56.00', '448.00', '448.00', '56.00', 457, 8),
+(1006, 1, '56.00', '56.00', '56.00', '56.00', 458, 3),
+(1007, 1, '0.00', '0.00', '0.00', '0.00', 458, 4),
+(1008, 1, '5.60', '5.60', '5.60', '5.60', 458, 16),
+(1009, 1, '11.20', '11.20', '11.20', '11.20', 458, 17),
+(1010, 1, '0.28', '1.68', '1.68', '0.28', 459, 11),
+(1011, 1, '56.00', '896.00', '896.00', '56.00', 459, 12),
+(1012, 1, '6.40', '0.00', '0.00', '6.40', 460, 13),
+(1013, 1, '11.20', '11.20', '11.20', '11.20', 460, 19),
+(1014, 1, '5.60', '5.60', '5.60', '5.60', 460, 20),
+(1015, 1, '28.00', '392.00', '392.00', '28.00', 461, 14),
+(1016, 1, '0.00', '0.00', '0.00', '0.00', 461, 15),
+(1017, 1, '0.00', '0.00', '0.00', '0.00', 461, 21),
+(1018, 1, '0.00', '0.00', '0.00', '0.00', 461, 22),
+(1019, 1, '0.00', '0.00', '0.00', '0.00', 461, 23),
+(1020, 1, '0.00', '0.00', '0.00', '0.00', 461, 24),
+(1021, 1, '0.00', '0.00', '0.00', '0.00', 462, 25),
+(1022, 1, '140.00', '2100.00', '2100.00', '140.00', 462, 26),
+(1023, 1, '0.28', '0.28', '0.28', '0.28', 463, 27),
+(1024, 1, '56.00', '672.00', '672.00', '56.00', 463, 28),
+(1025, 1, '56.00', '448.00', '448.00', '56.00', 463, 29),
+(1026, 1, '2.95', '0.00', '0.00', '2.95', 463, 30),
+(1027, 1, '22.40', '336.00', '336.00', '22.40', 464, 31),
+(1028, 1, '22.40', '224.00', '224.00', '22.40', 464, 32),
+(1029, 1, '56.00', '560.00', '560.00', '56.00', 465, 5),
+(1030, 1, '0.23', '0.23', '0.23', '0.23', 466, 33),
+(1031, 1, '0.35', '2.45', '2.45', '0.35', 466, 34),
+(1032, 1, '28.00', '392.00', '392.00', '28.00', 466, 35),
+(1033, 1, '224.00', '224.00', '224.00', '224.00', 467, 36),
+(1034, 1, '28.00', '392.00', '392.00', '28.00', 467, 37),
+(1035, 1, '8.96', '116.48', '116.48', '8.96', 467, 38),
+(1036, 1, '224.00', '224.00', '224.00', '224.00', 467, 39),
+(1037, 1, '0.28', '1.68', '1.68', '0.28', 468, 40),
+(1038, 1, '0.00', '0.00', '0.00', '0.00', 469, 6),
+(1039, 1, '0.06', '0.34', '0.34', '0.06', 470, 41),
+(1040, 1, '0.00', '0.00', '0.00', '0.00', 477, 48),
+(1041, 1, '0.00', '0.00', '0.00', '0.00', 477, 49),
+(1042, 1, '0.00', '0.00', '0.00', '0.00', 477, 50),
+(1043, 1, '0.00', '0.00', '0.00', '0.00', 477, 51),
+(1044, 1, '0.00', '0.00', '0.00', '0.00', 477, 52),
+(1045, 1, '0.00', '0.00', '0.00', '0.00', 477, 53),
+(1046, 1, '0.00', '0.00', '0.00', '0.00', 477, 54),
+(1047, 1, '0.00', '0.00', '0.00', '0.00', 477, 55),
+(1048, 1, '0.00', '0.00', '0.00', '0.00', 477, 58),
+(1049, 1, '0.00', '0.00', '0.00', '0.00', 477, 59),
+(1050, 1, '0.00', '0.00', '0.00', '0.00', 477, 60),
+(1051, 1, '0.00', '0.00', '0.00', '0.00', 477, 61),
+(1052, 1, '0.00', '0.00', '0.00', '0.00', 477, 62),
+(1053, 1, '168.00', '168.00', '168.00', '168.00', 477, 63),
+(1054, 1, '0.00', '0.00', '0.00', '0.00', 477, 64),
+(1055, 1, '252.00', '504.00', '504.00', '252.00', 483, 42),
+(1056, 1, '168.00', '336.00', '336.00', '168.00', 483, 43),
+(1057, 1, '42.00', '84.00', '84.00', '42.00', 483, 44),
+(1058, 1, '14.00', '42.00', '42.00', '14.00', 483, 45),
+(1059, 1, '336.00', '336.00', '336.00', '336.00', 483, 46),
+(1060, 1, '84.00', '84.00', '84.00', '84.00', 483, 47),
+(1119, 1, '56.00', '448.00', '448.00', '56.00', 511, 1),
+(1120, 1, '56.00', '336.00', '336.00', '56.00', 511, 2),
+(1121, 1, '56.00', '168.00', '168.00', '56.00', 511, 7),
+(1122, 1, '56.00', '448.00', '448.00', '56.00', 511, 8),
+(1123, 1, '56.00', '56.00', '56.00', '56.00', 512, 3),
+(1124, 1, '0.00', '0.00', '0.00', '0.00', 512, 4),
+(1125, 1, '5.60', '5.60', '5.60', '5.60', 512, 16),
+(1126, 1, '11.20', '11.20', '11.20', '11.20', 512, 17),
+(1127, 1, '0.28', '1.68', '1.68', '0.28', 513, 11),
+(1128, 1, '56.00', '896.00', '896.00', '56.00', 513, 12),
+(1129, 1, '6.40', '0.00', '0.00', '6.40', 514, 13),
+(1130, 1, '11.20', '11.20', '11.20', '11.20', 514, 19),
+(1131, 1, '5.60', '5.60', '5.60', '5.60', 514, 20),
+(1132, 1, '28.00', '392.00', '392.00', '28.00', 515, 14),
+(1133, 1, '0.00', '0.00', '0.00', '0.00', 515, 15),
+(1134, 1, '0.00', '0.00', '0.00', '0.00', 515, 21),
+(1135, 1, '0.00', '0.00', '0.00', '0.00', 515, 22),
+(1136, 1, '0.00', '0.00', '0.00', '0.00', 515, 23),
+(1137, 1, '0.00', '0.00', '0.00', '0.00', 515, 24),
+(1138, 1, '0.00', '0.00', '0.00', '0.00', 516, 25),
+(1139, 1, '140.00', '2100.00', '2100.00', '140.00', 516, 26),
+(1140, 1, '0.28', '0.28', '0.28', '0.28', 517, 27),
+(1141, 1, '56.00', '672.00', '672.00', '56.00', 517, 28),
+(1142, 1, '56.00', '448.00', '448.00', '56.00', 517, 29),
+(1143, 1, '2.95', '0.00', '0.00', '2.95', 517, 30),
+(1144, 1, '22.40', '336.00', '336.00', '22.40', 518, 31),
+(1145, 1, '22.40', '224.00', '224.00', '22.40', 518, 32),
+(1146, 1, '56.00', '560.00', '560.00', '56.00', 519, 5),
+(1147, 1, '0.23', '0.23', '0.23', '0.23', 520, 33),
+(1148, 1, '0.35', '2.45', '2.45', '0.35', 520, 34),
+(1149, 1, '28.00', '392.00', '392.00', '28.00', 520, 35),
+(1150, 1, '224.00', '224.00', '224.00', '224.00', 521, 36),
+(1151, 1, '28.00', '392.00', '392.00', '28.00', 521, 37),
+(1152, 1, '8.96', '116.48', '116.48', '8.96', 521, 38),
+(1153, 1, '224.00', '224.00', '224.00', '224.00', 521, 39),
+(1154, 1, '0.28', '1.68', '1.68', '0.28', 522, 40),
+(1155, 1, '0.00', '0.00', '0.00', '0.00', 523, 6),
+(1156, 1, '0.06', '0.34', '0.34', '0.06', 524, 41),
+(1157, 1, '0.00', '0.00', '0.00', '0.00', 531, 48),
+(1158, 1, '0.00', '0.00', '0.00', '0.00', 531, 49),
+(1159, 1, '0.00', '0.00', '0.00', '0.00', 531, 50),
+(1160, 1, '0.00', '0.00', '0.00', '0.00', 531, 51),
+(1161, 1, '0.00', '0.00', '0.00', '0.00', 531, 52),
+(1162, 1, '0.00', '0.00', '0.00', '0.00', 531, 53),
+(1163, 1, '0.00', '0.00', '0.00', '0.00', 531, 54),
+(1164, 1, '0.00', '0.00', '0.00', '0.00', 531, 55),
+(1165, 1, '0.00', '0.00', '0.00', '0.00', 531, 58),
+(1166, 1, '0.00', '0.00', '0.00', '0.00', 531, 59),
+(1167, 1, '0.00', '0.00', '0.00', '0.00', 531, 60),
+(1168, 1, '0.00', '0.00', '0.00', '0.00', 531, 61),
+(1169, 1, '0.00', '0.00', '0.00', '0.00', 531, 62),
+(1170, 1, '168.00', '168.00', '168.00', '168.00', 531, 63),
+(1171, 1, '0.00', '0.00', '0.00', '0.00', 531, 64),
+(1172, 1, '252.00', '504.00', '504.00', '252.00', 537, 42),
+(1173, 1, '168.00', '336.00', '336.00', '168.00', 537, 43),
+(1174, 1, '42.00', '84.00', '84.00', '42.00', 537, 44),
+(1175, 1, '14.00', '42.00', '42.00', '14.00', 537, 45),
+(1176, 1, '336.00', '336.00', '336.00', '336.00', 537, 46),
+(1177, 1, '84.00', '84.00', '84.00', '84.00', 537, 47),
+(1178, 1, '56.00', '448.00', '448.00', '56.00', 538, 1),
+(1179, 1, '56.00', '336.00', '336.00', '56.00', 538, 2),
+(1180, 1, '56.00', '168.00', '168.00', '56.00', 538, 7),
+(1181, 1, '56.00', '448.00', '448.00', '56.00', 538, 8),
+(1182, 1, '56.00', '56.00', '56.00', '56.00', 539, 3),
+(1183, 1, '0.00', '0.00', '0.00', '0.00', 539, 4),
+(1184, 1, '5.60', '5.60', '5.60', '5.60', 539, 16),
+(1185, 1, '11.20', '11.20', '11.20', '11.20', 539, 17),
+(1186, 1, '0.28', '1.68', '1.68', '0.28', 540, 11),
+(1187, 1, '56.00', '896.00', '896.00', '56.00', 540, 12),
+(1188, 1, '6.40', '0.00', '0.00', '6.40', 541, 13),
+(1189, 1, '11.20', '11.20', '11.20', '11.20', 541, 19),
+(1190, 1, '5.60', '5.60', '5.60', '5.60', 541, 20),
+(1191, 1, '28.00', '392.00', '392.00', '28.00', 542, 14),
+(1192, 1, '0.00', '0.00', '0.00', '0.00', 542, 15),
+(1193, 1, '0.00', '0.00', '0.00', '0.00', 542, 21),
+(1194, 1, '0.00', '0.00', '0.00', '0.00', 542, 22),
+(1195, 1, '0.00', '0.00', '0.00', '0.00', 542, 23),
+(1196, 1, '0.00', '0.00', '0.00', '0.00', 542, 24),
+(1197, 1, '0.00', '0.00', '0.00', '0.00', 543, 25),
+(1198, 1, '140.00', '2100.00', '2100.00', '140.00', 543, 26),
+(1199, 1, '0.28', '0.28', '0.28', '0.28', 544, 27),
+(1200, 1, '56.00', '672.00', '672.00', '56.00', 544, 28),
+(1201, 1, '56.00', '448.00', '448.00', '56.00', 544, 29),
+(1202, 1, '2.95', '0.00', '0.00', '2.95', 544, 30),
+(1203, 1, '22.40', '336.00', '336.00', '22.40', 545, 31),
+(1204, 1, '22.40', '224.00', '224.00', '22.40', 545, 32),
+(1205, 1, '56.00', '560.00', '560.00', '56.00', 546, 5),
+(1206, 1, '0.23', '0.23', '0.23', '0.23', 547, 33),
+(1207, 1, '0.35', '2.45', '2.45', '0.35', 547, 34),
+(1208, 1, '28.00', '392.00', '392.00', '28.00', 547, 35),
+(1209, 1, '224.00', '224.00', '224.00', '224.00', 548, 36),
+(1210, 1, '28.00', '392.00', '392.00', '28.00', 548, 37),
+(1211, 1, '8.96', '116.48', '116.48', '8.96', 548, 38),
+(1212, 1, '224.00', '224.00', '224.00', '224.00', 548, 39),
+(1213, 1, '0.28', '1.68', '1.68', '0.28', 549, 40),
+(1214, 1, '0.00', '0.00', '0.00', '0.00', 550, 6),
+(1215, 1, '0.06', '0.34', '0.34', '0.06', 551, 41),
+(1216, 1, '0.00', '0.00', '0.00', '0.00', 558, 48),
+(1217, 1, '0.00', '0.00', '0.00', '0.00', 558, 49),
+(1218, 1, '0.00', '0.00', '0.00', '0.00', 558, 50),
+(1219, 1, '0.00', '0.00', '0.00', '0.00', 558, 51),
+(1220, 1, '0.00', '0.00', '0.00', '0.00', 558, 52),
+(1221, 1, '0.00', '0.00', '0.00', '0.00', 558, 53),
+(1222, 1, '0.00', '0.00', '0.00', '0.00', 558, 54),
+(1223, 1, '0.00', '0.00', '0.00', '0.00', 558, 55),
+(1224, 1, '0.00', '0.00', '0.00', '0.00', 558, 58),
+(1225, 1, '0.00', '0.00', '0.00', '0.00', 558, 59),
+(1226, 1, '0.00', '0.00', '0.00', '0.00', 558, 60),
+(1227, 1, '0.00', '0.00', '0.00', '0.00', 558, 61),
+(1228, 1, '0.00', '0.00', '0.00', '0.00', 558, 62),
+(1229, 1, '168.00', '168.00', '168.00', '168.00', 558, 63),
+(1230, 1, '0.00', '0.00', '0.00', '0.00', 558, 64),
+(1231, 1, '252.00', '504.00', '504.00', '252.00', 564, 42),
+(1232, 1, '168.00', '336.00', '336.00', '168.00', 564, 43),
+(1233, 1, '42.00', '84.00', '84.00', '42.00', 564, 44),
+(1234, 1, '14.00', '42.00', '42.00', '14.00', 564, 45),
+(1235, 1, '336.00', '336.00', '336.00', '336.00', 564, 46),
+(1236, 1, '84.00', '84.00', '84.00', '84.00', 564, 47);
 
 -- --------------------------------------------------------
 
@@ -639,7 +988,35 @@ INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `SUMMEGLOBAL`
 (110, '0.00', NULL, 25, 6),
 (111, '686.00', NULL, 25, 8),
 (112, NULL, NULL, 26, 1),
-(113, NULL, NULL, 27, 1);
+(113, NULL, NULL, 27, 1),
+(115, '704.31', '6559.56', 29, 1),
+(116, '569.88', '1913.18', 29, 2),
+(117, '0.00', '0.00', 29, 3),
+(118, '168.00', '168.00', 29, 4),
+(119, '0.00', '0.00', 29, 5),
+(120, '0.00', '0.00', 29, 6),
+(121, '896.00', '1386.00', 29, 8),
+(122, '704.31', '6559.56', 30, 1),
+(123, '569.88', '1913.18', 30, 2),
+(124, '0.00', '0.00', 30, 3),
+(125, '168.00', '168.00', 30, 4),
+(126, '0.00', '0.00', 30, 5),
+(127, '0.00', '0.00', 30, 6),
+(128, '896.00', '1386.00', 30, 8),
+(136, '704.31', '6559.56', 32, 1),
+(137, '569.88', '1913.18', 32, 2),
+(138, '0.00', '0.00', 32, 3),
+(139, '168.00', '168.00', 32, 4),
+(140, '0.00', '0.00', 32, 5),
+(141, '0.00', '0.00', 32, 6),
+(142, '896.00', '1386.00', 32, 8),
+(143, '704.31', '6559.56', 33, 1),
+(144, '569.88', '1913.18', 33, 2),
+(145, '0.00', '0.00', 33, 3),
+(146, '168.00', '168.00', 33, 4),
+(147, '0.00', '0.00', 33, 5),
+(148, '0.00', '0.00', 33, 6),
+(149, '896.00', '1386.00', 33, 8);
 
 -- --------------------------------------------------------
 
@@ -654,6 +1031,14 @@ CREATE TABLE `demandcategoryvalidation` (
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategoryvalidation`
+--
+
+INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`, `USER_LOGIN`) VALUES
+(1, '21:47:10', 32, NULL, 'walo'),
+(2, '21:48:49', 33, NULL, 'walo');
 
 -- --------------------------------------------------------
 
@@ -744,50 +1129,50 @@ CREATE TABLE `departementcriteriaitem` (
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DESCRIPTIONGLOBAL`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '(8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Erstellung Datenpflegeguide', NULL, 1),
-(2, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung Redaktionsguide', NULL, 1),
-(3, '1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Katalog Reda_Vorausgabe kopieren', NULL, 2),
-(4, '8*demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100', 'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100', 'PDF-Generator Reda', NULL, 2),
-(5, '10*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung', NULL, 9),
+(1, '(8*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Erstellung Datenpflegeguide', NULL, 1),
+(2, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung Redaktionsguide', NULL, 1),
+(3, '1*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Katalog Reda_Vorausgabe kopieren', NULL, 2),
+(4, '8*demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/100', 'demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/100', 'PDF-Generator Reda', NULL, 2),
+(5, '10*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung', NULL, 9),
 (6, '', '', 'Klassifizierung Neuheiten Information = LK_Schlüssel*Korrektirschlüssel*Prpzessschlüssel*Anzahl_Artikel_Neu*(8*std_satz/90)', NULL, 13),
-(7, '3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Masterlisten Prüfung', NULL, 1),
-(8, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Testdaten bereitstellen', NULL, 1),
-(11, 'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', '0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', 'Preis Artikel Reda-Online Pflege', NULL, 3),
-(12, '16*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Online Pflege(2 Tage)', NULL, 3),
-(13, 'demandCategory.getUmfang()*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70', '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70', 'PDF Generator Informatica ', NULL, 4),
-(14, 'demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*0.5', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Lieferantenkorrektur Versand', NULL, 5),
+(7, '3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Masterlisten Prüfung', NULL, 1),
+(8, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Testdaten bereitstellen', NULL, 1),
+(11, 'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', '0.3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', 'Preis Artikel Reda-Online Pflege', NULL, 3),
+(12, '16*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Online Pflege(2 Tage)', NULL, 3),
+(13, 'demandCategory.getUmfang()*8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/70', '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/70', 'PDF Generator Informatica ', NULL, 4),
+(14, 'demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()*0.5', '0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Lieferantenkorrektur Versand', NULL, 5),
 (15, '', '', 'Mitgliederkorrektur Versand', NULL, 5),
-(16, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', 'Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte', NULL, 2),
-(17, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext für neue Produkte ', NULL, 2),
-(19, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext neue Produkte', NULL, 4),
-(20, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', 'Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte', NULL, 4),
+(16, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', 'Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte', NULL, 2),
+(17, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext für neue Produkte ', NULL, 2),
+(19, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext neue Produkte', NULL, 4),
+(20, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', 'Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte', NULL, 4),
 (21, '', '', 'redaktionelle Korrektur inkl. Einarbeitung LK', NULL, 5),
 (22, '', '', 'Korrekturlesen mit Kunden', NULL, 5),
 (23, '', '', 'Redaktionelle Korrekturlesen inkl. MK', NULL, 5),
 (24, '', '', 'Redaktionelle Korrekturlesen Digiphase', NULL, 5),
 (25, '', '', 'Großplott Prüfung', NULL, 6),
-(26, 'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Preisprüfung aus Satz, KG-Nummer, etc', NULL, 6),
-(27, 'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung IVZ/Synonympflege', NULL, 7),
-(28, '1.5*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale ECC Publikationskonfigurator bei LL', NULL, 7),
-(29, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)', NULL, 7),
-(30, 'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19', 'Korrektorat (P. Mensch extern)', NULL, 7),
-(31, 'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'Übersetzungsmanagement Marketingdaten', NULL, 8),
-(32, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'Pauschale Übersetzunsmanagement ', NULL, 8),
-(33, '0.25*demandCategory.getAnzahlNeueProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', 'Datenbeschaffung pro Produkt Neuheit', NULL, 10),
-(34, '(demandCategory.getAnzahlNeueArtikel()*(configurationItemFacade.findByName(\'std_stz_dtp\').getDefaultValue()/200))', '(configurationItemFacade.findByName(\'std_stz_dtp\').getDefaultValue()/200)', 'Datenbeschaffung pro Artikel Neuheit', NULL, 10),
-(35, '(demandCategory.getAnzahlLieferantNeu()*(0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()))', '(0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Datenbeschaffung pro Lieferanten Neuheit ', NULL, 10),
-(36, '(4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Pauschale Preisbeschaffung (1/2 Tag)', NULL, 11),
-(37, '(demandCategory.getAnzahlLieferantNeu()*(0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()))', '(0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Preisbechaffung pro Lieferanten Neuheit ', NULL, 11),
-(38, '(demandCategory.getAnzahlLieferantGesamt()*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25))', '(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25)', 'Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)', NULL, 11),
-(39, '(4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Pauschale Preisprüfung (1/2 Tag)', NULL, 11),
-(40, '(demandCategory.getAnzahlGesamtArtikel()*(demandCategory.getCorrectionSchluessel().getValue()*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200)))', '(demandCategory.getCorrectionSchluessel().getValue()*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200))', 'Stammdatenpflege (ASD, Modul)', NULL, 12),
-(41, '(demandCategory.getAnzahlGesamtArtikel()*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000))', '(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000)', 'Übersetzungsmanagement Stammdaten (1000 Art/std)', NULL, 14),
-(42, '(demandCategory.getAnzahlBeteiligten()*(4.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()))', '(4.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Abstimmungsgespräche (Festsatz/Laufzeit in Monaten nach Personen (1xTPV + 1x0,5 Grl) ca 0,25h)', NULL, 27),
-(43, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ', NULL, 27),
-(44, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4', 'Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ', NULL, 27),
-(45, '0.25*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ', NULL, 27),
-(46, '(6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Pauschale Projektplanung = 6 std', NULL, 27),
-(47, '(1.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(1.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Pauschale Projektvorbereitung = 1,5 std', NULL, 27),
+(26, 'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '2.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Preisprüfung aus Satz, KG-Nummer, etc', NULL, 6),
+(27, 'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.005*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung IVZ/Synonympflege', NULL, 7),
+(28, '1.5*8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale ECC Publikationskonfigurator bei LL', NULL, 7),
+(29, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)', NULL, 7),
+(30, 'demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/19', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/19', 'Korrektorat (P. Mensch extern)', NULL, 7),
+(31, 'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'Übersetzungsmanagement Marketingdaten', NULL, 8),
+(32, '4*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'Pauschale Übersetzunsmanagement ', NULL, 8),
+(33, '0.25*demandCategory.getAnzahlNeueProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', '0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', 'Datenbeschaffung pro Produkt Neuheit', NULL, 10),
+(34, '(demandCategory.getAnzahlNeueArtikel()*(configurationItemFacade.findByName(''std_stz_dtp'').getDefaultValue()/200))', '(configurationItemFacade.findByName(''std_stz_dtp'').getDefaultValue()/200)', 'Datenbeschaffung pro Artikel Neuheit', NULL, 10),
+(35, '(demandCategory.getAnzahlLieferantNeu()*(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Datenbeschaffung pro Lieferanten Neuheit ', NULL, 10),
+(36, '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Preisbeschaffung (1/2 Tag)', NULL, 11),
+(37, '(demandCategory.getAnzahlLieferantNeu()*(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Preisbechaffung pro Lieferanten Neuheit ', NULL, 11),
+(38, '(demandCategory.getAnzahlLieferantGesamt()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/6.25))', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/6.25)', 'Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)', NULL, 11),
+(39, '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(4*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Preisprüfung (1/2 Tag)', NULL, 11),
+(40, '(demandCategory.getAnzahlGesamtArtikel()*(demandCategory.getCorrectionSchluessel().getValue()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200)))', '(demandCategory.getCorrectionSchluessel().getValue()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200))', 'Stammdatenpflege (ASD, Modul)', NULL, 12),
+(41, '(demandCategory.getAnzahlGesamtArtikel()*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/1000))', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/1000)', 'Übersetzungsmanagement Stammdaten (1000 Art/std)', NULL, 14),
+(42, '(demandCategory.getAnzahlBeteiligten()*(4.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()))', '(4.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Abstimmungsgespräche (Festsatz/Laufzeit in Monaten nach Personen (1xTPV + 1x0,5 Grl) ca 0,25h)', NULL, 27),
+(43, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ', NULL, 27),
+(44, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/4', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/4', 'Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ', NULL, 27),
+(45, '0.25*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ', NULL, 27),
+(46, '(6*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(6*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Projektplanung = 6 std', NULL, 27),
+(47, '(1.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(1.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Pauschale Projektvorbereitung = 1,5 std', NULL, 27),
 (48, '', '', 'Pauschale Kalkulation inkl. Prüfschleife und Abstimmung GF', NULL, 28),
 (49, '', '', 'Nachkalkulation zur Druckvergabe', NULL, 28),
 (50, '', '', 'Bestellformular inkl. Baukastenanhang erstellen und prüfen', NULL, 28),
@@ -801,7 +1186,7 @@ INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRIC
 (60, '', '', 'Druckabnahme', NULL, 28),
 (61, '', '', 'Verarbeitungsüberwachung', NULL, 28),
 (62, '', '', 'Weiterberchnung (Vorbereitung und Durchführung)', NULL, 28),
-(63, '(3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Endabrechnung (Pauschal)', NULL, 28),
+(63, '(3*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(3*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Endabrechnung (Pauschal)', NULL, 28),
 (64, '', '', 'Erstellung und Auswertung von Befragungen (Pauschal)', NULL, 28);
 
 -- --------------------------------------------------------
@@ -869,7 +1254,7 @@ INSERT INTO `katalogart` (`ID`, `NAME`, `VALUEE`) VALUES
 
 CREATE TABLE `konzeptbearbeitungfaktor` (
   `ID` bigint(20) NOT NULL,
-  `EXPRESSION` tinyint(1) DEFAULT '0',
+  `EXPRESSION` varchar(255) DEFAULT '0',
   `WERT` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -878,8 +1263,8 @@ CREATE TABLE `konzeptbearbeitungfaktor` (
 --
 
 INSERT INTO `konzeptbearbeitungfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
-(1, 1, '1.35'),
-(2, 0, '1.00');
+(1, 'Ja', '1.35'),
+(2, 'Nein', '1.00');
 
 -- --------------------------------------------------------
 
@@ -924,7 +1309,7 @@ CREATE TABLE `layoutpricing` (
 
 CREATE TABLE `mitgliederkorrekturfaktor` (
   `ID` bigint(20) NOT NULL,
-  `EXPRESSION` tinyint(1) DEFAULT '0',
+  `EXPRESSION` varchar(255) DEFAULT '0',
   `WERT` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -933,8 +1318,8 @@ CREATE TABLE `mitgliederkorrekturfaktor` (
 --
 
 INSERT INTO `mitgliederkorrekturfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
-(2, 0, '1.00'),
-(3, 0, '1.00');
+(2, 'Ja', '1.00'),
+(3, 'Nein', '1.00');
 
 -- --------------------------------------------------------
 
@@ -1171,7 +1556,7 @@ CREATE TABLE `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '0');
+('SEQ_GEN', '50');
 
 -- --------------------------------------------------------
 
@@ -1232,7 +1617,11 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 (47, '10.00', 24, 1),
 (48, '90.00', 24, 3),
 (49, '100.00', 26, 3),
-(50, '100.00', 27, 2);
+(50, '100.00', 27, 2),
+(52, '100.00', 29, 1),
+(53, '100.00', 30, 1),
+(55, '100.00', 32, 1),
+(56, '100.00', 33, 1);
 
 -- --------------------------------------------------------
 
@@ -1242,12 +1631,21 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 
 CREATE TABLE `teilnehmerzahlpricing` (
   `ID` bigint(20) NOT NULL,
-  `PRICE` decimal(10,2) NOT NULL,
-  `TEILNEHMERZAHLMIN` varchar(255) NOT NULL,
-  `TEILNEHMERZAHLMINOPERATOR` varchar(255) NOT NULL,
-  `TEILNEHMERZAHLMAX` varchar(255) NOT NULL,
-  `TEILNEHMERZAHLMAXOPERATOR` varchar(255) NOT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  `TEILNEHMERZAHLMIN` varchar(255) DEFAULT NULL,
+  `TEILNEHMERZAHLMINOPERATOR` varchar(255) DEFAULT NULL,
+  `TEILNEHMERZAHLMAX` varchar(255) DEFAULT NULL,
+  `TEILNEHMERZAHLMAXOPERATOR` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `teilnehmerzahlpricing`
+--
+
+INSERT INTO `teilnehmerzahlpricing` (`ID`, `PRICE`, `TEILNEHMERZAHLMIN`, `TEILNEHMERZAHLMINOPERATOR`, `TEILNEHMERZAHLMAX`, `TEILNEHMERZAHLMAXOPERATOR`) VALUES
+(1, '1.00', NULL, '', '20', '<='),
+(2, '1.20', '20', '>', '35', '<='),
+(3, '2.00', '35', '>', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1334,7 +1732,7 @@ CREATE TABLE `veredlung` (
 
 CREATE TABLE `wechselfassungvariantfaktor` (
   `ID` bigint(20) NOT NULL,
-  `EXPRESSION` tinyint(1) DEFAULT '0',
+  `EXPRESSION` varchar(255) DEFAULT '0',
   `WERT` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1343,8 +1741,8 @@ CREATE TABLE `wechselfassungvariantfaktor` (
 --
 
 INSERT INTO `wechselfassungvariantfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
-(1, 1, '1.20'),
-(2, 0, '1.00');
+(1, 'Ja', '1.20'),
+(2, 'Nein', '1.00');
 
 --
 -- Index pour les tables exportées
@@ -1694,27 +2092,27 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=429;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=565;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=943;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1237;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `departement`
 --
@@ -1774,12 +2172,12 @@ ALTER TABLE `sortiment`
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT pour la table `teilnehmerzahlpricing`
 --
 ALTER TABLE `teilnehmerzahlpricing`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --

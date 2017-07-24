@@ -168,16 +168,6 @@
                                     <p:ajax event="rowSelect"   update=" editButton deleteButton"/>
                                     <p:ajax event="rowUnselect" update=" editButton deleteButton"/>
 
-
-                                    
-
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_department}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.department.name}"/>
-                                    </p:column>
-
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('category')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>
@@ -553,13 +543,13 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_summDruck}"/>
                                         </f:facet>
-                                        <h:outputText value="#{demandCategoryController.findSummByDepartement(item)}"/>
+                                        <h:outputText value="#{item.summDruck}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_summTotal}"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.summTotal}"/>
+                                        <h:outputText value="#{demandCategoryController.findSummByDepartement(item)}"/>
                                     </p:column>
                                     <p:column styleClass="align-center" width="70" >
                                         <f:facet name="header">
