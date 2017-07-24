@@ -7,20 +7,15 @@ package service;
 
 import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
-import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
-import bean.DepartementCriteria;
 import controler.util.SearchUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
@@ -159,4 +154,20 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         super(DemandCategoryDepartementCalculation.class);
     }
 
+    
+
+public BigDecimal findByDateMinMax(Date dateMin, Date dateMax, String nameDepartement) {
+        String requet = "SELECT SUM(dcdc.summe) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
+
+        requet += SearchUtil.addConstraintMinMaxDate("dcdc", "demandCategory.dateDemandCategory", dateMin, dateMax);
+        requet += " AND dcdc.departement.name='" + nameDepartement + "'";
+
+        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> " + requet);
+        List<BigDecimal> res = em.createQuery(requet).getResultList();
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            System.out.println("res.get(0) = "+res.get(0));
+            return res.get(0);
+        }
+        return new BigDecimal(0);
+    }
 }

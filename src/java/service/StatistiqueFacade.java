@@ -75,6 +75,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         }
         if (departements != null && !departements.isEmpty()) {
             fromQuery += " , DemandCategoryDepartementCalculation dcdc";
+            
         }
         if (typeSum == 1) {
             summQuery = " SUM(" + beanAbreviation + ".summTotal)";
