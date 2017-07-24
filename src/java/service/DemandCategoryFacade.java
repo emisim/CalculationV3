@@ -43,6 +43,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private @EJB
     SotimentItemFacade sotimentItemFacade;
     private @EJB
+    TeilnehmerZahlPricingFacade teilnehmerZahlPricingFacade;
+    private @EJB
     AuflageSeitenCoverMatrixFacade auflageSeitenCoverMatrixFacade;
     private @EJB
     DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
@@ -87,43 +89,42 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
+        saveOrUpdate(simulation, isSave, demandCategory);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
+        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
+        calcSumDruck(demandCategory);
+        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
+        teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        if (simulation == false) {
+            edit(demandCategory);
+            if (isSave) {
+                demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
+            }
+        }
+        saveOrUpdate(simulation, isSave, demandCategory);
 
+    }
+
+    private void saveOrUpdate(boolean simulation, boolean isSave, DemandCategory demandCategory) {
         if (!simulation) {
             if (isSave) {
                 create(demandCategory);
             } else {
                 edit(demandCategory);
             }
-            System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
-        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
-        calcSumDruck(demandCategory);
-        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
-
-        if (simulation == false && isSave == false) {
-            edit(demandCategory);
-            demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
-        }
-         if (!simulation) {
-            if (isSave) {
-                create(demandCategory);
-            } else {
-                edit(demandCategory);
-            }
-            System.out.println("hana savite demandCategory ==> " + demandCategory);
-        }
-
     }
 
     private void calcSumTotal(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
-        demandCategory.setSummTotal(new BigDecimal(0));
+        demandCategory.setSummUnitPrice(new BigDecimal(0));
+        demandCategory.setSummeGlobal(new BigDecimal(0));
         if (demandCategoryDepartementCalculations == null || demandCategoryDepartementCalculations.isEmpty()) {
             return;
         }
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
+            demandCategory.setSummUnitPrice(demandCategory.getSummUnitPrice().add(demandCategoryDepartementCalculation.getSumme()));
+            demandCategory.setSummeGlobal(demandCategory.getSummeGlobal().add(demandCategoryDepartementCalculation.getSummeGlobal()));
         }
     }
 
@@ -239,12 +240,12 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
-            return demandCategory.getSummTotal();
+            return demandCategory.getSummeGlobal();
         } else if (SessionUtil.getConnectedUser().getDepartement() != null && !Objects.equals(SessionUtil.getConnectedUser().getDepartement().getId(), demandCategory.getDepartment().getId())) {
-            return (BigDecimal) em.createQuery("SELECT item.summe FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
+            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
                     + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
-            return demandCategory.getSummTotal();
+            return demandCategory.getSummeGlobal();
         }
     }
 

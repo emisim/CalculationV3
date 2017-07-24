@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 24 Juillet 2017 à 20:20
+-- Généré le :  Lun 24 Juillet 2017 à 23:16
 -- Version du serveur :  10.1.8-MariaDB
 -- Version de PHP :  5.6.14
 
@@ -327,8 +327,9 @@ CREATE TABLE `demandcategory` (
   `PERCENTSEITENFAKTOR` int(11) DEFAULT NULL,
   `SEITENANZAHL` int(11) DEFAULT NULL,
   `SUMMDRUCK` decimal(10,2) DEFAULT NULL,
-  `SUMMTOTAL` decimal(10,2) DEFAULT NULL,
+  `SUMMUNITPRICE` decimal(10,2) DEFAULT NULL,
   `TEILNEHMERZAHL` int(11) DEFAULT NULL,
+  `TEILNEHMERZAHLPRICING` decimal(10,2) DEFAULT NULL,
   `UMFANG` int(11) DEFAULT NULL,
   `UMSCHLAG` tinyint(1) DEFAULT '0',
   `SCHLUESSEL_ID` bigint(20) DEFAULT NULL,
@@ -360,20 +361,23 @@ CREATE TABLE `demandcategory` (
   `PRODUCTSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
   `ARTIKELPERPAGELFAKTOR` decimal(10,2) NOT NULL,
   `LKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
-  `MKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL
+  `MKSCHLUESSELFAKTOR` decimal(10,2) NOT NULL,
+  `SUMMEGLOBAL` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `demandcategory`
 --
 
-INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMTOTAL`, `TEILNEHMERZAHL`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`, `PRODUCTSCHLUESSELFAKTOR`, `ARTIKELPERPAGELFAKTOR`, `LKSCHLUESSELFAKTOR`, `MKSCHLUESSELFAKTOR`) VALUES
-(24, -1, 0, 5, 2, 0, 6, 2, 0, 4, 15, 13, 14, 20, 7, 2, 0, 9, 3, '2017-07-23', '2017-07-23', 1, '2017-07-23', 0, 10, 17, '0.00', '2338.19', 16, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '2.72', '9.14', '1.01', '1.01'),
-(25, -1, -1, 5, 0, 0, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 0, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '2128.19', 16, 0, 0, NULL, NULL, NULL, 7, NULL, 1, 102, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '0.00', '0.00', '0.00', '0.00'),
-(26, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, 7, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'kiki', NULL, 1, '0.00', '0.00', '0.00', '0.00'),
-(27, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-24', '2017-07-24', 0, '2017-07-24', 0, 10, 17, '0.00', '0.00', 16, 0, 0, NULL, NULL, NULL, 8, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'ana', NULL, NULL, '0.00', '0.00', '0.00', '0.00'),
-(29, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 0, 10, 17, '0.00', '2338.19', 16, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05'),
-(30, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 0, 10, 17, '0.00', '2338.19', 16, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05');
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LIEFERTERMIN`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMUNITPRICE`, `TEILNEHMERZAHL`, `TEILNEHMERZAHLPRICING`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`, `PRODUCTSCHLUESSELFAKTOR`, `ARTIKELPERPAGELFAKTOR`, `LKSCHLUESSELFAKTOR`, `MKSCHLUESSELFAKTOR`, `SUMMEGLOBAL`) VALUES
+(24, -1, 0, 5, 2, 0, 6, 2, 0, 4, 15, 13, 14, 20, 7, 2, 0, 9, 3, '2017-07-23', '2017-07-23', 1, '2017-07-23', 0, 10, 17, '0.00', '2338.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '2.72', '9.14', '1.01', '1.01', '0.00'),
+(25, -1, -1, 5, 0, 0, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 0, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '2128.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 1, 102, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '0.00', '0.00', '0.00', '0.00', '0.00'),
+(26, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-23', '2017-07-23', 0, '2017-07-23', 0, 10, 17, '0.00', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'kiki', NULL, 1, '0.00', '0.00', '0.00', '0.00', '0.00'),
+(27, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, 0, '2017-07-24', '2017-07-24', 0, '2017-07-24', 0, 10, 17, '0.00', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 8, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'ana', NULL, NULL, '0.00', '0.00', '0.00', '0.00', '0.00'),
+(29, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 0, 10, 17, '0.00', '2338.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05', '0.00'),
+(30, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 0, 10, 17, '0.00', '2338.19', 16, NULL, 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05', '0.00'),
+(32, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 1, 10, 17, '0.00', '2338.19', 16, '1.00', 0, 0, NULL, NULL, NULL, 7, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05', '0.00'),
+(33, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, 3, '2017-07-24', '2017-07-24', 1, '2017-07-24', 1, 10, 17, '0.00', '2338.19', 21, '1.20', 0, 0, NULL, NULL, NULL, 7, NULL, 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1, '4.70', '15.80', '1.10', '1.05', '0.00');
 
 -- --------------------------------------------------------
 
@@ -506,7 +510,61 @@ INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `SUMMEGLOBAL`, `VALIDE`,
 (480, '0.00', '0', 0, 126, 23),
 (481, '0.00', '0', 0, 127, 24),
 (482, '0.00', '0', 0, 127, 25),
-(483, '896.00', '1386', 0, 128, 27);
+(483, '896.00', '1386', 0, 128, 27),
+(511, '224.00', '1400', 0, 136, 1),
+(512, '72.80', '73', 0, 136, 2),
+(513, '56.28', '898', 0, 136, 3),
+(514, '23.20', '17', 0, 136, 4),
+(515, '28.00', '392', 0, 136, 5),
+(516, '140.00', '2100', 0, 136, 6),
+(517, '115.23', '1120', 0, 136, 7),
+(518, '44.80', '560', 0, 136, 8),
+(519, '56.00', '560', 0, 137, 9),
+(520, '28.58', '395', 0, 137, 10),
+(521, '484.96', '956', 0, 137, 11),
+(522, '0.28', '2', 0, 137, 12),
+(523, '0.00', '0', 0, 137, 13),
+(524, '0.06', '0', 0, 137, 14),
+(525, '0.00', '0', 0, 138, 15),
+(526, '0.00', '0', 0, 138, 16),
+(527, '0.00', '0', 0, 138, 17),
+(528, '0.00', '0', 0, 138, 18),
+(529, '0.00', '0', 0, 138, 19),
+(530, '0.00', '0', 0, 138, 20),
+(531, '168.00', '168', 0, 139, 28),
+(532, '0.00', '0', 0, 140, 21),
+(533, '0.00', '0', 0, 140, 22),
+(534, '0.00', '0', 0, 140, 23),
+(535, '0.00', '0', 0, 141, 24),
+(536, '0.00', '0', 0, 141, 25),
+(537, '896.00', '1386', 0, 142, 27),
+(538, '224.00', '1400', 0, 143, 1),
+(539, '72.80', '73', 0, 143, 2),
+(540, '56.28', '898', 0, 143, 3),
+(541, '23.20', '17', 0, 143, 4),
+(542, '28.00', '392', 0, 143, 5),
+(543, '140.00', '2100', 0, 143, 6),
+(544, '115.23', '1120', 0, 143, 7),
+(545, '44.80', '560', 0, 143, 8),
+(546, '56.00', '560', 0, 144, 9),
+(547, '28.58', '395', 0, 144, 10),
+(548, '484.96', '956', 0, 144, 11),
+(549, '0.28', '2', 0, 144, 12),
+(550, '0.00', '0', 0, 144, 13),
+(551, '0.06', '0', 0, 144, 14),
+(552, '0.00', '0', 0, 145, 15),
+(553, '0.00', '0', 0, 145, 16),
+(554, '0.00', '0', 0, 145, 17),
+(555, '0.00', '0', 0, 145, 18),
+(556, '0.00', '0', 0, 145, 19),
+(557, '0.00', '0', 0, 145, 20),
+(558, '168.00', '168', 0, 146, 28),
+(559, '0.00', '0', 0, 147, 21),
+(560, '0.00', '0', 0, 147, 22),
+(561, '0.00', '0', 0, 147, 23),
+(562, '0.00', '0', 0, 148, 24),
+(563, '0.00', '0', 0, 148, 25),
+(564, '896.00', '1386', 0, 149, 27);
 
 -- --------------------------------------------------------
 
@@ -777,7 +835,125 @@ INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICE
 (1057, 1, '42.00', '84.00', '84.00', '42.00', 483, 44),
 (1058, 1, '14.00', '42.00', '42.00', '14.00', 483, 45),
 (1059, 1, '336.00', '336.00', '336.00', '336.00', 483, 46),
-(1060, 1, '84.00', '84.00', '84.00', '84.00', 483, 47);
+(1060, 1, '84.00', '84.00', '84.00', '84.00', 483, 47),
+(1119, 1, '56.00', '448.00', '448.00', '56.00', 511, 1),
+(1120, 1, '56.00', '336.00', '336.00', '56.00', 511, 2),
+(1121, 1, '56.00', '168.00', '168.00', '56.00', 511, 7),
+(1122, 1, '56.00', '448.00', '448.00', '56.00', 511, 8),
+(1123, 1, '56.00', '56.00', '56.00', '56.00', 512, 3),
+(1124, 1, '0.00', '0.00', '0.00', '0.00', 512, 4),
+(1125, 1, '5.60', '5.60', '5.60', '5.60', 512, 16),
+(1126, 1, '11.20', '11.20', '11.20', '11.20', 512, 17),
+(1127, 1, '0.28', '1.68', '1.68', '0.28', 513, 11),
+(1128, 1, '56.00', '896.00', '896.00', '56.00', 513, 12),
+(1129, 1, '6.40', '0.00', '0.00', '6.40', 514, 13),
+(1130, 1, '11.20', '11.20', '11.20', '11.20', 514, 19),
+(1131, 1, '5.60', '5.60', '5.60', '5.60', 514, 20),
+(1132, 1, '28.00', '392.00', '392.00', '28.00', 515, 14),
+(1133, 1, '0.00', '0.00', '0.00', '0.00', 515, 15),
+(1134, 1, '0.00', '0.00', '0.00', '0.00', 515, 21),
+(1135, 1, '0.00', '0.00', '0.00', '0.00', 515, 22),
+(1136, 1, '0.00', '0.00', '0.00', '0.00', 515, 23),
+(1137, 1, '0.00', '0.00', '0.00', '0.00', 515, 24),
+(1138, 1, '0.00', '0.00', '0.00', '0.00', 516, 25),
+(1139, 1, '140.00', '2100.00', '2100.00', '140.00', 516, 26),
+(1140, 1, '0.28', '0.28', '0.28', '0.28', 517, 27),
+(1141, 1, '56.00', '672.00', '672.00', '56.00', 517, 28),
+(1142, 1, '56.00', '448.00', '448.00', '56.00', 517, 29),
+(1143, 1, '2.95', '0.00', '0.00', '2.95', 517, 30),
+(1144, 1, '22.40', '336.00', '336.00', '22.40', 518, 31),
+(1145, 1, '22.40', '224.00', '224.00', '22.40', 518, 32),
+(1146, 1, '56.00', '560.00', '560.00', '56.00', 519, 5),
+(1147, 1, '0.23', '0.23', '0.23', '0.23', 520, 33),
+(1148, 1, '0.35', '2.45', '2.45', '0.35', 520, 34),
+(1149, 1, '28.00', '392.00', '392.00', '28.00', 520, 35),
+(1150, 1, '224.00', '224.00', '224.00', '224.00', 521, 36),
+(1151, 1, '28.00', '392.00', '392.00', '28.00', 521, 37),
+(1152, 1, '8.96', '116.48', '116.48', '8.96', 521, 38),
+(1153, 1, '224.00', '224.00', '224.00', '224.00', 521, 39),
+(1154, 1, '0.28', '1.68', '1.68', '0.28', 522, 40),
+(1155, 1, '0.00', '0.00', '0.00', '0.00', 523, 6),
+(1156, 1, '0.06', '0.34', '0.34', '0.06', 524, 41),
+(1157, 1, '0.00', '0.00', '0.00', '0.00', 531, 48),
+(1158, 1, '0.00', '0.00', '0.00', '0.00', 531, 49),
+(1159, 1, '0.00', '0.00', '0.00', '0.00', 531, 50),
+(1160, 1, '0.00', '0.00', '0.00', '0.00', 531, 51),
+(1161, 1, '0.00', '0.00', '0.00', '0.00', 531, 52),
+(1162, 1, '0.00', '0.00', '0.00', '0.00', 531, 53),
+(1163, 1, '0.00', '0.00', '0.00', '0.00', 531, 54),
+(1164, 1, '0.00', '0.00', '0.00', '0.00', 531, 55),
+(1165, 1, '0.00', '0.00', '0.00', '0.00', 531, 58),
+(1166, 1, '0.00', '0.00', '0.00', '0.00', 531, 59),
+(1167, 1, '0.00', '0.00', '0.00', '0.00', 531, 60),
+(1168, 1, '0.00', '0.00', '0.00', '0.00', 531, 61),
+(1169, 1, '0.00', '0.00', '0.00', '0.00', 531, 62),
+(1170, 1, '168.00', '168.00', '168.00', '168.00', 531, 63),
+(1171, 1, '0.00', '0.00', '0.00', '0.00', 531, 64),
+(1172, 1, '252.00', '504.00', '504.00', '252.00', 537, 42),
+(1173, 1, '168.00', '336.00', '336.00', '168.00', 537, 43),
+(1174, 1, '42.00', '84.00', '84.00', '42.00', 537, 44),
+(1175, 1, '14.00', '42.00', '42.00', '14.00', 537, 45),
+(1176, 1, '336.00', '336.00', '336.00', '336.00', 537, 46),
+(1177, 1, '84.00', '84.00', '84.00', '84.00', 537, 47),
+(1178, 1, '56.00', '448.00', '448.00', '56.00', 538, 1),
+(1179, 1, '56.00', '336.00', '336.00', '56.00', 538, 2),
+(1180, 1, '56.00', '168.00', '168.00', '56.00', 538, 7),
+(1181, 1, '56.00', '448.00', '448.00', '56.00', 538, 8),
+(1182, 1, '56.00', '56.00', '56.00', '56.00', 539, 3),
+(1183, 1, '0.00', '0.00', '0.00', '0.00', 539, 4),
+(1184, 1, '5.60', '5.60', '5.60', '5.60', 539, 16),
+(1185, 1, '11.20', '11.20', '11.20', '11.20', 539, 17),
+(1186, 1, '0.28', '1.68', '1.68', '0.28', 540, 11),
+(1187, 1, '56.00', '896.00', '896.00', '56.00', 540, 12),
+(1188, 1, '6.40', '0.00', '0.00', '6.40', 541, 13),
+(1189, 1, '11.20', '11.20', '11.20', '11.20', 541, 19),
+(1190, 1, '5.60', '5.60', '5.60', '5.60', 541, 20),
+(1191, 1, '28.00', '392.00', '392.00', '28.00', 542, 14),
+(1192, 1, '0.00', '0.00', '0.00', '0.00', 542, 15),
+(1193, 1, '0.00', '0.00', '0.00', '0.00', 542, 21),
+(1194, 1, '0.00', '0.00', '0.00', '0.00', 542, 22),
+(1195, 1, '0.00', '0.00', '0.00', '0.00', 542, 23),
+(1196, 1, '0.00', '0.00', '0.00', '0.00', 542, 24),
+(1197, 1, '0.00', '0.00', '0.00', '0.00', 543, 25),
+(1198, 1, '140.00', '2100.00', '2100.00', '140.00', 543, 26),
+(1199, 1, '0.28', '0.28', '0.28', '0.28', 544, 27),
+(1200, 1, '56.00', '672.00', '672.00', '56.00', 544, 28),
+(1201, 1, '56.00', '448.00', '448.00', '56.00', 544, 29),
+(1202, 1, '2.95', '0.00', '0.00', '2.95', 544, 30),
+(1203, 1, '22.40', '336.00', '336.00', '22.40', 545, 31),
+(1204, 1, '22.40', '224.00', '224.00', '22.40', 545, 32),
+(1205, 1, '56.00', '560.00', '560.00', '56.00', 546, 5),
+(1206, 1, '0.23', '0.23', '0.23', '0.23', 547, 33),
+(1207, 1, '0.35', '2.45', '2.45', '0.35', 547, 34),
+(1208, 1, '28.00', '392.00', '392.00', '28.00', 547, 35),
+(1209, 1, '224.00', '224.00', '224.00', '224.00', 548, 36),
+(1210, 1, '28.00', '392.00', '392.00', '28.00', 548, 37),
+(1211, 1, '8.96', '116.48', '116.48', '8.96', 548, 38),
+(1212, 1, '224.00', '224.00', '224.00', '224.00', 548, 39),
+(1213, 1, '0.28', '1.68', '1.68', '0.28', 549, 40),
+(1214, 1, '0.00', '0.00', '0.00', '0.00', 550, 6),
+(1215, 1, '0.06', '0.34', '0.34', '0.06', 551, 41),
+(1216, 1, '0.00', '0.00', '0.00', '0.00', 558, 48),
+(1217, 1, '0.00', '0.00', '0.00', '0.00', 558, 49),
+(1218, 1, '0.00', '0.00', '0.00', '0.00', 558, 50),
+(1219, 1, '0.00', '0.00', '0.00', '0.00', 558, 51),
+(1220, 1, '0.00', '0.00', '0.00', '0.00', 558, 52),
+(1221, 1, '0.00', '0.00', '0.00', '0.00', 558, 53),
+(1222, 1, '0.00', '0.00', '0.00', '0.00', 558, 54),
+(1223, 1, '0.00', '0.00', '0.00', '0.00', 558, 55),
+(1224, 1, '0.00', '0.00', '0.00', '0.00', 558, 58),
+(1225, 1, '0.00', '0.00', '0.00', '0.00', 558, 59),
+(1226, 1, '0.00', '0.00', '0.00', '0.00', 558, 60),
+(1227, 1, '0.00', '0.00', '0.00', '0.00', 558, 61),
+(1228, 1, '0.00', '0.00', '0.00', '0.00', 558, 62),
+(1229, 1, '168.00', '168.00', '168.00', '168.00', 558, 63),
+(1230, 1, '0.00', '0.00', '0.00', '0.00', 558, 64),
+(1231, 1, '252.00', '504.00', '504.00', '252.00', 564, 42),
+(1232, 1, '168.00', '336.00', '336.00', '168.00', 564, 43),
+(1233, 1, '42.00', '84.00', '84.00', '42.00', 564, 44),
+(1234, 1, '14.00', '42.00', '42.00', '14.00', 564, 45),
+(1235, 1, '336.00', '336.00', '336.00', '336.00', 564, 46),
+(1236, 1, '84.00', '84.00', '84.00', '84.00', 564, 47);
 
 -- --------------------------------------------------------
 
@@ -827,7 +1003,21 @@ INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `SUMMEGLOBAL`
 (125, '168.00', '168.00', 30, 4),
 (126, '0.00', '0.00', 30, 5),
 (127, '0.00', '0.00', 30, 6),
-(128, '896.00', '1386.00', 30, 8);
+(128, '896.00', '1386.00', 30, 8),
+(136, '704.31', '6559.56', 32, 1),
+(137, '569.88', '1913.18', 32, 2),
+(138, '0.00', '0.00', 32, 3),
+(139, '168.00', '168.00', 32, 4),
+(140, '0.00', '0.00', 32, 5),
+(141, '0.00', '0.00', 32, 6),
+(142, '896.00', '1386.00', 32, 8),
+(143, '704.31', '6559.56', 33, 1),
+(144, '569.88', '1913.18', 33, 2),
+(145, '0.00', '0.00', 33, 3),
+(146, '168.00', '168.00', 33, 4),
+(147, '0.00', '0.00', 33, 5),
+(148, '0.00', '0.00', 33, 6),
+(149, '896.00', '1386.00', 33, 8);
 
 -- --------------------------------------------------------
 
@@ -842,6 +1032,14 @@ CREATE TABLE `demandcategoryvalidation` (
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `demandcategoryvalidation`
+--
+
+INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`, `USER_LOGIN`) VALUES
+(1, '21:47:10', 32, NULL, 'walo'),
+(2, '21:48:49', 33, NULL, 'walo');
 
 -- --------------------------------------------------------
 
@@ -1359,7 +1557,7 @@ CREATE TABLE `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '0');
+('SEQ_GEN', '50');
 
 -- --------------------------------------------------------
 
@@ -1422,7 +1620,9 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 (49, '100.00', 26, 3),
 (50, '100.00', 27, 2),
 (52, '100.00', 29, 1),
-(53, '100.00', 30, 1);
+(53, '100.00', 30, 1),
+(55, '100.00', 32, 1),
+(56, '100.00', 33, 1);
 
 -- --------------------------------------------------------
 
@@ -1432,12 +1632,21 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 
 CREATE TABLE `teilnehmerzahlpricing` (
   `ID` bigint(20) NOT NULL,
-  `PRICE` decimal(10,2) NOT NULL,
-  `TEILNEHMERZAHLMIN` varchar(255) NOT NULL,
-  `TEILNEHMERZAHLMINOPERATOR` varchar(255) NOT NULL,
-  `TEILNEHMERZAHLMAX` varchar(255) NOT NULL,
-  `TEILNEHMERZAHLMAXOPERATOR` varchar(255) NOT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  `TEILNEHMERZAHLMIN` varchar(255) DEFAULT NULL,
+  `TEILNEHMERZAHLMINOPERATOR` varchar(255) DEFAULT NULL,
+  `TEILNEHMERZAHLMAX` varchar(255) DEFAULT NULL,
+  `TEILNEHMERZAHLMAXOPERATOR` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `teilnehmerzahlpricing`
+--
+
+INSERT INTO `teilnehmerzahlpricing` (`ID`, `PRICE`, `TEILNEHMERZAHLMIN`, `TEILNEHMERZAHLMINOPERATOR`, `TEILNEHMERZAHLMAX`, `TEILNEHMERZAHLMAXOPERATOR`) VALUES
+(1, '1.00', NULL, '', '20', '<='),
+(2, '1.20', '20', '>', '35', '<='),
+(3, '2.00', '35', '>', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1884,27 +2093,27 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=484;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=565;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1061;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1237;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `departement`
 --
@@ -1964,12 +2173,12 @@ ALTER TABLE `sortiment`
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT pour la table `teilnehmerzahlpricing`
 --
 ALTER TABLE `teilnehmerzahlpricing`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --
