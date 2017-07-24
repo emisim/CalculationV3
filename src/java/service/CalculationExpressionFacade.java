@@ -58,8 +58,8 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
             }
             if (!SearchUtil.isStringNullOrVide(expression)) {
                 Object obj = getJsEngine().eval(expression);
-                BigDecimal value = (BigDecimal) obj;
-                value.setScale(2, RoundingMode.HALF_UP);
+                BigDecimal value = new BigDecimal(obj+"");
+                value=value.setScale(2, RoundingMode.HALF_UP);
                 System.out.println("haaa l eval ==> " + value);
                 return value;
             }
