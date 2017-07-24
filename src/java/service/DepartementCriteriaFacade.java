@@ -60,11 +60,13 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
         List<DepartementDetail> departementDetails = new ArrayList<>();
         int i = 0;
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            String summ = demandCategoryDepartementCalculation.getSumme() != null ? demandCategoryDepartementCalculation.getSumme() + "" : "0";
+            String summ = demandCategoryDepartementCalculation.getSumme() != null ? demandCategoryDepartementCalculation.getSumme() + "" : "0.00";
+            String summGlobal = demandCategoryDepartementCalculation.getSummeGlobal()!= null ? demandCategoryDepartementCalculation.getSummeGlobal()+ "" : "0.00";
             String summTotal = demandCategoryDepartementCalculation.getDemandCategory().getSummTotal() != null ? demandCategoryDepartementCalculation.getDemandCategory().getSummTotal() + "" : "0.00";
             String summDruck = demandCategoryDepartementCalculation.getDemandCategory().getSummDruck() != null ? demandCategoryDepartementCalculation.getDemandCategory().getSummDruck() + "" : "0.00";
             for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryDepartementCalculation.getDemandCategoryCalculations()) {
                 String summCriteria = demandCategoryCalculation.getSumme() != null ? demandCategoryCalculation.getSumme() + "" : "0.00";
+                String summCriteriaGlobal = demandCategoryCalculation.getSummeGlobal() != null ? demandCategoryCalculation.getSummeGlobal() + "" : "0.00";
                 String nomDepCriteria = demandCategoryCalculation.getDepartementCriteria().getName();
                 for (DemandCategoryCalculationItem demandCategoryCalculationItem : demandCategoryCalculation.getDemandCategoryCalculationItems()) {
                     DepartementCriteriaItem departementCriteriaItem = demandCategoryCalculationItem.getDepartementCriteriaItem();
@@ -79,7 +81,9 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
                     departementDetail.setArithmitiqueExpresionForUnitePrice(departementCriteriaItem.getArithmitiqueExpresionForUnitePrice());
                     departementDetail.setArithmitiqueExpresionForGlobalPrice(departementCriteriaItem.getArithmitiqueExpresionForGlobalPrice());
                     departementDetail.setSummCriteria(summCriteria);
+                    departementDetail.setSummCriteriaGlobal(summCriteriaGlobal);
                     departementDetail.setSummDepartement(summ);
+                    departementDetail.setSummDepartementGlobal(summGlobal);
                     departementDetail.setSummTotal(summTotal);
                     departementDetail.setSummDruck(summDruck);
                     departementDetail.setChecked(demandCategoryCalculationItem.getCalcultaed());
