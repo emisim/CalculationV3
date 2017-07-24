@@ -360,7 +360,6 @@ public class DemandCategoryController implements Serializable {
         updateDepItems(departementCriterias);
     }
 
-  
     public Integer getValidationSearch() {
         return validationSearch;
     }
@@ -379,14 +378,19 @@ public class DemandCategoryController implements Serializable {
             if (loadedDepartementDetail.isChecked() == false) {
                 System.out.println("false");
                 BigDecimal price = new BigDecimal(loadedDepartementDetail.getPriceUpdate());
+                BigDecimal priceGlobal = new BigDecimal(loadedDepartementDetail.getPriceGlobalUpdate());
                 BigDecimal subTotal = new BigDecimal(loadedDepartementDetail.getSummCriteria()).subtract(new BigDecimal(loadedDepartementDetail.getPriceUpdate()));
+                BigDecimal subTotalGlobal = new BigDecimal(loadedDepartementDetail.getSummCriteriaGlobal()).subtract(new BigDecimal(loadedDepartementDetail.getPriceGlobalUpdate()));
                 System.out.println("Subtotal :::::: " + subTotal);
                 BigDecimal total = new BigDecimal(loadedDepartementDetail.getSummDepartement()).subtract(price);
+                BigDecimal totalGlobal = new BigDecimal(loadedDepartementDetail.getSummDepartementGlobal()).subtract(priceGlobal);
                 System.out.println("Toootaaaal ::::::::::::::::::::::::::::::; " + total);
                 loadedDepartementDetail.setSummCriteria(subTotal + "");
                 loadedDepartementDetail.setSummDepartement(total + "");
-                loadedDepartementDetail.setPriceUpdate("0");
-                loadedDepartementDetail.setPriceGlobalUpdate("0");
+                loadedDepartementDetail.setSummCriteriaGlobal(subTotalGlobal + "");
+                loadedDepartementDetail.setSummDepartementGlobal(totalGlobal + "");
+                loadedDepartementDetail.setPriceUpdate("0.00");
+                loadedDepartementDetail.setPriceGlobalUpdate("0.00");
                 departementDetails.set(departementDetails.indexOf(loadedDepartementDetail), loadedDepartementDetail);
             }
 
@@ -396,9 +400,13 @@ public class DemandCategoryController implements Serializable {
                 BigDecimal price = new BigDecimal(loadedDepartementDetail.getPrice());
                 BigDecimal priceGlobal = new BigDecimal(loadedDepartementDetail.getPriceGlobal());
                 BigDecimal subTotal = new BigDecimal(loadedDepartementDetail.getSummCriteria()).add(price);
+                BigDecimal subTotalGlobal = new BigDecimal(loadedDepartementDetail.getSummCriteriaGlobal()).add(priceGlobal);
                 BigDecimal total = new BigDecimal(loadedDepartementDetail.getSummDepartement()).add(price);
+                BigDecimal totalGlobal = new BigDecimal(loadedDepartementDetail.getSummDepartementGlobal()).add(priceGlobal);
                 loadedDepartementDetail.setSummCriteria(subTotal + "");
                 loadedDepartementDetail.setSummDepartement(total + "");
+                loadedDepartementDetail.setSummCriteriaGlobal(subTotalGlobal + "");
+                loadedDepartementDetail.setSummDepartementGlobal(totalGlobal + "");
                 loadedDepartementDetail.setPriceUpdate(price + "");
                 loadedDepartementDetail.setPriceGlobalUpdate(priceGlobal + "");
                 departementDetails.set(departementDetails.indexOf(loadedDepartementDetail), loadedDepartementDetail);
@@ -414,7 +422,6 @@ public class DemandCategoryController implements Serializable {
         }
     }
 
-   
     public List allDepartements() {
         return departementCriteriaFacade.allDetailDepartements();
     }

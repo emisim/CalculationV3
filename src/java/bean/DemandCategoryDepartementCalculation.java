@@ -28,6 +28,7 @@ public class DemandCategoryDepartementCalculation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summe;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summeGlobal;
     @ManyToOne
     private DemandCategory demandCategory;
     @ManyToOne
@@ -63,6 +64,14 @@ public class DemandCategoryDepartementCalculation implements Serializable {
         this.summe = summe;
     }
 
+    public BigDecimal getSummeGlobal() {
+        return summeGlobal;
+    }
+
+    public void setSummeGlobal(BigDecimal summeGlobal) {
+        this.summeGlobal = summeGlobal;
+    }
+    
     public DemandCategory getDemandCategory() {
         return demandCategory;
     }

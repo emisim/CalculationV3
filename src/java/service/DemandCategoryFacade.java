@@ -253,6 +253,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             for (DepartementDetail departementCriteria : departementDetails) {
                 DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuationId());
                 demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
+                demandCategoryCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummCriteriaGlobal()));
                 demandCategoryCalculationFacade.edit(demandCategoryCalculation);
                 DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
                 demandCategoryCalculationItem.setPriceUpdate(new BigDecimal(departementCriteria.getPriceUpdate()));
@@ -261,6 +262,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                 demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
                 DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());
                 demandCategoryDepartementCalculation.setSumme(new BigDecimal(departementCriteria.getSummDepartement()));
+                demandCategoryDepartementCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummDepartementGlobal()));
                 demandCategoryDepartementCalculationFacade.edit(demandCategoryDepartementCalculation);
             }
             JsfUtil.addSuccessMessage("Details updated");
