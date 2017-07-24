@@ -24,7 +24,9 @@ public class DepartementDetail {
     private String priceGlobal;
     private String priceGlobalUpdate;
     private String summCriteria;
+    private String summCriteriaGlobal;
     private String summDepartement;
+    private String summDepartementGlobal;
     private boolean checked;
     private Long demandCategoryCalcuationId;
     private Long demandCategoryDepartementCalculationId;
@@ -180,6 +182,24 @@ public class DepartementDetail {
     public void setSummDruck(String summDruck) {
         this.summDruck = summDruck;
     }
+
+    public String getSummCriteriaGlobal() {
+        return summCriteriaGlobal;
+    }
+
+    public void setSummCriteriaGlobal(String summCriteriaGlobal) {
+        this.summCriteriaGlobal = summCriteriaGlobal;
+    }
+
+    public String getSummDepartementGlobal() {
+        return summDepartementGlobal;
+    }
+
+    public void setSummDepartementGlobal(String summDepartementGlobal) {
+        this.summDepartementGlobal = summDepartementGlobal;
+    }
+    
+    
     
     @Override
     public int hashCode() {
