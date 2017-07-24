@@ -68,7 +68,7 @@ public class StatistiqueController implements Serializable {
 
         for (Departement dep : departementFacade.findAll()) {
             if (dep != null) {
-                pieChartModel.set("" + dep.getName(), demandCategoryDepartementCalculationFacade.findByDateMinMax(dateMin, dateMax, dep.getName()));
+                pieChartModel.set("" + dep.getName(), statistiqueFacade.findByDateMinMax(selectedForSearch,validationLevel,dateMin, dateMax, dep.getName()));
             }
 
         }

@@ -11,6 +11,7 @@ import bean.DemandCategoryDepartementCalculation;
 import controler.util.SearchUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -64,6 +65,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         }
         return new BigDecimal(0);
     }
+
     private String[] constructQueryHelper(int month, List<String> departements, int typeSum) {
         String monthInQuery = "" + month;
         String beanAbreviation = "dc";
@@ -75,7 +77,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         }
         if (departements != null && !departements.isEmpty()) {
             fromQuery += " , DemandCategoryDepartementCalculation dcdc";
-            
+
         }
         if (typeSum == 1) {
             summQuery = " SUM(" + beanAbreviation + ".summTotal)";
@@ -88,19 +90,34 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
                 beanAbreviation = "dcdc";
                 summQuery = "SUM(" + beanAbreviation + ".summe)";
                 wherequery = " dcdc.demandCategory.id=dc.id";
+            } else {
+                /*
+                    if departements == null et typeSum != {1,2,3} we return requet always false( wherequery = " 1=0 " ) 
+                    resultat return = String[]{"SUM(" + beanAbreviation + ".summTotal)", "DemandCategory dc", " 1=0 ", monthInQuery}
+                 */
+                wherequery = " 1=0 ";
+                //requet toujours faux quelque soit summQuery
+                summQuery = summQuery = " SUM(" + beanAbreviation + ".summTotal)";
             }
-//            } else {
-//                /*
-//                    if departements == null et typeSum != {1,2,3} we return requet always false( wherequery = " 1=0 " ) 
-//                    resultat return = String[]{"SUM(" + beanAbreviation + ".summTotal)", "DemandCategory dc", " 1=0 ", monthInQuery}
-//                */
-//                wherequery = " 1=0 ";
-//                //requet toujours faux quelque soit summQuery
-//                summQuery = summQuery = " SUM(" + beanAbreviation + ".summTotal)";
-//            }
 
         }
         return new String[]{summQuery, fromQuery, wherequery, monthInQuery};
+    }
+
+    public BigDecimal findByDateMinMax(DemandCategory selectedForSearch, Integer validationLevel,Date dateMin, Date dateMax, String nameDepartement) {
+        String query = "SELECT SUM(dcdc.summe) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
+
+        query += SearchUtil.addConstraintMinMaxDate("dcdc", "demandCategory.dateDemandCategory", dateMin, dateMax);
+        query +=demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dcdc.demandCategory");
+        query += " AND dcdc.departement.name='" + nameDepartement + "'";
+
+        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> " + query);
+        List<BigDecimal> res = em.createQuery(query).getResultList();
+        if (res != null && !res.isEmpty() && res.get(0) != null) {
+            System.out.println("res.get(0) = " + res.get(0));
+            return res.get(0);
+        }
+        return new BigDecimal(0);
     }
 
     @Override
