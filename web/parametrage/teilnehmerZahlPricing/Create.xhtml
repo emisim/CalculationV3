@@ -22,8 +22,6 @@
                         <p:inputText id="teilnehmerZahlMax" value="#{teilnehmerZahlPricingController.selected.teilnehmerZahlMax}" title="#{bundle.CreateTeilnehmerZahlPricingTitle_teilnehmerZahlMax}" />
                         <p:outputLabel value="#{bundle.CreateTeilnehmerZahlPricingLabel_price}" for="price" />
                         <p:inputText id="price" value="#{teilnehmerZahlPricingController.selected.price}" title="#{bundle.CreateTeilnehmerZahlPricingTitle_price}" />
-                        <p:outputLabel value="#{bundle.CreateTeilnehmerZahlPricingLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{teilnehmerZahlPricingController.selected.id}" title="#{bundle.CreateTeilnehmerZahlPricingTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{teilnehmerZahlPricingController.create}" value="#{bundle.Save}" update="display,:parametrageTab:TeilnehmerZahlPricingListForm:datalist,:growl" oncomplete="handleSubmit(args,'TeilnehmerZahlPricingCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TeilnehmerZahlPricingCreateDialog.hide()"/>
