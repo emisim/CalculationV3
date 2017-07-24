@@ -124,7 +124,7 @@ public class DemandCategoryController implements Serializable {
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
-        if (selected != null && selected.getSotimentItems()!=null && !selected.getSotimentItems().isEmpty()) {
+        if (selected != null && selected.getSotimentItems() != null && !selected.getSotimentItems().isEmpty()) {
             if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
                 demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
                 departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
@@ -139,7 +139,6 @@ public class DemandCategoryController implements Serializable {
                     }
                 }
             }
-            feedLists();
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('DemandCategoryDetailDialog').show();");
         } else {
@@ -346,11 +345,10 @@ public class DemandCategoryController implements Serializable {
             }
 
         }
-        feedLists();
-
+        System.out.println("params ::::: " + params);
     }
 
-    private void updateDepItems(List<DepartementDetail> departementDetails) {
+    public void updateDepItems(List<DepartementDetail> departementDetails) {
         ejbFacade.updateDepItems(departementDetails);
     }
 
@@ -362,34 +360,7 @@ public class DemandCategoryController implements Serializable {
         updateDepItems(departementCriterias);
     }
 
-    public void updateDetailContentManagement(DepartementDetail departementDetail) throws ScriptException {
-        updateDetails(departementDetail, contentManagement);
-    }
-
-    public void updateContentManagement() {
-        updateDepItems(contentManagement);
-    }
-
-    public void updateDetailDatenManagement(DepartementDetail departementDetail) throws ScriptException {
-        updateDetails(departementDetail, datenManagement);
-    }
-
-    public void updateDatenManagement() {
-        updateDepItems(datenManagement);
-    }
-
-    public void updateDetailDatabasePublishing(DepartementDetail departementDetail) throws ScriptException {
-        updateDetails(departementDetail, databasePublisihing);
-    }
-
-    public void updateDatabasePublisihing() {
-        updateDepItems(databasePublisihing);
-    }
-
-    public void updateDetailProjectManagement(DepartementDetail departementDetail) throws ScriptException {
-        updateDetails(departementDetail, projectManagement);
-    }
-
+  
     public Integer getValidationSearch() {
         return validationSearch;
     }
@@ -402,7 +373,7 @@ public class DemandCategoryController implements Serializable {
         updateDepItems(projectManagement);
     }
 
-    private void updateDetails(DepartementDetail loadedDepartementDetail, List<DepartementDetail> departementDetails) {
+    public void updateDetails(DepartementDetail loadedDepartementDetail, List<DepartementDetail> departementDetails) {
         if (departementDetails != null && !departementDetails.isEmpty() && loadedDepartementDetail != null) {
 
             if (loadedDepartementDetail.isChecked() == false) {
@@ -443,16 +414,7 @@ public class DemandCategoryController implements Serializable {
         }
     }
 
-    public void feedLists() {
-        if (params != null && !params.isEmpty()) {
-            contentManagement = params.get("contentManagement");
-            datenManagement = params.get("datenManagement");
-            databasePublisihing = params.get("databasePublisihing");
-            projectManagement = params.get("projectManagement");
-        }
-
-    }
-
+   
     public List allDepartements() {
         return departementCriteriaFacade.allDetailDepartements();
     }
@@ -633,10 +595,14 @@ public class DemandCategoryController implements Serializable {
     }
 
     public Map<String, List<DepartementDetail>> getParams() {
+        if (params == null) {
+            params = new HashMap<>();
+        }
         return params;
     }
 
     public void setParams(Map<String, List<DepartementDetail>> params) {
+
         this.params = params;
     }
 
@@ -716,7 +682,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public boolean isSave() {
-        
+
         return save;
     }
 

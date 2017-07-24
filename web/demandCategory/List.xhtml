@@ -570,7 +570,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="Action"/>
                                         </f:facet>
-                                        <p:commandButton id="detailCat" title="Detail" icon="fa fa-th-large"  actionListener="#{demandCategoryController.departementeDetails(item)}" update=":DemandCategoryDetailForm" oncomplete="PF('DemandCategoryDetailDialog').show()"  />
+                                        <p:commandButton id="detailCat" title="Detail" icon="fa fa-th-large"  actionListener="#{demandCategoryController.departementeDetails(item)}" update=":DemandCategoryDetailForm"   oncomplete="PF('DemandCategoryDetailDialog').show()"  />
                                         <p:commandButton id="valider" title="Valider" icon="#{demandCategoryController.checkDemandValidation(item)==1?'ui-icon-check':'ui-icon-closethick'}" style="color:#{demandCategoryController.checkDemandValidation(item)==-1?'green':'red'}" actionListener="#{demandCategoryController.validate(item)}" update="DemandCategoryListForm,DemandCategoryListForm:datalist" />
                                     </p:column>
                                     <f:facet name="footer" >
