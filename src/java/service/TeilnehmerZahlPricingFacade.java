@@ -22,9 +22,13 @@ public class TeilnehmerZahlPricingFacade extends AbstractFacade<TeilnehmerZahlPr
     private EntityManager em;
 
     public BigDecimal findPriceByTeilnehmerZahlValue(int teilnehmerZahl){
-        return getUniqueResult("SELECT item FROM TeilnehmerZahlPricing item WHERE ("+teilnehmerZahl+" item.teilnehmerZahlMinOperator "
+        TeilnehmerZahlPricing res= getUniqueResult("SELECT item FROM TeilnehmerZahlPricing item WHERE ("+teilnehmerZahl+" item.teilnehmerZahlMinOperator "
                 + "item.teilnehmerZahlMin AND item.teilnehmerZahlMin!= null) AND ("+teilnehmerZahl+" item.teilnehmerZahlMaxOperator "
-                + "item.teilnehmerZahlMax AND item.teilnehmerZahlMax!= null)").getPrice();
+                + "item.teilnehmerZahlMax AND item.teilnehmerZahlMax!= null)");
+        if(res!=null){
+            return res.getPrice();
+        }
+        return new BigDecimal(0);
     }
     @Override
     protected EntityManager getEntityManager() {
