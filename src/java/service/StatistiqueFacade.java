@@ -88,15 +88,16 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
                 beanAbreviation = "dcdc";
                 summQuery = "SUM(" + beanAbreviation + ".summe)";
                 wherequery = " dcdc.demandCategory.id=dc.id";
-            } else {
-                /*
-                    if departements == null et typeSum != {1,2,3} we return requet always false( wherequery = " 1=0 " ) 
-                    resultat return = String[]{"SUM(" + beanAbreviation + ".summTotal)", "DemandCategory dc", " 1=0 ", monthInQuery}
-                */
-                wherequery = " 1=0 ";
-                //requet toujours faux quelque soit summQuery
-                summQuery = summQuery = " SUM(" + beanAbreviation + ".summTotal)";
             }
+//            } else {
+//                /*
+//                    if departements == null et typeSum != {1,2,3} we return requet always false( wherequery = " 1=0 " ) 
+//                    resultat return = String[]{"SUM(" + beanAbreviation + ".summTotal)", "DemandCategory dc", " 1=0 ", monthInQuery}
+//                */
+//                wherequery = " 1=0 ";
+//                //requet toujours faux quelque soit summQuery
+//                summQuery = summQuery = " SUM(" + beanAbreviation + ".summTotal)";
+//            }
 
         }
         return new String[]{summQuery, fromQuery, wherequery, monthInQuery};

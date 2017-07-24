@@ -12,10 +12,12 @@ import java.io.IOException;
 import service.UserFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -33,12 +35,15 @@ public class UserController implements Serializable {
     private service.UserFacade ejbFacade;
     private List<User> items = null;
     private User selected;
+    private List<User> userProfils ;
     private User connectedUser;
     private Message message;
     private String oldPassword;
     private String newPassword;
     private String newRepetePassword;
     private String pwdForUpdate;
+
+   
 
     public UserController() {
     }
@@ -153,6 +158,16 @@ public class UserController implements Serializable {
         return newRepetePassword;
     }
 
+    public List<User> getUserProfils() {
+        userProfils = new ArrayList();
+        userProfils.add(SessionUtil.getConnectedUser());
+        return userProfils;
+    }
+
+    public void setUserProfils(List<User> userProfils) {
+        this.userProfils = userProfils;
+    }
+
     public void setNewRepetePassword(String newRepetePassword) {
         this.newRepetePassword = newRepetePassword;
     }
@@ -176,7 +191,6 @@ public class UserController implements Serializable {
         this.pwdForUpdate = pwdForUpdate;
     }
 
-    
     protected void setEmbeddableKeys() {
     }
 

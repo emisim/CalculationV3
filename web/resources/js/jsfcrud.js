@@ -5,9 +5,8 @@ function handleSubmit(args, dialog) {
     } else {
         PF(dialog).hide();
     }
-    togglerEvent();
 }
 
-function togglerEvent() {
-    $('.ui-columntoggler-items .ui-chkbox .ui-chkbox-box').click();
-}
+
+
+
