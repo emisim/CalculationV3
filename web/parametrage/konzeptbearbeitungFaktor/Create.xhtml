@@ -12,6 +12,8 @@
             <h:form id="KonzeptbearbeitungFaktorCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{konzeptbearbeitungFaktorController.selected != null}">
+                         <p:outputLabel value="#{bundle.CreateKonzeptbearbeitungFaktorLabel_expression}" for="expression" />
+                        <p:inputText id="expression" value="#{konzeptbearbeitungFaktorController.selected.expression}" title="#{bundle.CreateKonzeptbearbeitungFaktorTitle_expression}" />
                         <p:outputLabel value="#{bundle.CreateKonzeptbearbeitungFaktorLabel_value}" for="value" />
                         <p:inputText id="value" value="#{konzeptbearbeitungFaktorController.selected.value}" title="#{bundle.CreateKonzeptbearbeitungFaktorTitle_value}" />
                     </p:panelGrid>

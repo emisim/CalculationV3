@@ -12,6 +12,8 @@
             <h:form id="MitgliederkorrekturFaktorEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mitgliederkorrekturFaktorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMitgliederkorrekturFaktorLabel_expression}" for="expression" />
+                        <p:inputText id="expression" value="#{mitgliederkorrekturFaktorController.selected.expression}" title="#{bundle.EditMitgliederkorrekturFaktorTitle_expression}" />
                         <p:outputLabel value="#{bundle.EditMitgliederkorrekturFaktorLabel_value}" for="value" />
                         <p:inputText id="value" value="#{mitgliederkorrekturFaktorController.selected.value}" title="#{bundle.EditMitgliederkorrekturFaktorTitle_value}" />
                     </p:panelGrid>

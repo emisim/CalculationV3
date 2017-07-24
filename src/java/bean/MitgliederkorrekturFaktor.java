@@ -24,14 +24,14 @@ public class MitgliederkorrekturFaktor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean expression;
+    private String expression;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert;
 
-    public boolean isExpression() {
+    public String getExpression() {
         return expression;
     }
 
-    public void setExpression(boolean expression) {
+    public void setExpression(String expression) {
         this.expression = expression;
     }
 
