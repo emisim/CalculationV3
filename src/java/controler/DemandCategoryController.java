@@ -411,13 +411,14 @@ public class DemandCategoryController implements Serializable {
                 loadedDepartementDetail.setPriceGlobalUpdate(priceGlobal + "");
                 departementDetails.set(departementDetails.indexOf(loadedDepartementDetail), loadedDepartementDetail);
             }
-
             for (DepartementDetail departementDetail2 : departementDetails) {
                 if (loadedDepartementDetail.getNomDepCritera().equals(departementDetail2.getNomDepCritera())) {
                     System.out.println("vrai");
                     departementDetail2.setSummCriteria(loadedDepartementDetail.getSummCriteria());
+                    departementDetail2.setSummCriteriaGlobal(loadedDepartementDetail.getSummCriteriaGlobal());
                 }
                 departementDetail2.setSummDepartement(loadedDepartementDetail.getSummDepartement());
+                departementDetail2.setSummDepartementGlobal(loadedDepartementDetail.getSummDepartementGlobal());
             }
         }
     }

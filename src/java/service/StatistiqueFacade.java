@@ -105,7 +105,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
     }
 
     public BigDecimal findByDateMinMax(DemandCategory selectedForSearch, Integer validationLevel,Date dateMin, Date dateMax, String nameDepartement) {
-        String query = "SELECT SUM(dcdc.summe) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
+        String query = "SELECT SUM(dcdc.summeGlobal) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
 
         query += SearchUtil.addConstraintMinMaxDate("dcdc", "demandCategory.dateDemandCategory", dateMin, dateMax);
         query +=demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dcdc.demandCategory");
