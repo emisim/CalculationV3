@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListWechselfassungVariantFaktorTitle_expression}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.expression}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListWechselfassungVariantFaktorTitle_value}"/>
                             </f:facet>
                             <h:outputText value="#{item.value}"/>

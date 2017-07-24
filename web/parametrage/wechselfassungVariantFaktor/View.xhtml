@@ -12,6 +12,8 @@
             <h:form id="WechselfassungVariantFaktorViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{wechselfassungVariantFaktorController.selected != null}">
+                        <h:outputText value="#{bundle.ViewWechselfassungVariantFaktorLabel_expression}"/>
+                        <h:outputText value="#{wechselfassungVariantFaktorController.selected.expression}" title="#{bundle.ViewWechselfassungVariantFaktorTitle_expression}"/>
                         <h:outputText value="#{bundle.ViewWechselfassungVariantFaktorLabel_value}"/>
                         <h:outputText value="#{wechselfassungVariantFaktorController.selected.value}" title="#{bundle.ViewWechselfassungVariantFaktorTitle_value}"/>
                         <h:outputText value="#{bundle.ViewWechselfassungVariantFaktorLabel_id}"/>

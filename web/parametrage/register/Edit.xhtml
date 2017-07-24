@@ -12,6 +12,8 @@
             <h:form id="RegisterEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{registerController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRegisterLabel_expression}" for="expression" />
+                        <p:inputText id="expression" value="#{registerController.selected.expression}" title="#{bundle.EditRegisterTitle_expression}" />
                         <p:outputLabel value="#{bundle.EditRegisterLabel_price}" for="price" />
                         <p:inputText id="price" value="#{registerController.selected.price}" title="#{bundle.EditRegisterTitle_price}" />
                     </p:panelGrid>

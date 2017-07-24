@@ -24,15 +24,15 @@ public class Register implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private boolean expression;
+    private String expression;
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal price;
 
-    public boolean isExpression() {
+    public String getExpression() {
         return expression;
     }
 
-    public void setExpression(boolean expression) {
+    public void setExpression(String expression) {
         this.expression = expression;
     }
 

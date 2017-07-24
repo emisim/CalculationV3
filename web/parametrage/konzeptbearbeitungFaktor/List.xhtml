@@ -24,6 +24,12 @@
 
                 <p:column>
                     <f:facet name="header">
+                        <h:outputText value="#{bundle.ListKonzeptbearbeitungFaktorTitle_expression}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.expression}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
                         <h:outputText value="#{bundle.ListKonzeptbearbeitungFaktorTitle_value}"/>
                     </f:facet>
                     <h:outputText value="#{item.value}"/>

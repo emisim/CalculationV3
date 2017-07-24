@@ -12,6 +12,8 @@
             <h:form id="RegisterViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{registerController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRegisterLabel_expression}"/>
+                        <h:outputText value="#{registerController.selected.expression}" title="#{bundle.ViewRegisterTitle_expression}"/>
                         <h:outputText value="#{bundle.ViewRegisterLabel_price}"/>
                         <h:outputText value="#{registerController.selected.price}" title="#{bundle.ViewRegisterTitle_price}"/>
                     </p:panelGrid>

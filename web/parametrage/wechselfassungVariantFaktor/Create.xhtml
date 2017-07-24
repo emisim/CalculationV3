@@ -12,6 +12,8 @@
             <h:form id="WechselfassungVariantFaktorCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{wechselfassungVariantFaktorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateWechselfassungVariantFaktorLabel_expression}" for="expression" />
+                        <p:inputText id="expression" value="#{wechselfassungVariantFaktorController.selected.expression}" title="#{bundle.CreateWechselfassungVariantFaktorTitle_expression}" />
                         <p:outputLabel value="#{bundle.CreateWechselfassungVariantFaktorLabel_value}" for="value" />
                         <p:inputText id="value" value="#{wechselfassungVariantFaktorController.selected.value}" title="#{bundle.CreateWechselfassungVariantFaktorTitle_value}" />
                         <p:outputLabel value="#{bundle.CreateWechselfassungVariantFaktorLabel_id}" for="id" />
