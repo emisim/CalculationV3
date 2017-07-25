@@ -50,8 +50,12 @@
                                     <h:outputText value="#{item.priceGlobalUpdate}" />
                                 </p:column>
                                 <p:summaryRow>
-                                    <p:column colspan="5" style="text-align:right">
-                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $ -- Total Global Prices : #{item.summCriteriaGlobal} $" />
+                                    <p:column colspan="3" ></p:column>
+                                    <p:column>
+                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
+                                    </p:column>
+                                     <p:column>
+                                        <h:outputText value="Total Global Prices : #{item.summCriteriaGlobal} $" />
                                     </p:column>
                                 </p:summaryRow>
                                 <f:facet name="footer">
@@ -109,11 +113,11 @@
                                     <p:summaryRow>
                                         <p:column colspan="3" >
                                         </p:column>
-                                        <p:column colspan="5" style="text-align:right">
-                                            <h:outputText value="Total Unit Prices : #{item.summCriteria} $ -- Total Global Prices : #{item.summCriteriaGlobal} $" />
+                                        <p:column  style="text-align:right">
+                                            <h:outputText value="Total Unit Prices : #{item.summCriteria} $ " />
                                         </p:column>
-                                        <p:column colspan="" style="text-align:right">
-                                            <h:outputText value="Total Unit Prices : #{item.summCriteria} $ -- Total Global Prices : #{item.summCriteriaGlobal} $" />
+                                        <p:column  style="text-align:right">
+                                            <h:outputText value="Total Global Prices : #{item.summCriteriaGlobal} $" />
                                         </p:column>
                                     </p:summaryRow>
                                     <f:facet name="footer">
