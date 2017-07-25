@@ -80,11 +80,11 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
 
         }
         if (typeSum == 1) {
-            summQuery = " SUM(" + beanAbreviation + ".summGlobal)";
+            summQuery = " SUM(" + beanAbreviation + ".summeGlobal)";
         } else if (typeSum == 2) {
             summQuery = " SUM(" + beanAbreviation + ".summDruck)";
         } else if (typeSum == 3) {
-            summQuery = " SUM(" + beanAbreviation + ".summDruck" + " + " + beanAbreviation + ".summGlobal)";
+            summQuery = " SUM(" + beanAbreviation + ".summDruck" + " + " + beanAbreviation + ".summeGlobal)";
         } else {
             if (departements != null && !departements.isEmpty()) {
                 beanAbreviation = "dcdc";
@@ -97,7 +97,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
                  */
                 wherequery = " 1=0 ";
                 //requet toujours faux quelque soit summQuery
-                summQuery = summQuery = " SUM(" + beanAbreviation + ".summGlobal)";
+                summQuery = summQuery = " SUM(" + beanAbreviation + ".summeGlobal)";
             }
 
         }
@@ -105,7 +105,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
     }
 
     public BigDecimal findByDateMinMax(DemandCategory selectedForSearch, Integer validationLevel,Date dateMin, Date dateMax, String nameDepartement) {
-        String query = "SELECT SUM(dcdc.summe) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
+        String query = "SELECT SUM(dcdc.summeGlobal) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
 
         query += SearchUtil.addConstraintMinMaxDate("dcdc", "demandCategory.dateDemandCategory", dateMin, dateMax);
         query +=demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dcdc.demandCategory");
