@@ -7,20 +7,15 @@ package service;
 
 import bean.DemandCategory;
 import bean.DemandCategoryCalculation;
-import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
-import bean.DepartementCriteria;
 import controler.util.SearchUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.script.ScriptException;
@@ -50,7 +45,6 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         return demandCategoryDepartementCalculations;
     }
 
-   
     public List<DemandCategoryDepartementCalculation> findByDemandCategory(DemandCategory demandCategory, Departement departement) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE 1=1";
         if (demandCategory != null && demandCategory.getId() != null) {
@@ -83,7 +77,8 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
 
             //Save calculation
             demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.save(demandCategory, demandCategoryDepartementCalculation, similuer, isSave));
-            demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
+            demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations(), "summ"));
+            demandCategoryDepartementCalculation.setSummeGlobal(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations(), "summGlobal"));
             if (!similuer) {
                 edit(demandCategoryDepartementCalculation);
                 System.out.println("hana editer demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
@@ -104,7 +99,8 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         for (Departement myDepartement : departements) {
             DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = find(myDepartement, demandCategory);
             demandCategoryDepartementCalculation.setDemandCategoryCalculations(demandCategoryCalculationFacade.detail(demandCategory, demandCategoryDepartementCalculation));
-            demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations()));
+            demandCategoryDepartementCalculation.setSumme(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations(), "summ"));
+            demandCategoryDepartementCalculation.setSummeGlobal(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations(), "summGlobal"));
             res.add(demandCategoryDepartementCalculation);
         }
         return res;
@@ -140,11 +136,20 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
         return new DemandCategoryDepartementCalculation();
     }
 
-    private BigDecimal calculerSum(List<DemandCategoryCalculation> demandCategoryCalculations) {
+    private BigDecimal calculerSum(List<DemandCategoryCalculation> demandCategoryCalculations, String flag) {
         BigDecimal sum = new BigDecimal(0);
-        for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryCalculations) {
-            if (demandCategoryCalculation.getSumme() != null) {
-                sum = sum.add(demandCategoryCalculation.getSumme());
+        if (flag.equals("summ")) {
+            for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryCalculations) {
+                if (demandCategoryCalculation.getSumme() != null) {
+                    sum = sum.add(demandCategoryCalculation.getSumme());
+                }
+            }
+        }
+        if (flag.equals("summGlobal")) {
+            for (DemandCategoryCalculation demandCategoryCalculation : demandCategoryCalculations) {
+                if (demandCategoryCalculation.getSummeGlobal()!= null) {
+                    sum = sum.add(demandCategoryCalculation.getSummeGlobal());
+                }
             }
         }
         return sum;
@@ -158,5 +163,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
     public DemandCategoryDepartementCalculationFacade() {
         super(DemandCategoryDepartementCalculation.class);
     }
+
+    
 
 }

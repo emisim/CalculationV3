@@ -43,6 +43,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private @EJB
     SotimentItemFacade sotimentItemFacade;
     private @EJB
+    TeilnehmerZahlPricingFacade teilnehmerZahlPricingFacade;
+    private @EJB
     AuflageSeitenCoverMatrixFacade auflageSeitenCoverMatrixFacade;
     private @EJB
     DemandCategoryDepartementCalculationFacade demandCategoryDepartementCalculationFacade;
@@ -87,43 +89,42 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
+        saveOrUpdate(simulation, isSave, demandCategory);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
+        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
+        calcSumDruck(demandCategory);
+        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
+        teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        if (simulation == false) {
+            edit(demandCategory);
+            if (isSave) {
+                demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
+            }
+        }
+        saveOrUpdate(simulation, isSave, demandCategory);
 
+    }
+
+    private void saveOrUpdate(boolean simulation, boolean isSave, DemandCategory demandCategory) {
         if (!simulation) {
             if (isSave) {
                 create(demandCategory);
             } else {
                 edit(demandCategory);
             }
-            System.out.println("hana savite demandCategory ==> " + demandCategory);
         }
-        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
-        calcSumDruck(demandCategory);
-        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
-
-        if (simulation == false && isSave == false) {
-            edit(demandCategory);
-            demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
-        }
-         if (!simulation) {
-            if (isSave) {
-                create(demandCategory);
-            } else {
-                edit(demandCategory);
-            }
-            System.out.println("hana savite demandCategory ==> " + demandCategory);
-        }
-
     }
 
     private void calcSumTotal(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations) {
-        demandCategory.setSummTotal(new BigDecimal(0));
+        demandCategory.setSummUnitPrice(new BigDecimal(0));
+        demandCategory.setSummeGlobal(new BigDecimal(0));
         if (demandCategoryDepartementCalculations == null || demandCategoryDepartementCalculations.isEmpty()) {
             return;
         }
         for (DemandCategoryDepartementCalculation demandCategoryDepartementCalculation : demandCategoryDepartementCalculations) {
-            demandCategory.setSummTotal(demandCategory.getSummTotal().add(demandCategoryDepartementCalculation.getSumme()));
+            demandCategory.setSummUnitPrice(demandCategory.getSummUnitPrice().add(demandCategoryDepartementCalculation.getSumme()));
+            demandCategory.setSummeGlobal(demandCategory.getSummeGlobal().add(demandCategoryDepartementCalculation.getSummeGlobal()));
         }
     }
 
@@ -239,12 +240,12 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
-            return demandCategory.getSummTotal();
+            return demandCategory.getSummeGlobal();
         } else if (SessionUtil.getConnectedUser().getDepartement() != null && !Objects.equals(SessionUtil.getConnectedUser().getDepartement().getId(), demandCategory.getDepartment().getId())) {
-            return (BigDecimal) em.createQuery("SELECT item.summe FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
+            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
                     + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
-            return demandCategory.getSummTotal();
+            return demandCategory.getSummeGlobal();
         }
     }
 
@@ -253,6 +254,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             for (DepartementDetail departementCriteria : departementDetails) {
                 DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuationId());
                 demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
+                demandCategoryCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummCriteriaGlobal()));
                 demandCategoryCalculationFacade.edit(demandCategoryCalculation);
                 DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
                 demandCategoryCalculationItem.setPriceUpdate(new BigDecimal(departementCriteria.getPriceUpdate()));
@@ -261,6 +263,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                 demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
                 DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());
                 demandCategoryDepartementCalculation.setSumme(new BigDecimal(departementCriteria.getSummDepartement()));
+                demandCategoryDepartementCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummDepartementGlobal()));
                 demandCategoryDepartementCalculationFacade.edit(demandCategoryDepartementCalculation);
             }
             JsfUtil.addSuccessMessage("Details updated");
@@ -297,51 +300,37 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getDepartment() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
             }
-            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
-            }
+//            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+//            }
 
-            if (demandCategory.getCorrectionSchluessel() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
-            }
-            if (demandCategory.getMitgliederkorrekturFaktor() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
-            }
-            if (demandCategory.getWechselfassungVariantFaktor() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
-            }
-            if (demandCategory.getParticipantFaktor() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
-            }
-            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
-            }
-            if (demandCategory.getUser() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
-            }
-            if (demandCategory.getDepartment() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
-            }
-            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
-            }
+//            if (demandCategory.getCorrectionSchluessel() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "correctionSchluessel.id", "=", demandCategory.getCorrectionSchluessel().getId());
+//            }
+//            if (demandCategory.getMitgliederkorrekturFaktor() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "mitgliederkorrekturFaktor.id", "=", demandCategory.getMitgliederkorrekturFaktor().getId());
+//            }
+//            if (demandCategory.getWechselfassungVariantFaktor() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "wechselfassungVariantFaktor.id", "=", demandCategory.getWechselfassungVariantFaktor().getId());
+//            }
+//            if (demandCategory.getParticipantFaktor() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "participantFaktor.id", "=", demandCategory.getParticipantFaktor().getId());
+//            }
+//            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+//            }
+//            if (demandCategory.getUser() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
+//            }
+//            if (demandCategory.getDepartment() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
+//            }
+//            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
+//            }
         }
         query += findByValidation(validationLevel, beanAbreviation);
         return query;
-    }
-
-    public BigDecimal findByDateMinMax(Date dateMin, Date dateMax, String nameDepartement) {
-        String requet = "SELECT SUM(dc.summTotal) FROM DemandCategory dc WHERE 1=1";
-
-        requet += SearchUtil.addConstraintMinMaxDate("dc", "dateDemandCategory", dateMin, dateMax);
-        requet += " AND dc.department.name='" + nameDepartement + "'";
-
-        System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> " + requet);
-        List<BigDecimal> res = em.createQuery(requet).getResultList();
-        if (res != null && !res.isEmpty() && res.get(0) != null) {
-            return res.get(0);
-        }
-        return new BigDecimal(0);
     }
 
 }

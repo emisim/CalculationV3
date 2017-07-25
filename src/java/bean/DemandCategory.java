@@ -119,6 +119,8 @@ public class DemandCategory implements Serializable {
 
     //Teilnehmerzahl
     private int teilnehmerZahl = 16; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal teilnehmerZahlPricing = new BigDecimal(0);
     @ManyToOne
     private ParticipantFaktor participantFaktor;
 
@@ -177,7 +179,10 @@ public class DemandCategory implements Serializable {
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal summDruck = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal summTotal = new BigDecimal(0);
+    BigDecimal summUnitPrice = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal summeGlobal;
+
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
 
@@ -187,6 +192,22 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    public BigDecimal getSummeGlobal() {
+        return summeGlobal;
+    }
+
+    public void setSummeGlobal(BigDecimal summeGlobal) {
+        this.summeGlobal = summeGlobal;
+    }
+
+    public BigDecimal getTeilnehmerZahlPricing() {
+        return teilnehmerZahlPricing;
+    }
+
+    public void setTeilnehmerZahlPricing(BigDecimal teilnehmerZahlPricing) {
+        this.teilnehmerZahlPricing = teilnehmerZahlPricing;
+    }
 
     public Seiten getDruckSeiten() {
         return druckSeiten;
@@ -303,12 +324,12 @@ public class DemandCategory implements Serializable {
         this.summDruck = summDruck;
     }
 
-    public BigDecimal getSummTotal() {
-        return summTotal;
+    public BigDecimal getSummUnitPrice() {
+        return summUnitPrice;
     }
 
-    public void setSummTotal(BigDecimal summTotal) {
-        this.summTotal = summTotal;
+    public void setSummUnitPrice(BigDecimal summUnitPrice) {
+        this.summUnitPrice = summUnitPrice;
     }
 
     public Category getCategory() {

@@ -9,6 +9,7 @@ import bean.ArtDerWeiterverarbeitung;
 import bean.DemandCategory;
 import controler.util.SearchUtil;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -57,8 +58,10 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
             }
             if (!SearchUtil.isStringNullOrVide(expression)) {
                 Object obj = getJsEngine().eval(expression);
-                System.out.println("haaa l eval ==> " + obj);
-                return obj;
+                BigDecimal value = new BigDecimal(obj+"");
+                value=value.setScale(2, RoundingMode.HALF_UP);
+                System.out.println("haaa l eval ==> " + value);
+                return value;
             }
         }
         return "0";
