@@ -28,18 +28,53 @@
                     <div Class="ui-grid-col-12">
                         <h:form id="chartView">
                             <p:fieldset id="StatField" legend="Erweiterte Suche" toggleable="true" toggleSpeed="500" style="margin-bottom:20px" >
-                                <h:panelGrid id="champsInput" columns="4" style="width:50%;margin-left: 25%;" >
+                                <h:panelGrid id="champsInput" columns="8" style="width:100%;" >
 
-                                    <p:outputLabel value="First date" for="date1" />
+                                    <p:outputLabel value="Von: " for="date1" />
                                     <p:calendar  id="date1" pattern="yyyy-MM-dd" value="#{statistiqueController.dateMin}" title="#{bundle.EditJournalTitle_systemDate}"  showOn="button"  >
                                         <f:convertDateTime pattern="yyyy-MM-dd"  />
                                     </p:calendar>
                                     
-                                    <p:outputLabel value="seconde date" for="date2" />
+                                    <p:outputLabel value="Bis: " for="date2" />
                                     <p:calendar  id="date2" pattern="yyyy-MM-dd" value="#{statistiqueController.dateMax}" title="#{bundle.EditJournalTitle_systemDate}"  showOn="button"  >
                                         <f:convertDateTime pattern="yyyy-MM-dd"  />
                                     </p:calendar>
 
+                                     
+                                      <p:outputLabel value="#{bundle.ListDemandCategoryTitle_nbrTotalValidation}" for="validation" />
+                                    <p:selectOneMenu id="validation" value="#{statistiqueController.validationLevel}" autoWidth="false" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItem itemValue="2" itemLabel="Valid"/>
+                                        <f:selectItem itemValue="1" itemLabel="In Progress"/>
+                                        <f:selectItem itemValue="0" itemLabel="Not Valid"/>
+
+                                    </p:selectOneMenu>
+
+                                        
+                                    <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
+                                    <p:selectOneMenu id="category" value="#{statistiqueController.selectedForSearch.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
+                                                       var="categoryItem"
+                                                       itemValue="#{categoryItem}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_product}" for="product" rendered="#{demandCategoryController.renderAttribute('product')}" />
+                                    <p:selectOneMenu id="product" value="#{statistiqueController.selectedForSearch.product}" rendered="#{demandCategoryController.renderAttribute('product')}" autoWidth="false">
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItems value="#{productController.itemsAvailableSelectOne}"
+                                                       var="productItem"
+                                                       itemValue="#{productItem}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.ViewDemandCategoryLabel_user}" for="user"/>
+                                    <p:selectOneMenu id="user" value="#{statistiqueController.selectedForSearch.user}" disabled="#{!demandCategoryController.adminAccess()}" autoWidth="false"> 
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                                       var="user"
+                                                       itemValue="#{user}"
+                                                       itemLabel="#{user.nom} #{user.prenom}"/>
+                                    </p:selectOneMenu>
 
                                 </h:panelGrid>
                                 <div class="ui-widget-header align-center">

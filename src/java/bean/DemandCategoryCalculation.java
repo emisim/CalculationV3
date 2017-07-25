@@ -30,6 +30,7 @@ public class DemandCategoryCalculation implements Serializable {
     @ManyToOne
     private DepartementCriteria departementCriteria;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summe;
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal summeGlobal;
 
     private boolean valide;
     @OneToMany(mappedBy = "demandCategoryCalculation")
@@ -55,6 +56,15 @@ public class DemandCategoryCalculation implements Serializable {
     public void setSumme(BigDecimal summe) {
         this.summe = summe;
     }
+
+    public BigDecimal getSummeGlobal() {
+        return summeGlobal;
+    }
+
+    public void setSummeGlobal(BigDecimal summeGlobal) {
+        this.summeGlobal = summeGlobal;
+    }
+    
 
     public List<DemandCategoryCalculationItem> getDemandCategoryCalculationItems() {
         return demandCategoryCalculationItems;

@@ -113,6 +113,27 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
                         <h:outputText value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
 
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_artikelPerPagelFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.artikelPerPagelFaktor}" title="#{bundle.ViewDemandCategoryTitle_artikelPerPagelFaktor}"/>
+                       
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_lKSchluesselFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.lKSchluesselFaktor}" title="#{bundle.ViewDemandCategoryTitle_lKSchluesselFaktor}"/>
+                       
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_mKSchluesselFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.mKSchluesselFaktor}" title="#{bundle.ViewDemandCategoryTitle_mKSchluesselFaktor}"/>
+                       
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_productSchluesselFaktor}"/>
+                        <h:outputText value="#{demandCategoryController.selected.productSchluesselFaktor}" title="#{bundle.ViewDemandCategoryTitle_productSchluesselFaktor}"/>
+                    
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_teilnehmerZahlPricing}"/>
+                        <h:outputText value="#{demandCategoryController.selected.teilnehmerZahlPricing}" title="#{bundle.ViewDemandCategoryTitle_teilnehmerZahlPricing}"/>
+                    
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summUnitPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summUnitPrice}" title="#{bundle.ViewDemandCategoryTitle_summUnitPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                       
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summeGlobal}" title="#{bundle.ViewDemandCategoryTitle_summGolbalPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+
 
                     </p:panelGrid>
 
@@ -175,11 +196,8 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck') and demandCategoryController.selected.druck == true}"/>
                         <h:outputText value="#{demandCategoryController.selected.summDruck}" title="#{bundle.ViewDemandCategoryTitle_summDruck}" rendered="#{demandCategoryController.renderAttribute('summDruck') and demandCategoryController.selected.druck == true}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.summTotal}" title="#{bundle.ViewDemandCategoryTitle_summTotal}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
-
+                        
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="DemandCategoryViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
 
