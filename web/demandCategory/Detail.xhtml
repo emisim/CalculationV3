@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="DemandCategoryDetailDlg" width="1200" style="height: 50%;max-height: 600px;overflow: auto;" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Details':userController.connectedUser.departement}" >
+        <p:dialog id="DemandCategoryDetailDlg" width="1300" style="height: 50%;max-height: 600px;overflow: auto;" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Details':userController.connectedUser.departement}" >
             <h:form id="DemandCategoryDetailForm">
                 <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
                     <p:tabView id="displayTabForUser" >
