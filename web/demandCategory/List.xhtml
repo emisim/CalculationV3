@@ -168,6 +168,16 @@
                                     <p:ajax event="rowSelect"   update=" editButton deleteButton"/>
                                     <p:ajax event="rowUnselect" update=" editButton deleteButton"/>
 
+
+                                    
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_department}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.department.name}"/>
+                                    </p:column>
+
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('category')}">
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListDemandCategoryTitle_category}"/>

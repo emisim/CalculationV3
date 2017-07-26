@@ -1514,7 +1514,7 @@ INSERT INTO `prozess` (`ID`, `NAME`, `VALUEE`) VALUES
 
 CREATE TABLE `register` (
   `ID` bigint(20) NOT NULL,
-  `EXPRESSION` tinyint(1) DEFAULT '0',
+  `EXPRESSION` varchar(255) DEFAULT '0',
   `PRICE` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1719,6 +1719,7 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 (55, '100.00', 32, 1),
 (56, '100.00', 33, 1),
 (57, '100.00', 34, 1);
+
 
 -- --------------------------------------------------------
 
