@@ -171,7 +171,7 @@ INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID
 CREATE TABLE `correctionschluessel` (
   `ID` bigint(20) NOT NULL,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(10,2) DEFAULT NULL
+  `WERT` decimal(10,3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
