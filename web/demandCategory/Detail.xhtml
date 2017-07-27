@@ -55,12 +55,12 @@
                                         <!--<h:outputText value="Total Unit Prices : {item.summCriteria} €" />-->
                                     </p:column>
                                      <p:column>
-                                        <h:outputText value="Total Global Prices : #{item.summCriteriaGlobal} €" />
+                                        <h:outputText value="Total Price : #{item.summCriteriaGlobal} €" />
                                     </p:column>
                                 </p:summaryRow>
                                 <f:facet name="footer">
-                                    <h:outputText value="Print Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDruck:'0.00'} €"  /><br></br>
-                                    <h:outputText value="Total Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartementGlobal:'0.00'} €" />
+                                    <h:outputText value="Print Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDruck:'0.00'} €" style="text-align:left" /><br></br>
+                                    <h:outputText value="Total Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartementGlobal:'0.00'} €" style="text-align:right" />
                                 </f:facet>
                             </p:dataTable>
                             <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
@@ -117,7 +117,7 @@
                                             <!--<h:outputText value="Total Unit Prices : {item.summCriteria} € " />-->
                                         </p:column>
                                         <p:column  style="text-align:right">
-                                            <h:outputText value="Total Global Prices : #{item.summCriteriaGlobal} €" />
+                                            <h:outputText value="Total Price : #{item.summCriteriaGlobal} €" />
                                         </p:column>
                                     </p:summaryRow>
                                     <f:facet name="footer">

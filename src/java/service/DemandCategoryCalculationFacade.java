@@ -79,6 +79,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
             double div = ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100);
             System.out.println(" aatini afak chno div: " + div);
             selected.setCorrectionSchluessel(correctionSchluesselFacade.findByPercent((int) ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100)));
+            System.out.println("aatini prozessschluessel: " + selected.getProzess().getValuee());
         }
     }
 
@@ -162,6 +163,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
             summe = summe.add(percentValueSortiment(sotimentItem, percent, ordreSortiement));
         }
         System.out.println("haa somme dyal faktor dyalna multipliés par leur sortiment " + summe);
+
         return summe;
     }
 
