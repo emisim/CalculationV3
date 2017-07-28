@@ -98,14 +98,18 @@
                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlGenerierungUpdateSeitenn()}" update="anzahlGenerierungUpdateSeiten" />
                                     </p:inputText>
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGenerierungUpdateSeiten}" for="anzahlGenerierungUpdateSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlGenerierungUpdateSeiten')}" />
-                                    <p:inputText id="anzahlGenerierungUpdateSeiten" value="#{demandCategoryController.selected.anzahlGenerierungUpdateSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGenerierungUpdateSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGenerierungUpdateSeiten')}" />
-
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlIHVZSeiten}" for="anzahlIHVZSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlIHVZSeiten')}" />
-                                    <p:inputText id="anzahlIHVZSeiten" value="#{demandCategoryController.selected.anzahlIHVZSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlIHVZSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlIHVZSeiten')}" />
+                                    <p:inputText id="anzahlIHVZSeiten" value="#{demandCategoryController.selected.anzahlIHVZSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlIHVZSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlIHVZSeiten')}" >
+                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlGenerierungUpdateSeitenn()}" update="anzahlGenerierungUpdateSeiten" />
+                                    </p:inputText>
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlBestellNrSeiten}" for="anzahlBestellNrSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlBestellNrSeiten')}" />
-                                    <p:inputText id="anzahlBestellNrSeiten" value="#{demandCategoryController.selected.anzahlBestellNrSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlBestellNrSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlBestellNrSeiten')}" />
+                                    <p:inputText id="anzahlBestellNrSeiten" value="#{demandCategoryController.selected.anzahlBestellNrSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlBestellNrSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlBestellNrSeiten')}" >
+                                        <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlGenerierungUpdateSeitenn()}" update="anzahlGenerierungUpdateSeiten" />
+                                    </p:inputText>
+
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGenerierungUpdateSeiten}" for="anzahlGenerierungUpdateSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlGenerierungUpdateSeiten')}" />
+                                    <p:inputText id="anzahlGenerierungUpdateSeiten" value="#{demandCategoryController.selected.anzahlGenerierungUpdateSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGenerierungUpdateSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGenerierungUpdateSeiten')}" />
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtArtikel}" for="anzahlGesamtArtikel" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtArtikel')}" />
                                     <p:inputText id="anzahlGesamtArtikel" value="#{demandCategoryController.selected.anzahlGesamtArtikel}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtArtikel}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtArtikel')}" >

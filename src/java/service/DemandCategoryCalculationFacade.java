@@ -78,6 +78,9 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (selected.getAnzahlGesamtArtikel() != 0) {
             double div = ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100);
             selected.setCorrectionSchluessel(correctionSchluesselFacade.findByPercent((int) ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100)));
+            
+            System.out.println("aatini correction schluessel dyal : " + ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100));
+            System.out.println("daba correctionschlluessel hiya:" + selected.getCorrectionSchluessel().getValue());
         }
     }
 
@@ -186,7 +189,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     }
 
     public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected) {
-        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten());
+        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten() -selected.getAnzahlIHVZSeiten() - selected.getAnzahlBestellNrSeiten());
     }
 
     public List<DemandCategoryCalculation> findWithItemsByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {

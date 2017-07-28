@@ -74,8 +74,8 @@ public class DemandCategory implements Serializable {
     private int percentSeitenFaktor = 10;
     private int anzahlSonderSeiten = 3;
     private int anzahlGenerierungUpdateSeiten = 4;
-    private int anzahlIHVZSeiten = 4;
-    private int anzahlBestellNrSeiten = 5;
+    private int anzahlIHVZSeiten = 10;
+    private int anzahlBestellNrSeiten = 10;
 
     //Artikel
     private int anzahlGesamtArtikel = 1900;
