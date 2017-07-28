@@ -88,6 +88,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
             selected.setAnzahlGesamtProdukt((int) (new Double(selected.getAnzahlGesamtArtikel()) / sortimentFaktor.doubleValue()));
         }
+        System.out.println("ha anzahlGesamtProdukt" + selected.getAnzahlGesamtProdukt());
 
     }
 
