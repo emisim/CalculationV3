@@ -84,9 +84,9 @@ public class DemandCategory implements Serializable {
     private int anzahlÜbernahmeArtikel = 9;
 
     //Produkt
-    private int anzahlGesamtProdukt;
-    private int anzahlNeueProdukt;
-    private int anzahlBestandProdukt;
+    private int anzahlGesamtProdukt = 0;
+    private int anzahlNeueProdukt = 0;
+    private int anzahlBestandProdukt = 0;
 
     //Lieferant   
     private int anzahlLieferantGesamt = 16;

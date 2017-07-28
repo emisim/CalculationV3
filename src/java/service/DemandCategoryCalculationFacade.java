@@ -77,9 +77,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     private void calculateCorrectionSchluessel(DemandCategory selected) {
         if (selected.getAnzahlGesamtArtikel() != 0) {
             double div = ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100);
-            System.out.println(" aatini afak chno div: " + div);
             selected.setCorrectionSchluessel(correctionSchluesselFacade.findByPercent((int) ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100)));
-            System.out.println("aatini prozessschluessel: " + selected.getProzess().getValuee());
         }
     }
 
@@ -88,7 +86,6 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         calculateCorrectionSchluessel(selected);
         BigDecimal sortimentFaktor = summSortimentProductSchluessel(selected, sotimentItems, true, true);
         if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
-
             selected.setAnzahlGesamtProdukt((int) (new Double(selected.getAnzahlGesamtArtikel()) / sortimentFaktor.doubleValue()));
         }
 
