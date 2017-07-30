@@ -25,15 +25,7 @@ public class WechselfassungVariantFaktor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String expression;
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert;
-
-    public BigDecimal getWert() {
-        return wert;
-    }
-
-    public void setWert(BigDecimal wert) {
-        this.wert = wert;
-    }
+    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal value;
 
   public String getExpression() {
         return expression;
@@ -43,14 +35,14 @@ public class WechselfassungVariantFaktor implements Serializable {
         this.expression = expression;
     }
 
-//
-//    public BigDecimal getValue() {
-//        return wert;
-//    }
-//
-//    public void setValue(BigDecimal wert) {
-//        this.wert = wert;
-//    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public void setValue(BigDecimal wert) {
+        this.value = value;
+    }
 
     public Long getId() {
         return id;
@@ -82,7 +74,7 @@ public class WechselfassungVariantFaktor implements Serializable {
 
     @Override
     public String toString() {
-        return wert + "";
+        return value + "";
     }
 
 }
