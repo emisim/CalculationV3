@@ -37,6 +37,8 @@ public class User implements Serializable {
     @ManyToOne
     private Departement departement;
     private int admin;
+    @OneToMany(mappedBy = "user")
+    private List<Device> devices;
 
     public int getAdmin() {
         return admin;

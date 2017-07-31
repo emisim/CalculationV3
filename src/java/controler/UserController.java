@@ -1,7 +1,9 @@
 package controler;
 
+import bean.Question;
 import bean.User;
 import controler.util.AccessDepartement;
+import controler.util.DeviceUtil;
 import controler.util.HashageUtil;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
@@ -17,7 +19,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -26,6 +27,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.DeviceFacade;
+import service.QuestionFacade;
 
 @Named("userController")
 @SessionScoped
@@ -35,7 +38,7 @@ public class UserController implements Serializable {
     private service.UserFacade ejbFacade;
     private List<User> items = null;
     private User selected;
-    private List<User> userProfils ;
+    private List<User> userProfils;
     private User connectedUser;
     private Message message;
     private String oldPassword;
@@ -43,7 +46,14 @@ public class UserController implements Serializable {
     private String newRepetePassword;
     private String pwdForUpdate;
 
-   
+    private List<Question> verificationQuestions;
+    private Question selectedQuestion;
+    private List<Question> questions;
+
+    @EJB
+    private QuestionFacade questionFacade;
+    @EJB
+    private DeviceFacade deviceFacade;
 
     public UserController() {
     }
@@ -56,8 +66,8 @@ public class UserController implements Serializable {
         }
     }
 
-    public String seConnnecter() {
-        int res = ejbFacade.seConnnecter(selected);
+    public String seConnnecter() throws IOException {
+        int res = ejbFacade.seConnnecter(selected, DeviceUtil.getDevice());
         AccessDepartement.populateMaps();
         System.out.println("resss " + res);
         if (res > 0) {
@@ -67,9 +77,40 @@ public class UserController implements Serializable {
             } else {
                 return "/user/ChangePassword?faces-redirect=true";
             }
+        } else if (res == -6) {
+            System.out.println("hnaaaa verification");
+            return "/verification?faces-redirect=true";
         }
         validteConnexionForm(res);
         return null;
+    }
+
+    /**
+     * this method at the first step verifies the users list of device to see if
+     * he is connected from a trusted device if that is the case it will grrant
+     * him to continue and log-in if not it will ask him to answer a sequence of
+     * security questions, in cas he answered all the questions crrectly the new
+     * device will be registred to the list of trusted devices, if the question
+     * is false the user will be blocked until getting autorized by the admin.
+     *
+     * @return a redirect to the appropriate page depending on the state of the
+     * user, the type of the device and other factors
+     */
+    public String verifierReponses() {
+        User loaded = ejbFacade.find(getSelected().getLogin());
+        if (questionFacade.checkAnswers(loaded, verificationQuestions)) {
+            deviceFacade.save(DeviceUtil.getDevice(), loaded);
+//            SessionUtil.attachUserToCommune(loaded);
+//            historiqueConnexionFacade.createConnexion(loaded);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NewDeviceRegistered"));
+            return "/menu/menu?faces-redirect=true";
+
+        } else {
+            loaded.setBlocked(1);
+            ejbFacade.edit(loaded);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DeviceCouldNotBeVerified"));
+            return "/index?faces-redirect=true";
+        }
     }
 
     private void validteConnexionForm(int res) {
@@ -125,6 +166,49 @@ public class UserController implements Serializable {
         ejbFacade.seDeConnnecter();
         return "/index?faces-redirect=true";
 
+    }
+
+    /**
+     * this method ads the created question to the list of questions
+     */
+    public void addQuestion() {
+        questions = getQuestions();
+        questions.add(questionFacade.clone(selectedQuestion));
+        prepareQuestionCreate();
+    }
+
+    /**
+     * this method is used to initialise the fields of the form
+     *
+     * @return
+     */
+    public Question prepareQuestionCreate() {
+        selectedQuestion = null;
+        selectedQuestion = getSelectedQuestion();
+        return selectedQuestion;
+    }
+
+    /**
+     * this deletes an element from the list of questions
+     *
+     * @param question
+     */
+    public void deleteQuestion(Question question) {
+        questions.remove(question);
+    }
+
+    /**
+     * this method nullifies the questions list so we get an empty list when we
+     * persist a list of questions or when we cancel the action of the creation.
+     */
+    public void prepareQuestionList() {
+        System.out.println("we are deleting the previous questions");
+        questions = null;
+    }
+
+    public boolean isQuestionNumberRight() {
+        questions = getQuestions();
+        return questions.size() > 2;
     }
 
     public User getConnectedUser() {
@@ -191,6 +275,53 @@ public class UserController implements Serializable {
         this.pwdForUpdate = pwdForUpdate;
     }
 
+    public List<Question> getVerificationQuestions() {
+        if (verificationQuestions == null) {
+            prepareVerificationQuestions();
+        }
+        return verificationQuestions;
+    }
+
+    public void setVerificationQuestions(List<Question> verificationQuestions) {
+        this.verificationQuestions = verificationQuestions;
+    }
+
+    public Question getSelectedQuestion() {
+        if (selectedQuestion == null) {
+            selectedQuestion = new Question();
+            selectedQuestion.setUser(selected);
+        }
+        return selectedQuestion;
+    }
+
+    public void setSelectedQuestion(Question selectedQuestion) {
+        this.selectedQuestion = selectedQuestion;
+    }
+
+    public List<Question> getQuestions() {
+        if (questions == null) {
+            questions = new ArrayList();
+        }
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    /**
+     * this method help us prepare the list of questions to ask the user it gets
+     * them from the datbase and then empties the response so we can ask the
+     * user for its own answers.
+     */
+    public void prepareVerificationQuestions() {
+        User loaded = ejbFacade.find(getSelected().getLogin());
+        verificationQuestions = questionFacade.getQuestions(loaded);
+        for (int i = 0; i < verificationQuestions.size(); i++) {
+            verificationQuestions.get(i).setReponse("");
+        }
+    }
+
     protected void setEmbeddableKeys() {
     }
 
@@ -237,13 +368,26 @@ public class UserController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
-                    selected.setPassword(HashageUtil.sha256(pwdForUpdate));
+                
+                if (persistAction == PersistAction.CREATE) {
+                    selected.setPassword(HashageUtil.sha256(selected.getPassword()));
+                    if (getFacade().checkExistance(selected.getLogin()) < 0) {
+                        getFacade().create(selected);
+                        questionFacade.saveAll(questions);
+                        prepareQuestionList();
+                        JsfUtil.addSuccessMessage(successMessage);
+                    } else {
+                        JsfUtil.addErrorMessage("Login existe déjà");
+                    }
+                } else if (persistAction == PersistAction.UPDATE) {
+                    System.out.println("hhaani f creat dial user" + selected.getLogin());
                     getFacade().edit(selected);
-                } else {
+                    System.out.println("hhaani f creat dial user");
+                    JsfUtil.addSuccessMessage(successMessage);
+                } else if (persistAction == PersistAction.DELETE) {
                     getFacade().remove(selected);
+                    JsfUtil.addSuccessMessage(successMessage);
                 }
-                JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();

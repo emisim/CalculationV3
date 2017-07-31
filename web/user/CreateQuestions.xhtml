@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="QuestionsCreateDlg" widgetVar="QuestionsCreateDialog" modal="true" appendTo="@(body)" resizable="false"  header="#{bundle.CreateQuestionsTitle}" style="margin: 100px;">
+            <h:panelGroup id="displayQuestions">
+                <div class="ui-grid-col-12" >
+                    <div class="ui-grid-col-4">
+                        <h:form id="QuestionsCreateForm">
+                            <p:fieldset legend="#{bundle.Questions_Form}">
+                                <h:panelGrid columns="2" cellpadding="3">
+                                    <p:outputLabel value="#{bundle.EnterSecurityQuestion}" />
+                                    <p:inputText value="#{userController.selectedQuestion.question}" required="true" />
+                                    <p:outputLabel value="#{bundle.EnterSecurityResponse}" />
+                                    <p:inputText value="#{userController.selectedQuestion.reponse}" required="true" />
+                                </h:panelGrid>
+                            </p:fieldset>
+                            <p:commandButton value="#{bundle.Add}" actionListener="#{userController.addQuestion()}" update="displayQuestions, questionsSaveForm:QuestionsSaveButton, :questionDatalist, :QuestionsCreateForm" />
+                        </h:form>
+                    </div>
+                    <div class="ui-grid-col-8">
+                        <p:fieldset legend="#{bundle.Questions_List}">
+                            <p:dataTable id="questionDatalist" value="#{userController.questions}" var="item"
+                                         paginator="true"
+                                         rowKey="#{item.question}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         >
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListQuestionTitle_question}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.question}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListResponseTitle_response}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reponse}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListQuestionTitle_delete}"/>
+                                    </f:facet>
+                                    <h:form>
+                                        <p:commandButton value="#{bundle.Delete}" action="#{userController.deleteQuestion(item)}" update=":questionDatalist, questionsSaveForm:QuestionsSaveButton" />
+                                    </h:form>
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:fieldset>
+                    </div>
+
+                    <h:form id="questionsSaveForm">
+                        <p:commandButton id="QuestionsSaveButton" disabled="#{!userController.isQuestionNumberRight()}" value="#{bundle.Save}"  update=":QuestionsCreateDlg" oncomplete="PF('QuestionsCreateDialog').hide(); PF('UserCreateDialog').show()"/>
+                        <p:commandButton value="#{bundle.Cancel}" update="questionDatalist" actionListener="#{userController.prepareQuestionList()}" oncomplete="PF('QuestionsCreateDialog').hide(); PF('UserCreateDialog').show()" />
+                    </h:form>
+                </div>
+            </h:panelGroup>
+        </p:dialog>
+
+    </ui:composition>
+</html>
