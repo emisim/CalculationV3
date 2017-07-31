@@ -188,6 +188,15 @@
                                            var="konzeptbearbeitungFaktorItem"
                                            itemValue="#{konzeptbearbeitungFaktorItem}"/>
                         </p:selectOneMenu>
+                        
+                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" />
+                                    <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" autoWidth="false" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
+                                                       var="baukastenControllerItem"
+                                                       itemValue="#{baukastenControllerItem}" 
+                                                       itemLabel="#{baukastenControllerItem.expression}"
+                                                       />
 
                         <p:outputLabel value="druck" for="druck"/>
                         <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >

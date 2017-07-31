@@ -130,7 +130,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     private int calcSumDruck(DemandCategory demandCategory) {
         demandCategory.setSummDruck(new BigDecimal(0));
-        AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit());
+        AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit(),demandCategory.getBaukasten());
         if (demandCategory == null || demandCategory.getCover() == null || SearchUtil.isStringNullOrVide(demandCategory.getCover().getDescription())) {
             return -1;
         }
@@ -242,7 +242,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return demandCategory.getSummeGlobal();
         } else if (SessionUtil.getConnectedUser().getDepartement() != null && !Objects.equals(SessionUtil.getConnectedUser().getDepartement().getId(), demandCategory.getDepartment().getId())) {
-            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id"
+            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id="
                     + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
             return demandCategory.getSummeGlobal();

@@ -15,6 +15,7 @@ import service.DemandCategoryFacade;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -91,6 +92,13 @@ public class DemandCategoryController implements Serializable {
     private boolean save = false;
     private Date dateSysMin;
     private Date dateSysMax;
+
+    public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
+        if (demandCategory.getAuflage() != null && demandCategory.getAuflage().getPrice() != null) {
+            return demandCategory.getSummeGlobal().add(demandCategory.getSummDruck()).divide(demandCategory.getAuflage().getPrice(), 2, RoundingMode.HALF_UP);
+        }
+        return new BigDecimal(0);
+    }
 
     @PostConstruct
     public void prepareSearchForm() {
@@ -427,20 +435,30 @@ public class DemandCategoryController implements Serializable {
         return departementCriteriaFacade.allDetailDepartements();
     }
 
+    public void verifySortiement() {
+        if (!sortimentCondition()) {
+            JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
+        }
+    }
+
+    private boolean sortimentCondition() {
+        return DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100)) == 0;
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100))==0) {
+                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && sortimentCondition()) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
-                        JsfUtil.addSuccessMessage(successMessage);
+                        JsfUtil.addSuccessMessage(successMessage+" et une validation au nom de "+SessionUtil.getConnectedUser().getLogin()+" a ete automatiquement sauvgardé");
                     } else {
                         JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
                     }
                 } else if (persistAction == PersistAction.UPDATE) {
                     sortimentItemFacade.delete(detailSotimentItems);
-                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100))==0) {
+                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100)) == 0) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, false);
                         JsfUtil.addSuccessMessage(successMessage);
                     } else {

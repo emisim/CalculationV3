@@ -19,7 +19,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditUserLabel_departement}" for="departement" />
                         <p:selectOneMenu id="departement" value="#{userController.selected.departement}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
                                            var="departementItem"
                                            itemValue="#{departementItem}"/>

@@ -71,4 +71,21 @@ public class JsfUtil {
         DELETE,
         UPDATE
     }
+
+    public static int delete(List list, Object item) {
+        int index = list.indexOf(item);
+        if (index > -1) {
+            list.remove(index);
+            return 1;
+        }
+        return -1;
+    }
+    public static int edit(List list, Object item) {
+        int index = list.indexOf(item);
+        if (index > -1) {
+            list.set(index, item);
+            return 1;
+        }
+        return -1;
+    }
 }

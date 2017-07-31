@@ -29,7 +29,7 @@
                     <p:panel header="Demand category"  >
                         <h:form id="DemandCategoryCreateForm">
                             <h:panelGroup id="display" >
-                                <h:panelGrid columns="10" cellpadding="7">
+                                <h:panelGrid columns="8" cellpadding="7">
 
                                     <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                                     <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
@@ -160,7 +160,7 @@
                                         <f:selectItems value="#{mitgliederkorrekturFaktorController.itemsAvailableSelectOne}"
                                                        var="mitgliederkorrekturFaktorItem"
                                                        itemValue="#{mitgliederkorrekturFaktorItem}" 
-                                                       itemLabel="#{mitgliederkorrekturFaktorItem.expression} (#{mitgliederkorrekturFaktorItem.value})"
+                                                       itemLabel="#{mitgliederkorrekturFaktorItem.expression}"
                                                        />
                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlBestandProdukt()}" update="anzahlBestandProdukt" />
 
@@ -173,7 +173,7 @@
                                         <f:selectItems value="#{wechselfassungVariantFaktorController.itemsAvailableSelectOne}"
                                                        var="wechselfassungVariantFaktorItem"
                                                        itemValue="#{wechselfassungVariantFaktorItem}"
-                                                       itemLabel="#{wechselfassungVariantFaktorItem.expression} (#{wechselfassungVariantFaktorItem.value})"
+                                                       itemLabel="#{wechselfassungVariantFaktorItem.expression}"
                                                        />
                                     </p:selectOneMenu>
 
@@ -189,7 +189,17 @@
                                         <f:selectItems value="#{konzeptbearbeitungFaktorController.itemsAvailableSelectOne}"
                                                        var="konzeptbearbeitungFaktorItem"
                                                        itemValue="#{konzeptbearbeitungFaktorItem}" 
-                                                       itemLabel="#{konzeptbearbeitungFaktorItem.expression} (#{konzeptbearbeitungFaktorItem.value})"
+                                                       itemLabel="#{konzeptbearbeitungFaktorItem.expression}"
+                                                       />
+                                    </p:selectOneMenu>
+                                    
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" />
+                                    <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" autoWidth="false" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
+                                                       var="baukastenControllerItem"
+                                                       itemValue="#{baukastenControllerItem}" 
+                                                       itemLabel="#{baukastenControllerItem.expression}"
                                                        />
                                     </p:selectOneMenu>
                                     
@@ -275,6 +285,14 @@
                                                        var="umschlagFarbigkeitItem"
                                                        itemValue="#{umschlagFarbigkeitItem}" itemLabel="#{umschlagFarbigkeitItem.label}"/>
                                     </p:selectOneMenu>
+                                    
+                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" />
+                                    <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" autoWidth="false" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                                        <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
+                                                       var="baukastenItem"
+                                                       itemValue="#{baukastenItem}" itemLabel="#{baukastenItem.label}"/>
+                                    </p:selectOneMenu>
 
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_cover}" for="cover" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true }" />
@@ -302,6 +320,8 @@
                                                        var="auflageItem"
                                                        itemValue="#{auflageItem}" itemLabel="#{auflageItem.description}"/>
                                     </p:selectOneMenu>
+                                    
+                                   
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_liefertermin}" for="liefertermin" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true }" />
                                     <p:calendar id="liefertermin" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.EditDemandCategoryTitle_liefertermin}"  showOn="button" rendered="#{demandCategoryController.renderAttribute('liefertermin') and demandCategoryController.selected.druck == true }" />

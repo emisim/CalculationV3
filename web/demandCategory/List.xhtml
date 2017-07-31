@@ -366,7 +366,15 @@
                                         </f:facet>
                                         <h:outputText value="#{item.konzeptbearbeitungFaktor.value}"/>
                                     </p:column>
+                                    
+                                    <p:column rendered="#{demandCategoryController.renderAttributeForList('konzeptbearbeitungFaktor')}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListDemandCategoryTitle_baukasten}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.baukasten.value}"/>
+                                    </p:column>
 
+                                    
 
                                     <p:column rendered="#{demandCategoryController.renderAttributeForList('formatAuswaehlen')}">
                                         <f:facet name="header">
@@ -507,7 +515,6 @@
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-<!--                                            <h:outputText value="{bundle.ListDemandCategoryTitle_summGlobalPrice}"/>-->
                                             <h:outputText value="#{bundle.CreateDemandCategoryTitle_summTotal}"/>
                                         </f:facet>
                                         <h:outputText value="#{demandCategoryController.findSummByDepartement(item)}"/>

@@ -157,7 +157,8 @@ public class DemandCategory implements Serializable {
     private Bindung bindung;
     @ManyToOne
     private Auflage auflage;
-
+    @ManyToOne
+    private Baukasten baukasten;
     //Date de Livraisoin
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date liefertermin = new Date();
@@ -192,6 +193,14 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    public Baukasten getBaukasten() {
+        return baukasten;
+    }
+
+    public void setBaukasten(Baukasten baukasten) {
+        this.baukasten = baukasten;
+    }
 
     public BigDecimal getSummeGlobal() {
         return summeGlobal;
