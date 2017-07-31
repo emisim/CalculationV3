@@ -33,6 +33,13 @@
                                            var="seitenItem"
                                            itemValue="#{seitenItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAuflageSeitenCoverMatrixLabel_baukasten}" for="baukasten" />
+                        <p:selectOneMenu id="baukasten" value="#{auflageSeitenCoverMatrixController.selected.baukasten}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
+                                           var="baukastenItem"
+                                           itemValue="#{baukastenItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAuflageSeitenCoverMatrixLabel_price}" for="price" />
                         <p:inputText id="price" value="#{auflageSeitenCoverMatrixController.selected.price}" title="#{bundle.EditAuflageSeitenCoverMatrixTitle_price}" />
                     </p:panelGrid>

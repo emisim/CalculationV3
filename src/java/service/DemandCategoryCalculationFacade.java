@@ -76,7 +76,11 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
 
     private void calculateCorrectionSchluessel(DemandCategory selected) {
         if (selected.getAnzahlGesamtArtikel() != 0) {
+            double div = ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100);
             selected.setCorrectionSchluessel(correctionSchluesselFacade.findByPercent((int) ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100)));
+            
+            System.out.println("aatini correction schluessel dyal : " + ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100));
+            System.out.println("daba correctionschlluessel hiya:" + selected.getCorrectionSchluessel().getValue());
         }
     }
 
@@ -85,11 +89,9 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         calculateCorrectionSchluessel(selected);
         BigDecimal sortimentFaktor = summSortimentProductSchluessel(selected, sotimentItems, true, true);
         if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
-
             selected.setAnzahlGesamtProdukt((int) (new Double(selected.getAnzahlGesamtArtikel()) / sortimentFaktor.doubleValue()));
-            System.out.println(" hha l faktor dyalna " + sortimentFaktor);
-            System.out.println("ha selected.setAnzahlGesamtProdukt " + selected.getAnzahlGesamtProdukt());
         }
+        System.out.println("ha anzahlGesamtProdukt" + selected.getAnzahlGesamtProdukt());
 
     }
 
@@ -99,8 +101,6 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         BigDecimal sortimentFaktor = summSortimentProductSchluessel(selected, sotimentItems, true, true);
         if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
             selected.setAnzahlNeueProdukt((int) (new Double(selected.getAnzahlNeueArtikel()) / sortimentFaktor.doubleValue()));
-            System.out.println(" hha l faktor dyalna " + sortimentFaktor);
-            System.out.println("ha selected.setAnzahlNeueProdukt " + selected.getAnzahlGesamtProdukt());
         }
 
     }
@@ -112,7 +112,6 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
             BigDecimal sortimentFaktor = new BigDecimal(selected.getAnzahlNeueArtikel()).divide(summ);
             selected.setAnzahlNeueProdukt(sortimentFaktor.intValue());
 
-            System.out.println("haa le resultat dyl produkt gesamt " + sortimentFaktor);
         }
     }
 
@@ -165,6 +164,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
             summe = summe.add(percentValueSortiment(sotimentItem, percent, ordreSortiement));
         }
         System.out.println("haa somme dyal faktor dyalna multipliés par leur sortiment " + summe);
+
         return summe;
     }
 
@@ -189,7 +189,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     }
 
     public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected) {
-        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten());
+        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten() -selected.getAnzahlIHVZSeiten() - selected.getAnzahlBestellNrSeiten());
     }
 
     public List<DemandCategoryCalculation> findWithItemsByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {

@@ -130,30 +130,30 @@
 
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="description"/>
+                                            <h:outputText value="Leistung"/>
                                         </f:facet>
                                         <h:outputText value="#{item.description}"/>
                                     </p:column>
 
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Formel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.descriptionGlobal}"/>
+                                    </p:column>
 
 
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Expression for unite price"/>
+                                            <h:outputText value="Arithmetic Expression for unite price"/>
                                         </f:facet>
                                         <h:outputText value="#{item.arithmitiqueExpresionForUnitePrice}"/>
                                     </p:column>
 
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Expression global"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.descriptionGlobal}"/>
-                                    </p:column>
                                    
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Expression for global price"/>
+                                            <h:outputText value="Arithmetic Expression for global price"/>
                                         </f:facet>
                                         <h:outputText value="#{item.arithmitiqueExpresionForGlobalPrice}"/>
                                     </p:column>

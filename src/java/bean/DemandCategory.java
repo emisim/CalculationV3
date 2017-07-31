@@ -63,7 +63,7 @@ public class DemandCategory implements Serializable {
     @ManyToOne
     private Schluessel Schluessel;
 
-    private int umfang;
+    private int umfang = 1028;
 
     //Seiten
     private int anzahlGesamtSeiten;
@@ -74,26 +74,26 @@ public class DemandCategory implements Serializable {
     private int percentSeitenFaktor = 10;
     private int anzahlSonderSeiten = 3;
     private int anzahlGenerierungUpdateSeiten = 4;
-    private int anzahlIHVZSeiten = 4;
-    private int anzahlBestellNrSeiten = 5;
+    private int anzahlIHVZSeiten = 10;
+    private int anzahlBestellNrSeiten = 10;
 
     //Artikel
-    private int anzahlGesamtArtikel = 6;
-    private int anzahlNeueArtikel = 7;
-    private int anzahlBestandArtikel = 8;
+    private int anzahlGesamtArtikel = 1900;
+    private int anzahlNeueArtikel = 800;
+    private int anzahlBestandArtikel = 10;
     private int anzahlÜbernahmeArtikel = 9;
 
     //Produkt
-    private int anzahlGesamtProdukt = 10;
-    private int anzahlNeueProdukt = 11;
-    private int anzahlBestandProdukt = 12;
+    private int anzahlGesamtProdukt = 1;
+    private int anzahlNeueProdukt = 1;
+    private int anzahlBestandProdukt = 1;
 
     //Lieferant   
-    private int anzahlLieferantGesamt = 13;
+    private int anzahlLieferantGesamt = 16;
     private int anzahlLieferantNeu = 14;
 
     //Warengruppe Kapitel
-    private int anzahlKapitetel = 15;
+    private int anzahlKapitetel = 9;
 
     private int nbrTotalValidation;
 
@@ -118,7 +118,7 @@ public class DemandCategory implements Serializable {
     private WechselfassungVariantFaktor wechselfassungVariantFaktor;
 
     //Teilnehmerzahl
-    private int teilnehmerZahl = 16; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
+    private int teilnehmerZahl = 35; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal teilnehmerZahlPricing = new BigDecimal(0);
     @ManyToOne
@@ -157,7 +157,8 @@ public class DemandCategory implements Serializable {
     private Bindung bindung;
     @ManyToOne
     private Auflage auflage;
-
+    @ManyToOne
+    private Baukasten baukasten;
     //Date de Livraisoin
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date liefertermin = new Date();
@@ -192,6 +193,14 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    public Baukasten getBaukasten() {
+        return baukasten;
+    }
+
+    public void setBaukasten(Baukasten baukasten) {
+        this.baukasten = baukasten;
+    }
 
     public BigDecimal getSummeGlobal() {
         return summeGlobal;

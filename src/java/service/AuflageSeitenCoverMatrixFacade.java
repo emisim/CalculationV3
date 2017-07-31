@@ -7,6 +7,7 @@ package service;
 
 import bean.Auflage;
 import bean.AuflageSeitenCoverMatrix;
+import bean.Baukasten;
 import bean.Farbigkeit;
 import bean.FormatAuswaehlen;
 import bean.Seiten;
@@ -26,11 +27,11 @@ public class AuflageSeitenCoverMatrixFacade extends AbstractFacade<AuflageSeiten
     private EntityManager em;
 
     public AuflageSeitenCoverMatrix findByCriteria(Auflage auflage, Seiten seiten,
-            FormatAuswaehlen formatAuswaehlen, Farbigkeit farbigkeit) {
+            FormatAuswaehlen formatAuswaehlen, Farbigkeit farbigkeit,Baukasten baukasten) {
         if (auflage == null || auflage.getId() == null || seiten == null
                 || seiten.getId() == null || formatAuswaehlen == null
                 || formatAuswaehlen.getId() == null || farbigkeit == null
-                || farbigkeit.getId() == null) {
+                || farbigkeit.getId() == null|| baukasten == null|| baukasten.getId() == null) {
             return null;
         } else {
             String query = "SELECT item FROM AuflageSeitenCoverMatrix WHERE 1=1";
@@ -38,6 +39,7 @@ public class AuflageSeitenCoverMatrixFacade extends AbstractFacade<AuflageSeiten
             query += SearchUtil.addConstraint("item", "seiten.id", "=", seiten.getId());
             query += SearchUtil.addConstraint("item", "formatAuswaehlen.id", "=", formatAuswaehlen.getId());
             query += SearchUtil.addConstraint("item", "farbigkeit.id", "=", farbigkeit.getId());
+            query += SearchUtil.addConstraint("item", "baukasten.id", "=", baukasten.getId());
             return getUniqueResult(query);
         }
     }

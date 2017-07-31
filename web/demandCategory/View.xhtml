@@ -20,7 +20,7 @@
 
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateSystem}"/>
                         <h:outputText value="#{demandCategoryController.selected.dateSystem}" title="#{bundle.ViewDemandCategoryTitle_dateSystem}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="MM/dd/yyyy hh:mm:ss" />
                         </h:outputText>
 
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_category}" rendered="#{demandCategoryController.renderAttribute('category')}"/>
@@ -101,17 +101,8 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_teilnehmerZahl}" rendered="#{demandCategoryController.renderAttribute('teilnehmerZahl')}"/>
                         <h:outputText value="#{demandCategoryController.selected.teilnehmerZahl}" title="#{bundle.ViewDemandCategoryTitle_teilnehmerZahl}" rendered="#{demandCategoryController.renderAttribute('teilnehmerZahl')}"/>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_participantFaktor}" rendered="#{demandCategoryController.renderAttribute('participantFaktor')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.participantFaktor.value}" title="#{bundle.ViewDemandCategoryTitle_participantFaktor}" rendered="#{demandCategoryController.renderAttribute('participantFaktor')}"/>
-
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}"/>
                         <h:outputText value="#{demandCategoryController.selected.konzeptbearbeitungFaktor.value}" title="#{bundle.ViewDemandCategoryTitle_konzeptbearbeitungFaktor}" rendered="#{demandCategoryController.renderAttribute('konzeptbearbeitungFaktor')}"/>
-
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.schluessel.description}" title="#{bundle.ViewDemandCategoryTitle_schluessel}" rendered="#{demandCategoryController.renderAttribute('schluessel')}"/>
-
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.ViewDemandCategoryTitle_anzahlGesamtSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlGesamtSeiten')}"/>
 
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_artikelPerPagelFaktor}"/>
                         <h:outputText value="#{demandCategoryController.selected.artikelPerPagelFaktor}" title="#{bundle.ViewDemandCategoryTitle_artikelPerPagelFaktor}"/>
@@ -128,12 +119,31 @@
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_teilnehmerZahlPricing}"/>
                         <h:outputText value="#{demandCategoryController.selected.teilnehmerZahlPricing}" title="#{bundle.ViewDemandCategoryTitle_teilnehmerZahlPricing}"/>
                     
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summUnitPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.summUnitPrice}" title="#{bundle.ViewDemandCategoryTitle_summUnitPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
-                       
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.summeGlobal}" title="#{bundle.ViewDemandCategoryTitle_summGolbalPrice}" rendered="#{demandCategoryController.renderAttribute('summTotal') and demandCategoryController.selected.druck == true}"/>
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}" />
+                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}" />
 
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}" />
+                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}" />
+
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}" />
+                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}" />
+                        
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}" />
+                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}" />
+
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summUnitPrice}" />
+                        <h:outputText value="#{demandCategoryController.selected.summUnitPrice}" title="#{bundle.ViewDemandCategoryTitle_summUnitPrice}" />
+                       
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPrice}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summeGlobal}" title="#{bundle.ViewDemandCategoryTitle_summGolbalPrice}" />
+                        
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPrice} und #{bundle.ViewDemandCategoryLabel_summDruck}"/>
+                        <h:outputText value="#{demandCategoryController.selected.summeGlobal.add(demandCategoryController.selected.summDruck)}" title="#{bundle.ViewDemandCategoryLabel_summGlobalPrice} und #{bundle.ViewDemandCategoryLabel_summDruck}" />
+                        
+                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotalPerAuflag}"/>
+                        <h:outputText value="#{demandCategoryController.calcSumPerAuflag(demandCategoryController.selected)}" title="#{bundle.ViewDemandCategoryLabel_summTotalPerAuflag}" />
+                        
+                      
 
                     </p:panelGrid>
 
@@ -179,15 +189,7 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
 
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.ViewDemandCategoryTitle_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') and demandCategoryController.selected.druck == true}"/>
-
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlBeteiligten}" title="#{bundle.ViewDemandCategoryTitle_anzahlBeteiligten}" rendered="#{demandCategoryController.renderAttribute('anzahlBeteiligten') and demandCategoryController.selected.druck == true}"/>
-
-                        <h:outputText value="#{bundle.ViewDemandCategoryLabel_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') and demandCategoryController.selected.druck == true}"/>
-                        <h:outputText value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.ViewDemandCategoryTitle_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') and demandCategoryController.selected.druck == true}"/>
-
+                        
                         <h:outputText value="#{bundle.ViewDemandCategoryLabel_dateDemandCategory}" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true}"/>
                         <h:outputText value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.ViewDemandCategoryTitle_dateDemandCategory}" rendered="#{demandCategoryController.renderAttribute('dateDemandCategory') and demandCategoryController.selected.druck == true}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
