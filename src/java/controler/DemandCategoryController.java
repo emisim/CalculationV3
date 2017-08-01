@@ -92,6 +92,7 @@ public class DemandCategoryController implements Serializable {
     private String save;
     private Date dateSysMin;
     private Date dateSysMax;
+    private List<String> departements= new ArrayList();
 
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
         if (demandCategory.getAuflage() != null && demandCategory.getAuflage().getPrice() != null) {
@@ -275,6 +276,17 @@ public class DemandCategoryController implements Serializable {
         this.selected = selected;
     }
 
+      public List<String> getDepartements() {
+        System.out.println("departements ---> " + departements);
+        if (departements == null) {
+            departements = new ArrayList<>();
+        }
+        return departements;
+    }
+
+    public void setDepartements(List<String> departements) {
+        this.departements = departements;
+    }
     protected void setEmbeddableKeys() {
     }
 
@@ -292,7 +304,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch, dateSysMin, dateSysMax);
+        items = ejbFacade.search(selectedForSearch, departements,sotimentItemsForCheckBox, selectedSortiemnts, validationSearch, dateSysMin, dateSysMax);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
