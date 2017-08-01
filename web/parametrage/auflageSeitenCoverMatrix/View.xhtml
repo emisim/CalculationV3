@@ -13,11 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageSeitenCoverMatrixController.selected != null}">
                        <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_auflage}"/>
-                        <h:outputText value="#{auflageSeitenCoverMatrixController.selected.auflage}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_auflage}"/>
+                       <h:outputText value="#{auflageSeitenCoverMatrixController.selected.auflage.description} | #{auflageSeitenCoverMatrixController.selected.auflage.price}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_auflage}"/>
                         <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_seiten}"/>
-                        <h:outputText value="#{auflageSeitenCoverMatrixController.selected.seiten}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_seiten}"/>
+                        <h:outputText value="#{auflageSeitenCoverMatrixController.selected.seiten.nbrePage}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_seiten}"/>
                         <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_baukasten}"/>
-                        <h:outputText value="#{auflageSeitenCoverMatrixController.selected.baukasten}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_baukasten}"/>
+                        <h:outputText value="#{auflageSeitenCoverMatrixController.selected.baukasten.expression} #{auflageSeitenCoverMatrixController.selected.baukasten.value}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_baukasten}"/>
                         <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_price}"/>
                         <h:outputText value="#{auflageSeitenCoverMatrixController.selected.price}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_price}"/>
                     </p:panelGrid>

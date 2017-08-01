@@ -26,19 +26,19 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_auflage}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.auflage}"/>
+                                <h:outputText value="#{item.auflage.description} | #{item.auflage.price}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_seiten}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.seiten}"/>
+                                <h:outputText value="#{item.seiten.nbrePage}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_baukasten}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.baukasten}"/>
+                                <h:outputText value="#{item.baukasten.expression} | #{item.baukasten.price}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
