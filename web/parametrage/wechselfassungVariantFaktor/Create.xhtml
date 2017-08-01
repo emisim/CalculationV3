@@ -16,8 +16,6 @@
                         <p:inputText id="expression" value="#{wechselfassungVariantFaktorController.selected.expression}" title="#{bundle.CreateWechselfassungVariantFaktorTitle_expression}" />
                         <p:outputLabel value="#{bundle.CreateWechselfassungVariantFaktorLabel_value}" for="value" />
                         <p:inputText id="value" value="#{wechselfassungVariantFaktorController.selected.value}" title="#{bundle.CreateWechselfassungVariantFaktorTitle_value}" />
-                        <p:outputLabel value="#{bundle.CreateWechselfassungVariantFaktorLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{wechselfassungVariantFaktorController.selected.id}" title="#{bundle.CreateWechselfassungVariantFaktorTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{wechselfassungVariantFaktorController.create}" value="#{bundle.Save}" update="display,:parametrageTab:WechselfassungVariantFaktorListForm:datalist,:growl" oncomplete="handleSubmit(args,'WechselfassungVariantFaktorCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="WechselfassungVariantFaktorCreateDialog.hide()"/>

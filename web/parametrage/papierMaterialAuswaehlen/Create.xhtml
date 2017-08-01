@@ -12,10 +12,13 @@
             <h:form id="PapierMaterialAuswaehlenCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{papierMaterialAuswaehlenController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePapierMaterialAuswaehlenLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{papierMaterialAuswaehlenController.selected.id}" title="#{bundle.CreatePapierMaterialAuswaehlenTitle_id}" />
                         <p:outputLabel value="#{bundle.CreatePapierMaterialAuswaehlenLabel_price}" for="price" />
                         <p:inputText id="price" value="#{papierMaterialAuswaehlenController.selected.price}" title="#{bundle.CreatePapierMaterialAuswaehlenTitle_price}" />
                         <p:outputLabel value="#{bundle.CreatePapierMaterialAuswaehlenLabel_description}" for="description" />
                         <p:inputText id="description" value="#{papierMaterialAuswaehlenController.selected.description}" title="#{bundle.CreatePapierMaterialAuswaehlenTitle_description}" />
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{papierMaterialAuswaehlenController.create}" value="#{bundle.Save}" update="display,:parametrageTab:PapierMaterialAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args,'PapierMaterialAuswaehlenCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PapierMaterialAuswaehlenCreateDialog.hide()"/>

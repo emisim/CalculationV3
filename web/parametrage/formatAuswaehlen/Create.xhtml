@@ -12,6 +12,8 @@
             <h:form id="FormatAuswaehlenCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{formatAuswaehlenController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFormatAuswaehlenLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{formatAuswaehlenController.selected.id}" title="#{bundle.CreateFormatAuswaehlenTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateFormatAuswaehlenLabel_price}" for="price" />
                         <p:inputText id="price" value="#{formatAuswaehlenController.selected.price}" title="#{bundle.CreateFormatAuswaehlenTitle_price}" />
                         <p:outputLabel value="#{bundle.CreateFormatAuswaehlenLabel_description}" for="description" />
