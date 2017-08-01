@@ -89,7 +89,7 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> projectManagement;
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
-    private boolean save = false;
+    private String save;
     private Date dateSysMin;
     private Date dateSysMax;
 
@@ -128,16 +128,16 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void simuler() throws ScriptException {
-        save = false;
+        save = "simuler";
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
         if (selected != null && selected.getSotimentItems() != null && !selected.getSotimentItems().isEmpty()) {
-            if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
-                demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
-                departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-            }
-            if (departement == null && user.getAdmin() == 1) {
+//            if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
+//                demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
+//                departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+//            }
+//            if (departement == null && user.getAdmin() == 1) {
                 List<Departement> departements = departementFacade.findAll();
                 if (departements != null && !departements.isEmpty()) {
                     for (Departement departement1 : departements) {
@@ -146,7 +146,7 @@ public class DemandCategoryController implements Serializable {
                         params.put(departement1.getName(), myDepartementCriterias);
                     }
                 }
-            }
+            //}
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('DemandCategoryDetailDialog').show();");
         } else {
@@ -331,18 +331,18 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void departementeDetails(DemandCategory demandCategory) throws ScriptException {
-        save = true;
+        save = "details";
         selected = demandCategory;
         prepareValidate(demandCategory);
         prepareSortimentItems(demandCategory);
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
         User user = SessionUtil.getConnectedUser();
         Departement departement = SessionUtil.getConnectedUser().getDepartement();
-        if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
-            demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(demandCategory, departement);
-            departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-        }
-        if (departement == null && user.getAdmin() == 1) {
+//        if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
+//            demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(demandCategory, departement);
+//            departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+//        }
+//        if (departement == null && user.getAdmin() == 1) {
             List<Departement> departements = departementFacade.findAll();
             if (departements != null && !departements.isEmpty()) {
                 for (Departement departement1 : departements) {
@@ -352,7 +352,7 @@ public class DemandCategoryController implements Serializable {
                 }
             }
 
-        }
+       // }
         System.out.println("params ::::: " + params);
     }
 
@@ -707,14 +707,15 @@ public class DemandCategoryController implements Serializable {
         this.sortiments = sortiments;
     }
 
-    public boolean isSave() {
-
+    public String getSave() {
         return save;
     }
 
-    public void setSave(boolean save) {
+    public void setSave(String save) {
         this.save = save;
     }
+
+    
 
     public Date getDateSysMin() {
         return dateSysMin;
