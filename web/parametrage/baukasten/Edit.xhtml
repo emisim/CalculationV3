@@ -16,9 +16,7 @@
                         <p:inputText id="expression" value="#{baukastenController.selected.expression}" title="#{bundle.EditBaukastenTitle_expression}" />
                         <p:outputLabel value="#{bundle.EditBaukastenLabel_value}" for="value" />
                         <p:inputText id="value" value="#{baukastenController.selected.value}" title="#{bundle.EditBaukastenTitle_value}" />
-                        <p:outputLabel value="#{bundle.EditBaukastenLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{baukastenController.selected.id}" title="#{bundle.EditBaukastenTitle_id}" />
-                    </p:panelGrid>
+                     </p:panelGrid>
                     <p:commandButton actionListener="#{baukastenController.update}" value="#{bundle.Save}" update="display,:parametrageTab:BaukastenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BaukastenEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="BaukastenEditDialog.hide()"/>
                 </h:panelGroup>

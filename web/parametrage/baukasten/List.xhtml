@@ -33,12 +33,7 @@
                             </f:facet>
                             <h:outputText value="#{item.value}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBaukastenTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{baukastenController.prepareCreate}" update=":parametrageTab:BaukastenCreateForm" oncomplete="PF('BaukastenCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:BaukastenViewForm" oncomplete="PF('BaukastenViewDialog').show()" disabled="#{empty baukastenController.selected}"/>
