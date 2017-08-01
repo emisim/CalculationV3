@@ -197,7 +197,7 @@
                                                        itemValue="#{baukastenControllerItem}" 
                                                        itemLabel="#{baukastenControllerItem.expression}"
                                                        />
-
+                        </p:selectOneMenu>
                         <p:outputLabel value="druck" for="druck"/>
                         <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
                             <p:ajax process="druck" update="afterDruck" listener="#{demandCategoryController.checkDruck()}" />

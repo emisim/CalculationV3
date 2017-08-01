@@ -193,16 +193,6 @@
                                                        />
                                     </p:selectOneMenu>
                                     
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" />
-                                    <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" autoWidth="false" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
-                                                       var="baukastenControllerItem"
-                                                       itemValue="#{baukastenControllerItem}" 
-                                                       itemLabel="#{baukastenControllerItem.expression}"
-                                                       />
-                                    </p:selectOneMenu>
-                                    
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_bearbeitungszeit}" for="bearbeitungszeit" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') }" />
                                     <p:inputText id="bearbeitungszeit" value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.CreateDemandCategoryTitle_bearbeitungszeit}" rendered="#{demandCategoryController.renderAttribute('bearbeitungszeit') }" />
 
