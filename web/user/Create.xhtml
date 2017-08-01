@@ -19,6 +19,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
                         <p:selectOneMenu id="departement" value="#{userController.selected.departement}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                             <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
                                            var="departementItem"
                                            itemValue="#{departementItem}"/>
@@ -40,12 +41,14 @@
                             <f:selectItem itemValue="0" itemLabel="non blocked"/>
                             <f:selectItem itemValue="1" itemLabel="blocked"/>
                         </p:selectOneMenu>    
-                      
+                        <p:outputLabel value="#{bundle.AddSecurityQuestion}" for="QustionButton" />
+                        <p:commandButton id="QustionButton" value="#{bundle.AddSecurityQuestion}" actionListener="#{userController.prepareQuestionCreate}" update=":QuestionsCreateForm" oncomplete="PF('QuestionsCreateDialog').show(); PF('UserCreateDialog').hide()"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UserCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
+            <ui:include src="CreateQuestions.xhtml"/>
         </p:dialog>
 
     </ui:composition>

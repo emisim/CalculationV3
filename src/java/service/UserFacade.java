@@ -6,9 +6,11 @@
  */
 package service;
 
+import bean.Device;
 import bean.User;
 import controler.util.HashageUtil;
 import controler.util.SessionUtil;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,6 +23,10 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UserFacade extends AbstractFacade<User> {
 
+    @EJB
+    private DeviceFacade deviceFacade;
+    @EJB
+    private HistoriqueConnexionFacade historiqueConnexionFacade;
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 
@@ -29,7 +35,7 @@ public class UserFacade extends AbstractFacade<User> {
         return em;
     }
 
-    public int seConnnecter(User user) {
+    public int seConnnecter(User user, Device connectedDevice) {
         if (user == null || user.getLogin() == null) {
             return -5;
         } else {
@@ -57,8 +63,21 @@ public class UserFacade extends AbstractFacade<User> {
                 user.setDepartement(loadedUser.getDepartement());
                 user.setMdpChanged(loadedUser.isMdpChanged());
                 user.setPassword(null);
-                SessionUtil.registerUser(user);
-                return 1;
+                //Device
+                int resDevice = deviceFacade.checkDevice(user, connectedDevice);
+                if (resDevice > 0) {
+                    if (resDevice == 1) {
+                        deviceFacade.save(connectedDevice, user);
+                    }
+//
+                    //Création historique
+                    historiqueConnexionFacade.createConnexion(user);
+
+                    SessionUtil.registerUser(user);
+                    return 1;
+                } else {
+                    return -6;
+                }
 
             }
         }
@@ -82,8 +101,17 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public void seDeConnnecter() {
+        historiqueConnexionFacade.createDeConnexion();
         SessionUtil.getSession().invalidate();
 
+    }
+    
+    public int checkExistance(String login) {
+        List<User> users = em.createQuery("SELECT u FROM User u WHERE u.login = '" + login + "'").getResultList();
+        if (users != null && users.size() > 0) {
+            return 1;
+        }
+        return -1;
     }
 
     public UserFacade() {

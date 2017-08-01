@@ -30,7 +30,7 @@ public class CorrectionSchluessel implements Serializable {
 
     // Hier wird der Wert der durch die Bechnung von 100* gesamtArtikel/New_Artikel
     private int percent;
-    private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal wert;
+    private @Column(columnDefinition = "DECIMAL(10,3)") BigDecimal wert;
 
     @OneToMany(mappedBy = "correctionSchluessel")
     private List<DemandCategory> demandCategorys;

@@ -63,6 +63,7 @@ public class DepartementController implements Serializable {
 
     public void deleteCriteriaItem(DepartementCriteriaItem criteriaItem) {
         departementCriteriaItemFacade.remove(criteriaItem);
+        JsfUtil.delete(departementCriteriaItems, criteriaItem);
     }
 
     public void deleteCriteriaWithCriteriaItem(DepartementCriteria criteria) {
@@ -104,6 +105,7 @@ public class DepartementController implements Serializable {
 
     public void updateDepartementCriteriaItem() {
         departementCriteriaItemFacade.edit(departementCriteriaItem);
+       JsfUtil.edit(departementCriteriaItems, departementCriteriaItem);
     }
 
     public void prepareDepartementCriteria(DepartementCriteria criteria) {
@@ -126,6 +128,7 @@ public class DepartementController implements Serializable {
     public void createDepartementCriterieItem() {
         departementCriteriaItem.setDepartementCriteria(departementCriteria);
         departementCriteriaItemFacade.create(departementCriteriaItem);
+        findCriteriaItemByCriteria(departementCriteria);
         departementCriteriaItem = new DepartementCriteriaItem();
     }
 

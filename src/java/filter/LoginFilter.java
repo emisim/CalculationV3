@@ -33,7 +33,7 @@ public class LoginFilter implements Filter {
         boolean imageResources = req.getRequestURI().endsWith("png") || req.getRequestURI().endsWith("jpg");
         User user = (User) session.getAttribute("user");
         try {
-            if ((session.getAttribute("user") != null && user.getLogin() != null) || req.getRequestURI().endsWith("index.xhtml") || req.getRequestURI().endsWith("/") || resourceRequest || imageResources) {
+            if ((session.getAttribute("user") != null && user.getLogin() != null) || req.getRequestURI().endsWith("index.xhtml") || req.getRequestURI().endsWith("verification.xhtml") || req.getRequestURI().endsWith("/") || resourceRequest || imageResources) {
                 chain.doFilter(request, response);
             } else {
                 HttpServletResponse res = (HttpServletResponse) response;

@@ -23,6 +23,12 @@
 
                 <p:column>
                     <f:facet name="header">
+                        <h:outputText value="#{bundle.ListBindungTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
                         <h:outputText value="#{bundle.ListBindungTitle_price}"/>
                     </f:facet>
                     <h:outputText value="#{item.price}"/>

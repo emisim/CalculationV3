@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BackupEditDlg" widgetVar="BackupEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBackupTitle}">
+            <h:form id="BackupEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{backupController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBackupLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{backupController.selected.nom}" title="#{bundle.EditBackupTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditBackupLabel_dateSysteme}" for="dateSysteme" />
+                        <p:calendar id="dateSysteme" pattern="dd/MM/yyyy" value="#{backupController.selected.dateSysteme}" title="#{bundle.EditBackupTitle_dateSysteme}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditBackupLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{backupController.selected.id}" title="#{bundle.EditBackupTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{backupController.update}" value="#{bundle.Save}" update="display,:BackupListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BackupEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BackupEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

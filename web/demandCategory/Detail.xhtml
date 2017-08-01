@@ -52,15 +52,15 @@
                                 <p:summaryRow>
                                     <p:column colspan="3" ></p:column>
                                     <p:column>
-                                        <h:outputText value="Total Unit Prices : #{item.summCriteria} $" />
+                                        <!--<h:outputText value="Total Unit Prices : {item.summCriteria} €" />-->
                                     </p:column>
                                      <p:column>
-                                        <h:outputText value="Total Global Prices : #{item.summCriteriaGlobal} $" />
+                                        <h:outputText value="Total Price : #{item.summCriteriaGlobal} €" />
                                     </p:column>
                                 </p:summaryRow>
                                 <f:facet name="footer">
-                                    <h:outputText value="Summ Total : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summTotal:'0'} $ | Summ Druck : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDruck:'0.00'} $" style="margin-right: 700px;" /><br></br>
-                                    <h:outputText value="Total Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartement:'0'} $ -- Total Global Prices : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartementGlobal:'0.00'} $" style="font-size:18px;text-align: left;" />
+                                    <h:outputText value="Print Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDruck:'0.00'} €" style="text-align:left" /><br></br>
+                                    <h:outputText value="Total Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartementGlobal:'0.00'} €" style="text-align:right" />
                                 </f:facet>
                             </p:dataTable>
                             <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
@@ -114,15 +114,15 @@
                                         <p:column colspan="3" >
                                         </p:column>
                                         <p:column  style="text-align:right">
-                                            <h:outputText value="Total Unit Prices : #{item.summCriteria} $ " />
+                                            <!--<h:outputText value="Total Unit Prices : {item.summCriteria} € " />-->
                                         </p:column>
                                         <p:column  style="text-align:right">
-                                            <h:outputText value="Total Global Prices : #{item.summCriteriaGlobal} $" />
+                                            <h:outputText value="Total Price : #{item.summCriteriaGlobal} €" />
                                         </p:column>
                                     </p:summaryRow>
                                     <f:facet name="footer">
-                                        <h:outputText value="Summ Total : #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summTotal:'0.00'} $ | Summ Druck : #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDruck:'0.00'} $" style="margin-right: 700px;" /><br></br>
-                                        <h:outputText value="Total Prices : #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDepartement:'0.00'} $ -- Total Global Prices : #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDepartementGlobal:'0.00'} $" style="font-size:18px;text-align: left;" />
+                                        <h:outputText value="Print Price : #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDruck:'0.00'} €" /><br></br>
+                                        <h:outputText value="Total Price: #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDepartementGlobal:'0.00'} €" style="font-size:18px;text-align: left;" />
                                     </f:facet>
                                 </p:dataTable>
                                 <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">

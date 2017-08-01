@@ -69,7 +69,7 @@
 
                     </p:dataTable>
 
-                    <p:commandButton value="Bestätigen" oncomplete="handleSubmit(args,'MixDialog');" />
+                    <p:commandButton value="Bestätigen" actionListener="#{demandCategoryController.verifySortiement()}" oncomplete="handleSubmit(args,'MixDialog');" update=":growl"/>
 
                 </p:panel>
 
