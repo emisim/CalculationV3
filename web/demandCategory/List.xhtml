@@ -58,7 +58,7 @@
                                                 </p:selectCheckboxMenu>
 
                                                 <p:outputLabel value="User:" for="user"/>
-                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}" disabled="#{!demandCategoryController.adminAccess()}" autoWidth="false" > 
+                                                <p:selectOneMenu id="user" value="#{demandCategoryController.selectedForSearch.user}" autoWidth="false" > 
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{userController.itemsAvailableSelectOne}"
                                                                    var="user"
@@ -67,7 +67,7 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
-                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}" disabled="#{!demandCategoryController.adminAccess()}" autoWidth="false">
+                                                <p:selectOneMenu id="departement" value="#{demandCategoryController.selectedForSearch.department}"  autoWidth="false">
                                                     <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                                     <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
                                                                    var="departementItem"

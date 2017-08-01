@@ -36,6 +36,8 @@ public class AuflageSeitenCoverMatrix implements Serializable {
     private Farbigkeit farbigkeit;
     @ManyToOne
     private Baukasten baukasten;
+    @ManyToOne
+    private Cover cover;
 
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal price;
@@ -46,6 +48,14 @@ public class AuflageSeitenCoverMatrix implements Serializable {
 
     public void setBaukasten(Baukasten baukasten) {
         this.baukasten = baukasten;
+    }
+
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
     }
 
     public FormatAuswaehlen getFormatAuswaehlen() {

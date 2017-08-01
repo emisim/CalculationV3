@@ -13,6 +13,14 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageSeitenCoverMatrixController.selected != null}">
 
+                        <p:outputLabel value="#{bundle.EditAuflageSeitenCoverMatrixLabel_cover}" for="cover" />
+                        <p:selectOneMenu id="cover" value="#{auflageSeitenCoverMatrixController.selected.cover}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{coverController.itemsAvailableSelectOne}"
+                                           var="coverItem"
+                                            itemValue="#{coverItem}" itemLabel="#{coverItem.id} | #{coverItem.description} "
+                                           />
+                            
                         <p:outputLabel value="#{bundle.EditAuflageSeitenCoverMatrixLabel_auflage}" for="auflage" />
                         <p:selectOneMenu id="auflage" value="#{auflageSeitenCoverMatrixController.selected.auflage}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
