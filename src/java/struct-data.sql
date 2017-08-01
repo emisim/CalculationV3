@@ -1,375 +1,342 @@
--- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 01, 2017 at 01:55 AM
--- Server version: 10.1.24-MariaDB
--- PHP Version: 7.1.6
-
-SET FOREIGN_KEY_CHECKS=0;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: kt_fst_2
+-- ------------------------------------------------------
+-- Server version	5.7.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `kt_fst_2`
---
-
--- --------------------------------------------------------
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `artderweiterverarbeitung`
 --
 
+DROP TABLE IF EXISTS `artderweiterverarbeitung`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `artderweiterverarbeitung` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `artderweiterverarbeitung`
+--
+
+LOCK TABLES `artderweiterverarbeitung` WRITE;
+/*!40000 ALTER TABLE `artderweiterverarbeitung` DISABLE KEYS */;
+/*!40000 ALTER TABLE `artderweiterverarbeitung` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `auflage`
 --
 
+DROP TABLE IF EXISTS `auflage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auflage` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `auflage`
 --
 
-INSERT INTO `auflage` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
-(1, '50', '0.00'),
-(2, '100', '0.00'),
-(3, '150', '0.00'),
-(4, '200', '0.00'),
-(5, '500', '0.00'),
-(6, '750', '0.00'),
-(7, '1000', '0.00'),
-(8, '1250', '0.00'),
-(9, '1500', '0.00'),
-(10, '1750', '0.00'),
-(11, '2000', '0.00'),
-(12, '2500', '0.00'),
-(13, '3000', '0.00'),
-(14, '3500', '0.00'),
-(15, '4000', '0.00'),
-(16, '4500', '0.00'),
-(17, '5000', '0.00'),
-(18, '5500', '0.00'),
-(19, '6000', '0.00'),
-(20, '6500', '0.00'),
-(21, '7000', '0.00'),
-(22, '7500', '0.00'),
-(23, '8000', '0.00'),
-(24, '8500', '0.00'),
-(25, '9000', '0.00'),
-(26, '9500', '0.00'),
-(27, '10000', '0.00');
-
--- --------------------------------------------------------
+LOCK TABLES `auflage` WRITE;
+/*!40000 ALTER TABLE `auflage` DISABLE KEYS */;
+INSERT INTO `auflage` VALUES (1,'50',0.00),(2,'100',0.00),(3,'150',0.00),(4,'200',0.00),(5,'500',0.00),(6,'750',0.00),(7,'1000',0.00),(8,'1250',0.00),(9,'1500',0.00),(10,'1750',0.00),(11,'2000',0.00),(12,'2500',0.00),(13,'3000',0.00),(14,'3500',0.00),(15,'4000',0.00),(16,'4500',0.00),(17,'5000',0.00),(18,'5500',0.00),(19,'6000',0.00),(20,'6500',0.00),(21,'7000',0.00),(22,'7500',0.00),(23,'8000',0.00),(24,'8500',0.00),(25,'9000',0.00),(26,'9500',0.00),(27,'10000',0.00);
+/*!40000 ALTER TABLE `auflage` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `auflageseitencovermatrix`
 --
 
+DROP TABLE IF EXISTS `auflageseitencovermatrix`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auflageseitencovermatrix` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PRICE` decimal(10,2) DEFAULT NULL,
   `AUFLAGE_ID` int(11) DEFAULT NULL,
   `BAUKASTEN_ID` bigint(20) DEFAULT NULL,
   `FARBIGKEIT_ID` varchar(255) DEFAULT NULL,
   `FORMATAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
-  `SEITEN_ID` bigint(20) DEFAULT NULL
+  `SEITEN_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` (`SEITEN_ID`),
+  KEY `FK_AUFLAGESEITENCOVERMATRIX_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
+  KEY `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` (`AUFLAGE_ID`),
+  KEY `FK_AUFLAGESEITENCOVERMATRIX_FARBIGKEIT_ID` (`FARBIGKEIT_ID`),
+  KEY `FK_AUFLAGESEITENCOVERMATRIX_BAUKASTEN_ID` (`BAUKASTEN_ID`),
+  CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` FOREIGN KEY (`AUFLAGE_ID`) REFERENCES `auflage` (`ID`),
+  CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_BAUKASTEN_ID` FOREIGN KEY (`BAUKASTEN_ID`) REFERENCES `baukasten` (`ID`),
+  CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_FARBIGKEIT_ID` FOREIGN KEY (`FARBIGKEIT_ID`) REFERENCES `farbigkeit` (`ID`),
+  CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_FORMATAUSWAEHLEN_ID` FOREIGN KEY (`FORMATAUSWAEHLEN_ID`) REFERENCES `formatauswaehlen` (`ID`),
+  CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` FOREIGN KEY (`SEITEN_ID`) REFERENCES `seiten` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `auflageseitencovermatrix`
+--
+
+LOCK TABLES `auflageseitencovermatrix` WRITE;
+/*!40000 ALTER TABLE `auflageseitencovermatrix` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auflageseitencovermatrix` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ausgabe`
 --
 
+DROP TABLE IF EXISTS `ausgabe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ausgabe` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL,
-  `VALUEE` decimal(10,2) DEFAULT NULL
+  `VALUEE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ausgabe`
 --
 
-INSERT INTO `ausgabe` (`ID`, `NAME`, `PRICE`, `VALUEE`) VALUES
-(7, 'Erstausgabe', NULL, '0.50'),
-(8, 'Folgeausgabe', NULL, '0.20');
-
--- --------------------------------------------------------
+LOCK TABLES `ausgabe` WRITE;
+/*!40000 ALTER TABLE `ausgabe` DISABLE KEYS */;
+INSERT INTO `ausgabe` VALUES (7,'Erstausgabe',NULL,0.50),(8,'Folgeausgabe',NULL,0.20);
+/*!40000 ALTER TABLE `ausgabe` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `backup`
 --
 
+DROP TABLE IF EXISTS `backup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `backup` (
   `ID` bigint(20) NOT NULL,
   `DATESYSTEME` date DEFAULT NULL,
-  `NOM` varchar(255) DEFAULT NULL
+  `NOM` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `backup`
+--
+
+LOCK TABLES `backup` WRITE;
+/*!40000 ALTER TABLE `backup` DISABLE KEYS */;
+/*!40000 ALTER TABLE `backup` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `baukasten`
 --
 
+DROP TABLE IF EXISTS `baukasten`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `baukasten` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` varchar(255) DEFAULT NULL,
-  `VALUE` decimal(10,2) DEFAULT NULL
+  `VALUE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `baukasten`
+--
+
+LOCK TABLES `baukasten` WRITE;
+/*!40000 ALTER TABLE `baukasten` DISABLE KEYS */;
+/*!40000 ALTER TABLE `baukasten` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `bindung`
 --
 
+DROP TABLE IF EXISTS `bindung`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bindung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `bindung`
 --
 
-INSERT INTO `bindung` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
-('Fadenheftung', NULL, NULL),
-('PUR-Bindung', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `bindung` WRITE;
+/*!40000 ALTER TABLE `bindung` DISABLE KEYS */;
+INSERT INTO `bindung` VALUES ('Fadenheftung',NULL,NULL),('PUR-Bindung',NULL,NULL);
+/*!40000 ALTER TABLE `bindung` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `category`
 --
 
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
-  `ID` bigint(20) NOT NULL,
-  `NAME` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`ID`, `NAME`) VALUES
-(1, 'Katalog'),
-(2, 'Fleyer'),
-(3, 'Prospekt'),
-(4, 'BMEcat');
-
--- --------------------------------------------------------
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Katalog'),(2,'Fleyer'),(3,'Prospekt'),(4,'BMEcat');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `configuration`
 --
 
+DROP TABLE IF EXISTS `configuration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuration` (
-  `ID` bigint(20) NOT NULL,
-  `DATEAPPLICATION` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `DATEAPPLICATION` date DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `configuration`
 --
 
-INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
-(1, '2012-07-03');
-
--- --------------------------------------------------------
+LOCK TABLES `configuration` WRITE;
+/*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
+INSERT INTO `configuration` VALUES (1,'2012-07-03');
+/*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `configurationitem`
 --
 
+DROP TABLE IF EXISTS `configurationitem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configurationitem` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DEFAULTVALUE` decimal(10,2) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `CONFIGURATION_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `CONFIGURATION_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_CONFIGURATIONITEM_CONFIGURATION_ID` (`CONFIGURATION_ID`),
+  CONSTRAINT `FK_CONFIGURATIONITEM_CONFIGURATION_ID` FOREIGN KEY (`CONFIGURATION_ID`) REFERENCES `configuration` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `configurationitem`
 --
 
-INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID`) VALUES
-(1, '56.25', 'std_stz', NULL),
-(2, '70.00', 'std_stz_dtp', NULL),
-(3, '56.25', 'std_stz_pm', NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `configurationitem` WRITE;
+/*!40000 ALTER TABLE `configurationitem` DISABLE KEYS */;
+INSERT INTO `configurationitem` VALUES (1,56.25,'std_stz',NULL),(2,70.00,'std_stz_dtp',NULL),(3,56.25,'std_stz_pm',NULL);
+/*!40000 ALTER TABLE `configurationitem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `correctionschluessel`
 --
 
+DROP TABLE IF EXISTS `correctionschluessel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `correctionschluessel` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(10,3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `WERT` decimal(10,3) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `correctionschluessel`
 --
 
-INSERT INTO `correctionschluessel` (`ID`, `PERCENT`, `WERT`) VALUES
-(1, 0, '1.000'),
-(2, 1, '1.000'),
-(3, 2, '1.000'),
-(4, 3, '1.000'),
-(5, 4, '1.000'),
-(6, 5, '1.000'),
-(7, 6, '1.000'),
-(8, 7, '1.000'),
-(9, 8, '1.000'),
-(10, 9, '1.000'),
-(11, 10, '1.000'),
-(12, 11, '1.000'),
-(13, 12, '1.000'),
-(14, 13, '1.000'),
-(15, 14, '1.000'),
-(17, 15, '1.050'),
-(18, 16, '1.025'),
-(19, 17, '1.025'),
-(20, 18, '1.025'),
-(21, 19, '1.025'),
-(22, 20, '1.025'),
-(23, 21, '1.025'),
-(24, 22, '1.025'),
-(25, 23, '1.025'),
-(26, 24, '1.025'),
-(27, 25, '1.025'),
-(28, 26, '1.025'),
-(29, 27, '1.025'),
-(30, 28, '1.025'),
-(31, 29, '1.025'),
-(32, 30, '1.025'),
-(33, 31, '1.050'),
-(34, 32, '1.050'),
-(35, 33, '1.050'),
-(36, 34, '1.050'),
-(37, 35, '1.050'),
-(38, 36, '1.050'),
-(39, 37, '1.050'),
-(40, 38, '1.050'),
-(41, 39, '1.050'),
-(42, 40, '1.050'),
-(43, 41, '1.050'),
-(44, 42, '1.050'),
-(45, 43, '1.050'),
-(46, 44, '1.050'),
-(47, 45, '1.050'),
-(48, 46, '1.050'),
-(49, 47, '1.050'),
-(50, 48, '1.050'),
-(51, 49, '1.050'),
-(52, 50, '1.050'),
-(53, 51, '1.100'),
-(54, 52, '1.100'),
-(55, 53, '1.100'),
-(56, 54, '1.100'),
-(57, 55, '1.100'),
-(58, 56, '1.100'),
-(59, 57, '1.100'),
-(60, 58, '1.100'),
-(61, 59, '1.100'),
-(62, 60, '1.100'),
-(63, 61, '1.100'),
-(64, 62, '1.100'),
-(65, 63, '1.100'),
-(66, 64, '1.100'),
-(67, 65, '1.100'),
-(68, 66, '1.100'),
-(69, 67, '1.100'),
-(70, 68, '1.100'),
-(71, 69, '1.100'),
-(72, 70, '1.100'),
-(73, 71, '1.100'),
-(74, 72, '1.100'),
-(75, 73, '1.100'),
-(76, 74, '1.100'),
-(77, 75, '1.100'),
-(78, 76, '1.150'),
-(79, 77, '1.150'),
-(80, 78, '1.150'),
-(81, 79, '1.150'),
-(82, 80, '1.150'),
-(83, 81, '1.150'),
-(84, 82, '1.150'),
-(85, 83, '1.150'),
-(86, 84, '1.150'),
-(87, 85, '1.150'),
-(88, 86, '1.150'),
-(89, 87, '1.150'),
-(90, 88, '1.150'),
-(91, 89, '1.150'),
-(92, 90, '1.150'),
-(93, 91, '1.150'),
-(94, 92, '1.150'),
-(95, 93, '1.150'),
-(96, 94, '1.150'),
-(97, 95, '1.150'),
-(98, 96, '1.150'),
-(99, 97, '1.150'),
-(100, 98, '1.150'),
-(101, 99, '1.150'),
-(102, 100, '1.150');
-
--- --------------------------------------------------------
+LOCK TABLES `correctionschluessel` WRITE;
+/*!40000 ALTER TABLE `correctionschluessel` DISABLE KEYS */;
+INSERT INTO `correctionschluessel` VALUES (1,0,1.000),(2,1,1.000),(3,2,1.000),(4,3,1.000),(5,4,1.000),(6,5,1.000),(7,6,1.000),(8,7,1.000),(9,8,1.000),(10,9,1.000),(11,10,1.000),(12,11,1.000),(13,12,1.000),(14,13,1.000),(15,14,1.000),(17,15,1.050),(18,16,1.025),(19,17,1.025),(20,18,1.025),(21,19,1.025),(22,20,1.025),(23,21,1.025),(24,22,1.025),(25,23,1.025),(26,24,1.025),(27,25,1.025),(28,26,1.025),(29,27,1.025),(30,28,1.025),(31,29,1.025),(32,30,1.025),(33,31,1.050),(34,32,1.050),(35,33,1.050),(36,34,1.050),(37,35,1.050),(38,36,1.050),(39,37,1.050),(40,38,1.050),(41,39,1.050),(42,40,1.050),(43,41,1.050),(44,42,1.050),(45,43,1.050),(46,44,1.050),(47,45,1.050),(48,46,1.050),(49,47,1.050),(50,48,1.050),(51,49,1.050),(52,50,1.050),(53,51,1.100),(54,52,1.100),(55,53,1.100),(56,54,1.100),(57,55,1.100),(58,56,1.100),(59,57,1.100),(60,58,1.100),(61,59,1.100),(62,60,1.100),(63,61,1.100),(64,62,1.100),(65,63,1.100),(66,64,1.100),(67,65,1.100),(68,66,1.100),(69,67,1.100),(70,68,1.100),(71,69,1.100),(72,70,1.100),(73,71,1.100),(74,72,1.100),(75,73,1.100),(76,74,1.100),(77,75,1.100),(78,76,1.150),(79,77,1.150),(80,78,1.150),(81,79,1.150),(82,80,1.150),(83,81,1.150),(84,82,1.150),(85,83,1.150),(86,84,1.150),(87,85,1.150),(88,86,1.150),(89,87,1.150),(90,88,1.150),(91,89,1.150),(92,90,1.150),(93,91,1.150),(94,92,1.150),(95,93,1.150),(96,94,1.150),(97,95,1.150),(98,96,1.150),(99,97,1.150),(100,98,1.150),(101,99,1.150),(102,100,1.150);
+/*!40000 ALTER TABLE `correctionschluessel` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `cover`
 --
 
+DROP TABLE IF EXISTS `cover`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cover` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `cover`
 --
 
-INSERT INTO `cover` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
-('Hardcover', NULL, NULL),
-('Softcover', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `cover` WRITE;
+/*!40000 ALTER TABLE `cover` DISABLE KEYS */;
+INSERT INTO `cover` VALUES ('Hardcover',NULL,NULL),('Softcover',NULL,NULL);
+/*!40000 ALTER TABLE `cover` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `demandcategory`
 --
 
+DROP TABLE IF EXISTS `demandcategory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `demandcategory` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ANZAHLBESTANDARTIKEL` int(11) DEFAULT NULL,
   `ANZAHLBESTANDPRODUKT` int(11) DEFAULT NULL,
   `ANZAHLBESTELLNRSEITEN` int(11) DEFAULT NULL,
@@ -432,965 +399,915 @@ CREATE TABLE `demandcategory` (
   `UMSCHLAGPAPIERAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL,
   `VEREDLUNG_ID` varchar(255) DEFAULT NULL,
-  `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DEMANDCATEGORY_PROZESS_ID` (`PROZESS_ID`),
+  KEY `FK_DEMANDCATEGORY_REGISTER_ID` (`REGISTER_ID`),
+  KEY `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` (`CORRECTIONSCHLUESSEL_ID`),
+  KEY `FK_DEMANDCATEGORY_PRODUCT_ID` (`PRODUCT_ID`),
+  KEY `FK_DEMANDCATEGORY_CATEGORY_ID` (`CATEGORY_ID`),
+  KEY `FK_DEMANDCATEGORY_DEPARTMENT_ID` (`DEPARTMENT_ID`),
+  KEY `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` (`KONZEPTBEARBEITUNGFAKTOR_ID`),
+  KEY `FK_DEMANDCATEGORY_VEREDLUNG_ID` (`VEREDLUNG_ID`),
+  KEY `FK_DEMANDCATEGORY_COVER_ID` (`COVER_ID`),
+  KEY `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` (`PARTICIPANTFAKTOR_ID`),
+  KEY `FK_DEMANDCATEGORY_LAYOUT_ID` (`LAYOUT_ID`),
+  KEY `FK_DEMANDCATEGORY_DRUCKSEITEN_ID` (`DRUCKSEITEN_ID`),
+  KEY `FK_DEMANDCATEGORY_MITGLIEDERKORREKTURFAKTOR_ID` (`MITGLIEDERKORREKTURFAKTOR_ID`),
+  KEY `FK_DEMANDCATEGORY_USER_LOGIN` (`USER_LOGIN`),
+  KEY `FK_DEMANDCATEGORY_BAUKASTEN_ID` (`BAUKASTEN_ID`),
+  KEY `FK_DEMANDCATEGORY_KATALOGART_ID` (`KATALOGART_ID`),
+  KEY `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
+  KEY `FK_DEMANDCATEGORY_SCHLUESSEL_ID` (`SCHLUESSEL_ID`),
+  KEY `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` (`ARTDERWEITERVERARBEITUNG_ID`),
+  KEY `FK_DEMANDCATEGORY_AUFLAGE_ID` (`AUFLAGE_ID`),
+  KEY `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` (`UMSCHLAGPAPIERAUSWAEHLEN_ID`),
+  KEY `FK_DEMANDCATEGORY_BINDUNG_ID` (`BINDUNG_ID`),
+  KEY `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` (`PAPIERMATERIALAUSWAEHLEN_ID`),
+  KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` (`UMSCHLAGFARBIGKEIT_ID`),
+  KEY `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` (`WECHSELFASSUNGVARIANTFAKTOR_ID`),
+  KEY `FK_DEMANDCATEGORY_AUSGABE_ID` (`AUSGABE_ID`),
+  KEY `FK_DEMANDCATEGORY_FARBIGKEIT_ID` (`FARBIGKEIT_ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` FOREIGN KEY (`ARTDERWEITERVERARBEITUNG_ID`) REFERENCES `artderweiterverarbeitung` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_AUFLAGE_ID` FOREIGN KEY (`AUFLAGE_ID`) REFERENCES `auflage` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_AUSGABE_ID` FOREIGN KEY (`AUSGABE_ID`) REFERENCES `ausgabe` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_BAUKASTEN_ID` FOREIGN KEY (`BAUKASTEN_ID`) REFERENCES `baukasten` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_BINDUNG_ID` FOREIGN KEY (`BINDUNG_ID`) REFERENCES `bindung` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_CATEGORY_ID` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` FOREIGN KEY (`CORRECTIONSCHLUESSEL_ID`) REFERENCES `correctionschluessel` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_DEPARTMENT_ID` FOREIGN KEY (`DEPARTMENT_ID`) REFERENCES `departement` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_DRUCKSEITEN_ID` FOREIGN KEY (`DRUCKSEITEN_ID`) REFERENCES `seiten` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_FARBIGKEIT_ID` FOREIGN KEY (`FARBIGKEIT_ID`) REFERENCES `farbigkeit` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` FOREIGN KEY (`FORMATAUSWAEHLEN_ID`) REFERENCES `formatauswaehlen` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_KATALOGART_ID` FOREIGN KEY (`KATALOGART_ID`) REFERENCES `katalogart` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` FOREIGN KEY (`KONZEPTBEARBEITUNGFAKTOR_ID`) REFERENCES `konzeptbearbeitungfaktor` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_LAYOUT_ID` FOREIGN KEY (`LAYOUT_ID`) REFERENCES `layout` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_MITGLIEDERKORREKTURFAKTOR_ID` FOREIGN KEY (`MITGLIEDERKORREKTURFAKTOR_ID`) REFERENCES `mitgliederkorrekturfaktor` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` FOREIGN KEY (`PAPIERMATERIALAUSWAEHLEN_ID`) REFERENCES `papiermaterialauswaehlen` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` FOREIGN KEY (`PARTICIPANTFAKTOR_ID`) REFERENCES `participantfaktor` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_PRODUCT_ID` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_PROZESS_ID` FOREIGN KEY (`PROZESS_ID`) REFERENCES `prozess` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_REGISTER_ID` FOREIGN KEY (`REGISTER_ID`) REFERENCES `register` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_SCHLUESSEL_ID` FOREIGN KEY (`SCHLUESSEL_ID`) REFERENCES `schluessel` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` FOREIGN KEY (`UMSCHLAGPAPIERAUSWAEHLEN_ID`) REFERENCES `umschlagpapierauswaehlen` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`),
+  CONSTRAINT `FK_DEMANDCATEGORY_VEREDLUNG_ID` FOREIGN KEY (`VEREDLUNG_ID`) REFERENCES `veredlung` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` FOREIGN KEY (`WECHSELFASSUNGVARIANTFAKTOR_ID`) REFERENCES `wechselfassungvariantfaktor` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `demandcategory`
 --
 
-INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `ARTIKELPERPAGELFAKTOR`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LKSCHLUESSELFAKTOR`, `LIEFERTERMIN`, `MKSCHLUESSELFAKTOR`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `PRODUCTSCHLUESSELFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMUNITPRICE`, `SUMMEGLOBAL`, `TEILNEHMERZAHL`, `TEILNEHMERZAHLPRICING`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BAUKASTEN_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
-(24, -1, 0, 5, 2, 0, 6, 2, 0, 4, 15, 13, 14, 20, 7, 2, 0, 9, '9.14', 3, '2017-07-23', '2017-07-23', 1, '1.01', '2017-07-23', '1.01', 0, 10, '2.72', 17, '0.00', '2338.19', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(25, -1, -1, 5, 0, 0, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 0, 9, '0.00', 0, '2017-07-23', '2017-07-23', 0, '0.00', '2017-07-23', '0.00', 0, 10, '0.00', 17, '0.00', '2128.19', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 102, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(26, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, '0.00', 0, '2017-07-23', '2017-07-23', 0, '0.00', '2017-07-23', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'kiki', NULL, 1),
-(27, 8, -1, 5, 0, 4, 6, 10, 0, 4, 15, 13, 14, 0, 7, 11, 3, 9, '0.00', 0, '2017-07-24', '2017-07-24', 0, '0.00', '2017-07-24', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 8, NULL, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, 1, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'ana', NULL, NULL),
-(29, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, '15.80', 3, '2017-07-24', '2017-07-24', 1, '1.10', '2017-07-24', '1.05', 0, 10, '4.70', 17, '0.00', '2338.19', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(30, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, '15.80', 3, '2017-07-24', '2017-07-24', 1, '1.10', '2017-07-24', '1.05', 0, 10, '4.70', 17, '0.00', '2338.19', '0.00', 16, NULL, 0, 0, NULL, NULL, NULL, 7, NULL, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(32, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, '15.80', 3, '2017-07-24', '2017-07-24', 1, '1.10', '2017-07-24', '1.05', 1, 10, '4.70', 17, '0.00', '2338.19', '0.00', 16, '1.00', 0, 0, NULL, NULL, NULL, 7, NULL, 'Fadenheftung', 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 1, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(33, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, '15.80', 3, '2017-07-24', '2017-07-24', 1, '1.10', '2017-07-24', '1.05', 1, 10, '4.70', 17, '0.00', '2338.19', '0.00', 21, '1.20', 0, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 2, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(34, -1, 0, 5, 2, 0, 6, 1, 0, 4, 15, 13, 14, 20, 7, 1, 0, 9, '15.80', 3, '2017-07-24', '2017-07-24', 1, '1.10', '2017-07-24', '1.05', 1, 10, '4.70', 17, '0.00', '2338.19', '10026.74', 16, '1.00', 0, 0, NULL, NULL, NULL, 7, NULL, 'Fadenheftung', 2, 102, NULL, NULL, NULL, '1/1 -farbig', NULL, 1, 1, 3, 2, '65 g/qm', NULL, 1, 5, NULL, NULL, NULL, 'walo', NULL, 1),
-(35, 50, 11, 5, 0, 990, 100, 21, 0, 4, 9, 13, 14, 0, 50, 10, 110, 9, '15.80', 0, '2017-07-26', '2017-07-26', 0, '1.10', '2017-07-26', '1.05', 1, 10, '4.70', 17, '0.00', '2744.19', '23802.70', 35, '1.20', 1100, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(36, 50, 20, 5, 0, 1710, 100, 40, 0, 4, 15, 13, 14, 0, 50, 20, 190, 9, '0.00', 0, '2017-07-26', '2017-07-26', 0, '0.00', '2017-07-26', '0.00', 0, 10, '2.50', 17, '0.00', '0.00', NULL, 40, '0.00', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(37, 50, 20, 5, 0, 1710, 100, 40, 0, 4, 15, 13, 14, 0, 50, 20, 190, 9, '0.00', 0, '2017-07-26', '2017-07-26', 0, '0.00', '2017-07-26', '0.00', 0, 10, '2.50', 17, '0.00', '0.00', NULL, 40, '0.00', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(38, 50, 20, 5, 0, 1710, 100, 40, 0, 4, 15, 13, 14, 0, 50, 20, 190, 9, '0.00', 0, '2017-07-26', '2017-07-26', 0, '0.00', '2017-07-26', '0.00', 0, 10, '2.50', 17, '0.00', '0.00', NULL, 40, '0.00', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(39, 3900, 488, 5, 0, 1710, 4000, 500, 0, 4, 15, 13, 14, 0, 100, 12, 190, 9, '26.90', 0, '2017-07-26', '2017-07-26', 0, '1.00', '2017-07-26', '1.00', 1, 10, '8.00', 17, '0.00', '3192.19', '43803.08', 16, '1.00', 1900, 0, NULL, NULL, NULL, 8, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, NULL, 3, 1, 2, 2, NULL, NULL, 1, 6, NULL, NULL, NULL, 'admin', NULL, 1),
-(41, 910, 190, 5, 0, 900, 1000, 208, 0, 4, 15, 13, 14, 0, 90, 18, 100, 9, '16.10', 0, '2017-07-26', '2017-07-26', 0, '1.00', '2017-07-26', '1.00', 1, 10, '4.80', 17, '0.00', '2688.19', '26290.59', 37, '1.35', 1000, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(42, 1100, 550, 5, 0, 926, 1900, 950, 0, 4, 9, 16, 14, 0, 800, 400, 102, 9, '5.70', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '2.00', 17, '0.00', '2733.41', '45859.84', 16, '1.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 5, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(43, 910, 505, 5, 0, 900, 1000, 555, 0, 4, 15, 13, 14, 0, 90, 50, 100, 9, '6.10', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '1.80', 17, '0.00', '2717.66', '31873.54', 16, '1.00', 1000, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 7, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(44, 400, 222, 5, 0, 926, 1200, 666, 0, 4, 9, 13, 14, 0, 800, 444, 102, 9, '6.10', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '1.80', 17, '0.00', '2733.41', '42904.63', 16, '1.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 7, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(45, 100, 40, 5, 0, 9000, 1000, 400, 0, 4, 15, 13, 14, 0, 900, 360, 1000, 9, '8.40', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '2.50', 17, '0.00', '7780.16', '162942.36', 16, '1.00', 10000, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 6, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(46, 720, 450, 5, 0, 1710, 800, 500, 0, 4, 15, 13, 14, 0, 80, 50, 190, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 1, 10, '1.60', 17, '0.00', '0.00', NULL, 16, '0.00', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(47, 1810, 1131, 5, 0, 1710, 1900, 1187, 0, 4, 15, 13, 14, 0, 90, 56, 190, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '1.60', 17, '0.00', '0.00', NULL, 16, '0.00', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 1, 2, NULL, NULL, 1, 6, NULL, NULL, NULL, 'admin', NULL, 1),
-(48, 1090, 681, 5, 0, 1710, 1980, 1237, 0, 4, 15, 30, 20, 0, 890, 556, 190, 9, '5.38', 0, '2017-07-27', '2017-07-27', 0, '1.15', '2017-07-27', '1.08', 1, 10, '1.60', 17, '0.00', '3223.91', '67193.04', 38, '1.35', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(49, 1800, 225, 8, 0, 1800, 1890, 236, 0, 9, 4, 33, 23, 0, 90, 11, 200, 9, '26.90', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '8.00', 17, '0.00', '3276.78', '40156.35', 23, '1.20', 2000, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(50, 2181, 272, 5, 0, 1800, 2990, 373, 0, 4, 9, 20, 12, 0, 809, 101, 200, 9, '26.90', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '8.00', 17, '0.00', '3276.78', '44485.01', 45, '1.35', 2000, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 3, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(51, 729, 202, 5, 0, 1800, 809, 224, 0, 4, 9, 20, 2, 0, 80, 22, 200, 9, '12.10', 0, '2017-07-27', '2017-07-27', 0, '1.10', '2017-07-27', '1.05', 1, 10, '3.60', 17, '0.00', '3276.78', '38522.43', 46, '1.35', 2000, 0, NULL, NULL, NULL, 7, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(52, 7309, 2149, 5, 0, 1800, 8098, 2381, 0, 4, 15, 13, 14, 0, 789, 232, 200, 9, '11.43', 0, '2017-07-27', '2017-07-27', 0, '1.11', '2017-07-27', '1.05', 1, 10, '3.40', 17, '0.00', '3276.78', '74856.03', 80, '1.35', 2000, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(53, 7300, 2920, 5, 2, 1800, 8000, 3200, 0, 4, 15, 13, 14, 20, 700, 280, 200, 9, '8.40', 3, '2017-07-27', '2017-07-27', 1, '1.00', '2017-07-27', '1.00', 1, 10, '2.50', 17, '0.00', '3487.72', '86551.15', 16, '1.00', 2000, 0, NULL, NULL, 3, 8, NULL, 'Fadenheftung', 1, 1, 'Hardcover', NULL, NULL, '2/2 -farbig', 'A5', 1, 1, 2, 2, '65 g/qm', NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(57, 23217, 4837, 5, 0, 4212, 23451, 4885, 0, 4, 15, 13, 14, 0, 234, 48, 467, 9, '16.10', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '4.80', 17, '0.00', '4783.72', '146061.47', 16, '1.00', 4679, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 4, 1, 3, 2, NULL, NULL, 2, 6, NULL, NULL, NULL, 'admin', NULL, 1),
-(58, 7000, 875, 5, 0, 8100, 7890, 986, 0, 4, 34, 78, 21, 0, 890, 111, 900, 9, '26.90', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '8.00', 17, '0.00', '7217.66', '158783.43', 34, '1.20', 9000, 0, NULL, NULL, NULL, 7, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 6, NULL, NULL, NULL, 'admin', NULL, 1),
-(59, 801, 321, 5, 0, 1701, 890, 356, 0, 4, 9, 30, 27, 0, 89, 35, 189, 9, '8.40', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '2.50', 17, '0.00', '1788.04', '37812.60', 16, '1.00', 1890, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, 1, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'ana', NULL, NULL),
-(60, 6700, 837, 5, 0, 3783, 6789, 848, 0, 4, 15, 13, 14, 0, 89, 11, 6, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '8.00', 17, '0.00', '0.00', NULL, 33, '0.00', 3789, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(61, 822, 158, 5, 0, 1800, 900, 173, 0, 4, 15, 13, 14, 0, 78, 15, 200, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '5.20', 17, '0.00', '0.00', NULL, 16, '0.00', 2000, 0, NULL, NULL, NULL, 7, NULL, NULL, 2, 1, NULL, 1, NULL, NULL, NULL, 1, NULL, 2, 2, NULL, NULL, 3, NULL, NULL, NULL, NULL, 'ana', NULL, NULL),
-(62, 622, 78, 5, 0, 2700, 700, 87, 0, 4, 15, 13, 14, 0, 78, 9, 300, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '8.00', 17, '0.00', '0.00', NULL, 16, '0.00', 3000, 0, NULL, NULL, NULL, 8, NULL, NULL, 1, 1, NULL, 1, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'ana', NULL, NULL),
-(63, 8901, 5563, 5, 0, 2700, 8990, 5618, 0, 4, 9, 13, 4, 0, 89, 55, 299, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '1.60', 17, '0.00', '0.00', NULL, 78, '0.00', 2999, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(65, 8901, 5563, 5, 0, 2700, 8990, 5618, 0, 4, 9, 13, 4, 0, 89, 55, 299, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '1.60', 17, '0.00', '0.00', NULL, 78, '0.00', 2999, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(66, 8901, 5563, 5, 0, 2700, 8990, 5618, 0, 4, 9, 13, 4, 0, 89, 55, 299, 9, '0.00', 0, '2017-07-27', '2017-07-27', 0, '0.00', '2017-07-27', '0.00', 0, 10, '1.60', 17, '0.00', '0.00', NULL, 78, '0.00', 2999, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(69, 74889, 46805, 5, 0, 17018, 75678, 47298, 0, 4, 9, 20, 2, 0, 789, 493, 1890, 9, '5.38', 0, '2017-07-27', '2017-07-27', 0, '1.15', '2017-07-27', '1.08', 1, 10, '1.60', 17, '0.00', '12790.91', '927782.12', 44, '1.35', 18908, 0, NULL, NULL, NULL, 7, NULL, NULL, 3, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(71, 820, 12, 5, 0, 1710, 900, 360, 0, 4, 9, 18, 7, 0, 80, 32, 190, 9, '8.40', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '2.50', 17, '0.00', '572.43', '1907.52', 16, '1.00', 1900, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, 2, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, 2, 6, NULL, NULL, NULL, 'dmd', NULL, NULL),
-(72, 1622, 649, 5, 0, 1710, 1700, 680, 0, 4, 9, 9, 7, 0, 78, 31, 190, 9, '8.40', 0, '2017-07-27', '2017-07-27', 0, '1.00', '2017-07-27', '1.00', 1, 10, '2.50', 17, '0.00', '1793.66', '41618.44', 16, '1.00', 1900, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, 1, NULL, NULL, NULL, 2, NULL, 3, 2, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'ana', NULL, NULL),
-(73, 1100, 440, 5, 0, 926, 1900, 760, 0, 4, 9, 16, 14, 0, 800, 320, 102, 9, '8.40', 0, '2017-07-28', '2017-07-28', 0, '1.00', '2017-07-28', '1.00', 1, 10, '2.50', 17, '0.00', '2733.41', '41456.39', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 4, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(76, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '12.10', 0, '2017-07-28', '2017-07-28', 0, '1.10', '2017-07-28', '1.05', 1, 10, '3.60', 17, '0.00', '2733.41', '36059.01', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 3, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(77, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '3.60', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(78, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '3.60', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(79, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '3.60', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(80, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '3.60', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(81, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '12.10', 0, '2017-07-28', '2017-07-28', 0, '1.10', '2017-07-28', '1.05', 1, 10, '3.60', 17, '0.00', '2733.41', '36059.01', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(91, 1100, 440, 5, 0, 926, 1900, 760, 0, 4, 9, 16, 14, 0, 800, 320, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '2.50', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(92, 1100, 137, 5, 0, 926, 1900, 237, 0, 4, 9, 16, 14, 0, 800, 100, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '8.00', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(93, 1100, 272, 5, 0, 926, 1900, 470, 0, 4, 9, 16, 14, 0, 800, 198, 102, 9, '13.58', 0, '2017-07-28', '2017-07-28', 0, '1.09', '2017-07-28', '1.05', 1, 10, '4.04', 17, '0.00', '2730.03', '33763.74', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(94, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '12.10', 0, '2017-07-28', '2017-07-28', 0, '1.10', '2017-07-28', '1.05', 1, 10, '3.60', 17, '0.00', '2730.03', '34966.65', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 3, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(96, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '12.10', 0, '2017-07-28', '2017-07-28', 0, '1.10', '2017-07-28', '1.05', 1, 10, '3.60', 17, '0.00', '2730.03', '34966.65', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(97, 1100, 176, 5, 0, 926, 1900, 304, 0, 4, 9, 16, 14, 0, 800, 128, 102, 9, '20.98', 0, '2017-07-28', '2017-07-28', 0, '1.04', '2017-07-28', '1.02', 1, 10, '6.24', 17, '0.00', '2731.91', '33820.64', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(98, 1100, 687, 5, 0, 926, 1900, 1187, 0, 4, 9, 16, 14, 0, 800, 500, 102, 9, '5.38', 0, '2017-07-28', '2017-07-28', 0, '1.15', '2017-07-28', '1.08', 1, 10, '1.60', 17, '0.00', '2737.17', '58482.79', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 6, NULL, NULL, NULL, 'admin', NULL, 1),
-(99, 1100, 137, 5, 0, 926, 1900, 237, 0, 4, 9, 16, 14, 0, 800, 100, 102, 9, '26.90', 0, '2017-07-28', '2017-07-28', 0, '1.00', '2017-07-28', '1.00', 1, 10, '8.00', 17, '0.00', '2733.79', '35974.00', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(100, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '3.60', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(101, 1100, 305, 5, 0, 926, 1900, 527, 0, 4, 9, 16, 14, 0, 800, 222, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '3.60', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(102, 10, 0, 5, 0, 926, 1900, 0, 0, 4, 9, 16, 14, 0, 800, 0, 102, 9, '12.10', 0, '2017-07-28', '2017-07-28', 0, '1.10', '2017-07-28', '1.05', 1, 10, '3.60', 17, '0.00', '2086.84', '30912.64', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 1, 1, 3, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(103, 1100, 611, 5, 0, 180, 1900, 1055, 0, 4, 9, 16, 14, 0, 800, 444, 20, 9, '6.10', 0, '2017-07-28', '2017-07-28', 0, '1.00', '2017-07-28', '1.00', 1, 10, '1.80', 17, '0.00', '1630.47', '50457.87', 20, '1.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 4, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(104, 1100, 611, 5, 0, 926, 1900, 1055, 0, 4, 9, 16, 14, 0, 800, 444, 102, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '1.80', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(106, 1100, 611, 5, 0, 926, 1900, 1055, 0, 4, 9, 16, 14, 0, 800, 444, 102, 9, '6.10', 0, '2017-07-28', '2017-07-28', 0, '1.00', '2017-07-28', '1.00', 1, 10, '1.80', 17, '0.00', '2096.22', '61958.04', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(107, 1100, 611, 10, 0, 160, 1900, 1055, 0, 10, 9, 16, 14, 0, 800, 444, 20, 9, '6.10', 0, '2017-07-28', '2017-07-28', 0, '1.00', '2017-07-28', '1.00', 1, 10, '1.80', 17, '0.00', '1630.47', '50457.87', 20, '1.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(112, 1100, 611, 10, 0, 160, 1900, 1055, 0, 10, 9, 16, 14, 0, 800, 444, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '1.80', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 1, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(113, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(114, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(115, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(116, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(117, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(118, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(119, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(120, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(121, 1100, 440, 10, 0, 160, 1900, 760, 0, 10, 9, 16, 14, 0, 800, 320, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '2.50', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(123, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(124, 10, 1, 10, 0, 160, 1900, 1, 0, 10, 9, 16, 14, 0, 800, 1, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, NULL, NULL, 4, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 'pm', NULL, NULL),
-(129, 1100, 611, 10, 0, 160, 1900, 1055, 0, 10, 9, 16, 14, 0, 800, 444, 20, 9, '0.00', 0, '2017-07-28', '2017-07-28', 0, '0.00', '2017-07-28', '0.00', 0, 10, '1.80', 17, '0.00', '0.00', NULL, 35, '0.00', 200, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 2, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(130, 1100, 229, 10, 0, 906, 1900, 395, 0, 10, 9, 16, 14, 0, 800, 166, 102, 9, '0.00', 0, '2017-07-30', '2017-07-30', 0, '0.00', '2017-07-30', '0.00', 0, 10, '4.80', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(131, 1100, 305, 10, 0, 906, 1900, 527, 0, 10, 9, 16, 14, 0, 800, 222, 102, 9, '12.10', 0, '2017-07-30', '2017-07-30', 0, '1.10', '2017-07-30', '1.05', 1, 10, '3.60', 17, '0.00', '2134.02', '49729.01', 35, '1.20', 1028, 0, NULL, NULL, NULL, 7, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 2, 1, 3, 2, NULL, NULL, 2, 5, NULL, NULL, NULL, 'admin', NULL, 1),
-(132, 10, 0, 10, 2, 4, 1900, 1, 0, 10, 9, 16, 14, 20, 800, 1, 3, 9, '0.00', 3, '2017-07-31', '2017-07-31', 1, '0.00', '2017-07-31', '0.00', 0, 10, '0.00', 17, '0.00', '0.00', NULL, 35, '0.00', 1028, 0, NULL, NULL, 3, 7, NULL, 'PUR-Bindung', 2, NULL, 'Hardcover', NULL, NULL, '3/3 -farbig', 'A5', 3, 2, 2, 3, '70 g/qm', NULL, 3, 6, NULL, NULL, NULL, 'walo', NULL, 2);
-
--- --------------------------------------------------------
+LOCK TABLES `demandcategory` WRITE;
+/*!40000 ALTER TABLE `demandcategory` DISABLE KEYS */;
+INSERT INTO `demandcategory` VALUES (34,-1,0,5,2,0,6,1,0,4,15,13,14,20,7,1,0,9,15.80,3,'2017-07-24','2017-07-24',1,1.10,'2017-07-24',1.05,1,10,4.70,17,0.00,2338.19,10026.74,16,1.00,0,0,NULL,NULL,NULL,7,NULL,'Fadenheftung',2,102,NULL,NULL,NULL,'1/1 -farbig',NULL,1,1,3,2,'65 g/qm',NULL,1,5,NULL,NULL,NULL,'walo',NULL,1),(35,50,11,5,0,990,100,21,0,4,9,13,14,0,50,10,110,9,15.80,0,'2017-07-26','2017-07-26',0,1.10,'2017-07-26',1.05,1,10,4.70,17,0.00,2744.19,23802.70,35,1.20,1100,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,2,5,NULL,NULL,NULL,'admin',NULL,1),(39,3900,488,5,0,1710,4000,500,0,4,15,13,14,0,100,12,190,9,26.90,0,'2017-07-26','2017-07-26',0,1.00,'2017-07-26',1.00,1,10,8.00,17,0.00,3192.19,43803.08,16,1.00,1900,0,NULL,NULL,NULL,8,NULL,NULL,2,1,NULL,NULL,NULL,NULL,NULL,3,1,2,2,NULL,NULL,1,6,NULL,NULL,NULL,'admin',NULL,1),(41,910,190,5,0,900,1000,208,0,4,15,13,14,0,90,18,100,9,16.10,0,'2017-07-26','2017-07-26',0,1.00,'2017-07-26',1.00,1,10,4.80,17,0.00,2688.19,26290.59,37,1.35,1000,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,1,2,NULL,NULL,2,5,NULL,NULL,NULL,'admin',NULL,1),(42,1100,550,5,0,926,1900,950,0,4,9,16,14,0,800,400,102,9,5.70,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,2.00,17,0.00,2733.41,45859.84,16,1.00,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,5,5,NULL,NULL,NULL,'admin',NULL,1),(43,910,505,5,0,900,1000,555,0,4,15,13,14,0,90,50,100,9,6.10,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,1.80,17,0.00,2717.66,31873.54,16,1.00,1000,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,7,5,NULL,NULL,NULL,'admin',NULL,1),(44,400,222,5,0,926,1200,666,0,4,9,13,14,0,800,444,102,9,6.10,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,1.80,17,0.00,2733.41,42904.63,16,1.00,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,7,5,NULL,NULL,NULL,'admin',NULL,1),(45,100,40,5,0,9000,1000,400,0,4,15,13,14,0,900,360,1000,9,8.40,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,2.50,17,0.00,7780.16,162942.36,16,1.00,10000,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,6,5,NULL,NULL,NULL,'admin',NULL,1),(48,1090,681,5,0,1710,1980,1237,0,4,15,30,20,0,890,556,190,9,5.38,0,'2017-07-27','2017-07-27',0,1.15,'2017-07-27',1.08,1,10,1.60,17,0.00,3223.91,67193.04,38,1.35,1900,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(49,1800,225,8,0,1800,1890,236,0,9,4,33,23,0,90,11,200,9,26.90,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,8.00,17,0.00,3276.78,40156.35,23,1.20,2000,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,1,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(50,2181,272,5,0,1800,2990,373,0,4,9,20,12,0,809,101,200,9,26.90,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,8.00,17,0.00,3276.78,44485.01,45,1.35,2000,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,2,2,NULL,NULL,3,5,NULL,NULL,NULL,'admin',NULL,1),(51,729,202,5,0,1800,809,224,0,4,9,20,2,0,80,22,200,9,12.10,0,'2017-07-27','2017-07-27',0,1.10,'2017-07-27',1.05,1,10,3.60,17,0.00,3276.78,38522.43,46,1.35,2000,0,NULL,NULL,NULL,7,NULL,NULL,2,1,NULL,NULL,NULL,NULL,NULL,1,1,1,2,NULL,NULL,2,5,NULL,NULL,NULL,'admin',NULL,1),(52,7309,2149,5,0,1800,8098,2381,0,4,15,13,14,0,789,232,200,9,11.43,0,'2017-07-27','2017-07-27',0,1.11,'2017-07-27',1.05,1,10,3.40,17,0.00,3276.78,74856.03,80,1.35,2000,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,1,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(53,7300,2920,5,2,1800,8000,3200,0,4,15,13,14,20,700,280,200,9,8.40,3,'2017-07-27','2017-07-27',1,1.00,'2017-07-27',1.00,1,10,2.50,17,0.00,3487.72,86551.15,16,1.00,2000,0,NULL,NULL,3,8,NULL,'Fadenheftung',1,1,'Hardcover',NULL,NULL,'2/2 -farbig','A5',1,1,2,2,'65 g/qm',NULL,2,5,NULL,NULL,NULL,'admin',NULL,1),(57,23217,4837,5,0,4212,23451,4885,0,4,15,13,14,0,234,48,467,9,16.10,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,4.80,17,0.00,4783.72,146061.47,16,1.00,4679,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,4,1,3,2,NULL,NULL,2,6,NULL,NULL,NULL,'admin',NULL,1),(58,7000,875,5,0,8100,7890,986,0,4,34,78,21,0,890,111,900,9,26.90,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,8.00,17,0.00,7217.66,158783.43,34,1.20,9000,0,NULL,NULL,NULL,7,NULL,NULL,2,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,1,6,NULL,NULL,NULL,'admin',NULL,1),(59,801,321,5,0,1701,890,356,0,4,9,30,27,0,89,35,189,9,8.40,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,2.50,17,0.00,1788.04,37812.60,16,1.00,1890,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,1,NULL,NULL,NULL,2,NULL,2,2,NULL,NULL,1,NULL,NULL,NULL,NULL,'ana',NULL,NULL),(69,74889,46805,5,0,17018,75678,47298,0,4,9,20,2,0,789,493,1890,9,5.38,0,'2017-07-27','2017-07-27',0,1.15,'2017-07-27',1.08,1,10,1.60,17,0.00,12790.91,927782.12,44,1.35,18908,0,NULL,NULL,NULL,7,NULL,NULL,3,1,NULL,NULL,NULL,NULL,NULL,2,1,3,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(71,820,12,5,0,1710,900,360,0,4,9,18,7,0,80,32,190,9,8.40,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,2.50,17,0.00,572.43,1907.52,16,1.00,1900,0,NULL,NULL,NULL,NULL,NULL,NULL,1,1,NULL,2,NULL,NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,2,6,NULL,NULL,NULL,'dmd',NULL,NULL),(72,1622,649,5,0,1710,1700,680,0,4,9,9,7,0,78,31,190,9,8.40,0,'2017-07-27','2017-07-27',0,1.00,'2017-07-27',1.00,1,10,2.50,17,0.00,1793.66,41618.44,16,1.00,1900,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,1,NULL,NULL,NULL,2,NULL,3,2,NULL,NULL,1,NULL,NULL,NULL,NULL,'ana',NULL,NULL),(73,1100,440,5,0,926,1900,760,0,4,9,16,14,0,800,320,102,9,8.40,0,'2017-07-28','2017-07-28',0,1.00,'2017-07-28',1.00,1,10,2.50,17,0.00,2733.41,41456.39,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,4,5,NULL,NULL,NULL,'admin',NULL,1),(76,1100,305,5,0,926,1900,527,0,4,9,16,14,0,800,222,102,9,12.10,0,'2017-07-28','2017-07-28',0,1.10,'2017-07-28',1.05,1,10,3.60,17,0.00,2733.41,36059.01,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,3,5,NULL,NULL,NULL,'admin',NULL,1),(81,1100,305,5,0,926,1900,527,0,4,9,16,14,0,800,222,102,9,12.10,0,'2017-07-28','2017-07-28',0,1.10,'2017-07-28',1.05,1,10,3.60,17,0.00,2733.41,36059.01,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(93,1100,272,5,0,926,1900,470,0,4,9,16,14,0,800,198,102,9,13.58,0,'2017-07-28','2017-07-28',0,1.09,'2017-07-28',1.05,1,10,4.04,17,0.00,2730.03,33763.74,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,3,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(94,1100,305,5,0,926,1900,527,0,4,9,16,14,0,800,222,102,9,12.10,0,'2017-07-28','2017-07-28',0,1.10,'2017-07-28',1.05,1,10,3.60,17,0.00,2730.03,34966.65,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,3,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(96,1100,305,5,0,926,1900,527,0,4,9,16,14,0,800,222,102,9,12.10,0,'2017-07-28','2017-07-28',0,1.10,'2017-07-28',1.05,1,10,3.60,17,0.00,2730.03,34966.65,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,1,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(97,1100,176,5,0,926,1900,304,0,4,9,16,14,0,800,128,102,9,20.98,0,'2017-07-28','2017-07-28',0,1.04,'2017-07-28',1.02,1,10,6.24,17,0.00,2731.91,33820.64,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,1,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(98,1100,687,5,0,926,1900,1187,0,4,9,16,14,0,800,500,102,9,5.38,0,'2017-07-28','2017-07-28',0,1.15,'2017-07-28',1.08,1,10,1.60,17,0.00,2737.17,58482.79,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,1,6,NULL,NULL,NULL,'admin',NULL,1),(99,1100,137,5,0,926,1900,237,0,4,9,16,14,0,800,100,102,9,26.90,0,'2017-07-28','2017-07-28',0,1.00,'2017-07-28',1.00,1,10,8.00,17,0.00,2733.79,35974.00,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,1,1,1,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(103,1100,611,5,0,180,1900,1055,0,4,9,16,14,0,800,444,20,9,6.10,0,'2017-07-28','2017-07-28',0,1.00,'2017-07-28',1.00,1,10,1.80,17,0.00,1630.47,50457.87,20,1.00,200,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,4,5,NULL,NULL,NULL,'admin',NULL,1),(106,1100,611,5,0,926,1900,1055,0,4,9,16,14,0,800,444,102,9,6.10,0,'2017-07-28','2017-07-28',0,1.00,'2017-07-28',1.00,1,10,1.80,17,0.00,2096.22,61958.04,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,1,5,NULL,NULL,NULL,'admin',NULL,1),(107,1100,611,10,0,160,1900,1055,0,10,9,16,14,0,800,444,20,9,6.10,0,'2017-07-28','2017-07-28',0,1.00,'2017-07-28',1.00,1,10,1.80,17,0.00,1630.47,50457.87,20,1.00,200,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,2,5,NULL,NULL,NULL,'admin',NULL,1),(131,1100,305,10,0,906,1900,527,0,10,9,16,14,0,800,222,102,9,12.10,0,'2017-07-30','2017-07-30',0,1.10,'2017-07-30',1.05,1,10,3.60,17,0.00,2134.02,49729.01,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,3,2,NULL,NULL,2,5,NULL,NULL,NULL,'admin',NULL,1),(133,1100,212,10,0,906,1900,365,0,10,9,16,14,0,800,153,102,9,17.50,0,'2017-08-01','2017-08-01',0,1.00,'2017-08-01',1.00,0,10,5.20,17,0.00,2443.19,51194.15,35,1.20,1028,0,NULL,NULL,NULL,7,NULL,NULL,1,1,NULL,NULL,NULL,NULL,NULL,2,1,2,2,NULL,NULL,3,5,NULL,NULL,NULL,'admin',NULL,1);
+/*!40000 ALTER TABLE `demandcategory` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `demandcategorycalculation`
 --
 
+DROP TABLE IF EXISTS `demandcategorycalculation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `demandcategorycalculation` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SUMME` decimal(10,2) DEFAULT NULL,
   `SUMMEGLOBAL` decimal(10,2) DEFAULT NULL,
   `VALIDE` tinyint(1) DEFAULT '0',
   `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID` bigint(20) DEFAULT NULL,
-  `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `DMNDCTGRYCLCULATIONDMNDCTGRYDPRTEMENTCALCULATIONID` (`DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`),
+  KEY `DEMANDCATEGORYCALCULATION_DEPARTEMENTCRITERIA_ID` (`DEPARTEMENTCRITERIA_ID`),
+  CONSTRAINT `DEMANDCATEGORYCALCULATION_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`),
+  CONSTRAINT `DMNDCTGRYCLCULATIONDMNDCTGRYDPRTEMENTCALCULATIONID` FOREIGN KEY (`DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`) REFERENCES `demandcategorydepartementcalculation` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `demandcategorycalculation`
+--
+
+LOCK TABLES `demandcategorycalculation` WRITE;
+/*!40000 ALTER TABLE `demandcategorycalculation` DISABLE KEYS */;
+INSERT INTO `demandcategorycalculation` VALUES (1,225.00,1406.25,0,1,1),(2,653.07,8834.07,0,1,2),(3,56.53,1434.38,0,1,3),(4,25.00,10760.39,0,1,4),(5,59.08,32807.81,0,1,5),(6,142.51,4828.13,0,1,6),(7,115.74,4271.08,0,1,7),(8,45.00,427.50,0,1,8),(9,56.25,562.50,0,2,9),(10,28.64,654.61,0,2,10),(11,149.63,987.75,0,2,11),(12,0.28,534.38,0,2,12),(13,30.00,25800.00,0,2,13),(14,0.06,106.88,0,2,14),(15,0.00,0.00,0,3,15),(16,0.00,0.00,0,3,16),(17,0.00,0.00,0,3,17),(18,0.00,0.00,0,3,18),(19,0.00,0.00,0,3,19),(20,0.00,0.00,0,3,20),(21,784.72,7920.79,0,4,28),(22,0.00,0.00,0,5,21),(23,0.00,0.00,0,5,22),(24,0.00,0.00,0,5,23),(25,0.00,0.00,0,6,24),(26,0.00,0.00,0,6,25),(27,801.57,768.39,0,7,27);
+/*!40000 ALTER TABLE `demandcategorycalculation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `demandcategorycalculationitem`
 --
 
+DROP TABLE IF EXISTS `demandcategorycalculationitem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `demandcategorycalculationitem` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `CALCULTAED` tinyint(1) DEFAULT '0',
   `PRICE` decimal(10,2) DEFAULT NULL,
   `PRICEGLOBAL` decimal(10,2) DEFAULT NULL,
   `PRICEGLOBALUPDATE` decimal(10,2) DEFAULT NULL,
   `PRICEUPDATE` decimal(10,2) DEFAULT NULL,
   `DEMANDCATEGORYCALCULATION_ID` bigint(20) DEFAULT NULL,
-  `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `DMNDCATEGORYCALCULATIONITEMDPRTEMENTCRITERIAITEMID` (`DEPARTEMENTCRITERIAITEM_ID`),
+  KEY `DMNDCTEGORYCALCULATIONITEMDMNDCTEGORYCALCULATIONID` (`DEMANDCATEGORYCALCULATION_ID`),
+  CONSTRAINT `DMNDCATEGORYCALCULATIONITEMDPRTEMENTCRITERIAITEMID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
+  CONSTRAINT `DMNDCTEGORYCALCULATIONITEMDMNDCTEGORYCALCULATIONID` FOREIGN KEY (`DEMANDCATEGORYCALCULATION_ID`) REFERENCES `demandcategorycalculation` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `demandcategorycalculationitem`
+--
+
+LOCK TABLES `demandcategorycalculationitem` WRITE;
+/*!40000 ALTER TABLE `demandcategorycalculationitem` DISABLE KEYS */;
+INSERT INTO `demandcategorycalculationitem` VALUES (1,1,56.25,450.00,450.00,56.25,1,1),(2,1,56.25,337.50,337.50,56.25,1,2),(3,1,56.25,168.75,168.75,56.25,1,7),(4,1,56.25,450.00,450.00,56.25,1,8),(5,1,56.25,56.25,56.25,56.25,2,3),(6,1,578.25,4626.00,4626.00,578.25,2,4),(7,1,6.19,2258.44,2258.44,6.19,2,16),(8,1,12.38,1893.38,1893.38,12.38,2,17),(9,1,0.28,534.38,534.38,0.28,3,11),(10,1,56.25,900.00,900.00,56.25,3,12),(11,1,6.43,6608.57,6608.57,6.43,4,13),(12,1,12.38,1893.38,1893.38,12.38,4,19),(13,1,6.19,2258.44,2258.44,6.19,4,20),(14,1,28.13,393.75,393.75,28.13,5,14),(15,1,14.06,351.56,351.56,14.06,5,15),(16,1,5.63,10687.50,10687.50,5.63,5,21),(17,1,1.88,3562.50,3562.50,1.88,5,22),(18,1,5.63,10687.50,10687.50,5.63,5,23),(19,1,3.75,7125.00,7125.00,3.75,5,24),(20,1,1.88,3562.50,3562.50,1.88,6,25),(21,1,140.63,1265.63,1265.63,140.63,6,26),(22,1,0.28,102.66,102.66,0.28,7,27),(23,1,56.25,675.00,675.00,56.25,7,28),(24,1,56.25,450.00,450.00,56.25,7,29),(25,1,2.96,3043.42,3043.42,2.96,7,30),(26,1,22.50,202.50,202.50,22.50,8,31),(27,1,22.50,225.00,225.00,22.50,8,32),(28,1,56.25,562.50,562.50,56.25,9,5),(29,1,0.23,35.86,35.86,0.23,10,33),(30,1,0.28,225.00,225.00,0.28,10,34),(31,1,28.13,393.75,393.75,28.13,10,35),(32,1,56.25,225.00,225.00,56.25,11,36),(33,1,28.13,393.75,393.75,28.13,11,37),(34,1,9.00,144.00,144.00,9.00,11,38),(35,1,56.25,225.00,225.00,56.25,11,39),(36,1,0.28,534.38,534.38,0.28,12,40),(37,1,6.00,4800.00,4800.00,6.00,13,6),(38,1,18.00,14400.00,14400.00,18.00,13,65),(39,1,6.00,6600.00,6600.00,6.00,13,66),(40,1,0.06,106.88,106.88,0.06,14,41),(41,1,37.13,445.50,445.50,37.13,21,48),(42,1,37.13,222.75,222.75,37.13,21,49),(43,1,67.50,243.00,243.00,67.50,21,50),(44,1,61.88,495.00,495.00,61.88,21,51),(45,1,56.25,168.75,168.75,56.25,21,52),(46,1,61.88,247.50,247.50,61.88,21,53),(47,1,40.84,1429.31,1429.31,40.84,21,54),(48,1,151.88,607.50,607.50,151.88,21,55),(49,1,2.25,2313.00,2313.00,2.25,21,58),(50,1,0.45,462.60,462.60,0.45,21,59),(51,1,67.50,303.75,303.75,67.50,21,60),(52,1,67.50,337.50,337.50,67.50,21,61),(53,1,8.78,307.13,307.13,8.78,21,62),(54,1,56.25,168.75,168.75,56.25,21,63),(55,1,67.50,168.75,168.75,67.50,21,64),(56,1,253.13,3.00,3.00,253.13,27,42),(57,1,337.50,6.00,6.00,337.50,27,43),(58,1,84.38,253.13,253.13,84.38,27,44),(59,1,14.06,84.38,84.38,14.06,27,45),(60,1,56.25,337.50,337.50,56.25,27,46),(61,1,56.25,84.38,84.38,56.25,27,47);
+/*!40000 ALTER TABLE `demandcategorycalculationitem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `demandcategorydepartementcalculation`
 --
 
+DROP TABLE IF EXISTS `demandcategorydepartementcalculation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `demandcategorydepartementcalculation` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `SUMME` decimal(10,2) DEFAULT NULL,
   `SUMMEGLOBAL` decimal(10,2) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
-  `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` (`DEMANDCATEGORY_ID`),
+  KEY `DEMANDCATEGORYDEPARTEMENTCALCULATIONDEPARTEMENT_ID` (`DEPARTEMENT_ID`),
+  CONSTRAINT `DEMANDCATEGORYDEPARTEMENTCALCULATIONDEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`),
+  CONSTRAINT `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `demandcategorydepartementcalculation`
+--
+
+LOCK TABLES `demandcategorydepartementcalculation` WRITE;
+/*!40000 ALTER TABLE `demandcategorydepartementcalculation` DISABLE KEYS */;
+INSERT INTO `demandcategorydepartementcalculation` VALUES (1,1321.93,64769.61,133,1),(2,264.86,28646.12,133,2),(3,0.00,0.00,133,3),(4,784.72,7920.79,133,4),(5,0.00,0.00,133,5),(6,0.00,0.00,133,6),(7,801.57,768.39,133,8);
+/*!40000 ALTER TABLE `demandcategorydepartementcalculation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `demandcategoryvalidation`
 --
 
+DROP TABLE IF EXISTS `demandcategoryvalidation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `demandcategoryvalidation` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `SYSDATE` time DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
-  `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DEMANDCATEGORYVALIDATION_DEPARTEMENT_ID` (`DEPARTEMENT_ID`),
+  KEY `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` (`USER_LOGIN`),
+  KEY `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`),
+  CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`),
+  CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `demandcategoryvalidation`
+--
+
+LOCK TABLES `demandcategoryvalidation` WRITE;
+/*!40000 ALTER TABLE `demandcategoryvalidation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `demandcategoryvalidation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `departement`
 --
 
+DROP TABLE IF EXISTS `departement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departement` (
-  `ID` bigint(20) NOT NULL,
-  `NAME` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `departement`
 --
 
-INSERT INTO `departement` (`ID`, `NAME`) VALUES
-(1, 'contentManagement'),
-(2, 'datenManagement'),
-(3, 'databasePublishing'),
-(4, 'projectManagement'),
-(5, 'Assetmanagement'),
-(6, 'Media IT'),
-(8, 'InitialCosts');
-
--- --------------------------------------------------------
+LOCK TABLES `departement` WRITE;
+/*!40000 ALTER TABLE `departement` DISABLE KEYS */;
+INSERT INTO `departement` VALUES (1,'contentManagement'),(2,'datenManagement'),(3,'databasePublishing'),(4,'projectManagement'),(5,'Assetmanagement'),(6,'Media IT'),(8,'InitialCosts');
+/*!40000 ALTER TABLE `departement` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `departementcriteria`
 --
 
+DROP TABLE IF EXISTS `departementcriteria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departementcriteria` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(255) DEFAULT NULL,
-  `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DEPARTEMENTCRITERIA_DEPARTEMENT_ID` (`DEPARTEMENT_ID`),
+  CONSTRAINT `FK_DEPARTEMENTCRITERIA_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `departementcriteria`
 --
 
-INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
-(1, 'Allgemein', 1),
-(2, 'Reda', 1),
-(3, 'Reda Online', 1),
-(4, 'Informatica', 1),
-(5, 'LK MG Korrektur', 1),
-(6, 'Pruefungen', 1),
-(7, 'Sonstiges', 1),
-(8, 'Fremdsprachen', 1),
-(9, 'Masterlist', 2),
-(10, 'Datenbeschaffung', 2),
-(11, 'Preisbeschaffung', 2),
-(12, 'ASD', 2),
-(13, 'Informatica', 2),
-(14, 'Sprache', 2),
-(15, 'Fixkosten', 3),
-(16, '1.Datenimport', 3),
-(17, '2. Datenimport', 3),
-(18, 'Druckdatenerstellung', 3),
-(19, 'Sonstiges', 3),
-(20, 'ECC', 3),
-(21, 'Produktaufnahme einer Produktgruppe', 5),
-(22, 'Fotoshootings', 5),
-(23, 'Lizenz', 5),
-(24, 'Konzeption', 6),
-(25, 'Programmierung', 6),
-(27, 'Initial Kosten, diesen fallen unabhängig vom Endprodukt immer an', 8),
-(28, 'Projektmanagement Leistungen:', 4);
-
--- --------------------------------------------------------
+LOCK TABLES `departementcriteria` WRITE;
+/*!40000 ALTER TABLE `departementcriteria` DISABLE KEYS */;
+INSERT INTO `departementcriteria` VALUES (1,'Allgemein',1),(2,'Reda',1),(3,'Reda Online',1),(4,'Informatica',1),(5,'LK MG Korrektur',1),(6,'Pruefungen',1),(7,'Sonstiges',1),(8,'Fremdsprachen',1),(9,'Masterlist',2),(10,'Datenbeschaffung',2),(11,'Preisbeschaffung',2),(12,'ASD',2),(13,'Informatica',2),(14,'Sprache',2),(15,'Fixkosten',3),(16,'1.Datenimport',3),(17,'2. Datenimport',3),(18,'Druckdatenerstellung',3),(19,'Sonstiges',3),(20,'ECC',3),(21,'Produktaufnahme einer Produktgruppe',5),(22,'Fotoshootings',5),(23,'Lizenz',5),(24,'Konzeption',6),(25,'Programmierung',6),(27,'Initial Kosten, diesen fallen unabhängig vom Endprodukt immer an',8),(28,'Projektmanagement Leistungen:',4);
+/*!40000 ALTER TABLE `departementcriteria` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `departementcriteriaitem`
 --
 
+DROP TABLE IF EXISTS `departementcriteriaitem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departementcriteriaitem` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ARITHMITIQUEEXPRESIONFORGLOBALPRICE` varchar(255) DEFAULT NULL,
   `ARITHMITIQUEEXPRESIONFORUNITEPRICE` varchar(255) DEFAULT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `DESCRIPTIONGLOBAL` varchar(255) DEFAULT NULL,
-  `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` (`DEPARTEMENTCRITERIA_ID`),
+  CONSTRAINT `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `departementcriteriaitem`
 --
 
-INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DESCRIPTIONGLOBAL`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung Datenpflegeguide', '8*Std_Satz', 1),
-(2, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung Redaktionsguide', '6*Std_Satz', 1),
-(3, '1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Katalog Reda_Vorausgabe kopieren', '1*Std_Satz', 2),
-(4, '8*demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100', 'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100', 'PDF-Generator Reda', '8*AnzahlGesamtSeiten*Std_Satz/100 (100Seiten/Tag)', 2),
-(5, '10*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung', '10*Std_Satz', 9),
-(6, '8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', '8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', 'Klassifizierung Neuheiten Information ', '8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/90', 13),
-(7, '3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Masterlisten Prüfung', 'hhh', 1),
-(8, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Testdaten bereitstellen', '8*Std_Satz', 1),
-(11, 'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', '0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', 'Preis Artikel Reda-Online Pflege', '0.3*AnzahlGesamtArtikel*Std_Satz/60 (0.3Min/Art)', 3),
-(12, '16*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Online Pflege(2 Tage)', '16*Std_Satz ', 3),
-(13, 'demandCategory.getUmfang()*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70', '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70', 'PDF Generator Informatica ', '8*AnzahlGesamtSeiten*Std_Satz/70 (70 Seiten/Tag)', 4),
-(14, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Lieferantenkorrektur Versand', '0.5*AnzahlNeueLieferante*Std_Satz', 5),
-(15, '0.25*(demandCategory.getAnzahlMitglieder())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Mitgliederkorrektur Versand', '0.25*AnzahlMitglieder*Std_Satz', 5),
-(16, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', 'Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte', 'AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 2),
-(17, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext für neue Produkte ', 'AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 2),
-(19, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext neue Produkte', 'AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/5', 4),
-(20, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', 'Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte', 'AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 4),
-(21, 'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10', 'demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10', 'redaktionelle Korrektur inkl. Einarbeitung LK', '(AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluessel)/(10*AnzahlArtikelPerPageFaktor)', 5),
-(22, '(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30', '(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30', 'Korrekturlesen mit Kunden', 'AnzahlGesamtArtikel*Std_Satz/AnzahlArtikelPerPageFaktor*30', 5),
-(23, '(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/10', '(demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/10', 'Redaktionelle Korrekturlesen inkl. MK', 'AnzahlGesamtArtikel*MK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*10)', 5),
-(24, '(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/15', '(demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/15', 'Redaktionelle Korrekturlesen Digiphase', 'AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*15)', 5),
-(25, '(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30', 'Großplott Prüfung', 'AnzahlGesamtArtikel*Std_Satz/(30*ArtikelperPageFaktor)', 6),
-(26, 'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Preisprüfung aus Satz, KG-Nummer, etc', '2.5*AnzahlKapitel*Std_Satz', 6),
-(27, 'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung IVZ/Synonympflege', '0,005*AnzahlGesamtProdukt*Std_Satz', 7),
-(28, '1.5*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale ECC Publikationskonfigurator bei LL', '1.5*8*Std_Satz', 7),
-(29, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)', '8*Std_Satz', 7),
-(30, 'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19', 'Korrektorat (P. Mensch extern)', '(AnzahlGesamtseiten*Std_Satz)/19', 7),
-(31, 'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'Übersetzungsmanagement Marketingdaten', 'AnzahKapitel*STd_Satz/2,5', 8),
-(32, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'Pauschale Übersetzunsmanagement ', '4*Std_Satz', 8),
-(33, '0.25*demandCategory.getAnzahlNeueProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', 'Datenbeschaffung pro Produkt Neuheit', '0.25*AnzahlGesamtProdukte*Std_Satz/60', 10),
-(34, 'demandCategory.getAnzahlNeueArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'Datenbeschaffung pro Artikel Neuheit', 'AnzahNeueArtikel*Std_Satz/200', 10),
-(35, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Datenbeschaffung pro Lieferanten Neuheit ', '0.5*AnzahlNeueLieferanten*Std_Satz', 10),
-(36, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Preisbeschaffung (1/2 Tag)', '4*std_Satz', 11),
-(37, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Preisbechaffung pro Lieferanten Neuheit ', '0.5*AnzahlNeueLieferante*Std_Satz', 11),
-(38, 'demandCategory.getAnzahlLieferantGesamt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25', 'Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)', 'AnzahlLieferantGesamt*Std_Satz/6.25', 11),
-(39, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Preisprüfung (1/2 Tag)', '4*STd_Satz', 11),
-(40, 'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'Stammdatenpflege (ASD, Modul)', 'AnzahlGesamtArtikel*KorrekturSchlüessel*Std_Satz/200', 12),
-(41, 'demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000', 'Übersetzungsmanagement Stammdaten (1000 Art/std)', 'AnzahlGesamtArtikel*std_Satz/1000', 14),
-(42, '4.5*demandCategory.getAnzahlBeteiligten()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '4.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Abstimmungsgespräche', '4.5*AnzahlBeteiligten*Std_Satz', 27),
-(43, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ', 'Bearbeitungszeit*Anzahl_Beteiligten*Szd_Satz', 27),
-(44, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4', 'Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ', 'AnzahlBeteiligten*Bearbeitungszeit*Std_Satz/4', 27),
-(45, '0.25*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ', '0.25*Bearbeitungszeit*Std_Satz', 27),
-(46, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Projektplanung = 6 std', '6*Std_Satz', 27),
-(47, '1.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Projektvorbereitung = 1,5 std', '1.5*Std_Satz', 27),
-(48, '', 'demandCategory.getKatalogart().getValuee()', 'Pauschale Kalkulation inkl. Prüfschleife und Abstimmung GF', '12*std_Satz*KatalogartFakt*WechselfssungFaktor*AusgabeFaktor', 28),
-(49, '', 'demandCategory.getAusgabe().getValuee()', 'Nachkalkulation zur Druckvergabe', '', 28),
-(50, '', 'demandCategory.getWechselfassungVariantFaktor().getValue()', 'Bestellformular inkl. Baukastenanhang erstellen und prüfen', '', 28),
-(51, '', '', 'Planung inkl. Prüfschleifen und Freigaben', '', 28),
-(52, '', '', 'Händlerabwicklung', '', 28),
-(53, '', 'demandCategory.getTeilnehmerZahl()', 'Präsentationserstellung', '', 28),
-(54, '', 'demandCategory.getTeilnehmerZahlPricing().getPrice()', 'Händlerabwicklung', '', 28),
-(55, '', '', 'Dokumentation', NULL, 28),
-(58, '', '', 'Digitales Archiv', NULL, 28),
-(59, '', '', 'Druckformschreibung', NULL, 28),
-(60, '', '', 'Druckabnahme', NULL, 28),
-(61, '', '', 'Verarbeitungsüberwachung', NULL, 28),
-(62, '', '', 'Weiterberchnung (Vorbereitung und Durchführung)', NULL, 28),
-(63, '(3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Endabrechnung (Pauschal)', NULL, 28),
-(64, '', '', 'Erstellung und Auswertung von Befragungen (Pauschal)', NULL, 28),
-(65, '8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30', '8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30', 'Basisdatenpflege Neuheiten Information', '8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/30', 13),
-(66, '8*demandCategory.getAnzahlBestandArtikel()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', '8*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', 'Basis Datenpflege Bestand Artikel', '8*AzahlBestandArtikel*Korrektuschluessek*Prozessschluessel*Std_Satz/90', 13);
-
--- --------------------------------------------------------
+LOCK TABLES `departementcriteriaitem` WRITE;
+/*!40000 ALTER TABLE `departementcriteriaitem` DISABLE KEYS */;
+INSERT INTO `departementcriteriaitem` VALUES (1,'8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Erstellung Datenpflegeguide','8*Std_Satz',1),(2,'6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Erstellung Redaktionsguide','6*Std_Satz',1),(3,'1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Katalog Reda_Vorausgabe kopieren','1*Std_Satz',2),(4,'8*demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100','demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100','PDF-Generator Reda','8*AnzahlGesamtSeiten*Std_Satz/100 (100Seiten/Tag)',2),(5,'10*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung','10*Std_Satz',9),(6,'8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90','8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90','Klassifizierung Neuheiten Information ','8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/90',13),(7,'3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Masterlisten Prüfung','3*Std_Satz',1),(8,'8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Testdaten bereitstellen','8*Std_Satz',1),(11,'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60','0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60','Preis Artikel Reda-Online Pflege','0.3*AnzahlGesamtArtikel*Std_Satz/60 (0.3Min/Art)',3),(12,'16*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale Online Pflege(2 Tage)','16*Std_Satz ',3),(13,'demandCategory.getUmfang()*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70','8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70','PDF Generator Informatica ','8*AnzahlGesamtSeiten*Std_Satz/70 (70 Seiten/Tag)',4),(14,'0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Lieferantenkorrektur Versand','0.5*AnzahlNeueLieferante*Std_Satz',5),(15,'0.25*(demandCategory.getAnzahlMitglieder())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())','0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Mitgliederkorrektur Versand','0.25*AnzahlMitglieder*Std_Satz',5),(16,'(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)','(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)','Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte','AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10',2),(17,'(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)','(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)','Redaktionelle Textveredlung der Basistext für neue Produkte ','AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10',2),(19,'(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)','(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)','Redaktionelle Textveredlung der Basistext neue Produkte','AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/5',4),(20,'(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)','(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)','Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte','AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10',4),(21,'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10','demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10','redaktionelle Korrektur inkl. Einarbeitung LK','(AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluessel)/(10*AnzahlArtikelPerPageFaktor)',5),(22,'(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30','(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30','Korrekturlesen mit Kunden','AnzahlGesamtArtikel*Std_Satz/AnzahlArtikelPerPageFaktor*30',5),(23,'(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/10','(demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/10','Redaktionelle Korrekturlesen inkl. MK','AnzahlGesamtArtikel*MK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*10)',5),(24,'(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/15','(demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/15','Redaktionelle Korrekturlesen Digiphase','AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*15)',5),(25,'(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30','Großplott Prüfung','AnzahlGesamtArtikel*Std_Satz/(30*ArtikelperPageFaktor)',6),(26,'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Preisprüfung aus Satz, KG-Nummer, etc','2.5*AnzahlKapitel*Std_Satz',6),(27,'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Erstellung IVZ/Synonympflege','0,005*AnzahlGesamtProdukt*Std_Satz',7),(28,'1.5*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale ECC Publikationskonfigurator bei LL','1.5*8*Std_Satz',7),(29,'8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)','8*Std_Satz',7),(30,'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19','Korrektorat (P. Mensch extern)','(AnzahlGesamtseiten*Std_Satz)/19',7),(31,'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5','Übersetzungsmanagement Marketingdaten','AnzahKapitel*STd_Satz/2,5',8),(32,'4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5','Pauschale Übersetzunsmanagement ','4*Std_Satz',8),(33,'0.25*demandCategory.getAnzahlNeueProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60','0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60','Datenbeschaffung pro Produkt Neuheit','0.25*AnzahlGesamtProdukte*Std_Satz/60',10),(34,'demandCategory.getAnzahlNeueArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200','Datenbeschaffung pro Artikel Neuheit','AnzahNeueArtikel*Std_Satz/200',10),(35,'0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Datenbeschaffung pro Lieferanten Neuheit ','0.5*AnzahlNeueLieferanten*Std_Satz',10),(36,'4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale Preisbeschaffung (1/2 Tag)','4*std_Satz',11),(37,'0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Preisbechaffung pro Lieferanten Neuheit ','0.5*AnzahlNeueLieferante*Std_Satz',11),(38,'demandCategory.getAnzahlLieferantGesamt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25','Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)','AnzahlLieferantGesamt*Std_Satz/6.25',11),(39,'4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale Preisprüfung (1/2 Tag)','4*STd_Satz',11),(40,'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200','demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200','Stammdatenpflege (ASD, Modul)','AnzahlGesamtArtikel*KorrekturSchlüessel*Std_Satz/200',12),(41,'demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000','Übersetzungsmanagement Stammdaten (1000 Art/std)','AnzahlGesamtArtikel*std_Satz/1000',14),(42,'demandCategory.getAnzahlBeteiligten()','4.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Abstimmungsgespräche','4.5*AnzahlBeteiligten*Std_Satz',27),(43,'demandCategory.getBearbeitungszeit()','demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ','Bearbeitungszeit*Anzahl_Beteiligten*Szd_Satz',27),(44,'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4','demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4','Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ','AnzahlBeteiligten*Bearbeitungszeit*Std_Satz/4',27),(45,'0.25*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ','0.25*Bearbeitungszeit*Std_Satz',27),(46,'6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale Projektplanung = 6 std','6*Std_Satz',27),(47,'1.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Pauschale Projektvorbereitung = 1,5 std','1.5*Std_Satz',27),(48,'12*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()*demandCategory.getAusgabe().getValuee()*demandCategory.getWechselfassungVariantFaktor().getValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()*demandCategory.getAusgabe().getValuee()*demandCategory.getWechselfassungVariantFaktor().getValue()','Pauschale Kalkulation inkl. Prüfschleife und Abstimmung GF','12*std_Satz*KatalogartFakt*WechselfssungFaktor*AusgabeFaktor',28),(49,'6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()*demandCategory.getAusgabe().getValuee()*demandCategory.getWechselfassungVariantFaktor().getValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()*demandCategory.getAusgabe().getValuee()*demandCategory.getWechselfassungVariantFaktor().getValue()','Nachkalkulation zur Druckvergabe','6*std_Satz*KatalogartFakt*WechselfssungFaktor*AusgabeFaktor',28),(50,'3.6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getWechselfassungVariantFaktor().getValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getWechselfassungVariantFaktor().getValue()','Bestellformular inkl. Baukastenanhang erstellen und prüfen','3,6*Std_Satz*Wechselfassung_Faktor',28),(51,'8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()','Planung inkl. Prüfschleifen und Freigaben',' 8*Std_Satz *KatalogartFaktor',28),(52,'3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Händlerabwicklung',' 3*StdSatz',28),(53,'4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()','Präsentationserstellung','4*Std_Satz*KatalogartFaktor',28),(54,'0.55*demandCategory.getTeilnehmerZahl()* demandCategory.getTeilnehmerZahlPricing()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()','0.55*demandCategory.getTeilnehmerZahlPricing()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getKatalogart().getValuee()','Händlerabwicklung','0.55*TeilnehmerAnzahl * KataloartFaktor* TeilnehmerzahlFaktor * PreisproTeilnehmer (da 0,55std/Teilnehmer)',28),(55,'4*0.45*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getBearbeitungszeit()','0.45*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getBearbeitungszeit()','Dokumentation',' 4* (0,45*Std_Satz * Produktionszeit)',28),(58,'0.04*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getUmfang()','0.04*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Digitales Archiv','0,04*Std_Satz* Anzahl_Seiten_Gesamt',28),(59,'0.008*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getUmfang()','0.008*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Druckformschreibung','0,008*Std_Satz*Anzahl_Seiten_Gesamt',28),(60,'4.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getWechselfassungVariantFaktor().getValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getWechselfassungVariantFaktor().getValue()','Druckabnahme','4,5*Std_Satz * Wechselfassung_Faktor',28),(61,'5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getWechselfassungVariantFaktor().getValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getWechselfassungVariantFaktor().getValue()','Verarbeitungsüberwachung','5*Std_Satz*WechselfassungVarianteaktor',28),(62,'0.13*demandCategory.getTeilnehmerZahl()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getTeilnehmerZahlPricing()','0.13*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getTeilnehmerZahlPricing()','Weiterberchnung (Vorbereitung und Durchführung)','Anzahl_Teilnehmer * PricePerTeilnehmer(ist 0.13*std_Satz)* Teilnhemerzahl_faktor',28),(63,'3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()','Endabrechnung (Pauschal)','3*Std_Satz',28),(64,'2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getTeilnehmerZahlPricing()','configurationItemFacade.findByName(\'std_stz\').getDefaultValue()*demandCategory.getTeilnehmerZahlPricing()','Erstellung und Auswertung von Befragungen (Pauschal)','2,5* Std_Satz*TeilnehmerFaktor',28),(65,'8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30','8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30','Basisdatenpflege Neuheiten Information','8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/30',13),(66,'8*demandCategory.getAnzahlBestandArtikel()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90','8*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90','Basis Datenpflege Bestand Artikel','8*AzahlBestandArtikel*Korrektuschluessek*Prozessschluessel*Std_Satz/90',13);
+/*!40000 ALTER TABLE `departementcriteriaitem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `device`
 --
 
+DROP TABLE IF EXISTS `device`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `device` (
   `ID` bigint(20) NOT NULL,
   `BROWSER` varchar(255) DEFAULT NULL,
   `DEVICECATEGORIE` varchar(255) DEFAULT NULL,
   `OPERATINGSYSTEM` varchar(255) DEFAULT NULL,
-  `USER_LOGIN` varchar(255) DEFAULT NULL
+  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `device`
 --
 
-INSERT INTO `device` (`ID`, `BROWSER`, `DEVICECATEGORIE`, `OPERATINGSYSTEM`, `USER_LOGIN`) VALUES
-(1, 'CHROME 59.0.3071.114', 'Personal computer', 'Windows', 'walo'),
-(51, 'CHROME 59.0.3071.115', 'Personal computer', 'Windows', 'walo');
-
--- --------------------------------------------------------
+LOCK TABLES `device` WRITE;
+/*!40000 ALTER TABLE `device` DISABLE KEYS */;
+INSERT INTO `device` VALUES (1,'CHROME 59.0.3071.114','Personal computer','Windows','walo'),(51,'CHROME 59.0.3071.115','Personal computer','Windows','walo'),(101,'SAFARI 10.1.1','Personal computer','OS X','admin'),(153,'SAFARI 10.1.1','Personal computer','OS X','pm');
+/*!40000 ALTER TABLE `device` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `farbigkeit`
 --
 
+DROP TABLE IF EXISTS `farbigkeit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `farbigkeit` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `farbigkeit`
 --
 
-INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
-('1/1 -farbig', NULL, NULL),
-('2/2 -farbig', NULL, NULL),
-('3/3 -farbig', NULL, NULL),
-('4/4 c', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `farbigkeit` WRITE;
+/*!40000 ALTER TABLE `farbigkeit` DISABLE KEYS */;
+INSERT INTO `farbigkeit` VALUES ('1/1 -farbig',NULL,NULL),('2/2 -farbig',NULL,NULL),('3/3 -farbig',NULL,NULL),('4/4 c',NULL,NULL);
+/*!40000 ALTER TABLE `farbigkeit` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `formatauswaehlen`
 --
 
+DROP TABLE IF EXISTS `formatauswaehlen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `formatauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `formatauswaehlen`
 --
 
-INSERT INTO `formatauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
-('A4', NULL, NULL),
-('A5', NULL, NULL),
-('A6', NULL, NULL),
-('E5PLUS', NULL, NULL),
-('F1926', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `formatauswaehlen` WRITE;
+/*!40000 ALTER TABLE `formatauswaehlen` DISABLE KEYS */;
+INSERT INTO `formatauswaehlen` VALUES ('A4',NULL,NULL),('A5',NULL,NULL),('A6',NULL,NULL),('E5PLUS',NULL,NULL),('F1926',NULL,NULL);
+/*!40000 ALTER TABLE `formatauswaehlen` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `historiqueconnexionuser`
 --
 
+DROP TABLE IF EXISTS `historiqueconnexionuser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `historiqueconnexionuser` (
   `ID` bigint(20) NOT NULL,
   `CONNEXION` tinyint(1) DEFAULT '0',
   `DATEACTION` datetime DEFAULT NULL,
-  `USER_LOGIN` varchar(255) DEFAULT NULL
+  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `historiqueconnexionuser`
 --
 
-INSERT INTO `historiqueconnexionuser` (`ID`, `CONNEXION`, `DATEACTION`, `USER_LOGIN`) VALUES
-(2, 1, '2017-08-01 00:41:42', 'walo'),
-(52, 1, '2017-08-01 00:50:15', 'walo');
-
--- --------------------------------------------------------
+LOCK TABLES `historiqueconnexionuser` WRITE;
+/*!40000 ALTER TABLE `historiqueconnexionuser` DISABLE KEYS */;
+INSERT INTO `historiqueconnexionuser` VALUES (2,1,'2017-08-01 00:41:42','walo'),(52,1,'2017-08-01 00:50:15','walo'),(102,1,'2017-08-01 13:42:45','admin'),(151,1,'2017-08-01 13:44:15','admin'),(152,0,'2017-08-01 13:50:02','admin'),(154,1,'2017-08-01 13:50:08','pm');
+/*!40000 ALTER TABLE `historiqueconnexionuser` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `katalogart`
 --
 
+DROP TABLE IF EXISTS `katalogart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `katalogart` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(10,2) DEFAULT NULL
+  `VALUEE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `katalogart`
 --
 
-INSERT INTO `katalogart` (`ID`, `NAME`, `VALUEE`) VALUES
-(1, 'Lagerliste', '1.00'),
-(2, 'E/D/E Katalog', '1.10'),
-(3, 'Individueller Katalog', '1.15'),
-(4, 'Fremdsprachen Katalog', '1.00'),
-(51, 'Preisliste', '1.00');
-
--- --------------------------------------------------------
+LOCK TABLES `katalogart` WRITE;
+/*!40000 ALTER TABLE `katalogart` DISABLE KEYS */;
+INSERT INTO `katalogart` VALUES (1,'Lagerliste',1.00),(2,'E/D/E Katalog',1.10),(3,'Individueller Katalog',1.15),(4,'Fremdsprachen Katalog',1.00),(51,'Preisliste',1.00);
+/*!40000 ALTER TABLE `katalogart` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `konzeptbearbeitungfaktor`
 --
 
+DROP TABLE IF EXISTS `konzeptbearbeitungfaktor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `konzeptbearbeitungfaktor` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EXPRESSION` varchar(255) DEFAULT NULL,
-  `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `WERT` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `konzeptbearbeitungfaktor`
 --
 
-INSERT INTO `konzeptbearbeitungfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
-(1, 'Ja', '1.35'),
-(2, 'Nein', '1.00');
-
--- --------------------------------------------------------
+LOCK TABLES `konzeptbearbeitungfaktor` WRITE;
+/*!40000 ALTER TABLE `konzeptbearbeitungfaktor` DISABLE KEYS */;
+INSERT INTO `konzeptbearbeitungfaktor` VALUES (1,'Ja',1.35),(2,'Nein',1.00);
+/*!40000 ALTER TABLE `konzeptbearbeitungfaktor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `layout`
 --
 
+DROP TABLE IF EXISTS `layout`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `layout` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(10,2) DEFAULT NULL
+  `VALUEE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `layout`
 --
 
-INSERT INTO `layout` (`ID`, `NAME`, `VALUEE`) VALUES
-(1, 'Einfach', '1.00'),
-(2, 'Standard', '1.10'),
-(3, 'Komplex', '1.15'),
-(52, 'individuelles', '1.70');
-
--- --------------------------------------------------------
+LOCK TABLES `layout` WRITE;
+/*!40000 ALTER TABLE `layout` DISABLE KEYS */;
+INSERT INTO `layout` VALUES (1,'Einfach',1.00),(2,'Standard',1.10),(3,'Komplex',1.15),(52,'individuelles',1.70);
+/*!40000 ALTER TABLE `layout` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `layoutpricing`
 --
 
+DROP TABLE IF EXISTS `layoutpricing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `layoutpricing` (
   `ID` bigint(20) NOT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL,
   `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL,
-  `LAYOUT_ID` bigint(20) DEFAULT NULL
+  `LAYOUT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` (`DEPARTEMENTCRITERIAITEM_ID`),
+  KEY `FK_LAYOUTPRICING_LAYOUT_ID` (`LAYOUT_ID`),
+  CONSTRAINT `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
+  CONSTRAINT `FK_LAYOUTPRICING_LAYOUT_ID` FOREIGN KEY (`LAYOUT_ID`) REFERENCES `layout` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `layoutpricing`
+--
+
+LOCK TABLES `layoutpricing` WRITE;
+/*!40000 ALTER TABLE `layoutpricing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `layoutpricing` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `mitgliederkorrekturfaktor`
 --
 
+DROP TABLE IF EXISTS `mitgliederkorrekturfaktor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mitgliederkorrekturfaktor` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EXPRESSION` varchar(255) DEFAULT NULL,
-  `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `WERT` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mitgliederkorrekturfaktor`
 --
 
-INSERT INTO `mitgliederkorrekturfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
-(2, 'Ja', '1.05'),
-(3, 'Nein', '1.00');
-
--- --------------------------------------------------------
+LOCK TABLES `mitgliederkorrekturfaktor` WRITE;
+/*!40000 ALTER TABLE `mitgliederkorrekturfaktor` DISABLE KEYS */;
+INSERT INTO `mitgliederkorrekturfaktor` VALUES (2,'Ja',1.05),(3,'Nein',1.00);
+/*!40000 ALTER TABLE `mitgliederkorrekturfaktor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `papiermaterialauswaehlen`
 --
 
+DROP TABLE IF EXISTS `papiermaterialauswaehlen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `papiermaterialauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `papiermaterialauswaehlen`
 --
 
-INSERT INTO `papiermaterialauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
-('65 g/qm', NULL, NULL),
-('70 g/qm', NULL, NULL),
-('80 g/qm', NULL, NULL),
-('85 g/qm', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `papiermaterialauswaehlen` WRITE;
+/*!40000 ALTER TABLE `papiermaterialauswaehlen` DISABLE KEYS */;
+INSERT INTO `papiermaterialauswaehlen` VALUES ('65 g/qm',NULL,NULL),('70 g/qm',NULL,NULL),('80 g/qm',NULL,NULL),('85 g/qm',NULL,NULL);
+/*!40000 ALTER TABLE `papiermaterialauswaehlen` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `participantfaktor`
 --
 
+DROP TABLE IF EXISTS `participantfaktor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participantfaktor` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `PERCENT` int(11) DEFAULT NULL,
-  `WERT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `WERT` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `participantfaktor`
 --
 
-INSERT INTO `participantfaktor` (`ID`, `PERCENT`, `WERT`) VALUES
-(1, 20, '1.00'),
-(2, 21, '1.00'),
-(3, 36, '1.00');
-
--- --------------------------------------------------------
+LOCK TABLES `participantfaktor` WRITE;
+/*!40000 ALTER TABLE `participantfaktor` DISABLE KEYS */;
+INSERT INTO `participantfaktor` VALUES (1,20,1.00),(2,21,1.00),(3,36,1.00);
+/*!40000 ALTER TABLE `participantfaktor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `product`
 --
 
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `CATEGORY_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_PRODUCT_CATEGORY_ID` (`CATEGORY_ID`),
+  CONSTRAINT `FK_PRODUCT_CATEGORY_ID` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
-(1, NULL, 'Premium EWZ', 1),
-(2, NULL, 'Fortis WZ', 1),
-(3, NULL, 'Industrietechnik', 1),
-(4, NULL, 'Baugerät', 1),
-(5, NULL, 'LL Gartentechnik', 1),
-(6, NULL, 'Plus1 Nachdruck', 1),
-(7, '', 'Haustechnik 2017', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,NULL,'Premium EWZ',1),(2,NULL,'Fortis WZ',1),(3,NULL,'Industrietechnik',1),(4,NULL,'Baugerät',1),(5,NULL,'LL Gartentechnik',1),(6,NULL,'Plus1 Nachdruck',1),(7,'','Haustechnik 2017',1);
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `prozess`
 --
 
+DROP TABLE IF EXISTS `prozess`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `prozess` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `VALUEE` decimal(10,2) DEFAULT NULL
+  `VALUEE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `prozess`
 --
 
-INSERT INTO `prozess` (`ID`, `NAME`, `VALUEE`) VALUES
-(5, 'Proz.Neu / Tech.Alt', '1.20'),
-(6, 'Prozess.Neu / Tech.Neu', '1.00');
-
--- --------------------------------------------------------
+LOCK TABLES `prozess` WRITE;
+/*!40000 ALTER TABLE `prozess` DISABLE KEYS */;
+INSERT INTO `prozess` VALUES (5,'Proz.Neu / Tech.Alt',1.20),(6,'Prozess.Neu / Tech.Neu',1.00);
+/*!40000 ALTER TABLE `prozess` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `question`
 --
 
+DROP TABLE IF EXISTS `question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question` (
   `ID` bigint(20) NOT NULL,
   `QUESTION` varchar(255) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
-  `USER_LOGIN` varchar(255) DEFAULT NULL
+  `USER_LOGIN` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `question`
 --
 
-INSERT INTO `question` (`ID`, `QUESTION`, `REPONSE`, `USER_LOGIN`) VALUES
-(1, 'your city', 'rabat', 'walo'),
-(2, 'your city', 'rabat', 'walo'),
-(3, 'your city', 'rabat', 'walo');
-
--- --------------------------------------------------------
+LOCK TABLES `question` WRITE;
+/*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` VALUES (1,'your city','rabat','walo'),(2,'your city','rabat','walo'),(3,'your city','rabat','walo');
+/*!40000 ALTER TABLE `question` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `register`
 --
 
+DROP TABLE IF EXISTS `register`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `register` (
   `ID` bigint(20) NOT NULL,
   `EXPRESSION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`ID`, `EXPRESSION`, `PRICE`) VALUES
-(51, 'Falls Register ausgewählt= 1 Euro*Auflage', '1.00');
-
--- --------------------------------------------------------
+LOCK TABLES `register` WRITE;
+/*!40000 ALTER TABLE `register` DISABLE KEYS */;
+INSERT INTO `register` VALUES (51,'Falls Register ausgewählt= 1 Euro*Auflage',1.00);
+/*!40000 ALTER TABLE `register` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `schluessel`
 --
 
+DROP TABLE IF EXISTS `schluessel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schluessel` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
   `WERT` decimal(10,2) DEFAULT NULL,
-  `SCHLUESSELTYPE_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `SCHLUESSELTYPE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` (`SCHLUESSELTYPE_ID`),
+  CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `schluessel`
 --
 
-INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_ID`) VALUES
-(1, 'Hier soll BIld oder Beschreibung', 'Einfach', '1.00', 2),
-(2, 'Hier soll BIld oder Beschreibung', 'Standard', '1.00', 2),
-(3, 'Hier soll BIld oder Beschreibung', 'Komplex', '1.00', 2),
-(4, 'Hier soll BIld oder Beschreibung', 'Erstausgabe', '1.00', 1),
-(5, 'Hier soll BIld oder Beschreibung', 'Folgeausgabe', '0.00', 1),
-(6, 'Hier soll BIld oder Beschreibung', 'Lagerliste', '1.00', 3),
-(7, 'Hier soll BIld oder Beschreibung', 'E/D/E Katalog', '1.00', 3),
-(8, 'Hier soll BIld oder Beschreibung', 'Individueller Katalog', '1.00', 3),
-(9, 'Hier soll BIld oder Beschreibung', 'Fremdsprachen-Katalog', '1.00', 3),
-(10, NULL, 'Proz.neu / Tech. Alt', '1.00', 4),
-(11, NULL, 'Proz.neu / Tech.Neu', '1.00', 4),
-(12, NULL, 'Datenmanagemnt', '56.00', 5),
-(13, NULL, 'Contentmanagement', '56.00', 5),
-(14, NULL, 'Assetmanagement', '56.00', 5),
-(15, NULL, 'Allgemein', '56.00', 5),
-(16, 'rettest', '', '1.00', 6);
-
--- --------------------------------------------------------
+LOCK TABLES `schluessel` WRITE;
+/*!40000 ALTER TABLE `schluessel` DISABLE KEYS */;
+INSERT INTO `schluessel` VALUES (1,'Hier soll BIld oder Beschreibung','Einfach',1.00,2),(2,'Hier soll BIld oder Beschreibung','Standard',1.00,2),(3,'Hier soll BIld oder Beschreibung','Komplex',1.00,2),(4,'Hier soll BIld oder Beschreibung','Erstausgabe',1.00,1),(5,'Hier soll BIld oder Beschreibung','Folgeausgabe',0.00,1),(6,'Hier soll BIld oder Beschreibung','Lagerliste',1.00,3),(7,'Hier soll BIld oder Beschreibung','E/D/E Katalog',1.00,3),(8,'Hier soll BIld oder Beschreibung','Individueller Katalog',1.00,3),(9,'Hier soll BIld oder Beschreibung','Fremdsprachen-Katalog',1.00,3),(10,NULL,'Proz.neu / Tech. Alt',1.00,4),(11,NULL,'Proz.neu / Tech.Neu',1.00,4),(12,NULL,'Datenmanagemnt',56.00,5),(13,NULL,'Contentmanagement',56.00,5),(14,NULL,'Assetmanagement',56.00,5),(15,NULL,'Allgemein',56.00,5),(16,'rettest','',1.00,6);
+/*!40000 ALTER TABLE `schluessel` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `schluesseltype`
 --
 
+DROP TABLE IF EXISTS `schluesseltype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schluesseltype` (
-  `ID` bigint(20) NOT NULL,
-  `NAME` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `schluesseltype`
 --
 
-INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
-(1, 'Ausgabe'),
-(2, 'Layout'),
-(3, 'Katalogart'),
-(4, 'Prozess/Technik'),
-(5, 'Kostenschlüssel'),
-(6, 'taoufik_key');
-
--- --------------------------------------------------------
+LOCK TABLES `schluesseltype` WRITE;
+/*!40000 ALTER TABLE `schluesseltype` DISABLE KEYS */;
+INSERT INTO `schluesseltype` VALUES (1,'Ausgabe'),(2,'Layout'),(3,'Katalogart'),(4,'Prozess/Technik'),(5,'Kostenschlüssel'),(6,'taoufik_key');
+/*!40000 ALTER TABLE `schluesseltype` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `seiten`
 --
 
+DROP TABLE IF EXISTS `seiten`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seiten` (
-  `ID` bigint(20) NOT NULL,
-  `NBREPAGE` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NBREPAGE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `seiten`
 --
 
-INSERT INTO `seiten` (`ID`, `NBREPAGE`) VALUES
-(78, 1),
-(79, 2),
-(80, 4),
-(81, 8),
-(82, 16),
-(83, 24),
-(84, 32),
-(85, 64),
-(86, 80),
-(87, 100),
-(88, 148),
-(89, 200),
-(90, 244),
-(91, 300),
-(92, 324),
-(93, 400),
-(94, 452),
-(95, 500),
-(96, 548),
-(97, 600),
-(98, 644),
-(99, 700),
-(100, 752),
-(101, 800),
-(102, 852),
-(103, 900),
-(104, 964),
-(105, 1000),
-(106, 1056),
-(107, 1104),
-(108, 1152),
-(109, 1200),
-(110, 1264),
-(111, 1312),
-(112, 1360),
-(113, 1408),
-(114, 1472),
-(115, 1504),
-(116, 1568),
-(117, 1600),
-(118, 1680),
-(119, 1760);
-
--- --------------------------------------------------------
+LOCK TABLES `seiten` WRITE;
+/*!40000 ALTER TABLE `seiten` DISABLE KEYS */;
+INSERT INTO `seiten` VALUES (78,1),(79,2),(80,4),(81,8),(82,16),(83,24),(84,32),(85,64),(86,80),(87,100),(88,148),(89,200),(90,244),(91,300),(92,324),(93,400),(94,452),(95,500),(96,548),(97,600),(98,644),(99,700),(100,752),(101,800),(102,852),(103,900),(104,964),(105,1000),(106,1056),(107,1104),(108,1152),(109,1200),(110,1264),(111,1312),(112,1360),(113,1408),(114,1472),(115,1504),(116,1568),(117,1600),(118,1680),(119,1760);
+/*!40000 ALTER TABLE `seiten` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `sequence`
 --
 
+DROP TABLE IF EXISTS `sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sequence` (
   `SEQ_NAME` varchar(50) NOT NULL,
-  `SEQ_COUNT` decimal(38,0) DEFAULT NULL
+  `SEQ_COUNT` decimal(38,0) DEFAULT NULL,
+  PRIMARY KEY (`SEQ_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sequence`
 --
 
-INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '100');
-
--- --------------------------------------------------------
+LOCK TABLES `sequence` WRITE;
+/*!40000 ALTER TABLE `sequence` DISABLE KEYS */;
+INSERT INTO `sequence` VALUES ('SEQ_GEN',200);
+/*!40000 ALTER TABLE `sequence` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `sortiment`
 --
 
+DROP TABLE IF EXISTS `sortiment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sortiment` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ARTIKELPERPAGE` decimal(10,2) DEFAULT NULL,
   `LKSCHLUESSEL` decimal(10,2) DEFAULT NULL,
   `MKSCHLUESSEL` decimal(10,2) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
-  `PRODUCTSCHLUESSEL` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `PRODUCTSCHLUESSEL` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sortiment`
 --
 
-INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`, `NAME`, `PRODUCTSCHLUESSEL`) VALUES
-(1, '15.80', '1.10', '1.05', 'Arbeitsschutz', '4.70'),
-(2, '16.10', '1.00', '1.00', 'Baubeschläge', '4.80'),
-(3, '8.40', '1.00', '1.00', 'Baugeräte', '2.50'),
-(4, '26.90', '1.00', '1.00', 'Befestigungstechnik', '8.00'),
-(5, '12.10', '1.10', '1.05', 'Betriebseinrichtungen', '3.60'),
-(6, '5.38', '1.15', '1.08', 'Elektrowerkzeuge', '1.60'),
-(7, '5.70', '1.00', '1.00', 'Gartentechnik', '2.00'),
-(8, '11.10', '1.00', '1.01', 'Handwerkzeuge', '3.30'),
-(9, '6.10', '1.00', '1.00', 'Haustechnik/Innendeko/Elektroinstallation', '1.80'),
-(10, '17.50', '1.00', '1.00', 'Industrietechnik', '5.20'),
-(11, '9.10', '1.00', '1.00', 'Möbelbeschläge', '2.70'),
-(12, '10.00', '1.05', '1.03', 'Präzisionswerkzeuge', '7.60'),
-(13, '9.10', '1.08', '1.04', 'Schweißtechnik', '2.70'),
-(14, '12.40', '1.00', '1.00', 'Verpackungen', '3.70'),
-(15, '5.70', '1.05', '1.05', 'Werkstattmaterial', '1.70'),
-(16, '11.10', '1.03', '1.01', 'Werkzeuge Holzbearbeitung', '3.30'),
-(17, '11.10', '1.03', '1.01', 'Werkzeuge Metallbearbeitung', '3.30');
-
--- --------------------------------------------------------
+LOCK TABLES `sortiment` WRITE;
+/*!40000 ALTER TABLE `sortiment` DISABLE KEYS */;
+INSERT INTO `sortiment` VALUES (1,15.80,1.10,1.05,'Arbeitsschutz',4.70),(2,16.10,1.00,1.00,'Baubeschläge',4.80),(3,8.40,1.00,1.00,'Baugeräte',2.50),(4,26.90,1.00,1.00,'Befestigungstechnik',8.00),(5,12.10,1.10,1.05,'Betriebseinrichtungen',3.60),(6,5.38,1.15,1.08,'Elektrowerkzeuge',1.60),(7,5.70,1.00,1.00,'Gartentechnik',2.00),(8,11.10,1.00,1.01,'Handwerkzeuge',3.30),(9,6.10,1.00,1.00,'Haustechnik/Innendeko/Elektroinstallation',1.80),(10,17.50,1.00,1.00,'Industrietechnik',5.20),(11,9.10,1.00,1.00,'Möbelbeschläge',2.70),(12,10.00,1.05,1.03,'Präzisionswerkzeuge',7.60),(13,9.10,1.08,1.04,'Schweißtechnik',2.70),(14,12.40,1.00,1.00,'Verpackungen',3.70),(15,5.70,1.05,1.05,'Werkstattmaterial',1.70),(16,11.10,1.03,1.01,'Werkzeuge Holzbearbeitung',3.30),(17,11.10,1.03,1.01,'Werkzeuge Metallbearbeitung',3.30);
+/*!40000 ALTER TABLE `sortiment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `sotimentitem`
 --
 
+DROP TABLE IF EXISTS `sotimentitem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sotimentitem` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `WERT` decimal(10,2) DEFAULT NULL,
   `DEMANDCATEGORY_ID` bigint(20) DEFAULT NULL,
-  `SORTIMENT_ID` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `SORTIMENT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_SOTIMENTITEM_SORTIMENT_ID` (`SORTIMENT_ID`),
+  KEY `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`),
+  CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
+  CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sotimentitem`
 --
 
-INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) VALUES
-(47, '10.00', 24, 1),
-(48, '90.00', 24, 3),
-(49, '100.00', 26, 3),
-(50, '100.00', 27, 2),
-(52, '100.00', 29, 1),
-(53, '100.00', 30, 1),
-(55, '100.00', 32, 1),
-(56, '100.00', 33, 1),
-(57, '100.00', 34, 1),
-(58, '100.00', 35, 1),
-(59, '100.00', 36, 3),
-(60, '100.00', 37, 3),
-(61, '100.00', 38, 3),
-(62, '100.00', 39, 4),
-(64, '100.00', 41, 2),
-(65, '100.00', 42, 7),
-(66, '100.00', 43, 9),
-(67, '100.00', 44, 9),
-(68, '100.00', 45, 3),
-(69, '100.00', 46, 6),
-(70, '100.00', 47, 6),
-(71, '100.00', 48, 6),
-(72, '100.00', 49, 4),
-(73, '100.00', 50, 4),
-(74, '100.00', 51, 5),
-(75, '10.00', 52, 6),
-(76, '90.00', 52, 5),
-(77, '100.00', 53, 3),
-(81, '100.00', 57, 2),
-(82, '100.00', 58, 4),
-(83, '100.00', 59, 3),
-(84, '100.00', 60, 4),
-(85, '100.00', 61, 10),
-(86, '100.00', 62, 4),
-(87, '100.00', 63, 6),
-(89, '100.00', 65, 6),
-(90, '100.00', 66, 6),
-(93, '100.00', 69, 6),
-(95, '100.00', 71, 3),
-(96, '100.00', 72, 3),
-(97, '100.00', 73, 3),
-(100, '100.00', 76, 5),
-(101, '100.00', 77, 5),
-(102, '100.00', 78, 5),
-(103, '100.00', 79, 5),
-(104, '100.00', 80, 5),
-(105, '100.00', 81, 5),
-(115, '100.00', 91, 3),
-(116, '100.00', 92, 4),
-(117, '90.00', 93, 5),
-(118, '10.00', 93, 4),
-(119, '100.00', 94, 5),
-(121, '100.00', 96, 5),
-(122, '40.00', 97, 5),
-(123, '60.00', 97, 4),
-(124, '100.00', 98, 6),
-(125, '100.00', 99, 4),
-(126, '100.00', 100, 5),
-(127, '100.00', 101, 5),
-(128, '100.00', 102, 5),
-(129, '100.00', 103, 9),
-(130, '100.00', 104, 9),
-(132, '100.00', 106, 9),
-(133, '100.00', 107, 9),
-(138, '100.00', 112, 9),
-(139, '100.00', 113, 1),
-(140, '100.00', 114, 1),
-(141, '100.00', 115, 2),
-(142, '100.00', 116, 4),
-(143, '100.00', 117, 4),
-(144, '100.00', 118, 4),
-(145, '100.00', 119, 4),
-(146, '100.00', 120, 4),
-(147, '100.00', 121, 3),
-(149, '100.00', 123, 5),
-(150, '100.00', 124, 5),
-(155, '100.00', 129, 9),
-(156, '100.00', 130, 2),
-(157, '100.00', 131, 5),
-(158, '50.00', 132, 8),
-(159, '50.00', 132, 6);
-
--- --------------------------------------------------------
+LOCK TABLES `sotimentitem` WRITE;
+/*!40000 ALTER TABLE `sotimentitem` DISABLE KEYS */;
+INSERT INTO `sotimentitem` VALUES (57,100.00,34,1),(58,100.00,35,1),(62,100.00,39,4),(64,100.00,41,2),(65,100.00,42,7),(66,100.00,43,9),(67,100.00,44,9),(68,100.00,45,3),(71,100.00,48,6),(72,100.00,49,4),(73,100.00,50,4),(74,100.00,51,5),(75,10.00,52,6),(76,90.00,52,5),(77,100.00,53,3),(81,100.00,57,2),(82,100.00,58,4),(83,100.00,59,3),(93,100.00,69,6),(95,100.00,71,3),(96,100.00,72,3),(97,100.00,73,3),(100,100.00,76,5),(105,100.00,81,5),(117,90.00,93,5),(118,10.00,93,4),(119,100.00,94,5),(121,100.00,96,5),(122,40.00,97,5),(123,60.00,97,4),(124,100.00,98,6),(125,100.00,99,4),(129,100.00,103,9),(132,100.00,106,9),(133,100.00,107,9),(157,100.00,131,5),(160,100.00,133,10);
+/*!40000 ALTER TABLE `sotimentitem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `teilnehmerzahlpricing`
 --
 
+DROP TABLE IF EXISTS `teilnehmerzahlpricing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teilnehmerzahlpricing` (
   `ID` bigint(20) NOT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL,
   `TEILNEHMERZAHLMAX` int(11) DEFAULT NULL,
   `TEILNEHMERZAHLMAXOPERATOR` varchar(255) DEFAULT NULL,
   `TEILNEHMERZAHLMIN` int(11) DEFAULT NULL,
-  `TEILNEHMERZAHLMINOPERATOR` varchar(255) DEFAULT NULL
+  `TEILNEHMERZAHLMINOPERATOR` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `teilnehmerzahlpricing`
 --
 
-INSERT INTO `teilnehmerzahlpricing` (`ID`, `PRICE`, `TEILNEHMERZAHLMAX`, `TEILNEHMERZAHLMAXOPERATOR`, `TEILNEHMERZAHLMIN`, `TEILNEHMERZAHLMINOPERATOR`) VALUES
-(1, '1.00', 20, '<=', 0, '>='),
-(2, '1.20', 35, '<=', 20, '>'),
-(3, '1.35', 100000, '<=', 35, '>');
-
--- --------------------------------------------------------
+LOCK TABLES `teilnehmerzahlpricing` WRITE;
+/*!40000 ALTER TABLE `teilnehmerzahlpricing` DISABLE KEYS */;
+INSERT INTO `teilnehmerzahlpricing` VALUES (1,1.00,20,'<=',0,'>='),(2,1.20,35,'<=',20,'>'),(3,1.35,100000,'<=',35,'>');
+/*!40000 ALTER TABLE `teilnehmerzahlpricing` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `umschlagfarbigkeit`
 --
 
+DROP TABLE IF EXISTS `umschlagfarbigkeit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `umschlagfarbigkeit` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LABEL` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `umschlagfarbigkeit`
 --
 
-INSERT INTO `umschlagfarbigkeit` (`ID`, `DESCRIPTION`, `LABEL`, `PRICE`) VALUES
-(1, NULL, '1/0-fbg. Skala', '92.03'),
-(2, NULL, '1/0-Sonderfarbe', '92.03'),
-(3, NULL, '2/0-fbg. Skala', '168.72'),
-(4, NULL, '2/0-fbg. Skala+1 Sonderfarbe', '168.72'),
-(5, NULL, '3/0-fbg. Skala', '245.41'),
-(6, NULL, '3/0-fbg. Skala+1 Sonderfarbe', '245.41'),
-(7, NULL, '4/0-fbg. Skala', '322.10'),
-(8, NULL, '4/1-fbg. Skala', '414.13'),
-(9, NULL, '4/2-fbg. Skala', '490.82'),
-(10, NULL, '5/0-fbg. Skala+1 Sonderfarbe', '398.79'),
-(11, NULL, '6/0-fbg. Skala+2 Sonderfarbe', '475.48');
-
--- --------------------------------------------------------
+LOCK TABLES `umschlagfarbigkeit` WRITE;
+/*!40000 ALTER TABLE `umschlagfarbigkeit` DISABLE KEYS */;
+INSERT INTO `umschlagfarbigkeit` VALUES (1,NULL,'1/0-fbg. Skala',92.03),(2,NULL,'1/0-Sonderfarbe',92.03),(3,NULL,'2/0-fbg. Skala',168.72),(4,NULL,'2/0-fbg. Skala+1 Sonderfarbe',168.72),(5,NULL,'3/0-fbg. Skala',245.41),(6,NULL,'3/0-fbg. Skala+1 Sonderfarbe',245.41),(7,NULL,'4/0-fbg. Skala',322.10),(8,NULL,'4/1-fbg. Skala',414.13),(9,NULL,'4/2-fbg. Skala',490.82),(10,NULL,'5/0-fbg. Skala+1 Sonderfarbe',398.79),(11,NULL,'6/0-fbg. Skala+2 Sonderfarbe',475.48);
+/*!40000 ALTER TABLE `umschlagfarbigkeit` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `umschlagpapierauswaehlen`
 --
 
+DROP TABLE IF EXISTS `umschlagpapierauswaehlen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `umschlagpapierauswaehlen` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `umschlagpapierauswaehlen`
+--
+
+LOCK TABLES `umschlagpapierauswaehlen` WRITE;
+/*!40000 ALTER TABLE `umschlagpapierauswaehlen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `umschlagpapierauswaehlen` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `LOGIN` varchar(255) NOT NULL,
   `ADMIN` int(11) DEFAULT NULL,
@@ -1402,660 +1319,79 @@ CREATE TABLE `user` (
   `PASSWORD` varchar(255) DEFAULT NULL,
   `PRENOM` varchar(255) DEFAULT NULL,
   `TEL` varchar(255) DEFAULT NULL,
-  `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
+  `DEPARTEMENT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`LOGIN`),
+  KEY `FK_USER_DEPARTEMENT_ID` (`DEPARTEMENT_ID`),
+  CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
-('admin', 1, 0, 'admin@ede.de', 1, 0, 'Admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin', '012345', NULL),
-('ana', 0, 0, 'ana', 1, 0, 'ana', 'b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64', 'ana', '00000', 1),
-('anas', 0, 0, 'user@gmail.com', 1, 0, 'anas', 'c157889e0fd5d7fc0d9a8d951fd64604ebeeb441de6519433dd8f931493dd5da', 'anas', '06', 1),
-('assetmanagement', 0, 0, '', 1, 0, 'assetmanagement', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', 5),
-('CM_user', 0, 0, 'CM_user@ede.de', 1, 0, 'CM_user', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'CM_user', '01234567', 1),
-('contentmanagement_user', 0, 0, 'xy@ede.de', 1, 0, 'x', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'y', '012356', 1),
-('datamanagement', 0, 0, '', 1, 0, 'user', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '', '', 2),
-('dmd', 0, 0, '', 1, 2, 'dm', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '', '', 2),
-('DTP_user', 0, 0, 'DTP_user@ede.de', 1, 0, 'DTP_user', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '01234567', 3),
-('kiki', 1, 0, 'kiki', 1, 0, 'kiki', '888da5db853449fff82b07cbdbf7c755ece0783aa670bb36cc5c4cc9a68fb864', 'kiki', 'kiki', NULL),
-('kkk', 0, 0, 'k', 0, 0, 'kkkk', '503afc4bd66d51aeda05cbcdbf07ad0d560d03fe0819f365629c48299e92b539', 'k', 'k', NULL),
-('mediIT', 0, 0, 'mediIT@ede.de', 1, 0, '', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '', '', 6),
-('pm', 0, 0, 'pm@ede.de', 1, 0, 'pm', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'pm', '123456', 4),
-('walo', 1, 0, 'walo', 1, 0, 'walo', '41d119f6079d09b46a5c950a03b455c99ec6c9b6f1726401a52c85d0b17d4b54', 'walo', '00000', NULL),
-('younes', 1, 0, 'younes@gmail.com', 1, 0, 'zouani', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'younes', '06', 1);
-
--- --------------------------------------------------------
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('admin',1,0,'admin@ede.de',1,0,'Admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','Admin','012345',NULL),('ana',0,0,'ana',1,0,'ana','b6d4a89ccde3fb8fc69865ac105801287867cf735adf0b8bbca86ee9186f7b64','ana','00000',1),('anas',0,0,'user@gmail.com',1,0,'anas','c157889e0fd5d7fc0d9a8d951fd64604ebeeb441de6519433dd8f931493dd5da','anas','06',1),('assetmanagement',0,0,'',1,0,'assetmanagement','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5','','',5),('CM_user',0,0,'CM_user@ede.de',1,0,'CM_user','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5','CM_user','01234567',1),('contentmanagement_user',0,0,'xy@ede.de',1,0,'x','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5','y','012356',1),('datamanagement',0,0,'',1,0,'user','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','','',2),('dmd',0,0,'',1,2,'dm','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','','',2),('DTP_user',0,0,'DTP_user@ede.de',1,0,'DTP_user','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5','','01234567',3),('kiki',1,0,'kiki',1,0,'kiki','888da5db853449fff82b07cbdbf7c755ece0783aa670bb36cc5c4cc9a68fb864','kiki','kiki',NULL),('kkk',0,0,'k',0,0,'kkkk','503afc4bd66d51aeda05cbcdbf07ad0d560d03fe0819f365629c48299e92b539','k','k',NULL),('mediIT',0,0,'mediIT@ede.de',1,0,'','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5','','',6),('pm',0,0,'pm@ede.de',1,0,'pm','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5','pm','123456',4),('walo',1,0,'walo',1,0,'walo','41d119f6079d09b46a5c950a03b455c99ec6c9b6f1726401a52c85d0b17d4b54','walo','00000',NULL),('younes',1,0,'younes@gmail.com',1,0,'zouani','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','younes','06',1);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `veredlung`
 --
 
+DROP TABLE IF EXISTS `veredlung`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `veredlung` (
   `ID` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
-  `PRICE` decimal(10,2) DEFAULT NULL
+  `PRICE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `veredlung`
+--
+
+LOCK TABLES `veredlung` WRITE;
+/*!40000 ALTER TABLE `veredlung` DISABLE KEYS */;
+/*!40000 ALTER TABLE `veredlung` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `wechselfassungvariantfaktor`
 --
 
+DROP TABLE IF EXISTS `wechselfassungvariantfaktor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wechselfassungvariantfaktor` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `EXPRESSION` varchar(255) DEFAULT NULL,
-  `VALUE` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `VALUE` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `wechselfassungvariantfaktor`
 --
 
-INSERT INTO `wechselfassungvariantfaktor` (`ID`, `EXPRESSION`, `VALUE`) VALUES
-(1, 'Ja', '1.20'),
-(2, 'Nein', '1.00');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `artderweiterverarbeitung`
---
-ALTER TABLE `artderweiterverarbeitung`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `auflage`
---
-ALTER TABLE `auflage`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `auflageseitencovermatrix`
---
-ALTER TABLE `auflageseitencovermatrix`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` (`SEITEN_ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` (`AUFLAGE_ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_FARBIGKEIT_ID` (`FARBIGKEIT_ID`),
-  ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_BAUKASTEN_ID` (`BAUKASTEN_ID`);
-
---
--- Indexes for table `ausgabe`
---
-ALTER TABLE `ausgabe`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `backup`
---
-ALTER TABLE `backup`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `baukasten`
---
-ALTER TABLE `baukasten`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `bindung`
---
-ALTER TABLE `bindung`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `configuration`
---
-ALTER TABLE `configuration`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `configurationitem`
---
-ALTER TABLE `configurationitem`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_CONFIGURATIONITEM_CONFIGURATION_ID` (`CONFIGURATION_ID`);
-
---
--- Indexes for table `correctionschluessel`
---
-ALTER TABLE `correctionschluessel`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `cover`
---
-ALTER TABLE `cover`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `demandcategory`
---
-ALTER TABLE `demandcategory`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_DEMANDCATEGORY_PROZESS_ID` (`PROZESS_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_REGISTER_ID` (`REGISTER_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` (`CORRECTIONSCHLUESSEL_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_PRODUCT_ID` (`PRODUCT_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_CATEGORY_ID` (`CATEGORY_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_DEPARTMENT_ID` (`DEPARTMENT_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` (`KONZEPTBEARBEITUNGFAKTOR_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_VEREDLUNG_ID` (`VEREDLUNG_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_COVER_ID` (`COVER_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` (`PARTICIPANTFAKTOR_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_LAYOUT_ID` (`LAYOUT_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_DRUCKSEITEN_ID` (`DRUCKSEITEN_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_MITGLIEDERKORREKTURFAKTOR_ID` (`MITGLIEDERKORREKTURFAKTOR_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_USER_LOGIN` (`USER_LOGIN`),
-  ADD KEY `FK_DEMANDCATEGORY_BAUKASTEN_ID` (`BAUKASTEN_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_KATALOGART_ID` (`KATALOGART_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` (`FORMATAUSWAEHLEN_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_SCHLUESSEL_ID` (`SCHLUESSEL_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` (`ARTDERWEITERVERARBEITUNG_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_AUFLAGE_ID` (`AUFLAGE_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` (`UMSCHLAGPAPIERAUSWAEHLEN_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_BINDUNG_ID` (`BINDUNG_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` (`PAPIERMATERIALAUSWAEHLEN_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` (`UMSCHLAGFARBIGKEIT_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` (`WECHSELFASSUNGVARIANTFAKTOR_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_AUSGABE_ID` (`AUSGABE_ID`),
-  ADD KEY `FK_DEMANDCATEGORY_FARBIGKEIT_ID` (`FARBIGKEIT_ID`);
-
---
--- Indexes for table `demandcategorycalculation`
---
-ALTER TABLE `demandcategorycalculation`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `DMNDCTGRYCLCULATIONDMNDCTGRYDPRTEMENTCALCULATIONID` (`DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`),
-  ADD KEY `DEMANDCATEGORYCALCULATION_DEPARTEMENTCRITERIA_ID` (`DEPARTEMENTCRITERIA_ID`);
-
---
--- Indexes for table `demandcategorycalculationitem`
---
-ALTER TABLE `demandcategorycalculationitem`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `DMNDCATEGORYCALCULATIONITEMDPRTEMENTCRITERIAITEMID` (`DEPARTEMENTCRITERIAITEM_ID`),
-  ADD KEY `DMNDCTEGORYCALCULATIONITEMDMNDCTEGORYCALCULATIONID` (`DEMANDCATEGORYCALCULATION_ID`);
-
---
--- Indexes for table `demandcategorydepartementcalculation`
---
-ALTER TABLE `demandcategorydepartementcalculation`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` (`DEMANDCATEGORY_ID`),
-  ADD KEY `DEMANDCATEGORYDEPARTEMENTCALCULATIONDEPARTEMENT_ID` (`DEPARTEMENT_ID`);
-
---
--- Indexes for table `demandcategoryvalidation`
---
-ALTER TABLE `demandcategoryvalidation`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_DEMANDCATEGORYVALIDATION_DEPARTEMENT_ID` (`DEPARTEMENT_ID`),
-  ADD KEY `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` (`USER_LOGIN`),
-  ADD KEY `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`);
-
---
--- Indexes for table `departement`
---
-ALTER TABLE `departement`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `departementcriteria`
---
-ALTER TABLE `departementcriteria`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_DEPARTEMENTCRITERIA_DEPARTEMENT_ID` (`DEPARTEMENT_ID`);
-
---
--- Indexes for table `departementcriteriaitem`
---
-ALTER TABLE `departementcriteriaitem`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` (`DEPARTEMENTCRITERIA_ID`);
-
---
--- Indexes for table `device`
---
-ALTER TABLE `device`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `farbigkeit`
---
-ALTER TABLE `farbigkeit`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `formatauswaehlen`
---
-ALTER TABLE `formatauswaehlen`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `historiqueconnexionuser`
---
-ALTER TABLE `historiqueconnexionuser`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `katalogart`
---
-ALTER TABLE `katalogart`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `konzeptbearbeitungfaktor`
---
-ALTER TABLE `konzeptbearbeitungfaktor`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `layout`
---
-ALTER TABLE `layout`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `layoutpricing`
---
-ALTER TABLE `layoutpricing`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` (`DEPARTEMENTCRITERIAITEM_ID`),
-  ADD KEY `FK_LAYOUTPRICING_LAYOUT_ID` (`LAYOUT_ID`);
-
---
--- Indexes for table `mitgliederkorrekturfaktor`
---
-ALTER TABLE `mitgliederkorrekturfaktor`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `papiermaterialauswaehlen`
---
-ALTER TABLE `papiermaterialauswaehlen`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `participantfaktor`
---
-ALTER TABLE `participantfaktor`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_PRODUCT_CATEGORY_ID` (`CATEGORY_ID`);
-
---
--- Indexes for table `prozess`
---
-ALTER TABLE `prozess`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `question`
---
-ALTER TABLE `question`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `register`
---
-ALTER TABLE `register`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `schluessel`
---
-ALTER TABLE `schluessel`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` (`SCHLUESSELTYPE_ID`);
-
---
--- Indexes for table `schluesseltype`
---
-ALTER TABLE `schluesseltype`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `seiten`
---
-ALTER TABLE `seiten`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `sequence`
---
-ALTER TABLE `sequence`
-  ADD PRIMARY KEY (`SEQ_NAME`);
-
---
--- Indexes for table `sortiment`
---
-ALTER TABLE `sortiment`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `sotimentitem`
---
-ALTER TABLE `sotimentitem`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_SOTIMENTITEM_SORTIMENT_ID` (`SORTIMENT_ID`),
-  ADD KEY `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`);
-
---
--- Indexes for table `teilnehmerzahlpricing`
---
-ALTER TABLE `teilnehmerzahlpricing`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `umschlagfarbigkeit`
---
-ALTER TABLE `umschlagfarbigkeit`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `umschlagpapierauswaehlen`
---
-ALTER TABLE `umschlagpapierauswaehlen`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`LOGIN`),
-  ADD KEY `FK_USER_DEPARTEMENT_ID` (`DEPARTEMENT_ID`);
-
---
--- Indexes for table `veredlung`
---
-ALTER TABLE `veredlung`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `wechselfassungvariantfaktor`
---
-ALTER TABLE `wechselfassungvariantfaktor`
-  ADD PRIMARY KEY (`ID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `artderweiterverarbeitung`
---
-ALTER TABLE `artderweiterverarbeitung`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `auflage`
---
-ALTER TABLE `auflage`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
---
--- AUTO_INCREMENT for table `auflageseitencovermatrix`
---
-ALTER TABLE `auflageseitencovermatrix`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `configuration`
---
-ALTER TABLE `configuration`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `configurationitem`
---
-ALTER TABLE `configurationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `correctionschluessel`
---
-ALTER TABLE `correctionschluessel`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
---
--- AUTO_INCREMENT for table `demandcategory`
---
-ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
---
--- AUTO_INCREMENT for table `demandcategorycalculation`
---
-ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `demandcategorycalculationitem`
---
-ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `demandcategorydepartementcalculation`
---
-ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `demandcategoryvalidation`
---
-ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `departement`
---
-ALTER TABLE `departement`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `departementcriteria`
---
-ALTER TABLE `departementcriteria`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
---
--- AUTO_INCREMENT for table `departementcriteriaitem`
---
-ALTER TABLE `departementcriteriaitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
---
--- AUTO_INCREMENT for table `konzeptbearbeitungfaktor`
---
-ALTER TABLE `konzeptbearbeitungfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `mitgliederkorrekturfaktor`
---
-ALTER TABLE `mitgliederkorrekturfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `participantfaktor`
---
-ALTER TABLE `participantfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `schluessel`
---
-ALTER TABLE `schluessel`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT for table `schluesseltype`
---
-ALTER TABLE `schluesseltype`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `seiten`
---
-ALTER TABLE `seiten`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
---
--- AUTO_INCREMENT for table `sortiment`
---
-ALTER TABLE `sortiment`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `sotimentitem`
---
-ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
---
--- AUTO_INCREMENT for table `umschlagfarbigkeit`
---
-ALTER TABLE `umschlagfarbigkeit`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `wechselfassungvariantfaktor`
---
-ALTER TABLE `wechselfassungvariantfaktor`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `auflageseitencovermatrix`
---
-ALTER TABLE `auflageseitencovermatrix`
-  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` FOREIGN KEY (`AUFLAGE_ID`) REFERENCES `auflage` (`ID`),
-  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_BAUKASTEN_ID` FOREIGN KEY (`BAUKASTEN_ID`) REFERENCES `baukasten` (`ID`),
-  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_FARBIGKEIT_ID` FOREIGN KEY (`FARBIGKEIT_ID`) REFERENCES `farbigkeit` (`ID`),
-  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_FORMATAUSWAEHLEN_ID` FOREIGN KEY (`FORMATAUSWAEHLEN_ID`) REFERENCES `formatauswaehlen` (`ID`),
-  ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` FOREIGN KEY (`SEITEN_ID`) REFERENCES `seiten` (`ID`);
-
---
--- Constraints for table `configurationitem`
---
-ALTER TABLE `configurationitem`
-  ADD CONSTRAINT `FK_CONFIGURATIONITEM_CONFIGURATION_ID` FOREIGN KEY (`CONFIGURATION_ID`) REFERENCES `configuration` (`ID`);
-
---
--- Constraints for table `demandcategory`
---
-ALTER TABLE `demandcategory`
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` FOREIGN KEY (`ARTDERWEITERVERARBEITUNG_ID`) REFERENCES `artderweiterverarbeitung` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_AUFLAGE_ID` FOREIGN KEY (`AUFLAGE_ID`) REFERENCES `auflage` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_AUSGABE_ID` FOREIGN KEY (`AUSGABE_ID`) REFERENCES `ausgabe` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_BAUKASTEN_ID` FOREIGN KEY (`BAUKASTEN_ID`) REFERENCES `baukasten` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_BINDUNG_ID` FOREIGN KEY (`BINDUNG_ID`) REFERENCES `bindung` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_CATEGORY_ID` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` FOREIGN KEY (`CORRECTIONSCHLUESSEL_ID`) REFERENCES `correctionschluessel` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_DEPARTMENT_ID` FOREIGN KEY (`DEPARTMENT_ID`) REFERENCES `departement` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_DRUCKSEITEN_ID` FOREIGN KEY (`DRUCKSEITEN_ID`) REFERENCES `seiten` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_FARBIGKEIT_ID` FOREIGN KEY (`FARBIGKEIT_ID`) REFERENCES `farbigkeit` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_FORMATAUSWAEHLEN_ID` FOREIGN KEY (`FORMATAUSWAEHLEN_ID`) REFERENCES `formatauswaehlen` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_KATALOGART_ID` FOREIGN KEY (`KATALOGART_ID`) REFERENCES `katalogart` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` FOREIGN KEY (`KONZEPTBEARBEITUNGFAKTOR_ID`) REFERENCES `konzeptbearbeitungfaktor` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_LAYOUT_ID` FOREIGN KEY (`LAYOUT_ID`) REFERENCES `layout` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_MITGLIEDERKORREKTURFAKTOR_ID` FOREIGN KEY (`MITGLIEDERKORREKTURFAKTOR_ID`) REFERENCES `mitgliederkorrekturfaktor` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_PAPIERMATERIALAUSWAEHLEN_ID` FOREIGN KEY (`PAPIERMATERIALAUSWAEHLEN_ID`) REFERENCES `papiermaterialauswaehlen` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_PARTICIPANTFAKTOR_ID` FOREIGN KEY (`PARTICIPANTFAKTOR_ID`) REFERENCES `participantfaktor` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_PRODUCT_ID` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_PROZESS_ID` FOREIGN KEY (`PROZESS_ID`) REFERENCES `prozess` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_REGISTER_ID` FOREIGN KEY (`REGISTER_ID`) REFERENCES `register` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_SCHLUESSEL_ID` FOREIGN KEY (`SCHLUESSEL_ID`) REFERENCES `schluessel` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_UMSCHLAGPAPIERAUSWAEHLEN_ID` FOREIGN KEY (`UMSCHLAGPAPIERAUSWAEHLEN_ID`) REFERENCES `umschlagpapierauswaehlen` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_VEREDLUNG_ID` FOREIGN KEY (`VEREDLUNG_ID`) REFERENCES `veredlung` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` FOREIGN KEY (`WECHSELFASSUNGVARIANTFAKTOR_ID`) REFERENCES `wechselfassungvariantfaktor` (`ID`);
-
---
--- Constraints for table `demandcategorycalculation`
---
-ALTER TABLE `demandcategorycalculation`
-  ADD CONSTRAINT `DEMANDCATEGORYCALCULATION_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`),
-  ADD CONSTRAINT `DMNDCTGRYCLCULATIONDMNDCTGRYDPRTEMENTCALCULATIONID` FOREIGN KEY (`DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`) REFERENCES `demandcategorydepartementcalculation` (`ID`);
-
---
--- Constraints for table `demandcategorycalculationitem`
---
-ALTER TABLE `demandcategorycalculationitem`
-  ADD CONSTRAINT `DMNDCATEGORYCALCULATIONITEMDPRTEMENTCRITERIAITEMID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
-  ADD CONSTRAINT `DMNDCTEGORYCALCULATIONITEMDMNDCTEGORYCALCULATIONID` FOREIGN KEY (`DEMANDCATEGORYCALCULATION_ID`) REFERENCES `demandcategorycalculation` (`ID`);
-
---
--- Constraints for table `demandcategorydepartementcalculation`
---
-ALTER TABLE `demandcategorydepartementcalculation`
-  ADD CONSTRAINT `DEMANDCATEGORYDEPARTEMENTCALCULATIONDEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`),
-  ADD CONSTRAINT `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`);
-
---
--- Constraints for table `demandcategoryvalidation`
---
-ALTER TABLE `demandcategoryvalidation`
-  ADD CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`),
-  ADD CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
-
---
--- Constraints for table `departementcriteria`
---
-ALTER TABLE `departementcriteria`
-  ADD CONSTRAINT `FK_DEPARTEMENTCRITERIA_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
-
---
--- Constraints for table `departementcriteriaitem`
---
-ALTER TABLE `departementcriteriaitem`
-  ADD CONSTRAINT `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`);
-
---
--- Constraints for table `layoutpricing`
---
-ALTER TABLE `layoutpricing`
-  ADD CONSTRAINT `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
-  ADD CONSTRAINT `FK_LAYOUTPRICING_LAYOUT_ID` FOREIGN KEY (`LAYOUT_ID`) REFERENCES `layout` (`ID`);
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `FK_PRODUCT_CATEGORY_ID` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`);
-
---
--- Constraints for table `schluessel`
---
-ALTER TABLE `schluessel`
-  ADD CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`);
-
---
--- Constraints for table `sotimentitem`
---
-ALTER TABLE `sotimentitem`
-  ADD CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
-  ADD CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`);
-
---
--- Constraints for table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
-SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
-
+LOCK TABLES `wechselfassungvariantfaktor` WRITE;
+/*!40000 ALTER TABLE `wechselfassungvariantfaktor` DISABLE KEYS */;
+INSERT INTO `wechselfassungvariantfaktor` VALUES (1,'Ja',1.20),(2,'Nein',1.00);
+/*!40000 ALTER TABLE `wechselfassungvariantfaktor` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-08-01 13:52:16
