@@ -130,7 +130,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     private int calcSumDruck(DemandCategory demandCategory) {
         demandCategory.setSummDruck(new BigDecimal(0));
-        AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit(),demandCategory.getBaukasten());
+        AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit(), demandCategory.getBaukasten());
         if (demandCategory == null || demandCategory.getCover() == null || SearchUtil.isStringNullOrVide(demandCategory.getCover().getDescription())) {
             return -1;
         }
@@ -178,17 +178,17 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
-    public List<DemandCategory> search(DemandCategory demandCategory, List<String> sotimentItems, List<String> sortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
+    public List<DemandCategory> search(DemandCategory demandCategory, List<String> departements, List<String> sotimentItems, List<String> sortiemnts, Integer validationLevel, Date dateSysMin, Date dateSysMax) {
         List<DemandCategory> demandCategorys = new ArrayList<>();
         String[] queryHelper = constructQueryHelper(sortiemnts);
 
         String query = "SELECT " + queryHelper[0] + " FROM " + queryHelper[1] + " WHERE " + queryHelper[2];
         query += constructSearchQuery(demandCategory, validationLevel, "dc");
         query += SearchUtil.addConstraintMinMaxDate("dc", "dateSystem", dateSysMin, dateSysMax);
-        if (sortiemnts != null && !sortiemnts.isEmpty()) {
-            query += SearchUtil.addConstraintOr("so", "sortiment.name", "=", sortiemnts);
-        }
+        query += SearchUtil.addConstraintOr("so", "sortiment.name", "=", sortiemnts);
+        query += SearchUtil.addConstraintOr("dc", "department.name", "=", departements);
 
+        System.out.println("ha departements ==> " + departements);
         System.out.println("ha query ==> " + query);
         demandCategorys = em.createQuery(query).getResultList();
 

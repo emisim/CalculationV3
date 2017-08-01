@@ -55,9 +55,7 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
         String query = "SELECT " + queryHelper[0] + " FROM " + queryHelper[1] + " WHERE " + queryHelper[2];
         query += " AND dc.dateDemandCategory LIKE '" + year + "-" + queryHelper[3] + "-%'";
         query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dc");
-        if (departements != null && !departements.isEmpty()) {
-            query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
-        }
+        query += SearchUtil.addConstraintOr("dcdc", "departement.name", "=", departements);
         System.out.println("reauet--| " + query);
         List<BigDecimal> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
@@ -85,30 +83,27 @@ public class StatistiqueFacade extends AbstractFacade<ArtDerWeiterverarbeitung> 
             summQuery = " SUM(" + beanAbreviation + ".summDruck)";
         } else if (typeSum == 3) {
             summQuery = " SUM(" + beanAbreviation + ".summDruck" + " + " + beanAbreviation + ".summeGlobal)";
+        } else if (departements != null && !departements.isEmpty()) {
+            beanAbreviation = "dcdc";
+            summQuery = "SUM(" + beanAbreviation + ".summeGlobal)";
+            wherequery = " dcdc.demandCategory.id=dc.id";
         } else {
-            if (departements != null && !departements.isEmpty()) {
-                beanAbreviation = "dcdc";
-                summQuery = "SUM(" + beanAbreviation + ".summeGlobal)";
-                wherequery = " dcdc.demandCategory.id=dc.id";
-            } else {
-                /*
+            /*
                     if departements == null et typeSum != {1,2,3} we return requet always false( wherequery = " 1=0 " ) 
                     resultat return = String[]{"SUM(" + beanAbreviation + ".summTotal)", "DemandCategory dc", " 1=0 ", monthInQuery}
-                 */
-                wherequery = " 1=0 ";
-                //requet toujours faux quelque soit summQuery
-                summQuery = summQuery = " SUM(" + beanAbreviation + ".summeGlobal)";
-            }
-
+             */
+            wherequery = " 1=0 ";
+            //requet toujours faux quelque soit summQuery
+            summQuery = summQuery = " SUM(" + beanAbreviation + ".summeGlobal)";
         }
         return new String[]{summQuery, fromQuery, wherequery, monthInQuery};
     }
 
-    public BigDecimal findByDateMinMax(DemandCategory selectedForSearch, Integer validationLevel,Date dateMin, Date dateMax, String nameDepartement) {
+    public BigDecimal findByDateMinMax(DemandCategory selectedForSearch, Integer validationLevel, Date dateMin, Date dateMax, String nameDepartement) {
         String query = "SELECT SUM(dcdc.summeGlobal) FROM DemandCategoryDepartementCalculation dcdc WHERE 1=1";
 
         query += SearchUtil.addConstraintMinMaxDate("dcdc", "demandCategory.dateDemandCategory", dateMin, dateMax);
-        query +=demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dcdc.demandCategory");
+        query += demandCategoryFacade.constructSearchQuery(selectedForSearch, validationLevel, "dcdc.demandCategory");
         query += " AND dcdc.departement.name='" + nameDepartement + "'";
 
         System.out.println("DemandCategoryFacade.findByDateMinMax requet ===> " + query);

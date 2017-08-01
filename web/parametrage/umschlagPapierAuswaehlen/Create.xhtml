@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateUmschlagPapierAuswaehlenLabel_id}" for="id" />
                         <p:inputText id="id" value="#{umschlagPapierAuswaehlenController.selected.id}" title="#{bundle.CreateUmschlagPapierAuswaehlenTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{umschlagPapierAuswaehlenController.create}" value="#{bundle.Save}" update="display,:UmschlagPapierAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args,'UmschlagPapierAuswaehlenCreateDialog');"/>
+                    <p:commandButton actionListener="#{umschlagPapierAuswaehlenController.create}" value="#{bundle.Save}" update="display,:parametrageTab:UmschlagPapierAuswaehlenListForm:datalist,:growl" oncomplete="handleSubmit(args,'UmschlagPapierAuswaehlenCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UmschlagPapierAuswaehlenCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
