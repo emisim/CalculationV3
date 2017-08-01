@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListHistoriqueConnexionUserTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form>
+                <p:fieldset legend="Criteres de recherche" style="margin-bottom:20px" toggleable="true" toggleSpeed="600">
+                    <p:panelGrid columns="10">
+
+                            <p:outputLabel value="connexion: " for="connexion"/>
+                            <p:selectOneMenu id="connexion" value="#{historiqueConnexionUserController.selected.connexion}" style="width: 100px">
+                                <f:selectItem itemValue="#{null}" itemLabel="--Select--"/>
+                                <f:selectItem  itemValue="true"  itemLabel="Connexion" />
+                                <f:selectItem  itemValue="false" itemLabel="Deconnexion" />
+                            </p:selectOneMenu>
+                        
+
+                        
+                            <p:outputLabel value="date Min: " for="DateMin" />
+                            <p:calendar size="12" pattern="dd/MM/yyyy HH:mm:ss" id="DateMin"  value="#{historiqueConnexionUserController.dateMin}" title="Date Min"  showOn="button">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"  />
+                            </p:calendar>
+                        
+                            <p:outputLabel value="Date Max: " for="DateMax" />
+                            <p:calendar size="12"  pattern="dd/MM/yyyy HH:mm:ss" id="DateMax"  value="#{historiqueConnexionUserController.dateMax}" title="Date Max"  showOn="button">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"  />
+                            </p:calendar>
+                        
+                           
+                        
+                            <p:outputLabel value="Utilisateur" for="user"/>
+                            <p:selectOneMenu id="user" value="#{historiqueConnexionUserController.user}" filter="true" filterMatchMode="startsWith" style="width: 100px">
+                                <f:selectItem itemValue="#{null}" itemLabel="--Select--"/>
+                                <f:selectItems value="#{historiqueConnexionUserController.users}"
+                                               var ="userItem"
+                                               itemValue="#{userItem}"
+                                               itemLabel="#{userItem.login}"/>
+                            </p:selectOneMenu>
+                            
+                        <p:commandButton title="Rechercher" value="Recherche" icon="ui-icon-search" actionListener="#{historiqueConnexionUserController.rechercher()}" update=":HistoriqueConnexionUserListForm:datalist"/>
+                        <p:commandButton title="Rafraichir" value="Rafraichir" icon="ui-icon-refresh" actionListener="#{historiqueConnexionUserController.findAll()}" update=":HistoriqueConnexionUserListForm:datalist"/>
+                    </p:panelGrid>
+                </p:fieldset>
+            </h:form>
+            <h:form id="HistoriqueConnexionUserListForm">
+                <p:panel header="#{bundle.ListHistoriqueConnexionUserTitle}">
+                    <p:dataTable id="datalist" value="#{historiqueConnexionUserController.items}" var="item"
+                                 selectionMode="single" selection="#{historiqueConnexionUserController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHistoriqueConnexionUserTitle_user}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.user}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date Connexion / Déconnexion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateAction}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Type Action"/>
+                            </f:facet>
+                            <h:outputText value="#{historiqueConnexionUserController.typeCnx(item.connexion)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

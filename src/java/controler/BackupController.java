@@ -36,7 +36,7 @@ public class BackupController implements Serializable {
     private static String fileBackUpOrigine = "C:\\backup\\Dropbox\\";
     private static String path2 = "C:\\backup\\";
 
-    @Schedule(second = "0", minute = "00", hour = "18", dayOfWeek = "*", persistent = false)
+    //@Schedule(second = "0", minute = "00", hour = "18", dayOfWeek = "*", persistent = false)
     public void recapDb() throws IOException, InterruptedException {
         System.out.println("hahwa dkhel l 1");
         ejbFacade.addBackup(fileBackUpOrigine);
