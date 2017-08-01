@@ -41,4 +41,7 @@ public class DateUtil {
         }
     }
     
+    public static java.sql.Timestamp getSqlDateTime(java.util.Date date) {
+        return new java.sql.Timestamp(date.getTime());
+    }
 }
