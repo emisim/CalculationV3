@@ -1,16 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 01, 2017 at 01:55 AM
--- Server version: 10.1.24-MariaDB
--- PHP Version: 7.1.6
+-- Client :  127.0.0.1
+-- Généré le :  Mar 01 Août 2017 à 15:38
+-- Version du serveur :  10.1.8-MariaDB
+-- Version de PHP :  5.6.14
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -20,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kt_fst_2`
+-- Base de données :  `kt_fst_2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `artderweiterverarbeitung`
+-- Structure de la table `artderweiterverarbeitung`
 --
 
 CREATE TABLE `artderweiterverarbeitung` (
@@ -39,7 +37,7 @@ CREATE TABLE `artderweiterverarbeitung` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auflage`
+-- Structure de la table `auflage`
 --
 
 CREATE TABLE `auflage` (
@@ -49,7 +47,7 @@ CREATE TABLE `auflage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `auflage`
+-- Contenu de la table `auflage`
 --
 
 INSERT INTO `auflage` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
@@ -84,7 +82,7 @@ INSERT INTO `auflage` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auflageseitencovermatrix`
+-- Structure de la table `auflageseitencovermatrix`
 --
 
 CREATE TABLE `auflageseitencovermatrix` (
@@ -100,7 +98,7 @@ CREATE TABLE `auflageseitencovermatrix` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ausgabe`
+-- Structure de la table `ausgabe`
 --
 
 CREATE TABLE `ausgabe` (
@@ -111,7 +109,7 @@ CREATE TABLE `ausgabe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `ausgabe`
+-- Contenu de la table `ausgabe`
 --
 
 INSERT INTO `ausgabe` (`ID`, `NAME`, `PRICE`, `VALUEE`) VALUES
@@ -121,19 +119,19 @@ INSERT INTO `ausgabe` (`ID`, `NAME`, `PRICE`, `VALUEE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `backup`
+-- Structure de la table `backup`
 --
 
 CREATE TABLE `backup` (
   `ID` bigint(20) NOT NULL,
   `DATESYSTEME` date DEFAULT NULL,
   `NOM` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `baukasten`
+-- Structure de la table `baukasten`
 --
 
 CREATE TABLE `baukasten` (
@@ -145,7 +143,7 @@ CREATE TABLE `baukasten` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bindung`
+-- Structure de la table `bindung`
 --
 
 CREATE TABLE `bindung` (
@@ -155,7 +153,7 @@ CREATE TABLE `bindung` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `bindung`
+-- Contenu de la table `bindung`
 --
 
 INSERT INTO `bindung` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
@@ -165,7 +163,7 @@ INSERT INTO `bindung` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Structure de la table `category`
 --
 
 CREATE TABLE `category` (
@@ -174,7 +172,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `category`
+-- Contenu de la table `category`
 --
 
 INSERT INTO `category` (`ID`, `NAME`) VALUES
@@ -186,7 +184,7 @@ INSERT INTO `category` (`ID`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `configuration`
+-- Structure de la table `configuration`
 --
 
 CREATE TABLE `configuration` (
@@ -195,7 +193,7 @@ CREATE TABLE `configuration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `configuration`
+-- Contenu de la table `configuration`
 --
 
 INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
@@ -204,7 +202,7 @@ INSERT INTO `configuration` (`ID`, `DATEAPPLICATION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `configurationitem`
+-- Structure de la table `configurationitem`
 --
 
 CREATE TABLE `configurationitem` (
@@ -215,7 +213,7 @@ CREATE TABLE `configurationitem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `configurationitem`
+-- Contenu de la table `configurationitem`
 --
 
 INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID`) VALUES
@@ -226,7 +224,7 @@ INSERT INTO `configurationitem` (`ID`, `DEFAULTVALUE`, `NAME`, `CONFIGURATION_ID
 -- --------------------------------------------------------
 
 --
--- Table structure for table `correctionschluessel`
+-- Structure de la table `correctionschluessel`
 --
 
 CREATE TABLE `correctionschluessel` (
@@ -236,7 +234,7 @@ CREATE TABLE `correctionschluessel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `correctionschluessel`
+-- Contenu de la table `correctionschluessel`
 --
 
 INSERT INTO `correctionschluessel` (`ID`, `PERCENT`, `WERT`) VALUES
@@ -345,7 +343,7 @@ INSERT INTO `correctionschluessel` (`ID`, `PERCENT`, `WERT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cover`
+-- Structure de la table `cover`
 --
 
 CREATE TABLE `cover` (
@@ -355,7 +353,7 @@ CREATE TABLE `cover` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cover`
+-- Contenu de la table `cover`
 --
 
 INSERT INTO `cover` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
@@ -365,7 +363,7 @@ INSERT INTO `cover` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandcategory`
+-- Structure de la table `demandcategory`
 --
 
 CREATE TABLE `demandcategory` (
@@ -436,7 +434,7 @@ CREATE TABLE `demandcategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `demandcategory`
+-- Contenu de la table `demandcategory`
 --
 
 INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `ARTIKELPERPAGELFAKTOR`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LKSCHLUESSELFAKTOR`, `LIEFERTERMIN`, `MKSCHLUESSELFAKTOR`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `PRODUCTSCHLUESSELFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMUNITPRICE`, `SUMMEGLOBAL`, `TEILNEHMERZAHL`, `TEILNEHMERZAHLPRICING`, `UMFANG`, `UMSCHLAG`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BAUKASTEN_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
@@ -521,7 +519,7 @@ INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUK
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandcategorycalculation`
+-- Structure de la table `demandcategorycalculation`
 --
 
 CREATE TABLE `demandcategorycalculation` (
@@ -536,7 +534,7 @@ CREATE TABLE `demandcategorycalculation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandcategorycalculationitem`
+-- Structure de la table `demandcategorycalculationitem`
 --
 
 CREATE TABLE `demandcategorycalculationitem` (
@@ -553,7 +551,7 @@ CREATE TABLE `demandcategorycalculationitem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandcategorydepartementcalculation`
+-- Structure de la table `demandcategorydepartementcalculation`
 --
 
 CREATE TABLE `demandcategorydepartementcalculation` (
@@ -567,7 +565,7 @@ CREATE TABLE `demandcategorydepartementcalculation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandcategoryvalidation`
+-- Structure de la table `demandcategoryvalidation`
 --
 
 CREATE TABLE `demandcategoryvalidation` (
@@ -581,7 +579,7 @@ CREATE TABLE `demandcategoryvalidation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departement`
+-- Structure de la table `departement`
 --
 
 CREATE TABLE `departement` (
@@ -590,7 +588,7 @@ CREATE TABLE `departement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `departement`
+-- Contenu de la table `departement`
 --
 
 INSERT INTO `departement` (`ID`, `NAME`) VALUES
@@ -605,7 +603,7 @@ INSERT INTO `departement` (`ID`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departementcriteria`
+-- Structure de la table `departementcriteria`
 --
 
 CREATE TABLE `departementcriteria` (
@@ -615,7 +613,7 @@ CREATE TABLE `departementcriteria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `departementcriteria`
+-- Contenu de la table `departementcriteria`
 --
 
 INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
@@ -650,7 +648,7 @@ INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departementcriteriaitem`
+-- Structure de la table `departementcriteriaitem`
 --
 
 CREATE TABLE `departementcriteriaitem` (
@@ -663,54 +661,54 @@ CREATE TABLE `departementcriteriaitem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `departementcriteriaitem`
+-- Contenu de la table `departementcriteriaitem`
 --
 
 INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRICE`, `ARITHMITIQUEEXPRESIONFORUNITEPRICE`, `DESCRIPTION`, `DESCRIPTIONGLOBAL`, `DEPARTEMENTCRITERIA_ID`) VALUES
-(1, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung Datenpflegeguide', '8*Std_Satz', 1),
-(2, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung Redaktionsguide', '6*Std_Satz', 1),
-(3, '1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '1*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Katalog Reda_Vorausgabe kopieren', '1*Std_Satz', 2),
-(4, '8*demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100', 'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/100', 'PDF-Generator Reda', '8*AnzahlGesamtSeiten*Std_Satz/100 (100Seiten/Tag)', 2),
-(5, '10*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung', '10*Std_Satz', 9),
-(6, '8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', '8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', 'Klassifizierung Neuheiten Information ', '8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/90', 13),
-(7, '3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Masterlisten Prüfung', 'hhh', 1),
-(8, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Testdaten bereitstellen', '8*Std_Satz', 1),
-(11, 'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', '0.3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', 'Preis Artikel Reda-Online Pflege', '0.3*AnzahlGesamtArtikel*Std_Satz/60 (0.3Min/Art)', 3),
-(12, '16*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Online Pflege(2 Tage)', '16*Std_Satz ', 3),
-(13, 'demandCategory.getUmfang()*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70', '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/70', 'PDF Generator Informatica ', '8*AnzahlGesamtSeiten*Std_Satz/70 (70 Seiten/Tag)', 4),
-(14, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Lieferantenkorrektur Versand', '0.5*AnzahlNeueLieferante*Std_Satz', 5),
-(15, '0.25*(demandCategory.getAnzahlMitglieder())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Mitgliederkorrektur Versand', '0.25*AnzahlMitglieder*Std_Satz', 5),
-(16, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', 'Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte', 'AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 2),
-(17, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext für neue Produkte ', 'AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 2),
-(19, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext neue Produkte', 'AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/5', 4),
-(20, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10)', 'Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte', 'AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 4),
-(21, 'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10', 'demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/10', 'redaktionelle Korrektur inkl. Einarbeitung LK', '(AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluessel)/(10*AnzahlArtikelPerPageFaktor)', 5),
-(22, '(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30', '(configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30', 'Korrekturlesen mit Kunden', 'AnzahlGesamtArtikel*Std_Satz/AnzahlArtikelPerPageFaktor*30', 5),
-(23, '(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/10', '(demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/10', 'Redaktionelle Korrekturlesen inkl. MK', 'AnzahlGesamtArtikel*MK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*10)', 5),
-(24, '(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/15', '(demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/15', 'Redaktionelle Korrekturlesen Digiphase', 'AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*15)', 5),
-(25, '(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())/30', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30', 'Großplott Prüfung', 'AnzahlGesamtArtikel*Std_Satz/(30*ArtikelperPageFaktor)', 6),
-(26, 'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '2.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Preisprüfung aus Satz, KG-Nummer, etc', '2.5*AnzahlKapitel*Std_Satz', 6),
-(27, 'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.005*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Erstellung IVZ/Synonympflege', '0,005*AnzahlGesamtProdukt*Std_Satz', 7),
-(28, '1.5*8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale ECC Publikationskonfigurator bei LL', '1.5*8*Std_Satz', 7),
-(29, '8*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)', '8*Std_Satz', 7),
-(30, 'demandCategory.getUmfang()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/19', 'Korrektorat (P. Mensch extern)', '(AnzahlGesamtseiten*Std_Satz)/19', 7),
-(31, 'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'Übersetzungsmanagement Marketingdaten', 'AnzahKapitel*STd_Satz/2,5', 8),
-(32, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/2.5', 'Pauschale Übersetzunsmanagement ', '4*Std_Satz', 8),
-(33, '0.25*demandCategory.getAnzahlNeueProdukt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/60', 'Datenbeschaffung pro Produkt Neuheit', '0.25*AnzahlGesamtProdukte*Std_Satz/60', 10),
-(34, 'demandCategory.getAnzahlNeueArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'Datenbeschaffung pro Artikel Neuheit', 'AnzahNeueArtikel*Std_Satz/200', 10),
-(35, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Datenbeschaffung pro Lieferanten Neuheit ', '0.5*AnzahlNeueLieferanten*Std_Satz', 10),
-(36, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Preisbeschaffung (1/2 Tag)', '4*std_Satz', 11),
-(37, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Preisbechaffung pro Lieferanten Neuheit ', '0.5*AnzahlNeueLieferante*Std_Satz', 11),
-(38, 'demandCategory.getAnzahlLieferantGesamt()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/6.25', 'Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)', 'AnzahlLieferantGesamt*Std_Satz/6.25', 11),
-(39, '4*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Preisprüfung (1/2 Tag)', '4*STd_Satz', 11),
-(40, 'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/200', 'Stammdatenpflege (ASD, Modul)', 'AnzahlGesamtArtikel*KorrekturSchlüessel*Std_Satz/200', 12),
-(41, 'demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/1000', 'Übersetzungsmanagement Stammdaten (1000 Art/std)', 'AnzahlGesamtArtikel*std_Satz/1000', 14),
-(42, '4.5*demandCategory.getAnzahlBeteiligten()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '4.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Abstimmungsgespräche', '4.5*AnzahlBeteiligten*Std_Satz', 27),
-(43, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ', 'Bearbeitungszeit*Anzahl_Beteiligten*Szd_Satz', 27),
-(44, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/4', 'Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ', 'AnzahlBeteiligten*Bearbeitungszeit*Std_Satz/4', 27),
-(45, '0.25*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', '0.25*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ', '0.25*Bearbeitungszeit*Std_Satz', 27),
-(46, '6*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Projektplanung = 6 std', '6*Std_Satz', 27),
-(47, '1.5*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'configurationItemFacade.findByName(\'std_stz\').getDefaultValue()', 'Pauschale Projektvorbereitung = 1,5 std', '1.5*Std_Satz', 27),
+(1, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung Datenpflegeguide', '8*Std_Satz', 1),
+(2, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung Redaktionsguide', '6*Std_Satz', 1),
+(3, '1*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '1*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Katalog Reda_Vorausgabe kopieren', '1*Std_Satz', 2),
+(4, '8*demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/100', 'demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/100', 'PDF-Generator Reda', '8*AnzahlGesamtSeiten*Std_Satz/100 (100Seiten/Tag)', 2),
+(5, '10*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale 8std Prüfung, 2 Std Redaktion Abstimmung', '10*Std_Satz', 9),
+(6, '8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/90', '8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/90', 'Klassifizierung Neuheiten Information ', '8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/90', 13),
+(7, '3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Masterlisten Prüfung', 'hhh', 1),
+(8, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Testdaten bereitstellen', '8*Std_Satz', 1),
+(11, 'demandCategory.getAnzahlGesamtArtikel()*0.3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', '0.3*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', 'Preis Artikel Reda-Online Pflege', '0.3*AnzahlGesamtArtikel*Std_Satz/60 (0.3Min/Art)', 3),
+(12, '16*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Online Pflege(2 Tage)', '16*Std_Satz ', 3),
+(13, 'demandCategory.getUmfang()*8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/70', '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/70', 'PDF Generator Informatica ', '8*AnzahlGesamtSeiten*Std_Satz/70 (70 Seiten/Tag)', 4),
+(14, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Lieferantenkorrektur Versand', '0.5*AnzahlNeueLieferante*Std_Satz', 5),
+(15, '0.25*(demandCategory.getAnzahlMitglieder())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Mitgliederkorrektur Versand', '0.25*AnzahlMitglieder*Std_Satz', 5),
+(16, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', 'Redaktionelle Text Veredlung der Basis Text für Gesamt Produkte', 'AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 2),
+(17, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext für neue Produkte ', 'AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 2),
+(19, '(demandCategory.getAnzahlNeueProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/5)', 'Redaktionelle Textveredlung der Basistext neue Produkte', 'AnzahlNeueProdukte*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/5', 4),
+(20, '(demandCategory.getAnzahlGesamtProdukt())*(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', '(demandCategory.getKatalogart().getValuee())*(demandCategory.getCorrectionSchluessel().getValue())*(configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10)', 'Redaktionelle Textveredlung der Basistext Gesamtanzahl Produkte', 'AnzahlGesamtProdukt*KatalogartSchluessel*CorrectionSchluessel*Std_Satz/10', 4),
+(21, 'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/10', 'redaktionelle Korrektur inkl. Einarbeitung LK', '(AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluessel)/(10*AnzahlArtikelPerPageFaktor)', 5),
+(22, '(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/30', '(configurationItemFacade.findByName(''std_stz'').getDefaultValue())/30', 'Korrekturlesen mit Kunden', 'AnzahlGesamtArtikel*Std_Satz/AnzahlArtikelPerPageFaktor*30', 5),
+(23, '(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/10', '(demandCategory.getmKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/10', 'Redaktionelle Korrekturlesen inkl. MK', 'AnzahlGesamtArtikel*MK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*10)', 5),
+(24, '(demandCategory.getAnzahlGesamtArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/15', '(demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/15', 'Redaktionelle Korrekturlesen Digiphase', 'AnzahlGesamtArtikel*LK_Faktor*CorrectionSchluesse*Std_Satzl/(AnzahlArtikelPerPageFaktor*15)', 5),
+(25, '(demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue())/30', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/30', 'Großplott Prüfung', 'AnzahlGesamtArtikel*Std_Satz/(30*ArtikelperPageFaktor)', 6),
+(26, 'demandCategory.getAnzahlKapitetel ()*2.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '2.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Preisprüfung aus Satz, KG-Nummer, etc', '2.5*AnzahlKapitel*Std_Satz', 6),
+(27, 'demandCategory.getAnzahlGesamtProdukt ()*0.005*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.005*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Erstellung IVZ/Synonympflege', '0,005*AnzahlGesamtProdukt*Std_Satz', 7),
+(28, '1.5*8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale ECC Publikationskonfigurator bei LL', '1.5*8*Std_Satz', 7),
+(29, '8*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Fotoshootings Teilnahme Redakteur (1 Tag)', '8*Std_Satz', 7),
+(30, 'demandCategory.getUmfang()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/19', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/19', 'Korrektorat (P. Mensch extern)', '(AnzahlGesamtseiten*Std_Satz)/19', 7),
+(31, 'demandCategory.getAnzahlKapitetel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'Übersetzungsmanagement Marketingdaten', 'AnzahKapitel*STd_Satz/2,5', 8),
+(32, '4*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/2.5', 'Pauschale Übersetzunsmanagement ', '4*Std_Satz', 8),
+(33, '0.25*demandCategory.getAnzahlNeueProdukt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', '0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/60', 'Datenbeschaffung pro Produkt Neuheit', '0.25*AnzahlGesamtProdukte*Std_Satz/60', 10),
+(34, 'demandCategory.getAnzahlNeueArtikel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200', 'Datenbeschaffung pro Artikel Neuheit', 'AnzahNeueArtikel*Std_Satz/200', 10),
+(35, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Datenbeschaffung pro Lieferanten Neuheit ', '0.5*AnzahlNeueLieferanten*Std_Satz', 10),
+(36, '4*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Preisbeschaffung (1/2 Tag)', '4*std_Satz', 11),
+(37, '0.5*demandCategory.getAnzahlLieferantNeu()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Preisbechaffung pro Lieferanten Neuheit ', '0.5*AnzahlNeueLieferante*Std_Satz', 11),
+(38, 'demandCategory.getAnzahlLieferantGesamt()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/6.25', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/6.25', 'Preisbeschaffung Lieferanten Gesamt (6,25 lf/std)', 'AnzahlLieferantGesamt*Std_Satz/6.25', 11),
+(39, '4*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Preisprüfung (1/2 Tag)', '4*STd_Satz', 11),
+(40, 'demandCategory.getAnzahlGesamtArtikel()*demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200', 'demandCategory.getCorrectionSchluessel().getValue()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/200', 'Stammdatenpflege (ASD, Modul)', 'AnzahlGesamtArtikel*KorrekturSchlüessel*Std_Satz/200', 12),
+(41, 'demandCategory.getAnzahlGesamtArtikel()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/1000', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()/1000', 'Übersetzungsmanagement Stammdaten (1000 Art/std)', 'AnzahlGesamtArtikel*std_Satz/1000', 14),
+(42, '4.5*demandCategory.getAnzahlBeteiligten()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '4.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Abstimmungsgespräche', '4.5*AnzahlBeteiligten*Std_Satz', 27),
+(43, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Termin Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (1h)  ', 'Bearbeitungszeit*Anzahl_Beteiligten*Szd_Satz', 27),
+(44, 'demandCategory.getAnzahlBeteiligten()*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/4', 'demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/4', 'Budget Überwachung: Festsatz/Laufzeit in Monaten / Stunde pro Monat (15min)  ', 'AnzahlBeteiligten*Bearbeitungszeit*Std_Satz/4', 27),
+(45, '0.25*demandCategory.getBearbeitungszeit()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', '0.25*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Berichtswesen: Festsatz/Laufzeit in Monaten / Stunde pro Monat (0,25 h)  ', '0.25*Bearbeitungszeit*Std_Satz', 27),
+(46, '6*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Projektplanung = 6 std', '6*Std_Satz', 27),
+(47, '1.5*configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'configurationItemFacade.findByName(''std_stz'').getDefaultValue()', 'Pauschale Projektvorbereitung = 1,5 std', '1.5*Std_Satz', 27),
 (48, '', 'demandCategory.getKatalogart().getValuee()', 'Pauschale Kalkulation inkl. Prüfschleife und Abstimmung GF', '12*std_Satz*KatalogartFakt*WechselfssungFaktor*AusgabeFaktor', 28),
 (49, '', 'demandCategory.getAusgabe().getValuee()', 'Nachkalkulation zur Druckvergabe', '', 28),
 (50, '', 'demandCategory.getWechselfassungVariantFaktor().getValue()', 'Bestellformular inkl. Baukastenanhang erstellen und prüfen', '', 28),
@@ -724,15 +722,15 @@ INSERT INTO `departementcriteriaitem` (`ID`, `ARITHMITIQUEEXPRESIONFORGLOBALPRIC
 (60, '', '', 'Druckabnahme', NULL, 28),
 (61, '', '', 'Verarbeitungsüberwachung', NULL, 28),
 (62, '', '', 'Weiterberchnung (Vorbereitung und Durchführung)', NULL, 28),
-(63, '(3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', '(3*configurationItemFacade.findByName(\'std_stz\').getDefaultValue())', 'Endabrechnung (Pauschal)', NULL, 28),
+(63, '(3*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', '(3*configurationItemFacade.findByName(''std_stz'').getDefaultValue())', 'Endabrechnung (Pauschal)', NULL, 28),
 (64, '', '', 'Erstellung und Auswertung von Befragungen (Pauschal)', NULL, 28),
-(65, '8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30', '8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/30', 'Basisdatenpflege Neuheiten Information', '8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/30', 13),
-(66, '8*demandCategory.getAnzahlBestandArtikel()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', '8*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(\'std_stz\').getDefaultValue()/90', 'Basis Datenpflege Bestand Artikel', '8*AzahlBestandArtikel*Korrektuschluessek*Prozessschluessel*Std_Satz/90', 13);
+(65, '8*demandCategory.getAnzahlNeueArtikel()*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/30', '8*demandCategory.getlKSchluesselFaktor()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/30', 'Basisdatenpflege Neuheiten Information', '8*Anzahl_Artikel_Neu* LK_Schlüssel*Korrekturschlüssel*Prozessschlüssel*std_satz/30', 13),
+(66, '8*demandCategory.getAnzahlBestandArtikel()*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/90', '8*demandCategory.getCorrectionSchluessel().getValue()*demandCategory.getProzess().getValuee()*configurationItemFacade.findByName(''std_stz'').getDefaultValue()/90', 'Basis Datenpflege Bestand Artikel', '8*AzahlBestandArtikel*Korrektuschluessek*Prozessschluessel*Std_Satz/90', 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `device`
+-- Structure de la table `device`
 --
 
 CREATE TABLE `device` (
@@ -741,20 +739,19 @@ CREATE TABLE `device` (
   `DEVICECATEGORIE` varchar(255) DEFAULT NULL,
   `OPERATINGSYSTEM` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `device`
+-- Contenu de la table `device`
 --
 
 INSERT INTO `device` (`ID`, `BROWSER`, `DEVICECATEGORIE`, `OPERATINGSYSTEM`, `USER_LOGIN`) VALUES
-(1, 'CHROME 59.0.3071.114', 'Personal computer', 'Windows', 'walo'),
-(51, 'CHROME 59.0.3071.115', 'Personal computer', 'Windows', 'walo');
+(1, 'CHROME 59.0.3071.115', 'Personal computer', 'Windows 7', 'walo');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `farbigkeit`
+-- Structure de la table `farbigkeit`
 --
 
 CREATE TABLE `farbigkeit` (
@@ -764,7 +761,7 @@ CREATE TABLE `farbigkeit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `farbigkeit`
+-- Contenu de la table `farbigkeit`
 --
 
 INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
@@ -776,7 +773,7 @@ INSERT INTO `farbigkeit` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formatauswaehlen`
+-- Structure de la table `formatauswaehlen`
 --
 
 CREATE TABLE `formatauswaehlen` (
@@ -786,7 +783,7 @@ CREATE TABLE `formatauswaehlen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `formatauswaehlen`
+-- Contenu de la table `formatauswaehlen`
 --
 
 INSERT INTO `formatauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
@@ -799,7 +796,7 @@ INSERT INTO `formatauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `historiqueconnexionuser`
+-- Structure de la table `historiqueconnexionuser`
 --
 
 CREATE TABLE `historiqueconnexionuser` (
@@ -807,20 +804,24 @@ CREATE TABLE `historiqueconnexionuser` (
   `CONNEXION` tinyint(1) DEFAULT '0',
   `DATEACTION` datetime DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `historiqueconnexionuser`
+-- Contenu de la table `historiqueconnexionuser`
 --
 
 INSERT INTO `historiqueconnexionuser` (`ID`, `CONNEXION`, `DATEACTION`, `USER_LOGIN`) VALUES
-(2, 1, '2017-08-01 00:41:42', 'walo'),
-(52, 1, '2017-08-01 00:50:15', 'walo');
+(2, 1, '2017-08-01 13:01:45', 'walo'),
+(51, 1, '2017-08-01 14:31:29', 'walo'),
+(52, 0, '2017-08-01 14:31:43', 'walo'),
+(53, 1, '2017-08-01 14:31:48', 'walo'),
+(101, 1, '2017-08-01 14:34:50', 'walo'),
+(151, 1, '2017-08-01 14:37:27', 'walo');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `katalogart`
+-- Structure de la table `katalogart`
 --
 
 CREATE TABLE `katalogart` (
@@ -830,7 +831,7 @@ CREATE TABLE `katalogart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `katalogart`
+-- Contenu de la table `katalogart`
 --
 
 INSERT INTO `katalogart` (`ID`, `NAME`, `VALUEE`) VALUES
@@ -843,7 +844,7 @@ INSERT INTO `katalogart` (`ID`, `NAME`, `VALUEE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `konzeptbearbeitungfaktor`
+-- Structure de la table `konzeptbearbeitungfaktor`
 --
 
 CREATE TABLE `konzeptbearbeitungfaktor` (
@@ -853,7 +854,7 @@ CREATE TABLE `konzeptbearbeitungfaktor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `konzeptbearbeitungfaktor`
+-- Contenu de la table `konzeptbearbeitungfaktor`
 --
 
 INSERT INTO `konzeptbearbeitungfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
@@ -863,7 +864,7 @@ INSERT INTO `konzeptbearbeitungfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `layout`
+-- Structure de la table `layout`
 --
 
 CREATE TABLE `layout` (
@@ -873,7 +874,7 @@ CREATE TABLE `layout` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `layout`
+-- Contenu de la table `layout`
 --
 
 INSERT INTO `layout` (`ID`, `NAME`, `VALUEE`) VALUES
@@ -885,7 +886,7 @@ INSERT INTO `layout` (`ID`, `NAME`, `VALUEE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `layoutpricing`
+-- Structure de la table `layoutpricing`
 --
 
 CREATE TABLE `layoutpricing` (
@@ -898,7 +899,7 @@ CREATE TABLE `layoutpricing` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mitgliederkorrekturfaktor`
+-- Structure de la table `mitgliederkorrekturfaktor`
 --
 
 CREATE TABLE `mitgliederkorrekturfaktor` (
@@ -908,7 +909,7 @@ CREATE TABLE `mitgliederkorrekturfaktor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `mitgliederkorrekturfaktor`
+-- Contenu de la table `mitgliederkorrekturfaktor`
 --
 
 INSERT INTO `mitgliederkorrekturfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
@@ -918,7 +919,7 @@ INSERT INTO `mitgliederkorrekturfaktor` (`ID`, `EXPRESSION`, `WERT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `papiermaterialauswaehlen`
+-- Structure de la table `papiermaterialauswaehlen`
 --
 
 CREATE TABLE `papiermaterialauswaehlen` (
@@ -928,7 +929,7 @@ CREATE TABLE `papiermaterialauswaehlen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `papiermaterialauswaehlen`
+-- Contenu de la table `papiermaterialauswaehlen`
 --
 
 INSERT INTO `papiermaterialauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
@@ -940,7 +941,7 @@ INSERT INTO `papiermaterialauswaehlen` (`ID`, `DESCRIPTION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `participantfaktor`
+-- Structure de la table `participantfaktor`
 --
 
 CREATE TABLE `participantfaktor` (
@@ -950,7 +951,7 @@ CREATE TABLE `participantfaktor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `participantfaktor`
+-- Contenu de la table `participantfaktor`
 --
 
 INSERT INTO `participantfaktor` (`ID`, `PERCENT`, `WERT`) VALUES
@@ -961,7 +962,7 @@ INSERT INTO `participantfaktor` (`ID`, `PERCENT`, `WERT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Structure de la table `product`
 --
 
 CREATE TABLE `product` (
@@ -972,7 +973,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product`
+-- Contenu de la table `product`
 --
 
 INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
@@ -987,7 +988,7 @@ INSERT INTO `product` (`ID`, `DESCRIPTION`, `LABEL`, `CATEGORY_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prozess`
+-- Structure de la table `prozess`
 --
 
 CREATE TABLE `prozess` (
@@ -997,7 +998,7 @@ CREATE TABLE `prozess` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `prozess`
+-- Contenu de la table `prozess`
 --
 
 INSERT INTO `prozess` (`ID`, `NAME`, `VALUEE`) VALUES
@@ -1007,7 +1008,7 @@ INSERT INTO `prozess` (`ID`, `NAME`, `VALUEE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question`
+-- Structure de la table `question`
 --
 
 CREATE TABLE `question` (
@@ -1015,21 +1016,12 @@ CREATE TABLE `question` (
   `QUESTION` varchar(255) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `question`
---
-
-INSERT INTO `question` (`ID`, `QUESTION`, `REPONSE`, `USER_LOGIN`) VALUES
-(1, 'your city', 'rabat', 'walo'),
-(2, 'your city', 'rabat', 'walo'),
-(3, 'your city', 'rabat', 'walo');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `register`
+-- Structure de la table `register`
 --
 
 CREATE TABLE `register` (
@@ -1039,7 +1031,7 @@ CREATE TABLE `register` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `register`
+-- Contenu de la table `register`
 --
 
 INSERT INTO `register` (`ID`, `EXPRESSION`, `PRICE`) VALUES
@@ -1048,7 +1040,7 @@ INSERT INTO `register` (`ID`, `EXPRESSION`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schluessel`
+-- Structure de la table `schluessel`
 --
 
 CREATE TABLE `schluessel` (
@@ -1060,7 +1052,7 @@ CREATE TABLE `schluessel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `schluessel`
+-- Contenu de la table `schluessel`
 --
 
 INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_ID`) VALUES
@@ -1084,7 +1076,7 @@ INSERT INTO `schluessel` (`ID`, `DESCRIPTION`, `LABEL`, `WERT`, `SCHLUESSELTYPE_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schluesseltype`
+-- Structure de la table `schluesseltype`
 --
 
 CREATE TABLE `schluesseltype` (
@@ -1093,7 +1085,7 @@ CREATE TABLE `schluesseltype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `schluesseltype`
+-- Contenu de la table `schluesseltype`
 --
 
 INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
@@ -1107,7 +1099,7 @@ INSERT INTO `schluesseltype` (`ID`, `NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seiten`
+-- Structure de la table `seiten`
 --
 
 CREATE TABLE `seiten` (
@@ -1116,7 +1108,7 @@ CREATE TABLE `seiten` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `seiten`
+-- Contenu de la table `seiten`
 --
 
 INSERT INTO `seiten` (`ID`, `NBREPAGE`) VALUES
@@ -1166,7 +1158,7 @@ INSERT INTO `seiten` (`ID`, `NBREPAGE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sequence`
+-- Structure de la table `sequence`
 --
 
 CREATE TABLE `sequence` (
@@ -1175,16 +1167,16 @@ CREATE TABLE `sequence` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `sequence`
+-- Contenu de la table `sequence`
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '100');
+('SEQ_GEN', '200');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sortiment`
+-- Structure de la table `sortiment`
 --
 
 CREATE TABLE `sortiment` (
@@ -1197,7 +1189,7 @@ CREATE TABLE `sortiment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `sortiment`
+-- Contenu de la table `sortiment`
 --
 
 INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`, `NAME`, `PRODUCTSCHLUESSEL`) VALUES
@@ -1222,7 +1214,7 @@ INSERT INTO `sortiment` (`ID`, `ARTIKELPERPAGE`, `LKSCHLUESSEL`, `MKSCHLUESSEL`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sotimentitem`
+-- Structure de la table `sotimentitem`
 --
 
 CREATE TABLE `sotimentitem` (
@@ -1233,7 +1225,7 @@ CREATE TABLE `sotimentitem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `sotimentitem`
+-- Contenu de la table `sotimentitem`
 --
 
 INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) VALUES
@@ -1322,7 +1314,7 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teilnehmerzahlpricing`
+-- Structure de la table `teilnehmerzahlpricing`
 --
 
 CREATE TABLE `teilnehmerzahlpricing` (
@@ -1335,7 +1327,7 @@ CREATE TABLE `teilnehmerzahlpricing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `teilnehmerzahlpricing`
+-- Contenu de la table `teilnehmerzahlpricing`
 --
 
 INSERT INTO `teilnehmerzahlpricing` (`ID`, `PRICE`, `TEILNEHMERZAHLMAX`, `TEILNEHMERZAHLMAXOPERATOR`, `TEILNEHMERZAHLMIN`, `TEILNEHMERZAHLMINOPERATOR`) VALUES
@@ -1346,7 +1338,7 @@ INSERT INTO `teilnehmerzahlpricing` (`ID`, `PRICE`, `TEILNEHMERZAHLMAX`, `TEILNE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `umschlagfarbigkeit`
+-- Structure de la table `umschlagfarbigkeit`
 --
 
 CREATE TABLE `umschlagfarbigkeit` (
@@ -1357,7 +1349,7 @@ CREATE TABLE `umschlagfarbigkeit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `umschlagfarbigkeit`
+-- Contenu de la table `umschlagfarbigkeit`
 --
 
 INSERT INTO `umschlagfarbigkeit` (`ID`, `DESCRIPTION`, `LABEL`, `PRICE`) VALUES
@@ -1376,7 +1368,7 @@ INSERT INTO `umschlagfarbigkeit` (`ID`, `DESCRIPTION`, `LABEL`, `PRICE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `umschlagpapierauswaehlen`
+-- Structure de la table `umschlagpapierauswaehlen`
 --
 
 CREATE TABLE `umschlagpapierauswaehlen` (
@@ -1388,7 +1380,7 @@ CREATE TABLE `umschlagpapierauswaehlen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -1406,7 +1398,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TEL`, `DEPARTEMENT_ID`) VALUES
@@ -1429,7 +1421,7 @@ INSERT INTO `user` (`LOGIN`, `ADMIN`, `BLOCKED`, `EMAIL`, `MDPCHANGED`, `NBRCNX`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `veredlung`
+-- Structure de la table `veredlung`
 --
 
 CREATE TABLE `veredlung` (
@@ -1441,7 +1433,7 @@ CREATE TABLE `veredlung` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wechselfassungvariantfaktor`
+-- Structure de la table `wechselfassungvariantfaktor`
 --
 
 CREATE TABLE `wechselfassungvariantfaktor` (
@@ -1451,7 +1443,7 @@ CREATE TABLE `wechselfassungvariantfaktor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `wechselfassungvariantfaktor`
+-- Contenu de la table `wechselfassungvariantfaktor`
 --
 
 INSERT INTO `wechselfassungvariantfaktor` (`ID`, `EXPRESSION`, `VALUE`) VALUES
@@ -1459,23 +1451,23 @@ INSERT INTO `wechselfassungvariantfaktor` (`ID`, `EXPRESSION`, `VALUE`) VALUES
 (2, 'Nein', '1.00');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `artderweiterverarbeitung`
+-- Index pour la table `artderweiterverarbeitung`
 --
 ALTER TABLE `artderweiterverarbeitung`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `auflage`
+-- Index pour la table `auflage`
 --
 ALTER TABLE `auflage`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `auflageseitencovermatrix`
+-- Index pour la table `auflageseitencovermatrix`
 --
 ALTER TABLE `auflageseitencovermatrix`
   ADD PRIMARY KEY (`ID`),
@@ -1486,62 +1478,62 @@ ALTER TABLE `auflageseitencovermatrix`
   ADD KEY `FK_AUFLAGESEITENCOVERMATRIX_BAUKASTEN_ID` (`BAUKASTEN_ID`);
 
 --
--- Indexes for table `ausgabe`
+-- Index pour la table `ausgabe`
 --
 ALTER TABLE `ausgabe`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `backup`
+-- Index pour la table `backup`
 --
 ALTER TABLE `backup`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `baukasten`
+-- Index pour la table `baukasten`
 --
 ALTER TABLE `baukasten`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `bindung`
+-- Index pour la table `bindung`
 --
 ALTER TABLE `bindung`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `category`
+-- Index pour la table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `configuration`
+-- Index pour la table `configuration`
 --
 ALTER TABLE `configuration`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `configurationitem`
+-- Index pour la table `configurationitem`
 --
 ALTER TABLE `configurationitem`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_CONFIGURATIONITEM_CONFIGURATION_ID` (`CONFIGURATION_ID`);
 
 --
--- Indexes for table `correctionschluessel`
+-- Index pour la table `correctionschluessel`
 --
 ALTER TABLE `correctionschluessel`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `cover`
+-- Index pour la table `cover`
 --
 ALTER TABLE `cover`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `demandcategory`
+-- Index pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
   ADD PRIMARY KEY (`ID`),
@@ -1574,7 +1566,7 @@ ALTER TABLE `demandcategory`
   ADD KEY `FK_DEMANDCATEGORY_FARBIGKEIT_ID` (`FARBIGKEIT_ID`);
 
 --
--- Indexes for table `demandcategorycalculation`
+-- Index pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
   ADD PRIMARY KEY (`ID`),
@@ -1582,7 +1574,7 @@ ALTER TABLE `demandcategorycalculation`
   ADD KEY `DEMANDCATEGORYCALCULATION_DEPARTEMENTCRITERIA_ID` (`DEPARTEMENTCRITERIA_ID`);
 
 --
--- Indexes for table `demandcategorycalculationitem`
+-- Index pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
   ADD PRIMARY KEY (`ID`),
@@ -1590,7 +1582,7 @@ ALTER TABLE `demandcategorycalculationitem`
   ADD KEY `DMNDCTEGORYCALCULATIONITEMDMNDCTEGORYCALCULATIONID` (`DEMANDCATEGORYCALCULATION_ID`);
 
 --
--- Indexes for table `demandcategorydepartementcalculation`
+-- Index pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
   ADD PRIMARY KEY (`ID`),
@@ -1598,7 +1590,7 @@ ALTER TABLE `demandcategorydepartementcalculation`
   ADD KEY `DEMANDCATEGORYDEPARTEMENTCALCULATIONDEPARTEMENT_ID` (`DEPARTEMENT_ID`);
 
 --
--- Indexes for table `demandcategoryvalidation`
+-- Index pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
   ADD PRIMARY KEY (`ID`),
@@ -1607,69 +1599,71 @@ ALTER TABLE `demandcategoryvalidation`
   ADD KEY `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`);
 
 --
--- Indexes for table `departement`
+-- Index pour la table `departement`
 --
 ALTER TABLE `departement`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `departementcriteria`
+-- Index pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_DEPARTEMENTCRITERIA_DEPARTEMENT_ID` (`DEPARTEMENT_ID`);
 
 --
--- Indexes for table `departementcriteriaitem`
+-- Index pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` (`DEPARTEMENTCRITERIA_ID`);
 
 --
--- Indexes for table `device`
+-- Index pour la table `device`
 --
 ALTER TABLE `device`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_DEVICE_USER_LOGIN` (`USER_LOGIN`);
 
 --
--- Indexes for table `farbigkeit`
+-- Index pour la table `farbigkeit`
 --
 ALTER TABLE `farbigkeit`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `formatauswaehlen`
+-- Index pour la table `formatauswaehlen`
 --
 ALTER TABLE `formatauswaehlen`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `historiqueconnexionuser`
+-- Index pour la table `historiqueconnexionuser`
 --
 ALTER TABLE `historiqueconnexionuser`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_HISTORIQUECONNEXIONUSER_USER_LOGIN` (`USER_LOGIN`);
 
 --
--- Indexes for table `katalogart`
+-- Index pour la table `katalogart`
 --
 ALTER TABLE `katalogart`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `konzeptbearbeitungfaktor`
+-- Index pour la table `konzeptbearbeitungfaktor`
 --
 ALTER TABLE `konzeptbearbeitungfaktor`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `layout`
+-- Index pour la table `layout`
 --
 ALTER TABLE `layout`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `layoutpricing`
+-- Index pour la table `layoutpricing`
 --
 ALTER TABLE `layoutpricing`
   ADD PRIMARY KEY (`ID`),
@@ -1677,81 +1671,82 @@ ALTER TABLE `layoutpricing`
   ADD KEY `FK_LAYOUTPRICING_LAYOUT_ID` (`LAYOUT_ID`);
 
 --
--- Indexes for table `mitgliederkorrekturfaktor`
+-- Index pour la table `mitgliederkorrekturfaktor`
 --
 ALTER TABLE `mitgliederkorrekturfaktor`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `papiermaterialauswaehlen`
+-- Index pour la table `papiermaterialauswaehlen`
 --
 ALTER TABLE `papiermaterialauswaehlen`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `participantfaktor`
+-- Index pour la table `participantfaktor`
 --
 ALTER TABLE `participantfaktor`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `product`
+-- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_PRODUCT_CATEGORY_ID` (`CATEGORY_ID`);
 
 --
--- Indexes for table `prozess`
+-- Index pour la table `prozess`
 --
 ALTER TABLE `prozess`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `question`
+-- Index pour la table `question`
 --
 ALTER TABLE `question`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_QUESTION_USER_LOGIN` (`USER_LOGIN`);
 
 --
--- Indexes for table `register`
+-- Index pour la table `register`
 --
 ALTER TABLE `register`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `schluessel`
+-- Index pour la table `schluessel`
 --
 ALTER TABLE `schluessel`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` (`SCHLUESSELTYPE_ID`);
 
 --
--- Indexes for table `schluesseltype`
+-- Index pour la table `schluesseltype`
 --
 ALTER TABLE `schluesseltype`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `seiten`
+-- Index pour la table `seiten`
 --
 ALTER TABLE `seiten`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `sequence`
+-- Index pour la table `sequence`
 --
 ALTER TABLE `sequence`
   ADD PRIMARY KEY (`SEQ_NAME`);
 
 --
--- Indexes for table `sortiment`
+-- Index pour la table `sortiment`
 --
 ALTER TABLE `sortiment`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `sotimentitem`
+-- Index pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
   ADD PRIMARY KEY (`ID`),
@@ -1759,182 +1754,182 @@ ALTER TABLE `sotimentitem`
   ADD KEY `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` (`DEMANDCATEGORY_ID`);
 
 --
--- Indexes for table `teilnehmerzahlpricing`
+-- Index pour la table `teilnehmerzahlpricing`
 --
 ALTER TABLE `teilnehmerzahlpricing`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `umschlagfarbigkeit`
+-- Index pour la table `umschlagfarbigkeit`
 --
 ALTER TABLE `umschlagfarbigkeit`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `umschlagpapierauswaehlen`
+-- Index pour la table `umschlagpapierauswaehlen`
 --
 ALTER TABLE `umschlagpapierauswaehlen`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`LOGIN`),
   ADD KEY `FK_USER_DEPARTEMENT_ID` (`DEPARTEMENT_ID`);
 
 --
--- Indexes for table `veredlung`
+-- Index pour la table `veredlung`
 --
 ALTER TABLE `veredlung`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `wechselfassungvariantfaktor`
+-- Index pour la table `wechselfassungvariantfaktor`
 --
 ALTER TABLE `wechselfassungvariantfaktor`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `artderweiterverarbeitung`
+-- AUTO_INCREMENT pour la table `artderweiterverarbeitung`
 --
 ALTER TABLE `artderweiterverarbeitung`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `auflage`
+-- AUTO_INCREMENT pour la table `auflage`
 --
 ALTER TABLE `auflage`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
--- AUTO_INCREMENT for table `auflageseitencovermatrix`
+-- AUTO_INCREMENT pour la table `auflageseitencovermatrix`
 --
 ALTER TABLE `auflageseitencovermatrix`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `configuration`
+-- AUTO_INCREMENT pour la table `configuration`
 --
 ALTER TABLE `configuration`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `configurationitem`
+-- AUTO_INCREMENT pour la table `configurationitem`
 --
 ALTER TABLE `configurationitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `correctionschluessel`
+-- AUTO_INCREMENT pour la table `correctionschluessel`
 --
 ALTER TABLE `correctionschluessel`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
--- AUTO_INCREMENT for table `demandcategory`
+-- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 --
--- AUTO_INCREMENT for table `demandcategorycalculation`
+-- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `demandcategorycalculationitem`
+-- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `demandcategorydepartementcalculation`
+-- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `demandcategoryvalidation`
+-- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `departement`
+-- AUTO_INCREMENT pour la table `departement`
 --
 ALTER TABLE `departement`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `departementcriteria`
+-- AUTO_INCREMENT pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
--- AUTO_INCREMENT for table `departementcriteriaitem`
+-- AUTO_INCREMENT pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
--- AUTO_INCREMENT for table `konzeptbearbeitungfaktor`
+-- AUTO_INCREMENT pour la table `konzeptbearbeitungfaktor`
 --
 ALTER TABLE `konzeptbearbeitungfaktor`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `mitgliederkorrekturfaktor`
+-- AUTO_INCREMENT pour la table `mitgliederkorrekturfaktor`
 --
 ALTER TABLE `mitgliederkorrekturfaktor`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `participantfaktor`
+-- AUTO_INCREMENT pour la table `participantfaktor`
 --
 ALTER TABLE `participantfaktor`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `schluessel`
+-- AUTO_INCREMENT pour la table `schluessel`
 --
 ALTER TABLE `schluessel`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
--- AUTO_INCREMENT for table `schluesseltype`
+-- AUTO_INCREMENT pour la table `schluesseltype`
 --
 ALTER TABLE `schluesseltype`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `seiten`
+-- AUTO_INCREMENT pour la table `seiten`
 --
 ALTER TABLE `seiten`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 --
--- AUTO_INCREMENT for table `sortiment`
+-- AUTO_INCREMENT pour la table `sortiment`
 --
 ALTER TABLE `sortiment`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
--- AUTO_INCREMENT for table `sotimentitem`
+-- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 --
--- AUTO_INCREMENT for table `umschlagfarbigkeit`
+-- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --
 ALTER TABLE `umschlagfarbigkeit`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT for table `wechselfassungvariantfaktor`
+-- AUTO_INCREMENT pour la table `wechselfassungvariantfaktor`
 --
 ALTER TABLE `wechselfassungvariantfaktor`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables exportées
 --
 
 --
--- Constraints for table `auflageseitencovermatrix`
+-- Contraintes pour la table `auflageseitencovermatrix`
 --
 ALTER TABLE `auflageseitencovermatrix`
   ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_AUFLAGE_ID` FOREIGN KEY (`AUFLAGE_ID`) REFERENCES `auflage` (`ID`),
@@ -1944,13 +1939,13 @@ ALTER TABLE `auflageseitencovermatrix`
   ADD CONSTRAINT `FK_AUFLAGESEITENCOVERMATRIX_SEITEN_ID` FOREIGN KEY (`SEITEN_ID`) REFERENCES `seiten` (`ID`);
 
 --
--- Constraints for table `configurationitem`
+-- Contraintes pour la table `configurationitem`
 --
 ALTER TABLE `configurationitem`
   ADD CONSTRAINT `FK_CONFIGURATIONITEM_CONFIGURATION_ID` FOREIGN KEY (`CONFIGURATION_ID`) REFERENCES `configuration` (`ID`);
 
 --
--- Constraints for table `demandcategory`
+-- Contraintes pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
   ADD CONSTRAINT `FK_DEMANDCATEGORY_ARTDERWEITERVERARBEITUNG_ID` FOREIGN KEY (`ARTDERWEITERVERARBEITUNG_ID`) REFERENCES `artderweiterverarbeitung` (`ID`),
@@ -1982,28 +1977,28 @@ ALTER TABLE `demandcategory`
   ADD CONSTRAINT `FK_DEMANDCATEGORY_WECHSELFASSUNGVARIANTFAKTOR_ID` FOREIGN KEY (`WECHSELFASSUNGVARIANTFAKTOR_ID`) REFERENCES `wechselfassungvariantfaktor` (`ID`);
 
 --
--- Constraints for table `demandcategorycalculation`
+-- Contraintes pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
   ADD CONSTRAINT `DEMANDCATEGORYCALCULATION_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`),
   ADD CONSTRAINT `DMNDCTGRYCLCULATIONDMNDCTGRYDPRTEMENTCALCULATIONID` FOREIGN KEY (`DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`) REFERENCES `demandcategorydepartementcalculation` (`ID`);
 
 --
--- Constraints for table `demandcategorycalculationitem`
+-- Contraintes pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
   ADD CONSTRAINT `DMNDCATEGORYCALCULATIONITEMDPRTEMENTCRITERIAITEMID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
   ADD CONSTRAINT `DMNDCTEGORYCALCULATIONITEMDMNDCTEGORYCALCULATIONID` FOREIGN KEY (`DEMANDCATEGORYCALCULATION_ID`) REFERENCES `demandcategorycalculation` (`ID`);
 
 --
--- Constraints for table `demandcategorydepartementcalculation`
+-- Contraintes pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
   ADD CONSTRAINT `DEMANDCATEGORYDEPARTEMENTCALCULATIONDEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`),
   ADD CONSTRAINT `DMANDCATEGORYDEPARTEMENTCALCULATIONDMANDCATEGORYID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`);
 
 --
--- Constraints for table `demandcategoryvalidation`
+-- Contraintes pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
   ADD CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
@@ -2011,50 +2006,67 @@ ALTER TABLE `demandcategoryvalidation`
   ADD CONSTRAINT `FK_DEMANDCATEGORYVALIDATION_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
 
 --
--- Constraints for table `departementcriteria`
+-- Contraintes pour la table `departementcriteria`
 --
 ALTER TABLE `departementcriteria`
   ADD CONSTRAINT `FK_DEPARTEMENTCRITERIA_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
 
 --
--- Constraints for table `departementcriteriaitem`
+-- Contraintes pour la table `departementcriteriaitem`
 --
 ALTER TABLE `departementcriteriaitem`
   ADD CONSTRAINT `FK_DEPARTEMENTCRITERIAITEM_DEPARTEMENTCRITERIA_ID` FOREIGN KEY (`DEPARTEMENTCRITERIA_ID`) REFERENCES `departementcriteria` (`ID`);
 
 --
--- Constraints for table `layoutpricing`
+-- Contraintes pour la table `device`
+--
+ALTER TABLE `device`
+  ADD CONSTRAINT `FK_DEVICE_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+
+--
+-- Contraintes pour la table `historiqueconnexionuser`
+--
+ALTER TABLE `historiqueconnexionuser`
+  ADD CONSTRAINT `FK_HISTORIQUECONNEXIONUSER_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+
+--
+-- Contraintes pour la table `layoutpricing`
 --
 ALTER TABLE `layoutpricing`
   ADD CONSTRAINT `FK_LAYOUTPRICING_DEPARTEMENTCRITERIAITEM_ID` FOREIGN KEY (`DEPARTEMENTCRITERIAITEM_ID`) REFERENCES `departementcriteriaitem` (`ID`),
   ADD CONSTRAINT `FK_LAYOUTPRICING_LAYOUT_ID` FOREIGN KEY (`LAYOUT_ID`) REFERENCES `layout` (`ID`);
 
 --
--- Constraints for table `product`
+-- Contraintes pour la table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `FK_PRODUCT_CATEGORY_ID` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`);
 
 --
--- Constraints for table `schluessel`
+-- Contraintes pour la table `question`
+--
+ALTER TABLE `question`
+  ADD CONSTRAINT `FK_QUESTION_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+
+--
+-- Contraintes pour la table `schluessel`
 --
 ALTER TABLE `schluessel`
   ADD CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`);
 
 --
--- Constraints for table `sotimentitem`
+-- Contraintes pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
   ADD CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
   ADD CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`);
 
 --
--- Constraints for table `user`
+-- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
 SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

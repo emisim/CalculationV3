@@ -8,78 +8,19 @@
 
     <ui:composition>
 
-        <p:dialog id="DemandCategoryDetailDlg" width="1300" style="height: 50%;max-height: 600px;overflow: auto;" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="false" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Details':userController.connectedUser.departement}" >
+        <p:dialog id="DemandCategoryDetailDlg" width="1300" style="height: 50%;max-height: 600px;overflow: auto;" widgetVar="DemandCategoryDetailDialog" modal="true" resizable="true" appendTo="@(body)" header="#{userController.connectedUser.admin == 1?'Details':userController.connectedUser.departement}" >
             <h:form id="DemandCategoryDetailForm">
-                <h:panelGroup id="displayForUser" rendered="#{userController.connectedUser.admin == 0 and userController.connectedUser.departement!=null}" >
-                    <p:tabView id="displayTabForUser" >
-                        <p:tab title="Infos Demand Category">
-                            <p:tabView id="InfosForUser" >
-                                <p:tab title="General">
-                                    <ui:include src="View.xhtml"/>
-                                </p:tab>
-                                <p:tab title="Validation" rendered="#{demandCategoryController.save}">
-                                    <ui:include src="ValidationItemList.xhtml"/>
-                                </p:tab>
-                                <p:tab title="Sortiement items" rendered="#{demandCategoryController.save}">
-                                    <ui:include src="SortimentItemList.xhtml"/>
-                                </p:tab>
-                            </p:tabView>
-                        </p:tab>
-                        <p:tab title="Details">
-                            <p:dataTable id="departementCriteriasDataList"  var="item" value="#{demandCategoryController.departementCriterias}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >
-                                <p:headerRow>
-                                    <p:column colspan="5" style="text-align:left" >
-                                        <h:outputText value="#{item.nomDepCritera}" />
-                                    </p:column>
-                                </p:headerRow>
-                                <p:column headerText="check" width="10">
-                                    <p:selectBooleanCheckbox value="#{item.checked}" >
-                                        <p:ajax  listener="#{demandCategoryController.updateDetailDepCritarias(item)}" update="departementCriteriasDataList" />
-                                    </p:selectBooleanCheckbox>
-                                </p:column>
-                                <p:column headerText="Description" width="80">
-                                    <h:outputText value="#{item.descrDepCriteriaItem}" />
-                                </p:column>
-                                <p:column headerText="Global Description" width="80">
-                                    <h:outputText value="#{item.descrDepCriteriaItemGlobal}" />
-                                </p:column>
-                                <p:column headerText="Unit Price" width="50" >
-                                    <h:outputText value="#{item.priceUpdate}" />
-                                </p:column>
-                                <p:column headerText="Global price" width="50" >
-                                    <h:outputText value="#{item.priceGlobalUpdate}" />
-                                </p:column>
-                                <p:summaryRow>
-                                    <p:column colspan="3" ></p:column>
-                                    <p:column>
-                                        <!--<h:outputText value="Total Unit Prices : {item.summCriteria} €" />-->
-                                    </p:column>
-                                     <p:column>
-                                        <h:outputText value="Total Price : #{item.summCriteriaGlobal} €" />
-                                    </p:column>
-                                </p:summaryRow>
-                                <f:facet name="footer">
-                                    <h:outputText value="Print Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDruck:'0.00'} €" style="text-align:left" /><br></br>
-                                    <h:outputText value="Total Price : #{demandCategoryController.departementCriterias.size()>0?demandCategoryController.departementCriterias.get(0).summDepartementGlobal:'0.00'} €" style="text-align:right" />
-                                </f:facet>
-                            </p:dataTable>
-                            <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
-                                <p:commandButton  actionListener="#{demandCategoryController.updateDepartementCriterias()}" value="#{bundle.Save}" update="departementCriteriasDataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
-                            </p:panel>   
-                        </p:tab> 
-                    </p:tabView>
-                </h:panelGroup>
 
-                <h:panelGroup id="displayForAdmin" rendered="#{userController.connectedUser.admin == 1 and userController.connectedUser.departement==null}" >
+                <h:panelGroup id="displayForAdmin" >
                     <p:fieldset id="fieldSetInfoForAdmin" legend="Infos Demand Category" toggleable="true" toggleSpeed="500">
                         <p:tabView id="InfosForAdminView">
                             <p:tab title="General">
                                 <ui:include src="View.xhtml"/>
                             </p:tab>
-                            <p:tab title="Validation" rendered="#{demandCategoryController.save}">
+                            <p:tab title="Validation" >
                                 <ui:include src="ValidationItemList.xhtml"/>
                             </p:tab>
-                            <p:tab title="Sortiement items" rendered="#{demandCategoryController.save}">
+                            <p:tab title="Sortiement items" >
                                 <ui:include src="SortimentItemList.xhtml"/>
                             </p:tab>
                         </p:tabView>   
@@ -125,9 +66,10 @@
                                         <h:outputText value="Total Price: #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDepartementGlobal:'0.00'} €" style="font-size:18px;text-align: left;" />
                                     </f:facet>
                                 </p:dataTable>
-                                <p:panel  styleClass="align-center" rendered="#{demandCategoryController.save}">
-                                    <p:commandButton  actionListener="#{demandCategoryController.updateDepItems(detailDepartement.value)}" value="#{bundle.Save}" update="dataList,:growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');"/>
-                                </p:panel>   
+                                <p:panel  styleClass="align-center" >
+                                    <p:commandButton rendered="#{demandCategoryController.save.equals('simuler')}" icon="fa fa-plus-square-o" actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update=":growl,:DemandCategoryCreateForm:display" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');" />
+                                    <p:commandButton rendered="#{demandCategoryController.save.equals('details')}" icon="fa fa-plus-square-o"  actionListener="#{demandCategoryController.updateDepItems(detailDepartement.value)}" value="#{bundle.Edit}" update=":growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');" />
+                                </p:panel> 
                             </p:tab>
                         </p:tabView>
                     </p:fieldset>
