@@ -105,4 +105,11 @@ public class DemandCategoryValidation implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "DemandCategoryValidation{" + "id=" + id + ", sysDate=" + sysDate + '}';
+    }
+    
+    
+
 }

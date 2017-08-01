@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.ejb.EJB;
@@ -45,24 +47,27 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
     }
 
     //Wichtig für die Evaluation unsere Expression
-    public Object evalFunction(String expression, DemandCategory demandCategory, boolean execExpression) throws ScriptException {
+    public Object evalFunction(String expression, DemandCategory demandCategory, boolean execExpression) {
         System.out.println("ha expression" + expression + " ha exec " + execExpression);
         System.out.println("haa input " + demandCategory);
-        if (execExpression == true) {
-            System.out.println("haa expression ==> " + expression);
-            System.out.println("ha demandCategory != null lwela " + (demandCategory != null));
-            System.out.println("ha SearchUtil.isStringNullOrVide(expression) tanyia " + (!SearchUtil.isStringNullOrVide(expression)));
-            if (demandCategory != null) {
-                // ALlle Input sinbd als Object hier gespeicherts
-                getJsEngine().put("demandCategory", demandCategory);
+        try {
+
+            if (execExpression == true) {
+                System.out.println("haa expression ==> " + expression);
+                if (demandCategory != null) {
+                    // ALlle Input sinbd als Object hier gespeicherts
+                    getJsEngine().put("demandCategory", demandCategory);
+                }
+                if (!SearchUtil.isStringNullOrVide(expression)) {
+                    Object obj = getJsEngine().eval(expression);
+                    BigDecimal value = new BigDecimal(obj + "");
+                    value = value.setScale(2, RoundingMode.HALF_UP);
+                    System.out.println("haaa l eval ==> " + value);
+                    return value;
+                }
             }
-            if (!SearchUtil.isStringNullOrVide(expression)) {
-                Object obj = getJsEngine().eval(expression);
-                BigDecimal value = new BigDecimal(obj+"");
-                value=value.setScale(2, RoundingMode.HALF_UP);
-                System.out.println("haaa l eval ==> " + value);
-                return value;
-            }
+        } catch (ScriptException ex) {
+            return "0";
         }
         return "0";
     }
