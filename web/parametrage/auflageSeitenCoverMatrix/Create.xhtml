@@ -12,12 +12,7 @@
             <h:form id="AuflageSeitenCoverMatrixCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageSeitenCoverMatrixController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_cover}" for="cover" />
-                        <p:selectOneMenu id="cover" value="#{auflageSeitenCoverMatrixController.selected.cover}" >
-                            <f:selectItems value="#{coverController.itemsAvailableSelectOne}"
-                                           var="coverItem"
-                                           itemValue="#{coverItem}"/>
-                        </p:selectOneMenu>
+                      
                         <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_auflage}" for="auflage" />
                         <p:selectOneMenu id="auflage" value="#{auflageSeitenCoverMatrixController.selected.auflage}" >
                             <f:selectItems value="#{auflageController.itemsAvailableSelectOne}"
@@ -39,7 +34,7 @@
                         <p:outputLabel value="#{bundle.CreateAuflageSeitenCoverMatrixLabel_price}" for="price" />
                         <p:inputText id="price" value="#{auflageSeitenCoverMatrixController.selected.price}" title="#{bundle.CreateAuflageSeitenCoverMatrixTitle_price}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{auflageSeitenCoverMatrixController.create}" value="#{bundle.Save}" update="display,:AuflageSeitenCoverMatrixListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuflageSeitenCoverMatrixCreateDialog');"/>
+                    <p:commandButton actionListener="#{auflageSeitenCoverMatrixController.create}" value="#{bundle.Save}" update="display,:parametrageTab:AuflageSeitenCoverMatrixListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuflageSeitenCoverMatrixCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AuflageSeitenCoverMatrixCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
