@@ -50,6 +50,7 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
             sotimentItems.get(0).setWert(new BigDecimal(100));
         }
         for (SotimentItem sotimentItem : sotimentItems) {
+          //  System.out.println("settttttteeeeeeeeeegf");
             sotimentItem.setDemandCategory(demandCategory);
             if (!simulation) {
                 if (isSave) {
@@ -64,9 +65,9 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
     public List<SotimentItem> findBySortiement(Sortiment sortiment) {
         List<SotimentItem> sotimentItems = new ArrayList<>();
         if (sortiment != null && sortiment.getId() != null) {
-            System.out.println("je suis dans findBySortiement");
+           // System.out.println("je suis dans findBySortiement");
             String query = "SELECT s FROM SotimentItem s WHERE s.sortiment.id = " + sortiment.getId();
-            System.out.println(query);
+           // System.out.println(query);
             sotimentItems = em.createQuery(query).getResultList();
         }
         return sotimentItems;

@@ -62,7 +62,7 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
                 } else {
                     edit(demandCategoryCalculationItem);
                 }
-                System.out.println("hana edite demandCategoryCalculationItem ==> " + demandCategoryCalculationItem);
+               // System.out.println("hana edite demandCategoryCalculationItem ==> " + demandCategoryCalculationItem);
             }
             res.add(demandCategoryCalculationItem);
         }
@@ -100,10 +100,10 @@ public class DemandCategoryCalculationItemFacade extends AbstractFacade<DemandCa
         String query = "SELECT item FROM DemandCategoryCalculationItem item WHERE "
                 + "item.demandCategoryCalculation.id=" + demandCategoryCalculation.getId() + " AND item.departementCriteriaItem.id=" + departementCriteriaItem.getId();
         List<DemandCategoryCalculationItem> res = em.createQuery(query).getResultList();
-        System.out.println("queryyy MMMMMMMMMMMMMMMMMm " + query);
-        System.out.println("DemandCategoryCalculationItem.size MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + res);
+//        System.out.println("queryyy MMMMMMMMMMMMMMMMMm " + query);
+//        System.out.println("DemandCategoryCalculationItem.size MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + res);
         if (res != null && !res.isEmpty() && res.get(0) != null) {
-            System.out.println("DemandCategoryCalculationItem.size and list is not null MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + res.get(0));
+          //  System.out.println("DemandCategoryCalculationItem.size and list is not null MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM " + res.get(0));
             return res.get(0);
         }
         return new DemandCategoryCalculationItem();

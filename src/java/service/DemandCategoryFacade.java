@@ -20,6 +20,7 @@ import controler.util.JsfUtil;
 import controler.util.SearchUtil;
 import controler.util.SessionUtil;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,10 +57,23 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private DemandCategoryValidationFacade demandCategoryValidationFacade;
     @EJB
     private DepartementFacade departementFacade;
+    @EJB
+    private DemandCategoryFacade demandCategoryFacade;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public boolean sortimentCondition(DemandCategory demandCategory, List<SotimentItem> sotimentItems) {
+        return demandCategory != null && sotimentItems != null && !sotimentItems.isEmpty() && DemandCategoryCalculationFacade.summSortiment(demandCategory, sotimentItems, false, 0).compareTo(new BigDecimal(100)) == 0;
+    }
+
+    public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
+        if (demandCategory.getAuflage() != null && demandCategory.getAuflage().getPrice() != null && demandCategory.getAuflage().getPrice().compareTo(new BigDecimal(0)) != 0) {
+            return demandCategory.getSummeGlobal().add(demandCategory.getSummDruck()).divide(demandCategory.getAuflage().getPrice(), 2, RoundingMode.HALF_UP);
+        }
+        return new BigDecimal(0);
     }
 
     private String findByValidation(Integer validationLevel, String beanAbrveation) {
@@ -92,10 +106,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         saveOrUpdate(simulation, isSave, demandCategory);
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(demandCategory, departement, simulation, isSave);
-        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
-        calcSumDruck(demandCategory);
-        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
-        teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        performCalculationDemandCategory(demandCategory, demandCategoryDepartementCalculations, sotimentItems);
         if (simulation == false) {
             edit(demandCategory);
             if (isSave) {
@@ -104,6 +115,20 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
         saveOrUpdate(simulation, isSave, demandCategory);
 
+    }
+
+    public void performCalculationDemandCategory(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations, List<SotimentItem> sotimentItems) {
+        calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
+        calcSumDruck(demandCategory);
+        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
+        teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        calcSumPerAuflag(demandCategory);
+    }
+
+    public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
+        prepare(demandCategory, isSave);
+        saveOrUpdate(simulation, isSave, demandCategory);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
     }
 
     private void saveOrUpdate(boolean simulation, boolean isSave, DemandCategory demandCategory) {
@@ -188,8 +213,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         query += SearchUtil.addConstraintOr("so", "sortiment.name", "=", sortiemnts);
         query += SearchUtil.addConstraintOr("dc", "department.name", "=", departements);
 
-        System.out.println("ha departements ==> " + departements);
-        System.out.println("ha query ==> " + query);
+//        System.out.println("ha departements ==> " + departements);
+//        System.out.println("ha query ==> " + query);
         demandCategorys = em.createQuery(query).getResultList();
 
         if (demandCategorys != null && demandCategorys.isEmpty()) {
@@ -249,24 +274,43 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
     }
 
-    public void updateDepItems(List<DepartementDetail> departementDetails) {
+    public void updateDepItems(List<DepartementDetail> departementDetails, List<SotimentItem> sotimentItems, String flag) {
         if (departementDetails != null && !departementDetails.isEmpty()) {
             for (DepartementDetail departementCriteria : departementDetails) {
-                DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuationId());
-                demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
-                demandCategoryCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummCriteriaGlobal()));
-                demandCategoryCalculationFacade.edit(demandCategoryCalculation);
-                DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItemId());
-                demandCategoryCalculationItem.setPriceUpdate(new BigDecimal(departementCriteria.getPriceUpdate()));
-                demandCategoryCalculationItem.setPriceGlobalUpdate(new BigDecimal(departementCriteria.getPriceGlobalUpdate()));
-                demandCategoryCalculationItem.setCalcultaed(departementCriteria.isChecked());
-                demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
-                DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculationId());
-                demandCategoryDepartementCalculation.setSumme(new BigDecimal(departementCriteria.getSummDepartement()));
-                demandCategoryDepartementCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummDepartementGlobal()));
-                demandCategoryDepartementCalculationFacade.edit(demandCategoryDepartementCalculation);
+                if (flag.equals("edit")) {
+                    DemandCategoryCalculation demandCategoryCalculation = demandCategoryCalculationFacade.find(departementCriteria.getDemandCategoryCalcuation().getId());
+                    demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
+                    demandCategoryCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummCriteriaGlobal()));
+                    demandCategoryCalculationFacade.edit(demandCategoryCalculation);
+                    DemandCategoryCalculationItem demandCategoryCalculationItem = demandCategoryCalculationItemFacade.find(departementCriteria.getDemandCategoryCalculationItem().getId());
+                    demandCategoryCalculationItem.setPriceUpdate(new BigDecimal(departementCriteria.getPriceUpdate()));
+                    demandCategoryCalculationItem.setPriceGlobalUpdate(new BigDecimal(departementCriteria.getPriceGlobalUpdate()));
+                    demandCategoryCalculationItem.setCalcultaed(departementCriteria.isChecked());
+                    demandCategoryCalculationItemFacade.edit(demandCategoryCalculationItem);
+                    DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.find(departementCriteria.getDemandCategoryDepartementCalculation().getId());
+                    demandCategoryDepartementCalculation.setSumme(new BigDecimal(departementCriteria.getSummDepartement()));
+                    demandCategoryDepartementCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummDepartementGlobal()));
+                    demandCategoryDepartementCalculationFacade.edit(demandCategoryDepartementCalculation);
+                }
+                if (flag.equals("save")) {
+                    //   System.out.println("save save");
+                    DemandCategoryCalculation demandCategoryCalculation = departementCriteria.getDemandCategoryCalcuation();
+                    demandCategoryCalculation.setSumme(new BigDecimal(departementCriteria.getSummCriteria()));
+                    demandCategoryCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummCriteriaGlobal()));
+                    demandCategoryCalculationFacade.create(demandCategoryCalculation);
+                    DemandCategoryCalculationItem demandCategoryCalculationItem = departementCriteria.getDemandCategoryCalculationItem();
+                    demandCategoryCalculationItem.setPriceUpdate(new BigDecimal(departementCriteria.getPriceUpdate()));
+                    demandCategoryCalculationItem.setPriceGlobalUpdate(new BigDecimal(departementCriteria.getPriceGlobalUpdate()));
+                    demandCategoryCalculationItem.setCalcultaed(departementCriteria.isChecked());
+                    demandCategoryCalculationItemFacade.create(demandCategoryCalculationItem);
+                    DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = departementCriteria.getDemandCategoryDepartementCalculation();
+                    demandCategoryDepartementCalculation.setSumme(new BigDecimal(departementCriteria.getSummDepartement()));
+                    demandCategoryDepartementCalculation.setSummeGlobal(new BigDecimal(departementCriteria.getSummDepartementGlobal()));
+                    demandCategoryDepartementCalculationFacade.create(demandCategoryDepartementCalculation);
+                }
+
             }
-            JsfUtil.addSuccessMessage("Details updated");
+
         }
     }
 

@@ -182,7 +182,7 @@ public class DemandCategory implements Serializable {
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal summUnitPrice = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal summeGlobal;
+    BigDecimal summeGlobal= new BigDecimal(0);
 
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;

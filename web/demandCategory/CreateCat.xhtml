@@ -148,9 +148,7 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlKapitetel}" for="anzahlKapitetel" rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}" />
                                     <p:inputText id="anzahlKapitetel" value="#{demandCategoryController.selected.anzahlKapitetel}" title="#{bundle.CreateDemandCategoryTitle_anzahlKapitetel}" rendered="#{demandCategoryController.renderAttribute('anzahlKapitetel')}" />
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_correctionSchluessel}" for="correctionSchluessel" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
-                                    <p:inputText id="correctionSchluessel" value="#{demandCategoryController.selected.correctionSchluessel}" title="#{bundle.CreateDemandCategoryTitle_anzahlKapitetel}" disabled="true" rendered="#{demandCategoryController.renderAttribute('correctionSchluessel')}" />
-
+                                   
 
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mitgliederkorrekturFaktor}" for="mitgliederkorrekturFaktor" rendered="#{demandCategoryController.renderAttribute('mitgliederkorrekturFaktor')}" />
@@ -219,7 +217,7 @@
                                     </p:selectBooleanCheckbox>
                                 </h:panelGrid>
 
-                                <h:panelGrid id="afterDruck" columns="10" cellpadding="7">
+                                <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                                     <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" autoWidth="false" >

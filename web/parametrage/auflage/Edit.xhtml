@@ -12,6 +12,8 @@
             <h:form id="AuflageEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAuflageLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{auflageController.selected.price}" title="#{bundle.EditAuflageTitle_price}" />
                         <p:outputLabel value="#{bundle.EditAuflageLabel_description}" for="description" />
                         <p:inputText id="description" value="#{auflageController.selected.description}" title="#{bundle.EditAuflageTitle_description}" />
                     </p:panelGrid>

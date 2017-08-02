@@ -15,7 +15,6 @@ import service.DemandCategoryFacade;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +38,7 @@ import org.primefaces.context.RequestContext;
 import service.AccessFacade;
 import service.DemandCategoryCalculationItemFacade;
 import service.DemandCategoryDepartementCalculationFacade;
+import service.SotimentItemFacade;
 
 @Named("demandCategoryController")
 @ViewScoped
@@ -64,6 +64,10 @@ public class DemandCategoryController implements Serializable {
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
     @EJB
     private AccessFacade accessFacade;
+    @EJB
+    private DemandCategoryFacade demandCategoryFacade;
+    @EJB
+    private SotimentItemFacade sotimentItemFacade;
 
     private List<DemandCategory> items = null;
     private DemandCategory selected;
@@ -95,10 +99,7 @@ public class DemandCategoryController implements Serializable {
     private List<String> departements = new ArrayList();
 
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
-        if (demandCategory.getAuflage() != null && demandCategory.getAuflage().getPrice() != null) {
-            return demandCategory.getSummeGlobal().add(demandCategory.getSummDruck()).divide(demandCategory.getAuflage().getPrice(), 2, RoundingMode.HALF_UP);
-        }
-        return new BigDecimal(0);
+        return ejbFacade.calcSumPerAuflag(demandCategory);
     }
 
     @PostConstruct
@@ -131,22 +132,21 @@ public class DemandCategoryController implements Serializable {
     public void simuler() throws ScriptException {
         save = "simuler";
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
-        if (selected != null && selected.getSotimentItems() != null && !selected.getSotimentItems().isEmpty()) {
-//            if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
-//                demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
-//                departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-//            }
-//            if (departement == null && user.getAdmin() == 1) {
+        List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculationsAll = new ArrayList();
+
+        if (ejbFacade.sortimentCondition(selected, selected.getSotimentItems())) {
             List<Departement> departements = departementFacade.findAll();
             if (departements != null && !departements.isEmpty()) {
                 for (Departement departement1 : departements) {
                     demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, departement1, true, false);
+                    demandCategoryDepartementCalculationsAll.addAll(demandCategoryDepartementCalculations);
                     myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
                     params.put(departement1.getName(), myDepartementCriterias);
                 }
             }
+            ejbFacade.performCalculationDemandCategory(selected, demandCategoryDepartementCalculationsAll, sotimentItems);
+
             System.out.println("Departements details :::: " + params);
-            //}
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('DemandCategoryDetailDialog').show();");
         } else {
@@ -193,26 +193,28 @@ public class DemandCategoryController implements Serializable {
         DemandCategoryCalculationFacade.calculateAnzahlBestandArtikel(selected);
     }
 
-    public void calculAnzahlGenerierungUpdateSeitenn() {
-        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
-    }
-
+//1
     public void calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn() {
         DemandCategoryCalculationFacade.calculateAnzahlSonderSeiten(selected);
         DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
 
     }
+//2
+    public void calculAnzahlGenerierungUpdateSeitenn() {
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
+    }
 
+//3
     public void calculAnzahlBestandArtikelAndAnzahlGesamtProdukt() {
         demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(selected, sotimentItems);
 
     }
-
+//4
     public void calculAnzahlBestandArtikelAndAnzahlNeueProdukt() {
         demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlNeueProdukt(selected, sotimentItems);
 
     }
-
+//5
     public void calculAnzahlBestandProdukt() {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
@@ -368,16 +370,24 @@ public class DemandCategoryController implements Serializable {
         System.out.println("params ::::: " + params);
     }
 
-    public void updateDepItems(List<DepartementDetail> departementDetails) {
-        ejbFacade.updateDepItems(departementDetails);
+    public void updateDepItems(String flag) {
+        try {
+            if (flag.equals("save")) {
+                demandCategoryFacade.saveForSimulation(sotimentItems, selected, false, true);
+            }
+            for (Map.Entry<String, List<DepartementDetail>> entry : params.entrySet()) {
+                List<DepartementDetail> value = entry.getValue();
+                ejbFacade.updateDepItems(value, sotimentItems, flag);
+            }
+            JsfUtil.addSuccessMessage("Details updated");
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("something went wrong");
+        }
+
     }
 
     public void updateDetailDepCritarias(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, departementCriterias);
-    }
-
-    public void updateDepartementCriterias() {
-        updateDepItems(departementCriterias);
     }
 
     public Integer getValidationSearch() {
@@ -386,10 +396,6 @@ public class DemandCategoryController implements Serializable {
 
     public void setValidationSearch(Integer validationSearch) {
         this.validationSearch = validationSearch;
-    }
-
-    public void updateProjectManagement() {
-        updateDepItems(projectManagement);
     }
 
     public void updateDetails(DepartementDetail loadedDepartementDetail, List<DepartementDetail> departementDetails) {
@@ -448,13 +454,9 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void verifySortiement() {
-        if (!sortimentCondition()) {
+        if (!ejbFacade.sortimentCondition(selected, sotimentItems)) {
             JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
         }
-    }
-
-    private boolean sortimentCondition() {
-        return DemandCategoryCalculationFacade.summSortiment(selected, sotimentItems, false, 0).compareTo(new BigDecimal(100)) == 0;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -462,7 +464,7 @@ public class DemandCategoryController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.CREATE) {
-                    if (getSotimentItems() != null && !getSotimentItems().isEmpty() && sortimentCondition()) {
+                    if (ejbFacade.sortimentCondition(selected, getSotimentItems())) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
                         JsfUtil.addSuccessMessage(successMessage + " et une validation au nom de " + SessionUtil.getConnectedUser().getLogin() + " a ete automatiquement sauvgardé");
                     } else {

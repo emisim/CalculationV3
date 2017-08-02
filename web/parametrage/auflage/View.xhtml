@@ -12,6 +12,8 @@
             <h:form id="AuflageViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAuflageLabel_price}"/>
+                        <h:outputText value="#{auflageController.selected.price}" title="#{bundle.ViewAuflageTitle_price}"/>
                         <h:outputText value="#{bundle.ViewAuflageLabel_description}"/>
                         <h:outputText value="#{auflageController.selected.description}" title="#{bundle.ViewAuflageTitle_description}"/>
                     </p:panelGrid>

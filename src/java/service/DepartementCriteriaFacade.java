@@ -88,9 +88,10 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
                     departementDetail.setSummDruck(summDruck);
                     departementDetail.setChecked(demandCategoryCalculationItem.getCalcultaed());
                     departementDetail.setId(new Long(i));
-                    departementDetail.setDemandCategoryCalcuationId(demandCategoryCalculation.getId());
-                    departementDetail.setDemandCategoryDepartementCalculationId(demandCategoryDepartementCalculation.getId());
-                    departementDetail.setDemandCategoryCalculationItemId(demandCategoryCalculationItem.getId());
+                    departementDetail.setDemandCategory(demandCategoryDepartementCalculation.getDemandCategory());
+                    departementDetail.setDemandCategoryCalcuation(demandCategoryCalculation);
+                    departementDetail.setDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
+                    departementDetail.setDemandCategoryCalculationItem(demandCategoryCalculationItem);
                     departementDetails.add(departementDetail);
                     i++;
                 }
@@ -119,9 +120,9 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
     }
 
     public void deleteCriteriaWithCriteriaItem(DepartementCriteria criteria) {
-        System.out.println("hahowa criteria : " + criteria);
+//        System.out.println("hahowa criteria : " + criteria);
         String requette = "select item from DepartementCriteriaItem item where item.departementCriteria.id ='" + criteria.getId() + "'";
-        System.out.println("hahiya requette : " + requette);
+//        System.out.println("hahiya requette : " + requette);
         List<DepartementCriteriaItem> departementCriteriaItems = em.createQuery(requette).getResultList();
 
         for (DepartementCriteriaItem departementCriteriaItem : departementCriteriaItems) {

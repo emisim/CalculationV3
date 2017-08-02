@@ -78,9 +78,9 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (selected.getAnzahlGesamtArtikel() != 0) {
             double div = ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100);
             selected.setCorrectionSchluessel(correctionSchluesselFacade.findByPercent((int) ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100)));
-            
-            System.out.println("aatini correction schluessel dyal : " + ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100));
-            System.out.println("daba correctionschlluessel hiya:" + selected.getCorrectionSchluessel().getValue());
+
+//            System.out.println("aatini correction schluessel dyal : " + ((selected.getAnzahlNeueArtikel() / selected.getAnzahlGesamtArtikel()) * 100));
+//            System.out.println("daba correctionschlluessel hiya:" + selected.getCorrectionSchluessel().getValue());
         }
     }
 
@@ -91,7 +91,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (sortimentFaktor.compareTo(new BigDecimal(0)) != 0) {
             selected.setAnzahlGesamtProdukt((int) (new Double(selected.getAnzahlGesamtArtikel()) / sortimentFaktor.doubleValue()));
         }
-        System.out.println("ha anzahlGesamtProdukt" + selected.getAnzahlGesamtProdukt());
+        //  System.out.println("ha anzahlGesamtProdukt" + selected.getAnzahlGesamtProdukt());
 
     }
 
@@ -128,6 +128,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (injectInDemandCategory) {
             selected.setArtikelPerPagelFaktor(summ);
         }
+        System.out.println("ha summSortimentArtikelPerPagel " + selected.getArtikelPerPagelFaktor());
         return summ;
     }
 
@@ -136,6 +137,8 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (injectInDemandCategory) {
             selected.setlKSchluesselFaktor(summ);
         }
+        System.out.println("ha summSortimentlKSchluessel " + selected.getlKSchluesselFaktor());
+
         return summ;
     }
 
@@ -144,6 +147,8 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
         if (injectInDemandCategory) {
             selected.setmKSchluesselFaktor(summ);
         }
+        System.out.println("ha summSortimentmKSchluessel " + selected.getmKSchluesselFaktor());
+
         return summ;
     }
 
@@ -189,7 +194,7 @@ public class DemandCategoryCalculationFacade extends AbstractFacade<DemandCatego
     }
 
     public static void calculateAnzahlGenerierungUpdateSeitenn(DemandCategory selected) {
-        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten() -selected.getAnzahlIHVZSeiten() - selected.getAnzahlBestellNrSeiten());
+        selected.setAnzahlGenerierungUpdateSeiten(selected.getUmfang() - selected.getAnzahlSonderSeiten() - selected.getAnzahlIHVZSeiten() - selected.getAnzahlBestellNrSeiten());
     }
 
     public List<DemandCategoryCalculation> findWithItemsByDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {

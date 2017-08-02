@@ -72,7 +72,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
                 } else {
                     edit(demandCategoryDepartementCalculation);
                 }
-                System.out.println("hana savite demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
+             //   System.out.println("hana savite demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
             }
 
             //Save calculation
@@ -81,7 +81,7 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
             demandCategoryDepartementCalculation.setSummeGlobal(calculerSum(demandCategoryDepartementCalculation.getDemandCategoryCalculations(), "summGlobal"));
             if (!similuer) {
                 edit(demandCategoryDepartementCalculation);
-                System.out.println("hana editer demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
+         //       System.out.println("hana editer demandCategoryDepartementCalculation ==> " + demandCategoryDepartementCalculation);
             }
             res.add(demandCategoryDepartementCalculation);
         }
@@ -109,14 +109,14 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
     private DemandCategoryDepartementCalculation createOrFind(Departement departement, DemandCategory demandCategory) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
                 + "item.demandCategory.id=" + demandCategory.getId() + " AND item.departement.id=" + departement.getId();
-        System.out.println("haa query ==> " + query);
+ //       System.out.println("haa query ==> " + query);
         List<DemandCategoryDepartementCalculation> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
-            System.out.println("rah l9ite DemandCategoryDepartementCalculation f bd ha son id " + res.get(0).getId());
+       //     System.out.println("rah l9ite DemandCategoryDepartementCalculation f bd ha son id " + res.get(0).getId());
             return res.get(0);
         }
-        System.out.println("rah maaa l9itechhh DemandCategoryDepartementCalculation f bd ");
-        System.out.println("Id ===========>" + generate("DemandCategoryDepartementCalculation", "id"));
+//        System.out.println("rah maaa l9itechhh DemandCategoryDepartementCalculation f bd ");
+//        System.out.println("Id ===========>" + generate("DemandCategoryDepartementCalculation", "id"));
         DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = new DemandCategoryDepartementCalculation();
         demandCategoryDepartementCalculation.setId(generate("DemandCategoryDepartementCalculation", "id"));
         demandCategoryDepartementCalculation.setDemandCategory(demandCategory);
@@ -127,10 +127,10 @@ public class DemandCategoryDepartementCalculationFacade extends AbstractFacade<D
     private DemandCategoryDepartementCalculation find(Departement departement, DemandCategory demandCategory) {
         String query = "SELECT item FROM DemandCategoryDepartementCalculation item WHERE "
                 + "item.demandCategory.id=" + demandCategory.getId() + " AND item.departement.id=" + departement.getId();
-        System.out.println("haa query ==> " + query);
+   //     System.out.println("haa query ==> " + query);
         List<DemandCategoryDepartementCalculation> res = em.createQuery(query).getResultList();
         if (res != null && !res.isEmpty() && res.get(0) != null) {
-            System.out.println("rah l9ite DemandCategoryDepartementCalculation f bd ha son id " + res.get(0).getId());
+    //        System.out.println("rah l9ite DemandCategoryDepartementCalculation f bd ha son id " + res.get(0).getId());
             return res.get(0);
         }
         return new DemandCategoryDepartementCalculation();
