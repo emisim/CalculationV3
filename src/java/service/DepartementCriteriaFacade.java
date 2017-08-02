@@ -88,9 +88,10 @@ public class DepartementCriteriaFacade extends AbstractFacade<DepartementCriteri
                     departementDetail.setSummDruck(summDruck);
                     departementDetail.setChecked(demandCategoryCalculationItem.getCalcultaed());
                     departementDetail.setId(new Long(i));
-                    departementDetail.setDemandCategoryCalcuationId(demandCategoryCalculation.getId());
-                    departementDetail.setDemandCategoryDepartementCalculationId(demandCategoryDepartementCalculation.getId());
-                    departementDetail.setDemandCategoryCalculationItemId(demandCategoryCalculationItem.getId());
+                    departementDetail.setDemandCategory(demandCategoryDepartementCalculation.getDemandCategory());
+                    departementDetail.setDemandCategoryCalcuation(demandCategoryCalculation);
+                    departementDetail.setDemandCategoryDepartementCalculation(demandCategoryDepartementCalculation);
+                    departementDetail.setDemandCategoryCalculationItem(demandCategoryCalculationItem);
                     departementDetails.add(departementDetail);
                     i++;
                 }
