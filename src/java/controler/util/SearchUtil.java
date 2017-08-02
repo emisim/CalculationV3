@@ -44,7 +44,7 @@ public class SearchUtil {
             for (Object value : values) {
                 query += addConstraintOr(beanAbrev, atributeName, operator, value);
             }
-            return query+")";
+            return query + ")";
         }
         return "";
     }
@@ -59,6 +59,7 @@ public class SearchUtil {
         }
         return requette;
     }
+
     public static String addConstraintMinMaxStrict(String beanAbrev, String atributeName, Object valueMin, Object valueMax) {
         String requette = "";
         if (valueMin != null) {
@@ -74,8 +75,16 @@ public class SearchUtil {
         return addConstraint(beanAbrev, atributeName, operator, DateUtil.convertFormUtilToSql(value));
     }
 
+    public static String addConstraintDateTimestamp(String beanAbrev, String atributeName, String operator, Date value) {
+        return addConstraint(beanAbrev, atributeName, operator, DateUtil.convertFormUtilToTimestamp(value));
+    }
+
     public static String addConstraintMinMaxDate(String beanAbrev, String atributeName, Date valueMin, Date valueMax) {
         return addConstraintMinMax(beanAbrev, atributeName, DateUtil.convertFormUtilToSql(valueMin), DateUtil.convertFormUtilToSql(valueMax));
+    }
+
+    public static String addConstraintMinMaxDateTimestamp(String beanAbrev, String atributeName, Date valueMin, Date valueMax) {
+        return addConstraintMinMax(beanAbrev, atributeName, DateUtil.convertFormUtilToTimestamp(valueMin), DateUtil.convertFormUtilToTimestamp(valueMax));
     }
 
     public static String supprimerCleEtranger(String beanAbrev, String atributeName, String condition, Object value) {
@@ -104,9 +113,9 @@ public class SearchUtil {
         }
         return requete;
     }
-    
-    public static boolean isStringNullOrVide(String str){
-        return (str==null || str.equals(""));
+
+    public static boolean isStringNullOrVide(String str) {
+        return (str == null || str.equals(""));
     }
 
 }

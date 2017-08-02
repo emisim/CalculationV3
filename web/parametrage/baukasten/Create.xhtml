@@ -16,10 +16,8 @@
                         <p:inputText id="expression" value="#{baukastenController.selected.expression}" title="#{bundle.CreateBaukastenTitle_expression}" />
                         <p:outputLabel value="#{bundle.CreateBaukastenLabel_value}" for="value" />
                         <p:inputText id="value" value="#{baukastenController.selected.value}" title="#{bundle.CreateBaukastenTitle_value}" />
-                        <p:outputLabel value="#{bundle.CreateBaukastenLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{baukastenController.selected.id}" title="#{bundle.CreateBaukastenTitle_id}" />
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{baukastenController.create}" value="#{bundle.Save}" update="display,:BaukastenListForm:datalist,:growl" oncomplete="handleSubmit(args,'BaukastenCreateDialog');"/>
+                       </p:panelGrid>
+                    <p:commandButton actionListener="#{baukastenController.create}" value="#{bundle.Save}" update="display,:parametrageTab:BaukastenListForm:datalist,:growl" oncomplete="handleSubmit(args,'BaukastenCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="BaukastenCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

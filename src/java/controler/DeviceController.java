@@ -1,68 +1,41 @@
 package controler;
 
-import bean.Backup;
-import controler.util.Downloader;
+import bean.Device;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
-import java.io.IOException;
-import service.BackupFacade;
+import service.DeviceFacade;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.ejb.Schedule;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "backupController")
+@Named("deviceController")
 @SessionScoped
-@Stateless
-public class BackupController implements Serializable {
+public class DeviceController implements Serializable {
 
     @EJB
-    private BackupFacade ejbFacade;
-    private List<Backup> items = null;
-    private Backup selected;
-    private static String fileBackUpOrigine = "C:\\backup\\Dropbox\\";
-    private static String path2 = "C:\\backup\\";
+    private service.DeviceFacade ejbFacade;
+    private List<Device> items = null;
+    private Device selected;
 
-    //@Schedule(second = "0", minute = "00", hour = "18", dayOfWeek = "*", persistent = false)
-    public void recapDb() throws IOException, InterruptedException {
-        System.out.println("hahwa dkhel l 1");
-        ejbFacade.addBackup(fileBackUpOrigine);
-    }
-    
-    public void prepareDownload(Backup backup){
-        Downloader.setFileName(backup.getNom());
-        Downloader.setFilePath(fileBackUpOrigine);
+    public DeviceController() {
     }
 
-    public List<Backup> backups() {
-        return ejbFacade.findAll();
-    }
-
-    public String donloadBackup(String nom) {
-        return fileBackUpOrigine + nom;
-    }
-
-    public BackupController() {
-    }
-
-    public Backup getSelected() {
+    public Device getSelected() {
         return selected;
     }
 
-    public void setSelected(Backup selected) {
+    public void setSelected(Device selected) {
         this.selected = selected;
     }
 
@@ -72,36 +45,36 @@ public class BackupController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private BackupFacade getFacade() {
+    private DeviceFacade getFacade() {
         return ejbFacade;
     }
 
-    public Backup prepareCreate() {
-        selected = new Backup();
+    public Device prepareCreate() {
+        selected = new Device();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("BackupCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("bundles/Bundle").getString("DeviceCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("BackupUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("DeviceUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("BackupDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("DeviceDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Backup> getItems() {
+    public List<Device> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -136,29 +109,29 @@ public class BackupController implements Serializable {
         }
     }
 
-    public Backup getBackup(java.lang.Long id) {
+    public Device getDevice(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<Backup> getItemsAvailableSelectMany() {
+    public List<Device> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Backup> getItemsAvailableSelectOne() {
+    public List<Device> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Backup.class)
-    public static class BackupControllerConverter implements Converter {
+    @FacesConverter(forClass = Device.class)
+    public static class DeviceControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BackupController controller = (BackupController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "backupController");
-            return controller.getBackup(getKey(value));
+            DeviceController controller = (DeviceController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "deviceController");
+            return controller.getDevice(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -178,11 +151,11 @@ public class BackupController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Backup) {
-                Backup o = (Backup) object;
+            if (object instanceof Device) {
+                Device o = (Device) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Backup.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Device.class.getName()});
                 return null;
             }
         }

@@ -40,5 +40,13 @@ public class DateUtil {
             return null;
         }
     }
-    
+
+    public static java.sql.Timestamp convertFormUtilToTimestamp(java.util.Date date) {
+        if (date != null) {
+            return new java.sql.Timestamp(date.getTime());
+        } else {
+            return null;
+        }
+    }
+
 }

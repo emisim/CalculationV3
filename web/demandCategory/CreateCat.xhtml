@@ -276,14 +276,6 @@
                                                        itemValue="#{umschlagFarbigkeitItem}" itemLabel="#{umschlagFarbigkeitItem.label}"/>
                                     </p:selectOneMenu>
                                     
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" />
-                                    <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" autoWidth="false" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
-                                                       var="baukastenItem"
-                                                       itemValue="#{baukastenItem}" itemLabel="#{baukastenItem.label}"/>
-                                    </p:selectOneMenu>
-
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_cover}" for="cover" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true }" />
                                     <p:selectOneMenu id="cover" value="#{demandCategoryController.selected.cover}" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true }" autoWidth="false" >
