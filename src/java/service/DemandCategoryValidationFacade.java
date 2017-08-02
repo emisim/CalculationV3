@@ -42,11 +42,14 @@ public class DemandCategoryValidationFacade extends AbstractFacade<DemandCategor
         if (user != null && user.getLogin() != null) {
             query += " and v.user.login = '" + user.getLogin() + "'";
         }
+        System.out.println("haa query ==> "+query);
         return query;
     }
 
     public DemandCategoryValidation findByConnectedUserAndDemandCategory(DemandCategory demandCategory) {
-        return getUniqueResult(findByUserAndDemandCategory(demandCategory, SessionUtil.getConnectedUser()));
+        DemandCategoryValidation demandCategoryValidation= getUniqueResult(findByUserAndDemandCategory(demandCategory, SessionUtil.getConnectedUser()));
+        System.out.println("ha res de validation "+demandCategoryValidation);
+        return demandCategoryValidation;
     }
 
     public List<DemandCategoryValidation> findByDemandCategory(DemandCategory demandCategory) {

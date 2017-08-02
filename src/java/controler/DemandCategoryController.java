@@ -92,7 +92,7 @@ public class DemandCategoryController implements Serializable {
     private String save;
     private Date dateSysMin;
     private Date dateSysMax;
-    private List<String> departements= new ArrayList();
+    private List<String> departements = new ArrayList();
 
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
         if (demandCategory.getAuflage() != null && demandCategory.getAuflage().getPrice() != null) {
@@ -131,22 +131,21 @@ public class DemandCategoryController implements Serializable {
     public void simuler() throws ScriptException {
         save = "simuler";
         List<DepartementDetail> myDepartementCriterias = new ArrayList<>();
-        User user = SessionUtil.getConnectedUser();
-        Departement departement = SessionUtil.getConnectedUser().getDepartement();
         if (selected != null && selected.getSotimentItems() != null && !selected.getSotimentItems().isEmpty()) {
 //            if (departement != null && departement.getId() != null && user.getAdmin() == 0) {
 //                demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
 //                departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
 //            }
 //            if (departement == null && user.getAdmin() == 1) {
-                List<Departement> departements = departementFacade.findAll();
-                if (departements != null && !departements.isEmpty()) {
-                    for (Departement departement1 : departements) {
-                        demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, SessionUtil.getConnectedUser().getDepartement(), true, false);
-                        myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-                        params.put(departement1.getName(), myDepartementCriterias);
-                    }
+            List<Departement> departements = departementFacade.findAll();
+            if (departements != null && !departements.isEmpty()) {
+                for (Departement departement1 : departements) {
+                    demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.save(selected, departement1, true, false);
+                    myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+                    params.put(departement1.getName(), myDepartementCriterias);
                 }
+            }
+            System.out.println("Departements details :::: " + params);
             //}
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('DemandCategoryDetailDialog').show();");
@@ -276,7 +275,7 @@ public class DemandCategoryController implements Serializable {
         this.selected = selected;
     }
 
-      public List<String> getDepartements() {
+    public List<String> getDepartements() {
         System.out.println("departements ---> " + departements);
         if (departements == null) {
             departements = new ArrayList<>();
@@ -287,6 +286,7 @@ public class DemandCategoryController implements Serializable {
     public void setDepartements(List<String> departements) {
         this.departements = departements;
     }
+
     protected void setEmbeddableKeys() {
     }
 
@@ -304,7 +304,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, departements,sotimentItemsForCheckBox, selectedSortiemnts, validationSearch, dateSysMin, dateSysMax);
+        items = ejbFacade.search(selectedForSearch, departements, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch, dateSysMin, dateSysMax);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -355,16 +355,16 @@ public class DemandCategoryController implements Serializable {
 //            departementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
 //        }
 //        if (departement == null && user.getAdmin() == 1) {
-            List<Departement> departements = departementFacade.findAll();
-            if (departements != null && !departements.isEmpty()) {
-                for (Departement departement1 : departements) {
-                    demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(demandCategory, departement1);
-                    myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
-                    params.put(departement1.getName(), myDepartementCriterias);
-                }
+        List<Departement> departements = departementFacade.findAll();
+        if (departements != null && !departements.isEmpty()) {
+            for (Departement departement1 : departements) {
+                demandCategoryDepartementCalculations = demandCategoryDepartementCalculationFacade.findWithItemsByDemandCategory(demandCategory, departement1);
+                myDepartementCriterias = departementCriteriaFacade.detailDepartement(demandCategoryDepartementCalculations);
+                params.put(departement1.getName(), myDepartementCriterias);
             }
+        }
 
-       // }
+        // }
         System.out.println("params ::::: " + params);
     }
 
@@ -726,8 +726,6 @@ public class DemandCategoryController implements Serializable {
     public void setSave(String save) {
         this.save = save;
     }
-
-    
 
     public Date getDateSysMin() {
         return dateSysMin;

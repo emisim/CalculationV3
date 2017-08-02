@@ -89,6 +89,7 @@ CREATE TABLE `auflageseitencovermatrix` (
   `ID` bigint(20) NOT NULL,
   `PRICE` decimal(10,2) DEFAULT NULL,
   `AUFLAGE_ID` int(11) DEFAULT NULL,
+  `COVER_ID` int(11) DEFAULT NULL,
   `BAUKASTEN_ID` bigint(20) DEFAULT NULL,
   `FARBIGKEIT_ID` varchar(255) DEFAULT NULL,
   `FORMATAUSWAEHLEN_ID` varchar(255) DEFAULT NULL,

@@ -75,7 +75,7 @@ public class AccessDepartement {
         populateAdminMap();
     }
 
-    private static void populateContentManagementMap() {
+ private static void populateContentManagementMap() {
 
         contentManagementMap.put("category", true);
         contentManagementMap.put("product", true);
@@ -138,6 +138,12 @@ public class AccessDepartement {
         projectManagementMap.put("katalogart", true);
         projectManagementMap.put("ausgabe", true);
         projectManagementMap.put("umfang", true);
+        projectManagementMap.put("teilnehmerZahl", true);
+        projectManagementMap.put("konzeptbearbeitungFaktor", true);
+        projectManagementMap.put("wechselfassungVariantFaktor",true);
+        projectManagementMap.put("bearbeitungszeit", true);
+        
+        
 
     }
 
