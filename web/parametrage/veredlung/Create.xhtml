@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateVeredlungLabel_id}" for="id" />
                         <p:inputText id="id" value="#{veredlungController.selected.id}" title="#{bundle.CreateVeredlungTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{veredlungController.create}" value="#{bundle.Save}" update="display,:VeredlungListForm:datalist,:growl" oncomplete="handleSubmit(args,'VeredlungCreateDialog');"/>
+                    <p:commandButton actionListener="#{veredlungController.create}" value="#{bundle.Save}" update="display,:parametrageTab:VeredlungListForm:datalist,:growl" oncomplete="handleSubmit(args,'VeredlungCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VeredlungCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

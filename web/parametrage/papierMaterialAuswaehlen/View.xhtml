@@ -12,6 +12,8 @@
             <h:form id="PapierMaterialAuswaehlenViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{papierMaterialAuswaehlenController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPapierMaterialAuswaehlenLabel_id}"/>
+                        <h:outputText value="#{papierMaterialAuswaehlenController.selected.id}" title="#{bundle.ViewPapierMaterialAuswaehlenTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPapierMaterialAuswaehlenLabel_price}"/>
                         <h:outputText value="#{papierMaterialAuswaehlenController.selected.price}" title="#{bundle.ViewPapierMaterialAuswaehlenTitle_price}"/>
                         <h:outputText value="#{bundle.ViewPapierMaterialAuswaehlenLabel_description}"/>

@@ -92,6 +92,7 @@ public class DemandCategoryController implements Serializable {
     private String save;
     private Date dateSysMin;
     private Date dateSysMax;
+    private List<String> departements= new ArrayList();
 
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
         if (demandCategory.getAuflage() != null && demandCategory.getAuflage().getPrice() != null) {
@@ -275,6 +276,17 @@ public class DemandCategoryController implements Serializable {
         this.selected = selected;
     }
 
+      public List<String> getDepartements() {
+        System.out.println("departements ---> " + departements);
+        if (departements == null) {
+            departements = new ArrayList<>();
+        }
+        return departements;
+    }
+
+    public void setDepartements(List<String> departements) {
+        this.departements = departements;
+    }
     protected void setEmbeddableKeys() {
     }
 
@@ -292,7 +304,7 @@ public class DemandCategoryController implements Serializable {
     }
 
     public void search() {
-        items = ejbFacade.search(selectedForSearch, sotimentItemsForCheckBox, selectedSortiemnts, validationSearch, dateSysMin, dateSysMax);
+        items = ejbFacade.search(selectedForSearch, departements,sotimentItemsForCheckBox, selectedSortiemnts, validationSearch, dateSysMin, dateSysMax);
     }
 
     public int checkDemandValidation(DemandCategory demandCategory) {
@@ -437,7 +449,7 @@ public class DemandCategoryController implements Serializable {
 
     public void verifySortiement() {
         if (!sortimentCondition()) {
-            JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
+            JsfUtil.addWrningMessage("Sortimentwert muss 100% sein");
         }
     }
 
@@ -452,9 +464,9 @@ public class DemandCategoryController implements Serializable {
                 if (persistAction == PersistAction.CREATE) {
                     if (getSotimentItems() != null && !getSotimentItems().isEmpty() && sortimentCondition()) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
-                        JsfUtil.addSuccessMessage(successMessage+" et une validation au nom de "+SessionUtil.getConnectedUser().getLogin()+" a ete automatiquement sauvgardé");
+                        JsfUtil.addSuccessMessage(successMessage+" und eine Validation von "+SessionUtil.getConnectedUser().getLogin()+" ist automatisch gespeichert");
                     } else {
-                        JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
+                        JsfUtil.addWrningMessage("Sortimentwert muss 100% sein");
                     }
                 } else if (persistAction == PersistAction.UPDATE) {
                     sortimentItemFacade.delete(detailSotimentItems);
@@ -462,7 +474,7 @@ public class DemandCategoryController implements Serializable {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, false);
                         JsfUtil.addSuccessMessage(successMessage);
                     } else {
-                        JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
+                        JsfUtil.addWrningMessage("Sortimentwert muss 100% sein");
                     }
                 } else {
                     getFacade().remove(selected);

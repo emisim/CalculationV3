@@ -12,7 +12,9 @@
             <h:form id="AuflageSeitenCoverMatrixViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auflageSeitenCoverMatrixController.selected != null}">
-                       <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_auflage}"/>
+                       <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_cover}"/>
+                       <h:outputText value="#{auflageSeitenCoverMatrixController.selected.cover.id} | #{auflageSeitenCoverMatrixController.selected.cover.description}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_cover}"/>
+                        <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_auflage}"/>
                        <h:outputText value="#{auflageSeitenCoverMatrixController.selected.auflage.description} | #{auflageSeitenCoverMatrixController.selected.auflage.price}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_auflage}"/>
                         <h:outputText value="#{bundle.ViewAuflageSeitenCoverMatrixLabel_seiten}"/>
                         <h:outputText value="#{auflageSeitenCoverMatrixController.selected.seiten.nbrePage}" title="#{bundle.ViewAuflageSeitenCoverMatrixTitle_seiten}"/>
