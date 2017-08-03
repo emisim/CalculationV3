@@ -50,6 +50,7 @@ public class SotimentItemFacade extends AbstractFacade<SotimentItem> {
             sotimentItems.get(0).setWert(new BigDecimal(100));
         }
         for (SotimentItem sotimentItem : sotimentItems) {
+            System.out.println("settttttteeeeeeeeeegf");
             sotimentItem.setDemandCategory(demandCategory);
             if (!simulation) {
                 if (isSave) {

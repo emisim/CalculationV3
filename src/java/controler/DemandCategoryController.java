@@ -39,6 +39,7 @@ import org.primefaces.context.RequestContext;
 import service.AccessFacade;
 import service.DemandCategoryCalculationItemFacade;
 import service.DemandCategoryDepartementCalculationFacade;
+import service.SotimentItemFacade;
 
 @Named("demandCategoryController")
 @ViewScoped
@@ -64,6 +65,10 @@ public class DemandCategoryController implements Serializable {
     private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
     @EJB
     private AccessFacade accessFacade;
+    @EJB
+    private DemandCategoryFacade demandCategoryFacade;
+    @EJB
+    private SotimentItemFacade sotimentItemFacade;
 
     private List<DemandCategory> items = null;
     private DemandCategory selected;
@@ -368,16 +373,24 @@ public class DemandCategoryController implements Serializable {
         System.out.println("params ::::: " + params);
     }
 
-    public void updateDepItems(List<DepartementDetail> departementDetails) {
-        ejbFacade.updateDepItems(departementDetails);
+    public void updateDepItems(String flag) {
+        try {
+            if (flag.equals("save")) {
+                demandCategoryFacade.saveForSimulation(sotimentItems, selected, false, true);
+            }
+            for (Map.Entry<String, List<DepartementDetail>> entry : params.entrySet()) {
+                List<DepartementDetail> value = entry.getValue();
+                ejbFacade.updateDepItems(value, sotimentItems, flag);
+            }
+            JsfUtil.addSuccessMessage("Details updated");
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("something went wrong");
+        }
+
     }
 
     public void updateDetailDepCritarias(DepartementDetail departementDetail) throws ScriptException {
         updateDetails(departementDetail, departementCriterias);
-    }
-
-    public void updateDepartementCriterias() {
-        updateDepItems(departementCriterias);
     }
 
     public Integer getValidationSearch() {
@@ -386,10 +399,6 @@ public class DemandCategoryController implements Serializable {
 
     public void setValidationSearch(Integer validationSearch) {
         this.validationSearch = validationSearch;
-    }
-
-    public void updateProjectManagement() {
-        updateDepItems(projectManagement);
     }
 
     public void updateDetails(DepartementDetail loadedDepartementDetail, List<DepartementDetail> departementDetails) {

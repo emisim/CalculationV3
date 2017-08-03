@@ -66,12 +66,13 @@
                                         <h:outputText value="Total Price: #{detailDepartement.value.size()>0?detailDepartement.value.get(0).summDepartementGlobal:'0.00'} €" style="font-size:18px;text-align: left;" />
                                     </f:facet>
                                 </p:dataTable>
-                                <p:panel  styleClass="align-center" >
-                                    <p:commandButton rendered="#{demandCategoryController.save.equals('simuler')}" icon="fa fa-plus-square-o" actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update=":growl,:DemandCategoryCreateForm:display" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');" />
-                                    <p:commandButton rendered="#{demandCategoryController.save.equals('details')}" icon="fa fa-plus-square-o"  actionListener="#{demandCategoryController.updateDepItems(detailDepartement.value)}" value="#{bundle.Edit}" update=":growl" oncomplete="handleSubmit(args, 'DemandCategoryDetailDialog');" />
-                                </p:panel> 
+
                             </p:tab>
                         </p:tabView>
+                        <p:panel  styleClass="align-center" >
+                            <p:commandButton rendered="#{demandCategoryController.save.equals('simuler')}" icon="fa fa-plus-square-o" actionListener="#{demandCategoryController.updateDepItems('save')}" value="#{bundle.Save}" update=":growl" />
+                            <p:commandButton rendered="#{demandCategoryController.save.equals('details')}" icon="fa fa-plus-square-o"  actionListener="#{demandCategoryController.updateDepItems('edit')}" value="#{bundle.Edit}" update=":growl" />
+                        </p:panel> 
                     </p:fieldset>
                 </h:panelGroup>
             </h:form>

@@ -5,6 +5,7 @@
  */
 package bean;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,9 +29,11 @@ public class DepartementDetail {
     private String summDepartement;
     private String summDepartementGlobal;
     private boolean checked;
-    private Long demandCategoryCalcuationId;
-    private Long demandCategoryDepartementCalculationId;
-    private Long demandCategoryCalculationItemId;
+    private DemandCategoryCalculation demandCategoryCalcuation;
+    private DemandCategoryDepartementCalculation demandCategoryDepartementCalculation;
+    private DemandCategoryCalculationItem demandCategoryCalculationItem;
+    private DemandCategory demandCategory;
+    private List<SotimentItem> sotimentItems;
     private String summTotal;
     private String summDruck;
 
@@ -119,29 +122,46 @@ public class DepartementDetail {
         this.checked = checked;
     }
 
-    public Long getDemandCategoryCalcuationId() {
-        return demandCategoryCalcuationId;
+    public DemandCategoryCalculation getDemandCategoryCalcuation() {
+        return demandCategoryCalcuation;
     }
 
-    public void setDemandCategoryCalcuationId(Long demandCategoryCalcuationId) {
-        this.demandCategoryCalcuationId = demandCategoryCalcuationId;
+    public void setDemandCategoryCalcuation(DemandCategoryCalculation demandCategoryCalcuation) {
+        this.demandCategoryCalcuation = demandCategoryCalcuation;
     }
 
-    public Long getDemandCategoryDepartementCalculationId() {
-        return demandCategoryDepartementCalculationId;
+    public DemandCategoryDepartementCalculation getDemandCategoryDepartementCalculation() {
+        return demandCategoryDepartementCalculation;
     }
 
-    public void setDemandCategoryDepartementCalculationId(Long demandCategoryDepartementCalculationId) {
-        this.demandCategoryDepartementCalculationId = demandCategoryDepartementCalculationId;
+    public void setDemandCategoryDepartementCalculation(DemandCategoryDepartementCalculation demandCategoryDepartementCalculation) {
+        this.demandCategoryDepartementCalculation = demandCategoryDepartementCalculation;
     }
 
-    public Long getDemandCategoryCalculationItemId() {
-        return demandCategoryCalculationItemId;
+    public DemandCategoryCalculationItem getDemandCategoryCalculationItem() {
+        return demandCategoryCalculationItem;
     }
 
-    public void setDemandCategoryCalculationItemId(Long demandCategoryCalculationItemId) {
-        this.demandCategoryCalculationItemId = demandCategoryCalculationItemId;
+    public void setDemandCategoryCalculationItem(DemandCategoryCalculationItem demandCategoryCalculationItem) {
+        this.demandCategoryCalculationItem = demandCategoryCalculationItem;
     }
+
+    public DemandCategory getDemandCategory() {
+        return demandCategory;
+    }
+
+    public void setDemandCategory(DemandCategory demandCategory) {
+        this.demandCategory = demandCategory;
+    }
+
+    public List<SotimentItem> getSotimentItems() {
+        return sotimentItems;
+    }
+
+    public void setSotimentItems(List<SotimentItem> sotimentItems) {
+        this.sotimentItems = sotimentItems;
+    }
+
 
     public String getPriceUpdate() {
         return priceUpdate;
