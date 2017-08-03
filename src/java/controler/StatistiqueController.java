@@ -83,7 +83,7 @@ public class StatistiqueController implements Serializable {
          cartesianChartModel = new BarChartModel();
         ChartSeries annee1 = new ChartSeries();
         for (int i = 0; i < 12; i++) {
-            annee1.set("mois " + (i + 1), 0);
+            annee1.set("Monat " + (i + 1), 0);
         }
         cartesianChartModel.addSeries(annee1);
         
@@ -111,8 +111,8 @@ public class StatistiqueController implements Serializable {
     }
 
     private void paramGraphForConstruction(CartesianChartModel model) {
-        System.out.println("Statistiques des années " + firstYear + " et " + secondYear);
-        model.setTitle("Statistiques des années " + firstYear + " et " + secondYear);
+        System.out.println("Statistiken von Jahr " + firstYear + " und " + secondYear);
+        model.setTitle("Statistiken von Jahr " + firstYear + " und " + secondYear);
         model.setLegendPosition("e");
         model.setAnimate(true);
         Axis yAxis = model.getAxis(AxisType.Y);
@@ -136,20 +136,20 @@ public class StatistiqueController implements Serializable {
         ChartSeries annee2;
         if (typeChart == 1) {
             annee1 = new LineChartSeries();
-            annee1.setLabel("Année " + firstYear);
+            annee1.setLabel("Jahr " + firstYear);
 
             annee2 = new LineChartSeries();
-            annee2.setLabel("Année " + secondYear);
+            annee2.setLabel("Jahr " + secondYear);
         } else {
             annee1 = new BarChartSeries();
-            annee1.setLabel("Année " + firstYear);
+            annee1.setLabel("Jahr " + firstYear);
             annee2 = new BarChartSeries();
-            annee2.setLabel("Année " + secondYear);
+            annee2.setLabel("Jahr " + secondYear);
         }
 
         for (int i = 0; i < 12; i++) {
-            annee1.set("mois " + (i + 1), resultats[0][i]);
-            annee2.set("mois " + (i + 1), resultats[1][i]);
+            annee1.set("Monat " + (i + 1), resultats[0][i]);
+            annee2.set("Monat " + (i + 1), resultats[1][i]);
 
         }
         System.out.println("annee1 ::: " + annee1);
