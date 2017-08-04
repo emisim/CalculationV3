@@ -25,6 +25,7 @@ public class LayoutPricingFacade extends AbstractFacade<LayoutPricing> {
     public LayoutPricing findByCriteriaAndLayout(DepartementCriteriaItem departementCriteriaItem, Layout layout) {
         return getUniqueResult("SELECT item FROM LayoutPricing item WHERE item.departementCriteriaItem.id=" + departementCriteriaItem.getId()
                 + " AND item.layout.id=" + layout.getId());
+        
     }
 
     public LayoutPricingFacade() {
