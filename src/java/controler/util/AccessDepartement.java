@@ -18,6 +18,8 @@ public class AccessDepartement {
     private static Map<String, Boolean> datenManagementMap = new HashMap<>();
     private static Map<String, Boolean> databasePublishingMap = new HashMap<>();
     private static Map<String, Boolean> projectManagementMap = new HashMap<>();
+    private static Map<String, Boolean> mediaITMap = new HashMap<>();
+    private static Map<String, Boolean> assetManagementMap = new HashMap<>();
     private static Map<String, Boolean> adminMap = new HashMap<>();
 
     public static Map<String, Boolean> getContentManagementMap() {
@@ -56,6 +58,23 @@ public class AccessDepartement {
         AccessDepartement.projectManagementMap = ProjectManagementMap;
     }
 
+    public static Map<String, Boolean> getAssetManagementMap() {
+        return assetManagementMap;
+    }
+
+    public static void setAssetManagementMap(Map<String, Boolean> assetManagementMap) {
+        AccessDepartement.assetManagementMap = assetManagementMap;
+    }
+
+    public static Map<String, Boolean> getMediaITMap() {
+        return mediaITMap;
+    }
+
+    public static void setMediaITMap(Map<String, Boolean> mediaITMap) {
+        AccessDepartement.mediaITMap = mediaITMap;
+    }
+
+    
     public static Map<String, Boolean> getAdminMap() {
         if (adminMap == null) {
             adminMap = new HashMap<>();
@@ -72,6 +91,8 @@ public class AccessDepartement {
         populateDatenManagementMap();
         populateDatabasePublishingMap();
         populateProjectManagementMap();
+        populateAssetManagementMap();
+        populatemediaITMap();
         populateAdminMap();
     }
 
@@ -146,7 +167,26 @@ public class AccessDepartement {
         
 
     }
+    
+    private static void populateAssetManagementMap() {
 
+        assetManagementMap.put("category", true);
+        assetManagementMap.put("product", true);
+        assetManagementMap.put("sortiment", true);
+        assetManagementMap.put("katalogart", true);
+        assetManagementMap.put("anzahlGesamtArtikel", true);
+        assetManagementMap.put("anzahlNeueArtikel", true);
+        assetManagementMap.put("anzahlGesamtProdukt", true);
+        assetManagementMap.put("anzahlNeueProdukt", true);
+    }
+    private static void populatemediaITMap() {
+
+        mediaITMap.put("category", true);
+        mediaITMap.put("product", true);
+        mediaITMap.put("katalogart", true);
+        mediaITMap.put("layout", true);
+        mediaITMap.put("ausgabe", true);
+    }
     private static void populateAdminMap() {
 
         adminMap.put("category", true);

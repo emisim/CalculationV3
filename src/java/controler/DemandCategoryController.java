@@ -92,6 +92,8 @@ public class DemandCategoryController implements Serializable {
     private List<DepartementDetail> datenManagement;
     private List<DepartementDetail> databasePublisihing;
     private List<DepartementDetail> projectManagement;
+    private List<DepartementDetail> assetManagement;
+    private List<DepartementDetail> mediaIT;
     private BigDecimal totalSummDepartement;
     private Integer validationSearch;
     private String save;
@@ -672,10 +674,28 @@ public class DemandCategoryController implements Serializable {
     public List<DepartementDetail> getProjectManagement() {
         return projectManagement;
     }
-
+    
+    
     public void setProjectManagement(List<DepartementDetail> projectManagement) {
         this.projectManagement = projectManagement;
     }
+
+    public List<DepartementDetail> getAssetManagement() {
+        return assetManagement;
+    }
+
+    public void setAssetManagement(List<DepartementDetail> assetManagement) {
+        this.assetManagement = assetManagement;
+    }
+
+    public List<DepartementDetail> getMediaIT() {
+        return mediaIT;
+    }
+
+    public void setMediaIT(List<DepartementDetail> mediaIT) {
+        this.mediaIT = mediaIT;
+    }
+
 
     public List<DepartementDetail> getDepartementCriterias() {
         return departementCriterias;
