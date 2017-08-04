@@ -57,8 +57,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private DemandCategoryValidationFacade demandCategoryValidationFacade;
     @EJB
     private DepartementFacade departementFacade;
-    @EJB
-    private DemandCategoryFacade demandCategoryFacade;
+
 
     @Override
     protected EntityManager getEntityManager() {
@@ -117,6 +116,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
+    public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
+        prepare(demandCategory, isSave);
+        saveOrUpdate(simulation, isSave, demandCategory);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
+        calcSumDruck(demandCategory);
+        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
+        teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        edit(demandCategory);
+        demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
+
+    }
+
     public void performCalculationDemandCategory(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations, List<SotimentItem> sotimentItems) {
         calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
         calcSumDruck(demandCategory);
@@ -125,11 +136,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         calcSumPerAuflag(demandCategory);
     }
 
-    public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
-        prepare(demandCategory, isSave);
-        saveOrUpdate(simulation, isSave, demandCategory);
-        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-    }
+    
 
     private void saveOrUpdate(boolean simulation, boolean isSave, DemandCategory demandCategory) {
         if (!simulation) {
@@ -185,13 +192,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setArtDerWeiterverarbeitung(null);
             demandCategory.setVeredlung(null);
             demandCategory.setVeredlung(null);
-            demandCategory.setUmschlag(false);
             demandCategory.setCover(null);
             demandCategory.setBindung(null);
             demandCategory.setAuflage(null);
-            demandCategory.setBearbeitungszeit(0);
-            demandCategory.setAnzahlBeteiligten(0);
-            demandCategory.setAnzahlMitglieder(0);
         }
         if (!demandCategory.isUmschlag()) {
             demandCategory.setUmschlagPapierAuswaehlen(null);
