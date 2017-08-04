@@ -117,6 +117,18 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     }
 
+    public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
+        prepare(demandCategory, isSave);
+        saveOrUpdate(simulation, isSave, demandCategory);
+        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
+        calcSumDruck(demandCategory);
+        DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
+        teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        edit(demandCategory);
+        demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
+
+    }
+
     public void performCalculationDemandCategory(DemandCategory demandCategory, List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations, List<SotimentItem> sotimentItems) {
         calcSumTotal(demandCategory, demandCategoryDepartementCalculations);
         calcSumDruck(demandCategory);
@@ -125,11 +137,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         calcSumPerAuflag(demandCategory);
     }
 
-    public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
-        prepare(demandCategory, isSave);
-        saveOrUpdate(simulation, isSave, demandCategory);
-        sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-    }
+    
 
     private void saveOrUpdate(boolean simulation, boolean isSave, DemandCategory demandCategory) {
         if (!simulation) {

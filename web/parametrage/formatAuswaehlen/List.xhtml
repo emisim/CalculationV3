@@ -30,13 +30,19 @@
                     <f:facet name="header">
                         <h:outputText value="#{bundle.ListFormatAuswaehlenTitle_price}"/>
                     </f:facet>
-                    <h:outputText value="#{item.price}"/>
+                    <h:outputText value="#{item.id}"/>
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="#{bundle.ListFormatAuswaehlenTitle_description}"/>
                     </f:facet>
                     <h:outputText value="#{item.description}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListFormatAuswaehlenTitle_price}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.price}"/>
                 </p:column>
 
                 <f:facet name="footer">

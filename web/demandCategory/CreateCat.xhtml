@@ -29,7 +29,7 @@
                     <p:panel header="Demand category"  >
                         <h:form id="DemandCategoryCreateForm">
                             <h:panelGroup id="display" >
-                                <h:panelGrid columns="8" cellpadding="7">
+                                <h:panelGrid columns="10" cellpadding="7">
 
                                     <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                                     <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
@@ -188,16 +188,6 @@
                                                        var="konzeptbearbeitungFaktorItem"
                                                        itemValue="#{konzeptbearbeitungFaktorItem}" 
                                                        itemLabel="#{konzeptbearbeitungFaktorItem.expression}"
-                                                       />
-                                    </p:selectOneMenu>
-                                    
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" />
-                                    <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" autoWidth="false" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
-                                                       var="baukastenControllerItem"
-                                                       itemValue="#{baukastenControllerItem}" 
-                                                       itemLabel="#{baukastenControllerItem.expression}"
                                                        />
                                     </p:selectOneMenu>
                                     

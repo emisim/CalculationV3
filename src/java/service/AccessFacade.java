@@ -59,7 +59,18 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
                     return true;
                 }
             }
-
+            
+            if (dep.getName().equals("assetManagement")) {
+                if (AccessDepartement.getAssetManagementMap().containsKey(attribute)){
+                    return true;
+                }
+            }
+            
+            if (dep.getName().equals("mediaIT")) {
+                if (AccessDepartement.getMediaITMap().containsKey(attribute)){
+                    return true;
+                }
+            }
             return false;
 
         }
@@ -97,6 +108,18 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
                     return true;
                 }
             }
+            if (dep.getName().equals("assetManagement")) {
+                if (AccessDepartement.getAssetManagementMap().containsKey(attribute)) {
+                    return true;
+                }
+            }
+            
+            if (dep.getName().equals("mediaIT")) {
+                if (AccessDepartement.getMediaITMap().containsKey(attribute)) {
+                    return true;
+                }
+            }
+            
 
         }
         return false;

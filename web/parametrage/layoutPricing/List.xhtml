@@ -24,13 +24,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLayoutPricingTitle_departementCriteriaItem}"/>
                             </f:facet>
-                            <h:outputText value="#{item.departementCriteriaItem}"/>
+                            <h:outputText value="#{item.departementCriteriaItem.description}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLayoutPricingTitle_layout}"/>
                             </f:facet>
-                            <h:outputText value="#{item.layout}"/>
+                            <h:outputText value="#{item.layout.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

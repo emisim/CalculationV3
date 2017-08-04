@@ -15,14 +15,14 @@
 
         <ui:define name="body">
             <h:form>
-                <p:fieldset legend="Criteres de recherche" style="margin-bottom:20px" toggleable="true" toggleSpeed="600">
+                <p:fieldset legend="erweiterte Suche" style="margin-bottom:20px" toggleable="true" toggleSpeed="600">
                     <p:panelGrid columns="10">
 
                             <p:outputLabel value="connexion: " for="connexion"/>
                             <p:selectOneMenu id="connexion" value="#{historiqueConnexionUserController.selected.connexion}" style="width: 100px">
                                 <f:selectItem itemValue="#{null}" itemLabel="--Select--"/>
-                                <f:selectItem  itemValue="true"  itemLabel="Connexion" />
-                                <f:selectItem  itemValue="false" itemLabel="Deconnexion" />
+                                <f:selectItem  itemValue="true"  itemLabel="Login" />
+                                <f:selectItem  itemValue="false" itemLabel="Logout" />
                             </p:selectOneMenu>
                         
 
@@ -39,7 +39,7 @@
                         
                            
                         
-                            <p:outputLabel value="Utilisateur" for="user"/>
+                            <p:outputLabel value="User" for="user"/>
                             <p:selectOneMenu id="user" value="#{historiqueConnexionUserController.user}" filter="true" filterMatchMode="startsWith" style="width: 100px">
                                 <f:selectItem itemValue="#{null}" itemLabel="--Select--"/>
                                 <f:selectItems value="#{historiqueConnexionUserController.users}"
@@ -48,8 +48,8 @@
                                                itemLabel="#{userItem.login}"/>
                             </p:selectOneMenu>
                             
-                        <p:commandButton title="Rechercher" value="Recherche" icon="ui-icon-search" actionListener="#{historiqueConnexionUserController.rechercher()}" update=":HistoriqueConnexionUserListForm:datalist"/>
-                        <p:commandButton title="Rafraichir" value="Rafraichir" icon="ui-icon-refresh" actionListener="#{historiqueConnexionUserController.findAll()}" update=":HistoriqueConnexionUserListForm:datalist"/>
+                        <p:commandButton title="Search" value="Search" icon="ui-icon-search" actionListener="#{historiqueConnexionUserController.rechercher()}" update=":HistoriqueConnexionUserListForm:datalist"/>
+                        <p:commandButton title="Update" value="Update" icon="ui-icon-refresh" actionListener="#{historiqueConnexionUserController.findAll()}" update=":HistoriqueConnexionUserListForm:datalist"/>
                     </p:panelGrid>
                 </p:fieldset>
             </h:form>
@@ -73,7 +73,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Date Connexion / Déconnexion"/>
+                                <h:outputText value="Date Login / Logout"/>
                             </f:facet>
                             <h:outputText value="#{item.dateAction}">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
@@ -82,7 +82,7 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Type Action"/>
+                                <h:outputText value="Action"/>
                             </f:facet>
                             <h:outputText value="#{historiqueConnexionUserController.typeCnx(item.connexion)}"/>
                         </p:column>
