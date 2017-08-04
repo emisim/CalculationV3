@@ -184,6 +184,7 @@ public class AccessDepartement {
         mediaITMap.put("category", true);
         mediaITMap.put("product", true);
         mediaITMap.put("katalogart", true);
+        mediaITMap.put("sortiment", true);
         mediaITMap.put("layout", true);
         mediaITMap.put("ausgabe", true);
     }
