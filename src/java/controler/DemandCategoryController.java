@@ -101,7 +101,7 @@ public class DemandCategoryController implements Serializable {
     private List<String> departements = new ArrayList();
 
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
-        return ejbFacade.calcSumPerAuflag(demandCategory);
+        return ejbFacade.calcSumPerAuflagRequieredSum(demandCategory);
     }
 
     @PostConstruct
@@ -137,6 +137,7 @@ public class DemandCategoryController implements Serializable {
         List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculationsAll = new ArrayList();
 
         if (ejbFacade.sortimentCondition(selected, selected.getSotimentItems())) {
+            ejbFacade.performPreCalculationDemandCategory(selected, sotimentItems);
             List<Departement> departements = departementFacade.findAll();
             if (departements != null && !departements.isEmpty()) {
                 for (Departement departement1 : departements) {
@@ -146,7 +147,7 @@ public class DemandCategoryController implements Serializable {
                     params.put(departement1.getName(), myDepartementCriterias);
                 }
             }
-            ejbFacade.performCalculationDemandCategory(selected, demandCategoryDepartementCalculationsAll, sotimentItems);
+            ejbFacade.performPostCalculationDemandCategory(selected, demandCategoryDepartementCalculationsAll, sotimentItems);
 
             System.out.println("Departements details :::: " + params);
             RequestContext context = RequestContext.getCurrentInstance();

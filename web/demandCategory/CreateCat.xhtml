@@ -29,7 +29,7 @@
                     <p:panel header="Demand category"  >
                         <h:form id="DemandCategoryCreateForm">
                             <h:panelGroup id="display" >
-                                <h:panelGrid columns="10" cellpadding="7">
+                                <h:panelGrid columns="8" cellpadding="7">
 
                                     <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                                     <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
