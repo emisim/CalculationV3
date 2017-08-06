@@ -118,10 +118,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
-        performPreCalculationDemandCategory(demandCategory, sotimentItems);
         saveOrUpdate(simulation, isSave, demandCategory);
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        //  performPostCalculationDemandCategory(demandCategory, demandCategoryDepartementCalculations, sotimentItems);
+
         edit(demandCategory);
         demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
 
@@ -135,6 +134,13 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     }
 
     public void performPreCalculationDemandCategory(DemandCategory demandCategory, List<SotimentItem> sotimentItems) {
+
+        DemandCategoryCalculationFacade.calculateAnzahlSonderSeiten(demandCategory);
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(demandCategory);
+        DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(demandCategory);
+        demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlGesamtProdukt(demandCategory, sotimentItems);
+        demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlNeueProdukt(demandCategory, sotimentItems);
+        DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(demandCategory);
         DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
         teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
     }
