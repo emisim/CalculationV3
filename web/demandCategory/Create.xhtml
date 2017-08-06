@@ -12,11 +12,100 @@
             <h:form id="DemandCategoryCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandCategoryController.selected != null}">
-
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_ausgabePricing}" for="ausgabePricing" />
+                        <p:inputText id="ausgabePricing" value="#{demandCategoryController.selected.ausgabePricing}" title="#{bundle.CreateDemandCategoryTitle_ausgabePricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nachsatzPricing}" for="nachsatzPricing" />
+                        <p:inputText id="nachsatzPricing" value="#{demandCategoryController.selected.nachsatzPricing}" title="#{bundle.CreateDemandCategoryTitle_nachsatzPricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nachspannPricing}" for="nachspannPricing" />
+                        <p:inputText id="nachspannPricing" value="#{demandCategoryController.selected.nachspannPricing}" title="#{bundle.CreateDemandCategoryTitle_nachspannPricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_vorspannPricing}" for="vorspannPricing" />
+                        <p:inputText id="vorspannPricing" value="#{demandCategoryController.selected.vorspannPricing}" title="#{bundle.CreateDemandCategoryTitle_vorspannPricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagFarbigkeitElementPricing}" for="umschlagFarbigkeitElementPricing" />
+                        <p:inputText id="umschlagFarbigkeitElementPricing" value="#{demandCategoryController.selected.umschlagFarbigkeitElementPricing}" title="#{bundle.CreateDemandCategoryTitle_umschlagFarbigkeitElementPricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukastenPricing}" for="baukastenPricing" />
+                        <p:inputText id="baukastenPricing" value="#{demandCategoryController.selected.baukastenPricing}" title="#{bundle.CreateDemandCategoryTitle_baukastenPricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_vorspann}" for="vorspann" />
+                        <p:selectOneMenu id="vorspann" value="#{demandCategoryController.selected.vorspann}" >
+                            <f:selectItems value="#{vorspannController.itemsAvailableSelectOne}"
+                                           var="vorspannItem"
+                                           itemValue="#{vorspannItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nachspann}" for="nachspann" />
+                        <p:selectOneMenu id="nachspann" value="#{demandCategoryController.selected.nachspann}" >
+                            <f:selectItems value="#{nachspannController.itemsAvailableSelectOne}"
+                                           var="nachspannItem"
+                                           itemValue="#{nachspannItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nachsatz}" for="nachsatz" />
+                        <p:selectOneMenu id="nachsatz" value="#{demandCategoryController.selected.nachsatz}" >
+                            <f:selectItems value="#{nachsatzController.itemsAvailableSelectOne}"
+                                           var="nachsatzItem"
+                                           itemValue="#{nachsatzItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagFarbigkeitElement}" for="umschlagFarbigkeitElement" />
+                        <p:selectOneMenu id="umschlagFarbigkeitElement" value="#{demandCategoryController.selected.umschlagFarbigkeitElement}" >
+                            <f:selectItems value="#{umschlagFarbigkeitElementController.itemsAvailableSelectOne}"
+                                           var="umschlagFarbigkeitElementItem"
+                                           itemValue="#{umschlagFarbigkeitElementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_baukasten}" for="baukasten" />
+                        <p:selectOneMenu id="baukasten" value="#{demandCategoryController.selected.baukasten}" >
+                            <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
+                                           var="baukastenItem"
+                                           itemValue="#{baukastenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summeGlobal}" for="summeGlobal" />
+                        <p:inputText id="summeGlobal" value="#{demandCategoryController.selected.summeGlobal}" title="#{bundle.CreateDemandCategoryTitle_summeGlobal}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_teilnehmerZahlPricing}" for="teilnehmerZahlPricing" />
+                        <p:inputText id="teilnehmerZahlPricing" value="#{demandCategoryController.selected.teilnehmerZahlPricing}" title="#{bundle.CreateDemandCategoryTitle_teilnehmerZahlPricing}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_druckSeiten}" for="druckSeiten" />
+                        <p:selectOneMenu id="druckSeiten" value="#{demandCategoryController.selected.druckSeiten}" >
+                            <f:selectItems value="#{seitenController.itemsAvailableSelectOne}"
+                                           var="druckSeitenItem"
+                                           itemValue="#{druckSeitenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_artikelPerPagelFaktor}" for="artikelPerPagelFaktor" />
+                        <p:inputText id="artikelPerPagelFaktor" value="#{demandCategoryController.selected.artikelPerPagelFaktor}" title="#{bundle.CreateDemandCategoryTitle_artikelPerPagelFaktor}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_lKSchluesselFaktor}" for="lKSchluesselFaktor" />
+                        <p:inputText id="lKSchluesselFaktor" value="#{demandCategoryController.selected.lKSchluesselFaktor}" title="#{bundle.CreateDemandCategoryTitle_lKSchluesselFaktor}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_mKSchluesselFaktor}" for="mKSchluesselFaktor" />
+                        <p:inputText id="mKSchluesselFaktor" value="#{demandCategoryController.selected.mKSchluesselFaktor}" title="#{bundle.CreateDemandCategoryTitle_mKSchluesselFaktor}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_productSchluesselFaktor}" for="productSchluesselFaktor" />
+                        <p:inputText id="productSchluesselFaktor" value="#{demandCategoryController.selected.productSchluesselFaktor}" title="#{bundle.CreateDemandCategoryTitle_productSchluesselFaktor}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtSeiten}" for="anzahlGesamtSeiten" />
+                        <p:inputText id="anzahlGesamtSeiten" value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtSeiten}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_register}" for="register" />
+                        <p:selectOneMenu id="register" value="#{demandCategoryController.selected.register}" >
+                            <f:selectItems value="#{registerController.itemsAvailableSelectOne}"
+                                           var="registerItem"
+                                           itemValue="#{registerItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{demandCategoryController.selected.user}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_department}" for="department" />
+                        <p:selectOneMenu id="department" value="#{demandCategoryController.selected.department}" >
+                            <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
+                                           var="departmentItem"
+                                           itemValue="#{departmentItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateSystem}" for="dateSystem" />
+                        <p:calendar id="dateSystem" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateSystem}" title="#{bundle.EditDemandCategoryTitle_dateSystem}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandCategoryController.selected.id}" title="#{bundle.CreateDemandCategoryTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_demandCategoryValidation}" for="demandCategoryValidation" />
+                        <p:selectOneMenu id="demandCategoryValidation" value="#{demandCategoryController.selected.demandCategoryValidation}" >
+                            <f:selectItems value="#{demandCategoryValidationController.itemsAvailableSelectOne}"
+                                           var="demandCategoryValidationItem"
+                                           itemValue="#{demandCategoryValidationItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summDruck}" for="summDruck" />
                         <p:inputText id="summDruck" value="#{demandCategoryController.selected.summDruck}" title="#{bundle.CreateDemandCategoryTitle_summDruck}" />
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summTotal}" for="summTotal" />
-                        <p:inputText id="summTotal" value="#{demandCategoryController.selected.summTotal}" title="#{bundle.CreateDemandCategoryTitle_summTotal}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_summUnitPrice}" for="summUnitPrice" />
+                        <p:inputText id="summUnitPrice" value="#{demandCategoryController.selected.summUnitPrice}" title="#{bundle.CreateDemandCategoryTitle_summUnitPrice}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_category}" for="category" />
                         <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" >
                             <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
@@ -29,10 +118,34 @@
                                            var="productItem"
                                            itemValue="#{productItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_layout}" for="layout" />
+                        <p:selectOneMenu id="layout" value="#{demandCategoryController.selected.layout}" >
+                            <f:selectItems value="#{layoutController.itemsAvailableSelectOne}"
+                                           var="layoutItem"
+                                           itemValue="#{layoutItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_katalogart}" for="katalogart" />
+                        <p:selectOneMenu id="katalogart" value="#{demandCategoryController.selected.katalogart}" >
+                            <f:selectItems value="#{katalogartController.itemsAvailableSelectOne}"
+                                           var="katalogartItem"
+                                           itemValue="#{katalogartItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umfang}" for="umfang" />
+                        <p:inputText id="umfang" value="#{demandCategoryController.selected.umfang}" title="#{bundle.CreateDemandCategoryTitle_umfang}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_prozess}" for="prozess" />
+                        <p:selectOneMenu id="prozess" value="#{demandCategoryController.selected.prozess}" >
+                            <f:selectItems value="#{prozessController.itemsAvailableSelectOne}"
+                                           var="prozessItem"
+                                           itemValue="#{prozessItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_ausgabe}" for="ausgabe" />
+                        <p:selectOneMenu id="ausgabe" value="#{demandCategoryController.selected.ausgabe}" >
+                            <f:selectItems value="#{ausgabeController.itemsAvailableSelectOne}"
+                                           var="ausgabeItem"
+                                           itemValue="#{ausgabeItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_schluessel}" for="schluessel" />
                         <p:inputText id="schluessel" value="#{demandCategoryController.selected.schluessel}" title="#{bundle.CreateDemandCategoryTitle_schluessel}" />
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlGesamtSeiten}" for="anzahlGesamtSeiten" />
-                        <p:inputText id="anzahlGesamtSeiten" value="#{demandCategoryController.selected.anzahlGesamtSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlGesamtSeiten}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_percentSeitenFaktor}" for="percentSeitenFaktor" />
                         <p:inputText id="percentSeitenFaktor" value="#{demandCategoryController.selected.percentSeitenFaktor}" title="#{bundle.CreateDemandCategoryTitle_percentSeitenFaktor}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlSonderSeiten}" for="anzahlSonderSeiten" />
@@ -95,51 +208,34 @@
                                            var="konzeptbearbeitungFaktorItem"
                                            itemValue="#{konzeptbearbeitungFaktorItem}"/>
                         </p:selectOneMenu>
-
-                        <p:outputLabel value="druck" for="druck" />
-                        <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
-                            <p:ajax process="druck" update="display, formatAuswaehlen, papierMaterialAuswaehlen, seitenanzahl, farbigkeit, artDerWeiterverarbeitung, veredlung" listener="#{demandCategoryController.checkDruck()}" />
-                        </p:selectBooleanCheckbox>
-
-
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true}" />
-                        <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true}" >
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" />
+                        <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" >
                             <f:selectItems value="#{formatAuswaehlenController.itemsAvailableSelectOne}"
                                            var="formatAuswaehlenItem"
                                            itemValue="#{formatAuswaehlenItem}"/>
                         </p:selectOneMenu>
-
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_papierMaterialAuswaehlen}" for="papierMaterialAuswaehlen" rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen') and demandCategoryController.selected.druck == true}" />
-                        <p:selectOneMenu id="papierMaterialAuswaehlen" value="#{demandCategoryController.selected.papierMaterialAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('papierMaterialAuswaehlen') and demandCategoryController.selected.druck == true}" >
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_papierMaterialAuswaehlen}" for="papierMaterialAuswaehlen" />
+                        <p:selectOneMenu id="papierMaterialAuswaehlen" value="#{demandCategoryController.selected.papierMaterialAuswaehlen}" >
                             <f:selectItems value="#{papierMaterialAuswaehlenController.itemsAvailableSelectOne}"
                                            var="papierMaterialAuswaehlenItem"
                                            itemValue="#{papierMaterialAuswaehlenItem}"/>
                         </p:selectOneMenu>
-
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_seitenanzahl}" for="seitenanzahl" rendered="#{demandCategoryController.renderAttribute('seitenanzahl') and demandCategoryController.selected.druck == true}" />
-                        <p:inputText id="seitenanzahl" value="#{demandCategoryController.selected.seitenanzahl}" title="#{bundle.CreateDemandCategoryTitle_seitenanzahl}" rendered="#{demandCategoryController.renderAttribute('seitenanzahl') and demandCategoryController.selected.druck == true}" />
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_farbigkeit}" for="farbigkeit" rendered="#{demandCategoryController.renderAttribute('farbigkeit') and demandCategoryController.selected.druck == true}" />
-                        <p:selectOneMenu id="farbigkeit" value="#{demandCategoryController.selected.farbigkeit}" rendered="#{demandCategoryController.renderAttribute('farbigkeit') and demandCategoryController.selected.druck == true}" >
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_seitenanzahl}" for="seitenanzahl" />
+                        <p:inputText id="seitenanzahl" value="#{demandCategoryController.selected.seitenanzahl}" title="#{bundle.CreateDemandCategoryTitle_seitenanzahl}" />
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_farbigkeit}" for="farbigkeit" />
+                        <p:selectOneMenu id="farbigkeit" value="#{demandCategoryController.selected.farbigkeit}" >
                             <f:selectItems value="#{farbigkeitController.itemsAvailableSelectOne}"
                                            var="farbigkeitItem"
                                            itemValue="#{farbigkeitItem}"/>
                         </p:selectOneMenu>
-
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_artDerWeiterverarbeitung}" for="artDerWeiterverarbeitung" rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung') and demandCategoryController.selected.druck == true}" />
-                        <p:selectOneMenu id="artDerWeiterverarbeitung" value="#{demandCategoryController.selected.artDerWeiterverarbeitung}" rendered="#{demandCategoryController.renderAttribute('artDerWeiterverarbeitung') and demandCategoryController.selected.druck == true}" >
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_artDerWeiterverarbeitung}" for="artDerWeiterverarbeitung" />
+                        <p:selectOneMenu id="artDerWeiterverarbeitung" value="#{demandCategoryController.selected.artDerWeiterverarbeitung}" >
                             <f:selectItems value="#{artDerWeiterverarbeitungController.itemsAvailableSelectOne}"
                                            var="artDerWeiterverarbeitungItem"
                                            itemValue="#{artDerWeiterverarbeitungItem}"/>
                         </p:selectOneMenu>
-
-
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_veredlung}" for="veredlung" rendered="#{demandCategoryController.renderAttribute('veredlung') and demandCategoryController.selected.druck == true}" />
-                        <p:selectOneMenu id="veredlung" value="#{demandCategoryController.selected.veredlung}" rendered="#{demandCategoryController.renderAttribute('veredlung') and demandCategoryController.selected.druck == true}" >
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_veredlung}" for="veredlung" />
+                        <p:selectOneMenu id="veredlung" value="#{demandCategoryController.selected.veredlung}" >
                             <f:selectItems value="#{veredlungController.itemsAvailableSelectOne}"
                                            var="veredlungItem"
                                            itemValue="#{veredlungItem}"/>
@@ -184,6 +280,8 @@
                         <p:inputText id="anzahlMitglieder" value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.CreateDemandCategoryTitle_anzahlMitglieder}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateDemandCategory}" for="dateDemandCategory" />
                         <p:calendar id="dateDemandCategory" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.EditDemandCategoryTitle_dateDemandCategory}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nbrTotalValidation}" for="nbrTotalValidation" />
+                        <p:inputText id="nbrTotalValidation" value="#{demandCategoryController.selected.nbrTotalValidation}" title="#{bundle.CreateDemandCategoryTitle_nbrTotalValidation}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandCategoryController.create}" value="#{bundle.Save}" update="display,:DemandCategoryListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandCategoryCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandCategoryCreateDialog.hide()"/>

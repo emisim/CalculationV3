@@ -198,6 +198,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getUmschlagFarbigkeitElement() != null) {
                 umschlagFarbigkeitElementPricing = demandCategory.getUmschlagFarbigkeitElement().getPrice();
             }
+            demandCategory.setNachsatzPricing(nachsatzPricing);
+            demandCategory.setNachspannPricing(nachspannPricing);
+            demandCategory.setVorspannPricing(vorspannPricing);
+            demandCategory.setUmschlagFarbigkeitElementPricing(umschlagFarbigkeitElementPricing);
             BigDecimal summDruck = demandCategory.getCover().getPrice().add(nachsatzPricing).add(nachspannPricing).add(vorspannPricing).add(umschlagFarbigkeitElementPricing).add(baukastenPricing);
 
             if (hardCover) {
@@ -205,6 +209,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             } else {
                 summDruck = summDruck.multiply(demandCategory.getAuflage().getPrice());
             }
+            
+            demandCategory.setBaukastenPricing(baukastenPricing);
             demandCategory.setSummDruck(summDruck);
             return 1;
         }
