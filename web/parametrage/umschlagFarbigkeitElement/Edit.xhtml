@@ -33,7 +33,7 @@
                         <p:outputLabel value="#{bundle.EditUmschlagFarbigkeitElementLabel_id}" for="id" />
                         <p:inputText id="id" value="#{umschlagFarbigkeitElementController.selected.id}" title="#{bundle.EditUmschlagFarbigkeitElementTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{umschlagFarbigkeitElementController.update}" value="#{bundle.Save}" update="display,:UmschlagFarbigkeitElementListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UmschlagFarbigkeitElementEditDialog');"/>
+                    <p:commandButton actionListener="#{umschlagFarbigkeitElementController.update}" value="#{bundle.Save}" update="display,:parametrageTab:UmschlagFarbigkeitElementListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UmschlagFarbigkeitElementEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UmschlagFarbigkeitElementEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

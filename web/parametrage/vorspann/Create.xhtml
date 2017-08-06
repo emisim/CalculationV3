@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateVorspannLabel_id}" for="id" />
                         <p:inputText id="id" value="#{vorspannController.selected.id}" title="#{bundle.CreateVorspannTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{vorspannController.create}" value="#{bundle.Save}" update="display,:VorspannListForm:datalist,:growl" oncomplete="handleSubmit(args,'VorspannCreateDialog');"/>
+                    <p:commandButton actionListener="#{vorspannController.create}" value="#{bundle.Save}" update="display,:parametrageTab:VorspannListForm:datalist,:growl" oncomplete="handleSubmit(args,'VorspannCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VorspannCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

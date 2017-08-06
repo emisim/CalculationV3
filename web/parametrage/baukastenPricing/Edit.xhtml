@@ -31,7 +31,7 @@
                         <p:outputLabel value="#{bundle.EditBaukastenPricingLabel_id}" for="id" />
                         <p:inputText id="id" value="#{baukastenPricingController.selected.id}" title="#{bundle.EditBaukastenPricingTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{baukastenPricingController.update}" value="#{bundle.Save}" update="display,:BaukastenPricingListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BaukastenPricingEditDialog');"/>
+                    <p:commandButton actionListener="#{baukastenPricingController.update}" value="#{bundle.Save}" update="display,:parametrageTab:BaukastenPricingListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BaukastenPricingEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="BaukastenPricingEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

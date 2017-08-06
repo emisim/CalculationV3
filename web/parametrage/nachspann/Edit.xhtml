@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.EditNachspannLabel_id}" for="id" />
                         <p:inputText id="id" value="#{nachspannController.selected.id}" title="#{bundle.EditNachspannTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{nachspannController.update}" value="#{bundle.Save}" update="display,:NachspannListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NachspannEditDialog');"/>
+                    <p:commandButton actionListener="#{nachspannController.update}" value="#{bundle.Save}" update="display,:parametrageTab:NachspannListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NachspannEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="NachspannEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
