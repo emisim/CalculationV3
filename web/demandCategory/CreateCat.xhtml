@@ -284,14 +284,7 @@
                                     </p:selectOneMenu>
 
 
-                                    <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagFarbigkeit}" for="umschlagFarbigkeit" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" />
-                                    <p:selectOneMenu id="umschlagFarbigkeit" value="#{demandCategoryController.selected.umschlagFarbigkeit}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" autoWidth="false" >
-                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{umschlagFarbigkeitController.itemsAvailableSelectOne}"
-                                                       var="umschlagFarbigkeitItem"
-                                                       itemValue="#{umschlagFarbigkeitItem}" itemLabel="#{umschlagFarbigkeitItem.label}"/>
-                                    </p:selectOneMenu>
-
+                                   
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_cover}" for="cover" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true }" />
                                     <p:selectOneMenu id="cover" value="#{demandCategoryController.selected.cover}" rendered="#{demandCategoryController.renderAttribute('cover') and demandCategoryController.selected.druck == true }" autoWidth="false" >
@@ -306,7 +299,7 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nachsatz}" for="nachsatz" />
                                     <p:selectOneMenu id="nachsatz" value="#{demandCategoryController.selected.nachsatz}" >
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
-                                        <f:selectItems value="#{demandCategoryCalculationController.nachsatzs}"
+                                        <f:selectItems value="#{demandCategoryController.nachsatzs}"
                                                        var="nachsatzItem"
                                                        itemValue="#{nachsatzItem}" itemLabel="#{nachsatzItem.expression}"
                                                        />
@@ -344,7 +337,7 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagFarbigkeit}" for="umschlagFarbigkeit" />
                                     <p:selectOneMenu id="umschlagFarbigkeit" value="#{demandCategoryController.selected.umschlagFarbigkeit}" >
-                                        <f:selectItems value="#{demandCategoryController.itemsAvailableSelectOne}"
+                                        <f:selectItems value="#{umschlagFarbigkeitController.itemsAvailableSelectOne}"
                                                        var="umschlagFarbigkeitItem"
                                                        itemValue="#{umschlagFarbigkeitItem}" itemLabel="#{umschlagFarbigkeitItem.label}"
                                                        />
