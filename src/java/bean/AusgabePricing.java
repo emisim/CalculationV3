@@ -7,44 +7,43 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author t3500
  */
 @Entity
-public class Baukasten implements Serializable {
+public class AusgabePricing implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String expression;
+    @ManyToOne
+    private Ausgabe ausgabe;
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal value;
+    BigDecimal price;
 
-    public String getExpression() {
-        return expression;
+    public Ausgabe getAusgabe() {
+        return ausgabe;
     }
 
-    public void setExpression(String expression) {
-        this.expression = expression;
+    public void setAusgabe(Ausgabe ausgabe) {
+        this.ausgabe = ausgabe;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Long getId() {
@@ -65,10 +64,10 @@ public class Baukasten implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Baukasten)) {
+        if (!(object instanceof AusgabePricing)) {
             return false;
         }
-        Baukasten other = (Baukasten) object;
+        AusgabePricing other = (AusgabePricing) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -77,7 +76,7 @@ public class Baukasten implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Baukasten[ id=" + id + " ]";
+        return "bean.AusgabePricing[ id=" + id + " ]";
     }
 
 }

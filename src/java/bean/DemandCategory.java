@@ -182,7 +182,7 @@ public class DemandCategory implements Serializable {
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal summUnitPrice = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal summeGlobal= new BigDecimal(0);
+    BigDecimal summeGlobal = new BigDecimal(0);
 
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
@@ -193,6 +193,99 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    @ManyToOne
+    private UmschlagFarbigkeitElement umschlagFarbigkeitElement;
+    @ManyToOne
+    private Vorspann vorspann;
+    @ManyToOne
+    private Nachspann nachspann;
+    @ManyToOne
+    private Nachsatz nachsatz;
+
+    //Druck Pricing
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal nachsatzPricing = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal nachspannPricing = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal vorspannPricing = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal umschlagFarbigkeitElementPricing = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal baukastenPricing = new BigDecimal(0);
+
+    public BigDecimal getNachsatzPricing() {
+        return nachsatzPricing;
+    }
+
+    public void setNachsatzPricing(BigDecimal nachsatzPricing) {
+        this.nachsatzPricing = nachsatzPricing;
+    }
+
+    public BigDecimal getNachspannPricing() {
+        return nachspannPricing;
+    }
+
+    public void setNachspannPricing(BigDecimal nachspannPricing) {
+        this.nachspannPricing = nachspannPricing;
+    }
+
+    public BigDecimal getVorspannPricing() {
+        return vorspannPricing;
+    }
+
+    public void setVorspannPricing(BigDecimal vorspannPricing) {
+        this.vorspannPricing = vorspannPricing;
+    }
+
+    public BigDecimal getUmschlagFarbigkeitElementPricing() {
+        return umschlagFarbigkeitElementPricing;
+    }
+
+    public void setUmschlagFarbigkeitElementPricing(BigDecimal umschlagFarbigkeitElementPricing) {
+        this.umschlagFarbigkeitElementPricing = umschlagFarbigkeitElementPricing;
+    }
+
+    public BigDecimal getBaukastenPricing() {
+        return baukastenPricing;
+    }
+
+    public void setBaukastenPricing(BigDecimal baukastenPricing) {
+        this.baukastenPricing = baukastenPricing;
+    }
+
+    public Vorspann getVorspann() {
+        return vorspann;
+    }
+
+    public void setVorspann(Vorspann vorspann) {
+        this.vorspann = vorspann;
+    }
+
+    public Nachspann getNachspann() {
+        return nachspann;
+    }
+
+    public void setNachspann(Nachspann nachspann) {
+        this.nachspann = nachspann;
+    }
+
+    public Nachsatz getNachsatz() {
+        return nachsatz;
+    }
+
+    public void setNachsatz(Nachsatz nachsatz) {
+        this.nachsatz = nachsatz;
+    }
+
+    public UmschlagFarbigkeitElement getUmschlagFarbigkeitElement() {
+        return umschlagFarbigkeitElement;
+    }
+
+    public void setUmschlagFarbigkeitElement(UmschlagFarbigkeitElement umschlagFarbigkeitElement) {
+        this.umschlagFarbigkeitElement = umschlagFarbigkeitElement;
+    }
 
     public Baukasten getBaukasten() {
         return baukasten;

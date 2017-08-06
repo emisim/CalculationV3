@@ -5,9 +5,10 @@
  */
 package service;
 
-import bean.DepartementCriteriaItem;
+import bean.DemandCategory;
 import bean.Layout;
 import bean.LayoutPricing;
+import java.math.BigDecimal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,10 +23,19 @@ public class LayoutPricingFacade extends AbstractFacade<LayoutPricing> {
     @PersistenceContext(unitName = "kt_FST_2PU")
     private EntityManager em;
 //database publishing
-    public LayoutPricing findByCriteriaAndLayout(DepartementCriteriaItem departementCriteriaItem, Layout layout) {
-        return getUniqueResult("SELECT item FROM LayoutPricing item WHERE item.departementCriteriaItem.id=" + departementCriteriaItem.getId()
+
+    public BigDecimal findByCriteriaAndLayout(String departementCriteriaItemDescription, DemandCategory demandCategory) {
+        return findByCriteriaAndLayout(departementCriteriaItemDescription, demandCategory.getLayout());
+    }
+
+    private BigDecimal findByCriteriaAndLayout(String departementCriteriaItemDescription, Layout layout) {
+        LayoutPricing layoutPricing = getUniqueResult("SELECT item FROM LayoutPricing item WHERE "
+                + "item.departementCriteriaItem.description='" + departementCriteriaItemDescription + "'"
                 + " AND item.layout.id=" + layout.getId());
-        
+        if (layoutPricing == null) {
+            return new BigDecimal(0);
+        }
+        return layoutPricing.getPrice();
     }
 
     public LayoutPricingFacade() {

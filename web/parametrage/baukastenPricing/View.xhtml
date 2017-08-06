@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BaukastenPricingViewDlg" widgetVar="BaukastenPricingViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBaukastenPricingTitle}">
+            <h:form id="BaukastenPricingViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{baukastenPricingController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBaukastenPricingLabel_baukasten}"/>
+                        <h:outputText value="#{baukastenPricingController.selected.baukasten}" title="#{bundle.ViewBaukastenPricingTitle_baukasten}"/>
+                        <h:outputText value="#{bundle.ViewBaukastenPricingLabel_cover}"/>
+                        <h:outputText value="#{baukastenPricingController.selected.cover}" title="#{bundle.ViewBaukastenPricingTitle_cover}"/>
+                        <h:outputText value="#{bundle.ViewBaukastenPricingLabel_price}"/>
+                        <h:outputText value="#{baukastenPricingController.selected.price}" title="#{bundle.ViewBaukastenPricingTitle_price}"/>
+                        <h:outputText value="#{bundle.ViewBaukastenPricingLabel_id}"/>
+                        <h:outputText value="#{baukastenPricingController.selected.id}" title="#{bundle.ViewBaukastenPricingTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BaukastenPricingViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

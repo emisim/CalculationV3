@@ -37,6 +37,8 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
     @EJB
     private ConfigurationItemFacade configurationItemFacade;
     @EJB
+    private LayoutPricingFacade layoutPricingFacade;
+    @EJB
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
 
     ScriptEngineManager manager = new ScriptEngineManager();
@@ -48,12 +50,9 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
 
     //Wichtig für die Evaluation unsere Expression
     public Object evalFunction(String expression, DemandCategory demandCategory, boolean execExpression) {
-       // System.out.println("ha expression" + expression + " ha exec " + execExpression);
-       // System.out.println("haa input " + demandCategory);
         try {
 
             if (execExpression == true) {
-               // System.out.println("haa expression ==> " + expression);
                 if (demandCategory != null) {
                     // ALlle Input sinbd als Object hier gespeicherts
                     getJsEngine().put("demandCategory", demandCategory);
@@ -62,11 +61,11 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
                     Object obj = getJsEngine().eval(expression);
                     BigDecimal value = new BigDecimal(obj + "");
                     value = value.setScale(2, RoundingMode.HALF_UP);
-                  //  System.out.println("haaa l eval ==> " + value);
                     return value;
                 }
             }
         } catch (ScriptException ex) {
+            ex.printStackTrace();
             return "0";
         }
         return "0";
@@ -77,6 +76,7 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
             jsEngine = manager.getEngineByName("JavaScript"); //BE CAREFUL about the engine name.
             jsEngine.put("configurationItemFacade", configurationItemFacade);
             jsEngine.put("demandCategoryCalculationFacade", demandCategoryCalculationFacade);
+            jsEngine.put("layoutPricingFacade", layoutPricingFacade);
         }
         return jsEngine;
     }

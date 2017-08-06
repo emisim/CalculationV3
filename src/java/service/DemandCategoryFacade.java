@@ -13,6 +13,7 @@ import bean.DemandCategoryCalculationItem;
 import bean.DemandCategoryDepartementCalculation;
 import bean.Departement;
 import bean.DepartementDetail;
+import bean.Nachsatz;
 import bean.Sortiment;
 import bean.SotimentItem;
 import bean.User;
@@ -57,6 +58,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private DemandCategoryValidationFacade demandCategoryValidationFacade;
     @EJB
     private DepartementFacade departementFacade;
+    @EJB
+    private BaukastenPricingFacade baukastenPricingFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -170,6 +173,11 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     private int calcSumDruck(DemandCategory demandCategory) {
         demandCategory.setSummDruck(new BigDecimal(0));
         AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit(), demandCategory.getBaukasten());
+        BigDecimal nachsatzPricing = new BigDecimal(0);
+        BigDecimal nachspannPricing = new BigDecimal(0);
+        BigDecimal vorspannPricing = new BigDecimal(0);
+        BigDecimal umschlagFarbigkeitElementPricing = new BigDecimal(0);
+        BigDecimal baukastenPricing = new BigDecimal(0);
         if (demandCategory == null || demandCategory.getCover() == null || SearchUtil.isStringNullOrVide(demandCategory.getCover().getDescription())) {
             return -1;
         }
@@ -177,11 +185,25 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         if (hardCover && (auflageSeitenCoverMatrix == null || auflageSeitenCoverMatrix.getPrice() == null)) {
             return -2;
         } else {
-            BigDecimal summDruck = new BigDecimal(0);
+            baukastenPricing = baukastenPricingFacade.findByCoverAndBaukasten(demandCategory.getCover(), demandCategory.getBaukasten());
+            if (demandCategory.getNachspann() != null) {
+                nachspannPricing = demandCategory.getNachspann().getValue();
+            }
+            if (demandCategory.getNachsatz() != null) {
+                nachsatzPricing = demandCategory.getNachsatz().getPrice();
+            }
+            if (demandCategory.getVorspann() != null) {
+                vorspannPricing = demandCategory.getVorspann().getValue();
+            }
+            if (demandCategory.getUmschlagFarbigkeitElement() != null) {
+                umschlagFarbigkeitElementPricing = demandCategory.getUmschlagFarbigkeitElement().getPrice();
+            }
+            BigDecimal summDruck = demandCategory.getCover().getPrice().add(nachsatzPricing).add(nachspannPricing).add(vorspannPricing).add(umschlagFarbigkeitElementPricing).add(baukastenPricing);
+
             if (hardCover) {
-                summDruck = (demandCategory.getCover().getPrice().add(auflageSeitenCoverMatrix.getPrice()).add(demandCategory.getRegister().getPrice())).multiply(demandCategory.getAuflage().getPrice());
+                summDruck = (summDruck.add(auflageSeitenCoverMatrix.getPrice()).add(demandCategory.getRegister().getPrice())).multiply(demandCategory.getAuflage().getPrice());
             } else {
-                summDruck = auflageSeitenCoverMatrix.getPrice().multiply(demandCategory.getAuflage().getPrice());
+                summDruck = summDruck.multiply(demandCategory.getAuflage().getPrice());
             }
             demandCategory.setSummDruck(summDruck);
             return 1;
@@ -223,8 +245,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         query += SearchUtil.addConstraintOr("so", "sortiment.name", "=", sortiemnts);
         query += SearchUtil.addConstraintOr("dc", "department.name", "=", departements);
 
-//        System.out.println("ha departements ==> " + departements);
-//        System.out.println("ha query ==> " + query);
+        System.out.println("ha departements ==> " + departements);
+        System.out.println("ha query ==> " + query);
         demandCategorys = em.createQuery(query).getResultList();
 
         if (demandCategorys != null && demandCategorys.isEmpty()) {
@@ -276,11 +298,19 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return demandCategory.getSummeGlobal();
-        } else if (SessionUtil.getConnectedUser().getDepartement() != null && !Objects.equals(SessionUtil.getConnectedUser().getDepartement().getId(), demandCategory.getDepartment().getId())) {
-            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id="
-                    + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
-            return demandCategory.getSummeGlobal();
+
+            System.out.println("SessionUtil.getConnectedUser().getDepartement()" + SessionUtil.getConnectedUser().getDepartement());
+            System.out.println("SessionUtil.getConnectedUser().getDepartement().getId()" + SessionUtil.getConnectedUser().getDepartement().getId());
+
+            DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.getUniqueResult("SELECT item FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id="
+                    + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId());
+            if (demandCategoryDepartementCalculation == null) {
+                System.out.println(" hna return NULL");
+                return new BigDecimal(0);
+            } else {
+                return demandCategoryDepartementCalculation.getSummeGlobal();
+            }
         }
     }
 
@@ -351,9 +381,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getUser() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
             }
-            if (demandCategory.getDepartment() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
-            }
+//            if (demandCategory.getDepartment() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
+//            }
 //            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
 //                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
 //            }
