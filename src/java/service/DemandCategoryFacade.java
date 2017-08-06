@@ -66,6 +66,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return em;
     }
 
+  
+
     public boolean sortimentCondition(DemandCategory demandCategory, List<SotimentItem> sotimentItems) {
         return demandCategory != null && sotimentItems != null && !sotimentItems.isEmpty() && DemandCategoryCalculationFacade.summSortiment(demandCategory, sotimentItems, false, 0).compareTo(new BigDecimal(100)) == 0;
     }
@@ -209,7 +211,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             } else {
                 summDruck = summDruck.multiply(demandCategory.getAuflage().getPrice());
             }
-            
+
             demandCategory.setBaukastenPricing(baukastenPricing);
             demandCategory.setSummDruck(summDruck);
             return 1;

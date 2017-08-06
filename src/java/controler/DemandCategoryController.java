@@ -104,13 +104,14 @@ public class DemandCategoryController implements Serializable {
     private List<UmschlagFarbigkeitElement> umschlagFarbigkeitElements = new ArrayList();
     private List<Nachsatz> nachsatzs = new ArrayList();
 
-    
-    public void findByUmschlagFarbigkeitAndCover(){
-        umschlagFarbigkeitElements= umschlagFarbigkeitElementFacade.findByUmschlagFarbigkeitAndCover(getSelected().getUmschlagFarbigkeit(), getSelected().getCover());
+    public void findByUmschlagFarbigkeitAndCover() {
+        umschlagFarbigkeitElements = umschlagFarbigkeitElementFacade.findByUmschlagFarbigkeitAndCover(getSelected().getUmschlagFarbigkeit(), getSelected().getCover());
     }
-    public void findByCover(){
-        nachsatzs= nachsatzFacade.findByCover(getSelected().getCover());
+
+    public void findByCover() {
+        nachsatzs = nachsatzFacade.findByCover(getSelected().getCover());
     }
+
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
         return ejbFacade.calcSumPerAuflagRequieredSum(demandCategory);
     }
@@ -129,6 +130,12 @@ public class DemandCategoryController implements Serializable {
         selected.setSotimentItems(null);
         selected = null;
         sotimentItems = null;
+    }
+
+    public boolean adminOrInTheSameDepartement(String departementName) {
+        boolean res= !accessFacade.isAdminOrInTheSameDepartement(SessionUtil.getConnectedUser(), departementName);
+        System.out.println("haa res ==> "+res);
+        return res;
     }
 
     public boolean adminAccess() {
@@ -288,7 +295,6 @@ public class DemandCategoryController implements Serializable {
         this.umschlagFarbigkeitElements = umschlagFarbigkeitElement;
     }
 
-    
     public DemandCategory getSelectedForSearch() {
         if (selectedForSearch == null) {
             selectedForSearch = new DemandCategory();
