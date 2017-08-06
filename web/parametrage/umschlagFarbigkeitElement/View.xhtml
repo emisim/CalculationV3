@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UmschlagFarbigkeitElementViewDlg" widgetVar="UmschlagFarbigkeitElementViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUmschlagFarbigkeitElementTitle}">
+            <h:form id="UmschlagFarbigkeitElementViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{umschlagFarbigkeitElementController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitElementLabel_expression}"/>
+                        <h:outputText value="#{umschlagFarbigkeitElementController.selected.expression}" title="#{bundle.ViewUmschlagFarbigkeitElementTitle_expression}"/>
+                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitElementLabel_umschlagFarbigkeit}"/>
+                        <h:outputText value="#{umschlagFarbigkeitElementController.selected.umschlagFarbigkeit}" title="#{bundle.ViewUmschlagFarbigkeitElementTitle_umschlagFarbigkeit}"/>
+                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitElementLabel_cover}"/>
+                        <h:outputText value="#{umschlagFarbigkeitElementController.selected.cover}" title="#{bundle.ViewUmschlagFarbigkeitElementTitle_cover}"/>
+                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitElementLabel_price}"/>
+                        <h:outputText value="#{umschlagFarbigkeitElementController.selected.price}" title="#{bundle.ViewUmschlagFarbigkeitElementTitle_price}"/>
+                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitElementLabel_id}"/>
+                        <h:outputText value="#{umschlagFarbigkeitElementController.selected.id}" title="#{bundle.ViewUmschlagFarbigkeitElementTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UmschlagFarbigkeitElementViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

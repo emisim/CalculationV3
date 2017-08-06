@@ -223,8 +223,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         query += SearchUtil.addConstraintOr("so", "sortiment.name", "=", sortiemnts);
         query += SearchUtil.addConstraintOr("dc", "department.name", "=", departements);
 
-//        System.out.println("ha departements ==> " + departements);
-//        System.out.println("ha query ==> " + query);
+        System.out.println("ha departements ==> " + departements);
+        System.out.println("ha query ==> " + query);
         demandCategorys = em.createQuery(query).getResultList();
 
         if (demandCategorys != null && demandCategorys.isEmpty()) {
@@ -276,11 +276,19 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     public BigDecimal findSummByDepartement(DemandCategory demandCategory) {
         if (SessionUtil.getConnectedUser().getAdmin() == 1) {
             return demandCategory.getSummeGlobal();
-        } else if (SessionUtil.getConnectedUser().getDepartement() != null && !Objects.equals(SessionUtil.getConnectedUser().getDepartement().getId(), demandCategory.getDepartment().getId())) {
-            return (BigDecimal) em.createQuery("SELECT item.summeGlobal FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id="
-                    + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId()).getSingleResult();
         } else {
-            return demandCategory.getSummeGlobal();
+
+            System.out.println("SessionUtil.getConnectedUser().getDepartement()" + SessionUtil.getConnectedUser().getDepartement());
+            System.out.println("SessionUtil.getConnectedUser().getDepartement().getId()" + SessionUtil.getConnectedUser().getDepartement().getId());
+
+            DemandCategoryDepartementCalculation demandCategoryDepartementCalculation = demandCategoryDepartementCalculationFacade.getUniqueResult("SELECT item FROM DemandCategoryDepartementCalculation item WHERE  item.demandCategory.id="
+                    + demandCategory.getId() + " AND item.departement.id=" + SessionUtil.getConnectedUser().getDepartement().getId());
+            if (demandCategoryDepartementCalculation == null) {
+                System.out.println(" hna return NULL");
+                return new BigDecimal(0);
+            } else {
+                return demandCategoryDepartementCalculation.getSummeGlobal();
+            }
         }
     }
 
@@ -351,9 +359,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             if (demandCategory.getUser() != null) {
                 query += SearchUtil.addConstraint(beanAbreviation, "user.login", "=", demandCategory.getUser().getLogin());
             }
-            if (demandCategory.getDepartment() != null) {
-                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
-            }
+//            if (demandCategory.getDepartment() != null) {
+//                query += SearchUtil.addConstraint(beanAbreviation, "department.id", "=", demandCategory.getDepartment().getId());
+//            }
 //            if (demandCategory.getKonzeptbearbeitungFaktor() != null) {
 //                query += SearchUtil.addConstraint(beanAbreviation, "konzeptbearbeitungFaktor.id", "=", demandCategory.getKonzeptbearbeitungFaktor().getId());
 //            }

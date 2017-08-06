@@ -24,7 +24,7 @@ public class UmschlagFarbigkeit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String label;
+    private String label;// Frimeneindruck or Individueller Sonderumschlag
     //Hier geht um dem Feld wo eine Erklärungsfeld gebraucht ist
     private String description;
     private @Column(columnDefinition = "DECIMAL(10,2)") BigDecimal price;

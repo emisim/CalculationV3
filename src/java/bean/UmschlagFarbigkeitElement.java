@@ -7,29 +7,31 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author t3500
  */
 @Entity
-public class Baukasten implements Serializable {
+public class UmschlagFarbigkeitElement implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String expression;
+    @ManyToOne
+    private UmschlagFarbigkeit umschlagFarbigkeit;
+    @ManyToOne
+    private Cover cover;
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal value;
+    BigDecimal price;
+    private String expression;
 
     public String getExpression() {
         return expression;
@@ -39,12 +41,28 @@ public class Baukasten implements Serializable {
         this.expression = expression;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public UmschlagFarbigkeit getUmschlagFarbigkeit() {
+        return umschlagFarbigkeit;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setUmschlagFarbigkeit(UmschlagFarbigkeit umschlagFarbigkeit) {
+        this.umschlagFarbigkeit = umschlagFarbigkeit;
+    }
+
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Long getId() {
@@ -65,10 +83,10 @@ public class Baukasten implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Baukasten)) {
+        if (!(object instanceof UmschlagFarbigkeitElement)) {
             return false;
         }
-        Baukasten other = (Baukasten) object;
+        UmschlagFarbigkeitElement other = (UmschlagFarbigkeitElement) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -77,7 +95,7 @@ public class Baukasten implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Baukasten[ id=" + id + " ]";
+        return "bean.UmschlagFarbigkeitElement[ id=" + id + " ]";
     }
 
 }

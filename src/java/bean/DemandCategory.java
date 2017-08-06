@@ -182,7 +182,7 @@ public class DemandCategory implements Serializable {
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal summUnitPrice = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal summeGlobal= new BigDecimal(0);
+    BigDecimal summeGlobal = new BigDecimal(0);
 
     @OneToMany(mappedBy = "demandCategory")
     private List<DemandCategoryDepartementCalculation> demandCategoryDepartementCalculations;
@@ -193,6 +193,47 @@ public class DemandCategory implements Serializable {
     private Departement department;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSystem = new Date();
+
+    @ManyToOne
+    private UmschlagFarbigkeitElement umschlagFarbigkeitElement;
+    @ManyToOne
+    private Vorspann vorspann;
+    @ManyToOne
+    private Nachspann nachspann;
+    @ManyToOne
+    private Nachsatz nachsatz;
+
+    public Vorspann getVorspann() {
+        return vorspann;
+    }
+
+    public void setVorspann(Vorspann vorspann) {
+        this.vorspann = vorspann;
+    }
+
+    public Nachspann getNachspann() {
+        return nachspann;
+    }
+
+    public void setNachspann(Nachspann nachspann) {
+        this.nachspann = nachspann;
+    }
+
+    public Nachsatz getNachsatz() {
+        return nachsatz;
+    }
+
+    public void setNachsatz(Nachsatz nachsatz) {
+        this.nachsatz = nachsatz;
+    }
+
+    public UmschlagFarbigkeitElement getUmschlagFarbigkeitElement() {
+        return umschlagFarbigkeitElement;
+    }
+
+    public void setUmschlagFarbigkeitElement(UmschlagFarbigkeitElement umschlagFarbigkeitElement) {
+        this.umschlagFarbigkeitElement = umschlagFarbigkeitElement;
+    }
 
     public Baukasten getBaukasten() {
         return baukasten;

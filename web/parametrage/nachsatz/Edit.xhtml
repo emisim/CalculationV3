@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NachsatzEditDlg" widgetVar="NachsatzEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditNachsatzTitle}">
+            <h:form id="NachsatzEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nachsatzController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditNachsatzLabel_cover}" for="cover" />
+                        <p:selectOneMenu id="cover" value="#{nachsatzController.selected.cover}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{coverController.itemsAvailableSelectOne}"
+                                           var="coverItem"
+                                           itemValue="#{coverItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditNachsatzLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{nachsatzController.selected.price}" title="#{bundle.EditNachsatzTitle_price}" />
+                        <p:outputLabel value="#{bundle.EditNachsatzLabel_expression}" for="expression" />
+                        <p:inputText id="expression" value="#{nachsatzController.selected.expression}" title="#{bundle.EditNachsatzTitle_expression}" />
+                        <p:outputLabel value="#{bundle.EditNachsatzLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{nachsatzController.selected.id}" title="#{bundle.EditNachsatzTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{nachsatzController.update}" value="#{bundle.Save}" update="display,:NachsatzListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NachsatzEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NachsatzEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

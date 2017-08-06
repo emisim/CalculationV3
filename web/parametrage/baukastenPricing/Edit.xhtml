@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BaukastenPricingEditDlg" widgetVar="BaukastenPricingEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBaukastenPricingTitle}">
+            <h:form id="BaukastenPricingEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{baukastenPricingController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBaukastenPricingLabel_baukasten}" for="baukasten" />
+                        <p:selectOneMenu id="baukasten" value="#{baukastenPricingController.selected.baukasten}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{baukastenController.itemsAvailableSelectOne}"
+                                           var="baukastenItem"
+                                           itemValue="#{baukastenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditBaukastenPricingLabel_cover}" for="cover" />
+                        <p:selectOneMenu id="cover" value="#{baukastenPricingController.selected.cover}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{coverController.itemsAvailableSelectOne}"
+                                           var="coverItem"
+                                           itemValue="#{coverItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditBaukastenPricingLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{baukastenPricingController.selected.price}" title="#{bundle.EditBaukastenPricingTitle_price}" />
+                        <p:outputLabel value="#{bundle.EditBaukastenPricingLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{baukastenPricingController.selected.id}" title="#{bundle.EditBaukastenPricingTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{baukastenPricingController.update}" value="#{bundle.Save}" update="display,:BaukastenPricingListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BaukastenPricingEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BaukastenPricingEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NachsatzViewDlg" widgetVar="NachsatzViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewNachsatzTitle}">
+            <h:form id="NachsatzViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nachsatzController.selected != null}">
+                        <h:outputText value="#{bundle.ViewNachsatzLabel_cover}"/>
+                        <h:outputText value="#{nachsatzController.selected.cover}" title="#{bundle.ViewNachsatzTitle_cover}"/>
+                        <h:outputText value="#{bundle.ViewNachsatzLabel_price}"/>
+                        <h:outputText value="#{nachsatzController.selected.price}" title="#{bundle.ViewNachsatzTitle_price}"/>
+                        <h:outputText value="#{bundle.ViewNachsatzLabel_expression}"/>
+                        <h:outputText value="#{nachsatzController.selected.expression}" title="#{bundle.ViewNachsatzTitle_expression}"/>
+                        <h:outputText value="#{bundle.ViewNachsatzLabel_id}"/>
+                        <h:outputText value="#{nachsatzController.selected.id}" title="#{bundle.ViewNachsatzTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="NachsatzViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -7,22 +7,19 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
  * @author t3500
  */
 @Entity
-public class Baukasten implements Serializable {
+public class Vorspann implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,10 +62,10 @@ public class Baukasten implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Baukasten)) {
+        if (!(object instanceof Vorspann)) {
             return false;
         }
-        Baukasten other = (Baukasten) object;
+        Vorspann other = (Vorspann) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -77,7 +74,7 @@ public class Baukasten implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Baukasten[ id=" + id + " ]";
+        return "bean.Vorspann[ id=" + id + " ]";
     }
 
 }

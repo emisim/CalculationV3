@@ -7,44 +7,53 @@ package bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author t3500
  */
 @Entity
-public class Baukasten implements Serializable {
+public class BaukastenPricing implements Serializable {
 
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String expression;
+    @ManyToOne
+    private Cover cover;
     private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal value;
+    BigDecimal price = new BigDecimal(0);
+    @ManyToOne
+    private Baukasten baukasten;
 
-    public String getExpression() {
-        return expression;
+    public Baukasten getBaukasten() {
+        return baukasten;
     }
 
-    public void setExpression(String expression) {
-        this.expression = expression;
+    public void setBaukasten(Baukasten baukasten) {
+        this.baukasten = baukasten;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public Cover getCover() {
+        return cover;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setCover(Cover cover) {
+        this.cover = cover;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Long getId() {
@@ -65,10 +74,10 @@ public class Baukasten implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Baukasten)) {
+        if (!(object instanceof BaukastenPricing)) {
             return false;
         }
-        Baukasten other = (Baukasten) object;
+        BaukastenPricing other = (BaukastenPricing) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -77,7 +86,7 @@ public class Baukasten implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Baukasten[ id=" + id + " ]";
+        return "bean.BaukastenPricing[ id=" + id + " ]";
     }
 
 }
