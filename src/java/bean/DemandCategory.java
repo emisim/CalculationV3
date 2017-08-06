@@ -214,6 +214,16 @@ public class DemandCategory implements Serializable {
     BigDecimal umschlagFarbigkeitElementPricing = new BigDecimal(0);
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal baukastenPricing = new BigDecimal(0);
+    private @Column(columnDefinition = "DECIMAL(10,2)")
+    BigDecimal ausgabePricing = new BigDecimal(0);
+
+    public BigDecimal getAusgabePricing() {
+        return ausgabePricing;
+    }
+
+    public void setAusgabePricing(BigDecimal ausgabePricing) {
+        this.ausgabePricing = ausgabePricing;
+    }
 
     public BigDecimal getNachsatzPricing() {
         return nachsatzPricing;

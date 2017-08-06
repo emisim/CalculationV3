@@ -137,7 +137,7 @@
                     <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPrice}"/>
                     <h:outputText value="#{demandCategoryController.selected.summeGlobal}" title="#{bundle.ViewDemandCategoryTitle_summGolbalPrice}" />
 
-                    <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPrice} und #{bundle.ViewDemandCategoryLabel_summDruck}"/>
+                    <h:outputText value="#{bundle.ViewDemandCategoryLabel_summGlobalPriceUndDruck}"/>
                     <h:outputText value="#{demandCategoryController.selected.summeGlobal.add(demandCategoryController.selected.summDruck)}" title="#{bundle.ViewDemandCategoryLabel_summGlobalPrice} und #{bundle.ViewDemandCategoryLabel_summDruck}" />
 
                     <h:outputText value="#{bundle.ViewDemandCategoryLabel_summTotalPerAuflag}"/>
@@ -148,7 +148,7 @@
                 </p:panelGrid>
 
                 <h3><p:outputLabel rendered="#{demandCategoryController.selected != null and demandCategoryController.selected.druck eq true }">Info Druck</p:outputLabel></h3>
-                <p:panelGrid columns="8" id="afterDruck" rendered="#{demandCategoryController.selected != null and demandCategoryController.selected.druck eq true }" style="margin: 3px"  >
+                <p:panelGrid columns="10" id="afterDruck" rendered="#{demandCategoryController.selected != null and demandCategoryController.selected.druck eq true }" style="margin: 3px"  >
                     <h:outputLabel value="druck" for="druck" />
                     <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" disabled="true"/>
                     <h:outputText value="#{bundle.ViewDemandCategoryLabel_formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true}"/>
