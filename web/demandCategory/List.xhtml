@@ -67,7 +67,7 @@
                                                 </p:selectOneMenu>
 
                                                 <p:outputLabel value="#{bundle.CreateUserLabel_departement}" for="departement" />
-                                                <p:selectCheckboxMenu id="departement" value="#{demandCategoryController.departements}" label="-- Select Departement --" disabled="#{!demandCategoryController.adminAccess()}" 
+                                                <p:selectCheckboxMenu id="departement" value="#{demandCategoryController.departements}" label="-- Select Departement --" 
                                                                       filter="true" filterMatchMode="startsWith" >
                                                     <f:selectItems value="#{departementController.itemsAvailableSelectMany}" var="dep" itemLabel="#{dep}" itemValue="#{dep}" />
                                                 </p:selectCheckboxMenu>
