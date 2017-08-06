@@ -118,10 +118,9 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void saveForSimulation(List<SotimentItem> sotimentItems, DemandCategory demandCategory, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
-        performPreCalculationDemandCategory(demandCategory, sotimentItems);
         saveOrUpdate(simulation, isSave, demandCategory);
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
-        //  performPostCalculationDemandCategory(demandCategory, demandCategoryDepartementCalculations, sotimentItems);
+       
         edit(demandCategory);
         demandCategoryValidationFacade.checkExistanceOrCreate(demandCategory);
 

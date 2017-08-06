@@ -203,6 +203,7 @@ public class DemandCategoryController implements Serializable {
 
     }
 //2
+
     public void calculAnzahlGenerierungUpdateSeitenn() {
         DemandCategoryCalculationFacade.calculateAnzahlGenerierungUpdateSeitenn(selected);
     }
@@ -213,11 +214,13 @@ public class DemandCategoryController implements Serializable {
 
     }
 //4
+
     public void calculAnzahlBestandArtikelAndAnzahlNeueProdukt() {
         demandCategoryCalculationFacade.calculAnzahlBestandArtikelAndAnzahlNeueProdukt(selected, sotimentItems);
 
     }
 //5
+
     public void calculAnzahlBestandProdukt() {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(selected);
     }
@@ -382,6 +385,8 @@ public class DemandCategoryController implements Serializable {
                 List<DepartementDetail> value = entry.getValue();
                 ejbFacade.updateDepItems(value, sotimentItems, flag);
             }
+            System.out.println("ha sum de selected " + selected.getSummeGlobal());
+            ejbFacade.edit(selected);
             JsfUtil.addSuccessMessage("Details updated");
         } catch (Exception e) {
             JsfUtil.addErrorMessage("something went wrong");
@@ -413,7 +418,8 @@ public class DemandCategoryController implements Serializable {
                 System.out.println("Subtotal :::::: " + subTotal);
                 BigDecimal total = new BigDecimal(loadedDepartementDetail.getSummDepartement()).subtract(price);
                 BigDecimal totalGlobal = new BigDecimal(loadedDepartementDetail.getSummDepartementGlobal()).subtract(priceGlobal);
-                System.out.println("Toootaaaal ::::::::::::::::::::::::::::::; " + total);
+                selected.setSummUnitPrice(selected.getSummUnitPrice().subtract(new BigDecimal(loadedDepartementDetail.getPriceUpdate())));
+                selected.setSummeGlobal(selected.getSummeGlobal().subtract(new BigDecimal(loadedDepartementDetail.getPriceGlobalUpdate())));
                 loadedDepartementDetail.setSummCriteria(subTotal + "");
                 loadedDepartementDetail.setSummDepartement(total + "");
                 loadedDepartementDetail.setSummCriteriaGlobal(subTotalGlobal + "");
@@ -432,6 +438,8 @@ public class DemandCategoryController implements Serializable {
                 BigDecimal subTotalGlobal = new BigDecimal(loadedDepartementDetail.getSummCriteriaGlobal()).add(priceGlobal);
                 BigDecimal total = new BigDecimal(loadedDepartementDetail.getSummDepartement()).add(price);
                 BigDecimal totalGlobal = new BigDecimal(loadedDepartementDetail.getSummDepartementGlobal()).add(priceGlobal);
+                selected.setSummUnitPrice(selected.getSummUnitPrice().subtract(new BigDecimal(loadedDepartementDetail.getPriceUpdate())));
+                selected.setSummeGlobal(selected.getSummeGlobal().subtract(new BigDecimal(loadedDepartementDetail.getPriceGlobalUpdate())));
                 loadedDepartementDetail.setSummCriteria(subTotal + "");
                 loadedDepartementDetail.setSummDepartement(total + "");
                 loadedDepartementDetail.setSummCriteriaGlobal(subTotalGlobal + "");
@@ -469,7 +477,7 @@ public class DemandCategoryController implements Serializable {
                 if (persistAction == PersistAction.CREATE) {
                     if (ejbFacade.sortimentCondition(selected, getSotimentItems())) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
-                        JsfUtil.addSuccessMessage(successMessage+" und eine Validation von "+SessionUtil.getConnectedUser().getLogin()+" ist automatisch gespeichert");
+                        JsfUtil.addSuccessMessage(successMessage + " und eine Validation von " + SessionUtil.getConnectedUser().getLogin() + " ist automatisch gespeichert");
                     } else {
                         JsfUtil.addWrningMessage("Sortimentwert muss 100% sein");
                     }
@@ -668,8 +676,7 @@ public class DemandCategoryController implements Serializable {
     public List<DepartementDetail> getProjectManagement() {
         return projectManagement;
     }
-    
-    
+
     public void setProjectManagement(List<DepartementDetail> projectManagement) {
         this.projectManagement = projectManagement;
     }
@@ -689,7 +696,6 @@ public class DemandCategoryController implements Serializable {
     public void setMediaIT(List<DepartementDetail> mediaIT) {
         this.mediaIT = mediaIT;
     }
-
 
     public List<DepartementDetail> getDepartementCriterias() {
         return departementCriterias;
