@@ -5,8 +5,10 @@ import bean.DemandCategoryDepartementCalculation;
 import bean.DemandCategoryValidation;
 import bean.Departement;
 import bean.DepartementDetail;
+import bean.Nachsatz;
 import bean.Sortiment;
 import bean.SotimentItem;
+import bean.UmschlagFarbigkeitElement;
 import bean.User;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
@@ -36,9 +38,9 @@ import service.DemandCategoryCalculationFacade;
 import javax.script.ScriptException;
 import org.primefaces.context.RequestContext;
 import service.AccessFacade;
-import service.DemandCategoryCalculationItemFacade;
 import service.DemandCategoryDepartementCalculationFacade;
-import service.SotimentItemFacade;
+import service.NachsatzFacade;
+import service.UmschlagFarbigkeitElementFacade;
 
 @Named("demandCategoryController")
 @ViewScoped
@@ -61,13 +63,13 @@ public class DemandCategoryController implements Serializable {
     @EJB
     private DemandCategoryCalculationFacade demandCategoryCalculationFacade;
     @EJB
-    private DemandCategoryCalculationItemFacade demandCategoryCalculationItemFacade;
+    private NachsatzFacade nachsatzFacade;
     @EJB
     private AccessFacade accessFacade;
     @EJB
     private DemandCategoryFacade demandCategoryFacade;
     @EJB
-    private SotimentItemFacade sotimentItemFacade;
+    private UmschlagFarbigkeitElementFacade umschlagFarbigkeitElementFacade;
 
     private List<DemandCategory> items = null;
     private DemandCategory selected;
@@ -99,7 +101,16 @@ public class DemandCategoryController implements Serializable {
     private Date dateSysMin;
     private Date dateSysMax;
     private List<String> departements = new ArrayList();
+    private List<UmschlagFarbigkeitElement> umschlagFarbigkeitElements = new ArrayList();
+    private List<Nachsatz> nachsatzs = new ArrayList();
 
+    
+    public void findByUmschlagFarbigkeitAndCover(){
+        umschlagFarbigkeitElements= umschlagFarbigkeitElementFacade.findByUmschlagFarbigkeitAndCover(getSelected().getUmschlagFarbigkeit(), getSelected().getCover());
+    }
+    public void findByCover(){
+        nachsatzs= nachsatzFacade.findByCover(getSelected().getCover());
+    }
     public BigDecimal calcSumPerAuflag(DemandCategory demandCategory) {
         return ejbFacade.calcSumPerAuflagRequieredSum(demandCategory);
     }
@@ -261,6 +272,23 @@ public class DemandCategoryController implements Serializable {
         }
     }
 
+    public List<Nachsatz> getNachsatzs() {
+        return nachsatzs;
+    }
+
+    public void setNachsatzs(List<Nachsatz> nachsatzs) {
+        this.nachsatzs = nachsatzs;
+    }
+
+    public List<UmschlagFarbigkeitElement> getUmschlagFarbigkeitElements() {
+        return umschlagFarbigkeitElements;
+    }
+
+    public void setUmschlagFarbigkeitElements(List<UmschlagFarbigkeitElement> umschlagFarbigkeitElement) {
+        this.umschlagFarbigkeitElements = umschlagFarbigkeitElement;
+    }
+
+    
     public DemandCategory getSelectedForSearch() {
         if (selectedForSearch == null) {
             selectedForSearch = new DemandCategory();
