@@ -275,7 +275,7 @@ public class DemandCategoryController implements Serializable {
         } else if (res == -2) {
             JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
         } else {
-            System.out.println("item ajouter avec wert = " + sortimentItem.getWert());
+            System.out.println("item hinzugefügt mit dem Wert = " + sortimentItem.getWert());
         }
     }
 
@@ -500,7 +500,7 @@ public class DemandCategoryController implements Serializable {
 
     public void verifySortiement() {
         if (!ejbFacade.sortimentCondition(selected, sotimentItems)) {
-            JsfUtil.addWrningMessage("Summe von Sortiement items muss 100% seins");
+            JsfUtil.addWrningMessage("Summe von Sortiement items muss 100% sein");
         }
     }
 
