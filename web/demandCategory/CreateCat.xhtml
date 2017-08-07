@@ -29,7 +29,7 @@
                     <p:panel header="Demand category"  >
                         <h:form id="DemandCategoryCreateForm">
                             <h:panelGroup id="display" >
-                                <h:panelGrid columns="10" cellpadding="7">
+                                <h:panelGrid columns="8" cellpadding="7">
 
                                     <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                                     <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
@@ -93,7 +93,7 @@
                                         <p:ajax event="blur" listener="#{demandCategoryController.calculAnzahlSonderSteinAndAnzahlGenerierungUpdateSeitenn()}" update="anzahlSonderSeiten, anzahlGenerierungUpdateSeiten" />
                                     </p:inputText>
 
-                                    
+
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlSonderSeiten}" for="anzahlSonderSeiten" rendered="#{demandCategoryController.renderAttribute('anzahlSonderSeiten')}" />
                                     <p:inputText id="anzahlSonderSeiten" value="#{demandCategoryController.selected.anzahlSonderSeiten}" title="#{bundle.CreateDemandCategoryTitle_anzahlSonderSeiten}" rendered="#{demandCategoryController.renderAttribute('anzahlSonderSeiten')}" >
@@ -202,16 +202,16 @@
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlMitglieder}" for="anzahlMitglieder" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder') }" />
                                     <p:inputText id="anzahlMitglieder" value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.CreateDemandCategoryTitle_anzahlMitglieder}" rendered="#{demandCategoryController.renderAttribute('anzahlMitglieder')}" />
 
-                                    
 
 
-                                   <p:outputLabel value="druck" for="druck" />
+
+                                    <p:outputLabel value="druck" for="druck" />
                                     <p:selectBooleanCheckbox id="druck" value="#{demandCategoryController.selected.druck}" >
                                         <p:ajax process="druck" update="afterDruck" listener="#{demandCategoryController.checkDruck()}" />
                                     </p:selectBooleanCheckbox>
                                 </h:panelGrid>
 
-                                <h:panelGrid id="afterDruck" columns="10" cellpadding="7">
+                                <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                                     <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" autoWidth="false" >
@@ -220,7 +220,7 @@
                                                        var="formatAuswaehlenItem"
                                                        itemValue="#{formatAuswaehlenItem}"/>
                                     </p:selectOneMenu>
-                                    
+
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_druckSeiten}" for="druckSeiten" rendered="#{demandCategoryController.renderAttribute('druckSeiten') and demandCategoryController.selected.druck == true}" />
                                     <p:selectOneMenu id="druckSeiten" value="#{demandCategoryController.selected.druckSeiten}" rendered="#{demandCategoryController.renderAttribute('druckSeiten') and demandCategoryController.selected.druck == true}" >
                                         <f:selectItems value="#{seitenController.itemsAvailableSelectOne}"
@@ -256,7 +256,7 @@
                                         <p:ajax process="cover" listener="#{demandCategoryController.findByCover()}" update="nachsatz" />
 
                                     </p:selectOneMenu>
-                                    
+
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_vorspann}" for="vorspann" rendered="#{demandCategoryController.renderAttribute('vorspann') and demandCategoryController.selected.druck == true }"/>
                                     <p:selectOneMenu id="vorspann" value="#{demandCategoryController.selected.vorspann}" rendered="#{demandCategoryController.renderAttribute('vorspann') and demandCategoryController.selected.druck == true }" autoWidth="false" >
@@ -277,7 +277,7 @@
                                                        itemValue="#{nachspannItem}" itemLabel="#{nachspannItem.expression}"
                                                        />
                                     </p:selectOneMenu>
-                                    
+
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nachsatz}" for="nachsatz" rendered="#{demandCategoryController.renderAttribute('nachsatz') and demandCategoryController.selected.druck == true }" />
                                     <p:selectOneMenu id="nachsatz" value="#{demandCategoryController.selected.nachsatz}" rendered="#{demandCategoryController.renderAttribute('nachsatz') and demandCategoryController.selected.druck == true }" autoWidth="false">
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
@@ -296,7 +296,7 @@
                                                        />
 
                                     </p:selectOneMenu>
-                                    
+
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_register}" for="register" rendered="#{demandCategoryController.renderAttribute('register') and demandCategoryController.selected.druck == true }"/>
                                     <p:selectOneMenu id="register" value="#{demandCategoryController.selected.register}" rendered="#{demandCategoryController.renderAttribute('register') and demandCategoryController.selected.druck == true }" autoWidth="false">
                                         <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
@@ -309,6 +309,7 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagFarbigkeit}" for="umschlagFarbigkeit" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }"/>
                                     <p:selectOneMenu id="umschlagFarbigkeit" value="#{demandCategoryController.selected.umschlagFarbigkeit}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeit') and demandCategoryController.selected.druck == true }" autoWidth="false" >
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{umschlagFarbigkeitController.itemsAvailableSelectOne}"
                                                        var="umschlagFarbigkeitItem"
                                                        itemValue="#{umschlagFarbigkeitItem}" itemLabel="#{umschlagFarbigkeitItem.label}"
@@ -318,6 +319,7 @@
 
                                     <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagFarbigkeitElement}" for="umschlagFarbigkeitElement" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeitElement') and demandCategoryController.selected.druck == true }"/>
                                     <p:selectOneMenu id="umschlagFarbigkeitElement" value="#{demandCategoryController.selected.umschlagFarbigkeitElement}" rendered="#{demandCategoryController.renderAttribute('umschlagFarbigkeitElement') and demandCategoryController.selected.druck == true }" autoWidth="false">
+                                        <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
                                         <f:selectItems value="#{demandCategoryController.umschlagFarbigkeitElements}"
                                                        var="umschlagFarbigkeitElementItem"
                                                        itemValue="#{umschlagFarbigkeitElementItem}"  itemLabel="#{umschlagFarbigkeitElementItem.expression}"

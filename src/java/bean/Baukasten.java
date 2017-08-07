@@ -28,8 +28,7 @@ public class Baukasten implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String expression;
-    private @Column(columnDefinition = "DECIMAL(10,2)")
-    BigDecimal value;
+
 
     public String getExpression() {
         return expression;
@@ -39,13 +38,7 @@ public class Baukasten implements Serializable {
         this.expression = expression;
     }
 
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
+  
 
     public Long getId() {
         return id;

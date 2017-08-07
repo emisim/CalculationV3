@@ -12,8 +12,6 @@
             <h:form id="UmschlagFarbigkeitEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{umschlagFarbigkeitController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUmschlagFarbigkeitLabel_price}" for="price" />
-                        <p:inputText id="price" value="#{umschlagFarbigkeitController.selected.price}" title="#{bundle.EditUmschlagFarbigkeitTitle_price}" />
                         <p:outputLabel value="#{bundle.EditUmschlagFarbigkeitLabel_description}" for="description" />
                         <p:inputText id="description" value="#{umschlagFarbigkeitController.selected.description}" title="#{bundle.EditUmschlagFarbigkeitTitle_description}" />
                         <p:outputLabel value="#{bundle.EditUmschlagFarbigkeitLabel_label}" for="label" />

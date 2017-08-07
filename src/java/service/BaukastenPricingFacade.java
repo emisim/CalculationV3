@@ -27,10 +27,10 @@ public class BaukastenPricingFacade extends AbstractFacade<BaukastenPricing> {
     public BigDecimal findByCoverAndBaukasten(Cover cover, Baukasten baukasten) {
         String query = "SELECT item FROM BaukastenPricing item WHERE 1=1 ";
         if (cover != null) {
-            SearchUtil.addConstraint("item", "cover.id", "=", cover.getId());
+            query+=SearchUtil.addConstraint("item", "cover.id", "=", cover.getId());
         }
         if (baukasten != null) {
-            SearchUtil.addConstraint("item", "baukasten.id", "=", baukasten.getId());
+           query+= SearchUtil.addConstraint("item", "baukasten.id", "=", baukasten.getId());
         }
         BaukastenPricing baukastenPricing = getUniqueResult(query);
         if (baukastenPricing == null || baukastenPricing.getPrice() == null) {
