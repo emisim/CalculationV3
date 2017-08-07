@@ -34,8 +34,8 @@
                                             <h:outputText value="#{item.nomDepCritera}" />
                                         </p:column>
                                     </p:headerRow>
-                                    <p:column headerText="check" width="10">
-                                        <p:selectBooleanCheckbox value="#{item.checked}" >
+                                    <p:column headerText="check" width="10" >
+                                        <p:selectBooleanCheckbox value="#{item.checked}" disabled="#{demandCategoryController.adminOrInTheSameDepartement(detailDepartement.key)}" >
                                             <p:ajax  listener="#{demandCategoryController.updateDetails(item, detailDepartement.value)}" update="dataList" />
                                         </p:selectBooleanCheckbox>
                                     </p:column>

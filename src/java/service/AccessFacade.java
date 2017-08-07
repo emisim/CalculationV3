@@ -29,6 +29,15 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
     }
 
     
+     public boolean isAdminOrInTheSameDepartement(User user,String departementName) {
+         if(user.getAdmin()==1)
+             return true;
+         else if(user.getDepartement() != null && user.getDepartement().getName().equals(departementName)){
+             System.out.println("ha dep ==> "+departementName);
+             return true;
+         }
+         return false;
+     }
      public boolean renderAttribute(String attribute) {
         User user = SessionUtil.getConnectedUser();
         Departement dep = user.getDepartement();
