@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{bundle.EditAusgabePricingLabel_id}" for="id" />
                         <p:inputText id="id" value="#{ausgabePricingController.selected.id}" title="#{bundle.EditAusgabePricingTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ausgabePricingController.update}" value="#{bundle.Save}" update="display,:AusgabePricingListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AusgabePricingEditDialog');"/>
+                    <p:commandButton actionListener="#{ausgabePricingController.update}" value="#{bundle.Save}" update="display,:parametrageTab:AusgabePricingListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AusgabePricingEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AusgabePricingEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
