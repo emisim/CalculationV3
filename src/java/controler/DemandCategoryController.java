@@ -500,7 +500,7 @@ public class DemandCategoryController implements Serializable {
 
     public void verifySortiement() {
         if (!ejbFacade.sortimentCondition(selected, sotimentItems)) {
-            JsfUtil.addWrningMessage("Somme Sortiement items doit etre = 100");
+            JsfUtil.addWrningMessage("Summe von Sortiement items muss 100% seins");
         }
     }
 
