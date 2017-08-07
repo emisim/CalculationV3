@@ -104,6 +104,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
+        System.out.println("demandCategory.getKatalogart().getValuee() ==> " + demandCategory.getKatalogart().getValuee());
+        System.out.println("demandCategory.getAusgabe().getValuee() ==> " + demandCategory.getAusgabe().getValuee());
+        System.out.println("demandCategory.getWechselfassungVariantFaktor().getValue() ==> " + demandCategory.getWechselfassungVariantFaktor().getValue());
+
         performPreCalculationDemandCategory(demandCategory, sotimentItems);
         saveOrUpdate(simulation, isSave, demandCategory);
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
@@ -203,9 +207,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setVorspannPricing(vorspannPricing);
             demandCategory.setBaukastenPricing(baukastenPricing);
 
-            System.out.println("nachsatzPricing = " + nachsatzPricing + " nachspannPricing=" + nachspannPricing
-                    + " vorspannPricing = " + vorspannPricing + " baukastenPricing =" + baukastenPricing
-                    + " umschlagFarbigkeitElementPricing =" + umschlagFarbigkeitElementPricing);
             demandCategory.setUmschlagFarbigkeitElementPricing(umschlagFarbigkeitElementPricing);
             BigDecimal summDruck = demandCategory.getCover().getPrice().add(nachsatzPricing).add(nachspannPricing).add(vorspannPricing).add(umschlagFarbigkeitElementPricing).add(baukastenPricing);
             System.out.println("summDruck before hard test ==> " + summDruck);
@@ -215,7 +216,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
                 summDruck = summDruck.multiply(demandCategory.getAuflage().getPrice());
             }
             System.out.println("summDruck after hard test ==> " + summDruck);
-
+            summDruck = summDruck.setScale(2, RoundingMode.HALF_UP);
             demandCategory.setSummDruck(summDruck);
             return 1;
         }

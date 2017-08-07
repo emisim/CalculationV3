@@ -32,6 +32,7 @@ public class HistoriqueConnexionFacade extends AbstractFacade<HistoriqueConnexio
     private void createTemplate(User user, boolean connexion) {
         System.out.println("ha user :: "+user.getLogin());
         HistoriqueConnexionUser historiqueConnexion = new HistoriqueConnexionUser(user, new Date(), connexion);
+        historiqueConnexion.setId(generate("HistoriqueConnexionUser", "id"));
         edit(historiqueConnexion);
     }
 
