@@ -11,7 +11,7 @@
         <p:dialog id="DemandCategoryEditDlg" widgetVar="DemandCategoryEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandCategoryTitle}">
             <h:form id="DemandCategoryEditForm">
                 <h:panelGroup id="display">
-                    <h:panelGrid columns="8" cellpadding="7">
+                    <h:panelGrid columns="10" cellpadding="7">
 
                         <p:outputLabel  value="#{bundle.CreateDemandCategoryLabel_category}"  for="category"  rendered="#{demandCategoryController.renderAttribute('category')}" />
                         <p:selectOneMenu id="category" value="#{demandCategoryController.selected.category}" rendered="#{demandCategoryController.renderAttribute('category')}" autoWidth="false" >
@@ -207,7 +207,7 @@
                         </p:selectBooleanCheckbox>
                     </h:panelGrid>
 
-                    <h:panelGrid id="afterDruck" columns="8" cellpadding="7">
+                    <h:panelGrid id="afterDruck" columns="10" cellpadding="7">
 
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_formatAuswaehlen}" for="formatAuswaehlen" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" />
                         <p:selectOneMenu id="formatAuswaehlen" value="#{demandCategoryController.selected.formatAuswaehlen}" rendered="#{demandCategoryController.renderAttribute('formatAuswaehlen') and demandCategoryController.selected.druck == true }" autoWidth="false" >

@@ -10,7 +10,7 @@
 
         <h:form id="DemandCategoryViewForm">
             <h:panelGroup id="display">
-                <p:panelGrid columns="8" rendered="#{demandCategoryController.selected != null}" style="margin: 3px" >
+                <p:panelGrid columns="10" rendered="#{demandCategoryController.selected != null}" style="margin: 3px" >
 
                     <h:outputText value="#{bundle.ViewDemandCategoryLabel_user}"/>
                     <h:outputText value="#{demandCategoryController.selected.user.login}" title="#{bundle.ViewDemandCategoryTitle_user}"/>
