@@ -104,6 +104,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
+        System.out.println("demandCategory.getKatalogart().getValuee() ==> "+demandCategory.getKatalogart().getValuee());
+        System.out.println("demandCategory.getAusgabe().getValuee() ==> "+demandCategory.getAusgabe().getValuee());
+        System.out.println("demandCategory.getWechselfassungVariantFaktor().getValue() ==> "+demandCategory.getWechselfassungVariantFaktor().getValue());
+
         performPreCalculationDemandCategory(demandCategory, sotimentItems);
         saveOrUpdate(simulation, isSave, demandCategory);
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 07 Août 2017 à 15:24
+-- Généré le :  Lun 07 Août 2017 à 16:12
 -- Version du serveur :  10.1.8-MariaDB
 -- Version de PHP :  5.6.14
 
@@ -709,12 +709,19 @@ CREATE TABLE `demandcategory` (
   `WECHSELFASSUNGVARIANTFAKTOR_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `demandcategory`
+--
+
+INSERT INTO `demandcategory` (`ID`, `ANZAHLBESTANDARTIKEL`, `ANZAHLBESTANDPRODUKT`, `ANZAHLBESTELLNRSEITEN`, `ANZAHLBETEILIGTEN`, `ANZAHLGENERIERUNGUPDATESEITEN`, `ANZAHLGESAMTARTIKEL`, `ANZAHLGESAMTPRODUKT`, `ANZAHLGESAMTSEITEN`, `ANZAHLIHVZSEITEN`, `ANZAHLKAPITETEL`, `ANZAHLLIEFERANTGESAMT`, `ANZAHLLIEFERANTNEU`, `ANZAHLMITGLIEDER`, `ANZAHLNEUEARTIKEL`, `ANZAHLNEUEPRODUKT`, `ANZAHLSONDERSEITEN`, `ANZAHLÜBERNAHMEARTIKEL`, `ARTIKELPERPAGELFAKTOR`, `AUSGABEPRICING`, `BAUKASTENPRICING`, `BEARBEITUNGSZEIT`, `DATEDEMANDCATEGORY`, `DATESYSTEM`, `DRUCK`, `LKSCHLUESSELFAKTOR`, `LIEFERTERMIN`, `MKSCHLUESSELFAKTOR`, `NACHSATZPRICING`, `NACHSPANNPRICING`, `NBRTOTALVALIDATION`, `PERCENTSEITENFAKTOR`, `PRODUCTSCHLUESSELFAKTOR`, `SEITENANZAHL`, `SUMMDRUCK`, `SUMMUNITPRICE`, `SUMMEGLOBAL`, `TEILNEHMERZAHL`, `TEILNEHMERZAHLPRICING`, `UMFANG`, `UMSCHLAG`, `UMSCHLAGFARBIGKEITELEMENTPRICING`, `VORSPANNPRICING`, `SCHLUESSEL_ID`, `ARTDERWEITERVERARBEITUNG_ID`, `AUFLAGE_ID`, `AUSGABE_ID`, `BAUKASTEN_ID`, `BINDUNG_ID`, `CATEGORY_ID`, `CORRECTIONSCHLUESSEL_ID`, `COVER_ID`, `DEPARTMENT_ID`, `DRUCKSEITEN_ID`, `FARBIGKEIT_ID`, `FORMATAUSWAEHLEN_ID`, `KATALOGART_ID`, `KONZEPTBEARBEITUNGFAKTOR_ID`, `LAYOUT_ID`, `MITGLIEDERKORREKTURFAKTOR_ID`, `NACHSATZ_ID`, `NACHSPANN_ID`, `PAPIERMATERIALAUSWAEHLEN_ID`, `PARTICIPANTFAKTOR_ID`, `PRODUCT_ID`, `PROZESS_ID`, `REGISTER_ID`, `UMSCHLAGFARBIGKEIT_ID`, `UMSCHLAGFARBIGKEITELEMENT_ID`, `UMSCHLAGPAPIERAUSWAEHLEN_ID`, `USER_LOGIN`, `VEREDLUNG_ID`, `VORSPANN_ID`, `WECHSELFASSUNGVARIANTFAKTOR_ID`) VALUES
+(3, 1100, 234, 10, 2, 906, 1900, 404, 0, 10, 9, 16, 14, 20, 800, 170, 102, 9, '15.80', '0.00', '184.84', 3, '2017-08-07', '2017-08-07', 1, '1.10', '2017-08-07', '1.05', '0.00', '199.40', 1, 10, '4.70', 17, '49882.00', '13280.71', '316838.66', 35, '1.20', 1028, 0, '414.00', '199.40', NULL, NULL, 1, 8, 1502, 'Fadenheftung', 2, 1, 'Softcover', NULL, 78, '1/1 -farbig', 'A4', 1, 1, 1, 2, 1902, 1907, '65 g/qm', NULL, 1, 5, 51, NULL, 26, NULL, 'walo', NULL, 2, 1);
+
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `demandcategorycalculation`
 --
 
--- Structure de la table `demandcategorycalculation`
 CREATE TABLE `demandcategorycalculation` (
   `ID` bigint(20) NOT NULL,
   `SUMME` decimal(10,2) DEFAULT NULL,
@@ -725,11 +732,46 @@ CREATE TABLE `demandcategorycalculation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
-
--- --------------------------------------------------------
+-- Contenu de la table `demandcategorycalculation`
 --
 
+INSERT INTO `demandcategorycalculation` (`ID`, `SUMME`, `SUMMEGLOBAL`, `VALIDE`, `DEMANDCATEGORYDEPARTEMENTCALCULATION_ID`, `DEPARTEMENTCRITERIA_ID`) VALUES
+(59, '225.00', '1406.25', 0, 15, 1),
+(60, '651.38', '8867.25', 0, 15, 2),
+(61, '56.53', '1434.38', 0, 15, 3),
+(62, '23.31', '10793.57', 0, 15, 4),
+(63, '60.30', '35053.13', 0, 15, 5),
+(64, '142.51', '4828.13', 0, 15, 6),
+(65, '115.74', '4282.05', 0, 15, 7),
+(66, '45.00', '427.50', 0, 15, 8),
+(67, '56.25', '562.50', 0, 16, 9),
+(68, '28.64', '658.59', 0, 16, 10),
+(69, '149.63', '987.75', 0, 16, 11),
+(70, '0.28', '534.38', 0, 16, 12),
+(71, '32.40', '27720.00', 0, 16, 13),
+(72, '0.06', '106.88', 0, 16, 14),
+(73, '4551.90', '16600.70', 0, 17, 15),
+(74, '121.00', '13248.00', 0, 17, 16),
+(75, '2.50', '2570.00', 0, 17, 17),
+(76, '2.50', '2570.00', 0, 17, 18),
+(77, '86.60', '37691.80', 0, 17, 19),
+(78, '0.00', '0.00', 0, 17, 20),
+(79, '646.55', '6994.35', 0, 18, 28),
+(80, '114.00', '46056.00', 0, 19, 21),
+(81, '350.00', '2800.00', 0, 19, 22),
+(82, '0.00', '0.00', 0, 19, 23),
+(83, '198.00', '79992.00', 0, 19, 29),
+(84, '30.00', '5100.00', 0, 19, 31),
+(85, '0.00', '0.00', 0, 20, 24),
+(86, '5000.00', '5000.00', 0, 20, 25),
+(87, '590.63', '553.45', 0, 21, 27);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `demandcategorycalculationitem`
+--
+
 CREATE TABLE `demandcategorycalculationitem` (
   `ID` bigint(20) NOT NULL,
   `CALCULTAED` tinyint(1) DEFAULT '0',
@@ -742,11 +784,134 @@ CREATE TABLE `demandcategorycalculationitem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
-
--- --------------------------------------------------------
+-- Contenu de la table `demandcategorycalculationitem`
 --
 
+INSERT INTO `demandcategorycalculationitem` (`ID`, `CALCULTAED`, `PRICE`, `PRICEGLOBAL`, `PRICEGLOBALUPDATE`, `PRICEUPDATE`, `DEMANDCATEGORYCALCULATION_ID`, `DEPARTEMENTCRITERIAITEM_ID`) VALUES
+(233, 1, '56.25', '450.00', '450.00', '56.25', 59, 1),
+(234, 1, '56.25', '337.50', '337.50', '56.25', 59, 2),
+(235, 1, '56.25', '168.75', '168.75', '56.25', 59, 7),
+(236, 1, '56.25', '450.00', '450.00', '56.25', 59, 8),
+(237, 1, '56.25', '56.25', '56.25', '56.25', 60, 3),
+(238, 1, '578.25', '4626.00', '4626.00', '578.25', 60, 4),
+(239, 1, '5.63', '2272.50', '2272.50', '5.63', 60, 16),
+(240, 1, '11.25', '1912.50', '1912.50', '11.25', 60, 17),
+(241, 1, '0.28', '534.38', '534.38', '0.28', 61, 11),
+(242, 1, '56.25', '900.00', '900.00', '56.25', 61, 12),
+(243, 1, '6.43', '6608.57', '6608.57', '6.43', 62, 13),
+(244, 1, '11.25', '1912.50', '1912.50', '11.25', 62, 19),
+(245, 1, '5.63', '2272.50', '2272.50', '5.63', 62, 20),
+(246, 1, '28.13', '393.75', '393.75', '28.13', 63, 14),
+(247, 1, '14.06', '281.25', '281.25', '14.06', 63, 15),
+(248, 1, '6.19', '11756.25', '11756.25', '6.19', 63, 21),
+(249, 1, '1.88', '3562.50', '3562.50', '1.88', 63, 22),
+(250, 1, '5.91', '11221.88', '11221.88', '5.91', 63, 23),
+(251, 1, '4.13', '7837.50', '7837.50', '4.13', 63, 24),
+(252, 1, '1.88', '3562.50', '3562.50', '1.88', 64, 25),
+(253, 1, '140.63', '1265.63', '1265.63', '140.63', 64, 26),
+(254, 1, '0.28', '113.63', '113.63', '0.28', 65, 27),
+(255, 1, '56.25', '675.00', '675.00', '56.25', 65, 28),
+(256, 1, '56.25', '450.00', '450.00', '56.25', 65, 29),
+(257, 1, '2.96', '3043.42', '3043.42', '2.96', 65, 30),
+(258, 1, '22.50', '202.50', '202.50', '22.50', 66, 31),
+(259, 1, '22.50', '225.00', '225.00', '22.50', 66, 32),
+(260, 1, '56.25', '562.50', '562.50', '56.25', 67, 5),
+(261, 1, '0.23', '39.84', '39.84', '0.23', 68, 33),
+(262, 1, '0.28', '225.00', '225.00', '0.28', 68, 34),
+(263, 1, '28.13', '393.75', '393.75', '28.13', 68, 35),
+(264, 1, '56.25', '225.00', '225.00', '56.25', 69, 36),
+(265, 1, '28.13', '393.75', '393.75', '28.13', 69, 37),
+(266, 1, '9.00', '144.00', '144.00', '9.00', 69, 38),
+(267, 1, '56.25', '225.00', '225.00', '56.25', 69, 39),
+(268, 1, '0.28', '534.38', '534.38', '0.28', 70, 40),
+(269, 1, '6.60', '5280.00', '5280.00', '6.60', 71, 6),
+(270, 1, '19.80', '15840.00', '15840.00', '19.80', 71, 65),
+(271, 1, '6.00', '6600.00', '6600.00', '6.00', 71, 66),
+(272, 1, '0.06', '106.88', '106.88', '0.06', 72, 41),
+(273, 1, '70.00', '140.00', '140.00', '70.00', 73, 67),
+(274, 1, '70.00', '1680.00', '1680.00', '70.00', 73, 68),
+(275, 1, '70.00', '560.00', '560.00', '70.00', 73, 69),
+(276, 1, '70.00', '1120.00', '1120.00', '70.00', 73, 70),
+(277, 1, '70.00', '280.00', '280.00', '70.00', 73, 71),
+(278, 1, '70.00', '840.00', '840.00', '70.00', 73, 72),
+(279, 1, '70.00', '17.50', '17.50', '70.00', 73, 73),
+(280, 1, '0.00', '0.00', '0.00', '0.00', 73, 74),
+(281, 1, '0.00', '0.00', '0.00', '0.00', 73, 75),
+(282, 1, '70.00', '280.00', '280.00', '70.00', 73, 76),
+(283, 1, '70.00', '280.00', '280.00', '70.00', 73, 77),
+(284, 1, '750.00', '750.00', '750.00', '750.00', 73, 78),
+(285, 1, '70.00', '5600.00', '5600.00', '70.00', 73, 79),
+(286, 1, '0.00', '0.00', '0.00', '0.00', 73, 80),
+(287, 1, '1.90', '1953.20', '1953.20', '1.90', 73, 81),
+(288, 1, '1500.00', '1500.00', '1500.00', '1500.00', 73, 82),
+(289, 1, '1600.00', '1600.00', '1600.00', '1600.00', 73, 83),
+(290, 1, '0.00', '0.00', '0.00', '0.00', 74, 84),
+(291, 1, '120.00', '12240.00', '12240.00', '120.00', 74, 85),
+(292, 1, '0.00', '0.00', '0.00', '0.00', 74, 86),
+(293, 1, '1.00', '1008.00', '1008.00', '1.00', 74, 87),
+(294, 1, '0.00', '0.00', '0.00', '0.00', 74, 88),
+(295, 1, '0.00', '0.00', '0.00', '0.00', 75, 89),
+(296, 1, '0.00', '0.00', '0.00', '0.00', 75, 90),
+(297, 1, '2.50', '2570.00', '2570.00', '2.50', 75, 91),
+(298, 1, '0.00', '0.00', '0.00', '0.00', 76, 92),
+(299, 1, '0.00', '0.00', '0.00', '0.00', 76, 93),
+(300, 1, '2.50', '2570.00', '2570.00', '2.50', 76, 94),
+(301, 1, '0.00', '0.00', '0.00', '0.00', 77, 95),
+(302, 1, '3.50', '3598.00', '3598.00', '3.50', 77, 96),
+(303, 1, '1.50', '1359.00', '1359.00', '1.50', 77, 97),
+(304, 1, '25.00', '250.00', '250.00', '25.00', 77, 98),
+(305, 1, '25.00', '0.00', '0.00', '25.00', 77, 99),
+(306, 1, '5.60', '5756.80', '5756.80', '5.60', 77, 100),
+(307, 1, '6.50', '6682.00', '6682.00', '6.50', 77, 101),
+(308, 1, '6.50', '6682.00', '6682.00', '6.50', 77, 102),
+(309, 1, '6.50', '6682.00', '6682.00', '6.50', 77, 103),
+(310, 1, '6.50', '6682.00', '6682.00', '6.50', 77, 104),
+(311, 1, '0.00', '0.00', '0.00', '0.00', 77, 105),
+(312, 1, '0.00', '0.00', '0.00', '0.00', 78, 106),
+(313, 1, '0.00', '0.00', '0.00', '0.00', 78, 107),
+(314, 1, '13.50', '162.00', '162.00', '13.50', 79, 48),
+(315, 1, '13.50', '81.00', '81.00', '13.50', 79, 49),
+(316, 1, '67.50', '243.00', '243.00', '67.50', 79, 50),
+(317, 1, '56.25', '450.00', '450.00', '56.25', 79, 51),
+(318, 1, '56.25', '168.75', '168.75', '56.25', 79, 52),
+(319, 1, '56.25', '225.00', '225.00', '56.25', 79, 53),
+(320, 1, '37.13', '1299.37', '1299.37', '37.13', 79, 54),
+(321, 1, '75.94', '303.75', '303.75', '75.94', 79, 55),
+(322, 1, '2.25', '2313.00', '2313.00', '2.25', 79, 58),
+(323, 1, '0.45', '462.60', '462.60', '0.45', 79, 59),
+(324, 1, '67.50', '303.75', '303.75', '67.50', 79, 60),
+(325, 1, '67.50', '337.50', '337.50', '67.50', 79, 61),
+(326, 1, '8.78', '307.13', '307.13', '8.78', 79, 62),
+(327, 1, '56.25', '168.75', '168.75', '56.25', 79, 63),
+(328, 1, '67.50', '168.75', '168.75', '67.50', 79, 64),
+(329, 1, '57.00', '23028.00', '23028.00', '57.00', 80, 108),
+(330, 1, '57.00', '23028.00', '23028.00', '57.00', 80, 109),
+(331, 1, '162.50', '1300.00', '1300.00', '162.50', 81, 110),
+(332, 1, '75.00', '600.00', '600.00', '75.00', 81, 111),
+(333, 1, '112.50', '900.00', '900.00', '112.50', 81, 112),
+(334, 1, '0.00', '0.00', '0.00', '0.00', 82, 113),
+(335, 1, '125.00', '50500.00', '50500.00', '125.00', 83, 114),
+(336, 1, '50.00', '20200.00', '20200.00', '50.00', 83, 115),
+(337, 1, '23.00', '9292.00', '9292.00', '23.00', 83, 116),
+(338, 1, '10.00', '1700.00', '1700.00', '10.00', 84, 117),
+(339, 1, '9.00', '1530.00', '1530.00', '9.00', 84, 118),
+(340, 1, '9.00', '1530.00', '1530.00', '9.00', 84, 119),
+(341, 1, '2.00', '340.00', '340.00', '2.00', 84, 120),
+(342, 1, '0.00', '0.00', '0.00', '0.00', 84, 121),
+(343, 1, '5000.00', '5000.00', '5000.00', '5000.00', 86, 122),
+(344, 1, '253.13', '2.00', '2.00', '253.13', 87, 42),
+(345, 1, '168.75', '3.00', '3.00', '168.75', 87, 43),
+(346, 1, '42.19', '84.38', '84.38', '42.19', 87, 44),
+(347, 1, '14.06', '42.19', '42.19', '14.06', 87, 45),
+(348, 1, '56.25', '337.50', '337.50', '56.25', 87, 46),
+(349, 1, '56.25', '84.38', '84.38', '56.25', 87, 47);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `demandcategorydepartementcalculation`
+--
+
 CREATE TABLE `demandcategorydepartementcalculation` (
   `ID` bigint(20) NOT NULL,
   `SUMME` decimal(10,2) DEFAULT NULL,
@@ -756,11 +921,24 @@ CREATE TABLE `demandcategorydepartementcalculation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
-
--- --------------------------------------------------------
+-- Contenu de la table `demandcategorydepartementcalculation`
 --
 
+INSERT INTO `demandcategorydepartementcalculation` (`ID`, `SUMME`, `SUMMEGLOBAL`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`) VALUES
+(15, '1319.77', '67092.26', 3, 1),
+(16, '267.26', '30570.10', 3, 2),
+(17, '4764.50', '72680.50', 3, 3),
+(18, '646.55', '6994.35', 3, 4),
+(19, '692.00', '133948.00', 3, 5),
+(20, '5000.00', '5000.00', 3, 6),
+(21, '590.63', '553.45', 3, 8);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `demandcategoryvalidation`
+--
+
 CREATE TABLE `demandcategoryvalidation` (
   `ID` int(11) NOT NULL,
   `SYSDATE` time DEFAULT NULL,
@@ -770,11 +948,18 @@ CREATE TABLE `demandcategoryvalidation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
-
--- --------------------------------------------------------
+-- Contenu de la table `demandcategoryvalidation`
 --
 
+INSERT INTO `demandcategoryvalidation` (`ID`, `SYSDATE`, `DEMANDCATEGORY_ID`, `DEPARTEMENT_ID`, `USER_LOGIN`) VALUES
+(1, '15:11:07', 3, NULL, 'walo');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `departement`
+--
+
 CREATE TABLE `departement` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
@@ -990,6 +1175,7 @@ CREATE TABLE `device` (
   `DEVICECATEGORIE` varchar(255) DEFAULT NULL,
   `OPERATINGSYSTEM` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `device`
@@ -1069,8 +1255,11 @@ CREATE TABLE `historiqueconnexionuser` (
 --
 
 INSERT INTO `historiqueconnexionuser` (`ID`, `CONNEXION`, `DATEACTION`, `USER_LOGIN`) VALUES
+(1, 1, '2017-08-07 14:24:59', 'walo'),
 (2, 1, '2017-08-01 00:41:42', 'walo'),
+(51, 1, '2017-08-07 14:34:01', 'walo'),
 (52, 1, '2017-08-01 00:50:15', 'walo'),
+(101, 1, '2017-08-07 14:54:01', 'walo'),
 (102, 1, '2017-08-01 13:42:45', 'admin'),
 (151, 1, '2017-08-01 13:44:15', 'admin'),
 (152, 0, '2017-08-01 13:50:02', 'admin'),
@@ -1236,7 +1425,11 @@ INSERT INTO `historiqueconnexionuser` (`ID`, `CONNEXION`, `DATEACTION`, `USER_LO
 (2501, 1, '2017-08-07 12:49:44', 'walo'),
 (2502, 1, '2017-08-07 12:57:34', 'walo'),
 (2551, 1, '2017-08-07 13:04:49', 'walo'),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(2601, 1, '2017-08-07 13:08:33', 'walo'),
+(2651, 1, '2017-08-07 14:15:08', 'walo'),
+(2652, 1, '2017-08-07 14:16:43', 'walo'),
+(2653, 1, '2017-08-07 15:04:53', 'walo'),
+(2654, 1, '2017-08-07 15:09:48', 'walo');
 
 -- --------------------------------------------------------
 
@@ -1516,9 +1709,7 @@ CREATE TABLE `question` (
   `QUESTION` varchar(255) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-(2601, 1, '2017-08-07 13:08:33', 'walo'),
-(2651, 1, '2017-08-07 14:15:08', 'walo'),
-(2652, 1, '2017-08-07 14:16:43', 'walo');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `question`
@@ -1683,7 +1874,7 @@ CREATE TABLE `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+('SEQ_GEN', '150');
 
 -- --------------------------------------------------------
 
@@ -1794,7 +1985,8 @@ INSERT INTO `sotimentitem` (`ID`, `WERT`, `DEMANDCATEGORY_ID`, `SORTIMENT_ID`) V
 (196, '100.00', 167, 10),
 (198, '100.00', 169, 10),
 (199, '100.00', 170, 3),
-(200, '100.00', 171, 12);
+(200, '100.00', 171, 12),
+(204, '100.00', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -1900,10 +2092,9 @@ CREATE TABLE `umschlagpapierauswaehlen` (
 -- --------------------------------------------------------
 
 --
-('SEQ_GEN', '0');
+-- Structure de la table `user`
 --
 
--- Structure de la table `user`
 CREATE TABLE `user` (
   `LOGIN` varchar(255) NOT NULL,
   `ADMIN` int(11) DEFAULT NULL,
@@ -2115,37 +2306,6 @@ ALTER TABLE `demandcategory`
   ADD KEY `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` (`CORRECTIONSCHLUESSEL_ID`),
   ADD KEY `FK_DEMANDCATEGORY_PRODUCT_ID` (`PRODUCT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_CATEGORY_ID` (`CATEGORY_ID`),
-
---
--- Contraintes pour la table `schluessel`
---
-ALTER TABLE `schluessel`
-  ADD CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`);
-
---
--- Contraintes pour la table `sotimentitem`
---
-ALTER TABLE `sotimentitem`
-  ADD CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
-  ADD CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`);
-
---
--- Contraintes pour la table `umschlagfarbigkeitelement`
---
-ALTER TABLE `umschlagfarbigkeitelement`
-  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
-  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`);
-
---
--- Contraintes pour la table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
-SET FOREIGN_KEY_CHECKS=1;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
   ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEITELEMENT_ID` (`UMSCHLAGFARBIGKEITELEMENT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_DEPARTMENT_ID` (`DEPARTMENT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` (`KONZEPTBEARBEITUNGFAKTOR_ID`),
@@ -2468,27 +2628,27 @@ ALTER TABLE `correctionschluessel`
 -- AUTO_INCREMENT pour la table `demandcategory`
 --
 ALTER TABLE `demandcategory`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculation`
 --
 ALTER TABLE `demandcategorycalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT pour la table `demandcategorycalculationitem`
 --
 ALTER TABLE `demandcategorycalculationitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=350;
 --
 -- AUTO_INCREMENT pour la table `demandcategorydepartementcalculation`
 --
 ALTER TABLE `demandcategorydepartementcalculation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT pour la table `demandcategoryvalidation`
 --
 ALTER TABLE `demandcategoryvalidation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `departement`
 --
@@ -2504,6 +2664,11 @@ ALTER TABLE `departementcriteria`
 --
 ALTER TABLE `departementcriteriaitem`
   MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+--
+-- AUTO_INCREMENT pour la table `historiqueconnexionuser`
+--
+ALTER TABLE `historiqueconnexionuser`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2655;
 --
 -- AUTO_INCREMENT pour la table `konzeptbearbeitungfaktor`
 --
@@ -2548,7 +2713,7 @@ ALTER TABLE `sortiment`
 -- AUTO_INCREMENT pour la table `sotimentitem`
 --
 ALTER TABLE `sotimentitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 --
 -- AUTO_INCREMENT pour la table `umschlagfarbigkeit`
 --
@@ -2706,3 +2871,34 @@ ALTER TABLE `product`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `FK_QUESTION_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
+
+--
+-- Contraintes pour la table `schluessel`
+--
+ALTER TABLE `schluessel`
+  ADD CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`);
+
+--
+-- Contraintes pour la table `sotimentitem`
+--
+ALTER TABLE `sotimentitem`
+  ADD CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
+  ADD CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`);
+
+--
+-- Contraintes pour la table `umschlagfarbigkeitelement`
+--
+ALTER TABLE `umschlagfarbigkeitelement`
+  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
+  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`);
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
+SET FOREIGN_KEY_CHECKS=1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
