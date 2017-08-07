@@ -712,9 +712,9 @@ CREATE TABLE `demandcategory` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `demandcategorycalculation`
 --
 
+-- Structure de la table `demandcategorycalculation`
 CREATE TABLE `demandcategorycalculation` (
   `ID` bigint(20) NOT NULL,
   `SUMME` decimal(10,2) DEFAULT NULL,
@@ -724,12 +724,12 @@ CREATE TABLE `demandcategorycalculation` (
   `DEPARTEMENTCRITERIA_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+
 -- --------------------------------------------------------
-
 --
+
 -- Structure de la table `demandcategorycalculationitem`
---
-
 CREATE TABLE `demandcategorycalculationitem` (
   `ID` bigint(20) NOT NULL,
   `CALCULTAED` tinyint(1) DEFAULT '0',
@@ -741,12 +741,12 @@ CREATE TABLE `demandcategorycalculationitem` (
   `DEPARTEMENTCRITERIAITEM_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+
 -- --------------------------------------------------------
-
 --
+
 -- Structure de la table `demandcategorydepartementcalculation`
---
-
 CREATE TABLE `demandcategorydepartementcalculation` (
   `ID` bigint(20) NOT NULL,
   `SUMME` decimal(10,2) DEFAULT NULL,
@@ -755,12 +755,12 @@ CREATE TABLE `demandcategorydepartementcalculation` (
   `DEPARTEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+
 -- --------------------------------------------------------
-
 --
+
 -- Structure de la table `demandcategoryvalidation`
---
-
 CREATE TABLE `demandcategoryvalidation` (
   `ID` int(11) NOT NULL,
   `SYSDATE` time DEFAULT NULL,
@@ -769,12 +769,12 @@ CREATE TABLE `demandcategoryvalidation` (
   `USER_LOGIN` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+
 -- --------------------------------------------------------
-
 --
+
 -- Structure de la table `departement`
---
-
 CREATE TABLE `departement` (
   `ID` bigint(20) NOT NULL,
   `NAME` varchar(255) DEFAULT NULL
@@ -990,7 +990,6 @@ CREATE TABLE `device` (
   `DEVICECATEGORIE` varchar(255) DEFAULT NULL,
   `OPERATINGSYSTEM` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `device`
@@ -1237,9 +1236,7 @@ INSERT INTO `historiqueconnexionuser` (`ID`, `CONNEXION`, `DATEACTION`, `USER_LO
 (2501, 1, '2017-08-07 12:49:44', 'walo'),
 (2502, 1, '2017-08-07 12:57:34', 'walo'),
 (2551, 1, '2017-08-07 13:04:49', 'walo'),
-(2601, 1, '2017-08-07 13:08:33', 'walo'),
-(2651, 1, '2017-08-07 14:15:08', 'walo'),
-(2652, 1, '2017-08-07 14:16:43', 'walo');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1519,7 +1516,9 @@ CREATE TABLE `question` (
   `QUESTION` varchar(255) DEFAULT NULL,
   `REPONSE` varchar(255) DEFAULT NULL,
   `USER_LOGIN` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(2601, 1, '2017-08-07 13:08:33', 'walo'),
+(2651, 1, '2017-08-07 14:15:08', 'walo'),
+(2652, 1, '2017-08-07 14:16:43', 'walo');
 
 --
 -- Contenu de la table `question`
@@ -1684,7 +1683,7 @@ CREATE TABLE `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '0');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1901,9 +1900,10 @@ CREATE TABLE `umschlagpapierauswaehlen` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+('SEQ_GEN', '0');
 --
 
+-- Structure de la table `user`
 CREATE TABLE `user` (
   `LOGIN` varchar(255) NOT NULL,
   `ADMIN` int(11) DEFAULT NULL,
@@ -2115,6 +2115,37 @@ ALTER TABLE `demandcategory`
   ADD KEY `FK_DEMANDCATEGORY_CORRECTIONSCHLUESSEL_ID` (`CORRECTIONSCHLUESSEL_ID`),
   ADD KEY `FK_DEMANDCATEGORY_PRODUCT_ID` (`PRODUCT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_CATEGORY_ID` (`CATEGORY_ID`),
+
+--
+-- Contraintes pour la table `schluessel`
+--
+ALTER TABLE `schluessel`
+  ADD CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`);
+
+--
+-- Contraintes pour la table `sotimentitem`
+--
+ALTER TABLE `sotimentitem`
+  ADD CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
+  ADD CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`);
+
+--
+-- Contraintes pour la table `umschlagfarbigkeitelement`
+--
+ALTER TABLE `umschlagfarbigkeitelement`
+  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
+  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`);
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
+SET FOREIGN_KEY_CHECKS=1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
   ADD KEY `FK_DEMANDCATEGORY_UMSCHLAGFARBIGKEITELEMENT_ID` (`UMSCHLAGFARBIGKEITELEMENT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_DEPARTMENT_ID` (`DEPARTMENT_ID`),
   ADD KEY `FK_DEMANDCATEGORY_KONZEPTBEARBEITUNGFAKTOR_ID` (`KONZEPTBEARBEITUNGFAKTOR_ID`),
@@ -2675,34 +2706,3 @@ ALTER TABLE `product`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `FK_QUESTION_USER_LOGIN` FOREIGN KEY (`USER_LOGIN`) REFERENCES `user` (`LOGIN`);
-
---
--- Contraintes pour la table `schluessel`
---
-ALTER TABLE `schluessel`
-  ADD CONSTRAINT `FK_SCHLUESSEL_SCHLUESSELTYPE_ID` FOREIGN KEY (`SCHLUESSELTYPE_ID`) REFERENCES `schluesseltype` (`ID`);
-
---
--- Contraintes pour la table `sotimentitem`
---
-ALTER TABLE `sotimentitem`
-  ADD CONSTRAINT `FK_SOTIMENTITEM_DEMANDCATEGORY_ID` FOREIGN KEY (`DEMANDCATEGORY_ID`) REFERENCES `demandcategory` (`ID`),
-  ADD CONSTRAINT `FK_SOTIMENTITEM_SORTIMENT_ID` FOREIGN KEY (`SORTIMENT_ID`) REFERENCES `sortiment` (`ID`);
-
---
--- Contraintes pour la table `umschlagfarbigkeitelement`
---
-ALTER TABLE `umschlagfarbigkeitelement`
-  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_COVER_ID` FOREIGN KEY (`COVER_ID`) REFERENCES `cover` (`ID`),
-  ADD CONSTRAINT `FK_UMSCHLAGFARBIGKEITELEMENT_UMSCHLAGFARBIGKEIT_ID` FOREIGN KEY (`UMSCHLAGFARBIGKEIT_ID`) REFERENCES `umschlagfarbigkeit` (`ID`);
-
---
--- Contraintes pour la table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `FK_USER_DEPARTEMENT_ID` FOREIGN KEY (`DEPARTEMENT_ID`) REFERENCES `departement` (`ID`);
-SET FOREIGN_KEY_CHECKS=1;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
