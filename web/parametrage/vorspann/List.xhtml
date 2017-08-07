@@ -6,59 +6,49 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <h:form id="VorspannListForm">
+        <p:panel header="#{bundle.ListVorspannTitle}">
+            <p:dataTable id="datalist" value="#{vorspannController.items}" var="item"
+                         selectionMode="single" selection="#{vorspannController.selected}"
+                         paginator="true"
+                         rowKey="#{item.id}"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         >
 
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListVorspannTitle}"></h:outputText>
-        </ui:define>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVorspannTitle_expression}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.expression}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVorspannTitle_value}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.value}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVorspannTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vorspannController.prepareCreate}" update=":parametrageTab:VorspannCreateForm" oncomplete="PF('VorspannCreateDialog').show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":parametrageTab:VorspannViewForm" oncomplete="PF('VorspannViewDialog').show()" disabled="#{empty vorspannController.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":parametrageTab:VorspannEditForm" oncomplete="PF('VorspannEditDialog').show()" disabled="#{empty vorspannController.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vorspannController.destroy}" update=":growl,datalist" disabled="#{empty vorspannController.selected}"/>
+                </f:facet>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
 
-        <ui:define name="body">
-            <h:form id="VorspannListForm">
-                <p:panel header="#{bundle.ListVorspannTitle}">
-                    <p:dataTable id="datalist" value="#{vorspannController.items}" var="item"
-                                 selectionMode="single" selection="#{vorspannController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
-
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVorspannTitle_expression}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.expression}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVorspannTitle_value}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.value}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVorspannTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vorspannController.prepareCreate}" update=":VorspannCreateForm" oncomplete="PF('VorspannCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VorspannViewForm" oncomplete="PF('VorspannViewDialog').show()" disabled="#{empty vorspannController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VorspannEditForm" oncomplete="PF('VorspannEditDialog').show()" disabled="#{empty vorspannController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vorspannController.destroy}" update=":growl,datalist" disabled="#{empty vorspannController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
-
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+    <ui:include src="Create.xhtml"/>
+    <ui:include src="Edit.xhtml"/>
+    <ui:include src="View.xhtml"/>
 
 </html>
