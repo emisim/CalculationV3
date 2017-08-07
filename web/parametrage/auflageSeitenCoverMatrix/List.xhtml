@@ -26,13 +26,14 @@
                     <f:facet name="header">
                         <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_cover}"/>
                     </f:facet>
-                    <h:outputText value="#{item.cover.id} | #{item.cover.description}"/>
+                    <h:outputText value="#{item.cover.id} "/>
                 </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_auflage}"/>
                         </f:facet>
-                        <h:outputText value="#{item.auflage.description} | #{item.auflage.price}"/>
+<!--                        <h:outputText value="{item.auflage.description} | {item.auflage.price}"/>-->
+                            <h:outputText value="#{item.auflage.description}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -40,12 +41,31 @@
                         </f:facet>
                         <h:outputText value="#{item.seiten.nbrePage}"/>
                     </p:column>
+                
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_baukasten}"/>
+                            <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_farbigkeit}"/>
                         </f:facet>
-                        <h:outputText value="#{item.baukasten.expression} | #{item.baukasten.price}"/>
+                        <h:outputText value="#{item.farbigkeit.id} "/>
                     </p:column>
+                
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_formatAuswaehlen}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.formatAuswaehlen.id} "/>
+                    </p:column>
+                
+                
+<!--                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="{bundle.ListAuflageSeitenCoverMatrixTitle_baukasten}"/>
+                        </f:facet>
+                        <h:outputText value="{item.baukasten.expression} | {item.baukasten.price}"/>
+                        <h:outputText value="{item.baukasten.expression} "/>
+                    </p:column>-->
+                
+                
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAuflageSeitenCoverMatrixTitle_price}"/>
