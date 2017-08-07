@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author abderrahmane
+ * @author 
  */
 @Entity
 public class HistoriqueConnexionUser implements Serializable {

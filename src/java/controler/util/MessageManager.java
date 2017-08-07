@@ -9,7 +9,7 @@ import javax.faces.application.FacesMessage;
 
 /**
  *
- * @author moulaYounes
+ * @author 
  */
 public class MessageManager {
 

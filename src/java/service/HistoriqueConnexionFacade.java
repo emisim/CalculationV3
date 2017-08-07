@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author abderrahmane
+ * @author 
  */
 @Stateless
 public class HistoriqueConnexionFacade extends AbstractFacade<HistoriqueConnexionUser> {

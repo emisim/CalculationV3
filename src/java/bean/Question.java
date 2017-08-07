@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author ESDAIRI
+ * @author 
  */
 @Entity
 public class Question implements Serializable {

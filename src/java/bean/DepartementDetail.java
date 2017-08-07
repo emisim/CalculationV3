@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author simo
+ * @author 
  */
 public class DepartementDetail {
     

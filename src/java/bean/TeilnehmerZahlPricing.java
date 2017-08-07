@@ -15,7 +15,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Younes
+ * @author 
  */
 @Entity
 public class TeilnehmerZahlPricing implements Serializable {

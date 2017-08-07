@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author Younes
+ * @author 
  */
 public class MathUtil {
 

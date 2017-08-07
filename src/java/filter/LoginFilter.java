@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author elhazdour
+ * @author 
  */
 public class LoginFilter implements Filter {
 

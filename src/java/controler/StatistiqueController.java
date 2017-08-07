@@ -32,7 +32,7 @@ import service.StatistiqueFacade;
 
 /**
  *
- * @author youness
+ * @author 
  */
 @Named(value = "statistiqueController")
 @SessionScoped
