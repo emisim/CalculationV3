@@ -74,7 +74,6 @@ public class AccessDepartement {
         AccessDepartement.mediaITMap = mediaITMap;
     }
 
-    
     public static Map<String, Boolean> getAdminMap() {
         if (adminMap == null) {
             adminMap = new HashMap<>();
@@ -96,7 +95,7 @@ public class AccessDepartement {
         populateAdminMap();
     }
 
- private static void populateContentManagementMap() {
+    private static void populateContentManagementMap() {
 
         contentManagementMap.put("category", true);
         contentManagementMap.put("product", true);
@@ -114,6 +113,14 @@ public class AccessDepartement {
         contentManagementMap.put("anzahlKapitetel", true);
         contentManagementMap.put("anzahlMitglieder", true);
         contentManagementMap.put("mitgliederkorrekturFaktor", true);
+
+        contentManagementMap.put("farbigkeit", true);
+        contentManagementMap.put("umschlagFarbigkeitElement", true);
+        contentManagementMap.put("umschlagFarbigkeit", true);
+        contentManagementMap.put("nachspann", true);
+        contentManagementMap.put("vorspann", true);
+        contentManagementMap.put("nachsatz", true);
+
     }
 
     private static void populateDatenManagementMap() {
@@ -131,6 +138,13 @@ public class AccessDepartement {
         datenManagementMap.put("anzahlLieferantGesamt", true);
         datenManagementMap.put("anzahlLieferantNeu", true);
         datenManagementMap.put("anzahlKapitetel", true);
+
+        datenManagementMap.put("farbigkeit", true);
+        datenManagementMap.put("umschlagFarbigkeitElement", true);
+        datenManagementMap.put("umschlagFarbigkeit", true);
+        datenManagementMap.put("nachspann", true);
+        datenManagementMap.put("vorspann", true);
+        datenManagementMap.put("nachsatz", true);
     }
 
     private static void populateDatabasePublishingMap() {
@@ -148,6 +162,13 @@ public class AccessDepartement {
         databasePublishingMap.put("anzahlBestellNrSeiten", true);
         databasePublishingMap.put("bearbeitungszeit", true);
 
+        databasePublishingMap.put("farbigkeit", true);
+        databasePublishingMap.put("umschlagFarbigkeitElement", true);
+        databasePublishingMap.put("umschlagFarbigkeit", true);
+        databasePublishingMap.put("nachspann", true);
+        databasePublishingMap.put("vorspann", true);
+        databasePublishingMap.put("nachsatz", true);
+
     }
 
     private static void populateProjectManagementMap() {
@@ -161,13 +182,18 @@ public class AccessDepartement {
         projectManagementMap.put("umfang", true);
         projectManagementMap.put("teilnehmerZahl", true);
         projectManagementMap.put("konzeptbearbeitungFaktor", true);
-        projectManagementMap.put("wechselfassungVariantFaktor",true);
+        projectManagementMap.put("wechselfassungVariantFaktor", true);
         projectManagementMap.put("bearbeitungszeit", true);
-        
-        
+
+        projectManagementMap.put("farbigkeit", true);
+        projectManagementMap.put("umschlagFarbigkeitElement", true);
+        projectManagementMap.put("umschlagFarbigkeit", true);
+        projectManagementMap.put("nachspann", true);
+        projectManagementMap.put("vorspann", true);
+        projectManagementMap.put("nachsatz", true);
 
     }
-    
+
     private static void populateAssetManagementMap() {
 
         assetManagementMap.put("category", true);
@@ -178,7 +204,16 @@ public class AccessDepartement {
         assetManagementMap.put("anzahlNeueArtikel", true);
         assetManagementMap.put("anzahlGesamtProdukt", true);
         assetManagementMap.put("anzahlNeueProdukt", true);
+
+        assetManagementMap.put("farbigkeit", true);
+        assetManagementMap.put("umschlagFarbigkeitElement", true);
+        assetManagementMap.put("umschlagFarbigkeit", true);
+        assetManagementMap.put("nachspann", true);
+        assetManagementMap.put("vorspann", true);
+        assetManagementMap.put("nachsatz", true);
+
     }
+
     private static void populatemediaITMap() {
 
         mediaITMap.put("category", true);
@@ -187,7 +222,15 @@ public class AccessDepartement {
         mediaITMap.put("sortiment", true);
         mediaITMap.put("layout", true);
         mediaITMap.put("ausgabe", true);
+
+        mediaITMap.put("farbigkeit", true);
+        mediaITMap.put("umschlagFarbigkeitElement", true);
+        mediaITMap.put("umschlagFarbigkeit", true);
+        mediaITMap.put("nachspann", true);
+        mediaITMap.put("vorspann", true);
+        mediaITMap.put("nachsatz", true);
     }
+
     private static void populateAdminMap() {
 
         adminMap.put("category", true);
@@ -198,6 +241,13 @@ public class AccessDepartement {
         adminMap.put("layout", true);
         adminMap.put("katalogart", true);
         adminMap.put("umfang", true);
+
+        adminMap.put("farbigkeit", true);
+        adminMap.put("umschlagFarbigkeitElement", true);
+        adminMap.put("umschlagFarbigkeit", true);
+        adminMap.put("nachspann", true);
+        adminMap.put("vorspann", true);
+        adminMap.put("nachsatz", true);
 
     }
 
