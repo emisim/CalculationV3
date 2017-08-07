@@ -12,9 +12,7 @@
             <h:form id="UmschlagFarbigkeitViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{umschlagFarbigkeitController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitLabel_price}"/>
-                        <h:outputText value="#{umschlagFarbigkeitController.selected.price}" title="#{bundle.ViewUmschlagFarbigkeitTitle_price}"/>
-                        <h:outputText value="#{bundle.ViewUmschlagFarbigkeitLabel_description}"/>
+                      <h:outputText value="#{bundle.ViewUmschlagFarbigkeitLabel_description}"/>
                         <h:outputText value="#{umschlagFarbigkeitController.selected.description}" title="#{bundle.ViewUmschlagFarbigkeitTitle_description}"/>
                         <h:outputText value="#{bundle.ViewUmschlagFarbigkeitLabel_label}"/>
                         <h:outputText value="#{umschlagFarbigkeitController.selected.label}" title="#{bundle.ViewUmschlagFarbigkeitTitle_label}"/>

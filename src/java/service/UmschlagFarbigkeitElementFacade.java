@@ -30,10 +30,12 @@ public class UmschlagFarbigkeitElementFacade extends AbstractFacade<UmschlagFarb
 
         String query = "SELECT item FROM UmschlagFarbigkeitElement item WHERE  1=1 ";
         if (cover != null) {
-            SearchUtil.addConstraint("item", "cover.id", "=", cover.getId());
+            query += SearchUtil.addConstraint("item", "cover.id", "=", cover.getId());
+        } else {
+            query += " AND item.cover.id = null";
         }
         if (umschlagFarbigkeit != null) {
-            SearchUtil.addConstraint("item", "umschlagFarbigkeit.id", "=", umschlagFarbigkeit.getId());
+            query += SearchUtil.addConstraint("item", "umschlagFarbigkeit.id", "=", umschlagFarbigkeit.getId());
         }
         List<UmschlagFarbigkeitElement> umschlagFarbigkeitElements = getMultipleResult(query);
         if (umschlagFarbigkeitElements == null) {

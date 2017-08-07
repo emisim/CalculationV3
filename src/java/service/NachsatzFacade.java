@@ -27,7 +27,7 @@ public class NachsatzFacade extends AbstractFacade<Nachsatz> {
     public List<Nachsatz> findByCover(Cover cover) {
         String query = "SELECT item FROM Nachsatz item WHERE 1=1 ";
         if (cover != null) {
-            SearchUtil.addConstraint("item", "cover.id", "=", cover.getId());
+           query+= SearchUtil.addConstraint("item", "cover.id", "=", cover.getId());
         }
        
         List<Nachsatz> nachsatzs = getMultipleResult(query);

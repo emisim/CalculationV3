@@ -14,9 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{baukastenController.selected != null}">
                         <h:outputText value="#{bundle.ViewBaukastenLabel_expression}"/>
                         <h:outputText value="#{baukastenController.selected.expression}" title="#{bundle.ViewBaukastenTitle_expression}"/>
-                        <h:outputText value="#{bundle.ViewBaukastenLabel_value}"/>
-                        <h:outputText value="#{baukastenController.selected.value}" title="#{bundle.ViewBaukastenTitle_value}"/>
-                       </p:panelGrid>
+                    </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="BaukastenViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

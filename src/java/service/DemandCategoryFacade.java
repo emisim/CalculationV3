@@ -66,8 +66,6 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         return em;
     }
 
-  
-
     public boolean sortimentCondition(DemandCategory demandCategory, List<SotimentItem> sotimentItems) {
         return demandCategory != null && sotimentItems != null && !sotimentItems.isEmpty() && DemandCategoryCalculationFacade.summSortiment(demandCategory, sotimentItems, false, 0).compareTo(new BigDecimal(100)) == 0;
     }
@@ -106,6 +104,10 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
 
     public void save(List<SotimentItem> sotimentItems, DemandCategory demandCategory, Departement departement, boolean simulation, boolean isSave) throws ScriptException {
         prepare(demandCategory, isSave);
+        System.out.println("demandCategory.getKatalogart().getValuee() ==> "+demandCategory.getKatalogart().getValuee());
+        System.out.println("demandCategory.getAusgabe().getValuee() ==> "+demandCategory.getAusgabe().getValuee());
+        System.out.println("demandCategory.getWechselfassungVariantFaktor().getValue() ==> "+demandCategory.getWechselfassungVariantFaktor().getValue());
+
         performPreCalculationDemandCategory(demandCategory, sotimentItems);
         saveOrUpdate(simulation, isSave, demandCategory);
         sotimentItemFacade.save(sotimentItems, demandCategory, simulation, isSave);
@@ -203,16 +205,21 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             demandCategory.setNachsatzPricing(nachsatzPricing);
             demandCategory.setNachspannPricing(nachspannPricing);
             demandCategory.setVorspannPricing(vorspannPricing);
+            demandCategory.setBaukastenPricing(baukastenPricing);
+
+            System.out.println("nachsatzPricing = " + nachsatzPricing + " nachspannPricing=" + nachspannPricing
+                    + " vorspannPricing = " + vorspannPricing + " baukastenPricing =" + baukastenPricing
+                    + " umschlagFarbigkeitElementPricing =" + umschlagFarbigkeitElementPricing);
             demandCategory.setUmschlagFarbigkeitElementPricing(umschlagFarbigkeitElementPricing);
             BigDecimal summDruck = demandCategory.getCover().getPrice().add(nachsatzPricing).add(nachspannPricing).add(vorspannPricing).add(umschlagFarbigkeitElementPricing).add(baukastenPricing);
-
+            System.out.println("summDruck before hard test ==> " + summDruck);
             if (hardCover) {
                 summDruck = (summDruck.add(auflageSeitenCoverMatrix.getPrice()).add(demandCategory.getRegister().getPrice())).multiply(demandCategory.getAuflage().getPrice());
             } else {
                 summDruck = summDruck.multiply(demandCategory.getAuflage().getPrice());
             }
+            System.out.println("summDruck after hard test ==> " + summDruck);
 
-            demandCategory.setBaukastenPricing(baukastenPricing);
             demandCategory.setSummDruck(summDruck);
             return 1;
         }
