@@ -32,6 +32,9 @@ public class LayoutPricingFacade extends AbstractFacade<LayoutPricing> {
         LayoutPricing layoutPricing = getUniqueResult("SELECT item FROM LayoutPricing item WHERE "
                 + "item.departementCriteriaItem.description='" + departementCriteriaItemDescription + "'"
                 + " AND item.layout.id=" + layout.getId());
+        System.out.println("SELECT item FROM LayoutPricing item WHERE "
+                + "item.departementCriteriaItem.description='" + departementCriteriaItemDescription + "'"
+                + " AND item.layout.id=" + layout.getId());
         if (layoutPricing == null) {
             return new BigDecimal(0);
         }

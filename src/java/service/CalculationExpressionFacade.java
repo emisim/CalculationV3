@@ -61,11 +61,12 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
                     Object obj = getJsEngine().eval(expression);
                     BigDecimal value = new BigDecimal(obj + "");
                     value = value.setScale(2, RoundingMode.HALF_UP);
+                    System.out.println(" ********************************** ha expression "+ expression + " ha eval " + value);
                     return value;
                 }
             }
         } catch (ScriptException ex) {
-            System.out.println("ha expression ==> "+expression);
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!! exception ==> "+expression);
             ex.printStackTrace();
             return "0";
         }

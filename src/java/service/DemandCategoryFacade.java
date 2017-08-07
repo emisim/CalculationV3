@@ -61,6 +61,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
     @EJB
     private BaukastenPricingFacade baukastenPricingFacade;
 
+        @EJB
+    private AusgabePricingFacade ausgabePricingFacade;
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -150,6 +152,8 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         DemandCategoryCalculationFacade.calculateAnzahlBestandProdukt(demandCategory);
         DemandCategoryCalculationFacade.summSortimentFactor(demandCategory, sotimentItems);
         teilnehmerZahlPricingFacade.calcPriceByTeilnehmerZahlValue(demandCategory);
+        
+        ausgabePricingFacade.findByAusgabe(demandCategory);
     }
 
     private void saveOrUpdate(boolean simulation, boolean isSave, DemandCategory demandCategory) {
