@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author morad
+ * @author 
  */
 @Entity
 public class Backup implements Serializable {

@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author morad
+ * @author 
  */
 @Stateless
 public class BackupFacade extends AbstractFacade<Backup> {
