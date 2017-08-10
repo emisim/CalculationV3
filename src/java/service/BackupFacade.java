@@ -57,8 +57,13 @@ public class BackupFacade extends AbstractFacade<Backup> {
         String nom = DateUtil.formateDate("yyyy-MM-dd", dateBackup) + ".sql";
         int annee = dateBackup.getYear() + 1900;
         int mois = dateBackup.getMonth()+1;
-        String path1 = path + annee +"\\" + mois;
-        String backup = path + annee + "\\" + mois + "\\" +nom;
+        //Windows
+//        String path1 = path + annee +"\\" + mois;
+//        String backup = path + annee + "\\" + mois + "\\" +nom;
+
+        //Puisque MAC
+        String path1 = path + annee +"/" + mois;
+        String backup = path + annee + "/" + mois + "/" +nom;
         System.out.println("haa chemin "+backup);
         Backup b = new Backup(nom, dateBackup);
         System.out.println("ha backup "+backup.toString());

@@ -33,8 +33,10 @@ public class BackupController implements Serializable {
     private BackupFacade ejbFacade;
     private List<Backup> items = null;
     private Backup selected;
-    private static String fileBackUpOrigine = "C:\\backup\\Dropbox\\";
-    private static String path2 = "C:\\backup\\";
+//    private static String fileBackUpOrigine = "C:\\backup\\Dropbox\\";
+//    private static String path2 = "C:\\backup\\";
+    private static String fileBackUpOrigine = "/backup/";
+    private static String path2 = "/backup/";
 
     //@Schedule(second = "0", minute = "00", hour = "18", dayOfWeek = "*", persistent = false)
     public void recapDb() throws IOException, InterruptedException {
