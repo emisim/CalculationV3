@@ -10,15 +10,15 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListHistoriqueConnexionUserTitle}"></h:outputText>
+            <h:outputText value="Marketing Calculator | #{bundle.ListHistoriqueConnexionUserTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form>
-                <p:fieldset legend="erweiterte Suche" style="margin-bottom:20px" toggleable="true" toggleSpeed="600">
-                    <p:panelGrid columns="10">
+                <p:fieldset legend="Advanced search" style="margin-bottom:20px" toggleable="true" toggleSpeed="600">
+                    <p:panelGrid columns="8">
 
-                            <p:outputLabel value="connexion: " for="connexion"/>
+                            <p:outputLabel value="Status: " for="connexion"/>
                             <p:selectOneMenu id="connexion" value="#{historiqueConnexionUserController.selected.connexion}" style="width: 100px">
                                 <f:selectItem itemValue="#{null}" itemLabel="--Select--"/>
                                 <f:selectItem  itemValue="true"  itemLabel="Login" />
@@ -27,12 +27,12 @@
                         
 
                         
-                            <p:outputLabel value="date Min: " for="DateMin" />
+                            <p:outputLabel value="von: " for="DateMin" />
                             <p:calendar size="12" pattern="dd/MM/yyyy HH:mm:ss" id="DateMin"  value="#{historiqueConnexionUserController.dateMin}" title="Date Min"  showOn="button">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"  />
                             </p:calendar>
                         
-                            <p:outputLabel value="Date Max: " for="DateMax" />
+                            <p:outputLabel value="bis: " for="DateMax" />
                             <p:calendar size="12"  pattern="dd/MM/yyyy HH:mm:ss" id="DateMax"  value="#{historiqueConnexionUserController.dateMax}" title="Date Max"  showOn="button">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"  />
                             </p:calendar>
@@ -57,14 +57,13 @@
                 <p:panel header="#{bundle.ListHistoriqueConnexionUserTitle}">
                     <p:dataTable id="datalist" value="#{historiqueConnexionUserController.items}" var="item"
                                  selectionMode="single" selection="#{historiqueConnexionUserController.selected}"
+                                 sortBy="#{item.dateAction}"
+                                 sortOrder="descending"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-
-
-
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListHistoriqueConnexionUserTitle_user}"/>
@@ -73,10 +72,10 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Date Login / Logout"/>
+                                <h:outputText value="Login/Logout Date"/>
                             </f:facet>
                             <h:outputText value="#{item.dateAction}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>
                         </p:column>
 

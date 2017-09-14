@@ -1021,7 +1021,7 @@ INSERT INTO `departementcriteria` (`ID`, `NAME`, `DEPARTEMENT_ID`) VALUES
 (24, 'Konzeption', 6),
 (25, 'Programmierung', 6),
 (27, 'Initial Kosten, diesen fallen unabhängig vom Endprodukt immer an', 8),
-(28, 'Projektmanagement Leistungen:', 4),
+(28, 'Projektmanagement Leistungen', 4),
 (29, 'Abbildung', 5),
 (31, 'Bildbearbeitung', 5);
 

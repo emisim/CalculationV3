@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{configurationController.selected != null}">
                         <h:outputText value="#{bundle.ViewConfigurationLabel_dateApplication}"/>
                         <h:outputText value="#{configurationController.selected.dateApplication}" title="#{bundle.ViewConfigurationTitle_dateApplication}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
                         </h:outputText>
 
 

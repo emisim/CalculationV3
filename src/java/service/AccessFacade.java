@@ -45,37 +45,37 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
         if (user.getAdmin() == 1) {
             return true;
         } else {
-            if (dep.getName().equals("contentManagement")) {
+            if (dep.getName().equals("Content Management")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("datenManagement")) {
+            if (dep.getName().equals("Daten Management")) {
                 if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("databasePublishing")) {
+            if (dep.getName().equals("Database Publishing ")) {
                 if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("projectManagement")) {
+            if (dep.getName().equals("Project Management")) {
                 if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
             
-            if (dep.getName().equals("assetManagement")) {
+            if (dep.getName().equals("Asset Management")) {
                 if (AccessDepartement.getAssetManagementMap().containsKey(attribute)){
                     return true;
                 }
             }
             
-            if (dep.getName().equals("mediaIT")) {
+            if (dep.getName().equals("Media IT")) {
                 if (AccessDepartement.getMediaITMap().containsKey(attribute)){
                     return true;
                 }
@@ -90,40 +90,40 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
         Departement dep = user.getDepartement();
 
         if (user.getAdmin() == 1) {
-            if (AccessDepartement.getAdminMap().containsKey(attribute)) {
+            if (AccessDepartement.getAdminMap().containsKey( attribute)) {
                 return true;
             }
         } else {
-            if (dep.getName().equals("contentManagement")) {
+            if (dep.getName().equals("Content Management")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("datenManagement")) {
+            if (dep.getName().equals("Daten Management")) {
                 if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("databasePublishing")) {
+            if (dep.getName().equals("Database Publishing")) {
                 if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("projectManagement")) {
+            if (dep.getName().equals("Project Management")) {
                 if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-            if (dep.getName().equals("assetManagement")) {
+            if (dep.getName().equals("Asset Management")) {
                 if (AccessDepartement.getAssetManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
             
-            if (dep.getName().equals("mediaIT")) {
+            if (dep.getName().equals("Media IT")) {
                 if (AccessDepartement.getMediaITMap().containsKey(attribute)) {
                     return true;
                 }

@@ -54,7 +54,7 @@ public class BackupFacade extends AbstractFacade<Backup> {
     private Backup prepareBackUp(String path){
         System.out.println("ha 3");
         Date dateBackup = new Date();
-        String nom = DateUtil.formateDate("yyyy-MM-dd", dateBackup) + ".sql";
+        String nom = DateUtil.formateDate("dd-MM-yyyy", dateBackup) + ".sql";
         int annee = dateBackup.getYear() + 1900;
         int mois = dateBackup.getMonth()+1;
         //Windows

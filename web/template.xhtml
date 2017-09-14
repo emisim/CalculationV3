@@ -31,28 +31,26 @@
                                 <br/>
                                 <p:menubar>
 
-                                    <p:submenu id="parametrage" label="Settings" icon="fa fa-gears" rendered="#{userController.checkUser()}" >
-                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml" icon="fa fa-list"  />
-                                    </p:submenu>
-
-
-                                    <p:submenu id="demandCategory" label="DemandCategory" icon="fa fa-th-large"  >
-                                        <p:menuitem value="Cacule" outcome="/demandCategory/CreateCat.xhtml" icon="fa fa-calculator"/>
+                                    <p:submenu id="demandCategory" label="Calculation" icon="fa fa-th-large"  >
+                                        <p:menuitem value="Calculator" outcome="/demandCategory/CreateCat.xhtml" icon="fa fa-calculator"/>
                                         <p:menuitem value="History" outcome="/demandCategory/List.xhtml"  icon="fa fa-history"/>
                                     </p:submenu>
 
 
-                                    <p:submenu id="departement" label="Departement/Criteria" icon="fa fa-building" >
+                                    <p:submenu id="departement" label="Services" icon="fa fa-building" >
                                         <p:menuitem value="List" outcome="/departement/List.xhtml" icon="fa fa-list"  />
                                     </p:submenu>
 
                                     <p:submenu id="configuration" label="Configuration" icon="fa fa-wrench" rendered="#{userController.checkUser()}">
                                         <p:menuitem value="List" outcome="/configurationItem/List.xhtml"  icon="fa fa-list" />
-
                                     </p:submenu>
-                                    <p:submenu id="statistiken" label="Statistiken" icon="fa fa-bar-chart" rendered="#{userController.checkUser()}">
-                                        <p:menuitem value="DemandCategory" outcome="/statistique/demandeCategoryStatistique.xhtml"  icon="fa fa-list" />
-                                        <p:menuitem value="Departement" outcome="/statistique/departementStatistique.xhtml"  icon="fa fa-list" />
+                                    
+                                    <p:submenu id="parametrage" label="Settings" icon="fa fa-gears" rendered="#{userController.checkUser()}" >
+                                        <p:menuitem value="List" outcome="/parametrage/Parametrage.xhtml" icon="fa fa-list"  />
+                                    </p:submenu>
+                                    <p:submenu id="statistiken" label="Statistics" icon="fa fa-bar-chart" rendered="#{userController.checkUser()}">
+                                        <p:menuitem value="Calculation" outcome="/statistique/demandeCategoryStatistique.xhtml"  icon="fa fa-list" />
+                                        <p:menuitem value="Department" outcome="/statistique/departementStatistique.xhtml"  icon="fa fa-list" />
 
                                     </p:submenu>
                                     
@@ -70,7 +68,7 @@
 
                                     <p:submenu id="user" label="Users" icon="fa fa-users" rendered="#{userController.checkUser()}">
                                         <p:menuitem value="List" outcome="/user/List.xhtml" icon="fa fa-list" />
-                                        <p:menuitem value="History of connexion" outcome="/user/History.xhtml" icon="fa fa-list" />
+                                        <p:menuitem value="History of connections" outcome="/user/History.xhtml" icon="fa fa-list" />
                                     </p:submenu>
                                     <p:submenu id="profil" label="Profil" icon="fa fa-user">
                                         <p:menuitem value="List" outcome="/profil/List.xhtml" icon="fa fa-list" />
@@ -81,7 +79,7 @@
                             </div>
                             <div class="ui-grid-col-1" style="text-align: center;">
                                 <br/><i class="fa fa-user" style="font-size: 13px;"></i>&nbsp;<b style="font-size: 13px;">#{userController.connectedUser.login}</b>&nbsp;<br/>
-                                <p:commandLink title="ausloggen" action="#{userController.seDeConnnecter()}">
+                                <p:commandLink title="logout" action="#{userController.seDeConnnecter()}">
                                     <p:graphicImage  value ="../resources/image/exit.png" width="32" height="32"/>
                                 </p:commandLink>
                             </div>

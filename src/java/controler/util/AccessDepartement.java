@@ -111,15 +111,16 @@ public class AccessDepartement {
         contentManagementMap.put("anzahlLieferantGesamt", true);
         contentManagementMap.put("anzahlLieferantNeu", true);
         contentManagementMap.put("anzahlKapitetel", true);
+        //Anzahlmitglieder ist für den Mitgliederkorrekturversand wichtig  = AnzahlMitglieder*.....
         contentManagementMap.put("anzahlMitglieder", true);
         contentManagementMap.put("mitgliederkorrekturFaktor", true);
-
-        contentManagementMap.put("farbigkeit", true);
-        contentManagementMap.put("umschlagFarbigkeitElement", true);
-        contentManagementMap.put("umschlagFarbigkeit", true);
-        contentManagementMap.put("nachspann", true);
-        contentManagementMap.put("vorspann", true);
-        contentManagementMap.put("nachsatz", true);
+//
+//        contentManagementMap.put("farbigkeit", true);
+//        contentManagementMap.put("umschlagFarbigkeitElement", true);
+//        contentManagementMap.put("umschlagFarbigkeit", true);
+//        contentManagementMap.put("nachspann", true);
+//        contentManagementMap.put("vorspann", true);
+//        contentManagementMap.put("nachsatz", true);
 
     }
 
@@ -134,6 +135,7 @@ public class AccessDepartement {
         datenManagementMap.put("anzahlGesamtArtikel", true);
         datenManagementMap.put("anzahlNeueArtikel", true);
         datenManagementMap.put("anzahlBestandArtikel", true);
+        datenManagementMap.put("anzahlGesamtProdukt", true);
         datenManagementMap.put("anzahlNeueProdukt", true);
         datenManagementMap.put("anzahlLieferantGesamt", true);
         datenManagementMap.put("anzahlLieferantNeu", true);
@@ -162,35 +164,89 @@ public class AccessDepartement {
         databasePublishingMap.put("anzahlBestellNrSeiten", true);
         databasePublishingMap.put("bearbeitungszeit", true);
 
-        databasePublishingMap.put("farbigkeit", true);
-        databasePublishingMap.put("umschlagFarbigkeitElement", true);
-        databasePublishingMap.put("umschlagFarbigkeit", true);
-        databasePublishingMap.put("nachspann", true);
-        databasePublishingMap.put("vorspann", true);
-        databasePublishingMap.put("nachsatz", true);
+//        databasePublishingMap.put("farbigkeit", true);
+//        databasePublishingMap.put("umschlagFarbigkeitElement", true);
+//        databasePublishingMap.put("umschlagFarbigkeit", true);
+//        databasePublishingMap.put("nachspann", true);
+//        databasePublishingMap.put("vorspann", true);
+//        databasePublishingMap.put("nachsatz", true);
 
     }
 
     private static void populateProjectManagementMap() {
 
+        //PM doit avoir la mm interface que Admin
+        
         projectManagementMap.put("category", true);
         projectManagementMap.put("product", true);
         projectManagementMap.put("sortiment", true);
         projectManagementMap.put("layout", true);
         projectManagementMap.put("katalogart", true);
+        projectManagementMap.put("prozess", true);
         projectManagementMap.put("ausgabe", true);
+        
         projectManagementMap.put("umfang", true);
+        projectManagementMap.put("anzahlSonderSeiten", true);
+        projectManagementMap.put("anzahlGenerierungUpdateSeiten", true);
+        projectManagementMap.put("anzahlIHVZSeiten", true);
+        projectManagementMap.put("anzahlBestellNrSeiten", true);
+        
+        projectManagementMap.put("anzahlGesamtArtikel", true);
+        projectManagementMap.put("anzahlNeueArtikel", true);
+        projectManagementMap.put("anzahlBestandArtikel", true);
+        projectManagementMap.put("anzahlGesamtProdukt", true);
+        projectManagementMap.put("anzahlNeueProdukt", true);
+        projectManagementMap.put("anzahlBestandProdukt", true);
+        projectManagementMap.put("anzahlLieferantGesamt", true);
+        projectManagementMap.put("anzahlLieferantNeu", true);
+        projectManagementMap.put("anzahlKapitetel", true);
+        
+        projectManagementMap.put("anzahlMitglieder", true);
+        projectManagementMap.put("mitgliederkorrekturFaktor", true);
+        
+        projectManagementMap.put("anzahlBeteiligten", true);
+        
         projectManagementMap.put("teilnehmerZahl", true);
         projectManagementMap.put("konzeptbearbeitungFaktor", true);
         projectManagementMap.put("wechselfassungVariantFaktor", true);
         projectManagementMap.put("bearbeitungszeit", true);
 
-        projectManagementMap.put("farbigkeit", true);
-        projectManagementMap.put("umschlagFarbigkeitElement", true);
-        projectManagementMap.put("umschlagFarbigkeit", true);
+        //DRUCK
+        projectManagementMap.put("formatAuswaehlen", true);
+        projectManagementMap.put("druckSeiten", true);
+        projectManagementMap.put("papierMaterialAuswaehlen", true);
+        projectManagementMap.put("cover", true);
+        projectManagementMap.put("farbigkeit", true);        
+        projectManagementMap.put("vorspann", true);        
         projectManagementMap.put("nachspann", true);
-        projectManagementMap.put("vorspann", true);
-        projectManagementMap.put("nachsatz", true);
+        projectManagementMap.put("nachsatz", true);        
+        projectManagementMap.put("baukasten", true);        
+        projectManagementMap.put("umschlagFarbigkeit", true);
+        projectManagementMap.put("umschlagFarbigkeitElement", true);
+        projectManagementMap.put("bindung", true);        
+        projectManagementMap.put("register", true);        
+        projectManagementMap.put("auflage", true);        
+        projectManagementMap.put("liefertermin", true);        
+                
+        //ALS PM NUR DIESE FELDER
+//        projectManagementMap.put("category", true);
+//        projectManagementMap.put("product", true);
+//        projectManagementMap.put("sortiment", true);
+//        projectManagementMap.put("layout", true);
+//        projectManagementMap.put("katalogart", true);
+//        projectManagementMap.put("ausgabe", true);
+//        projectManagementMap.put("umfang", true);
+//        projectManagementMap.put("teilnehmerZahl", true);
+//        projectManagementMap.put("konzeptbearbeitungFaktor", true);
+//        projectManagementMap.put("wechselfassungVariantFaktor", true);
+//        projectManagementMap.put("bearbeitungszeit", true);
+
+//        projectManagementMap.put("farbigkeit", true);
+//        projectManagementMap.put("umschlagFarbigkeitElement", true);
+//        projectManagementMap.put("umschlagFarbigkeit", true);
+//        projectManagementMap.put("nachspann", true);
+//        projectManagementMap.put("vorspann", true);
+//        projectManagementMap.put("nachsatz", true);
 
     }
 
@@ -205,12 +261,12 @@ public class AccessDepartement {
         assetManagementMap.put("anzahlGesamtProdukt", true);
         assetManagementMap.put("anzahlNeueProdukt", true);
 
-        assetManagementMap.put("farbigkeit", true);
-        assetManagementMap.put("umschlagFarbigkeitElement", true);
-        assetManagementMap.put("umschlagFarbigkeit", true);
-        assetManagementMap.put("nachspann", true);
-        assetManagementMap.put("vorspann", true);
-        assetManagementMap.put("nachsatz", true);
+//        assetManagementMap.put("farbigkeit", true);
+//        assetManagementMap.put("umschlagFarbigkeitElement", true);
+//        assetManagementMap.put("umschlagFarbigkeit", true);
+//        assetManagementMap.put("nachspann", true);
+//        assetManagementMap.put("vorspann", true);
+//        assetManagementMap.put("nachsatz", true);
 
     }
 
@@ -223,12 +279,12 @@ public class AccessDepartement {
         mediaITMap.put("layout", true);
         mediaITMap.put("ausgabe", true);
 
-        mediaITMap.put("farbigkeit", true);
-        mediaITMap.put("umschlagFarbigkeitElement", true);
-        mediaITMap.put("umschlagFarbigkeit", true);
-        mediaITMap.put("nachspann", true);
-        mediaITMap.put("vorspann", true);
-        mediaITMap.put("nachsatz", true);
+//        mediaITMap.put("farbigkeit", true);
+//        mediaITMap.put("umschlagFarbigkeitElement", true);
+//        mediaITMap.put("umschlagFarbigkeit", true);
+//        mediaITMap.put("nachspann", true);
+//        mediaITMap.put("vorspann", true);
+//        mediaITMap.put("nachsatz", true);
     }
 
     private static void populateAdminMap() {

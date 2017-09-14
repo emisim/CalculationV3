@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Menu principale</title>
+        <title>Marketing Calculator</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -23,7 +23,7 @@
             <div class="ui-grid-col-12" style="text-align: right; margin-top: 2px; padding-right: 10px">
                 <h:form>
                     Hallo : <b>#{userController.connectedUser.login}</b>&nbsp;
-                    |&nbsp;<p:commandLink value="Ausloggen" action="#{userController.seDeConnnecter()}"/>
+                    |&nbsp;<p:commandLink value="Logout" action="#{userController.seDeConnnecter()}"/>
                 </h:form>
             </div>
             <img src="../resources/image/ede.png" style="width: 120px; height: auto"/>
@@ -39,7 +39,7 @@
                             <a class="menu-link" href="../departement/List.xhtml">
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-th-large"></span></h1>
-                                    <h4>Criteria</h4>
+                                    <h4>Services</h4>
                                 </div>
                             </a>
                         </p:panel>
@@ -47,7 +47,7 @@
                             <a class="menu-link" href="../demandCategory/List.xhtml">
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-history"></span></h1>
-                                    <h4>Historie</h4>
+                                    <h4>History</h4>
                                 </div>
                             </a>
                         </p:panel>
@@ -55,7 +55,7 @@
                             <a class="menu-link" href="../demandCategory/CreateCat.xhtml">
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-calculator"></span></h1>
-                                    <h4>Calcul</h4>
+                                    <h4>Calculator</h4>
                                 </div>
                             </a>
                         </p:panel>
@@ -64,7 +64,7 @@
                             <a class="menu-link" href="../statistique/demandeCategoryStatistique.xhtml">
                                 <div class="menu-card">
                                     <h1><span class="fa-3x fa fa-bar-chart"></span></h1>
-                                    <h4>Statistiken</h4>
+                                    <h4>Statistics</h4>
                                 </div>
                             </a>
                         </p:panel>

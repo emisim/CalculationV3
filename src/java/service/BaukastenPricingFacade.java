@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author t3500
+ * @author 
  */
 @Stateless
 public class BaukastenPricingFacade extends AbstractFacade<BaukastenPricing> {

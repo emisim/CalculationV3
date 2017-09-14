@@ -12,7 +12,7 @@
             <h:form id="DemandCategoryDetailForm">
 
                 <h:panelGroup id="displayForAdmin" >
-                    <p:fieldset id="fieldSetInfoForAdmin" legend="Infos Demand Category" toggleable="true" toggleSpeed="500">
+                    <p:fieldset id="fieldSetInfoForAdmin" legend="Infos" toggleable="true" toggleSpeed="500">
                         <p:tabView id="InfosForAdminView">
                             <p:tab title="General">
                                 <ui:include src="View.xhtml"/>
@@ -20,12 +20,12 @@
                             <p:tab title="Validation" >
                                 <ui:include src="ValidationItemList.xhtml"/>
                             </p:tab>
-                            <p:tab title="Sortiement items" >
+                            <p:tab title="Sortiment" >
                                 <ui:include src="SortimentItemList.xhtml"/>
                             </p:tab>
                         </p:tabView>   
                     </p:fieldset>
-                    <p:fieldset id="fieldSetDetailsForAdmin" legend="Details calculation" toggleable="true" toggleSpeed="500" style="margin-top: 10px;">
+                    <p:fieldset id="fieldSetDetailsForAdmin" legend="Calculation details" toggleable="true" toggleSpeed="500" style="margin-top: 10px;">
                         <p:tabView id="displayTabForAdmin" value="#{demandCategoryController.params.entrySet().toArray()}" var="detailDepartement"  >
                             <p:tab title="#{detailDepartement.key}">
                                 <p:dataTable id="dataList"  var="item" value="#{detailDepartement.value}" sortBy="#{item.nomDepCritera}"  expandableRowGroups="true" >

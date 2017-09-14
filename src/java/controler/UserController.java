@@ -27,6 +27,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.jboss.weld.bean.builtin.ee.HttpSessionBean;
 import service.DeviceFacade;
 import service.QuestionFacade;
 
@@ -89,7 +90,7 @@ public class UserController implements Serializable {
      * this method at the first step verifies the users list of device to see if
      * he is connected from a trusted device if that is the case it will grrant
      * him to continue and log-in if not it will ask him to answer a sequence of
-     * security questions, in cas he answered all the questions crrectly the new
+     * security questions, in case he answered all the questions correctly the new
      * device will be registred to the list of trusted devices, if the question
      * is false the user will be blocked until getting autorized by the admin.
      *
@@ -102,13 +103,13 @@ public class UserController implements Serializable {
             deviceFacade.save(DeviceUtil.getDevice(), loaded);
 //            SessionUtil.attachUserToCommune(loaded);
 //            historiqueConnexionFacade.createConnexion(loaded);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NewDeviceRegistered"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("New device registered"));
             return "/menu/menu?faces-redirect=true";
 
         } else {
             loaded.setBlocked(1);
             ejbFacade.edit(loaded);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DeviceCouldNotBeVerified"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("Device could not be verified"));
             return "/index?faces-redirect=true";
         }
     }
@@ -120,11 +121,11 @@ public class UserController implements Serializable {
         } else if (res == -2) {
             message.setText("Ihre Account ist zur Zeit blokiert, bitte melden Sie sich bei Ihren Admin an");
         } else if (res == -3) {
-            message.setText("Oups,falsches Passwort. Wiederholen Sie es noch einmal!");
+            message.setText("Falsches Passwort. Bitte wiederholen Sie es noch einmal!");
         } else if (res == -4) {
             message.setText("Falsches login, Versuchen Sie es noch einmal!");
         } else if (res == -5) {
-            message.setText("Bitte geben Sie hier Ihre login an!");
+            message.setText("Please log in with your personal access data!");
         }
         MessageManager.showMessage(message);
     }
@@ -148,14 +149,16 @@ public class UserController implements Serializable {
             ejbFacade.edit(user);
             return seDeConnnecter();
         } else {
-            JsfUtil.addErrorMessage("Probleme während die Passwortänderung");
+            JsfUtil.addErrorMessage("Fehler!");
             return "";
         }
 
     }
 
     public int getTimout() {
+        System.out.println("getMaxInactiveInterval()" + SessionUtil.getSession().getMaxInactiveInterval());
         return SessionUtil.getSession().getMaxInactiveInterval();
+       
     }
 
     /*public int getTimout() {

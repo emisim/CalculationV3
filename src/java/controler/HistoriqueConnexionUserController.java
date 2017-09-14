@@ -66,10 +66,10 @@ public class HistoriqueConnexionUserController implements Serializable {
 
     public String typeCnx(Boolean connexion) {
         if (connexion == true) {
-            return "Connexion";
+            return "Login";
         }
         if (connexion == false) {
-            return "Deconnexion";
+            return "Logout";
         }
         return null;
     }

@@ -111,12 +111,12 @@ public class StatistiqueController implements Serializable {
     }
 
     private void paramGraphForConstruction(CartesianChartModel model) {
-        System.out.println("Statistiken von Jahr " + firstYear + " und " + secondYear);
-        model.setTitle("Statistiken von Jahr " + firstYear + " und " + secondYear);
+        System.out.println("Statistiken vom Jahr " + firstYear + " und " + secondYear);
+        model.setTitle("Statistics from " + firstYear + " and " + secondYear);
         model.setLegendPosition("e");
         model.setAnimate(true);
         Axis yAxis = model.getAxis(AxisType.Y);
-        yAxis.setLabel("SUMM");
+        yAxis.setLabel("Sum");
         yAxis.setMin(0);
         yAxis.setMax(max.multiply(new BigDecimal(1.1)));
         Axis xAxis = model.getAxis(AxisType.X);
@@ -136,20 +136,20 @@ public class StatistiqueController implements Serializable {
         ChartSeries annee2;
         if (typeChart == 1) {
             annee1 = new LineChartSeries();
-            annee1.setLabel("Jahr " + firstYear);
+            annee1.setLabel("Year " + firstYear);
 
             annee2 = new LineChartSeries();
-            annee2.setLabel("Jahr " + secondYear);
+            annee2.setLabel("Year " + secondYear);
         } else {
             annee1 = new BarChartSeries();
-            annee1.setLabel("Jahr " + firstYear);
+            annee1.setLabel("Year " + firstYear);
             annee2 = new BarChartSeries();
-            annee2.setLabel("Jahr " + secondYear);
+            annee2.setLabel("Year " + secondYear);
         }
 
         for (int i = 0; i < 12; i++) {
-            annee1.set("Monat " + (i + 1), resultats[0][i]);
-            annee2.set("Monat " + (i + 1), resultats[1][i]);
+            annee1.set("Month " + (i + 1), resultats[0][i]);
+            annee2.set("Month " + (i + 1), resultats[1][i]);
 
         }
         System.out.println("annee1 ::: " + annee1);

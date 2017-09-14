@@ -105,6 +105,13 @@ img-border {
     background: #006f73;
 }
 
+ .ui-datatable .ui-sortable-column.ui-state-active {
+    background: #006f73;
+    color: #fff;
+    border-color: #156090;
+    
+}
+
 .ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
 {border:1px solid #ec870e;
  font-weight:normal;

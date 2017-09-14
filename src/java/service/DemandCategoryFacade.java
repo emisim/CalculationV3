@@ -178,9 +178,69 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         }
     }
 
+    //Druck Kalkulation
+//    private int calcSumDruck(DemandCategory demandCategory) {
+//        demandCategory.setSummDruck(new BigDecimal(0));
+//        AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit(), demandCategory.getBaukasten());
+//        BigDecimal nachsatzPricing = new BigDecimal(0);
+//        BigDecimal nachspannPricing = new BigDecimal(0);
+//        BigDecimal vorspannPricing = new BigDecimal(0);
+//        BigDecimal umschlagFarbigkeitElementPricing = new BigDecimal(0);
+//        BigDecimal baukastenPricing = new BigDecimal(0);
+//        if (demandCategory == null || demandCategory.getCover() == null || SearchUtil.isStringNullOrVide(demandCategory.getCover().getDescription())) {
+//            return -1;
+//        }
+//
+//        boolean hardCover = demandCategory.getCover().getDescription().toLowerCase().contains("hard");
+//        
+//        if (!hardCover && (auflageSeitenCoverMatrix == null || auflageSeitenCoverMatrix.getPrice() == null)) {
+//            return -2;
+//        } else {
+//            baukastenPricing = baukastenPricingFacade.findByCoverAndBaukasten(demandCategory.getCover(), demandCategory.getBaukasten());
+//            if (demandCategory.getNachspann() != null) {
+//                nachspannPricing = demandCategory.getNachspann().getValue();
+//            }
+//            if (demandCategory.getNachsatz() != null) {
+//                nachsatzPricing = demandCategory.getNachsatz().getPrice();
+//            }
+//            if (demandCategory.getVorspann() != null) {
+//                vorspannPricing = demandCategory.getVorspann().getValue();
+//            }
+//            if (demandCategory.getUmschlagFarbigkeitElement() != null) {
+//                umschlagFarbigkeitElementPricing = demandCategory.getUmschlagFarbigkeitElement().getPrice();
+//            }
+//            demandCategory.setNachsatzPricing(nachsatzPricing);
+//            demandCategory.setNachspannPricing(nachspannPricing);
+//            demandCategory.setVorspannPricing(vorspannPricing);
+//            demandCategory.setBaukastenPricing(baukastenPricing);
+//
+//            demandCategory.setUmschlagFarbigkeitElementPricing(umschlagFarbigkeitElementPricing);
+//            BigDecimal summDruck = demandCategory.getCover().getPrice().add(nachsatzPricing).add(nachspannPricing).add(vorspannPricing).add(umschlagFarbigkeitElementPricing).add(baukastenPricing);
+//            System.out.println("summDruck before hard test ==> " + summDruck);
+//            if (hardCover) {
+//                System.out.println("hahna daba f hardcover derniere!!!!!!!!!!");
+//                System.out.println("demandCategory.getRegister().getPrice()" + demandCategory.getRegister().getPrice());
+//                System.out.println("auflageSeitenCoverMatrix.getPrice()" + auflageSeitenCoverMatrix.getPrice());
+//                System.out.println("demandCategory.getAuflage().getPrice()" + demandCategory.getAuflage().getPrice());
+//                
+//                summDruck = (summDruck.add(auflageSeitenCoverMatrix.getPrice()).add(demandCategory.getRegister().getPrice())).multiply(demandCategory.getAuflage().getPrice());
+//            } else {
+//                summDruck = summDruck.multiply(demandCategory.getAuflage().getPrice());
+//            }
+//            System.out.println("summDruck after hard test ==> " + summDruck);
+//            summDruck = summDruck.setScale(2, RoundingMode.HALF_UP);
+//            demandCategory.setSummDruck(summDruck);
+//            return 1;
+//        }
+//
+//    }
     private int calcSumDruck(DemandCategory demandCategory) {
         demandCategory.setSummDruck(new BigDecimal(0));
         AuflageSeitenCoverMatrix auflageSeitenCoverMatrix = auflageSeitenCoverMatrixFacade.findByCriteria(demandCategory.getAuflage(), demandCategory.getDruckSeiten(), demandCategory.getFormatAuswaehlen(), demandCategory.getFarbigkeit(), demandCategory.getBaukasten());
+        System.out.println("AuflageSeitenCoverMatrix Cover:" + auflageSeitenCoverMatrix.getCover());
+        System.out.println("AuflageSeitenCoverMatrix Auflage:" + auflageSeitenCoverMatrix.getAuflage());
+        System.out.println("AuflageSeitenCoverMatrix Druckseiten:" + auflageSeitenCoverMatrix.getSeiten());
+        System.out.println("AuflageSeitenCoverMatrix Price:" + auflageSeitenCoverMatrix.getPrice());
         BigDecimal nachsatzPricing = new BigDecimal(0);
         BigDecimal nachspannPricing = new BigDecimal(0);
         BigDecimal vorspannPricing = new BigDecimal(0);
@@ -190,7 +250,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
             return -1;
         }
         boolean hardCover = demandCategory.getCover().getDescription().toLowerCase().contains("hard");
-        if (hardCover && (auflageSeitenCoverMatrix == null || auflageSeitenCoverMatrix.getPrice() == null)) {
+        if (!hardCover && (auflageSeitenCoverMatrix == null || auflageSeitenCoverMatrix.getPrice() == null)) {
             return -2;
         } else {
             baukastenPricing = baukastenPricingFacade.findByCoverAndBaukasten(demandCategory.getCover(), demandCategory.getBaukasten());
@@ -266,7 +326,7 @@ public class DemandCategoryFacade extends AbstractFacade<DemandCategory> {
         demandCategorys = em.createQuery(query).getResultList();
 
         if (demandCategorys != null && demandCategorys.isEmpty()) {
-            JsfUtil.addErrorMessage("Kein Ergebnis gefunden!");
+            JsfUtil.addErrorMessage("Leider wurden keine Ergebnisse gefunden!");
         }
 
         return demandCategorys;

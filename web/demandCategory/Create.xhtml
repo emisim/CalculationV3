@@ -93,7 +93,7 @@
                                            itemValue="#{departmentItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateSystem}" for="dateSystem" />
-                        <p:calendar id="dateSystem" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateSystem}" title="#{bundle.EditDemandCategoryTitle_dateSystem}"  showOn="button"/>
+                        <p:calendar id="dateSystem" pattern="dd-MM-yyyy" value="#{demandCategoryController.selected.dateSystem}" title="#{bundle.EditDemandCategoryTitle_dateSystem}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_id}" for="id" />
                         <p:inputText id="id" value="#{demandCategoryController.selected.id}" title="#{bundle.CreateDemandCategoryTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_demandCategoryValidation}" for="demandCategoryValidation" />
@@ -234,12 +234,13 @@
                                            var="artDerWeiterverarbeitungItem"
                                            itemValue="#{artDerWeiterverarbeitungItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_veredlung}" for="veredlung" />
-                        <p:selectOneMenu id="veredlung" value="#{demandCategoryController.selected.veredlung}" >
-                            <f:selectItems value="#{veredlungController.itemsAvailableSelectOne}"
+                        
+<!--                        <p:outputLabel value="{bundle.CreateDemandCategoryLabel_veredlung}" for="veredlung" />
+                        <p:selectOneMenu id="veredlung" value="{demandCategoryController.selected.veredlung}" >
+                            <f:selectItems value="{veredlungController.itemsAvailableSelectOne}"
                                            var="veredlungItem"
-                                           itemValue="#{veredlungItem}"/>
-                        </p:selectOneMenu>
+                                           itemValue="{veredlungItem}"/>
+                        </p:selectOneMenu>-->
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_umschlagPapierAuswaehlen}" for="umschlagPapierAuswaehlen" />
                         <p:selectOneMenu id="umschlagPapierAuswaehlen" value="#{demandCategoryController.selected.umschlagPapierAuswaehlen}" >
                             <f:selectItems value="#{umschlagPapierAuswaehlenController.itemsAvailableSelectOne}"
@@ -271,7 +272,7 @@
                                            itemValue="#{auflageItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_liefertermin}" for="liefertermin" />
-                        <p:calendar id="liefertermin" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.EditDemandCategoryTitle_liefertermin}"  showOn="button"/>
+                        <p:calendar id="liefertermin" pattern="dd-MM-yyyy" value="#{demandCategoryController.selected.liefertermin}" title="#{bundle.EditDemandCategoryTitle_liefertermin}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_bearbeitungszeit}" for="bearbeitungszeit" />
                         <p:inputText id="bearbeitungszeit" value="#{demandCategoryController.selected.bearbeitungszeit}" title="#{bundle.CreateDemandCategoryTitle_bearbeitungszeit}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlBeteiligten}" for="anzahlBeteiligten" />
@@ -279,7 +280,7 @@
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_anzahlMitglieder}" for="anzahlMitglieder" />
                         <p:inputText id="anzahlMitglieder" value="#{demandCategoryController.selected.anzahlMitglieder}" title="#{bundle.CreateDemandCategoryTitle_anzahlMitglieder}" />
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_dateDemandCategory}" for="dateDemandCategory" />
-                        <p:calendar id="dateDemandCategory" pattern="MM/dd/yyyy" value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.EditDemandCategoryTitle_dateDemandCategory}"  showOn="button"/>
+                        <p:calendar id="dateDemandCategory" pattern="dd-MM-yyyy" value="#{demandCategoryController.selected.dateDemandCategory}" title="#{bundle.EditDemandCategoryTitle_dateDemandCategory}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateDemandCategoryLabel_nbrTotalValidation}" for="nbrTotalValidation" />
                         <p:inputText id="nbrTotalValidation" value="#{demandCategoryController.selected.nbrTotalValidation}" title="#{bundle.CreateDemandCategoryTitle_nbrTotalValidation}" />
                     </p:panelGrid>

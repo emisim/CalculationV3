@@ -66,6 +66,7 @@ public class DemandCategoryValidationFacade extends AbstractFacade<DemandCategor
             demandCategoryValidation.setDemandCategory(demandCategory);
             demandCategoryValidation.setUser(user);
             demandCategoryValidation.setSysDate(new Date());
+            //System.out.println("SysDate ist :" + new Date());
             demandCategoryValidation.setDepartement(user.getDepartement());
             create(demandCategoryValidation);
         } else {

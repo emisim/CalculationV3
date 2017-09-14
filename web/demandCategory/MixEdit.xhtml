@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="MixEditDlg" widgetVar="MixEditDialog" modal="true" resizable="false" appendTo="@(body)" width="1000" header="Sortiemnt Items">
+        <p:dialog id="MixEditDlg" widgetVar="MixEditDialog" modal="true" resizable="false" appendTo="@(body)" width="1000" header="Mix-Assortment">
 
             <h:form id="MixEditInfoForm">
                 <p:fieldset legend="Info" >
@@ -16,7 +16,7 @@
 
                         <p:outputLabel for="sortimentMix" value="Sortiment" />
                         <p:selectOneMenu id="sortimentMix" value="#{demandCategoryController.sortimentItem.sortiment}" converter="sortimentConverter">
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/>
+                            <f:selectItem itemValue="#{null}" itemLabel="--Select--"/>
                             <f:selectItems value="#{demandCategoryController.findAllSortiment()}"
                                            var="sortimentItem"
                                            itemValue="#{sortimentItem}"
@@ -25,10 +25,10 @@
 
                         </p:selectOneMenu>
 
-                        <p:outputLabel for="wert" value="Wert in %" />
+                        <p:outputLabel for="wert" value="Value in %" />
                         <p:inputText id="wert" value="#{demandCategoryController.sortimentItem.wert}" />
 
-                        <p:commandButton id="ajouter" value="add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixEditListForm,:growl"/>
+                        <p:commandButton id="ajouter" value="Add" actionListener="#{demandCategoryController.addSortimentItem()}" update=":MixEditListForm,:growl"/>
 
                     </h:panelGrid>
 
@@ -48,14 +48,14 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Sortiment"/>
+                                <h:outputText value="Assortment"/>
                             </f:facet>
                             <h:outputText value="#{item.sortiment.name}"/>
                         </p:column>
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Wert in %"/>
+                                <h:outputText value="Value in %"/>
                             </f:facet>
                             <h:outputText value="#{item.wert}"/>
                         </p:column>
@@ -64,12 +64,12 @@
                             <f:facet name="header">
                                 <h:outputText value="Action"/>
                             </f:facet>
-                            <p:commandButton value="delete" actionListener="#{demandCategoryController.removeSortimentItem(item)}" update="datalist"/>
+                            <p:commandButton value="Delete" actionListener="#{demandCategoryController.removeSortimentItem(item)}" update="datalist"/>
                         </p:column>
 
                     </p:dataTable>
-                    
-                    <p:commandButton value="Bestätigen" oncomplete="handleSubmit(args,'MixEditDialog');" />
+
+                    <p:commandButton value="Save" oncomplete="handleSubmit(args,'MixEditDialog');" />
 
                 </p:panel>
 

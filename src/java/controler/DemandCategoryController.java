@@ -171,7 +171,7 @@ public class DemandCategoryController implements Serializable {
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('DemandCategoryDetailDialog').show();");
         } else {
-            JsfUtil.addWrningMessage("Sortiment items required");
+            JsfUtil.addWrningMessage("Assortment items required");
         }
     }
 
@@ -271,9 +271,9 @@ public class DemandCategoryController implements Serializable {
 
         int res = demandCategoryCalculationFacade.addSortimentItem(selected, sotimentItems, sortimentItem);
         if (res == -1) {
-            JsfUtil.addErrorMessage("Diese Sortiment existiert schon in der Liste!");
+            JsfUtil.addErrorMessage("This assortment already exist!");
         } else if (res == -2) {
-            JsfUtil.addErrorMessage("Die Summe der Werte ist nicht gleich 100!");
+            JsfUtil.addErrorMessage("Sum of assortment musst be 100%!");
         } else {
             System.out.println("item hinzugefügt mit dem Wert = " + sortimentItem.getWert());
         }
@@ -423,7 +423,7 @@ public class DemandCategoryController implements Serializable {
             ejbFacade.edit(selected);
             JsfUtil.addSuccessMessage("Details updated");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage("something went wrong");
+            JsfUtil.addErrorMessage("something went wrong!");
         }
 
     }
@@ -500,7 +500,7 @@ public class DemandCategoryController implements Serializable {
 
     public void verifySortiement() {
         if (!ejbFacade.sortimentCondition(selected, sotimentItems)) {
-            JsfUtil.addWrningMessage("Summe von Sortiement items muss 100% sein");
+            JsfUtil.addWrningMessage("Assortment value should be 100%!");
         }
     }
 
@@ -511,9 +511,9 @@ public class DemandCategoryController implements Serializable {
                 if (persistAction == PersistAction.CREATE) {
                     if (ejbFacade.sortimentCondition(selected, getSotimentItems())) {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, true);
-                        JsfUtil.addSuccessMessage(successMessage + " und eine Validation von " + SessionUtil.getConnectedUser().getLogin() + " ist automatisch gespeichert");
+                        JsfUtil.addSuccessMessage(successMessage + " and is saved automatically from " + SessionUtil.getConnectedUser().getLogin());
                     } else {
-                        JsfUtil.addWrningMessage("Sortimentwert muss 100% sein");
+                        JsfUtil.addWrningMessage("Assortment value should be 100%!");
                     }
                 } else if (persistAction == PersistAction.UPDATE) {
                     sortimentItemFacade.delete(detailSotimentItems);
@@ -521,7 +521,7 @@ public class DemandCategoryController implements Serializable {
                         getFacade().save(getSotimentItems(), getSelected(), SessionUtil.getConnectedUser().getDepartement(), false, false);
                         JsfUtil.addSuccessMessage(successMessage);
                     } else {
-                        JsfUtil.addWrningMessage("Sortimentwert muss 100% sein");
+                        JsfUtil.addWrningMessage("Assortment value should be 100%!");
                     }
                 } else {
                     getFacade().remove(selected);

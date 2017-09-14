@@ -28,6 +28,7 @@ public class CreateFileUtil {
         //vérifier si le dossier backup existe
         System.out.println("hahwaa*********");
         File file = new File(path);
+        System.out.println("hahowa file dyali" + file);
         if (file.exists()) { // C:/...
             System.out.println("le dossier origine existe");
         } else {
@@ -85,9 +86,11 @@ public class CreateFileUtil {
                 path = home+"\\Téléchargement";
             }
         }else if(os.startsWith("linux")){
-//            path = getPath("root");
+                path = getPath("root");
+                System.out.println("mein PATH ist: " + path);
         }
         return path;
+        
     }
     
 }

@@ -8,7 +8,7 @@
     <ui:composition template="/template.xhtml">
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListArtDerWeiterverarbeitungTitle}"></h:outputText>
+            <h:outputText value="Marketing Calculator | Settings"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
@@ -26,15 +26,11 @@
                 <div class="ui-grid-col-12">
                     <p:tabView id="parametrageTab" >
 
-                        <p:tab title="Category">
+                        <p:tab title="Produkt">
                             <ui:include src="category/List.xhtml"/>
                         </p:tab>
 
-                        <p:tab title="Katalogart">
-                            <ui:include src="katalogart/List.xhtml"/>
-                        </p:tab>
-
-                        <p:tab title="Produkt">
+                        <p:tab title="Projekt">
                             <ui:include src="product/List.xhtml"/>
                         </p:tab>
 
@@ -48,6 +44,10 @@
 
                         <p:tab title="Prozess">
                             <ui:include src="prozess/List.xhtml"/>
+                        </p:tab>
+                        
+                        <p:tab title="Katalogart">
+                            <ui:include src="katalogart/List.xhtml"/>
                         </p:tab>
 
                         <p:tab title="Ausgabe">
@@ -145,6 +145,10 @@
                         <p:tab title="UmschlagFarbigkeitElement">
                             <ui:include src="umschlagFarbigkeitElement/List.xhtml"/>
                         </p:tab>
+                        
+<!--                        <p:tab title="Veredlung">
+                            <ui:include src="veredlung/List.xhtml"/>
+                        </p:tab>-->
 
 
 

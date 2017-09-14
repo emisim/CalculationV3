@@ -63,7 +63,7 @@ public class DemandCategory implements Serializable {
     @ManyToOne
     private Schluessel Schluessel;
 
-    private int umfang = 1028;
+    private int umfang = 0;
 
     //Seiten
     private int anzahlGesamtSeiten;
@@ -72,28 +72,28 @@ public class DemandCategory implements Serializable {
     private Seiten druckSeiten;
     //10% für den ANzahl dere Seiten
     private int percentSeitenFaktor = 10;
-    private int anzahlSonderSeiten = 3;
-    private int anzahlGenerierungUpdateSeiten = 4;
-    private int anzahlIHVZSeiten = 10;
-    private int anzahlBestellNrSeiten = 10;
+    private int anzahlSonderSeiten = 0;
+    private int anzahlGenerierungUpdateSeiten = 0;
+    private int anzahlIHVZSeiten = 0;
+    private int anzahlBestellNrSeiten = 0;
 
     //Artikel
-    private int anzahlGesamtArtikel = 1900;
-    private int anzahlNeueArtikel = 800;
-    private int anzahlBestandArtikel = 10;
-    private int anzahlÜbernahmeArtikel = 9;
+    private int anzahlGesamtArtikel = 0;
+    private int anzahlNeueArtikel = 0;
+    private int anzahlBestandArtikel = 0;
+    private int anzahlÜbernahmeArtikel = 0;
 
     //Produkt
-    private int anzahlGesamtProdukt = 1;
-    private int anzahlNeueProdukt = 1;
-    private int anzahlBestandProdukt = 1;
+    private int anzahlGesamtProdukt = 0;
+    private int anzahlNeueProdukt = 0;
+    private int anzahlBestandProdukt = 0;
 
     //Lieferant   
-    private int anzahlLieferantGesamt = 16;
-    private int anzahlLieferantNeu = 14;
+    private int anzahlLieferantGesamt = 0;
+    private int anzahlLieferantNeu = 0;
 
     //Warengruppe Kapitel
-    private int anzahlKapitetel = 9;
+    private int anzahlKapitetel = 0;
 
     private int nbrTotalValidation;
 
@@ -118,7 +118,7 @@ public class DemandCategory implements Serializable {
     private WechselfassungVariantFaktor wechselfassungVariantFaktor;
 
     //Teilnehmerzahl
-    private int teilnehmerZahl = 35; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
+    private int teilnehmerZahl = 0; // <=20 ==> teilnehmerZahl=1 || 20<<=35 ==> 1.2 || >35 ==> 35
     private @Column(columnDefinition = "DECIMAL(10,2)")
     BigDecimal teilnehmerZahlPricing = new BigDecimal(0);
     @ManyToOne
@@ -137,7 +137,7 @@ public class DemandCategory implements Serializable {
     @ManyToOne
     private PapierMaterialAuswaehlen papierMaterialAuswaehlen;
 
-    private int seitenanzahl = 17;
+    private int seitenanzahl = 0;
     @ManyToOne
     private Farbigkeit farbigkeit;
 
@@ -164,13 +164,13 @@ public class DemandCategory implements Serializable {
     private Date liefertermin = new Date();
 
     //Bearbeitungszeit
-    private int bearbeitungszeit = 3;
+    private int bearbeitungszeit = 0;
 
     //Beteiligten Anzahl die die Initialcosts beinflüssen
-    private int anzahlBeteiligten = 2;
+    private int anzahlBeteiligten = 0;
 
     //Mitglieder Anzahl
-    private int anzahlMitglieder = 20;
+    private int anzahlMitglieder = 0;
 
     //Datum falls die einzelne Preise geändert werden
     @Temporal(javax.persistence.TemporalType.DATE)

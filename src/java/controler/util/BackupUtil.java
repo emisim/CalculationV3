@@ -19,7 +19,8 @@ public class BackupUtil {
             Runtime runtime = Runtime.getRuntime();
             
             //WIndows
-            String commande = "C:\\xampp\\mysql\\bin\\mysqldump -u root -p --add-drop-database -B kt_fst_2 -r " + path;
+            //String commande = "C:\\xampp\\mysql\\bin\\mysqldump -u root -p --add-drop-database -B kt_fst_2 -r " + path;
+            String commande = "/Applications/MySQLWorkbench.app/Contents/MacOS/mysqldump  -u root -p --add-drop-database -B kt_fst_2 -r" + path;
 //            String commande = "C:\\xampp\\mysql\\bin\\mysqldump -uroot --password= --add-drop-database -B taxe_commune_zouani -r " + path;
             System.out.println("commande " + commande);
             p = runtime.exec(commande);
