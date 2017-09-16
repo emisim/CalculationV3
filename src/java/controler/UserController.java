@@ -117,15 +117,15 @@ public class UserController implements Serializable {
     private void validteConnexionForm(int res) {
         message = MessageManager.createErrorMessage(res, "");
         if (res == -1) {
-            message.setText("Socie ist zur Zeit blokiert, bitte kontaktieren Sie Ihren Admin");
+            message.setText("Socie is blocked, please cont the Admin!");
         } else if (res == -2) {
-            message.setText("Ihre Account ist zur Zeit blokiert, bitte melden Sie sich bei Ihren Admin an");
+            message.setText("This account is blocked, please contact the Admin!");
         } else if (res == -3) {
-            message.setText("Falsches Passwort. Bitte wiederholen Sie es noch einmal!");
+            message.setText("Could not authenticate user, Verify the user name and password, and try again.");
         } else if (res == -4) {
-            message.setText("Falsches login, Versuchen Sie es noch einmal!");
+            message.setText("Could not authenticate user, Verify the user name and password, and try again.");
         } else if (res == -5) {
-            message.setText("Please log in with your personal access data!");
+            message.setText("Please log in with your personal access data.");
         }
         MessageManager.showMessage(message);
     }
@@ -149,7 +149,7 @@ public class UserController implements Serializable {
             ejbFacade.edit(user);
             return seDeConnnecter();
         } else {
-            JsfUtil.addErrorMessage("Fehler!");
+            JsfUtil.addErrorMessage("Your new password is too similar to your current password. Please try ontoher password.");
             return "";
         }
 
@@ -161,9 +161,7 @@ public class UserController implements Serializable {
        
     }
 
-    /*public int getTimout() {
-        return SessionUtil.getSession().getMaxInactiveInterval();
-    }*/
+
     public String seDeConnnecter() {
         //
         ejbFacade.seDeConnnecter();
@@ -380,7 +378,7 @@ public class UserController implements Serializable {
                         prepareQuestionList();
                         JsfUtil.addSuccessMessage(successMessage);
                     } else {
-                        JsfUtil.addErrorMessage("Login existe déjà");
+                        JsfUtil.addErrorMessage("User name already exists.");
                     }
                 } else if (persistAction == PersistAction.UPDATE) {
                     System.out.println("hhaani f creat dial user" + selected.getLogin());

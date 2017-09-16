@@ -54,11 +54,11 @@
                                         <p:commandButton icon="fa fa-list" actionListener="#{departementController.findCriteriaByDepartement(item)}" update=":DepartementCriteriaListForm, :DepartementCriteriaItemListForm"/>
                                         <p:commandButton id="editButton"  icon="ui-icon-pencil"  actionListener="#{departementController.prepareEdit(item)}" update=":DepartementEditForm" oncomplete="PF('DepartementEditDialog').show()" disabled="#{empty departementController.selected}" rendered="#{departementController.checkUser()}"/>
                                         <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteDepartementWithCriteria(item)}"  update=":DepartementListForm" rendered="#{departementController.checkUser()}">
-                                            <p:confirm header="Confirmation" message="Sind Sie sicher?" icon="ui-icon-alert" />
+                                            <p:confirm header="Confirmation" message="Are you sure you want to delete this Item?  This action cannot be undone. " icon="ui-icon-alert" />
                                         </p:commandButton>
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                            <p:commandButton value="Ja" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                            <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            <p:commandButton value="Delete" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="Cancel" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                         </p:confirmDialog>
                                     </p:column>
                                     <f:facet name="footer">
@@ -97,7 +97,7 @@
                                         <p:commandButton  icon="fa fa-list" actionListener="#{departementController.findCriteriaItemByCriteria(itemm)}" update=":DepartementCriteriaItemListForm" />
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" actionListener="#{departementController.prepareEditCriteria(itemm)}"  update=":DepartementCriteriaEditForm" oncomplete="PF('DepartementCriteriaEditDialog').show()" disabled="#{empty departementController.departementCriteria}" rendered="#{departementController.checkUser()}"/>
                                         <p:commandButton id="deleteButton"   icon="ui-icon-trash"  actionListener="#{departementController.deleteCriteriaWithCriteriaItem(itemm)}"  update=":DepartementCriteriaListForm" rendered="#{departementController.checkUser()}">
-                                            <p:confirm header="Confirmation" message="Are you sure you want to delete this Item? This action cannot be undone. " icon="ui-icon-alert" />
+                                            <p:confirm header="Confirmation" message="Are you sure you want to delete this Item?  This action cannot be undone. " icon="ui-icon-alert" />
                                         </p:commandButton>
 
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

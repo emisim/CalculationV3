@@ -196,7 +196,7 @@ public class DemandCategoryController implements Serializable {
 
     public int checkSelection() {
         if (selected == null) {
-            JsfUtil.addWrningMessage("Please, select one demand category");
+            JsfUtil.addWrningMessage("Please, select a Calculation!");
             return 0;
         }
         return 1;
