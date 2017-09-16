@@ -65,7 +65,7 @@ public class CalculationExpressionFacade extends AbstractFacade<ArtDerWeitervera
                     return value;
                 }
             }
-        } catch (ScriptException ex) {
+        } catch (Throwable ex) {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!! exception ==> "+expression);
             ex.printStackTrace();
             return "0";

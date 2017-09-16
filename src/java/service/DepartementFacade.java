@@ -72,4 +72,9 @@ public class DepartementFacade extends AbstractFacade<Departement> {
 
     }
 
+    public List<String> findAllName() {
+            return em.createQuery("select item.name from Departement item").getResultList();
+
+    }
+
 }

@@ -30,6 +30,8 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
 
     
      public boolean isAdminOrInTheSameDepartement(User user,String departementName) {
+         if(user.getDepartement() != null && user.getDepartement().getName().equals("projectManagement") && departementName.equals("Initial costs"))
+                return true;
          if(user.getAdmin()==1)
              return true;
          else if(user.getDepartement() != null && user.getDepartement().getName().equals(departementName)){
@@ -45,37 +47,37 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
         if (user.getAdmin() == 1) {
             return true;
         } else {
-            if (dep.getName().equals("Content Management")) {
+            if (dep.getName().equals("contentManagement")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("Daten Management")) {
+            if (dep.getName().equals("datenManagement")) {
                 if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("Database Publishing ")) {
+            if (dep.getName().equals("databasePublishing")) {
                 if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("Project Management")) {
+            if (dep.getName().equals("projectManagement")) {
                 if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
             
-            if (dep.getName().equals("Asset Management")) {
+            if (dep.getName().equals("assetManagement")) {
                 if (AccessDepartement.getAssetManagementMap().containsKey(attribute)){
                     return true;
                 }
             }
             
-            if (dep.getName().equals("Media IT")) {
+            if (dep.getName().equals("mediaIT")) {
                 if (AccessDepartement.getMediaITMap().containsKey(attribute)){
                     return true;
                 }
@@ -94,36 +96,36 @@ public class AccessFacade extends AbstractFacade<ArtDerWeiterverarbeitung> {
                 return true;
             }
         } else {
-            if (dep.getName().equals("Content Management")) {
+            if (dep.getName().equals("contentManagement")) {
                 if (AccessDepartement.getContentManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("Daten Management")) {
+            if (dep.getName().equals("datenManagement")) {
                 if (AccessDepartement.getDatenManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("Database Publishing")) {
+            if (dep.getName().equals("databasePublishing")) {
                 if (AccessDepartement.getDatabasePublishingMap().containsKey(attribute)) {
                     return true;
                 }
             }
 
-            if (dep.getName().equals("Project Management")) {
+            if (dep.getName().equals("projectManagement")) {
                 if (AccessDepartement.getProjectManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
-            if (dep.getName().equals("Asset Management")) {
+            if (dep.getName().equals("assetManagement")) {
                 if (AccessDepartement.getAssetManagementMap().containsKey(attribute)) {
                     return true;
                 }
             }
             
-            if (dep.getName().equals("Media IT")) {
+            if (dep.getName().equals("mediaIT")) {
                 if (AccessDepartement.getMediaITMap().containsKey(attribute)) {
                     return true;
                 }
